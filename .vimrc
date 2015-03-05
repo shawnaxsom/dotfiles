@@ -7,6 +7,7 @@
 autocmd! bufwritepost .vimrc source %
 
 
+set noswapfile
 set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 syntax on
@@ -22,7 +23,7 @@ set guioptions-=L  "remove left-hand scroll bar
 
 set mouse=a
 set virtualedit=all "allow cursor to stay in same column while scrolling
-set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
+set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
 set tabstop=2 shiftwidth=2 expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 set scrolloff=18 "Keep cursor centered
@@ -64,7 +65,7 @@ set smartcase
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-let mapleader = "\<Space>"
+let mapleader = ","
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -89,7 +90,7 @@ Bundle 'qstrahl/vim-matchmaker'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'haya14busa/incsearch.vim'
 Bundle 'tpope/vim-commentary'
-" Bundle 'SirVer/ultisnips'
+Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'marijnh/tern_for_vim'
@@ -103,6 +104,14 @@ Bundle 'tpope/vim-surround'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'Shougo/neosnippet.vim'
 Bundle 'Shougo/neosnippet-snippets'
+Bundle 'terryma/vim-expand-region'
+Bundle 'tpope/vim-sleuth'
+Bundle 'jordwalke/VimCompleteLikeAModernEditor'
+Bundle 'matthewsimo/angular-vim-snippets'
+Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle 'vim-scripts/SyntaxComplete'
+Bundle 'pangloss/vim-javascript'
+Bundle 'freitass/todo.txt-vim'
 call vundle#end()
 filetype plugin indent on    " required
                
@@ -187,6 +196,9 @@ vmap <leader>h "hy:Search <c-r>h<CR>
 nmap <leader><leader>h :SearchReset<CR>
 "let g:MultipleSearchMaxColors=10
 
+nnoremap <S-J> }
+nnoremap <S-K> {
+
 " noremap - :VimFiler<CR>
 noremap - :VimFilerBuffer  -simple -winwidth=35 -toggle -quit<cr>
 noremap _ :update<CR>:cd %:p:h<CR>:VimFiler -project -find -toggle -auto-cd<CR>
@@ -203,15 +215,16 @@ noremap <silent> <F8> :!clear;python %<CR>
 noremap <F10> :!pudb %<CR>
 " noremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-map <leader>q :q<CR>
-map <leader>w :w<CR>
+map <leader>c :q<CR>
 map <leader>d :tab sp<CR>
+map <leader>e :sp ~/.vimrc<CR>
+map <leader>j <S-J>
+map <leader>q :q<CR>
 map <leader>s :sp<CR>
 map <leader>v :vsp<CR>
-map <leader>e :sp ~/.vimrc<CR>
-map <leader>c :q<CR>
-map <leader>z :tabp<CR>
+map <leader>w :w<CR>
 map <leader>x :tabn<CR>
+map <leader>z :tabp<CR>
 map <leader>` :marks<CR>
 map <leader><leader>cd :cd %:p:h<CR>
 
@@ -225,10 +238,8 @@ map <leader>gl :Glog<BAR>:bot copen<CR>
 map <leader>gL :Extradite<CR>
 
 " Go to next / previous change (GitGutter)
-" map <c-j> ]c
-" map <c-k> [c
-noremap <c-j> ]c
-noremap <c-k> [c
+nmap <c-j> ]c
+nmap <c-k> [c
 " And get or put the diff
 noremap <c-m> g;
 noremap <c-n> g,
@@ -310,10 +321,10 @@ autocmd BufReadPost *
 
 map <leader>m :marks<CR>
 
-" let g:UltiSnipsEditSplit="vertical"
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 let g:syntastic_javascript_jshint_args = '--config /home/shawn/.jshintrc'
 
@@ -362,8 +373,9 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#max_list = 10
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -414,10 +426,10 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "let g:neocomplete#enable_auto_select = 1
 
 " Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+" set completeopt+=longest
+" let g:neocomplete#enable_auto_select = 1
+" let g:neocomplete#disable_auto_complete = 1
+" inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -437,4 +449,16 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" Increase the selected region, defaults are plus/minus
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible ? "\<C-n>" : "\<TAB>"
+
+" let g:UltiSnipsSnippetDirectories += '/home/shawn/.vim/bundle/angular-vim-snippets/UltiSnips/'
+
+
+let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 

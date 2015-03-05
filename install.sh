@@ -30,3 +30,4 @@ fi
 
 create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
 create_symlink    ~/.dotfiles/fish       ~/.config/fish
+create_symlink    ~/.dotfiles/.zshrc     ~/.zshrc
