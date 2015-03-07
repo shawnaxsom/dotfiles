@@ -112,9 +112,11 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'vim-scripts/SyntaxComplete'
 Bundle 'pangloss/vim-javascript'
 Bundle 'freitass/todo.txt-vim'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'jeetsukumaran/vim-indentwise'
 call vundle#end()
 filetype plugin indent on    " required
-               
+             
 
 " Use Ranger file browser as explorer
 function! RangerChooser()
@@ -196,9 +198,6 @@ vmap <leader>h "hy:Search <c-r>h<CR>
 nmap <leader><leader>h :SearchReset<CR>
 "let g:MultipleSearchMaxColors=10
 
-nnoremap <S-J> }
-nnoremap <S-K> {
-
 " noremap - :VimFiler<CR>
 noremap - :VimFilerBuffer  -simple -winwidth=35 -toggle -quit<cr>
 noremap _ :update<CR>:cd %:p:h<CR>:VimFiler -project -find -toggle -auto-cd<CR>
@@ -226,6 +225,7 @@ map <leader>w :w<CR>
 map <leader>x :tabn<CR>
 map <leader>z :tabp<CR>
 map <leader>` :marks<CR>
+map <leader>' :marks<CR>
 map <leader><leader>cd :cd %:p:h<CR>
 
 map <leader>ge :Gedit<CR>
@@ -240,10 +240,11 @@ map <leader>gL :Extradite<CR>
 " Go to next / previous change (GitGutter)
 nmap <c-j> ]c
 nmap <c-k> [c
-" And get or put the diff
-noremap <c-m> g;
-noremap <c-n> g,
-
+"  And get or put the diff
+" THIS MESSES UP COPEN LIST PRESSING ENTER
+"noremap <c-m> g;
+"noremap <c-n> g,
+ 
 nnoremap s <Plug>(easymotion-s)
 
 
@@ -379,10 +380,8 @@ let g:neocomplete#max_list = 10
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+     \ 'scheme' : $HOME.'/.gosh_completions'
+         \ }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
@@ -398,9 +397,7 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -461,4 +458,7 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 
 let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
+
+nnoremap <S-J> }
+nnoremap <S-K> {
 
