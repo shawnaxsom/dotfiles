@@ -5,11 +5,11 @@ prompted_to_delete=false
 create_symlink() {
   if [ $prompted_to_delete=false ]; then
     if [ ! -L "$2" ]; then
-      if [ -f "$2" ] || [ -d "2" ]; then 
+      if [ -f "$2" ] || [ -d "$2" ]; then 
         read -p "Non-symbolic file already exists, okay to delete? (y/n)" yn
 
         case $yn in
-          [Yy]* ) break;;
+          [Yy]* ) ;;
           [Nn]* ) echo "Exiting..."; exit;;
       * ) echo "Please answer yes or no.";;
     esac
@@ -21,7 +21,7 @@ fi
 
   if [ -f "$2" ] || [ -d "$2" ]; then
     echo "Removing symbolic link $2"
-    rm $2
+    rm -rf $2
   fi
 
   echo "Creating symbolic link $2"
