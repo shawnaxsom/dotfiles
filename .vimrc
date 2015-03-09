@@ -50,12 +50,14 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args = "--ignore=E501 --max-complexity 10"
+let g:syntastic_python_flake8_args="--ignore=E501,E202,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
 
 set incsearch
+set hlsearch
 set ignorecase
 set smartcase
 
@@ -78,10 +80,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'lambacck/python_matchit'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'fs111/pydoc.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'jiangmiao/auto-pairs'
-Bundle 'klen/python-mode'
 Bundle 'mileszs/ack.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'airblade/vim-gitgutter'
@@ -113,6 +113,9 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'freitass/todo.txt-vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'jeetsukumaran/vim-indentwise'
+Bundle 'vim-scripts/Marks-Browser'
+"Bundle 'khorser/vim-mark-tools'
+Bundle 'kshenoy/vim-signature'
 call vundle#end()
 filetype plugin indent on    " required
              
@@ -168,7 +171,7 @@ let g:clang_conceal_snippets=1
 " let g:clang_snippets_engine='clang_complete'
 " nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlPBuffer'
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
 set wildignore+=*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'ra'
@@ -202,8 +205,9 @@ noremap - :VimFilerBuffer  -simple -winwidth=35 -toggle -quit<cr>
 noremap _ :update<CR>:cd %:p:h<CR>:VimFiler -project -find -toggle -auto-cd<CR>
 
 noremap <F1> :!tig %<CR>
-noremap <F2> :call RangerChooser()<CR>
+noremap <F2> :MarksBrowser<CR>
 noremap <F3> "hyiw:Ack <c-r>h
+noremap <F4> :call RangerChooser()<CR>
 noremap <silent> <F4> :Tlist<CR>
 vnoremap <silent> <F5> :w !sh<CR>
 noremap <F5> :!%:p<CR>
@@ -216,7 +220,7 @@ noremap <F10> :!pudb %<CR>
 map <leader>c :q<CR>
 map <leader>d :tab sp<CR>
 map <leader>e :sp ~/.vimrc<CR>
-map <leader>j <S-J>
+map <leader>j :join<CR>
 map <leader>q :q<CR>
 map <leader>s :sp<CR>
 map <leader>v :vsp<CR>
@@ -243,15 +247,11 @@ nmap <c-k> [c
 " THIS MESSES UP COPEN LIST PRESSING ENTER
 "noremap <c-m> g;
 "noremap <c-n> g,
- 
+
 nnoremap s <Plug>(easymotion-s)
 
 
 "nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>")<CR>
-
-let g:pymode_syntax = 1
-let g:pymode_syntax_slow_sync = 1
-let g:pymode_syntax_all = 1
 
 let g:vimfiler_as_default_explorer = 1
 
@@ -260,46 +260,7 @@ map H <Plug>(vimfiler_switch_to_history_directory)
 " Paste text from other places safely
 set pastetoggle=<F9>
 
-" Python-mode
-" Activate rope
-" Keys:
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 1
-
-" Documentation
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'T'
-
-"Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
-" Auto check on save
-let g:pymode_lint_write = 1
-
-" Support virtualenv
-let g:pymode_virtualenv = 1
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
-
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-
-" Don't autofold code
-let g:pymode_folding = 0
+"inoremap <ESC> <Nop>
 
 
 " Comment out a line of code
@@ -319,7 +280,7 @@ autocmd BufReadPost *
 \       exe 'normal! g`"zvzz' |
 \   endif
 
-map <leader>m :marks<CR>
+" map <leader>m :marks<CR>
 
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -450,14 +411,16 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible ? "\<C-n>" : "\<TAB>"
+" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"     \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible ? "\<C-n>" : "\<TAB>"
 
 " let g:UltiSnipsSnippetDirectories += '/home/shawn/.vim/bundle/angular-vim-snippets/UltiSnips/'
 
 
 let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 
-nnoremap <S-J> }
-nnoremap <S-K> {
+" nnoremap <S-J> }
+" noremap <S-K> {
 
+nnoremap <S-J> ]'
+nnoremap <S-K> ['
