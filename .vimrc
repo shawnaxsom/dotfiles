@@ -58,10 +58,9 @@ set wildcharm=<TAB>
 
 " This allows you to do undo even after you close a file, BUT it creates
 " annoying .foo.un~ files that clutter things up =\
-set undofile
-set undolevels=2000
-set undoreload=20000
-"foo
+" set undofile
+" set undolevels=2000
+" set undoreload=20000
 
 " The Vanilla Vim is not so good in formatting lines, so improve them: {
 
