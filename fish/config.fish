@@ -2,7 +2,8 @@
 set fish_path $HOME/.oh-my-fish
 
 # Theme
-set fish_theme robbyrussell
+#set fish_theme robbyrussell
+set fish_theme Informative
 
 # All built-in plugins can be found at ~/.oh-my-fish/plugins/
 # Custom plugins may be added to ~/.oh-my-fish/custom/plugins/
@@ -14,55 +15,8 @@ set fish_plugins theme z tmux tab vi-mode
 
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
-
-function start_agent                                                                                                                                                                    
-    echo "Initializing new SSH agent ..."
-    ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
-    echo "succeeded"
-    chmod 600 $SSH_ENV 
-    . $SSH_ENV > /dev/null
-    ssh-add
-end
  
-function test_identities                                                                                                                                                                
-    ssh-add -l | grep "The agent has no identities" > /dev/null
-    if [ $status -eq 0 ]
-        ssh-add
-        if [ $status -eq 2 ]
-            start_agent
-        end
-    end
-end
-
-function ack
-    /usr/bin/ack-grep $argv
-end
-
-alias pbcopy='xclip -selection clipboard -i'
-alias pbpaste='xclip -selection clipboard -o'
-
-setenv SSH_ENV $HOME/.ssh/environment
- 
-if [ -n "$SSH_AGENT_PID" ] 
-    ps -ef | grep $SSH_AGENT_PID | grep ssh-agent > /dev/null
-    if [ $status -eq 0 ]
-        test_identities
-    end  
-else
-    if [ -f $SSH_ENV ]
-        . $SSH_ENV > /dev/null
-    end  
-    ps -ef | grep $SSH_AGENT_PID | grep -v grep | grep ssh-agent > /dev/null
-    if [ $status -eq 0 ]
-        test_identities
-    else 
-        start_agent
-    end  
-end
- 
-xset r rate 250 30
-
-#alias vim='gvim'
+xset r rate 225 28
 
 alias ...='../..'
 alias ....='../../..'
@@ -73,3 +27,16 @@ alias ........='../../../../../../..'
 alias -='cd -'
 
 set -x TERM xterm-256color
+
+alias cal='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calw'
+alias todo='todotxt-machine'
+alias surf='surf google.com'
+alias ack='ack-grep'
+
+function google
+  elinks "https://www.google.com/search?q=$argv"
+end
+
+function replace
+  find . -type f -print0 | xargs -0 /bin/sed -i '$argv'
+end

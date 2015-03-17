@@ -1,0 +1,109 @@
+
+Xcursor.theme:    Vanilla-DMZ-AA
+
+!urxvt color scheme:
+
+URxvt*background: #020B10
+URxvt*foreground: #FFFFFF
+
+URxvt*colorUL: #86a2b0
+
+! black
+URxvt*color0  : #2E3436
+URxvt*color8  : #555753
+! red
+URxvt*color1  : #CC0000
+URxvt*color9  : #EF2929
+! green
+URxvt*color2  : #6EDA46
+URxvt*color10 : #8AE234
+! yellow
+URxvt*color3  : #C4A000
+URxvt*color11 : #FCE94F
+! blue
+URxvt*color4  : #4475C4
+URxvt*color12 : #72BFFF
+! magenta
+URxvt*color5  : #75507B
+URxvt*color13 : #AD7FA8
+! cyan
+URxvt*color6  : #06989A
+URxvt*color14 : #34E2E2
+! white
+URxvt*color7  : #D3D7CF
+URxvt*color15 : #EEEEEC
+
+!urxvt fonts: 
+
+URxvt*font: xft:Source Code Pro for Powerline:pixelsize=17:antialias=false:hinting=false
+URxvt*boldFont: xft:Source Code Pro for Powerline:bold:pixelsize=17:antialias=false:hinting=false
+
+!enabling clickable links:
+
+URxvt.urlLauncher:      /usr/bin/surf
+URxvt.matcher.button:   1 
+
+!urxvt scrolling options and cursor style:
+
+URxvt*saveLines: 12000
+URxvt*scrollstyle:plain
+URxvt*scrollBar: false
+URxvt*cursorBlink: true
+URxvt*cursorUnderline: true
+
+! urxvt tabs settings:
+
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 2
+URxvt.tabbed.tab-bg: 8
+URxvt.tabbed.autohide:  yes
+URxvt.tabbed.new-button:  no
+URxvt.tabbed.title: no
+
+URxvt.iso14755: False
+
+!-*- Perl extensions -*-
+URxvt.perl-ext-common:default,clipboard,matcher,keyboard-select
+URxvt.underlineURLs:  True
+URxvt.matcher.button: 1 
+URxvt.keysym.M-Escape:perl:keyboard-select:activate
+URxvt.keysym.M-c:     perl:clipboard:copy
+URxvt.keysym.M-v:     perl:clipboard:paste
+URxvt.keysym.C-v:     perl:clipboard:paste
+URxvt.keysym.M-C-v:   perl:clipboard:paste_escaped
+URxvt.copyCommand:   xsel -ib
+URxvt.pasteCommand:  xsel -ob
+
+# NOTE: To find the key codes here, go into BASH, then type READ, 
+#       press enter, and press a key combination.
+URxvt.keysym.C-Down:        \033[1;3B
+URxvt.keysym.C-Up:          \033[1;3A
+URxvt.keysym.C-Left:        \033[1;3D
+URxvt.keysym.C-Right:       \033[1;3C
+
+# Copy/Paste support, you must place this script here:
+# usr/lib/urxvt/perl
+##script to copy/paste text in URXVT
+#
+##! perl
+#
+#sub on_sel_grab {
+#    my $query = $_[0]->selection;
+#    open (my $pipe,'| /usr/bin/xclip -in -selection clipboard') or die;
+#    print $pipe $query;
+#    close $pipe;
+#}
+#
+#sub paste {
+#    my ($self) = @_;
+#    my $content = `/usr/bin/xclip -loop 1 -out -selection clipboard` ;
+#    $self->tt_write ($content);
+#}
+#
+#sub on_user_command {
+#    my ($self, $cmd) = @_;
+#    if ($cmd eq "clipboard:paste") {
+#        $self->paste;
+#    }
+#}

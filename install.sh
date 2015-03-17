@@ -39,4 +39,7 @@ create_symlink    ~/.dotfiles/fish       ~/.config/fish
 create_symlink    ~/.dotfiles/.fishrc    ~/.fishrc                        
 create_symlink    ~/.dotfiles/i3config   ~/.i3/config
 create_symlink    ~/.dotfiles/sift.vim   ~/.vim/colors/sift.vim
-
+create_symlink    ~/.dotfiles/badwolf.vim   ~/.vim/colors/badwolf.vim
+create_symlink    ~/.dotfiles/.muttrc    ~/.muttrc
+create_symlink    ~/.dotfiles/.Xdefaults ~/.Xdefaults
+create_symlink    ~/.dotfiles/.surf ~/.surf

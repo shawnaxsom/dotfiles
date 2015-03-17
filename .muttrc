@@ -1,0 +1,59 @@
+bind editor <space> noop
+set realname = 'Shawn Axsom'
+set from = 'shawn.axsom@rooksecurity.com'
+set alias_file        = '~/.mutt/aliases'
+set copy              = no
+# set display_filter    = '$HOME/.mutt/aliases.sh'
+set edit_headers
+# set editor            = "vim +/^$ ++1"
+set editor   = 'vim -c "set spell spelllang=en_us"'
+set folder            = 'imaps://imap.gmail.com:993'
+set hostname          = "gmail.com"
+set imap_check_subscribed
+set mail_check        = 5
+set move              = no
+set postponed         = "+[Gmail]/Drafts"
+set record            = "+[Gmail]/Sent Mail"
+set trash             = "+[Gmail]/Trash"
+set spoolfile         = "+INBOX"
+set text_flowed       = yes
+set sort    = reverse-threads
+set sort_aux    = last-date-received
+unset imap_passive
+# unset record
+
+
+bind index G imap-fetch-mail
+
+set header_cache =~/.mutt/cache/headers
+set message_cachedir = =~/.mutt/cache/bodies
+set certificate_file =~/.mutt/certificates
+
+set imap_keepalive = 900
+
+auto_view text/html
+
+
+# Gmail-style keyboard shortcuts
+macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
+macro index gt "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to trash"
+# macro index,pager d "<save-message>=[Gmail]/Trash<enter><enter>" "Trash"
+# macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+# macro index,pager y "<enter-command>unset trash\n <delete-message>" "Gmail archive message"
+folder-hook +INBOX 'macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive conversation"'
+folder-hook +[Gmail]/Trash macro index,pager y <save-message>=INBOX<enter><enter> "Move to inbox"
+folder-hook +[Gmail]/Starred bind  index,pager y flag-message #"Toggle star"
+
+source $alias_file
+
+##################################################
+# Create a secrets file with username and password
+##################################################
+# set imap_user = 'shawn.axsom@rooksecurity.com'
+# set imap_pass = ''
+# set smtp_url = 'smtp://shawn.axsom@rooksecurity.com@smtp.gmail.com:587/'
+# set smtp_pass = ''
+source ~/.mutt_secrets

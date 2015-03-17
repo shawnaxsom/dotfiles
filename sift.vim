@@ -136,8 +136,8 @@ hi ModeMsg        term=bold cterm=bold ctermfg=38
 hi LineNr         term=underline cterm=bold ctermfg=30 ctermbg=16 
 hi CursorLineNr   term=bold cterm=bold ctermfg=226 
 hi Question       term=standout cterm=bold ctermfg=146 
-hi StatusLine     term=bold,reverse cterm=bold ctermfg=17 ctermbg=38 
-hi StatusLineNC   term=reverse cterm=bold ctermfg=23 ctermbg=31 
+hi StatusLine     term=bold,reverse cterm=bold ctermfg=14 ctermbg=236 
+hi StatusLineNC   term=reverse cterm=bold ctermfg=24 ctermbg=236 
 hi VertSplit      term=reverse ctermfg=244 ctermbg=60 
 hi Title          term=bold ctermfg=46 
 hi Visual         term=reverse ctermfg=68 ctermbg=17 

@@ -28,7 +28,9 @@ font pango:Source Code Pro 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+# Make sure you install rxvt-unicode-256color
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -71,7 +73,8 @@ bindsym $mod+b split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen; focus child
+bindsym $mod+Shift+f focus parent; fullscreen; focus child
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -88,7 +91,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+Shift+a focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -115,8 +118,8 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # move to other screen
-bindsym $mod+Shift+n move workspace to output left
-bindsym $mod+Shift+m move workspace to output right
+# bindsym $mod+Shift+n move workspace to output left
+# bindsym $mod+Shift+m move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -133,10 +136,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -160,3 +163,11 @@ bar {
 for_window [window_role="pop-up"] floating enable
 
 bindsym $mod+Shift+b mark screenkey; floating enable;
+
+# bindsym $mod+g exec "surf google.com"
+# bindsym $mod+g split h; exec "surf google.com"; exec "sh -c 'sleep 2'"; focus right; 
+bindsym $mod+g exec "surf google.com"
+
+# bindsym $mod+m border toggle
+bindsym $mod+m move scratchpad
+bindsym $mod+o scratchpad show

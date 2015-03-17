@@ -8,11 +8,13 @@ autocmd! bufwritepost .vimrc source %
 
 
 set noswapfile
+set autoread
 set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 syntax on
 set background=dark
-colo sift
+"colo sift
+colorscheme badwolf
 "CSApprox " Show GVim color schemes in 256 bit terminals
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
@@ -24,29 +26,88 @@ set guioptions-=L  "remove left-hand scroll bar
 set mouse=a
 set virtualedit=all "allow cursor to stay in same column while scrolling
 set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
-set tabstop=2 shiftwidth=2 expandtab autoindent smarttab smartindent
+set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 set scrolloff=18 "Keep cursor centered
 set cindent
 set shell=bash
 set more " Use MORE as pager
+set lazyredraw
+set ttyfast
+set ttymouse=xterm2
+set ttyscroll=3
+set showmatch
+set splitbelow
+set splitright
+set gdefault
+set confirm
+set diffopt=vertical
+set hidden
+set history=1000
+set linebreak
+set nojoinspaces
+set magic
+set browsedir=buffer
+set cursorline
+set nobackup
+set nowritebackup
 
+set complete=.,w,b,u,t
+set completeopt=longest,menuone,preview
+set wildcharm=<TAB>
+
+" This allows you to do undo even after you close a file, BUT it creates
+" annoying .foo.un~ files that clutter things up =\
+set undofile
+set undolevels=2000
+set undoreload=20000
+"foo
+
+" The Vanilla Vim is not so good in formatting lines, so improve them: {
+
+    " Recognize numbered lists
+     set formatoptions+=n 
+
+    " Use indent from 2nd line of a paragraph
+     set formatoptions+=2 
+
+    " Don't break lines that are already long
+     set formatoptions+=l 
+
+    " Break before 1-letter words
+     set formatoptions+=1 
+
+    " Delete comment character when joining commented lines, so two lines of comment becomes one line when joining, without comment mark.
+    if v:version + has("patch541") >= 704
+        set formatoptions+=j
+    endif
+
+    " Don't continue comment mark after press 'o' when youre on a commented line
+     set formatoptions -=cro
+
+    " See the help under formatoptions for details
+     set formatoptions=tqw
+" }
 " Relative line numbers
-set number
+set nonumber
 "if exists('+rnu') | set relativenumber | endif
 
 " Ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 
-set laststatus=2
+set wildmenu
+set wildmode=full
+set wildignorecase
+set wildchar=<Tab>
+
+set laststatus=1
 set statusline=%-20t
-set statusline+=(%f)
 set statusline+=%=        " Switch to the right side
-" set statusline+=Current:\ %-4l\ Total:\ %-4L
-" set statusline+=%y // file type
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+set statusline+=(%f)
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -82,7 +143,7 @@ Bundle 'lambacck/python_matchit'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'jiangmiao/auto-pairs'
-Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'jelera/vim-javascript-syntax'
@@ -100,7 +161,6 @@ Bundle 'gregsexton/gitv'
 Bundle 'vim-scripts/MultipleSearch'
 Bundle 'int3/vim-extradite'
 Bundle 'tpope/vim-surround'
-Bundle 'Shougo/neocomplete.vim'
 Bundle 'Shougo/neosnippet.vim'
 Bundle 'Shougo/neosnippet-snippets'
 Bundle 'terryma/vim-expand-region'
@@ -113,12 +173,21 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'freitass/todo.txt-vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'jeetsukumaran/vim-indentwise'
-Bundle 'vim-scripts/Marks-Browser'
-"Bundle 'khorser/vim-mark-tools'
 Bundle 'kshenoy/vim-signature'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'ervandew/supertab'
 call vundle#end()
 filetype plugin indent on    " required
-             
+ 
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"            
 
 " Use Ranger file browser as explorer
 function! RangerChooser()
@@ -146,14 +215,6 @@ function! RangerChooser()
     endfor
     redraw!
 endfunction
-" fun! RangerChooser()
-"   exec "silent !ranger --choosefile=/tmp/chosenfile" . expand("%:p:h")
-"   if filereadable('/tmp/chosenfile')
-"     exec 'edit ' . system('cat /tmp/chosenfile')
-"     call system('rm /tmp/chosenfile')
-"   endif
-"   redraw!
-" endfun
 command! -bar RangerChooser call RangeChooser()
 
 set conceallevel=2
@@ -161,27 +222,28 @@ set concealcursor=vin
 let g:clang_snippets=1
 let g:clang_conceal_snippets=1
 
-" let g:ycm_autoclose_preview_window_after_completion=1
-" let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-" let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-" let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-" let g:ycm_complete_in_comments = 1 " Completion in comments
-" let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ctrlp_cmd = 'CtrlPMRU'
+noremap <c-l> :CtrlPFunky<CR>
+let g:ctrlp_mruf_relative = 1
+let g:ctrlp_match_window = 'bottom,order:btt'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+" Using ag is faster, BUT wildignore doesn't work
+" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' 
+" let g:ctrlp_use_caching = 0
 
-" let g:clang_snippets_engine='clang_complete'
-" nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-let g:ctrlp_cmd = 'CtrlPBuffer'
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-set wildignore+=*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'ra'
-nnoremap <leader>p :CtrlPFunky<Cr>
-nnoremap <c-g> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+" nnoremap <leader>p :CtrlPFunky<Cr>
+" nnoremap <c-g> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 set foldmethod=indent
 set foldnestmax=8
-set foldlevelstart=20
+"set foldlevelstart=20
+set foldlevelstart=0
 
+autocmd Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
 autocmd Syntax python setlocal foldmethod=indent
 autocmd Syntax python normal zR
 autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
@@ -204,25 +266,30 @@ nmap <leader><leader>h :SearchReset<CR>
 noremap - :VimFilerBuffer  -simple -winwidth=35 -toggle -quit<cr>
 noremap _ :update<CR>:cd %:p:h<CR>:VimFiler -project -find -toggle -auto-cd<CR>
 
-noremap <F1> :!tig %<CR>
-noremap <F2> :MarksBrowser<CR>
+noremap <F1> :!%:p<CR>
+" noremap <F2> :SignatureListMarka<CR>
 noremap <F3> "hyiw:Ack <c-r>h
 noremap <F4> :call RangerChooser()<CR>
-noremap <silent> <F4> :Tlist<CR>
+nnoremap <silent> <F5> :w !sh<CR>
 vnoremap <silent> <F5> :w !sh<CR>
-noremap <F5> :!%:p<CR>
+noremap <F6> :!tig %<CR>
 noremap <F7> :SyntasticCheck<CR>:Errors<CR>
 noremap <Leader><F7> :SyntasticReset<CR>
 noremap <silent> <F8> :!clear;python %<CR>
 noremap <F10> :!pudb %<CR>
-" noremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+nnoremap <TAB> <c-^>
+
+map <leader>/ :nohlsearch<CR>
 map <leader>c :q<CR>
-map <leader>d :tab sp<CR>
+" map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>e :sp ~/.vimrc<CR>
 map <leader>j :join<CR>
+map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
+map <leader>r :sp ~/.vimrc<CR>
 map <leader>s :sp<CR>
+map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader>x :tabn<CR>
@@ -241,12 +308,16 @@ map <leader>gl :Glog<BAR>:bot copen<CR>
 map <leader>gL :Extradite<CR>
 
 " Go to next / previous change (GitGutter)
-nmap <c-j> ]c
-nmap <c-k> [c
+" nmap <c-j> ]c
+" nmap <c-k> [c
+nmap <c-j> ]'
+nmap <c-k> ['
 "  And get or put the diff
 " THIS MESSES UP COPEN LIST PRESSING ENTER
 "noremap <c-m> g;
 "noremap <c-n> g,
+noremap <c-b> g;
+noremap <c-f> g,
 
 nnoremap s <Plug>(easymotion-s)
 
@@ -255,7 +326,10 @@ nnoremap s <Plug>(easymotion-s)
 
 let g:vimfiler_as_default_explorer = 1
 
-map H <Plug>(vimfiler_switch_to_history_directory)
+" map H <Plug>(vimfiler_switch_to_history_directory)
+map H ^
+map L g_
+map Y y$
 
 " Paste text from other places safely
 set pastetoggle=<F9>
@@ -273,6 +347,7 @@ nnoremap N Nzz
 
 " Escape by typing jj
 imap jj <Esc>
+imap kk <Esc>
 
 " Keep location of file when reopening
 autocmd BufReadPost *
@@ -291,8 +366,8 @@ let g:syntastic_javascript_jshint_args = '--config /home/shawn/.jshintrc'
 
 let g:ackprg = "ack-grep"
 
-map <c-l> :cnext<CR>
-map <c-h> :cprev<CR>
+" map <c-l> :cnext<CR>
+" map <c-h> :cprev<CR>
 
 "map <c-w> :NEXTCOLOR<CR>
 
@@ -310,11 +385,10 @@ autocmd BufReadPost fugitive://*
 
 
 
-set diffopt+=vertical
 
 "map <F1> :colo sift<CR>
 "map <F2> :highlight<CR>
-" map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+"map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 "map <F4> <c-a>:w <BAR> :colo sift<CR>
 "map <F5> <c-x>:w <BAR> :colo sift<CR>
 
@@ -326,93 +400,6 @@ xmap s S
 
 
 
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 4
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#max_list = 10
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-     \ 'scheme' : $HOME.'/.gosh_completions'
-         \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-" set completeopt+=longest
-" let g:neocomplete#enable_auto_select = 1
-" let g:neocomplete#disable_auto_complete = 1
-" inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-" Increase the selected region, defaults are plus/minus
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
-" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"     \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible ? "\<C-n>" : "\<TAB>"
 
 " let g:UltiSnipsSnippetDirectories += '/home/shawn/.vim/bundle/angular-vim-snippets/UltiSnips/'
 
@@ -422,5 +409,31 @@ let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 " nnoremap <S-J> }
 " noremap <S-K> {
 
-nnoremap <S-J> ]'
-nnoremap <S-K> ['
+" Jump to bookmark
+" nnoremap J ]'
+" nnoremap K ['
+" noremap K {
+" noremap J }
+
+" Don't skip wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
+map <BAR> "hyiw?\(class\s\\|var\\|def\s\).*<c-r>h<CR>:nohlsearch<CR>
+" nnoremap <c-g> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+noremap K ?\(class\s\\|def\s\\|Bundle\)<CR>:nohlsearch<CR>
+noremap J /\(class\s\\|def\s\\|Bundle\)<CR>:nohlsearch<CR>
+" vim-indentwise
+" map K [-
+" map J <c-o>
+
+" noremap <Space> za
+" Mark next, based on Vim-Signature
+map <Space> m,
+
+map Q :cprev<CR>
+map <c-q> :cnext<CR>
+
+let g:ag_highlight=1
