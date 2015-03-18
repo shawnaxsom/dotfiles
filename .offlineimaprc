@@ -1,0 +1,40 @@
+# To not have to enter a password:
+# Create a file ~/.netrc:
+#   machine imap.gmail.com
+#      login shawn.axsom@rooksecurity.com
+#      password APPLICATION_PASSWORD
+
+[general]
+accounts = Rook
+
+[Account Rook]
+localrepository = Rook-Local
+remoterepository = Rook-Remote
+
+[Repository Rook-Local]
+type = Maildir
+localfolders = /data/oi/Rook/
+sep = /
+
+[Repository Rook-Remote]
+type = Gmail
+remoteuser = shawn.axsom@rooksecurity.com
+realdelete = no
+folderfilter = lambda folder: folder not in ['[Gmail]/All Mail',
+                                             '[Gmail]/Important',
+                                             '[Gmail]/Starred',
+                                             '[Gmail]/Sent Mail'
+                                             ]
+
+
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+

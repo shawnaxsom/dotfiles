@@ -35,8 +35,9 @@ URxvt*color15 : #EEEEEC
 
 !urxvt fonts: 
 
-URxvt*font: xft:Source Code Pro for Powerline:pixelsize=17:antialias=false:hinting=false
-URxvt*boldFont: xft:Source Code Pro for Powerline:bold:pixelsize=17:antialias=false:hinting=false
+URxvt*font: xft:Source Code Pro for Powerline:pixelsize=17:antialias=true:hinting=true
+URxvt*boldFont: xft:Source Code Pro for Powerline:bold:pixelsize=17:antialias=true:hinting=true
+URxvt.letterSpace: -1
 
 !enabling clickable links:
 

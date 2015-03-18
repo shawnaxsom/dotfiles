@@ -43,3 +43,4 @@ create_symlink    ~/.dotfiles/badwolf.vim   ~/.vim/colors/badwolf.vim
 create_symlink    ~/.dotfiles/.muttrc    ~/.muttrc
 create_symlink    ~/.dotfiles/.Xdefaults ~/.Xdefaults
 create_symlink    ~/.dotfiles/.surf ~/.surf
+create_symlink    ~/.dotfiles/.offlineimaprc ~/.offlineimaprc
