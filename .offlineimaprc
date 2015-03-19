@@ -22,8 +22,7 @@ remoteuser = shawn.axsom@rooksecurity.com
 realdelete = no
 folderfilter = lambda folder: folder not in ['[Gmail]/All Mail',
                                              '[Gmail]/Important',
-                                             '[Gmail]/Starred',
-                                             '[Gmail]/Sent Mail'
+                                             '[Gmail]/Starred'
                                              ]
 
 
