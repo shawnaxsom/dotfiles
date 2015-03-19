@@ -19,6 +19,8 @@ set spoolfile         = "+INBOX"
 set text_flowed       = yes
 set sort    = reverse-threads
 set sort_aux    = last-date-received
+set signature="~/.signature"
+set sig_on_top        = yes
 unset imap_passive
 # unset record
 
