@@ -36,6 +36,7 @@ fi
 
 create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
 create_symlink    ~/.dotfiles/fish       ~/.config/fish
+create_symlink    ~/.dotfiles/.elinks    ~/.elinks
 create_symlink    ~/.dotfiles/.fishrc    ~/.fishrc                        
 create_symlink    ~/.dotfiles/i3config   ~/.i3/config
 create_symlink    ~/.dotfiles/sift.vim   ~/.vim/colors/sift.vim
