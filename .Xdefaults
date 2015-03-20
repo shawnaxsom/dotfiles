@@ -78,10 +78,11 @@ URxvt.pasteCommand:  xsel -ob
 
 # NOTE: To find the key codes here, go into BASH, then type READ, 
 #       press enter, and press a key combination.
-URxvt.keysym.C-Down:        \033[1;3B
-URxvt.keysym.C-Up:          \033[1;3A
-URxvt.keysym.C-Left:        \033[1;3D
-URxvt.keysym.C-Right:       \033[1;3C
+/* URxvt.keysym.C-Down:        \033[1;3B */
+/* URxvt.keysym.C-Up:          \033[1;3A */
+/* URxvt.keysym.C-Left:        \033[1;3D */
+/* URxvt.keysym.C-Right:       \033[1;3C */
+/* URxvt.keysym.C-u:           ^[[5~ */
 
 # Copy/Paste support, you must place this script here:
 # usr/lib/urxvt/perl
