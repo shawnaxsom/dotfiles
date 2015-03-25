@@ -28,7 +28,11 @@ alias -='cd -'
 
 set -x TERM xterm-256color
 
-alias cal='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calw'
+alias calw='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calw 2'
+alias calm='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calm'
+alias cal='gcalcli --calendar="shawn.axsom@rooksecurity.com"'
+alias calhome='gcalcli --calendar="Shawn Axsom"'
+alias calwork='gcalcli --calendar="shawn.axsom@rooksecurity.com"'
 alias todo='todotxt-machine'
 alias surf='surf google.com'
 alias ack='ack-grep'

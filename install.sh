@@ -35,6 +35,8 @@ if [ ! -d ~/.oh-my-fish ]; then
 fi
 
 create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
+create_symlink    ~/.dotfiles/.vimrc     ~/.nvimrc
+create_symlink    ~/.vim                 ~/.nvim
 create_symlink    ~/.dotfiles/fish       ~/.config/fish
 create_symlink    ~/.dotfiles/.elinks    ~/.elinks
 create_symlink    ~/.dotfiles/.fishrc    ~/.fishrc                        

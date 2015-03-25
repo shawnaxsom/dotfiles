@@ -30,7 +30,9 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 # Make sure you install rxvt-unicode-256color
-bindsym $mod+Return exec urxvt
+# bindsym $mod+Return exec urxvt
+# bindsym $mod+Return exec terminator
+bindsym $mod+Return exec roxterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -105,6 +107,15 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+# pressing same workspace again will return to previous workspace
+# workspace_auto_back_and_forth yes      
+
+# hotkey to jump to previous workstation
+bindsym $mod+q workspace back_and_forth
+
+# focus on elinks
+bindsym $mod+Shift+b [title="elinks"] focus
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -162,12 +173,41 @@ bar {
 
 for_window [window_role="pop-up"] floating enable
 
-bindsym $mod+Shift+b mark screenkey; floating enable;
+# bindsym $mod+Shift+b mark screenkey; floating enable;
 
 # bindsym $mod+g exec "surf google.com"
 # bindsym $mod+g split h; exec "surf google.com"; exec "sh -c 'sleep 2'"; focus right; 
 bindsym $mod+g exec "surf google.com"
 
-# bindsym $mod+m border toggle
-bindsym $mod+m move scratchpad
-bindsym $mod+o scratchpad show
+mode "mark_window" {                                                                        
+     bindsym $mod+1 mark m1; mode "default"                                                           
+     bindsym $mod+2 mark m2; mode "default"                                                           
+     bindsym $mod+3 mark m3; mode "default"                                                           
+     bindsym $mod+4 mark m4; mode "default"                                                           
+     bindsym $mod+5 mark m5; mode "default"                                                           
+     bindsym $mod+a mark ma; mode "default"                                                           
+     bindsym $mod+b mark mb; mode "default"                                                           
+     bindsym $mod+c mark mc; mode "default"                                                           
+     bindsym $mod+d mark md; mode "default"                                                           
+     bindsym $mod+e mark me; mode "default"                                                           
+     bindsym $mod+Return mode "default"                                               
+     bindsym $mod+Escape mode "default"                                               
+}                                                                                           
+                                                                                            
+mode "go_to_window" {                                                                       
+     bindsym $mod+1 [con_mark="m1"] focus; mode "default"                                             
+     bindsym $mod+2 [con_mark="m2"] focus; mode "default"                                             
+     bindsym $mod+3 [con_mark="m3"] focus; mode "default"                                             
+     bindsym $mod+4 [con_mark="m4"] focus; mode "default"                                             
+     bindsym $mod+5 [con_mark="m5"] focus; mode "default"                                             
+     bindsym $mod+a [con_mark="ma"] focus; mode "default"                                             
+     bindsym $mod+b [con_mark="mb"] focus; mode "default"                                             
+     bindsym $mod+c [con_mark="mc"] focus; mode "default"                                             
+     bindsym $mod+d [con_mark="md"] focus; mode "default"                                             
+     bindsym $mod+e [con_mark="me"] focus; mode "default"                                             
+     bindsym $mod+Return mode "default"                                               
+     bindsym $mod+Escape mode "default"                                               
+}                                                                                           
+                                                                                            
+bindsym $mod+o mode "go_to_window"                                                          
+bindsym $mod+m mode "mark_window" 

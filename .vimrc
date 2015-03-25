@@ -35,7 +35,7 @@ set more " Use MORE as pager
 set lazyredraw
 set ttyfast
 set ttymouse=xterm2
-set ttyscroll=3
+" set ttyscroll=3
 set showmatch
 set splitbelow
 set splitright
@@ -64,28 +64,26 @@ set wildcharm=<TAB>
 
 " The Vanilla Vim is not so good in formatting lines, so improve them: {
 
-    " Recognize numbered lists
-     set formatoptions+=n 
+"     " Recognize numbered lists
+"      set formatoptions+=n 
 
-    " Use indent from 2nd line of a paragraph
-     set formatoptions+=2 
+"     " Use indent from 2nd line of a paragraph
+"      set formatoptions+=2 
 
-    " Don't break lines that are already long
-     set formatoptions+=l 
+"     " Don't break lines that are already long
+"      set formatoptions+=l 
 
-    " Break before 1-letter words
-     set formatoptions+=1 
+"     " Break before 1-letter words
+"      set formatoptions+=1 
 
-    " Delete comment character when joining commented lines, so two lines of comment becomes one line when joining, without comment mark.
-    if v:version + has("patch541") >= 704
-        set formatoptions+=j
-    endif
+"     " Delete comment character when joining commented lines, so two lines of comment becomes one line when joining, without comment mark.
+"     if v:version + has("patch541") >= 704
+"         set formatoptions+=j
+"     endif
 
-    " Don't continue comment mark after press 'o' when youre on a commented line
-     set formatoptions -=cro
+"     " Don't continue comment mark after press 'o' when youre on a commented line
+"      set formatoptions -=cro
 
-    " See the help under formatoptions for details
-     set formatoptions=tqw
 " }
 " Relative line numbers
 set nonumber
@@ -240,7 +238,7 @@ let g:ctrlp_working_path_mode = 'ra'
 set foldmethod=indent
 set foldnestmax=8
 "set foldlevelstart=20
-set foldlevelstart=0
+set foldlevelstart=99
 
 autocmd Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
 autocmd Syntax python setlocal foldmethod=indent
@@ -436,3 +434,9 @@ map Q :cprev<CR>
 map <c-q> :cnext<CR>
 
 let g:ag_highlight=1
+
+noremap s "ryiw?var\s<c-r><c-w>\\|\(class\s\\|def\s\\|Bundle\)[^=]*<c-r><c-w>\\|\<c-r><c-w>.*\(class\s\\|def\s\\|Bundle\)\\|<c-r><c-w>\s=\\|function.*(.*<c-r><c-w>.*)<CR>0/<c-r>r<CR>:nohlsearch<CR>
+" noremap s "ryiw?<c-r><c-w>\s=<CR>0/<c-r>r<CR>:nohlsearch<CR>
+
+" Don't automatically do line breaks on long lines
+set formatoptions-=t
