@@ -39,7 +39,6 @@ s
 search
 13
 30
-0
 0 to
 to
 0 or 1
@@ -53,3 +52,47 @@ installation
 create
 stop
 flush
+Un t
+tcpdump
+flag
+SYN
+ecn
+iptables -A
+59
+T
+sta
+human
+theor
+example
+address
+instance
+select
+filters
+ip
+device-index
+eth1
+ifconfig
+Bcast
+Broa
+broadcast
+arp
+ARP
+\n
+\d\d[.]
+\s\d\d?[.]\s
+wildcard
+wild
+body
+verbose
+allow
+edit
+split
+0
+$
+param
+sleep
+all
+except
+kill
+Tl
+tl

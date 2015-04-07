@@ -280,11 +280,9 @@ pipework docker inspect returned invalid PID 0 - Google Search	http://www.google
 docker get full image id - Google Search	http://www.google.com/search?q=docker%20get%20full%20image%20id&btnG=Google+Search	1427131565
 Google Groups	https://groups.google.com/forum/	1427131581
 docker get full container id - Google Search	http://www.google.com/search?q=docker%20get%20full%20container%20id	1427131584
-Google	http://www.google.com/	1427135301
 iptables allow everything through - Google Search	http://www.google.com/search?q=iptables%20allow%20everything%20through	1427135357
 iptables accept all - Google Search	http://www.google.com/search?q=iptables%20accept%20all	1427135366
 IptablesHowTo - Community Help Wiki	https://help.ubuntu.com/community/IptablesHowTo	1427135399
-iptables allow all - Google Search	http://www.google.com/search?q=iptables%20allow%20all&btnG=Google+Search	1427135469
 disable iptables - Google Search	http://www.google.com/search?q=disable%20iptables	1427135477
 subnet mask - Google Search	http://www.google.com/search?q=subnet%20mask&btnG=Google+Search	1427140918
 rxvt ctrl-left doesn't work in ssh - Google Search	http://www.google.com/search?q=rxvt%20ctrl-left%20doesn't%20work%20in%20ssh&btnG=Google+Search	1427142564
@@ -327,7 +325,6 @@ invalid internal transport message format, got - Google Search	http://www.google
 invalid internal transport message format, got elasticsearch - Google Search	http://www.google.com/search?q=invalid%20internal%20transport%20message%20format%2c%20got%20elasticsearch	1427213510
 elasticsearch invalid internal transport message format, got - Google Search	http://www.google.com/search?q=elasticsearch%20invalid%20internal%20transport%20message%20format%2c%20got	1427213524
 elasticsearch - java.io.StreamCorruptedException: invalid internal transport message format - Stack Overflow	http://stackoverflow.com/questions/19510659/java-io-streamcorruptedexception-invalid-internal-transport-message-format	1427213536
-iptables accept all - Google Search	http://www.google.com/search?q=iptables%20accept%20all&btnG=Google+Search	1427215449
 4.8. Routing Tables	http://linux-ip.net/html/routing-tables.html	1427220922
 D.2. ip route	http://linux-ip.net/html/tools-ip-route.html	1427220930
 ip route new table - Google Search	http://www.google.com/search?q=ip%20route%20new%20table&btnG=Google+Search	1427221013
@@ -341,12 +338,9 @@ iptables accept all - Google Search	http://www.google.com/search?q=iptables%20ac
 no route to host elasticsearch - Google Search	http://www.google.com/search?q=no%20route%20to%20host%20elasticsearch&btnG=Google+Search	1427226889
 Elasticsearch error failed to connect to master - no route to host - Stack Overflow	http://stackoverflow.com/questions/25885411/elasticsearch-error-failed-to-connect-to-master-no-route-to-host	1427226891
 ip tables accept all - Google Search	http://www.google.com/search?q=ip%20tables%20accept%20all&btnG=Google+Search	1427227462
-linux - need iptables rule to accept all incoming traffic - Super User	http://superuser.com/questions/634469/need-iptables-rule-to-accept-all-incoming-traffic	1427227465
-curl no route to host - Google Search	http://www.google.com/search?q=curl%20no%20route%20to%20host&btnG=Google+Search	1427228818
 iptables log - Google Search	http://www.google.com/search?q=iptables%20log&btnG=Google+Search	1427228936
 iptables log file,and how change it - Ask Ubuntu	http://askubuntu.com/questions/348439/iptables-log-file-and-how-change-it	1427228946
 curl connection refused - Google Search	http://www.google.com/search?q=curl%20connection%20refused&btnG=Google+Search	1427229603
-Can't curl. curl: (7) Failed to connnect... Connection Refused - Server Fault	http://serverfault.com/questions/628321/cant-curl-curl-7-failed-to-connnect-connection-refused	1427229607
 30 Cool Open Source Software I Discovered in 2013	http://www.cyberciti.biz/open-source/30-cool-best-open-source-softwares-of-2013/	1427236306
 30 Handy Bash Shell Aliases For Linux / Unix / Mac OS X - nixCraft	http://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html	1427236307
 Linux: 25 PHP Security Best Practices For Sys Admins - nixCraft	http://www.cyberciti.biz/tips/php-security-best-practices-tutorial.html	1427236309
@@ -359,6 +353,237 @@ Top 20 Nginx WebServer Best Security Practices - nixCraft	http://www.cyberciti.b
 15 Greatest Open Source Terminal Applications Of 2012	http://www.cyberciti.biz/open-source/best-terminal-applications-for-linux-unix-macosx/	1427236317
 Top 10 Open Source Web-Based Project Management Software - nixCraft	http://www.cyberciti.biz/tips/open-source-project-management-software.html	1427236319
 My 10 UNIX Command Line Mistakes - nixCraft	http://www.cyberciti.biz/tips/my-10-unix-command-line-mistakes.html	1427236319
-No Route to Host error and solution - nixCraft	http://www.cyberciti.biz/tips/no-route-to-host-error-and-solution.html	1427236320
 The Novice Guide To Buying A Linux Laptop - nixCraft	http://www.cyberciti.biz/tips/linux-laptop.html	1427236321
 Top 5 Email Client For Linux, Mac OS X, and Windows Users - nixCraft	http://www.cyberciti.biz/tips/download-email-client-for-linux-mac-osx-windows.html	1427236321
+indentation - Why does vim not obey my expandtab in python files? - Stack Overflow	http://stackoverflow.com/questions/21073496/why-does-vim-not-obey-my-expandtab-in-python-files	1427297303
+vim reindent python 4 shiftwidth - Google Search	http://www.google.com/search?q=vim%20reindent%20python%204%20shiftwidth&btnG=Google+Search	1427297350
+Indenting Python with VIM	http://henry.precheur.org/vim/python.html	1427297357
+discordianfish/tcpdump-docker · GitHub	https://github.com/discordianfish/tcpdump-docker	1427301056
+install tcpdump docker - Google Search	http://www.google.com/search?q=install%20tcpdump%20docker&btnG=Google+Search	1427301062
+unable to locate package tcpdump - Google Search	http://www.google.com/search?q=unable%20to%20locate%20package%20tcpdump&btnG=Google+Search	1427301104
+unable to locate package tcpdump docker - Google Search	http://www.google.com/search?q=unable%20to%20locate%20package%20tcpdump%20docker	1427301208
+Odd Bits	http://blog.oddbit.com/2015/02/05/creating-minimal-docker-images/	1427301220
+"unable to locate package tcpdump" docker - Google Search	http://www.google.com/search?q=%22unable%20to%20locate%20package%20tcpdump%22%20docker	1427301246
+Install And Use Tcpdump on Ubuntu Linux	http://www.addictivetips.com/ubuntu-linux-tips/installing-and-using-tcpdump-on-ubuntu-linux/	1427301275
+Ubuntu – Details of package tcpdump in lucid	http://packages.ubuntu.com/lucid/tcpdump	1427301292
+install tcpdump ubuntu - Google Search	http://www.google.com/search?q=install%20tcpdump%20ubuntu	1427301295
+Install Debugging Tools	https://coreos.com/docs/cluster-management/debugging/install-debugging-tools/	1427301305
+install tcpdump docker container - Google Search	http://www.google.com/search?q=install%20tcpdump%20docker%20container	1427301314
+10 Docker Tips and Tricks That Will Make You Sing A Whale Song of Joy | I care, I share, I'm Nathan LeClaire.	http://nathanleclaire.com/blog/2014/07/12/10-docker-tips-and-tricks-that-will-make-you-sing-a-whale-song-of-joy/	1427301323
+apt-get always choose yes without prompt - Google Search	http://www.google.com/search?q=apt-get%20always%20choose%20yes%20without%20prompt&btnG=Google+Search	1427307331
+linux - Automatically answer 'Yes' when using apt-get install - Super User	http://superuser.com/questions/164553/automatically-answer-yes-when-using-apt-get-install	1427307339
+[stunnel-users] Stunnel configuration to forward IP address	https://www.stunnel.org/pipermail/stunnel-users/2012-January/003539.html	1427309223
+Stunnel - Specify Outbound IP? - Stack Overflow	http://stackoverflow.com/questions/8537974/stunnel-specify-outbound-ip	1427309247
+stunnel ip address - Google Search	http://www.google.com/search?q=stunnel%20ip%20address&btnG=Google+Search	1427309262
+stunnel: Home	https://www.stunnel.org/index.html	1427309272
+stunnel - Google Search	http://www.google.com/search?q=stunnel&btnG=Google+Search	1427309276
+stunnel quickstart - Google Search	http://www.google.com/search?q=stunnel%20quickstart	1427309280
+Source IP Addresses, STunnel, Haproxy and Server Logs | Loadbalancer.org Blog	http://blog.loadbalancer.org/source-ip-addresses-stunnel-haproxy-and-server-logs/	1427309312
+Stunnel FAQ Section 5: Stunnel command arguments	http://www.onsight.com/faq/stunnel/stunnel-faq-5.html	1427309375
+stunnel connect two ip addresses - Google Search	http://www.google.com/search?q=stunnel%20connect%20two%20ip%20addresses&btnG=Google+Search	1427309396
+How To Set Up an SSL Tunnel Using Stunnel on Ubuntu | DigitalOcean	https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ssl-tunnel-using-stunnel-on-ubuntu	1427309404
+tcpdump chksum failed - Google Search	http://www.google.com/search?q=tcpdump%20chksum%20failed&btnG=Google+Search	1427309535
+tcpdump chksum error - Google Search	http://www.google.com/search?q=tcpdump%20chksum%20error	1427309540
+tcpdump chksum incorrect - Google Search	http://www.google.com/search?q=tcpdump%20chksum%20incorrect	1427309569
+TCP / UDP Checksum errors from tcpdump | Techie In IT	http://sokratisg.net/2012/04/01/udp-tcp-checksum-errors-from-tcpdump-nic-hardware-offloading/	1427309584
+A tcpdump Tutorial and Primer	https://danielmiessler.com/study/tcpdump/	1427309754
+How to Remember Your TCP Flags	https://danielmiessler.com/study/tcpflags/	1427309787
+tcpdump flags - Google Search	http://www.google.com/search?q=tcpdump%20flags&btnG=Google+Search	1427309839
+Transmission Control Protocol - Wikipedia, the free encyclopedia	http://en.wikipedia.org/wiki/Transmission_Control_Protocol	1427309852
+tcp syn - Google Search	http://www.google.com/search?q=tcp%20syn	1427309881
+add iptables entry - Google Search	http://www.google.com/search?q=add%20iptables%20entry&btnG=Google+Search	1427312232
+Linux IPTables: How to Add Firewall Rules (With Allow SSH Example)	http://www.thegeekstuff.com/2011/02/iptables-add-rule/	1427312237
+shawn axsom - Google Search	http://www.google.com/search?q=shawn%20axsom&btnG=Google+Search	1427321160
+shawn axsom - Google Search	http://www.google.com/search?q=shawn+axsom&ie=UTF-8&prmd=ivns&ei=RzETVdGvKZS2oQT_vYCQDQ&start=10&sa=N	1427321173
+shawn axsom - Google Search	http://www.google.com/search?q=shawn+axsom&ie=UTF-8&prmd=ivns&ei=VDETVfPlNo3moASqk4KYBQ&start=20&sa=N	1427321216
+shawn axsom - Google Search	http://www.google.com/search?q=shawn+axsom&ie=UTF-8&prmd=ivns&ei=gDETVfj9EcuuogSqsIKYDA&start=30&sa=N	1427321237
+shawn axsom - Google Search	http://www.google.com/search?q=shawn+axsom&ie=UTF-8&prmd=ivns&ei=lTETVZ_BEIH1oATWkILwCA&start=40&sa=N	1427321258
+shawn axsom - Google Search	http://www.google.com/search?q=shawn+axsom&ie=UTF-8&prmd=ivns&ei=qjETVcWhDYSqogTL4YBw&start=50&sa=N	1427321312
+shawn axsom - Google Search	http://www.google.com/search?q=shawn+axsom&ie=UTF-8&prmd=ivns&ei=4DETVajoGIXyoAS734HIDA&start=60&sa=N	1427321338
+axs221 - Google Search	http://www.google.com/search?q=axs221	1427321360
+linux kill force - Google Search	http://www.google.com/search?q=linux%20kill%20force&btnG=Google+Search	1427328506
+Process Status D	http://www.linuxquestions.org/questions/linux-general-1/process-status-d-44989/	1427328792
+ps status D - Google Search	http://www.google.com/search?q=ps%20status%20D&btnG=Google+Search	1427328876
+linux - Process perminantly stuck on D state - Stack Overflow	http://stackoverflow.com/questions/20423521/process-perminantly-stuck-on-d-state	1427328885
+curl timeout - Google Search	http://www.google.com/search?q=curl%20timeout&btnG=Google+Search	1427331371
+apache - Does curl have a timeout? - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/94604/does-curl-have-a-timeout	1427331377
+command line - How to determine if a string is a substring of another in bash? - Ask Ubuntu	http://askubuntu.com/questions/299710/how-to-determine-if-a-string-is-a-substring-of-another-in-bash	1427331499
+bash contains string - Google Search	http://www.google.com/search?q=bash%20contains%20string&btnG=Google+Search	1427331784
+String contains in bash - Stack Overflow	http://stackoverflow.com/questions/229551/string-contains-in-bash	1427331788
+bash output to dev null - Google Search	http://www.google.com/search?q=bash%20output%20to%20dev%20null&btnG=Google+Search	1427331934
+BASH Shell Redirect Output and Errors To /dev/null	http://www.cyberciti.biz/faq/how-to-redirect-output-and-errors-to-devnull/	1427331937
+How to evaluate http response codes from bash/shell script? - Stack Overflow	http://stackoverflow.com/questions/2220301/how-to-evaluate-http-response-codes-from-bash-shell-script	1427332031
+bash check curl response - Google Search	http://www.google.com/search?q=bash%20check%20curl%20response&btnG=Google+Search	1427332053
+curl - How do I get the http status of a site in bash? - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/26426/how-do-i-get-the-http-status-of-a-site-in-bash	1427332058
+dairy - Google Search	http://www.google.com/search?q=dairy&btnG=Google+Search	1427337488
+Dairy product - Wikipedia, the free encyclopedia	http://en.wikipedia.org/wiki/Dairy_product	1427337519
+show unused ip addresses in subnet linux - Google Search	http://www.google.com/search?q=show%20unused%20ip%20addresses%20in%20subnet%20linux&btnG=Google+Search	1427337667
+networking - How to find unused IP Address on a network? - Ask Ubuntu	http://askubuntu.com/questions/64548/how-to-find-unused-ip-address-on-a-network	1427337675
+eth0:0 dhcp - Google Search	http://www.google.com/search?q=eth0%3a0%20dhcp&btnG=Google+Search	1427338802
+linux - IP address alias assigned by DHCP - Super User	http://superuser.com/questions/175475/ip-address-alias-assigned-by-dhcp	1427338809
+ec2-create-network-interface - Amazon Elastic Compute Cloud	http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ApiReference-cmd-CreateNetworkInterface.html	1427377317
+aws ec2 create interface - Google Search	http://www.google.com/search?q=aws%20ec2%20create%20interface&btnG=Google+Search	1427377322
+aws cli get subnet - Google Search	http://www.google.com/search?q=aws%20cli%20get%20subnet	1427377339
+describe-subnets — AWS CLI 1.7.17 documentation	http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-subnets.html	1427378632
+aws cli show available ip addresses in subnet - Google Search	http://www.google.com/search?q=aws%20cli%20show%20available%20ip%20addresses%20in%20subnet	1427378648
+Tutorial	http://stedolan.github.io/jq/tutorial/	1427379439
+jq	http://stedolan.github.io/jq/	1427379475
+jq - Google Search	http://www.google.com/search?q=jq&btnG=Google+Search	1427379476
+jq where statement - Google Search	http://www.google.com/search?q=jq%20where%20statement	1427379480
+json - jq Conditional output - Stack Overflow	http://stackoverflow.com/questions/19573517/jq-conditional-output	1427379485
+bash escape double quotes - Google Search	http://www.google.com/search?q=bash%20escape%20double%20quotes&btnG=Google+Search	1427380331
+bash - How to escape double quote inside a double quote? - Stack Overflow	http://stackoverflow.com/questions/3834839/how-to-escape-double-quote-inside-a-double-quote	1427380335
+bash - How to escape double quote inside a double quote? - Stack Overflow	http://stackoverflow.com/questions/3834839/how-to-escape-double-quote-inside-a-double-quote?answertab=oldest	1427380380
+arp-scan pcap_lookupdev: no suitable device found - Google Search	http://www.google.com/search?q=arp-scan%20pcap_lookupdev%3a%20no%20suitable%20device%20found&btnG=Google+Search	1427380767
+create-network-interface — AWS CLI 1.7.17 documentation	http://docs.aws.amazon.com/cli/latest/reference/ec2/create-network-interface.html	1427381745
+aws cli create-network-interface - Google Search	http://www.google.com/search?q=aws%20cli%20create-network-interface&btnG=Google+Search	1427381798
+aws cli assign network interface - Google Search	http://www.google.com/search?q=aws%20cli%20assign%20network%20interface	1427381807
+jq Manual	http://stedolan.github.io/jq/manual/	1427382127
+jq select - Google Search	http://www.google.com/search?q=jq%20select&btnG=Google+Search	1427382298
+jq contains string - Google Search	http://www.google.com/search?q=jq%20contains%20string	1427382303
+filter on "string contains" · Issue #33 · stedolan/jq · GitHub	https://github.com/stedolan/jq/issues/33	1427382315
+Implemented contains operator by stroan · Pull Request #36 · stedolan/jq · GitHub	https://github.com/stedolan/jq/pull/36	1427382363
+bash string concatenation - Google Search	http://www.google.com/search?q=bash%20string%20concatenation&btnG=Google+Search	1427383020
+shell - How can I concatenate string variables in Bash? - Stack Overflow	http://stackoverflow.com/questions/4181703/how-can-i-concatenate-string-variables-in-bash	1427383023
+linux - Shell Script - remove first and last quote (") from a variable - Stack Overflow	http://stackoverflow.com/questions/9733338/shell-script-remove-first-and-last-quote-from-a-variable	1427383168
+bash strip quotes from string - Google Search	http://www.google.com/search?q=bash%20strip%20quotes%20from%20string&btnG=Google+Search	1427384060
+attach-network-interface aws cli - Google Search	http://www.google.com/search?q=attach-network-interface%20aws%20cli&btnG=Google+Search	1427384069
+attach-network-interface — AWS CLI 1.7.17 documentation	http://docs.aws.amazon.com/cli/latest/reference/ec2/attach-network-interface.html	1427384167
+ec2-describe-instances - Amazon Elastic Compute Cloud	http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ApiReference-cmd-DescribeInstances.html	1427384178
+aws ec2 describe-instances - Google Search	http://www.google.com/search?q=aws%20ec2%20describe-instances&btnG=Google+Search	1427384180
+describe-instances — AWS CLI 1.7.17 documentation	http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html	1427384186
+pipework docker - Google Search	http://www.google.com/search?q=pipework%20docker&btnG=Google+Search	1427399876
+jpetazzo/pipework · GitHub	https://github.com/jpetazzo/pipework	1427399878
+find mac by ip address linux - Google Search	http://www.google.com/search?q=find%20mac%20by%20ip%20address%20linux&btnG=Google+Search	1427401206
+bash - Resolving MAC Address from IP Address in Linux - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/120153/resolving-mac-address-from-ip-address-in-linux	1427401210
+Destination Host Unreachable - Google Search	http://www.google.com/search?q=Destination%20Host%20Unreachable&btnG=Google+Search	1427401265
+linux clear arp cache - Google Search	http://www.google.com/search?q=linux%20clear%20arp%20cache&btnG=Google+Search	1427402942
+C.1. ifconfig	http://linux-ip.net/html/tools-ifconfig.html	1427403507
+linux change broadcast for device - Google Search	http://www.google.com/search?q=linux%20change%20broadcast%20for%20device&btnG=Google+Search	1427403552
+ifconfig change broadcast - Google Search	http://www.google.com/search?q=ifconfig%20change%20broadcast	1427403571
+Ifconfig: 7 Examples To Configure Network Interface	http://www.thegeekstuff.com/2009/03/ifconfig-7-examples-to-configure-network-interface/	1427403575
+docker Bcast 0.0.0.0 - Google Search	http://www.google.com/search?q=docker%20Bcast%200.0.0.0&btnG=Google+Search	1427403620
+Docker Networking – Part1 | Sreenivas Makam's Blog	https://sreeninet.wordpress.com/2014/12/31/docker-networking-part1/	1427403637
+Can't curl. curl: (7) Failed to connnect... Connection Refused - Server Fault	http://serverfault.com/questions/628321/cant-curl-curl-7-failed-to-connnect-connection-refused	1427404516
+curl: (7) Failed to connect to localhost port 3030: Connection refused · Issue #2 · couchand/fake-api-server · GitHub	https://github.com/couchand/fake-api-server/issues/2	1427404538
+connection refused curl - Google Search	http://www.google.com/search?q=connection%20refused%20curl&btnG=Google+Search	1427404543
+no route to host - Google Search	http://www.google.com/search?q=no%20route%20to%20host&btnG=Google+Search	1427404857
+curl no route to host - Google Search	http://www.google.com/search?q=curl%20no%20route%20to%20host&btnG=Google+Search	1427414852
+No Route to Host error and solution - nixCraft	http://www.cyberciti.biz/tips/no-route-to-host-error-and-solution.html	1427414860
+iptables allow all - Google Search	http://www.google.com/search?q=iptables%20allow%20all&btnG=Google+Search	1427425771
+ip route rule linux - Google Search	http://www.google.com/search?q=ip%20route%20rule%20linux&btnG=Google+Search	1427426813
+A Quick Introduction to Linux Policy Routing · Scott's Weblog · The weblog of an IT pro specializing in virtualization, networking, open source, and cloud computing	http://blog.scottlowe.org/2013/05/29/a-quick-introduction-to-linux-policy-routing/	1427427962
+arp clear linux - Google Search	http://www.google.com/search?q=arp%20clear%20linux&btnG=Google+Search	1427466567
+How to clear the ARP cache on Linux? - Linux Audit	http://linux-audit.com/how-to-clear-the-arp-cache-on-linux/	1427466571
+iptables accept all - Google Search	http://www.google.com/search?q=iptables%20accept%20all&btnG=Google+Search	1427466970
+linux - need iptables rule to accept all incoming traffic - Super User	http://superuser.com/questions/634469/need-iptables-rule-to-accept-all-incoming-traffic	1427466973
+linux - How to output only file names (with spaces) in ls -Al? - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/70614/how-to-output-only-file-names-with-spaces-in-ls-al	1427726549
+ls filenames only - Google Search	http://www.google.com/search?q=ls%20filenames%20only&btnG=Google+Search	1427726556
+filenames - How to list files without directories, and filter by name (ls options) - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/15950/how-to-list-files-without-directories-and-filter-by-name-ls-options	1427726576
+ls don't show directories - Google Search	http://www.google.com/search?q=ls%20don't%20show%20directories	1427726612
+Unix: List only File names and not directory - Linux / Unix Administration	http://www.justskins.com/forums/unix-list-only-file-140096.html	1427726623
+display find command in columns - Google Search	http://www.google.com/search?q=display%20find%20command%20in%20columns&btnG=Google+Search	1427726781
+display find command in columns linux find - Google Search	http://www.google.com/search?q=display%20find%20command%20in%20columns%20linux%20find	1427726790
+linux find command examples - Google Search	http://www.google.com/search?q=linux%20find%20command%20examples	1427726816
+35 Practical Examples of Linux Find Command	http://www.tecmint.com/35-practical-examples-of-linux-find-command/	1427726821
+iptables view logging information - Google Search	http://www.google.com/search?q=iptables%20view%20logging%20information&btnG=Google+Search	1427730415
+Where to look for iptables LOG?	http://forums.devshed.com/networking-help-109/look-iptables-log-108226.html	1427730434
+tcpdump filter both source and destination - Google Search	http://www.google.com/search?q=tcpdump%20filter%20both%20source%20and%20destination&btnG=Google+Search	1427755767
+aws cli add private i[ - Google Search	http://www.google.com/search?q=aws%20cli%20add%20private%20i%5b&btnG=Google+Search	1427846592
+aws cli add private ip - Google Search	http://www.google.com/search?q=aws%20cli%20add%20private%20ip	1427846598
+AWS CLI — AWS CLI 1.7.18 documentation	http://docs.aws.amazon.com/cli/latest/index.html	1427846612
+assign-private-ip-addresses — AWS CLI 1.7.18 documentation	http://docs.aws.amazon.com/cli/latest/reference/ec2/assign-private-ip-addresses.html	1427846617
+execute selected code - Google Search	http://www.google.com/search?q=execute%20selected%20code&btnG=Google+Search	1427846898
+execute selected code vim - Google Search	http://www.google.com/search?q=execute%20selected%20code%20vim	1427846902
+Execute current line in bash from vim - Stack Overflow	http://stackoverflow.com/questions/19883917/execute-current-line-in-bash-from-vim	1427846930
+execute selected code vim in shell - Google Search	http://www.google.com/search?q=execute%20selected%20code%20vim%20in%20shell	1427846975
+execute selected code vim in shellj - Google Search	http://www.google.com/search?q=execute%20selected%20code%20vim%20in%20shellj	1427846982
+How can I execute a Vim selection or range in bash without replacing it? - Super User	http://superuser.com/questions/330343/how-can-i-execute-a-vim-selection-or-range-in-bash-without-replacing-it	1427847877
+vim bash visual selection execute - Google Search	http://www.google.com/search?q=vim%20bash%20visual%20selection%20execute	1427847878
+aws cli describe interfaces - Google Search	http://www.google.com/search?q=aws%20cli%20describe%20interfaces&btnG=Google+Search	1427848524
+describe-network-interfaces — AWS CLI 1.7.18 documentation	http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-network-interfaces.html	1427848541
+iptables delete rules by destination - Google Search	http://www.google.com/search?q=iptables%20delete%20rules%20by%20destination&btnG=Google+Search	1427899921
+linux - iptables remove specific rules - Stack Overflow	http://stackoverflow.com/questions/10197405/iptables-remove-specific-rules	1427899931
+linux - How can I list (ls) the 5 last modified files in a directory? - Stack Overflow	http://stackoverflow.com/questions/15691359/how-can-i-list-ls-the-5-last-modified-files-in-a-directory	1427905063
+linux find most recently modified files - Google Search	http://www.google.com/search?q=linux%20find%20most%20recently%20modified%20files&btnG=Google+Search	1427905155
+linux find most recently modified files recursively - Google Search	http://www.google.com/search?q=linux%20find%20most%20recently%20modified%20files%20recursively	1427905163
+linux - How to recursively find and list the latest modified files in a directory with subdirectories and times? - Stack Overflow	http://stackoverflow.com/questions/5566310/how-to-recursively-find-and-list-the-latest-modified-files-in-a-directory-with-s	1427905168
+make user command linux - Google Search	http://www.google.com/search?q=make%20user%20command%20linux&btnG=Google+Search	1427910977
+Linux Set or Change User Password	http://www.cyberciti.biz/faq/linux-set-change-password-how-to/	1427912011
+change password user linux - Google Search	http://www.google.com/search?q=change%20password%20user%20linux&btnG=Google+Search	1427912038
+HowTo: Change Password of Specific User Account In Linux	http://www.cyberciti.biz/faq/changing-password-of-specific-account-in-linux-commandline/	1427912044
+bash check for empty string - Google Search	http://www.google.com/search?q=bash%20check%20for%20empty%20string&btnG=Google+Search	1427913659
+Checking for empty string in Bash « timmurphy.org	http://timmurphy.org/2010/05/19/checking-for-empty-string-in-bash/	1427913667
+Edit - Unix & Linux Stack Exchange	http://unix.stackexchange.com/posts/91046/edit	1427983991
+email - Search for mail content with mutt - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/91046/search-for-mail-content-with-mutt	1427983996
+mutt search email bodies - Google Search	http://www.google.com/search?q=mutt%20search%20email%20bodies&btnG=Google+Search	1427984002
+notmuch - Google Search	http://www.google.com/search?q=notmuch	1427984013
+notmuch email - Google Search	http://www.google.com/search?q=notmuch%20email	1427984017
+Notmuch - ArchWiki	https://wiki.archlinux.org/index.php/Notmuch	1427984034
+notmuch mail wildcard search - Google Search	http://www.google.com/search?q=notmuch%20mail%20wildcard%20search&btnG=Google+Search	1427984676
+searching	http://webcache.googleusercontent.com/search?q=cache:7N2HrUo6lasJ:http://notmuchmail.org/searching/%2Bnotmuch+mail+wildcard+search&hl=en&&ct=clnk	1427984695
+notmuch interfaces - Google Search	http://www.google.com/search?q=notmuch%20interfaces&btnG=Google+Search	1427984714
+apt-get upgrade a single program - Google Search	http://www.google.com/search?q=apt-get%20upgrade%20a%20single%20program&btnG=Google+Search	1427986809
+How to upgrade a single package using apt-get? - Ask Ubuntu	http://askubuntu.com/questions/44122/how-to-upgrade-a-single-package-using-apt-get	1427986818
+npm verbose - Google Search	http://www.google.com/search?q=npm%20verbose&btnG=Google+Search	1427993792
+blog.izs.me — 10 Cool Things You Probably Didn't Realize npm...	http://blog.izs.me/post/1675072029/10-cool-things-you-probably-didnt-realize-npm	1427993796
+bower install verbose - Google Search	http://www.google.com/search?q=bower%20install%20verbose&btnG=Google+Search	1427993969
+npm - Bower install hangs - Stack Overflow	http://stackoverflow.com/questions/23982615/bower-install-hangs	1427993995
+linux show all users in system - Google Search	http://www.google.com/search?q=linux%20show%20all%20users%20in%20system&btnG=Google+Search	1428000011
+Linux Command: List All Users In The System	http://www.cyberciti.biz/faq/linux-list-users-command/	1428000015
+bower allow root - Google Search	http://www.google.com/search?q=bower%20allow%20root&btnG=Google+Search	1428001656
+node.js - Run bower from root user, it's possible? How? - Stack Overflow	http://stackoverflow.com/questions/25672924/run-bower-from-root-user-its-possible-how	1428001666
+easymotion - Google Search	http://www.google.com/search?q=easymotion&btnG=Google+Search	1428156078
+Lokaltog/vim-easymotion · GitHub	https://github.com/Lokaltog/vim-easymotion	1428156088
+python strip newline character - Google Search	http://www.google.com/search?q=python%20strip%20newline%20character&btnG=Google+Search	1428172767
+python strip newline - Google Search	http://www.google.com/search?q=python%20strip%20newline&btnG=Google+Search	1428172808
+How can I remove (chomp) a newline in Python? - Stack Overflow	http://stackoverflow.com/questions/275018/how-can-i-remove-chomp-a-newline-in-python	1428172813
+linux - How can I trim the carriage return from text that is being piped in bash? - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/40335/how-can-i-trim-the-carriage-return-from-text-that-is-being-piped-in-bash	1428173046
+newlines - Remove trailing new line from 'clipboard' to prevent execution on the terminal? - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/96357/remove-trailing-new-line-from-clipboard-to-prevent-execution-on-the-terminal	1428173103
+xsel without newline - Google Search	http://www.google.com/search?q=xsel%20without%20newline&btnG=Google+Search	1428173184
+vim substitute with new line - Google Search	http://www.google.com/search?q=vim%20substitute%20with%20new%20line&btnG=Google+Search	1428191927
+How to replace a character for a newline in Vim? - Stack Overflow	http://stackoverflow.com/questions/71323/how-to-replace-a-character-for-a-newline-in-vim	1428191934
+Learn REST: A Tutorial: 12.6. Using REST in Python	http://rest.elkstein.org/2008/02/using-rest-in-python.html	1428192415
+python rest command - Google Search	http://www.google.com/search?q=python%20rest%20command&btnG=Google+Search	1428193150
+python urllib2 json object - Google Search	http://www.google.com/search?q=python%20urllib2%20json%20object	1428193169
+Python urllib2: Receive JSON response from url - Stack Overflow	http://stackoverflow.com/questions/13921910/python-urllib2-receive-json-response-from-url	1428193233
+python run command line command - Google Search	http://www.google.com/search?q=python%20run%20command%20line%20command&btnG=Google+Search	1428195021
+Executing command line programs from within python - Stack Overflow	http://stackoverflow.com/questions/450285/executing-command-line-programs-from-within-python	1428195028
+How to Edit an Existing Vim Macro	https://robots.thoughtbot.com/how-to-edit-an-existing-vim-macro	1428196770
+vim edit register - Google Search	http://www.google.com/search?q=vim%20edit%20register&btnG=Google+Search	1428196803
+vim tips and tricks: registers	https://www.cs.oberlin.edu/~kuperman/help/vim/registers.html	1428196811
+python split text - Google Search	http://www.google.com/search?q=python%20split%20text&btnG=Google+Search	1428197059
+7.1. string — Common string operations — Python 2.7.10rc0 documentation	https://docs.python.org/2/library/string.html	1428197066
+Python String replace() Method	http://www.tutorialspoint.com/python/string_replace.htm	1428279020
+python replace text - Google Search	http://www.google.com/search?q=python%20replace%20text&btnG=Google+Search	1428279051
+python stack - Google Search	http://www.google.com/search?q=python%20stack&btnG=Google+Search	1428280250
+python stack class - Google Search	http://www.google.com/search?q=python%20stack%20class	1428280274
+Stack data structure in python - Stack Overflow	http://stackoverflow.com/questions/4688859/stack-data-structure-in-python	1428280324
+8.10. Queue — A synchronized queue class — Python 2.7.10rc0 documentation	https://docs.python.org/2/library/queue.html	1428280329
+arma 3 steam - Google Search	http://www.google.com/search?q=arma%203%20steam&btnG=Google+Search	1428327485
+News - All News	http://store.steampowered.com/news/?appids=107410	1428327492
+Welcome to Steam	http://store.steampowered.com/	1428327507
+Steam Search	http://store.steampowered.com/search/?snr=1_4_4__12&term=arma%203	1428327514
+python try except - Google Search	http://www.google.com/search?q=python%20try%20except&btnG=Google+Search	1428415310
+8. Errors and Exceptions — Python 2.7.10rc0 documentation	https://docs.python.org/2/tutorial/errors.html	1428415312
+python listen on port - Google Search	http://www.google.com/search?q=python%20listen%20on%20port&btnG=Google+Search	1428415600
+python standard input - Google Search	http://www.google.com/search?q=python%20standard%20input&btnG=Google+Search	1428415602
+Code a simple socket server in Python	http://www.binarytides.com/python-socket-server-code-example/	1428415605
+python run new thread with parameters - Google Search	http://www.google.com/search?q=python%20run%20new%20thread%20with%20parameters	1428415813
+python run new thread - Google Search	http://www.google.com/search?q=python%20run%20new%20thread&btnG=Google+Search	1428415946
+Running Functions as Threads in Python « Software Ramblings	http://softwareramblings.com/2008/06/running-functions-as-threads-in-python.html	1428415950
+Google	http://www.google.com/	1428416279
+python sleep - Google Search	http://www.google.com/search?ie=ISO-8859-1&hl=en&source=hp&q=python%20sleep&gbv=1	1428416283
+sleep - How can I make a time delay in Python? - Stack Overflow	http://stackoverflow.com/questions/510348/how-can-i-make-a-time-delay-in-python	1428416289
+python except all - Google Search	http://www.google.com/search?q=python%20except%20all&btnG=Google+Search	1428419643
+HandlingExceptions - Python Wiki	https://wiki.python.org/moin/HandlingExceptions	1428419921
+Socket error - with simple socket programming using python - Stack Overflow	http://stackoverflow.com/questions/18765659/socket-error-with-simple-socket-programming-using-python	1428419938
+socket.error python message - Google Search	http://www.google.com/search?q=socket.error%20python%20message&btnG=Google+Search	1428420025
+Google	http://www.google.com/webhp	1428420799
+python disconnect socket connection - Google Search	http://www.google.com/search?ie=ISO-8859-1&hl=en&source=hp&q=python%20disconnect%20socket%20connection&gbv=1	1428420807
+kill job - Google Search	http://www.google.com/search?q=kill%20job&btnG=Google+Search	1428424508
+Learning the shell - Lesson 8: Job Control	http://linuxcommand.org/lts0080.php	1428424513
+linux 'Tl' status - Google Search	http://www.google.com/search?q=linux%20'Tl'%20status&btnG=Google+Search	1428424678
+ps STAT fields	http://www.linuxquestions.org/questions/linux-general-1/ps-stat-fields-563716/	1428424685
+linux sigkill fails - Google Search	http://www.google.com/search?q=linux%20sigkill%20fails&btnG=Google+Search	1428424886
+process - What if 'kill -9' does not work? - Unix & Linux Stack Exchange	http://unix.stackexchange.com/questions/5642/what-if-kill-9-does-not-work	1428424892

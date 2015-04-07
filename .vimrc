@@ -13,7 +13,6 @@ set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 syntax on
 set background=dark
-"colo sift
 colorscheme badwolf
 "CSApprox " Show GVim color schemes in 256 bit terminals
 
@@ -35,7 +34,6 @@ set more " Use MORE as pager
 set lazyredraw
 set ttyfast
 set ttymouse=xterm2
-" set ttyscroll=3
 set showmatch
 set splitbelow
 set splitright
@@ -56,40 +54,8 @@ set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
 set wildcharm=<TAB>
 
-" This allows you to do undo even after you close a file, BUT it creates
-" annoying .foo.un~ files that clutter things up =\
-" set undofile
-" set undolevels=2000
-" set undoreload=20000
-
-" The Vanilla Vim is not so good in formatting lines, so improve them: {
-
-"     " Recognize numbered lists
-"      set formatoptions+=n 
-
-"     " Use indent from 2nd line of a paragraph
-"      set formatoptions+=2 
-
-"     " Don't break lines that are already long
-"      set formatoptions+=l 
-
-"     " Break before 1-letter words
-"      set formatoptions+=1 
-
-"     " Delete comment character when joining commented lines, so two lines of comment becomes one line when joining, without comment mark.
-"     if v:version + has("patch541") >= 704
-"         set formatoptions+=j
-"     endif
-
-"     " Don't continue comment mark after press 'o' when youre on a commented line
-"      set formatoptions -=cro
-
-" }
-" Relative line numbers
 set nonumber
-"if exists('+rnu') | set relativenumber | endif
 
-" Ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 
 set wildmenu
@@ -101,10 +67,6 @@ set laststatus=1
 set statusline=%-20t
 set statusline+=%=        " Switch to the right side
 set statusline+=(%f)
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -112,20 +74,17 @@ let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=E501,E202,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
+let g:syntastic_python_flake8_args="--ignore=E501,E128,E202,E203,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
 
 set incsearch
-set hlsearch
+" set hlsearch
+
 set ignorecase
 set smartcase
-
-"nmap \e :NERDTreeToggle<CR>
-"let NERDTreeIgnore = ['\.pyc$']
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-let mapleader = ","
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -137,7 +96,7 @@ Bundle 'Shougo/unite.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'lambacck/python_matchit'
-Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'rking/ag.vim'
@@ -157,7 +116,7 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'gregsexton/gitv'
 Bundle 'vim-scripts/MultipleSearch'
 Bundle 'int3/vim-extradite'
-Bundle 'tpope/vim-surround'
+" Bundle 'tpope/vim-surround'
 Bundle 'Shougo/neosnippet.vim'
 Bundle 'Shougo/neosnippet-snippets'
 Bundle 'terryma/vim-expand-region'
@@ -265,26 +224,34 @@ noremap _ :update<CR>:cd %:p:h<CR>:VimFiler -project -find -toggle -auto-cd<CR>
 
 noremap <F1> :!%:p<CR>
 " noremap <F2> :SignatureListMarka<CR>
-noremap <F3> "hyiw:Ack <c-r>h
+noremap <F3> :Ag 
+noremap <leader><F3> :Ag<CR>
 noremap <F4> :call RangerChooser()<CR>
-nnoremap <silent> <F5> :w !sh<CR>
-vnoremap <silent> <F5> :w !sh<CR>
+nnoremap <F5> :!%:p<CR>
+vnoremap <F5> :w !bash<BAR>less<CR>
 noremap <F6> :!tig %<CR>
 noremap <F7> :SyntasticCheck<CR>:Errors<CR>
 noremap <Leader><F7> :SyntasticReset<CR>
 noremap <silent> <F8> :!clear;python %<CR>
 noremap <F10> :!pudb %<CR>
+noremap <Leader>f <c-w>_<c-w><BAR>
+noremap <Leader><Leader>f <c-w>=
 
-nnoremap <TAB> <c-^>
+" This messes up <c-i> if you bind <TAB>
+" nnoremap <TAB> <c-w><c-w>
+" nnoremap <TAB> <c-^>
+
+let mapleader = ","
 
 map <leader>/ :nohlsearch<CR>
 map <leader>c :q<CR>
-" map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>e :sp ~/.vimrc<CR>
 map <leader>j :join<CR>
 map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
-map <leader>r :sp ~/.vimrc<CR>
+map <leader>r "ryiw:%s/<c-r>r
+map <leader><leader>r :sp ~/.vimrc<CR>
 map <leader>s :sp<CR>
 map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
@@ -305,18 +272,18 @@ map <leader>gl :Glog<BAR>:bot copen<CR>
 map <leader>gL :Extradite<CR>
 
 " Go to next / previous change (GitGutter)
-" nmap <c-j> ]c
-" nmap <c-k> [c
+nmap <leader>j ]c
+nmap <leader>k [c
 nmap <c-j> ]'
 nmap <c-k> ['
 "  And get or put the diff
 " THIS MESSES UP COPEN LIST PRESSING ENTER
 "noremap <c-m> g;
 "noremap <c-n> g,
-noremap <c-b> g;
-noremap <c-f> g,
-
-nnoremap s <Plug>(easymotion-s)
+noremap <c-n> g;
+noremap <c-m> 999g,
+noremap <c-f> :cnext<CR>
+noremap <c-b> :cprev<CR>
 
 
 "nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>")<CR>
@@ -351,8 +318,6 @@ autocmd BufReadPost *
 \   if line("'\"") > 0 && line("'\"") <= line("$") |
 \       exe 'normal! g`"zvzz' |
 \   endif
-
-" map <leader>m :marks<CR>
 
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -391,7 +356,7 @@ autocmd BufReadPost fugitive://*
 
 "let g:hardtime_default_on = 1
 
-xmap s S
+"xmap s S
 
 
 
@@ -420,23 +385,42 @@ map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
 map <BAR> "hyiw?\(class\s\\|var\\|def\s\).*<c-r>h<CR>:nohlsearch<CR>
 " nnoremap <c-g> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
-noremap K ?\(class\s\\|def\s\\|Bundle\)<CR>:nohlsearch<CR>
-noremap J /\(class\s\\|def\s\\|Bundle\)<CR>:nohlsearch<CR>
 " vim-indentwise
 " map K [-
 " map J <c-o>
 
 " noremap <Space> za
 " Mark next, based on Vim-Signature
-map <Space> m,
+map <Space> m.
 
 map Q :cprev<CR>
 map <c-q> :cnext<CR>
 
 let g:ag_highlight=1
 
-noremap s "ryiw?var\s<c-r><c-w>\\|\(class\s\\|def\s\\|Bundle\)[^=]*<c-r><c-w>\\|\<c-r><c-w>.*\(class\s\\|def\s\\|Bundle\)\\|<c-r><c-w>\s=\\|function.*(.*<c-r><c-w>.*)<CR>0/<c-r>r<CR>:nohlsearch<CR>
+" nnoremap s "ryiw?var\s<c-r><c-w>\\|\(class\s\\|def\s\\|Bundle\)[^=]*<c-r><c-w>\\|\<c-r><c-w>.*\(class\s\\|def\s\\|Bundle\)\\|<c-r><c-w>\s=\\|function.*(.*<c-r><c-w>.*)<CR>0/<c-r>r<CR>:nohlsearch<CR>
 " noremap s "ryiw?<c-r><c-w>\s=<CR>0/<c-r>r<CR>:nohlsearch<CR>
 
 " Don't automatically do line breaks on long lines
 set formatoptions-=t
+
+" nmap v <nop>
+" nmap V <nop>
+" nmap h <nop>
+" nmap j <nop>
+" nmap k <nop>
+" nmap l <nop>
+" nmap j 5<DOWN>
+" nmap k 5<UP>
+nmap J }/[^ ]<CR>:nohlsearch<CR>
+nmap K <up>{/[^ ]<CR>:nohlsearch<CR>
+" nmap J <down>}?[^ ]<CR>:nohlsearch<CR>
+" nmap K {?[^ ]<CR>:nohlsearch<CR>
+" nmap J ]'
+" nmap K ['
+
+" map s <Plug>(easymotion-prefix)
+" map s <Plug>(easymotion-s)
+" map S <Plug>(easymotion-F)
+" map s <Plug>(easymotion-f)
+" map S <Plug>(Sneak_s)

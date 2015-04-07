@@ -49,3 +49,4 @@ create_symlink    ~/.dotfiles/.surf ~/.surf
 create_symlink    ~/.dotfiles/.offlineimaprc ~/.offlineimaprc
 create_symlink    ~/.dotfiles/.signature ~/.signature
 create_symlink    ~/.dotfiles/.tmux.conf ~/.tmux.conf
+create_symlink    ~/.dotfiles/.Xmodmap ~/.Xmodmap

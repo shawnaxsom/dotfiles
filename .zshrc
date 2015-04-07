@@ -204,3 +204,4 @@ source $ZSH/oh-my-zsh.sh
 eval "$(fasd --init auto)"
 
 TERM=xterm-256color
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
