@@ -35,7 +35,6 @@ del
 lates
 version
 ser
-s
 search
 13
 30
@@ -96,3 +95,6 @@ except
 kill
 Tl
 tl
+s
+map
+vmap

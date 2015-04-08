@@ -116,7 +116,7 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'gregsexton/gitv'
 Bundle 'vim-scripts/MultipleSearch'
 Bundle 'int3/vim-extradite'
-" Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-surround'
 Bundle 'Shougo/neosnippet.vim'
 Bundle 'Shougo/neosnippet-snippets'
 Bundle 'terryma/vim-expand-region'
@@ -247,7 +247,7 @@ map <leader>/ :nohlsearch<CR>
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>e :sp ~/.vimrc<CR>
-map <leader>j :join<CR>
+map <leader><leader>j :join<CR>
 map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
 map <leader>r "ryiw:%s/<c-r>r
@@ -277,11 +277,11 @@ nmap <leader>k [c
 nmap <c-j> ]'
 nmap <c-k> ['
 "  And get or put the diff
-" THIS MESSES UP COPEN LIST PRESSING ENTER
+" C-M THIS MESSES UP COPEN LIST PRESSING ENTER
 "noremap <c-m> g;
 "noremap <c-n> g,
 noremap <c-n> g;
-noremap <c-m> 999g,
+noremap <leader>n 999g,
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
 
@@ -304,6 +304,9 @@ set pastetoggle=<F9>
 " Comment out a line of code
 nmap   <Plug>CommentaryLine
 vmap   <Plug>Commentary
+
+vmap <Leader>s <Plug>Vsurround
+vmap <Leader>S <Plug>VSurround
 
 " Center screen when going through search results
 nnoremap n nzz

@@ -155,3 +155,9 @@ g socket.error python message
 g kill job
 g linux 'Tl' status
 g linux sigkill fails
+g jq strip double quotes
+g bash regex match
+g bash regex
+g python arguments
+g super object has no attribute
+g vim map surround to letter s
