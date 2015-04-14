@@ -74,7 +74,7 @@ let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=E501,E128,E202,E203,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
+let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
 
 set incsearch
 " set hlsearch
@@ -160,7 +160,6 @@ function! RangerChooser()
     let names = readfile(temp)
     if empty(names)
         redraw!
-        " Nothing to open.
         return
     endif
     " Edit the first item.
@@ -190,7 +189,7 @@ let g:ctrlp_working_path_mode = 0
 
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
 set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 'a'
 " nnoremap <leader>p :CtrlPFunky<Cr>
 " nnoremap <c-g> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
