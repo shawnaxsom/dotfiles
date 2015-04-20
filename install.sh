@@ -38,6 +38,10 @@ if [ ! -d ~/.vim/colors ]; then
   mkdir ~/.vim/colors
 fi
 
+if [ ! -f  /usr/local/etc/profile.d/z.sh ]; then
+  sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -P /usr/local/etc/profile.d/
+fi
+
 create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
 create_symlink    ~/.dotfiles/.vimrc     ~/.nvimrc
 create_symlink    ~/.vim                 ~/.nvim
@@ -58,6 +62,6 @@ create_symlink    ~/.dotfiles/.Xmodmap ~/.Xmodmap
 if [ ! -d ~/.vim/bundle ]; then
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
+  ~/.vim/bundle/YouCompleteMe/install.sh
 fi
 
-export TERM=xterm-256color
