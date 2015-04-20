@@ -60,4 +60,4 @@ if [ ! -d ~/.vim/bundle ]; then
   vim +PluginInstall +qall
 fi
 
-
+export TERM=xterm-256color
