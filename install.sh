@@ -2,6 +2,12 @@
 
 prompted_to_delete=false
 
+install_cmake() {
+  sudo add-apt-repository ppa:george-edison55/cmake-3.x
+  sudo apt-get update
+  sudo apt-get install cmake
+}
+
 create_symlink() {
   if [ $prompted_to_delete=false ]; then
     if [ ! -L $2 ]; then
@@ -62,6 +68,8 @@ create_symlink    ~/.dotfiles/.Xmodmap ~/.Xmodmap
 if [ ! -d ~/.vim/bundle ]; then
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
+
+  install_cmake
+  sudo apt-get install python-dev
   ~/.vim/bundle/YouCompleteMe/install.sh
 fi
-
