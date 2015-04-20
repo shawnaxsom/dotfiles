@@ -16,7 +16,9 @@ set fish_plugins theme z tmux tab vi-mode
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
  
-xset r rate 225 28
+if which xset
+  xset r rate 225 28
+end
 
 alias ...='../..'
 alias ....='../../..'
