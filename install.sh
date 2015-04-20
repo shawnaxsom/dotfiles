@@ -34,6 +34,10 @@ if [ ! -d ~/.oh-my-fish ]; then
   git clone https://github.com/bpinto/oh-my-fish ~/.oh-my-fish
 fi
 
+if [ ! -d ~/.vim/colors ]; then
+  mkdir ~/.vim/colors
+fi
+
 create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
 create_symlink    ~/.dotfiles/.vimrc     ~/.nvimrc
 create_symlink    ~/.vim                 ~/.nvim
@@ -50,3 +54,10 @@ create_symlink    ~/.dotfiles/.offlineimaprc ~/.offlineimaprc
 create_symlink    ~/.dotfiles/.signature ~/.signature
 create_symlink    ~/.dotfiles/.tmux.conf ~/.tmux.conf
 create_symlink    ~/.dotfiles/.Xmodmap ~/.Xmodmap
+
+if [ ! -d ~/.vim/bundle ]; then
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qall
+fi
+
+
