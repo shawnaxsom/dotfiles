@@ -132,6 +132,7 @@ Bundle 'jeetsukumaran/vim-indentwise'
 Bundle 'kshenoy/vim-signature'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'ervandew/supertab'
+Bundle 'christoomey/vim-tmux-navigator'
 call vundle#end()
 filetype plugin indent on    " required
  
@@ -178,7 +179,8 @@ let g:clang_snippets=1
 let g:clang_conceal_snippets=1
 
 let g:ctrlp_cmd = 'CtrlPMRU'
-noremap <c-l> :CtrlPFunky<CR>
+" noremap <c-l> :CtrlPFunky<CR>
+noremap <leader>p :CtrlPFunky<Cr>
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
@@ -190,7 +192,6 @@ let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
 set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'a'
-" nnoremap <leader>p :CtrlPFunky<Cr>
 " nnoremap <c-g> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 set foldmethod=indent
@@ -233,8 +234,10 @@ noremap <F7> :SyntasticCheck<CR>:Errors<CR>
 noremap <Leader><F7> :SyntasticReset<CR>
 noremap <silent> <F8> :!clear;python %<CR>
 noremap <F10> :!pudb %<CR>
-noremap <Leader>f <c-w>_<c-w><BAR>
-noremap <Leader><Leader>f <c-w>=
+" noremap <Leader>- <c-w>_<c-w><BAR>
+" noremap <Leader>= <c-w>=
+noremap z <c-w>_<c-w><BAR>
+noremap <Leader>z <c-w>=
 
 " This messes up <c-i> if you bind <TAB>
 " nnoremap <TAB> <c-w><c-w>
@@ -255,8 +258,6 @@ map <leader>s :sp<CR>
 map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
-map <leader>x :tabn<CR>
-map <leader>z :tabp<CR>
 map <leader>` :marks<CR>
 map <leader>' :marks<CR>
 map <leader><leader>cd :cd %:p:h<CR>
@@ -275,6 +276,10 @@ nmap <leader>j ]c
 nmap <leader>k [c
 nmap <c-j> ]'
 nmap <c-k> ['
+noremap <c-h> g;
+noremap H 999g;
+noremap <c-l> g,
+noremap L g;999g,
 "  And get or put the diff
 " C-M THIS MESSES UP COPEN LIST PRESSING ENTER
 "noremap <c-m> g;
@@ -290,8 +295,8 @@ noremap <c-b> :cprev<CR>
 let g:vimfiler_as_default_explorer = 1
 
 " map H <Plug>(vimfiler_switch_to_history_directory)
-map H ^
-map L g_
+" map H ^
+" map L g_
 map Y y$
 
 " Paste text from other places safely
@@ -310,10 +315,6 @@ vmap <Leader>S <Plug>VSurround
 " Center screen when going through search results
 nnoremap n nzz
 nnoremap N Nzz
-
-" Escape by typing jj
-imap jj <Esc>
-imap kk <Esc>
 
 " Keep location of file when reopening
 autocmd BufReadPost *
@@ -414,8 +415,10 @@ set formatoptions-=t
 " nmap l <nop>
 " nmap j 5<DOWN>
 " nmap k 5<UP>
-nmap J }/[^ ]<CR>:nohlsearch<CR>
-nmap K <up>{/[^ ]<CR>:nohlsearch<CR>
+nmap J }<down>
+vmap J <down>}<up>
+nmap K <up>{<down>
+vmap K <up>{<down>
 " nmap J <down>}?[^ ]<CR>:nohlsearch<CR>
 " nmap K {?[^ ]<CR>:nohlsearch<CR>
 " nmap J ]'
@@ -426,3 +429,10 @@ nmap K <up>{/[^ ]<CR>:nohlsearch<CR>
 " map S <Plug>(easymotion-F)
 " map s <Plug>(easymotion-f)
 " map S <Plug>(Sneak_s)
+
+vmap <leader><leader>n :norm 
+nmap <leader><leader>g :%g/
+
+" Escape by typing jj
+imap jj <Esc>
+imap kk <Esc>

@@ -174,3 +174,5 @@ g scour define
 g scout define
 g scout search linux
 g github scout
+g python pwd
+g urwid colors
