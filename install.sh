@@ -2,6 +2,12 @@
 
 prompted_to_delete=false
 
+install_cmake() {
+  sudo add-apt-repository ppa:george-edison55/cmake-3.x
+  sudo apt-get update
+  sudo apt-get install cmake
+}
+
 create_symlink() {
   if [ $prompted_to_delete=false ]; then
     if [ ! -L $2 ]; then
@@ -34,12 +40,19 @@ if [ ! -d ~/.oh-my-fish ]; then
   git clone https://github.com/bpinto/oh-my-fish ~/.oh-my-fish
 fi
 
+if [ ! -d ~/.vim/colors ]; then
+  mkdir ~/.vim/colors
+fi
+
+if [ ! -f  /usr/local/etc/profile.d/z.sh ]; then
+  sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -P /usr/local/etc/profile.d/
+fi
+
 create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
 create_symlink    ~/.dotfiles/.vimrc     ~/.nvimrc
 create_symlink    ~/.vim                 ~/.nvim
 create_symlink    ~/.dotfiles/fish       ~/.config/fish
 create_symlink    ~/.dotfiles/.elinks    ~/.elinks
-create_symlink    ~/.dotfiles/.fishrc    ~/.fishrc                        
 create_symlink    ~/.dotfiles/i3config   ~/.i3/config
 create_symlink    ~/.dotfiles/sift.vim   ~/.vim/colors/sift.vim
 create_symlink    ~/.dotfiles/badwolf.vim   ~/.vim/colors/badwolf.vim
@@ -50,3 +63,12 @@ create_symlink    ~/.dotfiles/.offlineimaprc ~/.offlineimaprc
 create_symlink    ~/.dotfiles/.signature ~/.signature
 create_symlink    ~/.dotfiles/.tmux.conf ~/.tmux.conf
 create_symlink    ~/.dotfiles/.Xmodmap ~/.Xmodmap
+
+if [ ! -d ~/.vim/bundle ]; then
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qall
+
+  install_cmake
+  sudo apt-get install python-dev
+  ~/.vim/bundle/YouCompleteMe/install.sh
+fi
