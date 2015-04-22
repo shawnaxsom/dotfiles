@@ -38,6 +38,7 @@ alias calwork='gcalcli --calendar="shawn.axsom@rooksecurity.com"'
 alias todo='todotxt-machine'
 alias surf='surf google.com'
 alias ack='ack-grep'
+alias forecast='grc -es --colour=auto weather ind -f'
 
 function google
   elinks "https://www.google.com/search?q=$argv"

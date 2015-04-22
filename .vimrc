@@ -74,7 +74,7 @@ let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
+let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
 
 set incsearch
 " set hlsearch
@@ -274,12 +274,13 @@ map <leader>gL :Extradite<CR>
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
-nmap <c-j> ]'
-nmap <c-k> ['
-noremap <c-h> g;
-noremap H 999g;
-noremap <c-l> g,
-noremap L g;999g,
+" nmap <c-j> ]'
+" nmap <c-k> ['
+" noremap <c-h> g;
+noremap H g;
+" noremap <c-l> g,
+noremap L g,
+noremap <leader>l g;999g,
 "  And get or put the diff
 " C-M THIS MESSES UP COPEN LIST PRESSING ENTER
 "noremap <c-m> g;
