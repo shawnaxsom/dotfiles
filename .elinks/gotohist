@@ -177,3 +177,5 @@ g github scout
 g python pwd
 g urwid colors
 g python arrays negative
+g ag case insensitive
+g fish shell export environment variable

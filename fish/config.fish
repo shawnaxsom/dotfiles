@@ -47,3 +47,7 @@ end
 function replace
   find . -type f -print0 | xargs -0 /bin/sed -i '$argv'
 end
+
+function search
+  ag $argv | /usr/local/share/pathpicker/fpp
+end

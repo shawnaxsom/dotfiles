@@ -12,6 +12,7 @@ set autoread
 set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 syntax on
+set list
 set background=dark
 colorscheme badwolf
 "CSApprox " Show GVim color schemes in 256 bit terminals
@@ -74,12 +75,12 @@ let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841 --max-complexity 10"
+let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293 --max-complexity 10"
 
 set incsearch
-" set hlsearch
+set hlsearch
 
-set ignorecase
+set noignorecase              " affects both searching and find/replace
 set smartcase
 
 set nocompatible              " be iMproved, required
@@ -98,7 +99,7 @@ Bundle 'tmhedberg/matchit'
 Bundle 'lambacck/python_matchit'
 " Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
-Bundle 'jiangmiao/auto-pairs'
+" Bundle 'jiangmiao/auto-pairs'
 Bundle 'rking/ag.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'airblade/vim-gitgutter'
@@ -224,10 +225,16 @@ noremap _ :update<CR>:cd %:p:h<CR>:VimFiler -project -find -toggle -auto-cd<CR>
 
 noremap <F1> :!%:p<CR>
 " noremap <F2> :SignatureListMarka<CR>
+" nnoremap <F2> "zyiwyypiprint "A"?def<CR>y$<c-o>Oprint "pA"iprint oprint "ZZZZ <ESC>:execute "normal! a" . ( line(".") + 1 )<CR>a "zpa: '" + str(<ESC>"zp<ESC>A) + "'"<ESC>oraw_input()<ESC>
+"             Copy     Print crnt    Copy def      Paste def         Print debug line
+" nnoremap <F2> "zyiwyypiprint "  A"?def<CR>y$<c-o>Oprint 'pA'joprint "  ZZZZ <ESC>:execute "normal! a" . ( line(".") + 1 )<CR>a "zpa: '" + str(<ESC>"zp<ESC>A) + "'"<ESC>oraw_input()<ESC>
+vnoremap <F2> "vyoprint "      "vpa: "a + str("vpa)
+nnoremap <F2> "wyiw ^"ly$ ?  def<CR> ^"dy$   ?^class<CR> ^"cy$   o# ZZZZ --------------  oprint ""cpa"  oprint ""dpa"    oprint "  :execute "normal! i" . ( line(".") + 1 )<cr>a  "lpa"      oprint "      "wpa: " + str("wpa)    oraw_input()
 noremap <F3> :Ag 
 noremap <leader><F3> :Ag<CR>
 noremap <F4> :call RangerChooser()<CR>
-nnoremap <F5> :!%:p<CR>
+inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
+nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
 vnoremap <F5> :w !bash<BAR>less<CR>
 noremap <F6> :!tig %<CR>
 noremap <F7> :SyntasticCheck<CR>:Errors<CR>
@@ -274,6 +281,8 @@ map <leader>gL :Extradite<CR>
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
+" nmap <c-[> '[
+" nmap <c-]> ']
 " nmap <c-j> ]'
 " nmap <c-k> ['
 " noremap <c-h> g;
@@ -416,10 +425,14 @@ set formatoptions-=t
 " nmap l <nop>
 " nmap j 5<DOWN>
 " nmap k 5<UP>
-nmap J }<down>
-vmap J <down>}<up>
-nmap K <up>{<down>
-vmap K <up>{<down>
+
+" nmap J }<down>
+" vmap J <down>}<up>
+" nmap K <up>{<down>
+" vmap K <up>{<down>
+map J /^    \w<CR>:nohlsearch<CR>
+map K ?^    \w<CR>:nohlsearch<CR>
+
 " nmap J <down>}?[^ ]<CR>:nohlsearch<CR>
 " nmap K {?[^ ]<CR>:nohlsearch<CR>
 " nmap J ]'
@@ -433,7 +446,3 @@ vmap K <up>{<down>
 
 vmap <leader><leader>n :norm 
 nmap <leader><leader>g :%g/
-
-" Escape by typing jj
-imap jj <Esc>
-imap kk <Esc>
