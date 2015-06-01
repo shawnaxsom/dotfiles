@@ -134,9 +134,10 @@ Bundle 'kshenoy/vim-signature'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'ervandew/supertab'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'dyng/ctrlsf.vim'
 call vundle#end()
 filetype plugin indent on    " required
- 
+
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -230,7 +231,8 @@ noremap <F1> :!%:p<CR>
 " nnoremap <F2> "zyiwyypiprint "  A"?def<CR>y$<c-o>Oprint 'pA'joprint "  ZZZZ <ESC>:execute "normal! a" . ( line(".") + 1 )<CR>a "zpa: '" + str(<ESC>"zp<ESC>A) + "'"<ESC>oraw_input()<ESC>
 vnoremap <F2> "vyoprint "      "vpa: "a + str("vpa)
 nnoremap <F2> "wyiw ^"ly$ ?  def<CR> ^"dy$   ?^class<CR> ^"cy$   o# ZZZZ --------------  oprint ""cpa"  oprint ""dpa"    oprint "  :execute "normal! i" . ( line(".") + 1 )<cr>a  "lpa"      oprint "      "wpa: " + str("wpa)    oraw_input()
-noremap <F3> :Ag 
+" noremap <F3> :Ag 
+noremap <F3> :CtrlSF 
 noremap <leader><F3> :Ag<CR>
 noremap <F4> :call RangerChooser()<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
