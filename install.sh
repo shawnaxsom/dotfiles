@@ -54,6 +54,7 @@ create_symlink    ~/.vim                 ~/.nvim
 create_symlink    ~/.dotfiles/fish       ~/.config/fish
 create_symlink    ~/.dotfiles/.elinks    ~/.elinks
 create_symlink    ~/.dotfiles/i3config   ~/.i3/config
+mkdir ~/.vim/colors/
 create_symlink    ~/.dotfiles/sift.vim   ~/.vim/colors/sift.vim
 create_symlink    ~/.dotfiles/badwolf.vim   ~/.vim/colors/badwolf.vim
 create_symlink    ~/.dotfiles/.muttrc    ~/.muttrc
@@ -71,4 +72,5 @@ if [ ! -d ~/.vim/bundle ]; then
   install_cmake
   sudo apt-get install python-dev
   # ~/.vim/bundle/YouCompleteMe/install.sh
+  cd ~/.vim/bundle/tern_for_vim && npm install
 fi

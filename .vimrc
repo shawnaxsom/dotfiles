@@ -130,7 +130,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'freitass/todo.txt-vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'jeetsukumaran/vim-indentwise'
-Bundle 'kshenoy/vim-signature'
+" Bundle 'kshenoy/vim-signature'
 " Bundle 'Valloric/YouCompleteMe'
 Bundle 'ervandew/supertab'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -138,9 +138,9 @@ Bundle 'dyng/ctrlsf.vim'
 call vundle#end()
 filetype plugin indent on    " required
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" " make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
