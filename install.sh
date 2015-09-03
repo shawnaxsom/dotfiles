@@ -70,5 +70,5 @@ if [ ! -d ~/.vim/bundle ]; then
 
   install_cmake
   sudo apt-get install python-dev
-  ~/.vim/bundle/YouCompleteMe/install.sh
+  # ~/.vim/bundle/YouCompleteMe/install.sh
 fi
