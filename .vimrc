@@ -12,7 +12,7 @@ set autoread
 set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 syntax on
-set list
+set nolist
 set background=dark
 colorscheme badwolf
 "CSApprox " Show GVim color schemes in 256 bit terminals
