@@ -4,4 +4,4 @@ echo "deb http://ppa.launchpad.net/fish-shell/release-2/ubuntu trusty main" > "/
 
 apt-get update --allow-unauthenticated
 
-apt-get install fish --force-yes --allow-unauthenticated
+apt-get install fish --yes --force-yes --allow-unauthenticated
