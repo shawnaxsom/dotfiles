@@ -72,5 +72,5 @@ if [ ! -d ~/.vim/bundle ]; then
   install_cmake
   sudo apt-get install python-dev
   # ~/.vim/bundle/YouCompleteMe/install.sh
-  cd ~/.vim/bundle/tern_for_vim && npm install
+  # cd ~/.vim/bundle/tern_for_vim && npm install
 fi
