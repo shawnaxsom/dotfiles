@@ -37,7 +37,7 @@ fi
 
 if [ ! -d ~/.oh-my-fish ]; then
   echo "Pulling down oh-my-fish"
-  git clone https://github.com/bpinto/oh-my-fish ~/.oh-my-fish
+  git clone http://github.com/oh-my-fish/oh-my-fish ~/.oh-my-fish
 fi
 
 if [ ! -d ~/.vim/colors ]; then
