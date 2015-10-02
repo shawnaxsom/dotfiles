@@ -48,13 +48,15 @@ if [ ! -f  /usr/local/etc/profile.d/z.sh ]; then
   sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -P /usr/local/etc/profile.d/
 fi
 
+mkdir ~/.vim/
+mkdir ~/.vim/colors/
+
 create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
 create_symlink    ~/.dotfiles/.vimrc     ~/.nvimrc
 create_symlink    ~/.vim                 ~/.nvim
 create_symlink    ~/.dotfiles/fish       ~/.config/fish
 create_symlink    ~/.dotfiles/.elinks    ~/.elinks
 create_symlink    ~/.dotfiles/i3config   ~/.i3/config
-mkdir ~/.vim/colors/
 create_symlink    ~/.dotfiles/sift.vim   ~/.vim/colors/sift.vim
 create_symlink    ~/.dotfiles/badwolf.vim   ~/.vim/colors/badwolf.vim
 create_symlink    ~/.dotfiles/.muttrc    ~/.muttrc
