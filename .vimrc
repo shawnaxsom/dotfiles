@@ -180,9 +180,9 @@ set concealcursor=vin
 let g:clang_snippets=1
 let g:clang_conceal_snippets=1
 
+" let g:ctrlp_map = '`'
 let g:ctrlp_cmd = 'CtrlPMRU'
 " noremap <c-l> :CtrlPFunky<CR>
-noremap <leader>p :CtrlPFunky<Cr>
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
@@ -243,33 +243,27 @@ noremap <F7> :SyntasticCheck<CR>:Errors<CR>
 noremap <Leader><F7> :SyntasticReset<CR>
 noremap <silent> <F8> :!clear;python %<CR>
 noremap <F10> :!pudb %<CR>
-" noremap <Leader>- <c-w>_<c-w><BAR>
-" noremap <Leader>= <c-w>=
-noremap z <c-w>_<c-w><BAR>
-noremap <Leader>z <c-w>=
 
-" This messes up <c-i> if you bind <TAB>
-" nnoremap <TAB> <c-w><c-w>
-" nnoremap <TAB> <c-^>
+nmap z 5<c-w>+5<c-w>>
+nmap = <c-w>=
 
-let mapleader = ","
+" let mapleader = ","
+let mapleader = "\<Space>"
 
-map <leader>/ :nohlsearch<CR>
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <leader>e :sp ~/.vimrc<CR>
-map <leader><leader>j :join<CR>
+map <leader>f "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
-map <leader>r "ryiw:%s/<c-r>r
-map <leader><leader>r :sp ~/.vimrc<CR>
+map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
 map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
-map <leader>` :marks<CR>
-map <leader>' :marks<CR>
-map <leader><leader>cd :cd %:p:h<CR>
+map <leader>/ :nohlsearch<CR>
+map <leader><leader>j :join<CR>
+map <leader><leader>v :sp ~/.vimrc<CR>
+map <leader><leader>r "ryiw:%s/<c-r>r
 
 map <leader>ge :Gedit<CR>
 map <leader>gs :Gstatus<CR>
@@ -288,9 +282,9 @@ nmap <leader>k [c
 " nmap <c-j> ]'
 " nmap <c-k> ['
 " noremap <c-h> g;
-noremap H g;
+" noremap H g;
 " noremap <c-l> g,
-noremap L g,
+" noremap L g,
 noremap <leader>l g;999g,
 "  And get or put the diff
 " C-M THIS MESSES UP COPEN LIST PRESSING ENTER
@@ -345,8 +339,6 @@ let g:ackprg = "ack-grep"
 
 " map <c-l> :cnext<CR>
 " map <c-h> :cprev<CR>
-
-"map <c-w> :NEXTCOLOR<CR>
 
 
 
@@ -413,9 +405,6 @@ map <c-q> :cnext<CR>
 
 let g:ag_highlight=1
 
-" nnoremap s "ryiw?var\s<c-r><c-w>\\|\(class\s\\|def\s\\|Bundle\)[^=]*<c-r><c-w>\\|\<c-r><c-w>.*\(class\s\\|def\s\\|Bundle\)\\|<c-r><c-w>\s=\\|function.*(.*<c-r><c-w>.*)<CR>0/<c-r>r<CR>:nohlsearch<CR>
-" noremap s "ryiw?<c-r><c-w>\s=<CR>0/<c-r>r<CR>:nohlsearch<CR>
-
 " Don't automatically do line breaks on long lines
 set formatoptions-=t
 
@@ -432,8 +421,12 @@ set formatoptions-=t
 " vmap J <down>}<up>
 " nmap K <up>{<down>
 " vmap K <up>{<down>
-map J /^    \w<CR>:nohlsearch<CR>
-map K ?^    \w<CR>:nohlsearch<CR>
+" map J /^    \w<CR>:nohlsearch<CR>
+" map K ?^    \w<CR>:nohlsearch<CR>
+map H <c-w>H
+map J <c-w>J
+map K <c-w>K
+map L <c-w>L
 
 " nmap J <down>}?[^ ]<CR>:nohlsearch<CR>
 " nmap K {?[^ ]<CR>:nohlsearch<CR>
@@ -448,3 +441,5 @@ map K ?^    \w<CR>:nohlsearch<CR>
 
 vmap <leader><leader>n :norm 
 nmap <leader><leader>g :%g/
+
+map ` <c-^>
