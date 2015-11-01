@@ -442,4 +442,4 @@ map L <c-w>L
 vmap <leader><leader>n :norm 
 nmap <leader><leader>g :%g/
 
-map ` <c-^>
+map ` @@
