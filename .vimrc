@@ -97,6 +97,8 @@ Bundle 'Shougo/unite.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'lambacck/python_matchit'
+" Bundle 'klen/python-mode' " Too slow
+" Bundle 'hdima/python-syntax'
 " Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 " Bundle 'jiangmiao/auto-pairs'
@@ -135,6 +137,7 @@ Bundle 'jeetsukumaran/vim-indentwise'
 Bundle 'ervandew/supertab'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'dyng/ctrlsf.vim'
+Bundle 'rubik/vim-radon'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -201,6 +204,8 @@ set foldnestmax=8
 "set foldlevelstart=20
 set foldlevelstart=99
 
+let g:pymode_options_max_line_length=120
+let python_highlight_all=1
 autocmd Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
 autocmd Syntax python setlocal foldmethod=indent
 autocmd Syntax python normal zR
@@ -443,3 +448,5 @@ vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
 map ` @@
+
+let radon_always_on = 0
