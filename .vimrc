@@ -92,6 +92,7 @@ set concealcursor=vin
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Bundle 'gmarik/Vundle.vim'
+Bundle 'mxw/vim-jsx'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tmhedberg/matchit'
@@ -278,3 +279,6 @@ nmap <leader><leader>g :%g/
 map ` @@
 
 let radon_always_on = 0
+
+let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
