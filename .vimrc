@@ -269,10 +269,12 @@ let g:ag_highlight=1
 set formatoptions-=t
 
 
-map H <c-w>H
-map J <c-w>J
-map K <c-w>K
-map L <c-w>L
+" map H <c-w>H
+" map J <c-w>J
+" map K <c-w>K
+" map L <c-w>L
+" map J :cn<CR>
+" map K :cp<CR>
 
 
 vmap <leader><leader>n :norm 

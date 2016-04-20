@@ -37,3 +37,4 @@ bindkey "^[[[B" select 1
 bindkey "^[[[C" select 2
 bindkey "^x" other
 
+vbell "off"
