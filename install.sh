@@ -51,22 +51,22 @@ fi
 mkdir ~/.vim/
 mkdir ~/.vim/colors/
 
-create_symlink    ./.vimrc     ~/.vimrc
-create_symlink    ./.vimrc     ~/.nvimrc
-create_symlink    ./.nvim
-create_symlink    ./fish       ~/.config/fish
-create_symlink    ./.elinks    ~/.elinks
-create_symlink    ./i3config   ~/.i3/config
-create_symlink    ./sift.vim   ~/.vim/colors/sift.vim
-create_symlink    ./badwolf.vim   ~/.vim/colors/badwolf.vim
-create_symlink    ./.muttrc    ~/.muttrc
-create_symlink    ./.Xdefaults ~/.Xdefaults
-create_symlink    ./.surf ~/.surf
-create_symlink    ./.offlineimaprc ~/.offlineimaprc
-create_symlink    ./.signature ~/.signature
-create_symlink    ./.tmux.conf ~/.tmux.conf
-create_symlink    ./.Xmodmap ~/.Xmodmap
-create_symlink    ./.screenrc ~/.screenrc
+create_symlink    ~/.dotfiles/.vimrc     ~/.vimrc
+create_symlink    ~/.dotfiles/.vimrc     ~/.nvimrc
+create_symlink    ~/.dotfiles/.nvim
+create_symlink    ~/.dotfiles/fish       ~/.config/fish
+create_symlink    ~/.dotfiles/.elinks    ~/.elinks
+create_symlink    ~/.dotfiles/i3config   ~/.i3/config
+create_symlink    ~/.dotfiles/sift.vim   ~/.vim/colors/sift.vim
+create_symlink    ~/.dotfiles/badwolf.vim   ~/.vim/colors/badwolf.vim
+create_symlink    ~/.dotfiles/.muttrc    ~/.muttrc
+create_symlink    ~/.dotfiles/.Xdefaults ~/.Xdefaults
+create_symlink    ~/.dotfiles/.surf ~/.surf
+create_symlink    ~/.dotfiles/.offlineimaprc ~/.offlineimaprc
+create_symlink    ~/.dotfiles/.signature ~/.signature
+create_symlink    ~/.dotfiles/.tmux.conf ~/.tmux.conf
+create_symlink    ~/.dotfiles/.Xmodmap ~/.Xmodmap
+create_symlink    ~/.dotfiles/.screenrc ~/.screenrc
 
 if [ ! -d ~/.vim/bundle ]; then
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
