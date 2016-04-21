@@ -164,10 +164,12 @@ nmap <leader><leader>h :SearchReset<CR>
 noremap - :e .<CR>
 
 noremap <F1> :!%:p<CR>
-vnoremap <F2> "vyoprint "      "vpa: "a + str("vpa)
-nnoremap <F2> "wyiw ^"ly$ ?  def<CR> ^"dy$   ?^class<CR> ^"cy$   o# ZZZZ --------------  oprint ""cpa"  oprint ""dpa"    oprint "  :execute "normal! i" . ( line(".") + 1 )<cr>a  "lpa"      o
-noremap <F3> :CtrlSF 
-noremap <leader><F3> :Ag<CR>
+" vnoremap <F2> "vyoprint "      "vpa: "a + str("vpa)
+" nnoremap <F2> "wyiw ^"ly$ ?  def<CR> ^"dy$   ?^class<CR> ^"cy$   o# ZZZZ --------------  oprint ""cpa"  oprint ""dpa"    oprint "  :execute "normal! i" . ( line(".") + 1 )<cr>a  "lpa"      o
+map <F2> :cp<CR>
+map <F3> :cn<CR>
+" noremap <F3> :CtrlSF 
+" noremap <leader><F3> :Ag<CR>
 noremap <F4> :call RangerChooser()<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
 nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
@@ -187,27 +189,24 @@ let mapleader = "\<Space>"
 
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <leader>f "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
-map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
 map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
 map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
-map <leader>/ :nohlsearch<CR>
 map <leader><leader>j :join<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
-map <leader><leader>r "ryiw:%s/<c-r>r
+map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
-map <leader>ge :Gedit<CR>
-map <leader>gs :Gstatus<CR>
-map <leader>gb :Gblame<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gR :Gread<CR>
-map <leader>gw :Gwrite<CR>
-map <leader>gl :Glog<BAR>:bot copen<CR>
-map <leader>gL :Extradite<CR>
+map ge :Gedit<CR>
+map gs :Gstatus<CR>
+map gb :Gblame<CR>
+map gd :Gdiff<CR>
+map gR :Gread<CR>
+map gw :Gwrite<CR>
+map gl :Glog<BAR>:bot copen<CR>
+map gL :Extradite<CR>
 
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
