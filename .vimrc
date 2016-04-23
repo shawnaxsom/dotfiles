@@ -13,7 +13,7 @@ set noautochdir "Some plugins don't work with this enabled, like vimfiler or vim
 syntax on
 set nolist
 set background=dark
-colorscheme badwolf
+colorscheme sift
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
@@ -59,10 +59,16 @@ set wildmode=full
 set wildignorecase
 set wildchar=<Tab>
 
-set laststatus=1
+" Always show the statusline
+set laststatus=2
 set statusline=%-20t
 set statusline+=%=        " Switch to the right side
 set statusline+=(%f)
+" set statusline+=%{fugitive#statusline()}
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 0
+let g:airline_theme='serene'
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -121,6 +127,8 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'dyng/ctrlsf.vim'
 Bundle 'rubik/vim-radon'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -133,7 +141,7 @@ let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 " Using ag is faster, BUT wildignore doesn't work
-" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' 
+" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
 set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
@@ -168,7 +176,7 @@ noremap <F1> :!%:p<CR>
 " nnoremap <F2> "wyiw ^"ly$ ?  def<CR> ^"dy$   ?^class<CR> ^"cy$   o# ZZZZ --------------  oprint ""cpa"  oprint ""dpa"    oprint "  :execute "normal! i" . ( line(".") + 1 )<cr>a  "lpa"      o
 map <F2> :cp<CR>
 map <F3> :cn<CR>
-" noremap <F3> :CtrlSF 
+" noremap <F3> :CtrlSF
 " noremap <leader><F3> :Ag<CR>
 noremap <F4> :call RangerChooser()<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
@@ -242,7 +250,7 @@ set si
 
 
 " Prevent browsing in Fugitive from creating a trail of temp file buffers
-autocmd BufReadPost fugitive://* 
+autocmd BufReadPost fugitive://*
   \ set bufhidden=delete
 
 
@@ -276,7 +284,7 @@ set formatoptions-=t
 " map K :cp<CR>
 
 
-vmap <leader><leader>n :norm 
+vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
 map ` @@

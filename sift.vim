@@ -1,5 +1,5 @@
 " Vim color file
-" sift v2.0
+" sift v2.1
 " http://www.vim.org/scripts/script.php?script_id=1454
 " 
 " Maintainer:	Shawn Axsom <axs221@gmail.com>
@@ -69,7 +69,6 @@ hi Exception	guifg=#dfff80
 "end syntax highlighting """""""""""""""""""""""""""""""""""""
 
 " highlight groups
-"hi CursorIM
 hi Directory	guifg=#bbd0df
 
 hi DiffAdd      guibg=#9af5c0 guifg=#05293d
@@ -80,6 +79,8 @@ hi DiffText     guibg=#aae5d0 guifg=#05293d
 hi ErrorMsg     guibg=#ff4545
 
 hi Cursor       guibg=#cad5c0 guifg=#05293d
+hi CursorLine   cterm=NONE ctermbg=234
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
 hi Folded       guibg=#201328 guifg=#BBDDCC
 hi FoldColumn	guibg=#130014 guifg=#dbcaa5
@@ -124,13 +125,13 @@ hi MatchParen   guibg=#200080 guifg=#f0f080
 
 
 " terminal colors
-hi Normal         ctermbg=16 ctermfg=194
-hi SpecialKey     term=bold ctermfg=115 
+hi Normal         ctermbg=233 ctermfg=195
+hi SpecialKey     term=bold ctermfg=113 
 hi NonText        term=bold cterm=bold ctermfg=52 ctermbg=16 
 hi Directory      term=bold ctermfg=152 
 hi ErrorMsg       term=standout ctermfg=231 ctermbg=203 
-hi IncSearch      term=reverse cterm=reverse ctermfg=58 ctermbg=187 
-hi Search         term=reverse ctermfg=58 ctermbg=108 
+hi IncSearch      term=bold cterm=bold ctermfg=17 ctermbg=163 
+hi Search         term=reverse ctermfg=230 ctermbg=161 
 hi MoreMsg        term=bold cterm=bold ctermfg=29 
 hi ModeMsg        term=bold cterm=bold ctermfg=38 
 hi LineNr         term=underline cterm=bold ctermfg=30 ctermbg=16 
@@ -145,15 +146,16 @@ hi VisualNOS      term=bold,underline cterm=bold,underline
 hi WarningMsg     term=standout ctermfg=209 
 hi WildMenu       term=standout ctermfg=16 ctermbg=226 
 hi Folded         term=standout ctermfg=2 ctermbg=0 
-hi Statement      term=bold cterm=bold
+hi Statement      term=bold cterm=bold ctermfg=220
+hi Type		  term=standout ctermfg=79
 hi Constant		    ctermfg=45
 hi Function       term=bold cterm=bold ctermfg=173
-hi Special		    term=bold cterm=bold ctermfg=12
+hi Special		    term=bold cterm=bold ctermfg=124
 hi Conditional	  term=bold cterm=bold ctermfg=11 
-hi Operator		    term=bold cterm=bold ctermfg=178
+hi Operator		    term=bold cterm=bold ctermfg=168
 hi Repeat		      term=bold cterm=bold ctermfg=214
-hi Identifier     term=none cterm=none ctermfg=50
-hi Comment		    ctermfg=23
+hi Identifier     term=none cterm=none ctermfg=116
+hi Comment		    ctermfg=29
 
 hi DiffAdd        ctermfg=11 ctermbg=22
 hi DiffDelete     ctermfg=3 ctermbg=88
@@ -165,3 +167,13 @@ hi SignColumn        ctermbg=234
 hi GitGutterAdd      ctermfg=3 ctermbg=28 cterm=bold
 hi GitGutterChange   ctermfg=7 ctermbg=26 cterm=bold
 hi GitGutterDelete   ctermfg=2 ctermbg=1 cterm=bold
+
+hi javaScriptObjectKey     ctermfg=186
+hi javaScriptBrowserObjects ctermfg=155
+hi javaScriptDOMObjects ctermfg=112
+hi javaScriptDOMMethods ctermfg=193
+hi javaScriptGlobalObjects ctermfg=118
+hi xmlTagName              ctermfg=172
+hi xmlEndTag               ctermfg=173
+hi xmlAttrib               ctermfg=159
+hi xmlAttribPunct          ctermfg=177

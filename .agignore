@@ -1,3 +1,6 @@
 static
 dev.webpack-assets.json
 node_modules
+__tests__
+npm-shrinkwrap.json
+package.json
