@@ -79,8 +79,8 @@ hi DiffText     guibg=#aae5d0 guifg=#05293d
 hi ErrorMsg     guibg=#ff4545
 
 hi Cursor       guibg=#cad5c0 guifg=#05293d
-hi CursorLine   cterm=NONE ctermbg=234
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorLine   cterm=NONE
+hi CursorColumn cterm=NONE
 
 hi Folded       guibg=#201328 guifg=#BBDDCC
 hi FoldColumn	guibg=#130014 guifg=#dbcaa5
@@ -157,10 +157,13 @@ hi Repeat		      term=bold cterm=bold ctermfg=214
 hi Identifier     term=none cterm=none ctermfg=116
 hi Comment		    ctermfg=29
 
-hi DiffAdd        ctermfg=11 ctermbg=22
+hi DiffAdd        ctermfg=48 ctermbg=35
 hi DiffDelete     ctermfg=3 ctermbg=88
-hi DiffChange     ctermfg=12 ctermbg=25
-hi DiffText       term=bold cterm=bold ctermfg=85 ctermbg=32
+hi DiffChange     ctermfg=252 ctermbg=24
+hi DiffText       term=bold cterm=bold ctermfg=85 ctermbg=33
+
+hi diffAdded      ctermfg=83
+hi diffRemoved    ctermfg=161
 
 hi Matchmaker        ctermfg=16 ctermbg=32
 hi SignColumn        ctermbg=234         

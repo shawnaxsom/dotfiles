@@ -163,21 +163,12 @@ autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
 
-" Highlight word under cursor in a color
-nmap <leader>h "hyiw:Search <c-r>h<CR>
-vmap <leader>h "hy:Search <c-r>h<CR>
-nmap <leader><leader>h :SearchReset<CR>
-
 " Explore using "-" key
 noremap - :e .<CR>
 
 noremap <F1> :!%:p<CR>
-" vnoremap <F2> "vyoprint "      "vpa: "a + str("vpa)
-" nnoremap <F2> "wyiw ^"ly$ ?  def<CR> ^"dy$   ?^class<CR> ^"cy$   o# ZZZZ --------------  oprint ""cpa"  oprint ""dpa"    oprint "  :execute "normal! i" . ( line(".") + 1 )<cr>a  "lpa"      o
 map <F2> :cp<CR>
 map <F3> :cn<CR>
-" noremap <F3> :CtrlSF
-" noremap <leader><F3> :Ag<CR>
 noremap <F4> :call RangerChooser()<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
 nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
@@ -207,14 +198,17 @@ map <leader><leader>j :join<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
+" Diff put to grab changes using comma
+noremap , :diffput<CR>
+
 map ge :Gedit<CR>
 map gs :Gstatus<CR>
 map gb :Gblame<CR>
 map gd :Gdiff<CR>
 map gR :Gread<CR>
 map gw :Gwrite<CR>
-map gl :Glog<BAR>:bot copen<CR>
-map gL :Extradite<CR>
+map gl :Extradite<CR>
+map gL :Glog<BAR>:bot copen<CR>
 
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
@@ -228,9 +222,6 @@ noremap <c-b> :cprev<CR>
 " Comment out a line of code
 nmap   <Plug>CommentaryLine
 vmap   <Plug>Commentary
-
-vmap <Leader>s <Plug>Vsurround
-vmap <Leader>S <Plug>VSurround
 
 " Center screen when going through search results
 nnoremap n nzz
@@ -280,8 +271,8 @@ set formatoptions-=t
 " map J <c-w>J
 " map K <c-w>K
 " map L <c-w>L
-" map J :cn<CR>
-" map K :cp<CR>
+map J ]c
+map K [c
 
 
 vmap <leader><leader>n :norm
