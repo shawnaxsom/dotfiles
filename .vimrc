@@ -166,10 +166,11 @@ vnoremap . :normal .<CR>
 " Explore using "-" key
 noremap - :e .<CR>
 
-noremap <F1> :!%:p<CR>
-map <F2> :cp<CR>
+map <F1> :cp<CR>
+map <F2> :Ag 
 map <F3> :cn<CR>
-noremap <F4> :call RangerChooser()<CR>
+map <F4> :Ag 
+map <F4> "hyiw:Ag <c-r>h<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
 nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
 vnoremap <F5> :w !bash<BAR>less<CR>
@@ -210,9 +211,6 @@ map gw :Gwrite<CR>
 map gl :Extradite<CR>
 map gL :Glog<BAR>:bot copen<CR>
 
-" Go to next / previous change (GitGutter)
-nmap <leader>j ]c
-nmap <leader>k [c
 noremap <leader>l g;999g,
 noremap <c-n> g;
 noremap <leader>n 999g,
@@ -247,11 +245,6 @@ autocmd BufReadPost fugitive://*
 
 let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 
-
-" Don't skip wrapped lines
-nnoremap j gj
-nnoremap k gk
-
 map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
 map <BAR> "hyiw?\(class\s\\|var\\|def\s\).*<c-r>h<CR>:nohlsearch<CR>
 
@@ -267,12 +260,24 @@ let g:ag_highlight=1
 set formatoptions-=t
 
 
+
+" Don't skip wrapped lines
+nnoremap j gj
+nnoremap k gk
+
 " map H <c-w>H
 " map J <c-w>J
 " map K <c-w>K
 " map L <c-w>L
-map J ]c
-map K [c
+" map J ]c
+" map K [c
+" Go to next / previous change (GitGutter)
+nmap <leader>j ]c
+nmap <leader>k [c
+map J }jw
+map K k{jw
+map H [{
+map L ]}
 
 
 vmap <leader><leader>n :norm
