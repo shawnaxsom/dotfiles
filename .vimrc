@@ -164,7 +164,7 @@ autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 vnoremap . :normal .<CR>
 
 " Explore using "-" key
-noremap - :e .<CR>
+noremap - :e %:p:h<CR>
 
 map <F1> :cp<CR>
 map <F2> :Ag 
@@ -274,8 +274,8 @@ nnoremap k gk
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
-map J }jw
-map K k{jw
+map J }j^
+map K k{j^
 map H [{
 map L ]}
 
