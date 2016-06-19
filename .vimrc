@@ -56,7 +56,6 @@ set wildcharm=<TAB>
 
 set wildmenu
 set wildmode=full
-set wildignorecase
 set wildchar=<Tab>
 
 " Always show the statusline
@@ -112,7 +111,6 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'qstrahl/vim-matchmaker'
 Bundle 'haya14busa/incsearch.vim'
 Bundle 'tpope/vim-commentary'
-Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'tacahiroy/ctrlp-funky'
