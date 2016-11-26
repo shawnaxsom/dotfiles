@@ -21,12 +21,13 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-set mouse=a
+" set mouse=a
 set virtualedit=all "allow cursor to stay in same column while scrolling
-set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
+" set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
+set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
 set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
-set scrolloff=18 "Keep cursor centered
+" set scrolloff=18 "Keep cursor centered
 set cindent
 set shell=bash
 set more " Use MORE as pager
@@ -45,7 +46,7 @@ set linebreak
 set nojoinspaces
 set magic
 set browsedir=buffer
-set cursorline
+set nocursorline
 set nobackup
 set nowritebackup
 set nonumber
@@ -75,7 +76,9 @@ let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293 --max-complexity 10"
+let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293,W391 --max-complexity 10"
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/eslint.js'
 
 set incsearch
 set hlsearch
@@ -127,6 +130,9 @@ Bundle 'dyng/ctrlsf.vim'
 Bundle 'rubik/vim-radon'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'ervandew/supertab'
+Bundle 'SirVer/ultisnips'
+Bundle 'Valloric/YouCompleteMe'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -179,7 +185,7 @@ noremap <Leader><F7> :SyntasticReset<CR>
 noremap <silent> <F8> :!clear;python %<CR>
 noremap <F10> :!pudb %<CR>
 
-nmap z 5<c-w>+5<c-w>>
+" nmap z 5<c-w>+5<c-w>>
 nmap = <c-w>=
 
 " Use Space bar for leader key
@@ -200,6 +206,8 @@ map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 " Diff put to grab changes using comma
 noremap , :diffput<CR>
 
+map gC :Gcommit<CR>i
+map gP :Gpush<CR>
 map ge :Gedit<CR>
 map gs :Gstatus<CR>
 map gb :Gblame<CR>
@@ -210,7 +218,7 @@ map gl :Extradite<CR>
 map gL :Glog<BAR>:bot copen<CR>
 
 noremap <leader>l g;999g,
-noremap <c-n> g;
+" noremap <c-n> g;
 noremap <leader>n 999g,
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
@@ -272,18 +280,35 @@ nnoremap k gk
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
-map J }j^
-map K k{j^
-map H [{
-map L ]}
+" map J }j^
+" map K k{j^
+map J }
+map K {
+" map H [{
+" map L ]}
 
 
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
-map ` @@
+" map ` @@
 
 let radon_always_on = 0
 
 let g:jsx_ext_required = 0
-let g:syntastic_javascript_checkers = ['eslint']
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<c-e>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
