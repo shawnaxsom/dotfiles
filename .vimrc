@@ -21,7 +21,7 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-" set mouse=a
+" set mouse=a " Allows mouse click to move cursor, but it makes it harder to copy text
 set virtualedit=all "allow cursor to stay in same column while scrolling
 " set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
 set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
