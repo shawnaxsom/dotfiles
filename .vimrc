@@ -27,7 +27,7 @@ set virtualedit=all "allow cursor to stay in same column while scrolling
 set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
 set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
-" set scrolloff=18 "Keep cursor centered
+set scrolloff=17 "Keep cursor centered
 set cindent
 set shell=bash
 set more " Use MORE as pager
@@ -133,6 +133,7 @@ Bundle 'vim-airline/vim-airline-themes'
 Bundle 'ervandew/supertab'
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'mattn/emmet-vim'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -193,6 +194,7 @@ let mapleader = "\<Space>"
 
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
 map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
@@ -200,6 +202,7 @@ map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader><leader>j :join<CR>
+map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
@@ -300,11 +303,9 @@ let g:jsx_ext_required = 0
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
 " better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = "<c-e>"
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 

@@ -8,13 +8,53 @@ snippet print
 print "$1: %s" % ($1)
 endsnippet
 
+snippet "
+"""$0"""
+endsnippet
+
 snippet def
-def ${1:function_name}(${2:`indent('.') ? 'self' : ''`}):
+def ${1:function_name}(self${2:`indent('.') ? 'self' : ''`}):
+	$0
+endsnippet
+
+snippet init
+def __init__(self${2:`indent('.') ? 'self' : ''`}):
 	$0
 endsnippet
 
 snippet if
 if $1:
-	$2
-$0
+	$0
+endsnippet
+
+snippet elif
+elif $1:
+	$0
+endsnippet
+
+snippet else
+else:
+	$0
+endsnippet
+
+snippet debug
+import code
+code.interact(local=locals())
+endsnippet
+
+snippet main
+if __name__ == '__main__':
+	$0
+endsnippet
+
+snippet -
+print "-------------$1"
+endsnippet
+
+snippet --
+print "--------------------------------------------------------------------------------------------------------$1"
+endsnippet
+
+snippet ~
+print "~~~~~~~~~~~~~$1"
 endsnippet
