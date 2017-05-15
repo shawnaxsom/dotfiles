@@ -134,6 +134,7 @@ Bundle 'ervandew/supertab'
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'mattn/emmet-vim'
+Bundle 'derekwyatt/vim-scala'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -287,8 +288,8 @@ nmap <leader>k [c
 " map K k{j^
 map J }
 map K {
-" map H [{
-" map L ]}
+map H [{
+map L ]}
 
 
 vmap <leader><leader>n :norm
@@ -313,3 +314,15 @@ let g:UltiSnipsEditSplit="vertical"
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+
+if !exists('*RangerExplorer')
+  function RangerExplorer()
+      exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+      if filereadable('/tmp/vim_ranger_current_file')
+          exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+          call system('rm /tmp/vim_ranger_current_file')
+      endif
+      redraw!
+  endfun
+endif
+map = :call RangerExplorer()<CR>
