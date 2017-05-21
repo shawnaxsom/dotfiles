@@ -10,7 +10,7 @@ set noswapfile
 set autoread
 set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
-syntax on
+" syntax on
 set nolist
 set background=dark
 colorscheme sift
@@ -244,7 +244,7 @@ autocmd BufReadPost fugitive://*
 let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 
 map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
-map <BAR> "hyiw?\(class\s\\|var\\|def\s\).*<c-r>h<CR>:nohlsearch<CR>
+" map <BAR> "hyiw?\(class\s\\|var\\|def\s\).*<c-r>h<CR>:nohlsearch<CR>
 
 " Mark next, based on Vim-Signature
 map <Space> m.

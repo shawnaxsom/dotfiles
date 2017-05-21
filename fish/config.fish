@@ -28,6 +28,10 @@ alias .......='../../../../../..'
 alias ........='../../../../../../..'
 alias -='cd -'
 
+if test -e /usr/local/Cellar/vim/7.4.1941/bin/vim
+  alias vim='/usr/local/Cellar/vim/7.4.1941/bin/vim'
+end
+
 set -x TERM xterm-256color
 
 alias calw='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calw 2'
@@ -51,3 +55,7 @@ end
 function search
   ag $argv | /usr/local/share/pathpicker/fpp
 end
+
+status --is-interactive; and source (rbenv init -|psub)
+
+[ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
