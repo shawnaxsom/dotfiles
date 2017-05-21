@@ -23,10 +23,11 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " set mouse=a " Allows mouse click to move cursor, but it makes it harder to copy text
 set virtualedit=all "allow cursor to stay in same column while scrolling
-set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
+" set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
+set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
 set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
-set scrolloff=18 "Keep cursor centered
+set scrolloff=17 "Keep cursor centered
 set cindent
 set shell=bash
 set more " Use MORE as pager
@@ -45,10 +46,11 @@ set linebreak
 set nojoinspaces
 set magic
 set browsedir=buffer
-set cursorline
+set nocursorline
 set nobackup
 set nowritebackup
-set nonumber
+" set nonumber
+set relativenumber
 
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
@@ -75,7 +77,9 @@ let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293 --max-complexity 10"
+let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293,W391 --max-complexity 10"
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/eslint.js'
 
 set incsearch
 set hlsearch
@@ -127,6 +131,13 @@ Bundle 'dyng/ctrlsf.vim'
 Bundle 'rubik/vim-radon'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'ervandew/supertab'
+Bundle 'SirVer/ultisnips'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'mattn/emmet-vim'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'easymotion/vim-easymotion'
+Bundle 'tpope/vim-surround'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -142,7 +153,7 @@ let g:ctrlp_working_path_mode = 0
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*/jest/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'a'
 
 
@@ -157,6 +168,7 @@ autocmd Syntax python normal zR
 autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 
+autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -179,7 +191,7 @@ noremap <Leader><F7> :SyntasticReset<CR>
 noremap <silent> <F8> :!clear;python %<CR>
 noremap <F10> :!pudb %<CR>
 
-nmap z 5<c-w>+5<c-w>>
+" nmap z 5<c-w>+5<c-w>>
 nmap = <c-w>=
 
 " Use Space bar for leader key
@@ -187,6 +199,8 @@ let mapleader = "\<Space>"
 
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>p :set paste!<CR>
+map <leader>l :set list!<CR>
 map <leader>q :q<CR>
 map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
@@ -194,12 +208,16 @@ map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader><leader>j :join<CR>
+" map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
+map <leader><leader>l :BundleList<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
 " Diff put to grab changes using comma
 noremap , :diffput<CR>
 
+map gC :Gcommit<CR>i
+map gP :Gpush<CR>
 map ge :Gedit<CR>
 map gs :Gstatus<CR>
 map gb :Gblame<CR>
@@ -209,8 +227,8 @@ map gw :Gwrite<CR>
 map gl :Extradite<CR>
 map gL :Glog<BAR>:bot copen<CR>
 
-noremap <leader>l g;999g,
-noremap <c-n> g;
+" noremap <leader>l g;999g,
+" noremap <c-n> g;
 noremap <leader>n 999g,
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
@@ -272,8 +290,10 @@ nnoremap k gk
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
-map J }j^
-map K k{j^
+" map J }j^
+" map K k{j^
+map J }
+map K {
 map H [{
 map L ]}
 
@@ -281,9 +301,53 @@ map L ]}
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
-map ` @@
+" map ` @@
 
 let radon_always_on = 0
 
 let g:jsx_ext_required = 0
-let g:syntastic_javascript_checkers = ['eslint']
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+if !exists('*RangerExplorer')
+  function RangerExplorer()
+      exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+      if filereadable('/tmp/vim_ranger_current_file')
+          exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+          call system('rm /tmp/vim_ranger_current_file')
+      endif
+      redraw!
+  endfun
+endif
+map = :call RangerExplorer()<CR>
+
+map  s <Plug>(easymotion-bd-w)
+" nmap s <Plug>(easymotion-overwin-w)
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+" map / <Plug>(incsearch-stay)
+" map ? <Plug>(incsearch-stay)
+
+" Use '$ cat' to find the keys to map to
+" http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+map ˙ <c-w>h
+map ∆ <c-w>j
+map ˚ <c-w>k
+map ¬ <c-w>l
+
+noremap j j^
+noremap k k^

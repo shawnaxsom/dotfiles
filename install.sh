@@ -48,12 +48,11 @@ if [ ! -f  /usr/local/etc/profile.d/z.sh ]; then
   sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -P /usr/local/etc/profile.d/
 fi
 
-mkdir ~/.vim/
-mkdir ~/.vim/colors/
+mkdir -p ~/.vim/colors/
 
 create_symlink    .vimrc     ~/.vimrc
 create_symlink    .vimrc     ~/.nvimrc
-create_symlink    .nvim
+create_symlink    UltiSnips     ~/.vim/UltiSnips
 create_symlink    fish       ~/.config/fish
 create_symlink    .elinks    ~/.elinks
 create_symlink    i3config   ~/.i3/config
@@ -74,7 +73,10 @@ if [ ! -d ~/.vim/bundle ]; then
   vim +PluginInstall +qall
 fi
 
-# install_cmake
-# sudo apt-get install python-dev
-# ~/.vim/bundle/YouCompleteMe/install.sh
-# cd ~/.vim/bundle/tern_for_vim && npm install
+# if [ -f ~/.vim/bundle/YouCompleteMe/install.sh ]; then
+#   sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -P /usr/local/etc/profile.d/
+#   install_cmake
+#   sudo apt-get install python-dev
+#   ~/.vim/bundle/YouCompleteMe/install.sh
+#   cd ~/.vim/bundle/tern_for_vim && npm install
+# fi
