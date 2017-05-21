@@ -13,7 +13,7 @@ set noautochdir "Some plugins don't work with this enabled, like vimfiler or vim
 " syntax on
 set nolist
 set background=dark
-colorscheme sift
+colorscheme badwolf
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
