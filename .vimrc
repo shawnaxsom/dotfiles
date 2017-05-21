@@ -49,7 +49,8 @@ set browsedir=buffer
 set nocursorline
 set nobackup
 set nowritebackup
-set nonumber
+" set nonumber
+set relativenumber
 
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
@@ -135,6 +136,8 @@ Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'mattn/emmet-vim'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'easymotion/vim-easymotion'
+Bundle 'tpope/vim-surround'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -165,6 +168,7 @@ autocmd Syntax python normal zR
 autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 
+autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -203,8 +207,9 @@ map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader><leader>j :join<CR>
-map <leader><leader>s :UltiSnipsEdit<CR>
+" map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
+map <leader><leader>l :BundleList<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
 " Diff put to grab changes using comma
@@ -326,3 +331,22 @@ if !exists('*RangerExplorer')
   endfun
 endif
 map = :call RangerExplorer()<CR>
+
+map  s <Plug>(easymotion-bd-w)
+" nmap s <Plug>(easymotion-overwin-w)
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+" map / <Plug>(incsearch-stay)
+" map ? <Plug>(incsearch-stay)
+
+" Use '$ cat' to find the keys to map to
+" http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+map ˙ <c-w>h
+map ∆ <c-w>j
+map ˚ <c-w>k
+map ¬ <c-w>l
+
+noremap j j^
+noremap k k^
