@@ -351,3 +351,8 @@ map ¬ <c-w>l
 
 noremap j j^
 noremap k k^
+
+" Fixes highlighting issues when doing Ctrl+C with 'terryma/vim-multiple-cursors'
+let g:multi_cursor_quit_key='<C-c>'
+nnoremap <C-c> :call multiple_cursors#quit()<CR>
+set selection=inclusive
