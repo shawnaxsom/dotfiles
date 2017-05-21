@@ -10,7 +10,7 @@ set noswapfile
 set autoread
 set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
-" syntax on
+syntax on
 set nolist
 set background=dark
 colorscheme badwolf
