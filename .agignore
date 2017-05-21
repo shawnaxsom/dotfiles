@@ -2,6 +2,7 @@ static
 dev.webpack-assets.json
 webpack-assets.json
 node_modules
+jest
 __tests__
 npm-shrinkwrap.json
 package.json

@@ -153,7 +153,7 @@ let g:ctrlp_working_path_mode = 0
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*/jest/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'a'
 
 
@@ -200,6 +200,7 @@ let mapleader = "\<Space>"
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>p :set paste!<CR>
+map <leader>l :set list!<CR>
 map <leader>q :q<CR>
 map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
@@ -226,7 +227,7 @@ map gw :Gwrite<CR>
 map gl :Extradite<CR>
 map gL :Glog<BAR>:bot copen<CR>
 
-noremap <leader>l g;999g,
+" noremap <leader>l g;999g,
 " noremap <c-n> g;
 noremap <leader>n 999g,
 noremap <c-f> :cnext<CR>
