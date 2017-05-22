@@ -119,7 +119,6 @@ Bundle 'honza/vim-snippets'
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'flazz/vim-colorschemes'
-Bundle 'terryma/vim-multiple-cursors'
 Bundle 'gregsexton/gitv'
 Bundle 'vim-scripts/MultipleSearch'
 Bundle 'int3/vim-extradite'
@@ -208,7 +207,7 @@ map <leader>t :tabnew<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader><leader>j :join<CR>
-" map <leader><leader>s :UltiSnipsEdit<CR>
+map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
 map <leader><leader>l :BundleList<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
@@ -229,7 +228,7 @@ map gL :Glog<BAR>:bot copen<CR>
 
 " noremap <leader>l g;999g,
 " noremap <c-n> g;
-noremap <leader>n 999g,
+" noremap <leader>n 999g,
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
 
@@ -349,10 +348,8 @@ map ∆ <c-w>j
 map ˚ <c-w>k
 map ¬ <c-w>l
 
-noremap j j^
-noremap k k^
+" noremap j j^
+" noremap k k^
 
-" Fixes highlighting issues when doing Ctrl+C with 'terryma/vim-multiple-cursors'
-let g:multi_cursor_quit_key='<C-c>'
-nnoremap <C-c> :call multiple_cursors#quit()<CR>
-set selection=inclusive
+" Fix directory UltiSnipsEdit places snippets in
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
