@@ -320,17 +320,17 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-if !exists('*RangerExplorer')
-  function RangerExplorer()
-      exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-      if filereadable('/tmp/vim_ranger_current_file')
-          exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-          call system('rm /tmp/vim_ranger_current_file')
-      endif
-      redraw!
-  endfun
-endif
-map = :call RangerExplorer()<CR>
+" if !exists('*RangerExplorer')
+"   function RangerExplorer()
+"       exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+"       if filereadable('/tmp/vim_ranger_current_file')
+"           exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+"           call system('rm /tmp/vim_ranger_current_file')
+"       endif
+"       redraw!
+"   endfun
+" endif
+" map = :call RangerExplorer()<CR>
 
 map  s <Plug>(easymotion-bd-w)
 " nmap s <Plug>(easymotion-overwin-w)
@@ -353,3 +353,38 @@ map ¬ <c-w>l
 
 " Fix directory UltiSnipsEdit places snippets in
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
+
+" Use e.g. vai to select everything of same indent level
+" http://vim.wikia.com/wiki/Creating_new_text_objects
+" http://vim.wikia.com/wiki/Indent_text_object
+" http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects
+onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
+onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
+vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
+vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
+function! s:IndTxtObj(inner)
+  let curline = line(".")
+  let lastline = line("$")
+  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
+  let i = i < 0 ? 0 : i
+  if getline(".") !~ "^\\s*$"
+    let p = line(".") - 1
+    let nextblank = getline(p) =~ "^\\s*$"
+    while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+      -
+      let p = line(".") - 1
+      let nextblank = getline(p) =~ "^\\s*$"
+    endwhile
+    normal! 0V
+    call cursor(curline, 0)
+    let p = line(".") + 1
+    let nextblank = getline(p) =~ "^\\s*$"
+    while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+      +
+      let p = line(".") + 1
+      let nextblank = getline(p) =~ "^\\s*$"
+    endwhile
+    normal! $
+  endif
+endfunction

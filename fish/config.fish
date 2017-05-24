@@ -8,7 +8,6 @@ alias .....='../../../..'
 alias ......='../../../../..'
 alias .......='../../../../../..'
 alias ........='../../../../../../..'
-alias -='cd -'
 
 if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
   alias vim='/usr/local/Cellar/vim/8.0.0130/bin/vim'
@@ -38,6 +37,5 @@ function search
   ag $argv | /usr/local/share/pathpicker/fpp
 end
 
-status --is-interactive; and source (rbenv init -|psub)
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
