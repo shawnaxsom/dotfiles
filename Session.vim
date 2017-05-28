@@ -27,12 +27,12 @@ setlocal fdn=8
 setlocal fen
 58
 normal! zo
-let s:l = 60 - ((25 * winheight(0) + 24) / 48)
+let s:l = 48 - ((17 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-60
-normal! 0
+48
+normal! 036|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
