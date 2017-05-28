@@ -45,7 +45,7 @@ set -gx PATH /Users/shawnaxsom/Library/Android/sdk/platform-tools $PATH
 alias ga='git add .'
 alias gc='git commit'
 alias gac='git add .; git commit'
-alias gacp='git add .; git commit; git push;'
+alias gacp='git add .; git commit; git push'
 alias gp='git push'
 alias gl='git log -p'
 alias gs='git status'
@@ -55,7 +55,7 @@ alias vs='vim -S'
 
 function v
   # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
-  if test -e $pwd/Session.vim
+  if test -e $PWD/Session.vim
     vim -S
   else
     vim
