@@ -54,10 +54,8 @@ alias vs='vim -S'
 function gac
   git add .;
   if set -q $argv
-    echo 'foo'
     git commit -m $argv;
   else
-    echo 'bar'
     git commit;
   end
 end
