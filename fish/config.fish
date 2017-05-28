@@ -50,5 +50,13 @@ alias gl='git log -p'
 alias gs='git status'
 alias gR='git revert --hard; git clean -DF;'
 alias gd='git diff'
-alias v='vim'
 alias vs='vim -S'
+
+function v
+  # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
+  if test -e $pwd/Session.vim
+    vim -S
+  else
+    vim
+  end
+end
