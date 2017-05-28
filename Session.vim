@@ -9,6 +9,7 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +1 fish/config.fish
+badd +261 ~/.vimrc
 argglobal
 silent! argdel *
 edit fish/config.fish
@@ -24,14 +25,14 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=8
 setlocal fen
-57
+58
 normal! zo
-let s:l = 58 - ((25 * winheight(0) + 24) / 48)
+let s:l = 48 - ((21 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-58
-normal! 05|
+48
+normal! 044|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
