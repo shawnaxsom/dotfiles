@@ -10,6 +10,7 @@ endif
 set shortmess=aoO
 badd +1 fish/config.fish
 badd +261 ~/.vimrc
+badd +1 ~/.dotfiles/UltiSnips/all.snippets
 argglobal
 silent! argdel *
 edit fish/config.fish
@@ -25,14 +26,14 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=8
 setlocal fen
-57
+63
 normal! zo
-let s:l = 47 - ((22 * winheight(0) + 24) / 48)
+let s:l = 57 - ((36 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-47
-normal! 033|
+57
+normal! 024|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
