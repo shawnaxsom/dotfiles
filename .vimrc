@@ -257,8 +257,8 @@ map K {
 map H [{
 map L ]}
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 20, 1)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 20, 1)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 40, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 40, 2)<CR>
 " noremap <silent> K :call smooth_scroll#up(&scroll/3, 30, 1)<CR>
 " noremap <silent> J :call smooth_scroll#down(&scroll/3, 30, 1)<CR>
 " noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
@@ -371,15 +371,11 @@ endif
 
 map ; :
 
-let g:comfortable_motion_friction = 100.0
-let g:comfortable_motion_air_drag = 3.0
-let g:comfortable_motion_interval = 100.0 / 60
-let g:comfortable_motion_no_default_key_mappings = 1
-" nnoremap <silent> <C-d> :call comfortable_motion#flick(80)<CR>
-" nnoremap <silent> <C-u> :call comfortable_motion#flick(-80)<CR>
-
 imap <c-o> o
-nmap <tab> <c-^>
+nmap <tab> <c-p><CR>
+
+" Vue.js .vue file set filetype on load
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -424,9 +420,9 @@ Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-colorscheme-switcher'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'junegunn/gv.vim'
-" Bundle 'yuttie/comfortable-motion.vim'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'tpope/vim-obsession'
+Bundle 'posva/vim-vue'
 call vundle#end()
 filetype plugin indent on    " required
