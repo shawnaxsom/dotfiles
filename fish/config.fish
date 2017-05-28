@@ -39,3 +39,7 @@ end
 
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
+
+set -gx PATH /Users/shawnaxsom/Library/Android/sdk/platform-tools $PATH
+
+alias vim='vim -S'

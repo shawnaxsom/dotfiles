@@ -122,10 +122,72 @@ hi MatchParen   guibg=#200080 guifg=#f0f080
 
 
 
+" color terminal definitions
+hi Normal ctermfg=grey
+hi Number ctermfg=blue
+highlight Operator ctermfg=yellow
+highlight Conditional ctermfg=darkred
+highlight Repeat ctermfg=darkred
+hi Exception ctermfg=red
+hi function ctermfg=darkyellow
+hi SpecialKey	ctermfg=darkgreen
+hi NonText	cterm=bold ctermfg=darkgrey
+hi Directory	ctermfg=darkcyan
+hi ErrorMsg	cterm=bold ctermfg=7 ctermbg=1
+hi IncSearch	ctermfg=yellow ctermbg=darkyellow cterm=NONE
+hi Search	ctermfg=black ctermbg=darkyellow cterm=NONE
+hi MoreMsg	ctermfg=darkgreen
+hi ModeMsg	cterm=NONE ctermfg=brown
+hi LineNr	ctermfg=darkcyan ctermbg=NONE
+hi Question	ctermfg=green
+hi StatusLine	ctermfg=blue ctermbg=grey cterm=NONE
+hi StatusLineNC ctermfg=black ctermbg=grey cterm=NONE
+hi VertSplit	ctermfg=black ctermbg=grey cterm=NONE
+hi Title	ctermfg=Yellow cterm=NONE
+hi Visual	ctermbg=darkcyan ctermfg=black cterm=NONE
+hi VisualNOS	ctermbg=darkcyan ctermfg=black cterm=NONE
+hi WarningMsg	ctermfg=1
+hi WildMenu	ctermfg=0 ctermbg=3
+hi Folded	ctermfg=darkgreen ctermbg=NONE cterm=NONE
+hi FoldColumn	ctermfg=green ctermbg=black
+hi DiffAdd	ctermbg=4
+hi DiffChange	ctermbg=5
+hi DiffDelete	cterm=bold ctermfg=4 ctermbg=6
+hi DiffText	cterm=bold ctermbg=1
+hi identifier   ctermfg=darkmagenta
+
+"set comments to grey on non-Windows OS's to make sure
+"it is readable
+if &term == "builtin_gui" || &term == "win32"
+	hi Comment		ctermfg=darkgrey  ctermbg=darkblue
+	hi IncSearch	ctermfg=black ctermbg=grey cterm=NONE
+	hi Search	ctermfg=black ctermbg=darkgrey cterm=NONE
+else
+	hi Comment		ctermfg=grey  ctermbg=darkblue
+	hi IncSearch	ctermfg=yellow ctermbg=darkyellow cterm=NONE
+	hi Search	ctermfg=black ctermbg=darkyellow cterm=NONE
+endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+hi Constant	ctermfg=blue
+hi Special	ctermfg=darkmagenta
+hi Statement	ctermfg=red
+hi PreProc	ctermfg=magenta
+hi Type		ctermfg=darkblue " ctermbg=darkblue
+hi Underlined	ctermfg=yellow cterm=NONE
+hi Ignore	cterm=bold ctermfg=7
+hi Ignore	ctermfg=darkgrey
+hi Error	cterm=bold ctermfg=7 ctermbg=1
+
+" new Vim 7.0 items
+hi Pmenu        ctermbg=darkblue ctermfg=lightgrey
+hi PmenuSel     ctermbg=lightblue ctermfg=white                    
+
+"vim: sw=4
 
 
 " terminal colors
-hi Normal         ctermbg=233 ctermfg=195
+hi Normal         ctermbg=233 ctermfg=231
 hi SpecialKey     term=bold ctermfg=113 
 hi NonText        term=bold cterm=bold ctermfg=52 ctermbg=16 
 hi Directory      term=bold ctermfg=152 
@@ -134,8 +196,8 @@ hi IncSearch      term=bold cterm=bold ctermfg=17 ctermbg=163
 hi Search         term=reverse ctermfg=230 ctermbg=161 
 hi MoreMsg        term=bold cterm=bold ctermfg=29 
 hi ModeMsg        term=bold cterm=bold ctermfg=38 
-hi LineNr         term=underline cterm=bold ctermfg=30 ctermbg=16 
-hi CursorLineNr   term=bold cterm=bold ctermfg=226 
+hi LineNr         term=underline  ctermfg=248 ctermbg=16 
+hi CursorLineNr   term=bold cterm=bold ctermfg=255 ctermbg=236 
 hi Question       term=standout cterm=bold ctermfg=146 
 hi StatusLine     term=bold,reverse cterm=bold ctermfg=14 ctermbg=236 
 hi StatusLineNC   term=reverse cterm=bold ctermfg=24 ctermbg=236 
@@ -152,10 +214,10 @@ hi Constant		    ctermfg=45
 hi Function       term=bold cterm=bold ctermfg=173
 hi Special		    term=bold cterm=bold ctermfg=124
 hi Conditional	  term=bold cterm=bold ctermfg=11 
-hi Operator		    term=bold cterm=bold ctermfg=168
+hi Operator		    term=bold cterm=bold ctermfg=125
 hi Repeat		      term=bold cterm=bold ctermfg=214
 hi Identifier     term=none cterm=none ctermfg=116
-hi Comment		    ctermfg=29
+hi Comment		    ctermfg=29 ctermbg=232
 
 hi DiffAdd        ctermfg=48 ctermbg=35
 hi DiffDelete     ctermfg=3 ctermbg=88
