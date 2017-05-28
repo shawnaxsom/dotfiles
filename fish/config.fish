@@ -42,4 +42,8 @@ end
 
 set -gx PATH /Users/shawnaxsom/Library/Android/sdk/platform-tools $PATH
 
-alias vim='vim -S'
+alias ga='git add .'
+alias gc='git commit'
+alias gp='git push'
+alias gs='git status'
+alias gd='git diff'
