@@ -14,7 +14,16 @@ syntax on
 set nolist
 set background=dark
 " colorscheme beekai
-colorscheme zenburn
+" colorscheme zenburn
+" colorscheme badwolf
+" colorscheme molokai
+" colorscheme molokai_dark
+" colorscheme Monokai
+" colorscheme gruvbox
+" colorscheme predawn
+" colorscheme onedark
+colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night-Bright
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
@@ -373,6 +382,8 @@ map ; :
 
 imap <c-o> o
 nmap <tab> <c-p><CR>
+
+imap <c-z> <c-y>,
 
 " Vue.js .vue file set filetype on load
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
