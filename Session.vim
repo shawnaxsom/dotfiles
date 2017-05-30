@@ -8,41 +8,36 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 fish/config.fish
-badd +261 ~/.vimrc
-badd +1 ~/.dotfiles/UltiSnips/all.snippets
+badd +59 fish/config.fish
+badd +1 ~/.vimrc
+badd +1 UltiSnips/all.snippets
 argglobal
 silent! argdel *
-edit fish/config.fish
+edit ~/.vimrc
 set splitbelow splitright
 wincmd t
-set winminheight=1 winheight=1 winminwidth=1 winwidth=1
+set winheight=1 winwidth=1
 argglobal
-setlocal fdm=indent
+setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=99
+setlocal fdl=0
 setlocal fml=1
 setlocal fdn=8
 setlocal fen
-55
-normal! zo
-71
-normal! zo
-let s:l = 59 - ((29 * winheight(0) + 24) / 48)
+let s:l = 55 - ((17 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-59
-normal! 05|
+55
+normal! 013|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20 shortmess=filnxtToOc
-set winminheight=1 winminwidth=1
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
   exe "source " . fnameescape(s:sx)

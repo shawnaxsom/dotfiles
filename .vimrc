@@ -36,8 +36,6 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'dyng/ctrlsf.vim'
 Bundle 'rubik/vim-radon'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
 Bundle 'ervandew/supertab'
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
@@ -53,6 +51,9 @@ Bundle 'terryma/vim-smooth-scroll'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'tpope/vim-obsession'
 Bundle 'posva/vim-vue'
+" Bundle 'itchyny/lightline.vim'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -74,10 +75,6 @@ colorscheme predawn
 " colorscheme onedark
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 0
-" let g:airline_theme='alduin'
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
@@ -128,10 +125,9 @@ set showtabline=0
 
 " Always show the statusline
 set laststatus=2
-set statusline=%-20t
+set statusline=%f
 set statusline+=%=        " Switch to the right side
-set statusline+=(%f)
-" set statusline+=%{fugitive#statusline()}
+set statusline+=%{fugitive#statusline()}
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -438,3 +434,54 @@ imap <c-z> <c-y>,
 
 " Vue.js .vue file set filetype on load
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'inactive': {
+      \   'left': [  [ 'filename' ],
+      \              [ 'parentfolder' ],
+      \              [ 'pwd' ]]
+      \ },
+      \ 'active': {
+      \   'left': [  [ 'filename' ],
+      \              [ 'parentfolder' ],
+      \              [ 'pwd' ]],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ]]
+      \ },
+      \ 'component': {
+      \ 'mode': '%{lightline#mode()}',
+      \ 'absolutepath': '%F',
+      \ 'relativepath': '%f',
+      \ 'pwd': '%{expand("%:p:h")}',
+      \ 'filename': '%t',
+      \ 'parentfolder': '%{expand("%:p:h:t")}',
+      \ 'modified': '%M',
+      \ 'bufnum': '%n',
+      \ 'paste': '%{&paste?"PASTE":""}',
+      \ 'readonly': '%R',
+      \ 'charvalue': '%b',
+      \ 'charvaluehex': '%B',
+      \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+      \ 'fileformat': '%{&ff}',
+      \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
+      \ 'percent': '%3p%%',
+      \ 'percentwin': '%P',
+      \ 'spell': '%{&spell?&spelllang:""}',
+      \ 'lineinfo': '%3l:%-2v',
+      \ 'line': '%l',
+      \ 'column': '%c',
+      \ 'close': '%999X X ' } }
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 0
+let g:airline_theme='simple'
+let g:airline_section_a = '%t'
+let g:airline_section_b = '%{expand("%:p:h:t")}'
+let g:airline_section_c = '%{expand("%:p:h")}'
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
