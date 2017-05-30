@@ -168,6 +168,7 @@ autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 
 autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
+autocmd Syntax javascript map <F1> :!node %:p<CR>
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
