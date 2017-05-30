@@ -12,8 +12,22 @@ set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 syntax on
 set nolist
-colorscheme badwolf
 set background=dark
+" colorscheme beekai
+" colorscheme zenburn
+" colorscheme badwolf
+" colorscheme molokai
+" colorscheme molokai_dark
+" colorscheme Monokai
+" colorscheme gruvbox
+" colorscheme predawn
+" colorscheme onedark
+colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night-Bright
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 0
+let g:airline_theme='alduin'
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
@@ -60,16 +74,14 @@ set wildmenu
 set wildmode=full
 set wildchar=<Tab>
 
+set showtabline=0
+
 " Always show the statusline
 set laststatus=2
 set statusline=%-20t
 set statusline+=%=        " Switch to the right side
 set statusline+=(%f)
 " set statusline+=%{fugitive#statusline()}
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 0
-let g:airline_theme='serene'
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -96,49 +108,6 @@ set foldlevelstart=99
 
 set conceallevel=0
 set concealcursor=vin
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Bundle 'gmarik/Vundle.vim'
-Bundle 'mxw/vim-jsx'
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tmhedberg/matchit'
-Bundle 'lambacck/python_matchit'
-Bundle 'tpope/vim-fugitive'
-Bundle 'rking/ag.vim'
-Bundle 'Chun-Yang/vim-action-ag'
-Bundle 'majutsushi/tagbar'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'qstrahl/vim-matchmaker'
-Bundle 'haya14busa/incsearch.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'honza/vim-snippets'
-Bundle 'Chiel92/vim-autoformat'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'gregsexton/gitv'
-Bundle 'vim-scripts/MultipleSearch'
-Bundle 'int3/vim-extradite'
-Bundle 'terryma/vim-expand-region'
-Bundle 'tpope/vim-sleuth'
-Bundle 'pangloss/vim-javascript'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'dyng/ctrlsf.vim'
-Bundle 'rubik/vim-radon'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'ervandew/supertab'
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'mattn/emmet-vim'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'easymotion/vim-easymotion'
-Bundle 'tpope/vim-surround'
-call vundle#end()
-filetype plugin indent on    " required
 
 " """"""""""""""""""""""""""""""""
 " "" Ctrl P
@@ -169,6 +138,7 @@ autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 
 autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 autocmd Syntax javascript map <F1> :!node %:p<CR>
+autocmd Syntax ruby map <F1> :!./bin/rails server<CR>
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -186,9 +156,8 @@ nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
 vnoremap <F5> :w !bash<BAR>less<CR>
 noremap <F6> :!tig %<CR>
 noremap <F7> :SyntasticCheck<CR>:Errors<CR>
-set pastetoggle=<F9> " Paste text from other places safely
 noremap <Leader><F7> :SyntasticReset<CR>
-noremap <silent> <F8> :!clear;python %<CR>
+noremap <F9> :RandomColorScheme<CR>:colo<CR>
 noremap <F10> :!pudb %<CR>
 
 " nmap z 5<c-w>+5<c-w>>
@@ -210,6 +179,7 @@ map <leader>w :w<CR>
 map <leader><leader>j :join<CR>
 map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
+map <leader><leader>i :BundleInstall<CR>
 map <leader><leader>l :BundleList<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
@@ -224,7 +194,7 @@ map gb :Gblame<CR>
 map gd :Gdiff<CR>
 map gR :Gread<CR>
 map gw :Gwrite<CR>
-map gl :Extradite<CR>
+map gl :GV!<CR>  " gv.vim
 map gL :Glog<BAR>:bot copen<CR>
 
 " noremap <leader>l g;999g,
@@ -273,7 +243,7 @@ map <c-q> :cnext<CR>
 let g:ag_highlight=1
 
 " Don't automatically do line breaks on long lines
-set formatoptions-=t
+" set formatoptions-=t
 
 
 
@@ -296,6 +266,14 @@ map J }
 map K {
 map H [{
 map L ]}
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 40, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 40, 2)<CR>
+" noremap <silent> K :call smooth_scroll#up(&scroll/3, 30, 1)<CR>
+" noremap <silent> J :call smooth_scroll#down(&scroll/3, 30, 1)<CR>
+" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
 
 
 vmap <leader><leader>n :norm
@@ -355,6 +333,7 @@ map ¬ <c-w>l
 " Fix directory UltiSnipsEdit places snippets in
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
+map ! :!
 
 " Use e.g. vai to select everything of same indent level
 " http://vim.wikia.com/wiki/Creating_new_text_objects
@@ -389,3 +368,73 @@ function! s:IndTxtObj(inner)
     normal! $
   endif
 endfunction
+
+" F8 to cycle colorschemes with Bundle 'twe4ked/vim-colorscheme-switcher'
+autocmd VimEnter * :silent! SetColors all
+
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+if executable("ag")
+  let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+
+map ; :
+
+imap <c-o> o
+nmap <tab> <c-p><CR>
+
+imap <c-z> <c-y>,
+
+" Vue.js .vue file set filetype on load
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Bundle 'gmarik/Vundle.vim'
+Bundle 'mxw/vim-jsx'
+Bundle 'scrooloose/syntastic'
+Bundle 'ctrlpvim/ctrlp.vim'
+Bundle 'tmhedberg/matchit'
+Bundle 'lambacck/python_matchit'
+Bundle 'tpope/vim-fugitive'
+Bundle 'rking/ag.vim'
+Bundle 'Chun-Yang/vim-action-ag'
+Bundle 'majutsushi/tagbar'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'qstrahl/vim-matchmaker'
+Bundle 'haya14busa/incsearch.vim'
+Bundle 'tpope/vim-commentary'
+Bundle 'honza/vim-snippets'
+Bundle 'Chiel92/vim-autoformat'
+Bundle 'tacahiroy/ctrlp-funky'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'gregsexton/gitv'
+Bundle 'vim-scripts/MultipleSearch'
+Bundle 'terryma/vim-expand-region'
+Bundle 'tpope/vim-sleuth'
+Bundle 'pangloss/vim-javascript'
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'dyng/ctrlsf.vim'
+Bundle 'rubik/vim-radon'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+Bundle 'ervandew/supertab'
+Bundle 'SirVer/ultisnips'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'mattn/emmet-vim'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'easymotion/vim-easymotion'
+Bundle 'tpope/vim-surround'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-colorscheme-switcher'
+Bundle 'jiangmiao/auto-pairs'
+Bundle 'junegunn/gv.vim'
+Bundle 'terryma/vim-smooth-scroll'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'tpope/vim-obsession'
+Bundle 'posva/vim-vue'
+call vundle#end()
+filetype plugin indent on    " required

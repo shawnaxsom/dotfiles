@@ -39,3 +39,38 @@ end
 
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
+
+set -gx PATH /Users/shawnaxsom/Library/Android/sdk/platform-tools $PATH
+
+alias ga='git add .'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log -p'
+alias gs='git status'
+alias gR='git revert --hard; git clean -DF;'
+alias gd='git diff'
+alias vs='vim -S'
+
+function gac
+  git add .;
+  if set -q $argv
+    git commit -m $argv;
+  else
+    git commit;
+  end
+end
+
+function gacp
+  git add .;
+  git commit -m $argv;
+  git push;
+end
+
+function v
+  # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
+  if test -e $PWD/Session.vim
+    vim -S
+  else
+    vim
+  end
+end
