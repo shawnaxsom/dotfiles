@@ -44,12 +44,18 @@ set -gx PATH /Users/shawnaxsom/Library/Android/sdk/platform-tools $PATH
 
 alias ga='git add .'
 alias gc='git commit'
-alias gp='git push'
+alias gp='git pull'
+alias gP='git push'
 alias gl='git log -p'
 alias gs='git status'
-alias gR='git revert --hard; git clean -DF;'
 alias gd='git diff'
 alias vs='vim -S'
+alias f='find . -name'
+
+function gR
+  git reset --hard;
+  git clean -df;
+end
 
 function gac
   git add .;
