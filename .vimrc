@@ -6,6 +6,56 @@
 " Auto-reload VIMRC
 autocmd! bufwritepost .vimrc source %
 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Bundle 'gmarik/Vundle.vim'
+Bundle 'mxw/vim-jsx'
+Bundle 'scrooloose/syntastic'
+Bundle 'ctrlpvim/ctrlp.vim'
+Bundle 'tmhedberg/matchit'
+Bundle 'lambacck/python_matchit'
+Bundle 'tpope/vim-fugitive'
+Bundle 'rking/ag.vim'
+Bundle 'Chun-Yang/vim-action-ag'
+Bundle 'majutsushi/tagbar'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'qstrahl/vim-matchmaker'
+Bundle 'haya14busa/incsearch.vim'
+Bundle 'tpope/vim-commentary'
+Bundle 'honza/vim-snippets'
+Bundle 'Chiel92/vim-autoformat'
+Bundle 'tacahiroy/ctrlp-funky'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'gregsexton/gitv'
+Bundle 'vim-scripts/MultipleSearch'
+Bundle 'terryma/vim-expand-region'
+Bundle 'tpope/vim-sleuth'
+Bundle 'pangloss/vim-javascript'
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'dyng/ctrlsf.vim'
+Bundle 'rubik/vim-radon'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+Bundle 'ervandew/supertab'
+Bundle 'SirVer/ultisnips'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'mattn/emmet-vim'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'easymotion/vim-easymotion'
+Bundle 'tpope/vim-surround'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-colorscheme-switcher'
+Bundle 'jiangmiao/auto-pairs'
+Bundle 'junegunn/gv.vim'
+Bundle 'terryma/vim-smooth-scroll'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'tpope/vim-obsession'
+Bundle 'posva/vim-vue'
+call vundle#end()
+filetype plugin indent on    " required
+
 set noswapfile
 set autoread
 set nowrap
@@ -20,14 +70,14 @@ set background=dark
 " colorscheme molokai_dark
 " colorscheme Monokai
 " colorscheme gruvbox
-" colorscheme predawn
+colorscheme predawn
 " colorscheme onedark
-colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
-let g:airline_theme='alduin'
+" let g:airline_theme='alduin'
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
@@ -388,53 +438,3 @@ imap <c-z> <c-y>,
 
 " Vue.js .vue file set filetype on load
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Bundle 'gmarik/Vundle.vim'
-Bundle 'mxw/vim-jsx'
-Bundle 'scrooloose/syntastic'
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'tmhedberg/matchit'
-Bundle 'lambacck/python_matchit'
-Bundle 'tpope/vim-fugitive'
-Bundle 'rking/ag.vim'
-Bundle 'Chun-Yang/vim-action-ag'
-Bundle 'majutsushi/tagbar'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'qstrahl/vim-matchmaker'
-Bundle 'haya14busa/incsearch.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'honza/vim-snippets'
-Bundle 'Chiel92/vim-autoformat'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'gregsexton/gitv'
-Bundle 'vim-scripts/MultipleSearch'
-Bundle 'terryma/vim-expand-region'
-Bundle 'tpope/vim-sleuth'
-Bundle 'pangloss/vim-javascript'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'dyng/ctrlsf.vim'
-Bundle 'rubik/vim-radon'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'ervandew/supertab'
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'mattn/emmet-vim'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'easymotion/vim-easymotion'
-Bundle 'tpope/vim-surround'
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-colorscheme-switcher'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'junegunn/gv.vim'
-Bundle 'terryma/vim-smooth-scroll'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'tpope/vim-obsession'
-Bundle 'posva/vim-vue'
-call vundle#end()
-filetype plugin indent on    " required
