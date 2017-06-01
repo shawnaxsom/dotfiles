@@ -54,6 +54,7 @@ Bundle 'posva/vim-vue'
 " Bundle 'itchyny/lightline.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'scrooloose/nerdtree'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -195,7 +196,8 @@ noremap - :e %:p:h<CR>
 
 " map <F1> :cp<CR>
 map <F2> :Ag 
-map <F3> :cn<CR>
+" map <F3> :cn<CR>
+map <F3> :NERDTreeToggle<CR>
 map <F4> :Ag 
 map <F4> "hyiw:Ag <c-r>h<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
@@ -238,7 +240,7 @@ map gP :Gpush<CR>
 map ge :Gedit<CR>
 map gs :Gstatus<CR>
 map gb :Gblame<CR>
-map gd :Gdiff<CR>
+" map gd :Gdiff<CR>
 map gR :Gread<CR>
 map gw :Gwrite<CR>
 map gl :GV!<CR>  " gv.vim
