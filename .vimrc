@@ -183,8 +183,9 @@ autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 
 autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
-autocmd Syntax javascript map <F1> :!node %:p<CR>
+" autocmd Syntax javascript map <F1> :!node %:p<CR>
 autocmd Syntax ruby map <F1> :!./bin/rails server<CR>
+map <F1> :map <F1> :!
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -192,7 +193,7 @@ vnoremap . :normal .<CR>
 " Explore using "-" key
 noremap - :e %:p:h<CR>
 
-map <F1> :cp<CR>
+" map <F1> :cp<CR>
 map <F2> :Ag 
 map <F3> :cn<CR>
 map <F4> :Ag 
@@ -485,3 +486,4 @@ let g:airline_section_y = ''
 let g:airline_section_z = ''
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
+

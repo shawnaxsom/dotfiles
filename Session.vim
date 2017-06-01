@@ -8,8 +8,8 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +59 fish/config.fish
-badd +1 ~/.vimrc
+badd +63 fish/config.fish
+badd +55 ~/.vimrc
 badd +1 UltiSnips/all.snippets
 argglobal
 silent! argdel *
@@ -22,7 +22,7 @@ setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=0
+setlocal fdl=99
 setlocal fml=1
 setlocal fdn=8
 setlocal fen
@@ -31,7 +31,7 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 55
-normal! 013|
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
