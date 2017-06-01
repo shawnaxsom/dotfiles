@@ -54,6 +54,7 @@ Bundle 'posva/vim-vue'
 " Bundle 'itchyny/lightline.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'elixir-lang/vim-elixir'
 Bundle 'scrooloose/nerdtree'
 call vundle#end()
 filetype plugin indent on    " required
