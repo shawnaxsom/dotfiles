@@ -4,9 +4,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Auto-reload VIMRC
-autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vimrc source % | set foldmethod=marker
 
+" {{{ Plugins    
 " set the runtime path to include Vundle and initialize
+set nocompatible              " be iMproved, required
+filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Bundle 'gmarik/Vundle.vim'
@@ -59,7 +62,9 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'leafgarland/typescript-vim'
 call vundle#end()
 filetype plugin indent on    " required
+" }}}
 
+" {{{ Options    
 set noswapfile
 set autoread
 set nowrap
@@ -117,7 +122,7 @@ set number
 set relativenumber
 
 set complete=.,w,b,u,t
-set completeopt=longest,menuone,preview
+set completeopt=menuone,preview
 set wildcharm=<TAB>
 
 set wildmenu
@@ -147,20 +152,30 @@ set hlsearch
 set noignorecase              " affects both searching and find/replace
 set smartcase
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" set foldmethod=indent
+" set foldnestmax=8
+" "set foldlevelstart=20
+" set foldlevelstart=99
 
-set foldmethod=indent
-set foldnestmax=8
-"set foldlevelstart=20
-set foldlevelstart=99
+
+let javaScript_fold=1         " JavaScript
+let perl_fold=1               " Perl
+let php_folding=1             " PHP
+let r_syntax_folding=1        " R
+let ruby_fold=1               " Ruby
+let sh_fold_enabled=1         " sh
+let vimsyn_folding='af'       " Vim script
+let xml_syntax_folding=1      " XML
 
 set conceallevel=0
 set concealcursor=vin
 
-" """"""""""""""""""""""""""""""""
-" "" Ctrl P
-" """"""""""""""""""""""""""""""""
+set foldlevelstart=0
+set foldmethod=syntax
+autocmd BufEnter .vimrc set foldmethod=marker foldlevel=0
+" }}}
+
+" {{{ Ctrl P
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_match_window = 'bottom,order:btt'
@@ -172,24 +187,29 @@ let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
 set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*/jest/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'a'
+" }}}
 
-
-" """"""""""""""""""""""""""""""""
-" "" Python
-" """"""""""""""""""""""""""""""""
+" {{{ Python
 let g:pymode_options_max_line_length=120
 let python_highlight_all=1
 autocmd Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
 autocmd Syntax python setlocal foldmethod=indent
 autocmd Syntax python normal zR
+" }}}
+
+" {{{ Other Languages
 autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
-
 autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 " autocmd Syntax javascript map <F1> :!node %:p<CR>
 autocmd Syntax ruby map <F1> :!./bin/rails server<CR>
 map <F1> :map <F1> :!
 
+" Vue.js .vue file set filetype on load
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+" }}}
+
+" {{{ Mappings
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
 
@@ -262,26 +282,6 @@ vmap   <Plug>Commentary
 nnoremap n nzz
 nnoremap N Nzz
 
-" Keep location of file when reopening
-autocmd BufReadPost *
-\   if line("'\"") > 0 && line("'\"") <= line("$") |
-\       exe 'normal! g`"zvzz' |
-\   endif
-
-
-" Auto indent wasn't working without this on bottom
-filetype indent on
-set ai
-set si
-
-
-" Prevent browsing in Fugitive from creating a trail of temp file buffers
-autocmd BufReadPost fugitive://*
-  \ set bufhidden=delete
-
-
-let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
-
 map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
 " map <BAR> "hyiw?\(class\s\\|var\\|def\s\).*<c-r>h<CR>:nohlsearch<CR>
 
@@ -295,8 +295,6 @@ let g:ag_highlight=1
 
 " Don't automatically do line breaks on long lines
 " set formatoptions-=t
-
-
 
 " Don't skip wrapped lines
 nnoremap j gj
@@ -330,8 +328,54 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
-" map ` @@
+map  s <Plug>(easymotion-bd-w)
 
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" Use '$ cat' to find the keys to map to
+" http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+map ˙ <c-w>h
+map ∆ <c-w>j
+map ˚ <c-w>k
+map ¬ <c-w>l
+
+map ! :!
+
+map ; :
+
+imap <c-o> o
+nmap <tab> <c-p><CR>
+
+imap <c-z> <c-y>,
+
+" }}}
+
+" {{{ Tweaks
+" Keep location of file when reopening
+autocmd BufReadPost *
+\   if line("'\"") > 0 && line("'\"") <= line("$") |
+\       exe 'normal! g`"zvzz' |
+\   endif
+" }}}
+
+" {{{ Fixes
+" Auto indent wasn't working without this on bottom
+filetype indent on
+set ai
+set si
+
+
+" Prevent browsing in Fugitive from creating a trail of temp file buffers
+autocmd BufReadPost fugitive://*
+  \ set bufhidden=delete
+
+
+let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
+" }}}
+
+" {{{ Variable Settings
 let radon_always_on = 0
 
 let g:jsx_ext_required = 0
@@ -350,35 +394,14 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" if !exists('*RangerExplorer')
-"   function RangerExplorer()
-"       exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-"       if filereadable('/tmp/vim_ranger_current_file')
-"           exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-"           call system('rm /tmp/vim_ranger_current_file')
-"       endif
-"       redraw!
-"   endfun
-" endif
-" map = :call RangerExplorer()<CR>
+" }}}
 
-map  s <Plug>(easymotion-bd-w)
-
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
-" Use '$ cat' to find the keys to map to
-" http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
-map ˙ <c-w>h
-map ∆ <c-w>j
-map ˚ <c-w>k
-map ¬ <c-w>l
-
+" {{{ UltiSnips
 " Fix directory UltiSnipsEdit places snippets in
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+" }}}
 
-map ! :!
+" {{{ Functions
 
 " Use e.g. vai to select everything of same indent level
 " http://vim.wikia.com/wiki/Creating_new_text_objects
@@ -414,26 +437,20 @@ function! s:IndTxtObj(inner)
   endif
 endfunction
 
-" F8 to cycle colorschemes with Bundle 'twe4ked/vim-colorscheme-switcher'
-" autocmd VimEnter * :silent! SetColors all
+" if !exists('*RangerExplorer')
+"   function RangerExplorer()
+"       exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+"       if filereadable('/tmp/vim_ranger_current_file')
+"           exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+"           call system('rm /tmp/vim_ranger_current_file')
+"       endif
+"       redraw!
+"   endfun
+" endif
+" map = :call RangerExplorer()<CR>
+" }}}
 
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
-if executable("ag")
-  let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
-
-map ; :
-
-imap <c-o> o
-nmap <tab> <c-p><CR>
-
-imap <c-z> <c-y>,
-
-" Vue.js .vue file set filetype on load
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
-
+" {{{ Airline / Lightline
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'inactive': {
@@ -486,3 +503,16 @@ let g:airline_section_error = ''
 let g:airline_section_warning = ''
 
 let g:AutoPairsShortcutToggle = '<c-a>'
+" }}}
+
+function! NeatFoldText() "{{{2
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+set foldtext=NeatFoldText()
