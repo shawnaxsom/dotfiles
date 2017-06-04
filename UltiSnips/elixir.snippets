@@ -5,3 +5,22 @@ endsnippet
 snippet put "Print out object"
 IO.puts $0
 endsnippet
+
+snippet puts "Print out object"
+IO.puts $0
+endsnippet
+
+snippet map "Enum Map" b
+Enum.map($1, $0)
+endsnippet
+
+snippet mapfn "Enum Map with anonymous function" b
+Enum.map($1, fn $2 -> $0 end)
+endsnippet
+
+snippet case "Case statement" b
+case $1 do
+  $2 -> $3
+  true -> $0
+end
+endsnippet

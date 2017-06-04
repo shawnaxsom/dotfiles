@@ -91,7 +91,7 @@ set virtualedit=all "allow cursor to stay in same column while scrolling
 set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
 set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
-set scrolloff=17 "Keep cursor centered
+set scrolloff=17 "Keep cursor centered -- this is choppy if scrolling multiple splits
 set cindent
 set shell=bash
 set more " Use MORE as pager
@@ -113,7 +113,7 @@ set browsedir=buffer
 set nocursorline
 set nobackup
 set nowritebackup
-" set nonumber
+set number
 set relativenumber
 
 set complete=.,w,b,u,t
@@ -242,7 +242,7 @@ map gP :Gpush<CR>
 map ge :Gedit<CR>
 map gs :Gstatus<CR>
 map gb :Gblame<CR>
-" map gd :Gdiff<CR>
+map gd :Gdiff<CR>
 map gR :Gread<CR>
 map gw :Gwrite<CR>
 map gl :GV!<CR>  " gv.vim
@@ -318,8 +318,8 @@ map K {
 map H [{
 map L ]}
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 60, 1)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 50, 2)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 35, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
 " noremap <silent> K :call smooth_scroll#up(&scroll/3, 30, 1)<CR>
 " noremap <silent> J :call smooth_scroll#down(&scroll/3, 30, 1)<CR>
 " noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
@@ -363,13 +363,10 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " map = :call RangerExplorer()<CR>
 
 map  s <Plug>(easymotion-bd-w)
-" nmap s <Plug>(easymotion-overwin-w)
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-" map / <Plug>(incsearch-stay)
-" map ? <Plug>(incsearch-stay)
 
 " Use '$ cat' to find the keys to map to
 " http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
@@ -377,9 +374,6 @@ map ˙ <c-w>h
 map ∆ <c-w>j
 map ˚ <c-w>k
 map ¬ <c-w>l
-
-" noremap j j^
-" noremap k k^
 
 " Fix directory UltiSnipsEdit places snippets in
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
@@ -421,7 +415,7 @@ function! s:IndTxtObj(inner)
 endfunction
 
 " F8 to cycle colorschemes with Bundle 'twe4ked/vim-colorscheme-switcher'
-autocmd VimEnter * :silent! SetColors all
+" autocmd VimEnter * :silent! SetColors all
 
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
@@ -492,4 +486,3 @@ let g:airline_section_error = ''
 let g:airline_section_warning = ''
 
 let g:AutoPairsShortcutToggle = '<c-a>'
-
