@@ -55,6 +55,8 @@ Bundle 'posva/vim-vue'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'elixir-lang/vim-elixir'
+Bundle 'scrooloose/nerdtree'
+Bundle 'leafgarland/typescript-vim'
 call vundle#end()
 filetype plugin indent on    " required
 
@@ -196,7 +198,8 @@ noremap - :e %:p:h<CR>
 
 " map <F1> :cp<CR>
 map <F2> :Ag 
-map <F3> :cn<CR>
+" map <F3> :cn<CR>
+map <F3> :NERDTreeToggle<CR>
 map <F4> :Ag 
 map <F4> "hyiw:Ag <c-r>h<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
@@ -239,7 +242,7 @@ map gP :Gpush<CR>
 map ge :Gedit<CR>
 map gs :Gstatus<CR>
 map gb :Gblame<CR>
-map gd :Gdiff<CR>
+" map gd :Gdiff<CR>
 map gR :Gread<CR>
 map gw :Gwrite<CR>
 map gl :GV!<CR>  " gv.vim
@@ -315,8 +318,8 @@ map K {
 map H [{
 map L ]}
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 40, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 40, 2)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 60, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 50, 2)<CR>
 " noremap <silent> K :call smooth_scroll#up(&scroll/3, 30, 1)<CR>
 " noremap <silent> J :call smooth_scroll#down(&scroll/3, 30, 1)<CR>
 " noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
