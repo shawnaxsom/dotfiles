@@ -16,7 +16,7 @@ silent! argdel *
 edit ~/.vimrc
 set splitbelow splitright
 wincmd t
-set winheight=1 winwidth=1
+set winminheight=1 winheight=1 winminwidth=1 winwidth=1
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -26,7 +26,7 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=8
 setlocal fen
-let s:l = 55 - ((17 * winheight(0) + 17) / 35)
+let s:l = 55 - ((14 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -38,6 +38,7 @@ if exists('s:wipebuf')
 endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20 shortmess=filnxtToOc
+set winminheight=1 winminwidth=1
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
   exe "source " . fnameescape(s:sx)

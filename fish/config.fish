@@ -59,11 +59,7 @@ end
 
 function gac
   git add .;
-  if set -q $argv
-    git commit -m $argv;
-  else
-    git commit;
-  end
+  git commit -m $argv;
 end
 
 function gacp

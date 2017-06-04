@@ -488,3 +488,5 @@ let g:airline_section_z = ''
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
 
+let g:AutoPairsShortcutToggle = '<c-a>'
+
