@@ -355,6 +355,9 @@ map <leader>0 :set foldlevel=0<CR>
 map <leader>1 :set foldlevel=1<CR>
 map <leader>2 :set foldlevel=2<CR>
 map <leader>3 :set foldlevel=3<CR>
+
+map n nzo
+map p pzo
 " }}}
 
 " {{{ Tweaks
