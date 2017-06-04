@@ -4,7 +4,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Auto-reload VIMRC
-autocmd! bufwritepost .vimrc source % | set foldmethod=marker
+" autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=1
+autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=0 | silent! normal zO
 
 " {{{ Plugins    
 " set the runtime path to include Vundle and initialize
@@ -170,9 +171,9 @@ let xml_syntax_folding=1      " XML
 set conceallevel=0
 set concealcursor=vin
 
-set foldlevelstart=0
+" set foldlevelstart=0
 set foldmethod=syntax
-autocmd BufEnter .vimrc set foldmethod=marker foldlevel=0
+autocmd BufEnter .vimrc setlocal foldmethod=marker foldlevel=0
 " }}}
 
 " {{{ Ctrl P
@@ -198,8 +199,8 @@ autocmd Syntax python normal zR
 " }}}
 
 " {{{ Other Languages
-autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
-autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
+" autocmd Syntax c,cpp,xml,html,xhtml setlocal foldmethod=syntax
+" autocmd Syntax c,cpp,xml,html,xhtml,perl normal zR
 autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 " autocmd Syntax javascript map <F1> :!node %:p<CR>
 autocmd Syntax ruby map <F1> :!./bin/rails server<CR>
@@ -350,6 +351,10 @@ nmap <tab> <c-p><CR>
 
 imap <c-z> <c-y>,
 
+map <leader>0 :set foldlevel=0<CR>
+map <leader>1 :set foldlevel=1<CR>
+map <leader>2 :set foldlevel=2<CR>
+map <leader>3 :set foldlevel=3<CR>
 " }}}
 
 " {{{ Tweaks
