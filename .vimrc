@@ -65,13 +65,7 @@ call vundle#end()
 filetype plugin indent on    " required
 " }}}
 
-" {{{ Options    
-set noswapfile
-set autoread
-set nowrap
-set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
-syntax on
-set nolist
+" {{{ Colorscheme
 set background=dark
 " colorscheme beekai
 " colorscheme zenburn
@@ -80,10 +74,24 @@ set background=dark
 " colorscheme molokai_dark
 " colorscheme Monokai
 " colorscheme gruvbox
-colorscheme predawn
 " colorscheme onedark
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
+" colorscheme gryffin
+" colorscheme predawn
+" colorscheme void
+" colorscheme sift
+colorscheme null
+
+" }}} Colorscheme
+
+" {{{ Options    
+set noswapfile
+set autoread
+set nowrap
+set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
+syntax on
+set nolist
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
@@ -172,7 +180,8 @@ set conceallevel=0
 set concealcursor=vin
 
 " set foldlevelstart=0
-set foldmethod=syntax
+set foldnestmax=3
+set foldmethod=indent
 autocmd BufEnter .vimrc setlocal foldmethod=marker foldlevel=0
 " }}}
 
@@ -230,7 +239,7 @@ noremap <F6> :!tig %<CR>
 noremap <F7> :SyntasticCheck<CR>:Errors<CR>
 noremap <Leader><F7> :SyntasticReset<CR>
 noremap <F9> :RandomColorScheme<CR>:colo<CR>
-noremap <F10> :!pudb %<CR>
+" noremap <F10> :!pudb %<CR>
 
 " nmap z 5<c-w>+5<c-w>>
 nmap = <c-w>=
@@ -355,9 +364,24 @@ map <leader>0 :set foldlevel=0<CR>
 map <leader>1 :set foldlevel=1<CR>
 map <leader>2 :set foldlevel=2<CR>
 map <leader>3 :set foldlevel=3<CR>
+map <leader>4 :set foldlevel=4<CR>
+map <leader>5 :set foldlevel=5<CR>
+map <leader>6 :set foldlevel=6<CR>
+map <leader>7 :set foldlevel=7<CR>
+map <leader>8 :set foldlevel=8<CR>
+map <leader>9 :set foldlevel=999<CR>
 
 map n nzo
 map p pzo
+
+" Show colorscheme element under cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+map <S-F10> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")<CR>
+map <F12> :norm <c-a><CR>:w<BAR>:colo null<CR>
+map <S-F12> :norm <c-x><CR>:w<BAR>:colo null<CR>
 " }}}
 
 " {{{ Tweaks
@@ -510,7 +534,7 @@ let g:airline_section_z = ''
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
 
-let g:AutoPairsShortcutToggle = '<c-a>'
+" let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
 
 function! NeatFoldText() "{{{2

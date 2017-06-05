@@ -57,6 +57,7 @@ create_symlink    fish       ~/.config/fish
 create_symlink    .elinks    ~/.elinks
 create_symlink    i3config   ~/.i3/config
 create_symlink    sift.vim   ~/.vim/colors/sift.vim
+create_symlink    null.vim   ~/.vim/colors/null.vim
 create_symlink    badwolf.vim   ~/.vim/colors/badwolf.vim
 create_symlink    .muttrc    ~/.muttrc
 create_symlink    .Xdefaults ~/.Xdefaults
