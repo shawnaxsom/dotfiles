@@ -19,7 +19,7 @@ endif
 let g:colors_name="null"
 
 
-hi Normal	guifg=#e0e0e0 guibg=grey9 ctermbg=235 ctermfg=250
+hi Normal	guifg=#e0e0e0 guibg=grey9 ctermbg=235 ctermfg=231
 
 " highlight groups
 hi Cursor	guibg=khaki guifg=slategrey
@@ -53,7 +53,7 @@ hi WarningMsg	guifg=salmon
 "hi Tooltip
 
 " syntax highlighting groups
-hi Comment	guifg=grey50 ctermfg=66
+hi Comment	guifg=grey50 ctermfg=65
 hi Constant	guifg=#e09085 ctermfg=222
 hi Identifier	guifg=#d0d0b0
 hi Statement	guifg=#ccaa88 gui=bold cterm=bold term=bold
@@ -81,7 +81,7 @@ hi IncSearch	cterm=NONE ctermfg=yellow ctermbg=green
 hi Search	cterm=NONE ctermfg=grey ctermbg=blue
 hi MoreMsg	ctermfg=darkgreen
 hi ModeMsg	cterm=NONE ctermfg=brown
-hi LineNr guifg=grey50 ctermfg=3
+hi LineNr guifg=grey50 ctermfg=251
 hi Question	ctermfg=green
 hi StatusLine	cterm=bold,reverse
 hi StatusLineNC cterm=reverse
@@ -91,7 +91,7 @@ hi Visual	cterm=reverse
 hi VisualNOS	cterm=bold,underline
 hi WarningMsg	ctermfg=1
 hi WildMenu	ctermfg=0 ctermbg=3
-hi Folded	ctermfg=darkgrey ctermbg=NONE
+hi Folded	ctermfg=139 ctermbg=NONE
 hi FoldColumn	ctermfg=darkgrey ctermbg=NONE
 hi DiffAdd	ctermbg=4
 hi DiffChange	ctermbg=5
@@ -102,15 +102,15 @@ hi Special	ctermfg=228
 " hi Identifier	ctermfg=117
 hi Identifier	ctermfg=74
 " hi Statement	ctermfg=3
-hi Statement	ctermfg=3
-hi PreProc	ctermfg=1
+hi Statement	ctermfg=192
+hi PreProc	ctermfg=209
 hi Type		ctermfg=79
 hi Underlined	cterm=underline ctermfg=5
 hi Ignore	cterm=bold ctermfg=7
 hi Ignore	ctermfg=darkgrey
 hi Error	cterm=bold ctermfg=7 ctermbg=1
 hi Operator	cterm=bold ctermfg=229
-hi String 	ctermfg=194 ctermbg=NONE cterm=NONE guifg=#bddcdc guibg=NONE gui=NONE
+hi String 	ctermfg=196 ctermbg=NONE cterm=NONE guifg=#bddcdc guibg=NONE gui=NONE
 
 " python specific highlightning
 hi link pythonOperator Statement
