@@ -54,7 +54,7 @@ hi WarningMsg	guifg=salmon
 
 " syntax highlighting groups
 hi Comment	guifg=grey50 ctermfg=66
-hi Constant	guifg=#e09085 ctermfg=211
+hi Constant	guifg=#e09085 ctermfg=222
 hi Identifier	guifg=#d0d0b0
 hi Statement	guifg=#ccaa88 gui=bold cterm=bold term=bold
 "hi Statement	guifg=darkkhaki
