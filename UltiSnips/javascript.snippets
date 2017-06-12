@@ -1,5 +1,5 @@
 snippet log "Console Log"
-console.log($1);$0
+console.log($1)$0
 endsnippet
 
 snippet for "For loop"
@@ -10,4 +10,22 @@ endsnippet
 
 snippet var
 var $1 = $0
+endsnippet
+
+snippet willUpdate "componentWillUpdate" b
+componentWillUpdate(props, state) {
+	$0
+}
+endsnippet
+
+snippet didUpdate "componentDidUpdate" b
+componentDidUpdate(props, state) {
+	$0
+}
+endsnippet
+
+snippet m
+$1($2) {
+	$0
+}
 endsnippet

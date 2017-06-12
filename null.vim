@@ -97,12 +97,12 @@ hi DiffAdd	ctermbg=4
 hi DiffChange	ctermbg=5
 hi DiffDelete	cterm=bold ctermfg=4 ctermbg=6
 hi DiffText	cterm=bold ctermbg=1
-hi Special	ctermfg=228
+hi Special	ctermfg=3
 " hi Identifier	ctermfg=158
 " hi Identifier	ctermfg=117
 hi Identifier	ctermfg=74
 " hi Statement	ctermfg=3
-hi Statement	ctermfg=192
+hi Statement	ctermfg=227
 hi PreProc	ctermfg=209
 hi Type		ctermfg=79
 hi Underlined	cterm=underline ctermfg=5
@@ -112,5 +112,16 @@ hi Error	cterm=bold ctermfg=7 ctermbg=1
 hi Operator	cterm=bold ctermfg=229
 hi String 	ctermfg=196 ctermbg=NONE cterm=NONE guifg=#bddcdc guibg=NONE gui=NONE
 
-" python specific highlightning
+" python specific highlighting
 hi link pythonOperator Statement
+
+" javascript specific highlighting
+hi javaScriptObjectKey     ctermfg=185
+hi javaScriptBrowserObjects ctermfg=157
+hi javaScriptDOMObjects ctermfg=112
+hi javaScriptDOMMethods ctermfg=193
+hi javaScriptGlobalObjects ctermfg=118
+hi xmlTagName              ctermfg=86
+hi xmlEndTag               ctermfg=81
+hi xmlAttrib               ctermfg=158
+hi xmlRegion               ctermfg=230

@@ -61,6 +61,7 @@ Bundle 'vim-airline/vim-airline-themes'
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'scrooloose/nerdtree'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'dkprice/vim-easygrep'
 call vundle#end()
 filetype plugin indent on    " required
 " }}}
@@ -81,6 +82,7 @@ set background=dark
 " colorscheme predawn
 " colorscheme void
 " colorscheme sift
+" colorscheme darkburn
 colorscheme null
 
 " }}} Colorscheme
@@ -164,7 +166,7 @@ set smartcase
 " set foldmethod=indent
 " set foldnestmax=8
 " "set foldlevelstart=20
-" set foldlevelstart=99
+set foldlevelstart=2
 
 
 let javaScript_fold=1         " JavaScript
@@ -183,6 +185,11 @@ set concealcursor=vin
 set foldnestmax=3
 set foldmethod=indent
 autocmd BufEnter .vimrc setlocal foldmethod=marker foldlevel=0
+
+let g:EasyGrepRoot = "search:.git,.svn"
+let g:EasyGrepFilesToExclude=".svn,.git,*.map,dist/**,index.js,yarn.lock"
+let g:EasyGrepOptionPrefix='<leader>vy'
+let g:EasyGrepProgram='ag'
 " }}}
 
 " {{{ Ctrl P
@@ -195,7 +202,7 @@ let g:ctrlp_working_path_mode = 0
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-set wildignore+=*/env/*,*/node_modules/*,*/bower_components/*,*/tmp/*,*/jest/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=*/env/*,*/node_modules/*,*/dist/*,*/bower_components/*,*/tmp/*,*/jest/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'a'
 " }}}
 
@@ -227,11 +234,10 @@ vnoremap . :normal .<CR>
 noremap - :e %:p:h<CR>
 
 " map <F1> :cp<CR>
-map <F2> :Ag 
+map <F2> :Grep 
 " map <F3> :cn<CR>
 map <F3> :NERDTreeToggle<CR>
-map <F4> :Ag 
-map <F4> "hyiw:Ag <c-r>h<CR>
+map <F4> "hyiw:Grep <c-r>h<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
 nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
 vnoremap <F5> :w !bash<BAR>less<CR>
@@ -267,16 +273,16 @@ map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 " Diff put to grab changes using comma
 noremap , :diffput<CR>
 
-map gC :Gcommit<CR>i
-map gP :Gpush<CR>
-map ge :Gedit<CR>
-map gs :Gstatus<CR>
-map gb :Gblame<CR>
-map gd :Gdiff<CR>
-map gR :Gread<CR>
-map gw :Gwrite<CR>
-map gl :GV!<CR>  " gv.vim
-map gL :Glog<BAR>:bot copen<CR>
+map <leader>gC :Gcommit<CR>i
+map <leader>gP :Gpush<CR>
+map <leader>ge :Gedit<CR>
+map <leader>gs :Gstatus<CR>
+map <leader>gb :Gblame<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gR :Gread<CR>
+map <leader>gw :Gwrite<CR>
+map <leader>gl :GV!<CR>  " gv.vim
+map <leader>gL :Glog<BAR>:bot copen<CR>
 
 " noremap <leader>l g;999g,
 " noremap <c-n> g;
