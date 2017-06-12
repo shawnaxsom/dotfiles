@@ -1,3 +1,59 @@
+snippet class "Class"
+class $1 {
+	$0
+}
+endsnippet
+
+snippet component "Component"
+class $1 extends Component {
+  $0
+}
+endsnippet
+
+snippet f "Function"
+function $1($2) {
+	$0
+}
+endsnippet
+
+snippet con "Constructor"
+constructor() {
+	$0
+}
+endsnippet
+
+snippet render "React render"
+render() {
+  $0
+}
+endsnippet
+
+snippet div
+<div>$1</div>$0
+endsnippet
+
+snippet default
+export default $0;
+endsnippet
+
+snippet this "Member variable"
+this.$1 = $1;
+endsnippet
+
+snippet describe "Describe"
+describe('$1', () => {
+  it('$2', () => {
+		$0
+  });
+});
+endsnippet
+
+snippet m "Method (Function on ES6 class)"
+$1($2) {
+	$0
+}
+endsnippet
+
 snippet log "Console Log"
 console.log($1)$0
 endsnippet
@@ -28,4 +84,29 @@ snippet m
 $1($2) {
 	$0
 }
+endsnippet
+
+snippet import "Import module"
+import $1 from '${2:$1}';$0
+endsnippet
+
+snippet require "Require file"
+const $1 = require('${2:$1}');$0
+endsnippet
+snippet req "Require file"
+const $1 = require('${2:$1}');$0
+endsnippet
+
+snippet new
+const $1 = new $2();
+endsnippet
+
+snippet it
+it('$1', () => {
+	$0
+});
+endsnippet
+
+snippet expect
+expect($1).to.$2
 endsnippet

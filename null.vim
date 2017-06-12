@@ -19,7 +19,7 @@ endif
 let g:colors_name="null"
 
 
-hi Normal	guifg=#e0e0e0 guibg=grey9 ctermbg=235 ctermfg=231
+hi Normal	guifg=#e0e0e0 guibg=grey9 ctermbg=235 ctermfg=253
 
 " highlight groups
 hi Cursor	guibg=khaki guifg=slategrey
@@ -86,7 +86,7 @@ hi Question	ctermfg=green
 hi StatusLine	cterm=bold,reverse
 hi StatusLineNC cterm=reverse
 hi VertSplit	cterm=reverse
-hi Title	ctermfg=5
+hi Title	ctermfg=191
 hi Visual	cterm=reverse
 hi VisualNOS	cterm=bold,underline
 hi WarningMsg	ctermfg=1

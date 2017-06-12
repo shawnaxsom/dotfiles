@@ -62,6 +62,8 @@ Bundle 'elixir-lang/vim-elixir'
 Bundle 'scrooloose/nerdtree'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'dkprice/vim-easygrep'
+Bundle 'fatih/vim-go'
+" Bundle 'justinmk/vim-sneak'
 call vundle#end()
 filetype plugin indent on    " required
 " }}}
@@ -140,8 +142,6 @@ set wildmenu
 set wildmode=full
 set wildchar=<Tab>
 
-set showtabline=0
-
 " Always show the statusline
 set laststatus=2
 set statusline=%f
@@ -160,7 +160,7 @@ let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/esli
 
 set incsearch
 set hlsearch
-set noignorecase              " affects both searching and find/replace
+set ignorecase              " affects both searching and find/replace
 set smartcase
 
 " set foldmethod=indent
@@ -190,6 +190,10 @@ let g:EasyGrepRoot = "search:.git,.svn"
 let g:EasyGrepFilesToExclude=".svn,.git,*.map,dist/**,index.js,yarn.lock"
 let g:EasyGrepOptionPrefix='<leader>vy'
 let g:EasyGrepProgram='ag'
+
+set showtabline=0
+
+let g:EasyMotion_smartcase = 1
 " }}}
 
 " {{{ Ctrl P
@@ -271,7 +275,7 @@ map <leader><leader>l :BundleList<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
 " Diff put to grab changes using comma
-noremap , :diffput<CR>
+" noremap , :diffput<CR>
 
 map <leader>gC :Gcommit<CR>i
 map <leader>gP :Gpush<CR>
@@ -344,8 +348,13 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
-map  s <Plug>(easymotion-bd-w)
+" map s <Plug>(easymotion-bd-w)
+" map S <Plug>(easymotion-b)
+" map s <Plug>(easymotion-w)
+nmap s <Plug>(easymotion-overwin-f2)
 
+" map s  <Plug>(incsearch-forward)
+" map S  <Plug>(incsearch-backward)
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -358,8 +367,6 @@ map ˚ <c-w>k
 map ¬ <c-w>l
 
 map ! :!
-
-map ; :
 
 imap <c-o> o
 nmap <tab> <c-p><CR>
@@ -388,6 +395,10 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 map <S-F10> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")<CR>
 map <F12> :norm <c-a><CR>:w<BAR>:colo null<CR>
 map <S-F12> :norm <c-x><CR>:w<BAR>:colo null<CR>
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
 " }}}
 
 " {{{ Tweaks
@@ -414,6 +425,7 @@ let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 " }}}
 
 " {{{ Variable Settings
+let g:sneak#label = 1
 let radon_always_on = 0
 
 let g:jsx_ext_required = 0
@@ -486,6 +498,18 @@ endfunction
 "   endfun
 " endif
 " map = :call RangerExplorer()<CR>
+
+function! NeatFoldText()
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+set foldtext=NeatFoldText()
 " }}}
 
 " {{{ Airline / Lightline
@@ -542,15 +566,3 @@ let g:airline_section_warning = ''
 
 " let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
-
-function! NeatFoldText() "{{{2
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-set foldtext=NeatFoldText()

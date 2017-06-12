@@ -24,3 +24,17 @@ case $1 do
   true -> $0
 end
 endsnippet
+
+snippet scope
+scope "/$1", $2 do
+  $0
+end
+endsnippet
+
+snippet resources
+resources "/$1", $2Controller, except: [:show, :index, :new, :edit]
+endsnippet
+
+snippet get
+get "/$1", $2Controller, :index$0
+endsnippet
