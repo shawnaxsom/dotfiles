@@ -8,64 +8,61 @@
 autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=0 | silent! normal zO
 
 " {{{ Plugins    
-" set the runtime path to include Vundle and initialize
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Bundle 'gmarik/Vundle.vim'
-Bundle 'mxw/vim-jsx'
-Bundle 'scrooloose/syntastic'
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'tmhedberg/matchit'
-Bundle 'lambacck/python_matchit'
-Bundle 'tpope/vim-fugitive'
-Bundle 'rking/ag.vim'
-Bundle 'Chun-Yang/vim-action-ag'
-Bundle 'majutsushi/tagbar'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'qstrahl/vim-matchmaker'
-Bundle 'haya14busa/incsearch.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'honza/vim-snippets'
-Bundle 'Chiel92/vim-autoformat'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'gregsexton/gitv'
-Bundle 'vim-scripts/MultipleSearch'
-Bundle 'terryma/vim-expand-region'
-Bundle 'tpope/vim-sleuth'
-Bundle 'pangloss/vim-javascript'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'dyng/ctrlsf.vim'
-Bundle 'rubik/vim-radon'
-Bundle 'ervandew/supertab'
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'mattn/emmet-vim'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'easymotion/vim-easymotion'
-Bundle 'tpope/vim-surround'
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-colorscheme-switcher'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'junegunn/gv.vim'
-Bundle 'terryma/vim-smooth-scroll'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'tpope/vim-obsession'
-Bundle 'posva/vim-vue'
-" Bundle 'itchyny/lightline.vim'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'elixir-lang/vim-elixir'
-Bundle 'scrooloose/nerdtree'
-Bundle 'leafgarland/typescript-vim'
-Bundle 'dkprice/vim-easygrep'
-Bundle 'fatih/vim-go'
-" Bundle 'justinmk/vim-sneak'
-call vundle#end()
-filetype plugin indent on    " required
+call plug#begin('~/.vim/bundle')
+Plug 'gmarik/Vundle.vim'
+Plug 'mxw/vim-jsx'
+Plug 'scrooloose/syntastic'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tmhedberg/matchit'
+Plug 'lambacck/python_matchit'
+Plug 'tpope/vim-fugitive'
+Plug 'Chun-Yang/vim-action-ag'
+Plug 'majutsushi/tagbar'
+Plug 'airblade/vim-gitgutter'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'qstrahl/vim-matchmaker'
+Plug 'haya14busa/incsearch.vim'
+Plug 'tpope/vim-commentary'
+Plug 'honza/vim-snippets'
+Plug 'Chiel92/vim-autoformat'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'flazz/vim-colorschemes'
+Plug 'gregsexton/gitv'
+Plug 'vim-scripts/MultipleSearch'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-sleuth'
+Plug 'pangloss/vim-javascript'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dyng/ctrlsf.vim'
+Plug 'rubik/vim-radon'
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe'
+Plug 'mattn/emmet-vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/gv.vim'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'tpope/vim-obsession'
+Plug 'posva/vim-vue'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'elixir-lang/vim-elixir'
+Plug 'scrooloose/nerdtree'
+Plug 'leafgarland/typescript-vim'
+Plug 'dkprice/vim-easygrep'
+Plug 'fatih/vim-go'
+Plug 'tpope/vim-repeat'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'rhysd/clever-f.vim'
+call plug#end()
 " }}}
 
 " {{{ Colorscheme
@@ -147,6 +144,7 @@ set laststatus=2
 set statusline=%f
 set statusline+=%=        " Switch to the right side
 set statusline+=%{fugitive#statusline()}
+set statusline+=%{ObsessionStatus()}
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -186,14 +184,34 @@ set foldnestmax=3
 set foldmethod=indent
 autocmd BufEnter .vimrc setlocal foldmethod=marker foldlevel=0
 
-let g:EasyGrepRoot = "search:.git,.svn"
-let g:EasyGrepFilesToExclude=".svn,.git,*.map,dist/**,index.js,yarn.lock"
+let g:clever_f_across_no_line = 1
+let g:clever_f_timeout_ms = 3000
+
+let g:EasyGrepRoot = "repository"
 let g:EasyGrepOptionPrefix='<leader>vy'
-let g:EasyGrepProgram='ag'
+let g:EasyGrepCommand = 1
+let g:EasyGrepJumpToMatch = 1
+let g:EasyGrepFilesToExclude = "*.swc,*.swp,*.git,tags,*.log,tmp/*,node_modules/*,dist/**,index.js,yarn.lock"
+let g:EasyGrepRecursive = 1
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+elseif executable('ack')
+  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
+endif
 
 set showtabline=0
 
 let g:EasyMotion_smartcase = 1
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 " }}}
 
 " {{{ Ctrl P
@@ -238,10 +256,13 @@ vnoremap . :normal .<CR>
 noremap - :e %:p:h<CR>
 
 " map <F1> :cp<CR>
-map <F2> :Grep 
+" map <F2> :Grep 
+map <F2> :Rg 
 " map <F3> :cn<CR>
 map <F3> :NERDTreeToggle<CR>
-map <F4> "hyiw:Grep <c-r>h<CR>
+" map <F4> "hyiw:Grep <c-r>h<CR>
+" map <F4> "hyiw:Ag <c-r>h<CR>
+map <F4> "hyiw:Rg <c-r>h<CR>
 inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
 nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
 vnoremap <F5> :w !bash<BAR>less<CR>
@@ -399,6 +420,10 @@ map <S-F12> :norm <c-x><CR>:w<BAR>:colo null<CR>
 " map F <Plug>Sneak_F
 " map t <Plug>Sneak_t
 " map T <Plug>Sneak_T
+
+" repeat.vim
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
 " }}}
 
 " {{{ Tweaks
@@ -453,39 +478,40 @@ let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 " {{{ Functions
 
-" Use e.g. vai to select everything of same indent level
-" http://vim.wikia.com/wiki/Creating_new_text_objects
-" http://vim.wikia.com/wiki/Indent_text_object
-" http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects
-onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
-onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
-vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
-vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
-function! s:IndTxtObj(inner)
-  let curline = line(".")
-  let lastline = line("$")
-  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
-  let i = i < 0 ? 0 : i
-  if getline(".") !~ "^\\s*$"
-    let p = line(".") - 1
-    let nextblank = getline(p) =~ "^\\s*$"
-    while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
-      -
-      let p = line(".") - 1
-      let nextblank = getline(p) =~ "^\\s*$"
-    endwhile
-    normal! 0V
-    call cursor(curline, 0)
-    let p = line(".") + 1
-    let nextblank = getline(p) =~ "^\\s*$"
-    while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
-      +
-      let p = line(".") + 1
-      let nextblank = getline(p) =~ "^\\s*$"
-    endwhile
-    normal! $
-  endif
-endfunction
+" I'm trying out this instead: michaeljsmith/vim-indent-object
+" " Use e.g. vai to select everything of same indent level
+" " http://vim.wikia.com/wiki/Creating_new_text_objects
+" " http://vim.wikia.com/wiki/Indent_text_object
+" " http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects
+" onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
+" onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
+" vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
+" vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
+" function! s:IndTxtObj(inner)
+"   let curline = line(".")
+"   let lastline = line("$")
+"   let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
+"   let i = i < 0 ? 0 : i
+"   if getline(".") !~ "^\\s*$"
+"     let p = line(".") - 1
+"     let nextblank = getline(p) =~ "^\\s*$"
+"     while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+"       -
+"       let p = line(".") - 1
+"       let nextblank = getline(p) =~ "^\\s*$"
+"     endwhile
+"     normal! 0V
+"     call cursor(curline, 0)
+"     let p = line(".") + 1
+"     let nextblank = getline(p) =~ "^\\s*$"
+"     while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+"       +
+"       let p = line(".") + 1
+"       let nextblank = getline(p) =~ "^\\s*$"
+"     endwhile
+"     normal! $
+"   endif
+" endfunction
 
 " if !exists('*RangerExplorer')
 "   function RangerExplorer()
@@ -510,6 +536,15 @@ function! NeatFoldText()
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
+
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 " }}}
 
 " {{{ Airline / Lightline
@@ -558,7 +593,7 @@ let g:airline_theme='simple'
 let g:airline_section_a = '%t'
 let g:airline_section_b = '%{expand("%:p:h:t")}'
 let g:airline_section_c = '%{expand("%:p:h")}'
-let g:airline_section_x = ''
+let g:airline_section_x = '%{ObsessionStatus()}'
 let g:airline_section_y = ''
 let g:airline_section_z = ''
 let g:airline_section_error = ''
