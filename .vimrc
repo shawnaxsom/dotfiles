@@ -4,9 +4,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Auto-reload VIMRC
-" autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=1
-" autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=0 | silent! normal zO
-autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker | AirlineRefresh
 
 " {{{ Plugins    
 call plug#begin('~/.vim/bundle')
