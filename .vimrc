@@ -5,7 +5,8 @@
 
 " Auto-reload VIMRC
 " autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=1
-autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=0 | silent! normal zO
+" autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker foldlevel=0 | silent! normal zO
+autocmd! bufwritepost .vimrc source %
 
 " {{{ Plugins    
 call plug#begin('~/.vim/bundle')
@@ -55,7 +56,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'elixir-lang/vim-elixir'
 Plug 'scrooloose/nerdtree'
 Plug 'leafgarland/typescript-vim'
-Plug 'dkprice/vim-easygrep'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
@@ -65,6 +65,7 @@ Plug 'rhysd/clever-f.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
+Plug 'ternjs/tern_for_vim'
 call plug#end()
 " }}}
 
@@ -74,34 +75,12 @@ runtime autoload/grepper.vim
 let g:grepper.jump = 1
 let g:grepper.stop = 500
 " }}}
-"
-" {{{ Colorscheme
-set background=dark
-" colorscheme beekai
-" colorscheme zenburn
-" colorscheme badwolf
-" colorscheme molokai
-" colorscheme molokai_dark
-" colorscheme Monokai
-" colorscheme gruvbox
-" colorscheme onedark
-" colorscheme Tomorrow-Night
-" colorscheme Tomorrow-Night-Bright
-" colorscheme gryffin
-" colorscheme predawn
-" colorscheme void
-" colorscheme sift
-" colorscheme darkburn
-colorscheme null
-
-" }}} Colorscheme
 
 " {{{ Options    
 set noswapfile
 set autoread
 set nowrap
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
-syntax on
 set nolist
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
@@ -168,7 +147,7 @@ let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/esli
 
 set incsearch
 set hlsearch
-set ignorecase              " affects both searching and find/replace
+set noignorecase              " affects both searching and find/replace
 set smartcase
 
 " set foldmethod=indent
@@ -196,13 +175,6 @@ autocmd BufEnter .vimrc setlocal foldmethod=marker foldlevel=0
 
 let g:clever_f_across_no_line = 1
 let g:clever_f_timeout_ms = 3000
-
-let g:EasyGrepRoot = "repository"
-let g:EasyGrepOptionPrefix='<leader>vy'
-let g:EasyGrepCommand = 1
-let g:EasyGrepJumpToMatch = 1
-let g:EasyGrepFilesToExclude = "*.swc,*.swp,*.git,tags,*.log,tmp/*,node_modules/*,dist/**,index.js,yarn.lock"
-let g:EasyGrepRecursive = 1
 
 set showtabline=0
 
@@ -246,6 +218,10 @@ let python_highlight_all=1
 autocmd Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
 autocmd Syntax python setlocal foldmethod=indent
 autocmd Syntax python normal zR
+" }}}
+
+" {{{ Javascript
+autocmd Syntax javascript map gd :TernDef<CR>
 " }}}
 
 " {{{ Other Languages
@@ -384,10 +360,10 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
-" map s <Plug>(easymotion-bd-w)
+nmap s <Plug>(easymotion-bd-w)
 " map S <Plug>(easymotion-b)
 " map s <Plug>(easymotion-w)
-nmap s <Plug>(easymotion-overwin-f2)
+" nmap s <Plug>(easymotion-overwin-f2)
 
 " map s  <Plug>(incsearch-forward)
 " map S  <Plug>(incsearch-backward)
@@ -404,7 +380,6 @@ map ¬ <c-w>l
 
 map ! :!
 
-imap <c-o> o
 nmap <tab> <c-p><CR>
 
 imap <c-z> <c-y>,
@@ -616,3 +591,25 @@ let g:airline_section_warning = ''
 
 " let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
+
+" {{{ Colorscheme
+" colorscheme beekai
+" colorscheme zenburn
+" colorscheme badwolf
+" colorscheme molokai
+" colorscheme molokai_dark
+" colorscheme Monokai
+" colorscheme gruvbox
+" colorscheme onedark
+" colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night-Bright
+" colorscheme gryffin
+" colorscheme predawn
+" colorscheme void
+" colorscheme sift
+" colorscheme darkburn
+syntax on
+colorscheme null
+set background=dark
+" }}} Colorscheme
+
