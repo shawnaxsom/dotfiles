@@ -610,6 +610,6 @@ let g:airline_section_warning = ''
 " colorscheme darkburn
 syntax on
 colorscheme null
-set background=dark
+" set background=dark
 " }}} Colorscheme
 
