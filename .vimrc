@@ -62,9 +62,19 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'rhysd/clever-f.vim'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'wellle/targets.vim'
+Plug 'mhinz/vim-grepper'
 call plug#end()
 " }}}
 
+" {{{ Grepper
+let g:grepper = {}
+runtime autoload/grepper.vim
+let g:grepper.jump = 1
+let g:grepper.stop = 500
+" }}}
+"
 " {{{ Colorscheme
 set background=dark
 " colorscheme beekai
@@ -193,18 +203,6 @@ let g:EasyGrepCommand = 1
 let g:EasyGrepJumpToMatch = 1
 let g:EasyGrepFilesToExclude = "*.swc,*.swp,*.git,tags,*.log,tmp/*,node_modules/*,dist/**,index.js,yarn.lock"
 let g:EasyGrepRecursive = 1
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-elseif executable('ack')
-  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
-endif
 
 set showtabline=0
 
@@ -215,7 +213,21 @@ let g:fzf_buffers_jump = 1
 " }}}
 
 " {{{ Ctrl P
+if executable('rg')
+  set grepprg=rg
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+elseif executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
+  let g:ctrlp_use_caching = 0
+elseif executable('ack')
+  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
+endif
+
 let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
@@ -242,7 +254,6 @@ autocmd Syntax python normal zR
 autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 " autocmd Syntax javascript map <F1> :!node %:p<CR>
 autocmd Syntax ruby map <F1> :!./bin/rails server<CR>
-map <F1> :map <F1> :!
 
 " Vue.js .vue file set filetype on load
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
@@ -255,17 +266,21 @@ vnoremap . :normal .<CR>
 " Explore using "-" key
 noremap - :e %:p:h<CR>
 
+map <F1> :map <F1> :!
 " map <F1> :cp<CR>
 " map <F2> :Grep 
-map <F2> :Rg 
+" map <F2> :Rg<SPACE>
+map <F2> "hyiw:GrepperRg <c-r>h<CR>
 " map <F3> :cn<CR>
-map <F3> :NERDTreeToggle<CR>
+map <F3> :GrepperRg<SPACE>
 " map <F4> "hyiw:Grep <c-r>h<CR>
 " map <F4> "hyiw:Ag <c-r>h<CR>
-map <F4> "hyiw:Rg <c-r>h<CR>
-inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
-nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
-vnoremap <F5> :w !bash<BAR>less<CR>
+map <F4> "hyiw:Rg <c-r>h
+map <F5> :NERDTreeToggle<CR>
+" map <F4> "hyiw:GrepperRg <c-r>h<CR>
+" inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
+" nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
+" vnoremap <F5> :w !bash<BAR>less<CR>
 noremap <F6> :!tig %<CR>
 noremap <F7> :SyntasticCheck<CR>:Errors<CR>
 noremap <Leader><F7> :SyntasticReset<CR>
