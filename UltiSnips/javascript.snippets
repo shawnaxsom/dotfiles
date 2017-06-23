@@ -24,7 +24,9 @@ endsnippet
 
 snippet render "React render"
 render() {
-  $0
+  return (
+    $0
+  );
 }
 endsnippet
 
@@ -109,4 +111,12 @@ endsnippet
 
 snippet expect
 expect($1).to.$2
+endsnippet
+
+snippet react
+import React, { Component } from 'react';
+endsnippet
+
+snippet cn
+className='$0'
 endsnippet

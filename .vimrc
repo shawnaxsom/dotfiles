@@ -52,7 +52,6 @@ Plug 'posva/vim-vue'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'elixir-lang/vim-elixir'
-Plug 'scrooloose/nerdtree'
 Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-repeat'
@@ -64,6 +63,7 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'ternjs/tern_for_vim'
+Plug 'tpope/vim-vinegar'
 call plug#end()
 " }}}
 
@@ -206,7 +206,8 @@ let g:ctrlp_working_path_mode = 0
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-set wildignore+=*/env/*,*/node_modules/*,*/dist/*,*/bower_components/*,*/tmp/*,*/jest/*,*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=env/,node_modules/,dist/,bower_components/,tmp/,jest/
+set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 let g:ctrlp_working_path_mode = 'a'
 " }}}
 
@@ -456,6 +457,13 @@ let g:UltiSnipsEditSplit="vertical"
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" Change CWD while navigating in NetRW.
+" This is necessary if you want to move a file like this: mt > cd > mf > mm
+" Otherwise you have to manually change cwd as well: mt > cd > c > mf > mm
+let g:netrw_keepdir=0
+" Allow netrw to remove non-empty local directories
+let g:netrw_localrmdir='rm -r'
 
 " }}}
 
