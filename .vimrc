@@ -583,7 +583,7 @@ let g:lightline = {
       \ 'column': '%c',
       \ 'close': '%999X X ' } }
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 let g:airline_theme='simple'
 let g:airline_section_a = '%t'
