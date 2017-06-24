@@ -1,9 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAKE SURE TO DO THIS IN YOUR FISH SHELL CONFIG: set -x TERM xterm-256color
-" MAKE SURE TO USE Source Code Pro FONT IN YOUR TERMINAL
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Auto-reload VIMRC
 autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker | AirlineRefresh
 
 " {{{ Plugins    
@@ -64,14 +58,108 @@ Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-vinegar'
+Plug 'mtth/scratch.vim'
 call plug#end()
 " }}}
+
+" {{{ Plugin Settings
 
 " {{{ Grepper
 let g:grepper = {}
 runtime autoload/grepper.vim
 let g:grepper.jump = 1
 let g:grepper.stop = 500
+" }}}
+
+" {{{ Ctrl P
+if executable('rg')
+  set grepprg=rg
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+elseif executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
+  let g:ctrlp_use_caching = 0
+elseif executable('ack')
+  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
+endif
+
+let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_mruf_relative = 1
+let g:ctrlp_match_window = 'bottom,order:btt'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+" Using ag is faster, BUT wildignore doesn't work
+" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" let g:ctrlp_use_caching = 0
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
+set wildignore+=env/,node_modules/,dist/,bower_components/,tmp/,jest/
+set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+let g:ctrlp_working_path_mode = 'a'
+" }}}
+
+" {{{ UltiSnips
+" Fix directory UltiSnipsEdit places snippets in
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+" }}}
+
+" {{{ Airline / Lightline
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'inactive': {
+      \   'left': [  [ 'filename' ],
+      \              [ 'parentfolder' ],
+      \              [ 'pwd' ]]
+      \ },
+      \ 'active': {
+      \   'left': [  [ 'filename' ],
+      \              [ 'parentfolder' ],
+      \              [ 'pwd' ]],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ]]
+      \ },
+      \ 'component': {
+      \ 'mode': '%{lightline#mode()}',
+      \ 'absolutepath': '%F',
+      \ 'relativepath': '%f',
+      \ 'pwd': '%{expand("%:p:h")}',
+      \ 'filename': '%t',
+      \ 'parentfolder': '%{expand("%:p:h:t")}',
+      \ 'modified': '%M',
+      \ 'bufnum': '%n',
+      \ 'paste': '%{&paste?"PASTE":""}',
+      \ 'readonly': '%R',
+      \ 'charvalue': '%b',
+      \ 'charvaluehex': '%B',
+      \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+      \ 'fileformat': '%{&ff}',
+      \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
+      \ 'percent': '%3p%%',
+      \ 'percentwin': '%P',
+      \ 'spell': '%{&spell?&spelllang:""}',
+      \ 'lineinfo': '%3l:%-2v',
+      \ 'line': '%l',
+      \ 'column': '%c',
+      \ 'close': '%999X X ' } }
+
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_powerline_fonts = 0
+let g:airline_theme='simple'
+let g:airline_section_a = '%t'
+let g:airline_section_b = '%{expand("%:p:h:t")}'
+let g:airline_section_c = '%{expand("%:p:h")}'
+let g:airline_section_x = '%{ObsessionStatus()}'
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
+
+" let g:AutoPairsShortcutToggle = '<c-a>'
+" }}}
+
 " }}}
 
 " {{{ Options    
@@ -180,36 +268,45 @@ let g:EasyMotion_smartcase = 1
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
+
+
+let g:sneak#label = 1
+let radon_always_on = 0
+
+let g:jsx_ext_required = 0
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" Change CWD while navigating in NetRW.
+" This is necessary if you want to move a file like this: mt > cd > mf > mm
+" Otherwise you have to manually change cwd as well: mt > cd > c > mf > mm
+let g:netrw_keepdir=0
+" Allow netrw to remove non-empty local directories
+let g:netrw_localrmdir='rm -r'
+
+" Auto indent wasn't working without this on bottom
+filetype indent on
+set ai
+set si
+
+
+let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
+
 " }}}
 
-" {{{ Ctrl P
-if executable('rg')
-  set grepprg=rg
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('ack')
-  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
-endif
-
-let g:ctrlp_cmd = 'CtrlPMRU'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_match_window = 'bottom,order:btt'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-" Using ag is faster, BUT wildignore doesn't work
-" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" let g:ctrlp_use_caching = 0
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-set wildignore+=env/,node_modules/,dist/,bower_components/,tmp/,jest/
-set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
-let g:ctrlp_working_path_mode = 'a'
-" }}}
+" {{{ Languages
 
 " {{{ Python
 let g:pymode_options_max_line_length=120
@@ -232,6 +329,8 @@ autocmd Syntax ruby map <F1> :!./bin/rails server<CR>
 
 " Vue.js .vue file set filetype on load
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+" }}}
+
 " }}}
 
 " {{{ Mappings
@@ -281,8 +380,8 @@ map <leader>w :w<CR>
 map <leader><leader>j :join<CR>
 map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
-map <leader><leader>i :BundleInstall<CR>
-map <leader><leader>l :BundleList<CR>
+map <leader><leader>i :PlugInstall<CR>
+map <leader><leader>u :PlugClean<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 
 " Diff put to grab changes using comma
@@ -415,63 +514,6 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " }}}
 
-" {{{ Tweaks
-" Keep location of file when reopening
-autocmd BufReadPost *
-\   if line("'\"") > 0 && line("'\"") <= line("$") |
-\       exe 'normal! g`"zvzz' |
-\   endif
-" }}}
-
-" {{{ Fixes
-" Auto indent wasn't working without this on bottom
-filetype indent on
-set ai
-set si
-
-
-" Prevent browsing in Fugitive from creating a trail of temp file buffers
-autocmd BufReadPost fugitive://*
-  \ set bufhidden=delete
-
-
-let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
-" }}}
-
-" {{{ Variable Settings
-let g:sneak#label = 1
-let radon_always_on = 0
-
-let g:jsx_ext_required = 0
-
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" Change CWD while navigating in NetRW.
-" This is necessary if you want to move a file like this: mt > cd > mf > mm
-" Otherwise you have to manually change cwd as well: mt > cd > c > mf > mm
-let g:netrw_keepdir=0
-" Allow netrw to remove non-empty local directories
-let g:netrw_localrmdir='rm -r'
-
-" }}}
-
-" {{{ UltiSnips
-" Fix directory UltiSnipsEdit places snippets in
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-" }}}
-
 " {{{ Functions
 
 " I'm trying out this instead: michaeljsmith/vim-indent-object
@@ -541,61 +583,16 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" }}}
+" Keep location of file when reopening
+autocmd BufReadPost *
+\   if line("'\"") > 0 && line("'\"") <= line("$") |
+\       exe 'normal! g`"zvzz' |
+\   endif
 
-" {{{ Airline / Lightline
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'inactive': {
-      \   'left': [  [ 'filename' ],
-      \              [ 'parentfolder' ],
-      \              [ 'pwd' ]]
-      \ },
-      \ 'active': {
-      \   'left': [  [ 'filename' ],
-      \              [ 'parentfolder' ],
-      \              [ 'pwd' ]],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ]]
-      \ },
-      \ 'component': {
-      \ 'mode': '%{lightline#mode()}',
-      \ 'absolutepath': '%F',
-      \ 'relativepath': '%f',
-      \ 'pwd': '%{expand("%:p:h")}',
-      \ 'filename': '%t',
-      \ 'parentfolder': '%{expand("%:p:h:t")}',
-      \ 'modified': '%M',
-      \ 'bufnum': '%n',
-      \ 'paste': '%{&paste?"PASTE":""}',
-      \ 'readonly': '%R',
-      \ 'charvalue': '%b',
-      \ 'charvaluehex': '%B',
-      \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-      \ 'fileformat': '%{&ff}',
-      \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
-      \ 'percent': '%3p%%',
-      \ 'percentwin': '%P',
-      \ 'spell': '%{&spell?&spelllang:""}',
-      \ 'lineinfo': '%3l:%-2v',
-      \ 'line': '%l',
-      \ 'column': '%c',
-      \ 'close': '%999X X ' } }
+" Prevent browsing in Fugitive from creating a trail of temp file buffers
+autocmd BufReadPost fugitive://*
+  \ set bufhidden=delete
 
-let g:airline#extensions#tabline#enabled = 0
-let g:airline_powerline_fonts = 0
-let g:airline_theme='simple'
-let g:airline_section_a = '%t'
-let g:airline_section_b = '%{expand("%:p:h:t")}'
-let g:airline_section_c = '%{expand("%:p:h")}'
-let g:airline_section_x = '%{ObsessionStatus()}'
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-let g:airline_section_error = ''
-let g:airline_section_warning = ''
-
-" let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
 
 " {{{ Colorscheme
