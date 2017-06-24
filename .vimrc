@@ -1,6 +1,6 @@
 autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker | AirlineRefresh
 
-" {{{ Plugins    
+" {{{ Plugins
 call plug#begin('~/.vim/bundle')
 Plug 'gmarik/Vundle.vim'
 Plug 'mxw/vim-jsx'
@@ -59,6 +59,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-vinegar'
 Plug 'mtth/scratch.vim'
+Plug 'thaerkh/vim-workspace'
 call plug#end()
 " }}}
 
@@ -162,7 +163,7 @@ let g:airline_section_warning = ''
 
 " }}}
 
-" {{{ Options    
+" {{{ Options
 set noswapfile
 set autoread
 set nowrap
@@ -342,7 +343,7 @@ noremap - :e %:p:h<CR>
 
 map <F1> :map <F1> :!
 " map <F1> :cp<CR>
-" map <F2> :Grep 
+" map <F2> :Grep
 " map <F2> :Rg<SPACE>
 map <F2> "hyiw:GrepperRg <c-r>h<CR>
 " map <F3> :cn<CR>
@@ -379,6 +380,7 @@ map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader><leader>j :join<CR>
 map <leader><leader>s :UltiSnipsEdit<CR>
+map <leader><leader>w :ToggleWorkspace<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
 map <leader><leader>i :PlugInstall<CR>
 map <leader><leader>u :PlugClean<CR>
