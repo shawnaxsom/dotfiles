@@ -71,8 +71,8 @@ end
 function v
   # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
   if test -e $PWD/Session.vim
-    vim -S
+    vim -S $argv
   else
-    vim
+    vim $argv
   end
 end

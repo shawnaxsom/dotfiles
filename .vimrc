@@ -60,10 +60,45 @@ Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-vinegar'
 Plug 'mtth/scratch.vim'
 Plug 'thaerkh/vim-workspace'
+Plug 'tpope/vim-eunuch'
+Plug 'sjl/gundo.vim'
 call plug#end()
 " }}}
 
 " {{{ Plugin Settings
+
+" {{{ Miscellaneous
+let g:EasyMotion_smartcase = 1
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+let radon_always_on = 0
+
+let g:jsx_ext_required = 0
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+let g:clever_f_across_no_line = 1
+let g:clever_f_timeout_ms = 3000
+
+let g:scratch_autohide = 1
+let g:scratch_persistence_file = '~/.scratch'
+let g:scratch_no_mappings = 1
+
+" }}}
 
 " {{{ Grepper
 let g:grepper = {}
@@ -75,7 +110,7 @@ let g:grepper.stop = 500
 " {{{ Ctrl P
 if executable('rg')
   set grepprg=rg
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
   let g:ctrlp_use_caching = 0
 elseif executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -98,6 +133,7 @@ let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
 set wildignore+=env/,node_modules/,dist/,bower_components/,tmp/,jest/
 set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=*__Scratch__ " scratch.vim
 let g:ctrlp_working_path_mode = 'a'
 " }}}
 
@@ -161,12 +197,28 @@ let g:airline_section_warning = ''
 " let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
 
+" {{{ Syntastic
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_jump = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293,W391 --max-complexity 10"
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/eslint.js'
+
+" }}}
+
 " }}}
 
 " {{{ Options
 set noswapfile
 set autoread
-set nowrap
+set wrap
+" set showbreak=...>
+set breakat=\ ^I
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 set nolist
 
@@ -222,16 +274,6 @@ set statusline+=%=        " Switch to the right side
 set statusline+=%{fugitive#statusline()}
 set statusline+=%{ObsessionStatus()}
 
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_auto_jump = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293,W391 --max-complexity 10"
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/eslint.js'
-
 set incsearch
 set hlsearch
 set noignorecase              " affects both searching and find/replace
@@ -260,35 +302,7 @@ set foldnestmax=3
 set foldmethod=indent
 autocmd BufEnter .vimrc setlocal foldmethod=marker foldlevel=0
 
-let g:clever_f_across_no_line = 1
-let g:clever_f_timeout_ms = 3000
-
 set showtabline=0
-
-let g:EasyMotion_smartcase = 1
-
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-
-
-let g:sneak#label = 1
-let radon_always_on = 0
-
-let g:jsx_ext_required = 0
-
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Change CWD while navigating in NetRW.
 " This is necessary if you want to move a file like this: mt > cd > mf > mm
@@ -335,38 +349,24 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
 " {{{ Mappings
+
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
 
-" Explore using "-" key
+let mapleader = "\<Space>"
 noremap - :e %:p:h<CR>
 
 map <F1> :map <F1> :!
-" map <F1> :cp<CR>
-" map <F2> :Grep
-" map <F2> :Rg<SPACE>
 map <F2> "hyiw:GrepperRg <c-r>h<CR>
-" map <F3> :cn<CR>
 map <F3> :GrepperRg<SPACE>
-" map <F4> "hyiw:Grep <c-r>h<CR>
-" map <F4> "hyiw:Ag <c-r>h<CR>
 map <F4> "hyiw:Rg <c-r>h
 map <F5> :NERDTreeToggle<CR>
-" map <F4> "hyiw:GrepperRg <c-r>h<CR>
-" inoremap <F5> <ESC>:wa<CR>:!clear<CR>:!%:p<CR>
-" nnoremap <F5> :wa<CR>:!clear<CR>:!%:p<CR>
-" vnoremap <F5> :w !bash<BAR>less<CR>
 noremap <F6> :!tig %<CR>
-noremap <F7> :SyntasticCheck<CR>:Errors<CR>
-noremap <Leader><F7> :SyntasticReset<CR>
+nmap <F7> "hyiw:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
+vmap <F7> "hy:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
 noremap <F9> :RandomColorScheme<CR>:colo<CR>
-" noremap <F10> :!pudb %<CR>
 
-" nmap z 5<c-w>+5<c-w>>
 nmap = <c-w>=
-
-" Use Space bar for leader key
-let mapleader = "\<Space>"
 
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -376,15 +376,16 @@ map <leader>q :q<CR>
 map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
 map <leader>t :tabnew<CR>
+map <leader>u :GundoToggle<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
+map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 map <leader><leader>j :join<CR>
 map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>w :ToggleWorkspace<CR>
 map <leader><leader>v :sp ~/.vimrc<CR>
 map <leader><leader>i :PlugInstall<CR>
-map <leader><leader>u :PlugClean<CR>
-map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
+map <leader><leader>u :PlugClean!<CR>
 
 " Diff put to grab changes using comma
 " noremap , :diffput<CR>
@@ -400,9 +401,6 @@ map <leader>gw :Gwrite<CR>
 map <leader>gl :GV!<CR>  " gv.vim
 map <leader>gL :Glog<BAR>:bot copen<CR>
 
-" noremap <leader>l g;999g,
-" noremap <c-n> g;
-" noremap <leader>n 999g,
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
 
@@ -415,10 +413,6 @@ nnoremap n nzz
 nnoremap N Nzz
 
 map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
-" map <BAR> "hyiw?\(class\s\\|var\\|def\s\).*<c-r>h<CR>:nohlsearch<CR>
-
-" Mark next, based on Vim-Signature
-map <Space> m.
 
 map Q :cprev<CR>
 map <c-q> :cnext<CR>
@@ -432,17 +426,10 @@ let g:ag_highlight=1
 nnoremap j gj
 nnoremap k gk
 
-" map H <c-w>H
-" map J <c-w>J
-" map K <c-w>K
-" map L <c-w>L
-" map J ]c
-" map K [c
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
-" map J }j^
-" map K k{j^
+
 map J }
 map K {
 map H [{
@@ -450,10 +437,6 @@ map L ]}
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 35, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
-" noremap <silent> K :call smooth_scroll#up(&scroll/3, 30, 1)<CR>
-" noremap <silent> J :call smooth_scroll#down(&scroll/3, 30, 1)<CR>
-" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 
 
@@ -480,8 +463,6 @@ map ¬ <c-w>l
 
 map ! :!
 
-nmap <tab> <c-p><CR>
-
 imap <c-z> <c-y>,
 
 map <leader>0 :set foldlevel=0<CR>
@@ -506,13 +487,12 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 map <S-F10> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")<CR>
 map <F12> :norm <c-a><CR>:w<BAR>:colo null<CR>
 map <S-F12> :norm <c-x><CR>:w<BAR>:colo null<CR>
-" map f <Plug>Sneak_f
-" map F <Plug>Sneak_F
-" map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
 
 " repeat.vim
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
+noremap gs :Scratch<CR>
+nnoremap gs :Scratch<CR>
 
 " }}}
 
