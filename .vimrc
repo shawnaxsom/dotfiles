@@ -62,6 +62,7 @@ Plug 'mtth/scratch.vim'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-eunuch'
 Plug 'sjl/gundo.vim'
+Plug 'rizzatti/dash.vim'
 call plug#end()
 " }}}
 
@@ -365,6 +366,7 @@ noremap <F6> :!tig %<CR>
 nmap <F7> "hyiw:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
 vmap <F7> "hy:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
 noremap <F9> :RandomColorScheme<CR>:colo<CR>
+map <F12> "hyiw:Dash <c-r>h<CR>
 
 nmap = <c-w>=
 
@@ -485,8 +487,8 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 map <S-F10> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")<CR>
-map <F12> :norm <c-a><CR>:w<BAR>:colo null<CR>
-map <S-F12> :norm <c-x><CR>:w<BAR>:colo null<CR>
+map <F8> :norm <c-a><CR>:w<BAR>:colo null<CR>
+map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 
 " repeat.vim
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
