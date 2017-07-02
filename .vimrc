@@ -63,6 +63,7 @@ Plug 'sjl/gundo.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
+Plug 'moll/vim-node'
 call plug#end()
 " }}}
 
@@ -218,7 +219,7 @@ let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/esli
 set noswapfile
 set autoread
 set wrap
-" set showbreak=...>
+set showbreak=...>
 set breakat=\ ^I
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 set nolist
@@ -308,7 +309,7 @@ set showtabline=0
 " Change CWD while navigating in NetRW.
 " This is necessary if you want to move a file like this: mt > cd > mf > mm
 " Otherwise you have to manually change cwd as well: mt > cd > c > mf > mm
-let g:netrw_keepdir=0
+" let g:netrw_keepdir=0
 " Allow netrw to remove non-empty local directories
 let g:netrw_localrmdir='rm -r'
 
