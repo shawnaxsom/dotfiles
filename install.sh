@@ -68,6 +68,7 @@ create_symlink    .tmux.conf ~/.tmux.conf
 create_symlink    .Xmodmap ~/.Xmodmap
 create_symlink    .screenrc ~/.screenrc
 create_symlink    .agignore ~/.agignore
+create_symlink    .tern-config    ~/.tern-config
 
 if [ ! -d ~/.vim/bundle ]; then
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim

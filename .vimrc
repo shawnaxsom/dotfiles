@@ -30,7 +30,6 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'rubik/vim-radon'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe'
 Plug 'mattn/emmet-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
@@ -56,12 +55,13 @@ Plug 'rhysd/clever-f.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
-Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-vinegar'
 Plug 'mtth/scratch.vim'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-eunuch'
 Plug 'sjl/gundo.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
 call plug#end()
 " }}}
