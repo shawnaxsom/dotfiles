@@ -60,13 +60,14 @@ Plug 'mtth/scratch.vim'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-eunuch'
 Plug 'sjl/gundo.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
 Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
 Plug 'tacahiroy/ctrlp-funky'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
+Plug 'Shougo/neocomplete.vim'
 call plug#end()
 " }}}
 
@@ -218,6 +219,10 @@ let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/esli
 
 " {{{ CtrlP Funky
 let g:ctrlp_funky_syntax_highlight = 1
+" }}}
+
+" {{{ Vim Better Whitespace
+autocmd BufEnter * EnableStripWhitespaceOnSave
 " }}}
 
 " }}}
