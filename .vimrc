@@ -28,7 +28,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dyng/ctrlsf.vim'
 Plug 'rubik/vim-radon'
-Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'derekwyatt/vim-scala'
@@ -65,9 +64,9 @@ Plug 'rizzatti/dash.vim'
 Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
 Plug 'tacahiroy/ctrlp-funky'
-Plug 'ntpeters/vim-better-whitespace'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
-Plug 'Shougo/neocomplete.vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 call plug#end()
 " }}}
 
@@ -92,17 +91,21 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
 let g:clever_f_across_no_line = 1
 let g:clever_f_timeout_ms = 3000
 
 let g:scratch_autohide = 1
 let g:scratch_persistence_file = '~/.scratch'
 let g:scratch_no_mappings = 1
+
+" }}}
+
+" {{{ YouCompleteMe
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " }}}
 
@@ -221,17 +224,13 @@ let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/esli
 let g:ctrlp_funky_syntax_highlight = 1
 " }}}
 
-" {{{ Vim Better Whitespace
-autocmd BufEnter * EnableStripWhitespaceOnSave
-" }}}
-
 " }}}
 
 " {{{ Options
 set noswapfile
 set autoread
 set wrap
-set showbreak=...>
+" set showbreak=...>
 set breakat=\ ^I
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
 set nolist
