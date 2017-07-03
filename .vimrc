@@ -64,6 +64,9 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
 Plug 'moll/vim-node'
+Plug 'othree/html5.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'bronson/vim-trailing-whitespace'
 call plug#end()
 " }}}
 
@@ -211,6 +214,10 @@ let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/eslint.js'
 
+" }}}
+
+" {{{ CtrlP Funky
+let g:ctrlp_funky_syntax_highlight = 1
 " }}}
 
 " }}}
@@ -368,6 +375,7 @@ nmap <F7> "hyiw:!open 'https://www.google.com/search?newwindow=1&site=&source=hp
 vmap <F7> "hy:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
 noremap <F9> :RandomColorScheme<CR>:colo<CR>
 map <F12> "hyiw:Dash <c-r>h<CR>
+vmap <F12> "hy:Dash <c-r>h<CR>
 
 nmap = <c-w>=
 
@@ -497,6 +505,12 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 noremap gs :Scratch<CR>
 nnoremap gs :Scratch<CR>
 
+" Emmet expand html
+imap <c-e> <c-y>,
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " }}}
 
 " {{{ Functions
