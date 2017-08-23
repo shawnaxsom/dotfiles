@@ -67,6 +67,7 @@ Plug 'tacahiroy/ctrlp-funky'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
+Plug 'sbdchd/neoformat'
 call plug#end()
 " }}}
 
@@ -98,6 +99,14 @@ let g:scratch_autohide = 1
 let g:scratch_persistence_file = '~/.scratch'
 let g:scratch_no_mappings = 1
 
+" }}}
+
+" {{{ Neoformat (Prettier)
+let g:neoformat_enabled_javascript = ['prettier']
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat! javascript prettier
+augroup END
 " }}}
 
 " {{{ YouCompleteMe
