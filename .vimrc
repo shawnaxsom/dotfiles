@@ -282,8 +282,6 @@ set laststatus=2
 set statusline=%f
 set statusline+=%=        " Switch to the right side
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 set incsearch
 set hlsearch
@@ -331,6 +329,14 @@ let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 " E.g. :find myfile.text
 " https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
 set path+=**
+
+" Set window title to include current filename.
+" Great for use in iterm2: press cmd+shift+o and search for filename of a
+" window
+set t_ts=]1;
+set t_fs=
+set title
+
 
 " }}}
 
@@ -431,8 +437,8 @@ nmap   <Plug>CommentaryLine
 vmap   <Plug>Commentary
 
 " Center screen when going through search results
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
+" nnoremap <silent> n nzz
+" nnoremap <silent> N Nzz
 
 map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
 
@@ -472,9 +478,9 @@ nmap s <Plug>(easymotion-bd-w)
 
 " map s  <Plug>(incsearch-forward)
 " map S  <Plug>(incsearch-backward)
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
 " Use '$ cat' to find the keys to map to
 " http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
@@ -622,7 +628,9 @@ syntax on
 " set background=dark
 " colorscheme zenburn
 colorscheme tender
+" colorscheme elflord
 " }}} Colorscheme
+
 
 autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
 autocmd! BufRead,BufNewFile .vimrc setlocal foldmethod=marker
