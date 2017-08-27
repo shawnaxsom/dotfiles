@@ -108,10 +108,14 @@ let g:neoformat_javascript_prettier = {
             \ }
             " \ 'args': ['--trailing-comma all', '--no-bracket-spacing', '--single-quote', '--no-semi'],
 let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_verbose = 1
+let g:neoformat_verbose = 0
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * Neoformat! javascript prettier
+" augroup END
 augroup fmt
   autocmd!
-  autocmd BufWritePre * Neoformat! javascript prettier
+  autocmd BufWritePre  *.js Neoformat! javascript prettier
 augroup END
 " }}}
 
@@ -335,27 +339,27 @@ set path+=**
 " {{{ Python
 let g:pymode_options_max_line_length=120
 let python_highlight_all=1
-autocmd Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
-autocmd Syntax python setlocal foldmethod=indent
-autocmd Syntax python normal zR
+autocmd! Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
+autocmd! Syntax python setlocal foldmethod=indent
+autocmd! Syntax python normal zR
 " }}}
 
 " {{{ Javascript
 " nmap gd :TernDef<CR>
-autocmd FileType javascript,javascript.jsx nmap gd :TernDef<CR>
+autocmd! FileType javascript,javascript.jsx nmap gd :TernDef<CR>
 " map <leader>rn :!node %:p<CR>
-autocmd FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
+autocmd! FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
 " }}}
 
 " {{{ Other Languages
-" autocmd Syntax c,cpp,xml,html,xhtml setlocal foldmethod=syntax
-" autocmd Syntax c,cpp,xml,html,xhtml,perl normal zR
-autocmd Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
-" autocmd Syntax javascript map <F1> :!node %:p<CR>
-autocmd Syntax ruby map <F1> :!./bin/rails server<CR>
+" autocmd! Syntax c,cpp,xml,html,xhtml setlocal foldmethod=syntax
+" autocmd! Syntax c,cpp,xml,html,xhtml,perl normal zR
+autocmd! Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
+" autocmd! Syntax javascript map <F1> :!node %:p<CR>
+autocmd! Syntax ruby map <F1> :!./bin/rails server<CR>
 
 " Vue.js .vue file set filetype on load
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+autocmd! BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
 " }}}
@@ -593,13 +597,13 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 " Keep location of file when reopening
-autocmd BufReadPost *
+autocmd! BufReadPost *
 \   if line("'\"") > 0 && line("'\"") <= line("$") |
 \       exe 'normal! g`"zvzz' |
 \   endif
 
 " Prevent browsing in Fugitive from creating a trail of temp file buffers
-autocmd BufReadPost fugitive://*
+autocmd! BufReadPost fugitive://*
   \ set bufhidden=delete
 
 " }}}
@@ -626,6 +630,6 @@ colorscheme null
 " }}} Colorscheme
 
 autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
-autocmd BufRead,BufNewFile .vimrc setlocal foldmethod=marker
+autocmd! BufRead,BufNewFile .vimrc setlocal foldmethod=marker
 " autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker | AirlineRefresh
 " autocmd BufRead,BufNewFile .vimrc setlocal foldmethod=marker foldlevel=1
