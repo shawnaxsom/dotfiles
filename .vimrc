@@ -68,6 +68,7 @@ Plug 'sbdchd/neoformat'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/jspc.vim'
 Plug 'w0rp/ale'
+Plug 'jacoborus/tender.vim'
 call plug#end()
 " }}}
 
@@ -610,26 +611,19 @@ autocmd! BufReadPost fugitive://*
 
 " {{{ Colorscheme
 " colorscheme beekai
-" colorscheme zenburn
 " colorscheme badwolf
 " colorscheme molokai
-" colorscheme molokai_dark
 " colorscheme Monokai
-" colorscheme gruvbox
-" colorscheme onedark
-" colorscheme Tomorrow-Night
-" colorscheme Tomorrow-Night-Bright
-" colorscheme gryffin
-" colorscheme predawn
 " colorscheme void
 " colorscheme sift
 " colorscheme darkburn
 syntax on
-colorscheme null
+" colorscheme null
+" colorscheme predawn
 " set background=dark
+" colorscheme zenburn
+colorscheme tender
 " }}} Colorscheme
 
 autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
 autocmd! BufRead,BufNewFile .vimrc setlocal foldmethod=marker
-" autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker | AirlineRefresh
-" autocmd BufRead,BufNewFile .vimrc setlocal foldmethod=marker foldlevel=1
