@@ -57,7 +57,19 @@ $1($2) {
 endsnippet
 
 snippet log "Console Log"
-console.log($1)$0
+console.log("$1")$0
+endsnippet
+
+snippet logo "Console Log an object"
+console.log("$1", $1)$0
+endsnippet
+
+snippet logos "Console Log an object, pretty printed"
+console.log("$1", JSON.stringify($1, null, 2))$0
+endsnippet
+
+snippet trace "Console Trace"
+console.trace();
 endsnippet
 
 snippet for "For loop"

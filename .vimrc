@@ -1,16 +1,14 @@
-autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker | AirlineRefresh
+nnoremap <leader>jt :! jsctags -o tags src<CR>
 
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
 Plug 'gmarik/Vundle.vim'
 Plug 'mxw/vim-jsx'
-Plug 'scrooloose/syntastic'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tmhedberg/matchit'
 Plug 'lambacck/python_matchit'
 Plug 'tpope/vim-fugitive'
 Plug 'Chun-Yang/vim-action-ag'
-Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'qstrahl/vim-matchmaker'
@@ -63,11 +61,13 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
 Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'sbdchd/neoformat'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/jspc.vim'
+Plug 'w0rp/ale'
 call plug#end()
 " }}}
 
@@ -102,10 +102,16 @@ let g:scratch_no_mappings = 1
 " }}}
 
 " {{{ Neoformat (Prettier)
+let g:neoformat_javascript_prettier = {
+            \ 'exe': 'prettier',
+            \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
+            \ }
+            " \ 'args': ['--trailing-comma all', '--no-bracket-spacing', '--single-quote', '--no-semi'],
 let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_verbose = 1
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat! javascript prettier
+  autocmd BufWritePre * Neoformat! javascript prettier
 augroup END
 " }}}
 
@@ -126,6 +132,7 @@ let g:grepper.stop = 500
 " }}}
 
 " {{{ Ctrl P
+nnoremap <silent> <c-t> :CtrlPLine<CR>
 if executable('rg')
   set grepprg=rg
   let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
@@ -139,20 +146,31 @@ elseif executable('ack')
 endif
 
 let g:ctrlp_cmd = 'CtrlPMRU'
+" let g:ctrlp_cmd = 'CtrlPBookmarkDir'
+" let g:ctrlp_cmd = 'CtrlPLastMode'
+" let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_use_caching = 0
+let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_mruf_relative = 1
+let g:ctrlp_match_current_file = 0
 let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_default_input = 0
+let g:ctrlp_types = ['fil', 'buf', 'mru']
+let g:ctrlp_mruf_exclude = '.*/.vimrc\|/temp/.*' " MacOSX/Linux
+let g:ctrlp_mruf_relative = 1
+
+let g:ctrlp_extensions = ['line', 'changes', 'bookmarkdir']
 " Using ag is faster, BUT wildignore doesn't work
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-set wildignore+=env/,node_modules/,dist/,bower_components/,tmp/,jest/
+" set wildignore+=env/,node_modules/,dist/,bower_components/,tmp/,jest/
+set wildignore+=env/,dist/,bower_components/,tmp/,jest/
 set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 set wildignore+=*__Scratch__ " scratch.vim
-let g:ctrlp_working_path_mode = 'a'
 " }}}
 
 " {{{ UltiSnips
@@ -161,72 +179,37 @@ let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 " }}}
 
 " {{{ Airline / Lightline
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'inactive': {
-      \   'left': [  [ 'filename' ],
-      \              [ 'parentfolder' ],
-      \              [ 'pwd' ]]
-      \ },
-      \ 'active': {
-      \   'left': [  [ 'filename' ],
-      \              [ 'parentfolder' ],
-      \              [ 'pwd' ]],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ]]
-      \ },
-      \ 'component': {
-      \ 'mode': '%{lightline#mode()}',
-      \ 'absolutepath': '%F',
-      \ 'relativepath': '%f',
-      \ 'pwd': '%{expand("%:p:h")}',
-      \ 'filename': '%t',
-      \ 'parentfolder': '%{expand("%:p:h:t")}',
-      \ 'modified': '%M',
-      \ 'bufnum': '%n',
-      \ 'paste': '%{&paste?"PASTE":""}',
-      \ 'readonly': '%R',
-      \ 'charvalue': '%b',
-      \ 'charvaluehex': '%B',
-      \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-      \ 'fileformat': '%{&ff}',
-      \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
-      \ 'percent': '%3p%%',
-      \ 'percentwin': '%P',
-      \ 'spell': '%{&spell?&spelllang:""}',
-      \ 'lineinfo': '%3l:%-2v',
-      \ 'line': '%l',
-      \ 'column': '%c',
-      \ 'close': '%999X X ' } }
-
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 let g:airline_theme='simple'
-let g:airline_section_a = '%t'
+" let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
+let g:airline_section_a = '%{expand("%:p:t")}'
+" let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
+" let g:airline_section_c = '%{substitute(substitute(expand("%:p"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
 let g:airline_section_b = '%{expand("%:p:h:t")}'
-let g:airline_section_c = '%{expand("%:p:h")}'
-let g:airline_section_x = '%{ObsessionStatus()}'
+let g:airline_section_c = '%{expand("%:p:h:h:t")}'
+" let g:airline_section_c = '%{join(split(expand("%:p", 1), "/")[0])}'
+" let g:airline_section_c = '%{getcwd()}'
+" let g:airline_section_c = '%{substitute(substitute(expand("%:p:h"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
+let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = ''
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
+let g:airline_inactive_collapse = 0
+
 
 " let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
 
-" {{{ Syntastic
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_auto_jump = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args="--ignore=C901,E501,E128,E202,E203,E226,E127,F401,E401,E302,E221,F811,E201,E126,F841,W293,W391 --max-complexity 10"
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = './odyssey/node_modules/eslint/bin/eslint.js'
-
+" {{{ ALE
+let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_fixers = {
+      \   'javascript': [
+      \       'eslint'
+      \   ],
+      \}
 " }}}
 
 " {{{ CtrlP Funky
@@ -238,7 +221,7 @@ let g:ctrlp_funky_syntax_highlight = 1
 " {{{ Options
 set noswapfile
 set autoread
-set wrap
+set nowrap
 " set showbreak=...>
 set breakat=\ ^I
 set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
@@ -286,24 +269,25 @@ set completeopt=menuone,preview
 set wildcharm=<TAB>
 
 set wildmenu
-set wildmode=full
+" set wildmode=full
+set wildmode=list:full
 set wildchar=<Tab>
 
 " Always show the statusline
 set laststatus=2
 set statusline=%f
 set statusline+=%=        " Switch to the right side
-set statusline+=%{fugitive#statusline()}
-set statusline+=%{ObsessionStatus()}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 set incsearch
 set hlsearch
 set noignorecase              " affects both searching and find/replace
 set smartcase
 
-" set foldmethod=indent
-" set foldnestmax=8
-" "set foldlevelstart=20
+set foldmethod=indent
+set foldnestmax=8
 set foldlevelstart=2
 
 
@@ -319,10 +303,8 @@ let xml_syntax_folding=1      " XML
 set conceallevel=0
 set concealcursor=vin
 
-" set foldlevelstart=0
 set foldnestmax=3
 set foldmethod=indent
-autocmd BufEnter .vimrc setlocal foldmethod=marker foldlevel=0
 
 set showtabline=0
 
@@ -341,6 +323,11 @@ set si
 
 let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 
+" Allow the :find command to search current directory recursively for a file
+" E.g. :find myfile.text
+" https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
+set path+=**
+
 " }}}
 
 " {{{ Languages
@@ -354,7 +341,10 @@ autocmd Syntax python normal zR
 " }}}
 
 " {{{ Javascript
-autocmd Syntax javascript map gd :TernDef<CR>
+" nmap gd :TernDef<CR>
+autocmd FileType javascript,javascript.jsx nmap gd :TernDef<CR>
+" map <leader>rn :!node %:p<CR>
+autocmd FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
 " }}}
 
 " {{{ Other Languages
@@ -377,11 +367,14 @@ vnoremap . :normal .<CR>
 
 let mapleader = "\<Space>"
 noremap - :e %:p:h<CR>
+" noremap _ :RangerEdit<CR>
+" noremap - :RangerEdit<CR>
 
 map <F1> :map <F1> :!
-map <F2> "hyiw:GrepperRg <c-r>h<CR>
-map <F3> :GrepperRg<SPACE>
-map <F4> "hyiw:Rg <c-r>h
+map <F2> "hyiw:%s/<c-r>h//c<LEFT><LEFT>
+map <F3> :GrepperAg ""<LEFT>
+" map <F4> "hyiw:GrepperAg <c-r>h<CR>
+" map <F4> "hyiw:Ag <c-r>h
 map <F5> :NERDTreeToggle<CR>
 noremap <F6> :!tig %<CR>
 nmap <F7> "hyiw:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
@@ -397,12 +390,13 @@ map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>p :set paste!<CR>
 map <leader>l :set list!<CR>
 map <leader>q :q<CR>
-map <leader>r :!py.test %:p<CR>
+" map <leader>q :bd<CR>
+" map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
-map <leader>t :tabnew<CR>
 map <leader>u :GundoToggle<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
+map <leader>x :bd<CR>
 map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 map <leader><leader>j :join<CR>
 map <leader><leader>s :UltiSnipsEdit<CR>
@@ -433,8 +427,8 @@ nmap   <Plug>CommentaryLine
 vmap   <Plug>Commentary
 
 " Center screen when going through search results
-nnoremap n nzz
-nnoremap N Nzz
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
 
 map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
 
@@ -517,6 +511,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 noremap gs :Scratch<CR>
 nnoremap gs :Scratch<CR>
+map gh !open https://www.npmjs.com/package/
 
 " Emmet expand html
 imap <c-e> <c-y>,
@@ -524,6 +519,8 @@ imap <c-e> <c-y>,
 nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+nmap gr "hyiw:GrepperAg <c-r>h<CR>
 " }}}
 
 " {{{ Functions
@@ -628,3 +625,7 @@ colorscheme null
 " set background=dark
 " }}} Colorscheme
 
+autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
+autocmd BufRead,BufNewFile .vimrc setlocal foldmethod=marker
+" autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker | AirlineRefresh
+" autocmd BufRead,BufNewFile .vimrc setlocal foldmethod=marker foldlevel=1
