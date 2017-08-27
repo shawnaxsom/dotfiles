@@ -2,7 +2,6 @@ nnoremap <leader>jt :! jsctags -o tags src<CR>
 
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
-Plug 'gmarik/Vundle.vim'
 Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tmhedberg/matchit'
