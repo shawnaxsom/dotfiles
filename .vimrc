@@ -1,6 +1,7 @@
 nnoremap <leader>jt :! jsctags -o tags src<CR>
 
 " {{{ Plugins
+" {{{ List of Plugins (Vim-Plug)
 call plug#begin('~/.vim/bundle')
 Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -69,6 +70,7 @@ Plug 'othree/jspc.vim'
 Plug 'w0rp/ale'
 Plug 'jacoborus/tender.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-rhubarb'
 call plug#end()
 " }}}
 
@@ -101,7 +103,6 @@ let g:scratch_persistence_file = '~/.scratch'
 let g:scratch_no_mappings = 1
 
 " }}}
-
 " {{{ Neoformat (Prettier)
 let g:neoformat_javascript_prettier = {
             \ 'exe': 'prettier',
@@ -119,7 +120,22 @@ augroup fmt
   autocmd BufWritePre  *.js Neoformat! javascript prettier
 augroup END
 " }}}
-
+" {{{ Fugitive
+map <leader>gc :Gcommit<CR>i
+map <leader>gp :Gpull<CR>
+map <leader>gP :Gpush<CR>
+map <leader>ge :Gedit<CR>
+map <leader>gs :Gstatus<CR>
+map <leader>gb :Gblame<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gR :Gread<CR>
+map <leader>gw :Gwrite<CR>
+map <leader>gl :GV<CR>
+map <leader>gL :GV!<CR>
+map <leader>gh :Gbrowse<CR>
+map <
+" map <leader>gL :Glog<BAR>:bot copen<CR>
+" }}}
 " {{{ YouCompleteMe
 
 " make YCM compatible with UltiSnips (using supertab)
@@ -128,14 +144,12 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " }}}
-
 " {{{ Grepper
 let g:grepper = {}
 runtime autoload/grepper.vim
 let g:grepper.jump = 1
 let g:grepper.stop = 500
 " }}}
-
 " {{{ Ctrl P
 nnoremap <silent> <c-t> :CtrlPLine<CR>
 if executable('rg')
@@ -179,12 +193,10 @@ set wildignore+=env/,dist/,bower_components/,tmp/,jest/
 set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 set wildignore+=*__Scratch__ " scratch.vim
 " }}}
-
 " {{{ UltiSnips
 " Fix directory UltiSnipsEdit places snippets in
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 " }}}
-
 " {{{ Airline / Lightline
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
@@ -208,7 +220,6 @@ let g:airline_inactive_collapse = 0
 
 " let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
-
 " {{{ ALE
 let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
 let g:ale_javascript_eslint_use_global = 1
@@ -218,13 +229,13 @@ let g:ale_fixers = {
       \   ],
       \}
 " }}}
-
 " {{{ CtrlP Funky
 let g:ctrlp_funky_syntax_highlight = 1
 " }}}
-
 " {{{ FZF
 let g:fzf_buffers_jump = 1
+" }}}
+
 " }}}
 
 " }}}
@@ -379,10 +390,8 @@ autocmd! BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " {{{ Mappings
 
-" allow the . to execute once for each line of a visual selection
-vnoremap . :normal .<CR>
+" {{{ Comma
 
-let mapleader = "\<Space>"
 " map ,, :b<Space>
 " map ,f :find<Space>
 " map ,e :find epics/**/**<LEFT>
@@ -409,6 +418,10 @@ noremap - :e %:p:h<CR>
 " noremap _ :RangerEdit<CR>
 " noremap - :RangerEdit<CR>
 
+
+" }}}
+
+" {{{ Function Keys
 map <F1> :map <F1> :!
 map <F2> "hyiw:%s/<c-r>h//c<LEFT><LEFT>
 map <F3> :GrepperAg ""<LEFT>
@@ -421,14 +434,18 @@ vmap <F7> "hy:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q
 noremap <F9> :RandomColorScheme<CR>:colo<CR>
 map <F12> "hyiw:Dash <c-r>h<CR>
 vmap <F12> "hy:Dash <c-r>h<CR>
+" }}}
 
-nmap = <c-w>=
 
-map <leader><tab> <c-^>
+" {{{ Leader <Space>
+
+let mapleader = "\<Space>"
+
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <leader>p :set paste!<CR>
 map <leader>l :set list!<CR>
+map <leader>o :copen<CR>
+map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
 " map <leader>q :bd<CR>
 " map <leader>r :!py.test %:p<CR>
@@ -452,21 +469,32 @@ map <leader><leader>u :PlugClean!<CR>
 " Diff put to grab changes using comma
 " noremap , :diffput<CR>
 
-map <leader>gC :Gcommit<CR>i
-map <leader>gP :Gpush<CR>
-map <leader>ge :Gedit<CR>
-map <leader>gs :Gstatus<CR>
-map <leader>gb :Gblame<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gR :Gread<CR>
-map <leader>gw :Gwrite<CR>
-map <leader>gl :GV!<CR>  " gv.vim
-map <leader>gL :Glog<BAR>:bot copen<CR>
+" Go to next / previous change (GitGutter)
+nmap <leader>j ]c
+nmap <leader>k [c
+map <leader>0 :set foldlevel=0<CR>
+map <leader>1 :set foldlevel=1<CR>
+map <leader>2 :set foldlevel=2<CR>
+map <leader>3 :set foldlevel=3<CR>
+map <leader>4 :set foldlevel=4<CR>
+map <leader>5 :set foldlevel=5<CR>
+map <leader>6 :set foldlevel=6<CR>
+map <leader>7 :set foldlevel=7<CR>
+" map <leader>8 :set foldlevel=8<CR>
+map <leader>9 :set foldlevel=999<CR>
+
+" }}}
+
+" allow the . to execute once for each line of a visual selection
+vnoremap . :normal .<CR>
+
+nmap = <c-w>=
+map <leader><tab> <c-^>
 
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
 
-" Comment out a line of code
+" Comment out a line of code with <c-/>
 nmap   <Plug>CommentaryLine
 vmap   <Plug>Commentary
 
@@ -488,10 +516,6 @@ let g:ag_highlight=1
 nnoremap j gj
 nnoremap k gk
 
-" Go to next / previous change (GitGutter)
-nmap <leader>j ]c
-nmap <leader>k [c
-
 map J }
 map K {
 map H [{
@@ -500,21 +524,10 @@ map L ]}
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 35, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
 
-
-
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
 
 nmap s <Plug>(easymotion-bd-w)
-" map S <Plug>(easymotion-b)
-" map s <Plug>(easymotion-w)
-" nmap s <Plug>(easymotion-overwin-f2)
-
-" map s  <Plug>(incsearch-forward)
-" map S  <Plug>(incsearch-backward)
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
 
 " Use '$ cat' to find the keys to map to
 " http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
@@ -526,17 +539,6 @@ map ¬ <c-w>l
 map ! :!
 
 imap <c-z> <c-y>,
-
-map <leader>0 :set foldlevel=0<CR>
-map <leader>1 :set foldlevel=1<CR>
-map <leader>2 :set foldlevel=2<CR>
-map <leader>3 :set foldlevel=3<CR>
-map <leader>4 :set foldlevel=4<CR>
-map <leader>5 :set foldlevel=5<CR>
-map <leader>6 :set foldlevel=6<CR>
-map <leader>7 :set foldlevel=7<CR>
-" map <leader>8 :set foldlevel=8<CR>
-map <leader>9 :set foldlevel=999<CR>
 
 map n nzo
 map p pzo
@@ -557,7 +559,7 @@ noremap gs :Scratch<CR>
 nnoremap gs :Scratch<CR>
 map go !open https://www.google.com/search?q=javascript+
 map gh !open https://github.com/search?q=
-map gn !open https://www.npmjs.com/package/
+map gn "pyi":!open https://www.npmjs.com/package/p
 
 " Emmet expand html
 imap <c-e> <c-y>,
