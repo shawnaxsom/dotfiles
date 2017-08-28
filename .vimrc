@@ -15,7 +15,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'tpope/vim-commentary'
 Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
-Plug 'tacahiroy/ctrlp-funky'
+" Plug 'tacahiroy/ctrlp-funky'
 Plug 'flazz/vim-colorschemes'
 Plug 'gregsexton/gitv'
 Plug 'vim-scripts/MultipleSearch'
@@ -68,6 +68,7 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/jspc.vim'
 Plug 'w0rp/ale'
 Plug 'jacoborus/tender.vim'
+Plug 'scrooloose/nerdtree'
 call plug#end()
 " }}}
 
@@ -154,7 +155,8 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 " let g:ctrlp_cmd = 'CtrlPLastMode'
 " let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_use_caching = 0
-let g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 0
+let g:ctrlp_regexp = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_match_current_file = 0
@@ -162,11 +164,12 @@ let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_default_input = 0
-let g:ctrlp_types = ['fil', 'buf', 'mru']
+let g:ctrlp_types = ['fil', 'mru']
 let g:ctrlp_mruf_exclude = '.*/.vimrc\|/temp/.*' " MacOSX/Linux
 let g:ctrlp_mruf_relative = 1
 
-let g:ctrlp_extensions = ['line', 'changes', 'bookmarkdir']
+" let g:ctrlp_extensions = ['line', 'changes', 'bookmarkdir']
+let g:ctrlp_extensions = []
 " Using ag is faster, BUT wildignore doesn't work
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
@@ -218,6 +221,10 @@ let g:ale_fixers = {
 
 " {{{ CtrlP Funky
 let g:ctrlp_funky_syntax_highlight = 1
+" }}}
+
+" {{{ FZF
+let g:fzf_buffers_jump = 1
 " }}}
 
 " }}}
@@ -351,7 +358,7 @@ autocmd! Syntax python normal zR
 " }}}
 
 " {{{ Javascript
-" nmap gd :TernDef<CR>
+nmap gd :TernDef<CR>
 autocmd! FileType javascript,javascript.jsx nmap gd :TernDef<CR>
 " map <leader>rn :!node %:p<CR>
 autocmd! FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
@@ -376,6 +383,28 @@ autocmd! BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 vnoremap . :normal .<CR>
 
 let mapleader = "\<Space>"
+" map ,, :b<Space>
+" map ,f :find<Space>
+" map ,e :find epics/**/**<LEFT>
+" map ,p :find parsers/**/**<LEFT>
+" map ,c :find components/**/**<LEFT>
+" map ,re :find reducers/**/**<LEFT>
+" map ,ro :find routes/**/**<LEFT>
+map ,, :CtrlPLine<CR>
+map ,f :CtrlPMRUFiles<CR>
+map ,e :CtrlPMRUFiles epics/<CR>
+map ,p :CtrlPMRUFiles parsers/<CR>
+map ,c :CtrlPMRUFiles components/<CR>
+map ,re :CtrlPMRUFiles reducers/<CR>
+map ,ro :CtrlPMRUFiles routes/<CR>
+" map <c-p> :History<CR>
+map ,, :Marks<CR>
+" map ,f :FZF<CR>
+" map ,e :FZF epics/<CR>
+" map ,p :FZF parsers/<CR>
+" map ,c :FZF components/<CR>
+" map ,re :FZF reducers/<CR>
+" map ,ro :FZF routes/<CR>
 noremap - :e %:p:h<CR>
 " noremap _ :RangerEdit<CR>
 " noremap - :RangerEdit<CR>
@@ -395,6 +424,7 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 
 nmap = <c-w>=
 
+map <leader><tab> <c-^>
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>p :set paste!<CR>
@@ -407,11 +437,15 @@ map <leader>u :GundoToggle<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader>x :bd<CR>
-map <leader>/ "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
+map <leader>/ "hyiw:Ag 
+map <leader>8 "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
+map <leader><leader>/ "hyiw:GrepperAg 
+map <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
+" map <leader>/ :GrepperAg ""<LEFT>
 map <leader><leader>j :join<CR>
 map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>w :ToggleWorkspace<CR>
-map <leader><leader>v :sp ~/.vimrc<CR>
+map <leader><leader>v :sp ~/.dotfiles/.vimrc<CR>
 map <leader><leader>i :PlugInstall<CR>
 map <leader><leader>u :PlugClean!<CR>
 
@@ -501,7 +535,7 @@ map <leader>4 :set foldlevel=4<CR>
 map <leader>5 :set foldlevel=5<CR>
 map <leader>6 :set foldlevel=6<CR>
 map <leader>7 :set foldlevel=7<CR>
-map <leader>8 :set foldlevel=8<CR>
+" map <leader>8 :set foldlevel=8<CR>
 map <leader>9 :set foldlevel=999<CR>
 
 map n nzo
@@ -521,7 +555,9 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 noremap gs :Scratch<CR>
 nnoremap gs :Scratch<CR>
-map gh !open https://www.npmjs.com/package/
+map go !open https://www.google.com/search?q=javascript+
+map gh !open https://github.com/search?q=
+map gn !open https://www.npmjs.com/package/
 
 " Emmet expand html
 imap <c-e> <c-y>,
@@ -530,7 +566,11 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
-nmap gr "hyiw:GrepperAg <c-r>h<CR>
+" nmap gr "hyiw:GrepperAg <c-r>h<CR>
+nmap gr "hyiw:Ag <c-r>h<CR>
+
+map ; :
+
 " }}}
 
 " {{{ Functions
@@ -627,10 +667,11 @@ syntax on
 " colorscheme predawn
 " set background=dark
 " colorscheme zenburn
-colorscheme tender
+" colorscheme tender
 " colorscheme elflord
+colorscheme gruvbox
 " }}} Colorscheme
 
-
-autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
+" autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
+autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker
 autocmd! BufRead,BufNewFile .vimrc setlocal foldmethod=marker
