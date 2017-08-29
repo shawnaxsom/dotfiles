@@ -1,5 +1,126 @@
 nnoremap <leader>jt :! jsctags -o tags src<CR>
 
+" {{{ Options
+set noswapfile
+set autoread
+set nowrap
+" set showbreak=...>
+set breakat=\ ^I
+set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
+set nolist
+
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+" set mouse=a " Allows mouse click to move cursor, but it makes it harder to copy text
+set virtualedit=all "allow cursor to stay in same column while scrolling
+" set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
+if $TMUX == ''
+  set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
+endif
+set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
+set backspace=indent,eol,start
+set scrolloff=17 "Keep cursor centered -- this is choppy if scrolling multiple splits
+set cindent
+set shell=bash
+set more " Use MORE as pager
+set lazyredraw
+set ttyfast
+set ttymouse=xterm2
+set showmatch
+set splitbelow
+set splitright
+set gdefault
+set confirm
+set diffopt=vertical
+set hidden
+set history=1000
+set linebreak
+set nojoinspaces
+set magic
+set browsedir=buffer
+set nocursorline
+set nobackup
+set nowritebackup
+set number
+set relativenumber
+
+set complete=.,w,b,u,t
+set completeopt=menuone,preview
+set wildcharm=<TAB>
+
+set wildmenu
+" set wildmode=full
+set wildmode=list:full
+set wildchar=<Tab>
+
+" Always show the statusline
+set laststatus=2
+set statusline=%f
+set statusline+=%=        " Switch to the right side
+set statusline+=%#warningmsg#
+
+set incsearch
+set hlsearch
+set noignorecase              " affects both searching and find/replace
+set smartcase
+
+set foldmethod=indent
+set foldnestmax=8
+set foldlevelstart=2
+
+
+let javaScript_fold=1         " JavaScript
+let perl_fold=1               " Perl
+let php_folding=1             " PHP
+let r_syntax_folding=1        " R
+let ruby_fold=1               " Ruby
+let sh_fold_enabled=1         " sh
+let vimsyn_folding='af'       " Vim script
+let xml_syntax_folding=1      " XML
+
+set conceallevel=0
+set concealcursor=vin
+
+set foldnestmax=3
+set foldmethod=indent
+
+set showtabline=0
+
+" Change CWD while navigating in NetRW.
+" This is necessary if you want to move a file like this: mt > cd > mf > mm
+" Otherwise you have to manually change cwd as well: mt > cd > c > mf > mm
+" let g:netrw_keepdir=0
+" Allow netrw to remove non-empty local directories
+let g:netrw_localrmdir='rm -r'
+
+" Auto indent wasn't working without this on bottom
+filetype indent on
+set ai
+set si
+
+
+let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
+
+" Allow the :find command to search current directory recursively for a file
+" E.g. :find myfile.text
+" https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
+set path+=**
+
+" Set window title to include current filename.
+" Great for use in iterm2: press cmd+shift+o and search for filename of a
+" window
+set t_ts=]1;
+set t_fs=
+set title
+
+let mapleader = "\<Space>"
+
+" }}}
+
 " {{{ Plugins
 " {{{ List of Plugins (Vim-Plug)
 call plug#begin('~/.vim/bundle')
@@ -33,7 +154,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/gv.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'hail2u/vim-css3-syntax'
@@ -48,7 +169,7 @@ Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'rhysd/clever-f.vim'
+" Plug 'rhysd/clever-f.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
@@ -59,7 +180,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'sjl/gundo.vim'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
-Plug 'moll/vim-node'
+" Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ervandew/supertab'
@@ -71,6 +192,8 @@ Plug 'w0rp/ale'
 Plug 'jacoborus/tender.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-rhubarb'
+" Plug 'Shougo/vimfiler.vim'
+" Plug 'Shougo/unite.vim'
 call plug#end()
 " }}}
 
@@ -98,9 +221,12 @@ let g:UltiSnipsEditSplit="vertical"
 let g:clever_f_across_no_line = 1
 let g:clever_f_timeout_ms = 3000
 
-let g:scratch_autohide = 1
-let g:scratch_persistence_file = '~/.scratch'
+let g:scratch_persistence_file = expand('$HOME/.scratch')
+" map gs :topleft 8split ~/.scratch<CR>
+let g:scratch_autohide = 0
 let g:scratch_no_mappings = 1
+noremap gs :Scratch<CR>
+nnoremap gs :Scratch<CR>
 
 " }}}
 " {{{ Neoformat (Prettier)
@@ -133,8 +259,14 @@ map <leader>gw :Gwrite<CR>
 map <leader>gl :GV<CR>
 map <leader>gL :GV!<CR>
 map <leader>gh :Gbrowse<CR>
-map <
 " map <leader>gL :Glog<BAR>:bot copen<CR>
+
+" augroup gitlog
+"   autocmd!
+"   autocmd FileType git nmap J /diff<CR> | nmap K k?diff<CR>
+" augroup END
+" autocmd! BufRead,BufNewFile fugitive* git nmap <leader>J /diff<CR>
+
 " }}}
 " {{{ YouCompleteMe
 
@@ -235,126 +367,11 @@ let g:ctrlp_funky_syntax_highlight = 1
 " {{{ FZF
 let g:fzf_buffers_jump = 1
 " }}}
-
+" {{{ VimFiler
+:let g:vimfiler_as_default_explorer = 1
 " }}}
 
 " }}}
-
-" {{{ Options
-set noswapfile
-set autoread
-set nowrap
-" set showbreak=...>
-set breakat=\ ^I
-set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
-set nolist
-
-set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
-" set mouse=a " Allows mouse click to move cursor, but it makes it harder to copy text
-set virtualedit=all "allow cursor to stay in same column while scrolling
-" set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
-set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
-set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
-set backspace=indent,eol,start
-set scrolloff=17 "Keep cursor centered -- this is choppy if scrolling multiple splits
-set cindent
-set shell=bash
-set more " Use MORE as pager
-set lazyredraw
-set ttyfast
-set ttymouse=xterm2
-set showmatch
-set splitbelow
-set splitright
-set gdefault
-set confirm
-set diffopt=vertical
-set hidden
-set history=1000
-set linebreak
-set nojoinspaces
-set magic
-set browsedir=buffer
-set nocursorline
-set nobackup
-set nowritebackup
-set number
-set relativenumber
-
-set complete=.,w,b,u,t
-set completeopt=menuone,preview
-set wildcharm=<TAB>
-
-set wildmenu
-" set wildmode=full
-set wildmode=list:full
-set wildchar=<Tab>
-
-" Always show the statusline
-set laststatus=2
-set statusline=%f
-set statusline+=%=        " Switch to the right side
-set statusline+=%#warningmsg#
-
-set incsearch
-set hlsearch
-set noignorecase              " affects both searching and find/replace
-set smartcase
-
-set foldmethod=indent
-set foldnestmax=8
-set foldlevelstart=2
-
-
-let javaScript_fold=1         " JavaScript
-let perl_fold=1               " Perl
-let php_folding=1             " PHP
-let r_syntax_folding=1        " R
-let ruby_fold=1               " Ruby
-let sh_fold_enabled=1         " sh
-let vimsyn_folding='af'       " Vim script
-let xml_syntax_folding=1      " XML
-
-set conceallevel=0
-set concealcursor=vin
-
-set foldnestmax=3
-set foldmethod=indent
-
-set showtabline=0
-
-" Change CWD while navigating in NetRW.
-" This is necessary if you want to move a file like this: mt > cd > mf > mm
-" Otherwise you have to manually change cwd as well: mt > cd > c > mf > mm
-" let g:netrw_keepdir=0
-" Allow netrw to remove non-empty local directories
-let g:netrw_localrmdir='rm -r'
-
-" Auto indent wasn't working without this on bottom
-filetype indent on
-set ai
-set si
-
-
-let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
-
-" Allow the :find command to search current directory recursively for a file
-" E.g. :find myfile.text
-" https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
-set path+=**
-
-" Set window title to include current filename.
-" Great for use in iterm2: press cmd+shift+o and search for filename of a
-" window
-set t_ts=]1;
-set t_fs=
-set title
-
 
 " }}}
 
@@ -368,8 +385,24 @@ autocmd! Syntax python setlocal foldmethod=indent
 autocmd! Syntax python normal zR
 " }}}
 
+if !exists('*TagsUnderCursor')
+  function TagsUnderCursor()
+    try
+      let default_input_save = get(g:, 'ctrlp_default_input', '')
+      let g:ctrlp_default_input = expand('<cfile>')
+      CtrlP
+    finally
+      if exists('default_input_save')
+        let g:ctrlp_default_input = default_input_save
+      endif
+    endtry
+  endfun
+endif
+
 " {{{ Javascript
 nmap gd :TernDef<CR>
+" nnoremap gf 0f"lv$F/"py:FZF<CR>foo
+" nnoremap gf :call TagsUnderCursor()<CR>
 autocmd! FileType javascript,javascript.jsx nmap gd :TernDef<CR>
 " map <leader>rn :!node %:p<CR>
 autocmd! FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
@@ -399,7 +432,8 @@ autocmd! BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " map ,c :find components/**/**<LEFT>
 " map ,re :find reducers/**/**<LEFT>
 " map ,ro :find routes/**/**<LEFT>
-map ,, :CtrlPLine<CR>
+" map ,, :CtrlPLine<CR>
+map ,, :BLines<CR>
 map ,f :CtrlPMRUFiles<CR>
 map ,e :CtrlPMRUFiles epics/<CR>
 map ,p :CtrlPMRUFiles parsers/<CR>
@@ -407,7 +441,7 @@ map ,c :CtrlPMRUFiles components/<CR>
 map ,re :CtrlPMRUFiles reducers/<CR>
 map ,ro :CtrlPMRUFiles routes/<CR>
 " map <c-p> :History<CR>
-map ,, :Marks<CR>
+" map ,, :Marks<CR>
 " map ,f :FZF<CR>
 " map ,e :FZF epics/<CR>
 " map ,p :FZF parsers/<CR>
@@ -439,32 +473,34 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 
 " {{{ Leader <Space>
 
-let mapleader = "\<Space>"
 
+
+" map <leader>/ "hyiw:Ag 
+map <leader>/ "hyiw:GrepperAg ""<LEFT>
+map <leader>8 "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
+map <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
+map <leader><leader>i :PlugInstall<CR>
+map <leader><leader>j :join<CR>
+map <leader><leader>s :UltiSnipsEdit<CR>
+map <leader><leader>u :PlugClean!<CR>
+map <leader><leader>v :sp ~/.dotfiles/.vimrc<CR>
+map <leader><leader>w :ToggleWorkspace<CR>
 map <leader>c :q<CR>
 map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>f :ALEFix<CR>
 map <leader>l :set list!<CR>
-map <leader>o :copen<CR>
+" map <leader>o :copen<CR>
+map <leader>oo !open https://www.google.com/search?q=javascript+
+map <leader>oh !open https://github.com/search?q=
+map <leader>on "pyi":!open https://www.npmjs.com/package/p
 map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
-" map <leader>q :bd<CR>
-" map <leader>r :!py.test %:p<CR>
 map <leader>s :sp<CR>
+map <leader>t :NERDTreeFind<CR>
 map <leader>u :GundoToggle<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
 map <leader>x :bd<CR>
-map <leader>/ "hyiw:Ag 
-map <leader>8 "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
-map <leader><leader>/ "hyiw:GrepperAg 
-map <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
-" map <leader>/ :GrepperAg ""<LEFT>
-map <leader><leader>j :join<CR>
-map <leader><leader>s :UltiSnipsEdit<CR>
-map <leader><leader>w :ToggleWorkspace<CR>
-map <leader><leader>v :sp ~/.dotfiles/.vimrc<CR>
-map <leader><leader>i :PlugInstall<CR>
-map <leader><leader>u :PlugClean!<CR>
 
 " Diff put to grab changes using comma
 " noremap , :diffput<CR>
@@ -540,9 +576,6 @@ map ! :!
 
 imap <c-z> <c-y>,
 
-map n nzo
-map p pzo
-
 " Show colorscheme element under cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -555,12 +588,6 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 " repeat.vim
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
-noremap gs :Scratch<CR>
-nnoremap gs :Scratch<CR>
-map go !open https://www.google.com/search?q=javascript+
-map gh !open https://github.com/search?q=
-map gn "pyi":!open https://www.npmjs.com/package/p
-
 " Emmet expand html
 imap <c-e> <c-y>,
 
@@ -568,8 +595,7 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
-" nmap gr "hyiw:GrepperAg <c-r>h<CR>
-nmap gr "hyiw:Ag <c-r>h<CR>
+nmap gr "hyiw:GrepperAg <c-r>h<CR>
 
 map ; :
 
