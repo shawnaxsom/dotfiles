@@ -143,7 +143,6 @@ let mapleader = "\<Space>"
 " {{{ List of Plugins (Vim-Plug)
 call plug#begin('~/.vim/bundle')
 Plug 'tpope/vim-sensible'
-Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tmhedberg/matchit'
 Plug 'lambacck/python_matchit'
@@ -422,7 +421,6 @@ map ,i :call VimuxInspectRunner()<CR>
 map ,z :VimuxZoomRunner<CR>
 " }}}
 " {{{ Dash.app
-" nmap <silent> <leader>h <Plug>DashGlobalSearch
 nmap <silent> <leader>d <Plug>DashSearch
 let g:dash_map = {
       \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
@@ -504,7 +502,7 @@ augroup filemarks
   autocmd BufEnter */routes/*        normal! mR
   autocmd BufEnter */reducers/*      normal! mS
   autocmd BufEnter */components/*    normal! mC
-  autocmd BufEnter */api/*    normal! mA
+  autocmd BufEnter */api/*           normal! mA
 augroup END
 " }}}
 
@@ -651,8 +649,8 @@ map H [{
 map L ]}
 " map <leader>h [{
 " map <leader>l ]}
-" map <silent> H :BufSurfBack<CR>
-" map <silent> L :BufSurfForward<CR>
+map <silent> <leader>h :BufSurfBack<CR>
+map <silent> <leader>l :BufSurfForward<CR>
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 35, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
