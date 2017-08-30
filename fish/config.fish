@@ -42,6 +42,9 @@ end
 
 set -gx PATH /Users/shawnaxsom/Library/Android/sdk/platform-tools $PATH
 
+# https://hub.github.com/
+alias git='hub'
+
 alias ga='git add .'
 alias gc='git commit'
 alias gp='git pull'
@@ -49,6 +52,10 @@ alias gP='git push'
 alias gl='git log -p'
 alias gs='git status'
 alias gd='git diff'
+alias gpr='git pull-request'
+alias gh='git browse'
+alias gb='git browse'
+
 alias vs='vim -S'
 alias f='find . -name'
 alias g='grep'

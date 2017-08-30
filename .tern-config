@@ -1,7 +1,17 @@
 {
+  "ecmaVersion": 6,
+  "libs": [
+    "browser",
+    "react"
+  ],
+  "dontLoad": [
+    "node_modules/**"
+  ],
   "plugins": {
-    "node": {},
     "node_resolve": {},
-    "es_modules": {}
+    "es_modules": {},
+    "webpack": {
+      "configPath": "../node_modules/react-scripts/config/webpack.config.dev.js"
+    }
   }
 }

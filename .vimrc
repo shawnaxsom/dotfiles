@@ -1,29 +1,48 @@
-nnoremap <leader>jt :! jsctags -o tags src<CR>
-
 " {{{ Options
+
+" Don't use a swapfile
 set noswapfile
+
+" Update buffer if file changes outside of Vim, without prompt
 set autoread
+
+" Don't wrap normally
 set nowrap
-" set showbreak=...>
+
+" If you enable wrap, break on spaces or tabs
 set breakat=\ ^I
-set noautochdir "Some plugins don't work with this enabled, like vimfiler or vimshell
+
+" Don't change directory to current buffer. 
+" Some plugins don't work with this enabled, like vimfiler or vimshell
+set noautochdir
 set nolist
 
+" Use GUI colors if supported, with more colors available
+set termguicolors
+
+" If you open up gVim for whatever reason
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-" set mouse=a " Allows mouse click to move cursor, but it makes it harder to copy text
-set virtualedit=all "allow cursor to stay in same column while scrolling
-" set clipboard=unnamedplus " allow copy/paste using system clipboard (otherwise have to use "+)
-if $TMUX == ''
-  set clipboard=unnamed " allow copy/paste using system clipboard (otherwise have to use "+)
+" allow cursor to stay in same column while scrolling
+set virtualedit=all
+
+" allow copy/paste using system clipboard (otherwise have to use "+)
+if $TMUX == ''  " disable in TMux as it breaks copy / paste and is not needed
+  set clipboard=unnamed
 endif
+
+" The basics
 set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
+
+" Allow backspace to go past beginning of line
 set backspace=indent,eol,start
-set scrolloff=17 "Keep cursor centered -- this is choppy if scrolling multiple splits
+
+" Keep cursor centered -- this is choppy if scrolling multiple splits
+set scrolloff=17
 set cindent
 set shell=bash
 set more " Use MORE as pager
@@ -64,13 +83,15 @@ set statusline+=%=        " Switch to the right side
 set statusline+=%#warningmsg#
 
 set incsearch
-set hlsearch
+set nohlsearch
 set noignorecase              " affects both searching and find/replace
 set smartcase
 
 set foldmethod=indent
 set foldnestmax=8
 set foldlevelstart=2
+set foldmethod=indent
+
 
 
 let javaScript_fold=1         " JavaScript
@@ -84,9 +105,6 @@ let xml_syntax_folding=1      " XML
 
 set conceallevel=0
 set concealcursor=vin
-
-set foldnestmax=3
-set foldmethod=indent
 
 set showtabline=0
 
@@ -124,6 +142,7 @@ let mapleader = "\<Space>"
 " {{{ Plugins
 " {{{ List of Plugins (Vim-Plug)
 call plug#begin('~/.vim/bundle')
+Plug 'tpope/vim-sensible'
 Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tmhedberg/matchit'
@@ -131,7 +150,6 @@ Plug 'lambacck/python_matchit'
 Plug 'tpope/vim-fugitive'
 Plug 'Chun-Yang/vim-action-ag'
 Plug 'airblade/vim-gitgutter'
-Plug 'jelera/vim-javascript-syntax'
 Plug 'qstrahl/vim-matchmaker'
 Plug 'haya14busa/incsearch.vim'
 Plug 'tpope/vim-commentary'
@@ -148,7 +166,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'dyng/ctrlsf.vim'
 Plug 'rubik/vim-radon'
 Plug 'SirVer/ultisnips'
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
@@ -178,22 +196,28 @@ Plug 'mtth/scratch.vim'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-eunuch'
 Plug 'sjl/gundo.vim'
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+" Shouldn't be needed
+" since tern is built in to YouCompleteMe now, if using flag
+" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }  
 Plug 'rizzatti/dash.vim'
 " Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
 Plug 'sbdchd/neoformat'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/jspc.vim'
-Plug 'w0rp/ale'
-Plug 'jacoborus/tender.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-rhubarb'
-" Plug 'Shougo/vimfiler.vim'
-" Plug 'Shougo/unite.vim'
+Plug 'w0rp/ale'  " Async linting
+" Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
+Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
+Plug 'chrisbra/NrrwRgn'  " :NR on selected text to open focused split that syncs
+Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
+Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
+Plug 'sheerun/vim-polyglot'  " Collection of language plugins
+Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
+Plug 'ton/vim-bufsurf'  " Previous buffer history with :BufSurfForward and :BufSurfBackward
+Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
 call plug#end()
 " }}}
 
@@ -225,6 +249,7 @@ let g:scratch_persistence_file = expand('$HOME/.scratch')
 " map gs :topleft 8split ~/.scratch<CR>
 let g:scratch_autohide = 0
 let g:scratch_no_mappings = 1
+let g:scratch_height = 8
 noremap gs :Scratch<CR>
 nnoremap gs :Scratch<CR>
 
@@ -241,10 +266,29 @@ let g:neoformat_verbose = 0
 "   autocmd!
 "   autocmd BufWritePre * Neoformat! javascript prettier
 " augroup END
-augroup fmt
-  autocmd!
-  autocmd BufWritePre  *.js Neoformat! javascript prettier
-augroup END
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre  *.js Neoformat! javascript prettier
+" augroup END
+
+" Neoformat when pressing =
+nmap <silent> = :Neoformat<CR>
+
+" Have Neoformat use &formatprg as a formatter
+let g:neoformat_try_formatprg = 1
+
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+" Don't be annoying with the 'no change was necessary' messages
+let g:neoformat_only_msg_on_error = 1
+
 " }}}
 " {{{ Fugitive
 map <leader>gc :Gcommit<CR>i
@@ -269,6 +313,7 @@ map <leader>gh :Gbrowse<CR>
 
 " }}}
 " {{{ YouCompleteMe
+nmap <silent> gd :YcmCompleter GoTo<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -301,7 +346,7 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 " let g:ctrlp_cmd = 'CtrlPLastMode'
 " let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_use_caching = 0
-let g:ctrlp_by_filename = 0
+let g:ctrlp_by_filename = 1
 let g:ctrlp_regexp = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_mruf_relative = 1
@@ -370,7 +415,29 @@ let g:fzf_buffers_jump = 1
 " {{{ VimFiler
 :let g:vimfiler_as_default_explorer = 1
 " }}}
-
+" {{{ Vimux
+let g:VimuxHeight = "25"
+map ,v :call VimuxRunCommand("")<LEFT><LEFT>
+map ,i :call VimuxInspectRunner()<CR>
+map ,z :VimuxZoomRunner<CR>
+" }}}
+" {{{ Dash.app
+" nmap <silent> <leader>h <Plug>DashGlobalSearch
+nmap <silent> <leader>d <Plug>DashSearch
+let g:dash_map = {
+      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
+      \ }
+" }}}
+" {{{ simple-todo
+let g:simple_todo_map_keys = 0
+augroup simpletodo
+  autocmd!
+  autocmd FileType scratch nmap <buffer> <leader>i <Plug>(simple-todo-new-start-of-line)i
+  autocmd FileType scratch nmap <buffer> <leader>o <Plug>(simple-todo-below)
+  autocmd FileType scratch nmap <buffer> <leader>x <Plug>(simple-todo-mark-switch)
+  autocmd BufLeave __Scratch__ wall
+augroup END
+" }}}
 " }}}
 
 " }}}
@@ -400,12 +467,20 @@ if !exists('*TagsUnderCursor')
 endif
 
 " {{{ Javascript
-nmap gd :TernDef<CR>
+" nmap gd :TernDef<CR>
+" nmap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " nnoremap gf 0f"lv$F/"py:FZF<CR>foo
 " nnoremap gf :call TagsUnderCursor()<CR>
-autocmd! FileType javascript,javascript.jsx nmap gd :TernDef<CR>
 " map <leader>rn :!node %:p<CR>
-autocmd! FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
+" autocmd FileType javascript,javascript.jsx nmap gd :TernDef<CR>
+" autocmd! FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
+" autocmd! FileType javascript.jsx map ,r :call VimuxRunCommand("npm start")
+" autocmd! FileType javascript.jsx map ,t :call VimuxRunCommand("npm start")
+augroup javascript
+  autocmd!
+  autocmd FileType javascript,javascript.jsx map ,r :call VimuxRunCommand("npm start")<CR>
+  autocmd FileType javascript,javascript.jsx map ,t :call VimuxRunCommand("npm test")<CR>
+augroup END
 " }}}
 
 " {{{ Other Languages
@@ -421,6 +496,18 @@ autocmd! BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " }}}
 
+" {{{ File Marks
+augroup filemarks
+  autocmd!
+  autocmd BufEnter *.{js,jsx,coffee} normal! mJ
+  autocmd BufEnter */parsers/*       normal! mP
+  autocmd BufEnter */routes/*        normal! mR
+  autocmd BufEnter */reducers/*      normal! mS
+  autocmd BufEnter */components/*    normal! mC
+  autocmd BufEnter */api/*    normal! mA
+augroup END
+" }}}
+
 " {{{ Mappings
 
 " {{{ Comma
@@ -433,13 +520,13 @@ autocmd! BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " map ,re :find reducers/**/**<LEFT>
 " map ,ro :find routes/**/**<LEFT>
 " map ,, :CtrlPLine<CR>
-map ,, :BLines<CR>
-map ,f :CtrlPMRUFiles<CR>
-map ,e :CtrlPMRUFiles epics/<CR>
-map ,p :CtrlPMRUFiles parsers/<CR>
-map ,c :CtrlPMRUFiles components/<CR>
-map ,re :CtrlPMRUFiles reducers/<CR>
-map ,ro :CtrlPMRUFiles routes/<CR>
+" map ,, :BLines<CR>
+" map ,f :CtrlPMRUFiles<CR>
+" map ,e :CtrlPMRUFiles epics/<CR>
+" map ,p :CtrlPMRUFiles parsers/<CR>
+" map ,c :CtrlPMRUFiles components/<CR>
+" map ,re :CtrlPMRUFiles reducers/<CR>
+" map ,ro :CtrlPMRUFiles routes/<CR>
 " map <c-p> :History<CR>
 " map ,, :Marks<CR>
 " map ,f :FZF<CR>
@@ -470,7 +557,6 @@ map <F12> "hyiw:Dash <c-r>h<CR>
 vmap <F12> "hy:Dash <c-r>h<CR>
 " }}}
 
-
 " {{{ Leader <Space>
 
 
@@ -485,10 +571,9 @@ map <leader><leader>s :UltiSnipsEdit<CR>
 map <leader><leader>u :PlugClean!<CR>
 map <leader><leader>v :sp ~/.dotfiles/.vimrc<CR>
 map <leader><leader>w :ToggleWorkspace<CR>
-map <leader>c :q<CR>
-map <leader>d :sp<CR>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+" map <leader>c :q<CR>
 map <leader>f :ALEFix<CR>
-map <leader>l :set list!<CR>
+" map <leader>l :set list!<CR>
 " map <leader>o :copen<CR>
 map <leader>oo !open https://www.google.com/search?q=javascript+
 map <leader>oh !open https://github.com/search?q=
@@ -500,7 +585,6 @@ map <leader>t :NERDTreeFind<CR>
 map <leader>u :GundoToggle<CR>
 map <leader>v :vsp<CR>
 map <leader>w :w<CR>
-map <leader>x :bd<CR>
 
 " Diff put to grab changes using comma
 " noremap , :diffput<CR>
@@ -521,10 +605,19 @@ map <leader>9 :set foldlevel=999<CR>
 
 " }}}
 
+map ,1 1
+map ,2 2
+map ,3 3
+map ,4 4
+map ,5 5
+map ,6 6
+map ,7 7
+map ,8 8
+map ,9 9
+
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
 
-nmap = <c-w>=
 map <leader><tab> <c-^>
 
 noremap <c-f> :cnext<CR>
@@ -538,7 +631,7 @@ vmap   <Plug>Commentary
 " nnoremap <silent> n nzz
 " nnoremap <silent> N Nzz
 
-map \ :YcmCompleter GoToDefinitionElseDeclaration<CR><CR>
+map \ :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 map Q :cprev<CR>
 map <c-q> :cnext<CR>
@@ -556,6 +649,10 @@ map J }
 map K {
 map H [{
 map L ]}
+" map <leader>h [{
+" map <leader>l ]}
+" map <silent> H :BufSurfBack<CR>
+" map <silent> L :BufSurfForward<CR>
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 35, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
@@ -596,6 +693,7 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 nmap gr "hyiw:GrepperAg <c-r>h<CR>
+nmap gR :YcmCompleter GoToReferences<CR>
 
 map ; :
 
@@ -695,7 +793,6 @@ syntax on
 " colorscheme predawn
 " set background=dark
 " colorscheme zenburn
-" colorscheme tender
 " colorscheme elflord
 colorscheme gruvbox
 " }}} Colorscheme
