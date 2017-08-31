@@ -12,7 +12,7 @@ set nowrap
 " If you enable wrap, break on spaces or tabs
 set breakat=\ ^I
 
-" Don't change directory to current buffer. 
+" Don't change directory to current buffer.
 " Some plugins don't work with this enabled, like vimfiler or vimshell
 set noautochdir
 set nolist
@@ -42,7 +42,7 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-set scrolloff=17
+" set scrolloff=17
 set cindent
 set shell=bash
 set more " Use MORE as pager
@@ -142,19 +142,31 @@ let mapleader = "\<Space>"
 " {{{ Plugins
 " {{{ List of Plugins (Vim-Plug)
 call plug#begin('~/.vim/bundle')
-Plug 'tpope/vim-sensible'
+" 1 - Essential
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" 2 - Great
+Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
+Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
+Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
+
+" 3 - Decent
+
+" 4 - Could do without
+" Plug 'jiangmiao/auto-pairs'
+
+" 5 - New / Evaluating
+Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
 Plug 'lambacck/python_matchit'
-Plug 'tpope/vim-fugitive'
 Plug 'Chun-Yang/vim-action-ag'
-Plug 'airblade/vim-gitgutter'
 Plug 'qstrahl/vim-matchmaker'
 Plug 'haya14busa/incsearch.vim'
 Plug 'tpope/vim-commentary'
 Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
-" Plug 'tacahiroy/ctrlp-funky'
 Plug 'flazz/vim-colorschemes'
 Plug 'gregsexton/gitv'
 Plug 'vim-scripts/MultipleSearch'
@@ -165,14 +177,11 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'dyng/ctrlsf.vim'
 Plug 'rubik/vim-radon'
 Plug 'SirVer/ultisnips'
-" Plug 'mattn/emmet-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
-" Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/gv.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-obsession'
@@ -190,14 +199,13 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
-Plug 'tpope/vim-vinegar'
-Plug 'mtth/scratch.vim'
+" Plug 'mtth/scratch.vim'
 Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-eunuch'
 Plug 'sjl/gundo.vim'
 " Shouldn't be needed
 " since tern is built in to YouCompleteMe now, if using flag
-" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }  
+" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
 " Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
@@ -214,9 +222,16 @@ Plug 'chrisbra/NrrwRgn'  " :NR on selected text to open focused split that syncs
 Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
 Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
 Plug 'sheerun/vim-polyglot'  " Collection of language plugins
-Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
 Plug 'ton/vim-bufsurf'  " Previous buffer history with :BufSurfForward and :BufSurfBackward
 Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
+Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
+Plug 'dominikduda/vim_current_word'  " Show the currently selected word highlighted
+Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
+Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p
+Plug 'justinmk/vim-dirvish'  " File manager
+Plug 'int3/vim-extradite'
+Plug 'farmergreg/vim-lastplace'
+Plug 'tpope/vim-dispatch'
 call plug#end()
 " }}}
 
@@ -244,14 +259,20 @@ let g:UltiSnipsEditSplit="vertical"
 let g:clever_f_across_no_line = 1
 let g:clever_f_timeout_ms = 3000
 
-let g:scratch_persistence_file = expand('$HOME/.scratch')
-" map gs :topleft 8split ~/.scratch<CR>
-let g:scratch_autohide = 0
-let g:scratch_no_mappings = 1
-let g:scratch_height = 8
-noremap gs :Scratch<CR>
-nnoremap gs :Scratch<CR>
+" let g:scratch_persistence_file = expand('$HOME/.scratch')
+map gs :topleft 8split ~/.scratch<CR>
+" let g:scratch_autohide = 0
+" let g:scratch_no_mappings = 1
+" let g:scratch_height = 8
+" noremap gs :Scratch<CR>
+" nnoremap gs :Scratch<CR>
 
+" }}}
+" {{{ Codi
+nmap <leader>c :Codi!!<CR>
+let g:codi#aliases = {
+      \ 'javascript.jsx': 'javascript',
+      \ }
 " }}}
 " {{{ Neoformat (Prettier)
 let g:neoformat_javascript_prettier = {
@@ -289,7 +310,7 @@ let g:neoformat_basic_format_trim = 1
 let g:neoformat_only_msg_on_error = 1
 
 " }}}
-" {{{ Fugitive
+" {{{ Fugitive / Extradite
 map <leader>gc :Gcommit<CR>i
 map <leader>gp :Gpull<CR>
 map <leader>gP :Gpush<CR>
@@ -299,10 +320,9 @@ map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gR :Gread<CR>
 map <leader>gw :Gwrite<CR>
-map <leader>gl :GV<CR>
-map <leader>gL :GV!<CR>
 map <leader>gh :Gbrowse<CR>
-" map <leader>gL :Glog<BAR>:bot copen<CR>
+map <leader>gl :Extradite<CR>
+map <leader>gL :Glog<BAR>:bot copen<CR>
 
 " augroup gitlog
 "   autocmd!
@@ -312,7 +332,8 @@ map <leader>gh :Gbrowse<CR>
 
 " }}}
 " {{{ YouCompleteMe
-nmap <silent> gd :YcmCompleter GoTo<CR>
+" nmap <silent> gd :YcmCompleter GoTo<CR>
+nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -414,9 +435,12 @@ let g:fzf_buffers_jump = 1
 " {{{ VimFiler
 :let g:vimfiler_as_default_explorer = 1
 " }}}
-" {{{ Vimux
-let g:VimuxHeight = "25"
-map ,v :call VimuxRunCommand("")<LEFT><LEFT>
+" {{{ Vimux / Dispatch
+let g:VimuxHeight = "20"
+let g:VimuxPromptString = "Vimux>  $ "
+map ,v :call VimuxPromptCommand("npm start")<CR>
+" Dispatch is better for single tasks, shows quickfix results afterwards
+map ,d :Dispatch<SPACE>
 map ,i :call VimuxInspectRunner()<CR>
 map ,z :VimuxZoomRunner<CR>
 " }}}
@@ -426,16 +450,48 @@ let g:dash_map = {
       \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
       \ }
 " }}}
-" {{{ simple-todo
+" {{{ vim-simple-todo
 let g:simple_todo_map_keys = 0
 augroup simpletodo
   autocmd!
-  autocmd FileType scratch nmap <buffer> <leader>i <Plug>(simple-todo-new-start-of-line)i
-  autocmd FileType scratch nmap <buffer> <leader>o <Plug>(simple-todo-below)
-  autocmd FileType scratch nmap <buffer> <leader>x <Plug>(simple-todo-mark-switch)
-  autocmd BufLeave __Scratch__ wall
+  autocmd BufEnter .scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter .scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter .scratch nmap <buffer> ,o <Plug>(simple-todo-below)
+  autocmd BufEnter .scratch nmap <buffer> x <Plug>(simple-todo-mark-switch)
+  " autocmd BufEnter .scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
+  " autocmd BufEnter .scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
+  " autocmd BufEnter .scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
+  autocmd BufEnter .scratch imap <buffer> [[ <Plug>(simple-todo-new)
+  autocmd BufEnter .scratch imap <buffer> ,i <Plug>(simple-todo-new)
+  autocmd BufEnter .scratch imap <buffer> ,o <Plug>(simple-todo-new)
+  autocmd BufLeave .scratch w
 augroup END
 " }}}
+" {{{ HardMode
+" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+nnoremap <leader><leader>h <Esc>:call ToggleHardMode()<CR>
+" }}}
+" {{{ visual-split
+vmap <leader>s :'<,'>VSSplitAbove<CR>
+" }}}
+" {{{ yankstack
+let g:yankstack_map_keys = 0
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+" }}}
+" {{{ Vinegar / Dirvish / Ranger
+
+" noremap - :e %:p:h<CR>
+noremap - :Dirvish %<CR>
+let g:dirvish_relative_paths = 1
+
+" noremap _ :RangerEdit<CR>
+" noremap - :RangerEdit<CR>
+
+" }}}
+
+
+"
 " }}}
 
 " }}}
@@ -477,7 +533,7 @@ endif
 augroup javascript
   autocmd!
   autocmd FileType javascript,javascript.jsx map ,r :call VimuxRunCommand("npm start")<CR>
-  autocmd FileType javascript,javascript.jsx map ,t :call VimuxRunCommand("npm test")<CR>
+  autocmd FileType javascript,javascript.jsx map ,t :Dispatch npm test<CR>
 augroup END
 " }}}
 
@@ -489,7 +545,7 @@ autocmd! Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 autocmd! Syntax ruby map <F1> :!./bin/rails server<CR>
 
 " Vue.js .vue file set filetype on load
-autocmd! BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
 " }}}
@@ -499,9 +555,11 @@ augroup filemarks
   autocmd!
   autocmd BufEnter *.{js,jsx,coffee} normal! mJ
   autocmd BufEnter */parsers/*       normal! mP
+  autocmd BufEnter */epics/*         normal! mE
   autocmd BufEnter */routes/*        normal! mR
   autocmd BufEnter */reducers/*      normal! mS
   autocmd BufEnter */components/*    normal! mC
+  autocmd BufEnter */utils/*         normal! mU
   autocmd BufEnter */api/*           normal! mA
 augroup END
 " }}}
@@ -533,9 +591,6 @@ augroup END
 " map ,c :FZF components/<CR>
 " map ,re :FZF reducers/<CR>
 " map ,ro :FZF routes/<CR>
-noremap - :e %:p:h<CR>
-" noremap _ :RangerEdit<CR>
-" noremap - :RangerEdit<CR>
 
 
 " }}}
@@ -559,7 +614,7 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 
 
 
-" map <leader>/ "hyiw:Ag 
+" map <leader>/ "hyiw:Ag
 map <leader>/ "hyiw:GrepperAg ""<LEFT>
 map <leader>8 "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 map <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
@@ -576,9 +631,9 @@ map <leader>f :ALEFix<CR>
 map <leader>oo !open https://www.google.com/search?q=javascript+
 map <leader>oh !open https://github.com/search?q=
 map <leader>on "pyi":!open https://www.npmjs.com/package/p
-map <leader>p :set paste!<CR>
+" map <leader>p :set paste!<CR>
 map <leader>q :q<CR>
-map <leader>s :sp<CR>
+nmap <leader>s :sp<CR>
 map <leader>t :NERDTreeFind<CR>
 map <leader>u :GundoToggle<CR>
 map <leader>v :vsp<CR>
@@ -640,8 +695,8 @@ let g:ag_highlight=1
 " set formatoptions-=t
 
 " Don't skip wrapped lines
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 map J }
 map K {
@@ -766,15 +821,21 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" Keep location of file when reopening
-autocmd! BufReadPost *
-\   if line("'\"") > 0 && line("'\"") <= line("$") |
-\       exe 'normal! g`"zvzz' |
-\   endif
+" " Keep location of file when reopening
+" augroup keeplocation
+"   autocmd!
+"   autocmd BufReadPost *
+"   \   if line("'\"") > 0 && line("'\"") <= line("$") |
+"   \       exe 'normal! g`"zvzz' |
+"   \   endif
+" augroup END
 
 " Prevent browsing in Fugitive from creating a trail of temp file buffers
-autocmd! BufReadPost fugitive://*
-  \ set bufhidden=delete
+augroup fugitive
+  autocmd! BufReadPost fugitive://*
+  autocmd BufReadPost fugitive://*
+    \ set bufhidden=delete
+augroup END
 
 " }}}
 
@@ -796,5 +857,9 @@ colorscheme gruvbox
 " }}} Colorscheme
 
 " autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
-autocmd! bufwritepost .vimrc source % | setlocal foldmethod=marker
-autocmd! BufRead,BufNewFile .vimrc setlocal foldmethod=marker
+augroup vimrc
+  autocmd!
+  " autocmd bufwritepost .vimrc source % | setlocal foldmethod=marker
+  autocmd bufwritepost .vimrc source % | setlocal foldmethod=marker
+  autocmd BufRead,BufNewFile .vimrc setlocal foldmethod=marker
+augroup END
