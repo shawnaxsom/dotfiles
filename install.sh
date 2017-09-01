@@ -49,6 +49,7 @@ if [ ! -f  /usr/local/etc/profile.d/z.sh ]; then
 fi
 
 mkdir -p ~/.vim/colors/
+mkdir -p ~/.config
 
 create_symlink    .vimrc     ~/.vimrc
 create_symlink    .vimrc     ~/.nvimrc
@@ -69,6 +70,8 @@ create_symlink    .Xmodmap ~/.Xmodmap
 create_symlink    .screenrc ~/.screenrc
 create_symlink    .agignore ~/.agignore
 create_symlink    .tern-config    ~/.tern-config
+create_symlink    .gitignore_global    ~/.gitignore_global
+create_symlink    .tmuxinator/    ~/.tmuxinator
 
 if [ ! -d ~/.vim/bundle ]; then
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim

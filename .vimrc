@@ -3,6 +3,9 @@
 " Don't use a swapfile
 set noswapfile
 
+" No undodir, don't undo past last close
+set noundofile
+
 " Update buffer if file changes outside of Vim, without prompt
 set autoread
 
@@ -42,7 +45,7 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-" set scrolloff=17
+set scrolloff=17
 set cindent
 set shell=bash
 set more " Use MORE as pager
@@ -153,12 +156,13 @@ Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
 Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
 
 " 3 - Decent
+Plug 'tpope/vim-sensible'  " Default settings for Vim. I probably already have these in my VimRC, need to review.
+Plug 'tpope/vim-sleuth'  " Auto set file tab settings based on current file or other files in directory
 
 " 4 - Could do without
 " Plug 'jiangmiao/auto-pairs'
 
 " 5 - New / Evaluating
-Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
 Plug 'lambacck/python_matchit'
 Plug 'Chun-Yang/vim-action-ag'
@@ -171,7 +175,6 @@ Plug 'flazz/vim-colorschemes'
 Plug 'gregsexton/gitv'
 Plug 'vim-scripts/MultipleSearch'
 Plug 'terryma/vim-expand-region'
-Plug 'tpope/vim-sleuth'
 Plug 'pangloss/vim-javascript'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dyng/ctrlsf.vim'
@@ -200,12 +203,11 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 " Plug 'mtth/scratch.vim'
-Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-eunuch'
 Plug 'sjl/gundo.vim'
 " Shouldn't be needed
 " since tern is built in to YouCompleteMe now, if using flag
-" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'rizzatti/dash.vim'
 " Plug 'moll/vim-node'
 Plug 'othree/html5.vim'
@@ -223,15 +225,16 @@ Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window 
 Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
 Plug 'sheerun/vim-polyglot'  " Collection of language plugins
 Plug 'ton/vim-bufsurf'  " Previous buffer history with :BufSurfForward and :BufSurfBackward
-Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
+" Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
 Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
 Plug 'dominikduda/vim_current_word'  " Show the currently selected word highlighted
 Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
-Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p
+" Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
 Plug 'justinmk/vim-dirvish'  " File manager
 Plug 'int3/vim-extradite'
 Plug 'farmergreg/vim-lastplace'
 Plug 'tpope/vim-dispatch'
+Plug 'godlygeek/tabular'
 call plug#end()
 " }}}
 
@@ -332,8 +335,9 @@ map <leader>gL :Glog<BAR>:bot copen<CR>
 
 " }}}
 " {{{ YouCompleteMe
+" These don't work as well as tern_for_vim
 " nmap <silent> gd :YcmCompleter GoTo<CR>
-nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -442,7 +446,15 @@ map ,v :call VimuxPromptCommand("npm start")<CR>
 " Dispatch is better for single tasks, shows quickfix results afterwards
 map ,d :Dispatch<SPACE>
 map ,i :call VimuxInspectRunner()<CR>
-map ,z :VimuxZoomRunner<CR>
+" map ,z :VimuxZoomRunner<CR>
+" map ,r :call VimuxPromptCommand("npm start")<CR>
+map ,r :Dispatch npm start<CR>
+" map ,q :call VimuxPromptCommand("env NODE_ENV=qa npm start")<CR>
+map ,q :Dispatch env NODE_ENV=qa npm start<CR>
+map ,t :Dispatch npm test<CR>
+map ,f :Dispatch npm test -- --tests %
+map ,b :Dispatch npm run build<CR>
+map ,z :Copen<CR>
 " }}}
 " {{{ Dash.app
 nmap <silent> <leader>d <Plug>DashSearch
@@ -458,6 +470,7 @@ augroup simpletodo
   autocmd BufEnter .scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
   autocmd BufEnter .scratch nmap <buffer> ,o <Plug>(simple-todo-below)
   autocmd BufEnter .scratch nmap <buffer> x <Plug>(simple-todo-mark-switch)
+  autocmd BufEnter .scratch nmap <buffer> X :%g/\[x\]/d<CR>
   " autocmd BufEnter .scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
   " autocmd BufEnter .scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
   " autocmd BufEnter .scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
@@ -489,9 +502,17 @@ let g:dirvish_relative_paths = 1
 " noremap - :RangerEdit<CR>
 
 " }}}
+" {{{ tern_for_vim
+nmap <silent> gd :TernDef<CR>
+" }}}
+" {{{ vim-workspace
+let g:workspace_persist_undo_history = 1
+let g:workspace_autosave_ignore = ['gitcommit']
+" }}}
+" {{{ gitgutter
+let g:gitgutter_highlight_lines = 1
+" }}}
 
-
-"
 " }}}
 
 " }}}
@@ -530,11 +551,11 @@ endif
 " autocmd! FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
 " autocmd! FileType javascript.jsx map ,r :call VimuxRunCommand("npm start")
 " autocmd! FileType javascript.jsx map ,t :call VimuxRunCommand("npm start")
-augroup javascript
-  autocmd!
-  autocmd FileType javascript,javascript.jsx map ,r :call VimuxRunCommand("npm start")<CR>
-  autocmd FileType javascript,javascript.jsx map ,t :Dispatch npm test<CR>
-augroup END
+" augroup javascript
+"   autocmd!
+"   autocmd FileType javascript,javascript.jsx map ,r :call VimuxRunCommand("npm start")<CR>
+"   autocmd FileType javascript,javascript.jsx map ,t :Dispatch npm test<CR>
+" augroup END
 " }}}
 
 " {{{ Other Languages
@@ -746,48 +767,16 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 nmap gr "hyiw:GrepperAg <c-r>h<CR>
+" nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
+nmap gi :GrepperAg %:p:t:r<CR>
 nmap gR :YcmCompleter GoToReferences<CR>
+" let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 
 map ; :
 
 " }}}
 
 " {{{ Functions
-
-" I'm trying out this instead: michaeljsmith/vim-indent-object
-" " Use e.g. vai to select everything of same indent level
-" " http://vim.wikia.com/wiki/Creating_new_text_objects
-" " http://vim.wikia.com/wiki/Indent_text_object
-" " http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects
-" onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
-" onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
-" vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
-" vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
-" function! s:IndTxtObj(inner)
-"   let curline = line(".")
-"   let lastline = line("$")
-"   let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
-"   let i = i < 0 ? 0 : i
-"   if getline(".") !~ "^\\s*$"
-"     let p = line(".") - 1
-"     let nextblank = getline(p) =~ "^\\s*$"
-"     while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
-"       -
-"       let p = line(".") - 1
-"       let nextblank = getline(p) =~ "^\\s*$"
-"     endwhile
-"     normal! 0V
-"     call cursor(curline, 0)
-"     let p = line(".") + 1
-"     let nextblank = getline(p) =~ "^\\s*$"
-"     while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
-"       +
-"       let p = line(".") + 1
-"       let nextblank = getline(p) =~ "^\\s*$"
-"     endwhile
-"     normal! $
-"   endif
-" endfunction
 
 " if !exists('*RangerExplorer')
 "   function RangerExplorer()
@@ -856,6 +845,22 @@ syntax on
 colorscheme gruvbox
 " }}} Colorscheme
 
+" {{{ Highlights
+" These come after Colorscheme so they don't get overwritten
+"
+" {{{ vim_current_word
+hi CurrentWord term=reverse ctermfg=235 ctermbg=214 guifg=#282828 guibg=#fabd2f
+hi CurrentWordTwins guibg=#587474 gui=underline  ctermbg=2 cterm=underline
+" }}}
+" {{{ gitgutter
+hi GitGutterAddLine          guibg=#005a02
+hi GitGutterChangeLine       guibg=#002a52
+hi GitGutterDeleteLine       guibg=#502020
+" hi GitGutterChangeDeleteLine " default: links to GitGutterChangeLineDefault
+" }}}
+" }}}
+
+" {{{ .vimrc
 " autocmd! bufwritepost .vimrc source % | AirlineRefresh | setlocal foldmethod=marker
 augroup vimrc
   autocmd!
@@ -863,3 +868,4 @@ augroup vimrc
   autocmd bufwritepost .vimrc source % | setlocal foldmethod=marker
   autocmd BufRead,BufNewFile .vimrc setlocal foldmethod=marker
 augroup END
+" }}}

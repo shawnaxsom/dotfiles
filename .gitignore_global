@@ -1,0 +1,6 @@
+# To use this on a new machine, run:
+# git config --global core.excludesfile ~/.gitignore_global
+
+Session.vim
+.undodir/
+.tern-project/

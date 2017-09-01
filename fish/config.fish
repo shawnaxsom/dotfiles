@@ -14,7 +14,9 @@ if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
 end
 
 set -x TERM xterm-256color
+set -x EDITOR /usr/local/bin/vim 
 
+alias mux='tmuxinator'
 alias calw='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calw 2'
 alias calm='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calm'
 alias cal='gcalcli --calendar="shawn.axsom@rooksecurity.com"'
@@ -55,6 +57,8 @@ alias gd='git diff'
 alias gpr='git pull-request'
 alias gh='git browse'
 alias gb='git browse'
+alias gcm='git checkout master'
+alias gc-='git checkout -'
 
 alias vs='vim -S'
 alias f='find . -name'
