@@ -486,6 +486,7 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " {{{ Dirvish
 Plug 'justinmk/vim-dirvish'  " File manager
 " noremap - :e %:p:h<CR>
+" noremap - :Dirvish %<CR>
 noremap - :Dirvish %<CR>
 let g:dirvish_relative_paths = 1
 " }}}
@@ -493,6 +494,7 @@ Plug 'int3/vim-extradite'
 Plug 'farmergreg/vim-lastplace'
 Plug 'godlygeek/tabular'
 Plug 'dracula/vim'
+Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " }}}

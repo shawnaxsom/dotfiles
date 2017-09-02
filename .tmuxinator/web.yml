@@ -37,6 +37,7 @@ windows:
       panes:
         - vim
         - npm start
+        - npm test
   - api:
       root: ~/dev/ambyint/packages/api
       layout: main-horizontal
