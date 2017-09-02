@@ -43,3 +43,17 @@ windows:
       panes:
         - vim
         - env NODE_ENV=qa npm start
+  - uiV2:
+      root: ~/dev/ambyint/packages/ambyint.ui
+      panes:
+        - vim
+  - uiV1:
+      root: ~/dev/pumpwell/WellEXPERT2.Web/
+      panes:
+        - vim
+  - codi:
+      root: ~/codi/
+      layout: main-horizontal
+      panes:
+        - vim codi.js
+        - 

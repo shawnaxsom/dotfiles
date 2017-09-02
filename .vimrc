@@ -140,218 +140,17 @@ set title
 
 let mapleader = "\<Space>"
 
+" How long leader key and other key combinations will wait for another key
+" press
+set timeoutlen=300
+
 " }}}
 
 " {{{ Plugins
-" {{{ List of Plugins (Vim-Plug)
 call plug#begin('~/.vim/bundle')
 " 1 - Essential
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" 2 - Great
-Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
-Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
-Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
-
-" 3 - Decent
-Plug 'tpope/vim-sensible'  " Default settings for Vim. I probably already have these in my VimRC, need to review.
-Plug 'tpope/vim-sleuth'  " Auto set file tab settings based on current file or other files in directory
-
-" 4 - Could do without
-" Plug 'jiangmiao/auto-pairs'
-
-" 5 - New / Evaluating
-Plug 'tmhedberg/matchit'
-Plug 'lambacck/python_matchit'
-Plug 'Chun-Yang/vim-action-ag'
-Plug 'qstrahl/vim-matchmaker'
-Plug 'haya14busa/incsearch.vim'
-Plug 'tpope/vim-commentary'
-Plug 'honza/vim-snippets'
-Plug 'Chiel92/vim-autoformat'
-Plug 'flazz/vim-colorschemes'
-Plug 'gregsexton/gitv'
-Plug 'vim-scripts/MultipleSearch'
-Plug 'terryma/vim-expand-region'
-Plug 'pangloss/vim-javascript'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dyng/ctrlsf.vim'
-Plug 'rubik/vim-radon'
-Plug 'SirVer/ultisnips'
-Plug 'derekwyatt/vim-scala'
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-surround'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'terryma/vim-smooth-scroll'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'tpope/vim-obsession'
-Plug 'posva/vim-vue'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'elixir-lang/vim-elixir'
-Plug 'leafgarland/typescript-vim'
-Plug 'fatih/vim-go'
-Plug 'tpope/vim-repeat'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-Plug 'junegunn/fzf.vim'
-Plug 'michaeljsmith/vim-indent-object'
-" Plug 'rhysd/clever-f.vim'
-Plug 'nelstrom/vim-visual-star-search'
-Plug 'wellle/targets.vim'
-Plug 'mhinz/vim-grepper'
-" Plug 'mtth/scratch.vim'
-Plug 'tpope/vim-eunuch'
-Plug 'sjl/gundo.vim'
-" Shouldn't be needed
-" since tern is built in to YouCompleteMe now, if using flag
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-Plug 'rizzatti/dash.vim'
-" Plug 'moll/vim-node'
-Plug 'othree/html5.vim'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
-Plug 'sbdchd/neoformat'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/jspc.vim'
-Plug 'w0rp/ale'  " Async linting
-" Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
-Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
-Plug 'chrisbra/NrrwRgn'  " :NR on selected text to open focused split that syncs
-Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
-Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
-Plug 'sheerun/vim-polyglot'  " Collection of language plugins
-Plug 'ton/vim-bufsurf'  " Previous buffer history with :BufSurfForward and :BufSurfBackward
-" Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
-Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
-Plug 'dominikduda/vim_current_word'  " Show the currently selected word highlighted
-Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
-" Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
-Plug 'justinmk/vim-dirvish'  " File manager
-Plug 'int3/vim-extradite'
-Plug 'farmergreg/vim-lastplace'
-Plug 'tpope/vim-dispatch'
-Plug 'godlygeek/tabular'
-call plug#end()
-" }}}
-
-" {{{ Plugin Settings
-
-" {{{ Miscellaneous
-let g:EasyMotion_smartcase = 1
-
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-
-let radon_always_on = 0
-
-let g:jsx_ext_required = 0
-
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-let g:clever_f_across_no_line = 1
-let g:clever_f_timeout_ms = 3000
-
-" let g:scratch_persistence_file = expand('$HOME/.scratch')
-map gs :topleft 8split ~/.scratch<CR>
-" let g:scratch_autohide = 0
-" let g:scratch_no_mappings = 1
-" let g:scratch_height = 8
-" noremap gs :Scratch<CR>
-" nnoremap gs :Scratch<CR>
-
-" }}}
-" {{{ Codi
-nmap <leader>c :Codi!!<CR>
-let g:codi#aliases = {
-      \ 'javascript.jsx': 'javascript',
-      \ }
-" }}}
-" {{{ Neoformat (Prettier)
-let g:neoformat_javascript_prettier = {
-            \ 'exe': 'prettier',
-            \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
-            \ }
-            " \ 'args': ['--trailing-comma all', '--no-bracket-spacing', '--single-quote', '--no-semi'],
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_verbose = 0
-" augroup fmt
-"   autocmd!
-"   autocmd BufWritePre * Neoformat! javascript prettier
-" augroup END
-" augroup fmt
-"   autocmd!
-"   autocmd BufWritePre  *.js Neoformat! javascript prettier
-" augroup END
-
-" Neoformat when pressing =
-nmap <silent> = :Neoformat<CR>
-
-" Have Neoformat use &formatprg as a formatter
-let g:neoformat_try_formatprg = 1
-
-" Enable alignment
-let g:neoformat_basic_format_align = 1
-
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
-
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
-
-" Don't be annoying with the 'no change was necessary' messages
-let g:neoformat_only_msg_on_error = 1
-
-" }}}
-" {{{ Fugitive / Extradite
-map <leader>gc :Gcommit<CR>i
-map <leader>gp :Gpull<CR>
-map <leader>gP :Gpush<CR>
-map <leader>ge :Gedit<CR>
-map <leader>gs :Gstatus<CR>
-map <leader>gb :Gblame<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gR :Gread<CR>
-map <leader>gw :Gwrite<CR>
-map <leader>gh :Gbrowse<CR>
-map <leader>gl :Extradite<CR>
-map <leader>gL :Glog<BAR>:bot copen<CR>
-
-" augroup gitlog
-"   autocmd!
-"   autocmd FileType git nmap J /diff<CR> | nmap K k?diff<CR>
-" augroup END
-" autocmd! BufRead,BufNewFile fugitive* git nmap <leader>J /diff<CR>
-
-" }}}
-" {{{ YouCompleteMe
-" These don't work as well as tern_for_vim
-" nmap <silent> gd :YcmCompleter GoTo<CR>
-" nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" }}}
-" {{{ Grepper
-let g:grepper = {}
-runtime autoload/grepper.vim
-let g:grepper.jump = 1
-let g:grepper.stop = 500
-" }}}
 " {{{ Ctrl P
+Plug 'ctrlpvim/ctrlp.vim'
 nnoremap <silent> <c-t> :CtrlPLine<CR>
 if executable('rg')
   set grepprg=rg
@@ -394,11 +193,143 @@ set wildignore+=env/,dist/,bower_components/,tmp/,jest/
 set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 set wildignore+=*__Scratch__ " scratch.vim
 " }}}
+" {{{ Fugitive / Extradite
+Plug 'tpope/vim-fugitive'
+map <leader>gc :Gcommit<CR>i
+map <leader>gp :Gpull<CR>
+map <leader>gP :Gpush<CR>
+map <leader>ge :Gedit<CR>
+map <leader>gs :Gstatus<CR>
+map <leader>gb :Gblame<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gR :Gread<CR>
+map <leader>gw :Gwrite<CR>
+map <leader>gh :Gbrowse<CR>
+map <leader>gl :Extradite<CR>
+map <leader>gL :Glog<BAR>:bot copen<CR>
+
+" augroup gitlog
+"   autocmd!
+"   autocmd FileType git nmap J /diff<CR> | nmap K k?diff<CR>
+" augroup END
+" autocmd! BufRead,BufNewFile fugitive* git nmap <leader>J /diff<CR>
+
+" }}}
+" {{{ gitgutter
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_highlight_lines = 1
+" }}}
+" {{{ Vimux / Dispatch
+Plug 'tpope/vim-dispatch'
+Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
+let g:VimuxHeight = "20"
+let g:VimuxPromptString = "Vimux>  $ "
+map ,v :call VimuxPromptCommand("npm start")<CR>
+" Dispatch is better for single tasks, shows quickfix results afterwards
+map ,d :Dispatch<SPACE>
+map ,i :call VimuxInspectRunner()<CR>
+" map ,z :VimuxZoomRunner<CR>
+" map ,r :call VimuxPromptCommand("npm start")<CR>
+map ,r :Dispatch npm start<CR>
+" map ,q :call VimuxPromptCommand("env NODE_ENV=qa npm start")<CR>
+map ,q :Dispatch env NODE_ENV=qa npm start<CR>
+map ,t :Dispatch npm test<CR>
+map ,f :Dispatch npm test -- --tests %
+map ,b :Dispatch npm run build<CR>
+map ,z :Copen<CR>
+" }}}
+
+" 2 - Great
+Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
+" {{{ vim-simple-todo
+Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
+let g:simple_todo_map_keys = 0
+augroup simpletodo
+  autocmd!
+  autocmd BufEnter .scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter .scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter .scratch nmap <buffer> ,o <Plug>(simple-todo-below)
+  autocmd BufEnter .scratch nmap <buffer> x <Plug>(simple-todo-mark-switch)
+  autocmd BufEnter .scratch nmap <buffer> X :%g/\[x\]/d<CR>
+  " autocmd BufEnter .scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
+  " autocmd BufEnter .scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
+  " autocmd BufEnter .scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
+  autocmd BufEnter .scratch imap <buffer> [[ <Plug>(simple-todo-new)
+  autocmd BufEnter .scratch imap <buffer> ,i <Plug>(simple-todo-new)
+  autocmd BufEnter .scratch imap <buffer> ,o <Plug>(simple-todo-new)
+  autocmd BufLeave .scratch w
+augroup END
+" }}}
+" {{{ Codi
+Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
+nmap <leader>c :Codi!!<CR>
+let g:codi#aliases = {
+      \ 'javascript.jsx': 'javascript',
+      \ }
+" }}}
+" {{{ Commentary
+Plug 'tpope/vim-commentary'
+" Comment out a line of code with <c-/>
+" }}}
+
+" 3 - Decent
+Plug 'tpope/vim-sensible'  " Default settings for Vim. I probably already have these in my VimRC, need to review.
+Plug 'tpope/vim-sleuth'  " Auto set file tab settings based on current file or other files in directory
+
+" 4 - Could do without
+" Plug 'jiangmiao/auto-pairs'
+
+" 5 - New / Evaluating
+Plug 'tmhedberg/matchit'
+Plug 'lambacck/python_matchit'
+Plug 'Chun-Yang/vim-action-ag'
+Plug 'qstrahl/vim-matchmaker'
+Plug 'haya14busa/incsearch.vim'
+nmap   <Plug>CommentaryLine
+vmap   <Plug>Commentary
+Plug 'honza/vim-snippets'
+Plug 'Chiel92/vim-autoformat'
+Plug 'flazz/vim-colorschemes'
+Plug 'gregsexton/gitv'
+Plug 'vim-scripts/MultipleSearch'
+Plug 'terryma/vim-expand-region'
+Plug 'pangloss/vim-javascript'
+" {{{ vim-tmux-navigator
+" Ctrl + J/K/H/L to move to different Vim or Tmux panes.
+Plug 'christoomey/vim-tmux-navigator'
+let g:tmux_navigator_disable_when_zoomed = 1
+" }}}
+Plug 'dyng/ctrlsf.vim'
+Plug 'rubik/vim-radon'
 " {{{ UltiSnips
+Plug 'SirVer/ultisnips'
 " Fix directory UltiSnipsEdit places snippets in
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 " }}}
+Plug 'derekwyatt/vim-scala'
+" {{{ EasyMotion
+Plug 'easymotion/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+" }}}
+Plug 'tpope/vim-surround'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'tpope/vim-obsession'
+Plug 'posva/vim-vue'
 " {{{ Airline / Lightline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 let g:airline_theme='simple'
@@ -421,7 +352,100 @@ let g:airline_inactive_collapse = 0
 
 " let g:AutoPairsShortcutToggle = '<c-a>'
 " }}}
+Plug 'elixir-lang/vim-elixir'
+Plug 'leafgarland/typescript-vim'
+Plug 'fatih/vim-go'
+Plug 'tpope/vim-repeat'
+" {{{ FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
+let g:fzf_buffers_jump = 1
+" }}}
+Plug 'michaeljsmith/vim-indent-object'
+" Plug 'rhysd/clever-f.vim'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'wellle/targets.vim'
+" {{{ Grepper
+Plug 'mhinz/vim-grepper'
+let g:grepper = {}
+runtime autoload/grepper.vim
+let g:grepper.jump = 1
+let g:grepper.stop = 500
+" }}}
+" Plug 'mtth/scratch.vim'
+Plug 'tpope/vim-eunuch'
+Plug 'sjl/gundo.vim'
+" Shouldn't be needed
+" since tern is built in to YouCompleteMe now, if using flag
+" {{{ tern_for_vim
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+" nmap <silent> gd :TernDef<CR>
+nmap <silent> gD :TernDef<CR>
+" }}}
+" {{{ Dash.app
+Plug 'rizzatti/dash.vim'
+nmap <silent> <leader>d <Plug>DashSearch
+let g:dash_map = {
+      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
+      \ }
+" }}}
+" Plug 'moll/vim-node'
+Plug 'othree/html5.vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'ervandew/supertab'
+" {{{ YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
+" These don't work as well as tern_for_vim
+" nmap <silent> gd :YcmCompleter GoTo<CR>
+" nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" }}}
+" {{{ Neoformat (Prettier)
+Plug 'sbdchd/neoformat'
+let g:neoformat_javascript_prettier = {
+            \ 'exe': 'prettier',
+            \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
+            \ }
+            " \ 'args': ['--trailing-comma all', '--no-bracket-spacing', '--single-quote', '--no-semi'],
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_verbose = 0
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * Neoformat! javascript prettier
+" augroup END
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre  *.js Neoformat! javascript prettier
+" augroup END
+
+" Neoformat when pressing =
+nmap <silent> = :Neoformat<CR>
+
+" Have Neoformat use &formatprg as a formatter
+let g:neoformat_try_formatprg = 1
+
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+" Don't be annoying with the 'no change was necessary' messages
+let g:neoformat_only_msg_on_error = 1
+
+" }}}
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/jspc.vim'
 " {{{ ALE
+Plug 'w0rp/ale'  " Async linting
 let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_fixers = {
@@ -430,90 +454,39 @@ let g:ale_fixers = {
       \   ],
       \}
 " }}}
-" {{{ CtrlP Funky
-let g:ctrlp_funky_syntax_highlight = 1
-" }}}
-" {{{ FZF
-let g:fzf_buffers_jump = 1
-" }}}
-" {{{ VimFiler
-:let g:vimfiler_as_default_explorer = 1
-" }}}
-" {{{ Vimux / Dispatch
-let g:VimuxHeight = "20"
-let g:VimuxPromptString = "Vimux>  $ "
-map ,v :call VimuxPromptCommand("npm start")<CR>
-" Dispatch is better for single tasks, shows quickfix results afterwards
-map ,d :Dispatch<SPACE>
-map ,i :call VimuxInspectRunner()<CR>
-" map ,z :VimuxZoomRunner<CR>
-" map ,r :call VimuxPromptCommand("npm start")<CR>
-map ,r :Dispatch npm start<CR>
-" map ,q :call VimuxPromptCommand("env NODE_ENV=qa npm start")<CR>
-map ,q :Dispatch env NODE_ENV=qa npm start<CR>
-map ,t :Dispatch npm test<CR>
-map ,f :Dispatch npm test -- --tests %
-map ,b :Dispatch npm run build<CR>
-map ,z :Copen<CR>
-" }}}
-" {{{ Dash.app
-nmap <silent> <leader>d <Plug>DashSearch
-let g:dash_map = {
-      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
-      \ }
-" }}}
-" {{{ vim-simple-todo
-let g:simple_todo_map_keys = 0
-augroup simpletodo
-  autocmd!
-  autocmd BufEnter .scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter .scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter .scratch nmap <buffer> ,o <Plug>(simple-todo-below)
-  autocmd BufEnter .scratch nmap <buffer> x <Plug>(simple-todo-mark-switch)
-  autocmd BufEnter .scratch nmap <buffer> X :%g/\[x\]/d<CR>
-  " autocmd BufEnter .scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
-  " autocmd BufEnter .scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
-  " autocmd BufEnter .scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
-  autocmd BufEnter .scratch imap <buffer> [[ <Plug>(simple-todo-new)
-  autocmd BufEnter .scratch imap <buffer> ,i <Plug>(simple-todo-new)
-  autocmd BufEnter .scratch imap <buffer> ,o <Plug>(simple-todo-new)
-  autocmd BufLeave .scratch w
-augroup END
-" }}}
+" Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
+Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
+Plug 'chrisbra/NrrwRgn'  " :NR on selected text to open focused split that syncs
+Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
+Plug 'sheerun/vim-polyglot'  " Collection of language plugins
+Plug 'ton/vim-bufsurf'  " Previous buffer history with :BufSurfForward and :BufSurfBackward
+" Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
 " {{{ HardMode
+Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader><leader>h <Esc>:call ToggleHardMode()<CR>
 " }}}
+Plug 'dominikduda/vim_current_word'  " Show the currently selected word highlighted
 " {{{ visual-split
+Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
 vmap <leader>s :'<,'>VSSplitAbove<CR>
 " }}}
 " {{{ yankstack
+" Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
 let g:yankstack_map_keys = 0
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " }}}
-" {{{ Vinegar / Dirvish / Ranger
-
+" {{{ Dirvish
+Plug 'justinmk/vim-dirvish'  " File manager
 " noremap - :e %:p:h<CR>
 noremap - :Dirvish %<CR>
 let g:dirvish_relative_paths = 1
-
-" noremap _ :RangerEdit<CR>
-" noremap - :RangerEdit<CR>
-
 " }}}
-" {{{ tern_for_vim
-nmap <silent> gd :TernDef<CR>
-" }}}
-" {{{ vim-workspace
-let g:workspace_persist_undo_history = 1
-let g:workspace_autosave_ignore = ['gitcommit']
-" }}}
-" {{{ gitgutter
-let g:gitgutter_highlight_lines = 1
-" }}}
-
-" }}}
+Plug 'int3/vim-extradite'
+Plug 'farmergreg/vim-lastplace'
+Plug 'godlygeek/tabular'
+call plug#end()
 
 " }}}
 
@@ -521,7 +494,7 @@ let g:gitgutter_highlight_lines = 1
 
 " {{{ Python
 let g:pymode_options_max_line_length=120
-let python_highlight_all=1
+let g:python_highlight_all=1
 autocmd! Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
 autocmd! Syntax python setlocal foldmethod=indent
 autocmd! Syntax python normal zR
@@ -646,7 +619,7 @@ map <leader><leader>u :PlugClean!<CR>
 map <leader><leader>v :sp ~/.dotfiles/.vimrc<CR>
 map <leader><leader>w :ToggleWorkspace<CR>
 " map <leader>c :q<CR>
-map <leader>f :ALEFix<CR>
+map <leader>f :file<CR>
 " map <leader>l :set list!<CR>
 " map <leader>o :copen<CR>
 map <leader>oo !open https://www.google.com/search?q=javascript+
@@ -697,9 +670,7 @@ map <leader><tab> <c-^>
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
 
-" Comment out a line of code with <c-/>
-nmap   <Plug>CommentaryLine
-vmap   <Plug>Commentary
+map gs :topleft 8split ~/.scratch<CR>
 
 " Center screen when going through search results
 " nnoremap <silent> n nzz

@@ -17,8 +17,10 @@ function $1($2) {
 endsnippet
 
 snippet con "Constructor"
-constructor() {
-	$0
+constructor(props) {
+  super(props);
+  $0
+  this.state = {};
 }
 endsnippet
 

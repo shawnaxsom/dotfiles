@@ -6,3 +6,5 @@ jest
 __tests__
 npm-shrinkwrap.json
 package.json
+README.md
+package-lock.json
