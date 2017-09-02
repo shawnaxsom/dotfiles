@@ -831,7 +831,7 @@ colorscheme dracula
 "
 " {{{ Highlight current line
 set cursorline
-hi cursorLine term=bold cterm=bold guibg=#555533
+hi cursorLine term=bold cterm=bold guibg=#555563
 " }}}
 
 " {{{ vim_current_word

@@ -43,6 +43,7 @@ windows:
       panes:
         - vim
         - env NODE_ENV=qa npm start
+        - watchmedo shell-command --patterns="*test.js" --ignore-patterns="*.tmp*" --recursive --command='echo ${watch_src_path} && npm test -- --tests "${watch_src_path}"'
   - uiV2:
       root: ~/dev/ambyint/packages/ambyint.ui
       panes:
