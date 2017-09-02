@@ -138,11 +138,15 @@ set t_ts=]1;
 set t_fs=
 set title
 
+" Fix Vim background in Tmux, don't break colors at end of line.
+set t_ut=
+set t_Co=256
+
 let mapleader = "\<Space>"
 
 " How long leader key and other key combinations will wait for another key
 " press
-set timeoutlen=300
+set timeoutlen=800
 
 " }}}
 
@@ -179,7 +183,7 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_default_input = 0
 let g:ctrlp_types = ['fil', 'mru']
-let g:ctrlp_mruf_exclude = '.*/.vimrc\|/temp/.*' " MacOSX/Linux
+let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
 let g:ctrlp_mruf_relative = 1
 
 " let g:ctrlp_extensions = ['line', 'changes', 'bookmarkdir']
@@ -217,7 +221,7 @@ map <leader>gL :Glog<BAR>:bot copen<CR>
 " }}}
 " {{{ gitgutter
 Plug 'airblade/vim-gitgutter'
-let g:gitgutter_highlight_lines = 1
+let g:gitgutter_highlight_lines = 0
 " }}}
 " {{{ Vimux / Dispatch
 Plug 'tpope/vim-dispatch'
@@ -298,6 +302,7 @@ Plug 'pangloss/vim-javascript'
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_save_on_switch = 2
 " }}}
 Plug 'dyng/ctrlsf.vim'
 Plug 'rubik/vim-radon'
@@ -332,7 +337,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
-let g:airline_theme='simple'
+let g:airline_theme='dracula'
+" let g:airline_theme='minimalist'
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
 " let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
@@ -486,6 +492,7 @@ let g:dirvish_relative_paths = 1
 Plug 'int3/vim-extradite'
 Plug 'farmergreg/vim-lastplace'
 Plug 'godlygeek/tabular'
+Plug 'dracula/vim'
 call plug#end()
 
 " }}}
@@ -652,6 +659,8 @@ map <leader>9 :set foldlevel=999<CR>
 
 " }}}
 
+imap jj <ESC>
+
 map ,1 1
 map ,2 2
 map ,3 3
@@ -813,20 +822,29 @@ syntax on
 " set background=dark
 " colorscheme zenburn
 " colorscheme elflord
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme dracula
 " }}} Colorscheme
 
 " {{{ Highlights
 " These come after Colorscheme so they don't get overwritten
 "
+" {{{ Highlight current line
+set cursorline
+hi cursorLine term=bold cterm=bold guibg=#555533
+" }}}
+
 " {{{ vim_current_word
 hi CurrentWord term=reverse ctermfg=235 ctermbg=214 guifg=#282828 guibg=#fabd2f
 hi CurrentWordTwins guibg=#587474 gui=underline  ctermbg=2 cterm=underline
 " }}}
 " {{{ gitgutter
-hi GitGutterAddLine          guibg=#005a02
-hi GitGutterChangeLine       guibg=#002a52
-hi GitGutterDeleteLine       guibg=#502020
+hi GitGutterAdd          guibg=#368430
+hi GitGutterChange       guibg=#305aa2
+hi GitGutterDelete       guibg=#502020
+" hi GitGutterAddLine          guibg=#368430
+" hi GitGutterChangeLine       guibg=#305aa2
+" hi GitGutterDeleteLine       guibg=#502020
 " hi GitGutterChangeDeleteLine " default: links to GitGutterChangeLineDefault
 " }}}
 " }}}
