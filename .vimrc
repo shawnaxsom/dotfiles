@@ -275,6 +275,13 @@ let g:codi#aliases = {
 Plug 'tpope/vim-commentary'
 " Comment out a line of code with <c-/>
 " }}}
+" {{{ Trailer Trash - Remove trailing spaces
+Plug 'csexton/trailertrash.vim'
+augroup removetrailingspaces
+  autocmd!
+  autocmd BufWritePre * TrailerTrim
+augroup END
+" }}}
 
 " 3 - Decent
 Plug 'tpope/vim-sensible'  " Default settings for Vim. I probably already have these in my VimRC, need to review.
@@ -337,8 +344,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
-let g:airline_theme='dracula'
-" let g:airline_theme='minimalist'
+let g:airline_theme='minimalist'
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
 " let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
@@ -487,7 +493,7 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 Plug 'justinmk/vim-dirvish'  " File manager
 " noremap - :e %:p:h<CR>
 " noremap - :Dirvish %<CR>
-noremap - :Dirvish %<CR>
+noremap - :Dirvish %:p:h<CR>
 let g:dirvish_relative_paths = 1
 " }}}
 Plug 'int3/vim-extradite'

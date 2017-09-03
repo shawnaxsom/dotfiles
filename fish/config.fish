@@ -14,7 +14,7 @@ if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
 end
 
 set -x TERM xterm-256color
-set -x EDITOR /usr/local/bin/vim 
+set -x EDITOR /usr/local/bin/vim
 
 alias mux='tmuxinator'
 alias calw='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calw 2'
@@ -42,7 +42,9 @@ end
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
-set -gx PATH /Users/shawnaxsom/Library/Android/sdk/platform-tools $PATH
+if test -d ~/Library/Android/sdk/platform-tools
+  set -gx PATH ~/Library/Android/sdk/platform-tools $PATH
+end
 
 # https://hub.github.com/
 alias git='hub'
@@ -63,6 +65,9 @@ alias gc-='git checkout -'
 alias vs='vim -S'
 alias f='find . -name'
 alias g='grep'
+alias l='ls -lat'
+alias h='head'
+alias t='tail'
 
 function gR
   git reset --hard;

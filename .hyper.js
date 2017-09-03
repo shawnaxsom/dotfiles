@@ -115,7 +115,14 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyperyellow", "hyper-ligatures"],
+  plugins: [
+    // "hyperyellow", // Yellow theme
+    // "hyper-ligatures", // Ligatures for FiraCode
+    // "hypergoogle",
+    // "hypercwd",
+    // "hyperterm-paste",
+    // "hyperterm-alternatescroll",
+  ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
