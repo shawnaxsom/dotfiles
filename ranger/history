@@ -1,0 +1,50 @@
+shell pwd %s
+shell ls %s
+delete
+shell -p ls
+rename README2.md
+rename ../README.md
+rename web/README.md
+rename README.md
+search web
+rename wells2.js
+rename wells.js
+shell 
+shell ls
+find filter
+find low
+find Chart
+h find
+help find
+h
+help
+find oncall
+find 
+rename countrie
+find im
+find pers
+find li
+find us
+find to
+find web
+find sr
+find ro
+find w
+find t
+find se
+find dev
+find am
+filter fonts
+
+filter src
+filter web
+filter
+find basicview
+travel 
+scout -aefiklst wellbv
+scout -aefiklst basv
+scout -aefiklst wells
+scout -aefiklst 
+travel tmux.c
+travel bav
+scout -aftl Desk

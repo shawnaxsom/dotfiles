@@ -65,9 +65,12 @@ alias gc-='git checkout -'
 alias vs='vim -S'
 alias f='find . -name'
 alias g='grep'
-alias l='ls -lat'
+alias c='cd'
+alias l='ls'
+alias lt='ls -lat'
 alias h='head'
 alias t='tail'
+alias r='ranger'
 
 function gR
   git reset --hard;

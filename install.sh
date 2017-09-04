@@ -11,7 +11,7 @@ install_cmake() {
 create_symlink() {
   if [ $prompted_to_delete=false ]; then
     if [ ! -L $2 ]; then
-      if [ -f $2 ] || [ -d $2 ]; then 
+      if [ -f $2 ] || [ -d $2 ]; then
         read -p "Non-symbolic file already exists, okay to delete? (y/n)" yn
 
         case $yn in
@@ -55,6 +55,7 @@ create_symlink    .vimrc            ~/.vimrc
 create_symlink    .vimrc            ~/.nvimrc
 create_symlink    UltiSnips         ~/.vim/UltiSnips
 create_symlink    fish              ~/.config/fish
+create_symlink    ranger            ~/.config/ranger
 create_symlink    .elinks           ~/.elinks
 create_symlink    i3config          ~/.i3/config
 create_symlink    sift.vim          ~/.vim/colors/sift.vim

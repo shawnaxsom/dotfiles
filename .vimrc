@@ -493,7 +493,7 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 Plug 'justinmk/vim-dirvish'  " File manager
 " noremap - :e %:p:h<CR>
 " noremap - :Dirvish %<CR>
-noremap - :Dirvish %:p:h<CR>
+" noremap - :Dirvish %:p:h<CR>
 let g:dirvish_relative_paths = 1
 " }}}
 Plug 'int3/vim-extradite'
@@ -501,6 +501,24 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'godlygeek/tabular'
 Plug 'dracula/vim'
 Plug 'tpope/vim-unimpaired'
+" {{{ Interesting Words
+Plug 'lfv89/vim-interestingwords'
+"}}}
+" {{{ Targets.vim
+" Adds a few text objects, like:
+" * aa / ia - an argument
+Plug 'wellle/targets.vim'
+"}}}
+" {{{ Targets.vim
+" Press Enter to select the closest text object. Press Enter again to expand
+" to the next largest text object,
+Plug 'gcmt/wildfire.vim'
+"}}}
+Plug 'romainl/vim-qlist'
+" {{{ Ranger.vim Ranger integration
+Plug 'francoiscabrol/ranger.vim'
+map - :Ranger<CR>
+" }}}
 call plug#end()
 
 " }}}
@@ -513,6 +531,10 @@ let g:python_highlight_all=1
 autocmd! Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
 autocmd! Syntax python setlocal foldmethod=indent
 autocmd! Syntax python normal zR
+augroup pythondispatch
+  autocmd!
+  autocmd FileType python map ,r :Dispatch python %:p<CR>
+augroup END
 " }}}
 
 if !exists('*TagsUnderCursor')
@@ -776,7 +798,7 @@ map ; :
 "       redraw!
 "   endfun
 " endif
-" map = :call RangerExplorer()<CR>
+" map - :call RangerExplorer()<CR>
 
 function! NeatFoldText()
   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
