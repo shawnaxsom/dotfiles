@@ -1,15 +1,8 @@
-shell pwd %s
-shell ls %s
-delete
-shell -p ls
-rename README2.md
-rename ../README.md
 rename web/README.md
 rename README.md
 search web
 rename wells2.js
 rename wells.js
-shell 
 shell ls
 find filter
 find low
@@ -35,7 +28,6 @@ find se
 find dev
 find am
 filter fonts
-
 filter src
 filter web
 filter
@@ -44,7 +36,15 @@ travel
 scout -aefiklst wellbv
 scout -aefiklst basv
 scout -aefiklst wells
-scout -aefiklst 
 travel tmux.c
 travel bav
 scout -aftl Desk
+shell 
+scout -aefiklst 
+scout -aftl ep
+scout -aftl o
+scout -aftl on-call
+scout -aftl textfield
+scout -aftl forms
+
+e country-selector.js

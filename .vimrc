@@ -490,7 +490,7 @@ nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " }}}
 " {{{ Dirvish
-Plug 'justinmk/vim-dirvish'  " File manager
+" Plug 'justinmk/vim-dirvish'  " File manager
 " noremap - :e %:p:h<CR>
 " noremap - :Dirvish %<CR>
 " noremap - :Dirvish %:p:h<CR>
@@ -517,7 +517,22 @@ Plug 'gcmt/wildfire.vim'
 Plug 'romainl/vim-qlist'
 " {{{ Ranger.vim Ranger integration
 Plug 'francoiscabrol/ranger.vim'
-map - :Ranger<CR>
+" map - :Ranger<CR>
+" }}}
+" {{{ Vim-Lion
+" Align text using a motion. E.g. vipgl= aligns equals signs in a paragraph
+Plug 'tommcdo/vim-lion'
+" }}}
+" {{{ VimFiler
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/unite.vim'
+autocmd FileType vimfiler nmap <buffer> - <Plug>(vimfiler_switch_to_parent_directory)
+nmap - :call VimFilerExplorer()<CR>
+" autocmd FileType vimfiler nmap <buffer> - :call VimFilerExplorer()<CR>
+" autocmd FileType vimfiler nmap <buffer> - :e %:p:h<CR>
+" let g:vimfiler_as_default_explorer = 1
+" noremap - :e %:p:h<CR>
+" nmap - :VimFilerBufferDir<CR>
 " }}}
 call plug#end()
 
@@ -800,6 +815,21 @@ map ; :
 " endif
 " map - :call RangerExplorer()<CR>
 
+function! VimFilerExplorer()
+  if expand("%:t") == "vimfiler:default"
+    execute <Plug>(vimfiler_switch_to_parent_directory)
+  else
+    call vimfiler#custom#profile('default', 'context', {
+          \ 'safe' : 0,
+          \ 'edit_action' : 'tabopen',
+          \ })
+    VimFilerBufferDir -find -buffer-name=explorer -force-quit
+    echom expand("%")
+    " echom "Bar"
+  endif
+endfun
+map - :call VimFilerExplorer()<CR>
+
 function! NeatFoldText()
   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
   let lines_count = v:foldend - v:foldstart + 1
@@ -861,7 +891,7 @@ colorscheme dracula
 "
 " {{{ Highlight current line
 set cursorline
-hi cursorLine term=bold cterm=bold guibg=#555563
+hi cursorLine term=bold cterm=bold guibg=#444444
 " }}}
 
 " {{{ vim_current_word
