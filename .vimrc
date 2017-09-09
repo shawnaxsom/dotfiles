@@ -1,7 +1,9 @@
 " {{{ Options
 
-" Don't use a swapfile
+" Don't use swap or backup files
 set noswapfile
+set nobackup
+set nowritebackup
 
 " No undodir, don't undo past last close
 set noundofile
@@ -50,7 +52,7 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-" set scrolloff=17
+" set scrolloff=10
 
 " Use Bash shell syntax for :! (even if you are in Fish or ZSH)
 set shell=bash
@@ -93,67 +95,49 @@ set history=1000
 " Don't insert two spaces after a join command
 set nojoinspaces
 
-
-set magic
-set browsedir=buffer
-set nobackup
-set nowritebackup
-set number
+" Line numbers
+set nonumber
+set norelativenumber
 set numberwidth=7
-set relativenumber
 
-set complete=.,w,b,u,t
-set completeopt=menuone,preview
+" Wildmenu completion mentu when pressing tab
 set wildcharm=<TAB>
-
 set wildmenu
-" set wildmode=full
-set wildmode=list:full
+set wildmode=list,full
 set wildchar=<Tab>
 
 " Always show the statusline
 set laststatus=2
+
+" Statusline (if Airline is not loaded)
 set statusline=%f
 set statusline+=%=        " Switch to the right side
 set statusline+=%#warningmsg#
 
+" Search settings
 set incsearch
 set nohlsearch
 set noignorecase              " affects both searching and find/replace
 set smartcase
 
+" Fold settings
 set foldmethod=indent
 set foldnestmax=8
 set foldlevelstart=2
 set foldmethod=indent
 
-
-
-let javaScript_fold=1         " JavaScript
-let perl_fold=1               " Perl
-let php_folding=1             " PHP
-let r_syntax_folding=1        " R
-let ruby_fold=1               " Ruby
-let sh_fold_enabled=1         " sh
-let vimsyn_folding='af'       " Vim script
-let xml_syntax_folding=1      " XML
-
+" Don't show tab bar
 set showtabline=0
 
 " Change CWD while navigating in NetRW.
-" This is necessary if you want to move a file like this: mt > cd > mf > mm
-" Otherwise you have to manually change cwd as well: mt > cd > c > mf > mm
-" let g:netrw_keepdir=0
+let g:netrw_keepdir=1
 " Allow netrw to remove non-empty local directories
 let g:netrw_localrmdir='rm -r'
 
-" Auto indent wasn't working without this on bottom
-filetype indent on
-set ai
-set si
-
-
-let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
+" Auto indent settings
+filetype plugin indent on
+set autoindent
+set smartindent
 
 " Allow the :find command to search current directory recursively for a file
 " E.g. :find myfile.text
@@ -164,8 +148,7 @@ set path+=**
 set suffixesadd=.js,.jsx
 
 " Set window title to include current filename.
-" Great for use in iterm2: press cmd+shift+o and search for filename of a
-" window
+" or use in iterm2: press cmd+shift+o and search for filename of a window
 set t_ts=]1;
 set t_fs=
 set title
@@ -174,6 +157,7 @@ set title
 set t_ut=
 set t_Co=256
 
+" Use space button for leader
 let mapleader = "\<Space>"
 
 " How long leader key and other key combinations will wait for another key
@@ -181,14 +165,16 @@ let mapleader = "\<Space>"
 " insert mode. If you start having this timeout apply, something must have set
 " up imap <space> or something similar. Use this to debug:
 " :verbose imap <space>
-set timeoutlen=1000
-set ttimeoutlen=0
+set timeoutlen=1500
+" set ttimeoutlen=0
 
 " }}}
 
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
+" -----------------------------------------------------------------------------------------
 " 1 - Essential
+" -----------------------------------------------------------------------------------------
 " {{{ Ctrl P
 Plug 'ctrlpvim/ctrlp.vim'
 nnoremap <silent> <c-t> :CtrlPLine<CR>
@@ -236,6 +222,8 @@ set wildignore+=*__Scratch__ " scratch.vim
 " }}}
 " {{{ Fugitive / Extradite
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
+Plug 'int3/vim-extradite'
 map <leader>gc :Gcommit<CR>i
 map <leader>gp :Gpull<CR>
 map <leader>gP :Gpush<CR>
@@ -248,13 +236,11 @@ map <leader>gw :Gwrite<CR>
 map <leader>gh :Gbrowse<CR>
 map <leader>gl :Extradite<CR>
 map <leader>gL :Glog<BAR>:bot copen<CR>
-
 " augroup gitlog
 "   autocmd!
 "   autocmd FileType git nmap J /diff<CR> | nmap K k?diff<CR>
 " augroup END
 " autocmd! BufRead,BufNewFile fugitive* git nmap <leader>J /diff<CR>
-
 " }}}
 " {{{ gitgutter
 Plug 'airblade/vim-gitgutter'
@@ -310,21 +296,37 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
 let g:ycm_show_diagnostics_ui = 1
 let g:ycm_log_level = 'debug'
 let g:ycm_cache_omnifunc = 1
-
-
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 " These don't work as well as tern_for_vim
 " nmap <silent> gd :YcmCompleter GoTo<CR>
 " nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
-
+" }}}
+" {{{ vim-polyglot
+" Collection of language plugins.
+" Includes: 'pangloss/vim-javascript'
+" Includes: 'mxw/vim-jsx'
+Plug 'sheerun/vim-polyglot'
+let g:javascript_conceal_function                  = "ƒ"
+let g:javascript_conceal_null                      = "ø"
+let g:javascript_conceal_this                      = "@"
+let g:javascript_conceal_return                    = "◁"
+let g:javascript_conceal_undefined                 = "¿"
+let g:javascript_conceal_NaN                       = "ℕ"
+let g:javascript_conceal_prototype                 = "¶"
+let g:javascript_conceal_static                    = "•"
+let g:javascript_conceal_super                     = "Ω"
+let g:javascript_conceal_arrow_function            = "➜"
+let g:javascript_conceal_noarg_arrow_function      = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
 " }}}
 
+" -----------------------------------------------------------------------------------------
 " 2 - Great
+" -----------------------------------------------------------------------------------------
 " {{{ Surround
 " Plug 'tpope/vim-surround'
 " }}}
@@ -342,6 +344,8 @@ nmap <leader><leader>/ :CtrlSF "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT
 " {{{ vim-simple-todo
 Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
 let g:simple_todo_map_keys = 0
+" map gs :topleft 12split ~/.scratch<CR>
+map gs :topleft split ~/.scratch<CR>
 augroup simpletodo
   autocmd!
   autocmd BufEnter   .scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
@@ -423,195 +427,19 @@ let g:neoformat_verbose = 0
 "   autocmd!
 "   autocmd BufWritePre  *.js Neoformat! javascript prettier
 " augroup END
-
 " Neoformat when pressing =
 nmap <silent> = :Neoformat<CR>
-
 " Have Neoformat use &formatprg as a formatter
 let g:neoformat_try_formatprg = 1
-
 " Enable alignment
 let g:neoformat_basic_format_align = 1
-
 " Enable tab to spaces conversion
 let g:neoformat_basic_format_retab = 1
-
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
-
 " Don't be annoying with the 'no change was necessary' messages
 let g:neoformat_only_msg_on_error = 1
-
 " }}}
-
-" 3 - Decent
-" {{{ Airline / Lightline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline#extensions#tabline#enabled = 0
-let g:airline_powerline_fonts = 0
-" let g:airline_theme='minimalist'
-let g:airline_theme='deus'
-" let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
-let g:airline_section_a = '%{expand("%:p:t")}'
-" let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
-" let g:airline_section_c = '%{substitute(substitute(expand("%:p"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
-let g:airline_section_b = '%{expand("%:p:h:t")}'
-let g:airline_section_c = '%{expand("%:p:h:h:t")}'
-" let g:airline_section_c = '%{join(split(expand("%:p", 1), "/")[0])}'
-" let g:airline_section_c = '%{getcwd()}'
-" let g:airline_section_c = '%{substitute(substitute(expand("%:p:h"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-let g:airline_section_error = ''
-let g:airline_section_warning = ''
-let g:airline_inactive_collapse = 0
-
-
-" let g:AutoPairsShortcutToggle = '<c-a>'
-" }}}
-" {{{ vim-smooth-scroll
-Plug 'terryma/vim-smooth-scroll'
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>
-" }}}
-Plug 'tpope/vim-sleuth'  " Auto set file tab settings based on current file or other files in directory
-Plug 'tmhedberg/matchit' " Use % to match HTML tags
-Plug 'flazz/vim-colorschemes'
-" {{{ vim-javascript
-" This sometimes has issues unfortunately with JSX
-Plug 'pangloss/vim-javascript'
-
-let g:javascript_conceal_function                  = "ƒ"
-let g:javascript_conceal_null                      = "ø"
-let g:javascript_conceal_this                      = "@"
-let g:javascript_conceal_return                    = "◁"
-let g:javascript_conceal_undefined                 = "¿"
-let g:javascript_conceal_NaN                       = "ℕ"
-let g:javascript_conceal_prototype                 = "¶"
-let g:javascript_conceal_static                    = "•"
-let g:javascript_conceal_super                     = "Ω"
-let g:javascript_conceal_arrow_function            = "➜"
-let g:javascript_conceal_noarg_arrow_function      = "🞅"
-let g:javascript_conceal_underscore_arrow_function = "🞅"
-
-" }}}
-" {{{ incsearch
-" Extended search and fuzzy search
-" Fuzzy search allows you to exclude spaces and such
-" While searching, <c-j> can go to next PAGE of matches before pressing enter
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-" map /  <Plug>(incsearch-fuzzy-/)
-" map ? <Plug>(incsearch-fuzzy-?)
-map z/ <Plug>(incsearch-stay)
-map z/ <Plug>(incsearch-fuzzy-/)
-map z? <Plug>(incsearch-fuzzy-?)
-map zg/ <Plug>(incsearch-fuzzy-stay)
-" }}}
-" {{{ EasyMotion
-Plug 'easymotion/vim-easymotion'
-let g:EasyMotion_smartcase = 1
-" }}}
-" {{{ vim-visual-star-search
-" Allow you to use * and # on visually selected text
-Plug 'nelstrom/vim-visual-star-search'
-" }}}
-" {{{ Clever-F
-" The f key will reuse f and F to go next, instead of ; and ,
-" Also, jumps to the next line if no more matches on current line
-Plug 'rhysd/clever-f.vim'
-" {{{ Targets
-" daa - delete an argument
-Plug 'wellle/targets.vim'
-" }}}
-" }}}
-" {{{ Grepper
-" Use Ag to search using :GrepperAg, and :copen when finished
-" CtrlSF is an alternative, but that doesn't allow :cnext or immediate search
-Plug 'mhinz/vim-grepper'
-map <F3> :GrepperAg ""<LEFT>
-" nmap <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
-" nmap <leader>/ :GrepperAg ""<LEFT>
-" nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-
-" Search only open buffers
-function! ToggleGrepperBuffersMode()
-  if g:grepper.buffers
-    let g:grepper.buffers = 0
-    echo "Grepper will search all files"
-  else
-    let g:grepper.buffers = 1
-    echo "Grepper will search only open buffers"
-  endif
-endfunction
-map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>
-
-nmap gr "hyiw:GrepperAg <c-r>h<CR>
-" nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
-nmap gi :GrepperAg %:p:t:r<CR>
-" map <F4> "hyiw:GrepperAg <c-r>h<CR>
-let g:grepper = {}
-runtime autoload/grepper.vim
-let g:grepper.jump = 1
-let g:grepper.stop = 500
-" }}}
-" {{{ tern_for_vim
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-" nmap <silent> gd :TernDef<CR>
-nmap <silent> gt :TernDef<CR>
-nmap <silent> gD :TernDef<CR>
-" }}}
-" {{{ Dash.app
-Plug 'rizzatti/dash.vim'
-nmap <silent> <leader>d <Plug>DashSearch
-let g:dash_map = {
-      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
-      \ }
-" }}}
-" {{{ Vim Trailing Whitespace
-Plug 'bronson/vim-trailing-whitespace'
-" }}}
-
-" 4 - Could do without
-" {{{ Colorscheme switcher
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
-noremap <F9> :RandomColorScheme<CR>:colo<CR>
-" }}}
-" {{{ matchmaker
-" Highlight word under cursor
-Plug 'qstrahl/vim-matchmaker'
-let g:matchmaker_enable_startup = 1
-let g:matchmaker_matchpriority = 1
-" }}}
-" Plug 'jiangmiao/auto-pairs'
-" Nice additions to netrw, but still not fun to rename/move/etc
-" Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
-" {{{ FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-Plug 'junegunn/fzf.vim'
-let g:fzf_buffers_jump = 1
-" }}}
-" {{{ Targets.vim
-" Adds a few text objects, like:
-" * aa / ia - an argument
-Plug 'wellle/targets.vim'
-"}}}
-" {{{ Gundo
-" Use :Gundo to time travel undo history
-Plug 'sjl/gundo.vim'
-nmap <leader>u :GundoToggle<CR>
-" }}}
-
-" 5 - New / Evaluating
-Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'lodash,react,flux,d3'
-
-Plug 'othree/jspc.vim'
 " {{{ ALE
 Plug 'w0rp/ale'  " Async linting
 let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
@@ -655,27 +483,203 @@ noremap - :topleft NERDTreeFind<CR>
 " noremap _ :NERDTree<CR>
 map <leader>b :Bookmark<space>
 " }}}
-Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
-Plug 'chrisbra/NrrwRgn'  " :NR on selected text to open focused split that syncs
+" {{{ yankstack
+Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
+let g:yankstack_map_keys = 0
+" Remove S as a yank key, otherwise interferes with vim surround S in visual
+let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 's', 'x', 'X', 'y', 'Y']
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+" }}}
+
+" -----------------------------------------------------------------------------------------
+" 3 - Decent
+" -----------------------------------------------------------------------------------------
+" {{{ Airline / Lightline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_powerline_fonts = 0
+" let g:airline_theme='minimalist'
+let g:airline_theme='deus'
+" let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
+let g:airline_section_a = '%{expand("%:p:t")}'
+" let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
+" let g:airline_section_c = '%{substitute(substitute(expand("%:p"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
+let g:airline_section_b = '%{expand("%:p:h:t")}'
+let g:airline_section_c = '%{expand("%:p:h:h:t")}'
+" let g:airline_section_c = '%{join(split(expand("%:p", 1), "/")[0])}'
+" let g:airline_section_c = '%{getcwd()}'
+" let g:airline_section_c = '%{substitute(substitute(expand("%:p:h"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
+let g:airline_inactive_collapse = 0
+" let g:AutoPairsShortcutToggle = '<c-a>'
+" }}}
+" {{{ vim-smooth-scroll
+Plug 'terryma/vim-smooth-scroll'
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>
+" }}}
+" {{{ vim-sleuth
+" Auto set file tab settings based on current file or other files in directory
+Plug 'tpope/vim-sleuth'
+" }}}
+" {{{ matchit
+" Use % to match HTML tags
+Plug 'tmhedberg/matchit'
+" }}}
+" {{{ vim-colorschemes
+" Big bundle of colorschemes to play with
+Plug 'flazz/vim-colorschemes'
+" }}}
+" {{{ incsearch
+" Extended search and fuzzy search
+" Fuzzy search allows you to exclude spaces and such
+" While searching, <c-j> can go to next PAGE of matches before pressing enter
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+" }}}
+" {{{ EasyMotion
+Plug 'easymotion/vim-easymotion'
+nmap s <Plug>(easymotion-bd-w)
+let g:EasyMotion_smartcase = 1
+" }}}
+" {{{ vim-visual-star-search
+" Allow you to use * and # on visually selected text
+Plug 'nelstrom/vim-visual-star-search'
+" }}}
+" {{{ Clever-F
+" The f key will reuse f and F to go next, instead of ; and ,
+" Also, jumps to the next line if no more matches on current line
+Plug 'rhysd/clever-f.vim'
+" {{{ Targets
+" daa - delete an argument
+Plug 'wellle/targets.vim'
+" }}}
+" }}}
+" {{{ Grepper
+" Use Ag to search using :GrepperAg, and :copen when finished
+" CtrlSF is an alternative, but that doesn't allow :cnext or immediate search
+Plug 'mhinz/vim-grepper'
+map <F3> :GrepperAg ""<LEFT>
+" nmap <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
+" nmap <leader>/ :GrepperAg ""<LEFT>
+" nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" Search only open buffers
+function! ToggleGrepperBuffersMode()
+  if g:grepper.buffers
+    let g:grepper.buffers = 0
+    echo "Grepper will search all files"
+  else
+    let g:grepper.buffers = 1
+    echo "Grepper will search only open buffers"
+  endif
+endfunction
+map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>
+nmap gr "hyiw:GrepperAg <c-r>h<CR>
+" nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
+nmap gi :GrepperAg %:p:t:r<CR>
+" map <F4> "hyiw:GrepperAg <c-r>h<CR>
+let g:grepper = {}
+runtime autoload/grepper.vim
+let g:grepper.jump = 1
+let g:grepper.stop = 500
+" }}}
+" {{{ tern_for_vim
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+" nmap <silent> gd :TernDef<CR>
+nmap <silent> gt :TernDef<CR>
+nmap <silent> gD :TernDef<CR>
+" }}}
+" {{{ Dash.app
+Plug 'rizzatti/dash.vim'
+nmap <silent> <leader>d <Plug>DashSearch
+let g:dash_map = {
+      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
+      \ }
+" }}}
+" {{{ Vim Trailing Whitespace
+Plug 'bronson/vim-trailing-whitespace'
+" }}}
+" {{{ winresizer
 Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
-Plug 'sheerun/vim-polyglot'  " Collection of language plugins
-" Plug 'mxw/vim-jsx'  " Vim JSX
-Plug 'ton/vim-bufsurf'  " Previous buffer history with :BufSurfForward and :BufSurfBackward
-" Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
-" {{{ HardMode
-Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
-" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-nnoremap <leader><leader>h <Esc>:call ToggleHardMode()<CR>
 " }}}
 " {{{ visual-split
 Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
-vmap <leader>s :'<,'>VSSplitAbove<CR>
+" vmap <leader>s :'<,'>VSSplitAbove<CR>
+vmap v :'<,'>VSSplitAbove<CR>
 " }}}
-" {{{ yankstack
-" Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
-let g:yankstack_map_keys = 0
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
+" {{{ vim-lastplace
+" Open files at last closed position
+Plug 'farmergreg/vim-lastplace'
+" }}}
+
+" -----------------------------------------------------------------------------------------
+" 4 - Could do without
+" -----------------------------------------------------------------------------------------
+" {{{ Tabular
+" Uses :Tabularize /character(s)
+Plug 'godlygeek/tabular'
+vmap gt :Tabularize /
+" }}}
+" {{{ Colorscheme switcher
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
+noremap <F9> :RandomColorScheme<CR>:colo<CR>
+" }}}
+" {{{ matchmaker
+" Highlight word under cursor
+Plug 'qstrahl/vim-matchmaker'
+" let g:matchmaker_enable_startup = 1
+let g:matchmaker_matchpriority = 1
+" }}}
+" {{{ Auto-Pairs
+" Auto close brackets
+" Great until you want to do a macro or enclose existing text
+" Plug 'jiangmiao/auto-pairs'
+" }}}
+" {{{ vim-vinegar
+" Nice additions to netrw, but still not fun to rename/move/etc
+Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
+" }}}
+" {{{ FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
+let g:fzf_buffers_jump = 1
+" }}}
+" {{{ Targets.vim
+" Adds a few text objects, like:
+" * aa / ia - an argument
+Plug 'wellle/targets.vim'
+"}}}
+" {{{ Gundo
+" Use :Gundo to time travel undo history
+Plug 'sjl/gundo.vim'
+nmap <leader>u :GundoToggle<CR>
+" }}}
+" {{{ javascript-libraries-syntax
+" Adds some minor extra syntax highlighting for certain libraries
+" Seems pretty minor, like I noticed React in React.Component was highlighted
+Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'lodash,react,flux,d3'
+" }}}
+" {{{ JSPC
+" Argument omnicompletion
+" I'm not sure if this one actually works with YouCompleteMe?
+Plug 'othree/jspc.vim'
+" }}}
+" {{{ HardMode
+" Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
+" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+" nnoremap <leader><leader>h <Esc>:call ToggleHardMode()<CR>
 " }}}
 " {{{ Dirvish
 " Plug 'justinmk/vim-dirvish'  " File manager
@@ -684,60 +688,20 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " noremap - :Dirvish %:p:h<CR>
 " let g:dirvish_relative_paths = 1
 " }}}
-Plug 'int3/vim-extradite'
-Plug 'farmergreg/vim-lastplace'
-" {{{ Tabular
-" Uses :Tabularize /character(s)
-Plug 'godlygeek/tabular'
-vmap gt :Tabularize /
-" }}}
+" {{{ Dracula (colorscheme)
 Plug 'dracula/vim'
+" }}}
+" {{{ Unimpaired
 Plug 'tpope/vim-unimpaired'
-" {{{ Interesting Words
-Plug 'lfv89/vim-interestingwords'
-"}}}
-" {{{ Targets.vim
+" }}}
+" {{{ Wildfire
 " Press Enter to select the closest text object. Press Enter again to expand
 " to the next largest text object,
 Plug 'gcmt/wildfire.vim'
 "}}}
-" {{{ Qlist
-" Show [I (buffer matches for word under cursor) in a Quickfix window :copen
-Plug 'romainl/vim-qlist'
-nmap <leader>8 :Ilist <CR>
-nmap <leader>* :Ilist <CR>
-" }}}
-" {{{ Ranger.vim Ranger integration
-" Plug 'francoiscabrol/ranger.vim'
-" map - :Ranger<CR>
-" map - :e %:p:h<CR>
-" }}}
-" {{{ CloseTag
-" TODO: evaluate removing / workaround. It causes leader key to have a
-" timeout. See:
-" :verbose imap <Space>
-" Plug 'alvan/vim-closetag'
-" let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.xml'
-" }}}
-Plug 'altercation/vim-colors-solarized'
-
 " {{{ Vim Maximizer
 Plug 'szw/vim-maximizer'
 nmap <leader>f :MaximizerToggle<CR>
-" }}}
-" {{{ Vim-Pad
-" :Pad new
-" :Pad ls
-Plug 'fmoralesc/vim-pad'
-let g:pad#dir = '~/notes/'
-" }}}
-" {{{ Peekaboo
-Plug 'junegunn/vim-peekaboo'
-" }}}
-" {{{ vim-json
-" Conceal quotes in JSON
-Plug 'elzr/vim-json'
-" let g:vim_json_syntax_conceal=1
 " }}}
 " {{{ vim-syntax-expand
 " Like abbreviations, but _head can detect if first character on line, and
@@ -747,11 +711,32 @@ autocmd FileType javascript inoremap <silent> <buffer> @ <C-r>=syntax_expand#exp
 autocmd FileType javascript inoremap <silent> <buffer> # <C-r>=syntax_expand#expand("#", ".prototype.")<CR>
 autocmd FileType javascript inoremap <silent> <buffer> < <C-r>=syntax_expand#expand_head("<", "return ")<CR>
 autocmd FileType javascript inoremap <silent> <buffer> >> <C-r>=syntax_expand#expand(">>", "=>")<CR>
+" }}}
+" {{{ vim-json
+" Conceal quotes in JSON
+Plug 'elzr/vim-json'
+" let g:vim_json_syntax_conceal=1
+" }}}
+" {{{ Peekaboo
+Plug 'junegunn/vim-peekaboo'
+" }}}
+" {{{ Vim-Pad
+" :Pad new
+" :Pad ls
+Plug 'fmoralesc/vim-pad'
+let g:pad#dir = '~/notes/'
+" }}}
 
+" -----------------------------------------------------------------------------------------
+" 5 - New / Evaluating
+" -----------------------------------------------------------------------------------------
+" {{{ vim-paste-easy
+" Automatically :set paste when it detects you have pasted text
+Plug 'roxma/vim-paste-easy'
 " }}}
 call plug#end()
 
-" }}}
+" }}} ======================================================================
 
 " {{{ Languages
 
@@ -769,20 +754,6 @@ augroup pythondispatch
   autocmd FileType python map ,r :Dispatch python %:p<CR>
 augroup END
 " }}}
-
-if !exists('*TagsUnderCursor')
-  function TagsUnderCursor()
-    try
-      let default_input_save = get(g:, 'ctrlp_default_input', '')
-      let g:ctrlp_default_input = expand('<cfile>')
-      CtrlP
-    finally
-      if exists('default_input_save')
-        let g:ctrlp_default_input = default_input_save
-      endif
-    endtry
-  endfun
-endif
 
 " {{{ Javascript
 " nmap gd :TernDef<CR>
@@ -815,6 +786,7 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
 " {{{ File Marks
+" Automatically bookmark last files accessed by directory
 augroup filemarks
   autocmd!
   autocmd BufEnter *.{js,jsx,coffee} normal! mJ
@@ -856,7 +828,6 @@ augroup END
 " map ,re :FZF reducers/<CR>
 " map ,ro :FZF routes/<CR>
 
-
 " }}}
 
 " {{{ Function Keys
@@ -873,32 +844,27 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 
 " {{{ Leader <Space>
 
-" map <leader>/ "hyiw:Ag
 nmap <leader><leader>i :PlugInstall<CR>
 nmap <leader><leader>j :join<CR>
 nmap <leader><leader>u :PlugClean!<CR>
 nmap <leader><leader>v :sp ~/dotfiles/.vimrc<CR>
 
 map <leader>c :bd<CR>
-" map <leader>l :set list!<CR>
-" map <leader>o :copen<CR>
-" map <leader>p :set paste!<CR>
-" nmap <leader>8 "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
 nmap <leader>oh !open https://github.com/search?q=
 nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
 nmap <leader>oo !open https://www.google.com/search?q=javascript+
 nmap <leader>q :q<CR>
 nmap <leader>s :sp<CR>
-nmap <leader>t :NERDTreeFind<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>
-
-" Diff put to grab changes using comma
-" noremap , :diffput<CR>
 
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
+
+" Switch to previous file
+map <leader><tab> <c-^>
+
 nmap <leader>0 :set foldlevel=0<CR>
 nmap <leader>1 :set foldlevel=1<CR>
 nmap <leader>2 :set foldlevel=2<CR>
@@ -907,7 +873,6 @@ nmap <leader>4 :set foldlevel=4<CR>
 nmap <leader>5 :set foldlevel=5<CR>
 nmap <leader>6 :set foldlevel=6<CR>
 nmap <leader>7 :set foldlevel=7<CR>
-" nmap <leader>8 :set foldlevel=8<CR>
 nmap <leader>9 :set foldlevel=999<CR>
 
 " }}}
@@ -918,74 +883,59 @@ vmap A :norm A
 vmap \ :norm<space>
 vmap s :sort<CR>
 vmap r :s/
-" vmap S :s/  " Interferes with Surround...
 vmap M :join<CR>
 " }}}
 
 " {{{ Window Keys
+" Maximize window
 map  _|
 map f _<bar>
 " }}}
 
-map ,1 1
-map ,2 2
-map ,3 3
-map ,4 4
-map ,5 5
-map ,6 6
-map ,7 7
-map ,8 8
-map ,9 9
+" {{{ Change default behavior
+
+" Match indent level on paste
+map P ]P
+map p ]p
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
 
-map <leader><tab> <c-^>
+" Center screen when going through search results
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
 
+" Don't skip wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" }}}
+
+" {{{ Changelist
+" Use c-f and c-b to move through quickfix, e.g. when using Grepper
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
 
-" map gs :topleft 12split ~/.scratch<CR>
-map gs :topleft split ~/.scratch<CR>
+map ! :!
+" }}}
 
-" Center screen when going through search results
-" nnoremap <silent> n nzz
-" nnoremap <silent> N Nzz
 
-map Q :cprev<CR>
-map <c-q> :cnext<CR>
-
-let g:ag_highlight=1
-
-" Don't automatically do line breaks on long lines
-" set formatoptions-=t
-
-" Don't skip wrapped lines
-" nnoremap j gj
-" nnoremap k gk
-
+" {{{ Navigation in buffer
 map J }
 map K {
 map H [{
 map L ]}
-" map <leader>h [{
-" map <leader>l ]}
-map <silent> <leader>h :BufSurfBack<CR>
-map <silent> <leader>l :BufSurfForward<CR>
+" }}}
 
-vmap <leader><leader>n :norm
-nmap <leader><leader>g :%g/
-
-nmap s <Plug>(easymotion-bd-w)
-
+" {{{ Navigate panes
 " Use '$ cat' to find the keys to map to
 " http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 map ˙ <c-w>h
 map ∆ <c-w>j
 map ˚ <c-w>k
 map ¬ <c-w>l
+" }}}
 
-map ! :!
 
 imap <c-z> <c-y>,
 
@@ -1010,8 +960,6 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 nmap gR :YcmCompleter GoToReferences<CR>
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
-
-map ; 
 
 " }}}
 
@@ -1098,7 +1046,7 @@ nnoremap <silent> <C-A> :ZoomToggle<CR>
 " }}}
 
 " {{{ Abbreviations
-" abbreviate --- -----------------------------------------------------------------------------------------
+abbreviate --- -----------------------------------------------------------------------------------------
 " }}}
 
 " {{{ Colorscheme
