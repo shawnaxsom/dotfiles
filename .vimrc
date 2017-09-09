@@ -93,7 +93,6 @@ set linebreak
 set nojoinspaces
 set magic
 set browsedir=buffer
-set nocursorline
 set nobackup
 set nowritebackup
 set number
@@ -136,9 +135,6 @@ let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 
-set conceallevel=0
-set concealcursor=vin
-
 set showtabline=0
 
 " Change CWD while navigating in NetRW.
@@ -161,6 +157,9 @@ let g:used_javascript_libs = 'jquery, underscore, backbone, angularjs'
 " https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
 set path+=**
 
+" Allow gf to find JavaScript file references without extension
+set suffixesadd=.js,.jsx
+
 " Set window title to include current filename.
 " Great for use in iterm2: press cmd+shift+o and search for filename of a
 " window
@@ -175,9 +174,12 @@ set t_Co=256
 let mapleader = "\<Space>"
 
 " How long leader key and other key combinations will wait for another key
-" press
-" set timeoutlen=800
-set timeoutlen=200
+" NOTE: Usually the timeout shouldn't be needed for <leader> / <space> in
+" insert mode. If you start having this timeout apply, something must have set
+" up imap <space> or something similar. Use this to debug:
+" :verbose imap <space>
+set timeoutlen=1000
+set ttimeoutlen=0
 
 " }}}
 
@@ -274,6 +276,8 @@ map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>
 augroup vimux
   autocmd!
   autocmd BufEnter */api/* map <buffer> ,q :call VimuxRunCommand("npm run build; and env NODE_ENV=qa npm start")<CR>
+  autocmd BufEnter */api/* map <buffer> ,t :call VimuxRunCommand("npm test -- --tests " . expand("%"))<CR>
+map ,t :Dispatch npm test<CR>
 augroup END
 map ,c :call VimuxInterruptRunner()<CR>
 map ,t :Dispatch npm test<CR>
@@ -289,19 +293,20 @@ Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
 let g:simple_todo_map_keys = 0
 augroup simpletodo
   autocmd!
-  autocmd BufEnter .scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter .scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter .scratch nmap <buffer> ,o <Plug>(simple-todo-below)
-  autocmd BufEnter .scratch nmap <buffer> x <Plug>(simple-todo-mark-switch)
-  autocmd BufEnter .scratch nmap <buffer> X :%g/\[x\]/d<CR>
+  autocmd BufEnter   .scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter   .scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter   .scratch nmap <buffer> ,o <Plug>(simple-todo-below)
+  autocmd BufEnter   .scratch nmap <buffer> x <Plug>(simple-todo-mark-switch)
+  autocmd BufEnter   .scratch nmap <buffer> X :%g/\[x\]/d<CR>
   " autocmd BufEnter .scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
   " autocmd BufEnter .scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
   " autocmd BufEnter .scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
-  autocmd BufEnter .scratch imap <buffer> [[ <Plug>(simple-todo-new)
-  autocmd BufEnter .scratch imap <buffer> ,i <Plug>(simple-todo-new)
-  autocmd BufEnter .scratch imap <buffer> ,o <Plug>(simple-todo-new)
-  autocmd BufLeave .scratch w
-  autocmd BufEnter .scratch abbreviate <buffer> [ [ ]
+  autocmd BufEnter   .scratch imap <buffer> [[ <Plug>(simple-todo-new)
+  autocmd BufEnter   .scratch imap <buffer> ,i <Plug>(simple-todo-new)
+  autocmd BufEnter   .scratch imap <buffer> ,o <Plug>(simple-todo-new)
+  autocmd BufLeave   .scratch w
+  autocmd BufEnter   .scratch abbreviate <buffer> [ [ ]
+  autocmd BufRead    .scratch setlocal foldlevel=0
 augroup END
 " }}}
 " {{{ Codi
@@ -341,7 +346,7 @@ Plug 'ajmwagar/vim-deus'
 " }}}
 
 " 4 - Could do without
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 
 " 5 - New / Evaluating
 " Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
@@ -357,7 +362,24 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'flazz/vim-colorschemes'
 Plug 'gregsexton/gitv'
 Plug 'vim-scripts/MultipleSearch'
+" {{{ vim-javascript
+" This sometimes has issues unfortunately with JSX
 Plug 'pangloss/vim-javascript'
+
+let g:javascript_conceal_function                  = "ƒ"
+let g:javascript_conceal_null                      = "ø"
+let g:javascript_conceal_this                      = "@"
+let g:javascript_conceal_return                    = "◁"
+let g:javascript_conceal_undefined                 = "¿"
+let g:javascript_conceal_NaN                       = "ℕ"
+let g:javascript_conceal_prototype                 = "¶"
+let g:javascript_conceal_static                    = "•"
+let g:javascript_conceal_super                     = "Ω"
+let g:javascript_conceal_arrow_function            = "➜"
+let g:javascript_conceal_noarg_arrow_function      = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
+
+" }}}
 " {{{ vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
 Plug 'christoomey/vim-tmux-navigator'
@@ -469,6 +491,7 @@ Plug 'sjl/gundo.vim'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 " nmap <silent> gd :TernDef<CR>
 nmap <silent> gt :TernDef<CR>
+nmap <silent> gD :TernDef<CR>
 " }}}
 " {{{ Dash.app
 Plug 'rizzatti/dash.vim'
@@ -585,6 +608,7 @@ Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github 
 Plug 'chrisbra/NrrwRgn'  " :NR on selected text to open focused split that syncs
 Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
 Plug 'sheerun/vim-polyglot'  " Collection of language plugins
+" Plug 'mxw/vim-jsx'  " Vim JSX
 Plug 'ton/vim-bufsurf'  " Previous buffer history with :BufSurfForward and :BufSurfBackward
 " Plug 'sickill/vim-pasta'  " Adjust pasted text indentation to match surrounding block, works automatically overriding <p>
 " {{{ HardMode
@@ -644,8 +668,11 @@ nmap <leader>* :Ilist <CR>
 " map - :e %:p:h<CR>
 " }}}
 " {{{ CloseTag
-Plug 'alvan/vim-closetag'
-let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.xml'
+" TODO: evaluate removing / workaround. It causes leader key to have a
+" timeout. See:
+" :verbose imap <Space>
+" Plug 'alvan/vim-closetag'
+" let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.xml'
 " }}}
 Plug 'altercation/vim-colors-solarized'
 
@@ -661,6 +688,21 @@ let g:pad#dir = '~/notes/'
 " }}}
 " {{{ Peekaboo
 Plug 'junegunn/vim-peekaboo'
+" }}}
+" {{{ vim-json
+" Conceal quotes in JSON
+Plug 'elzr/vim-json'
+" let g:vim_json_syntax_conceal=1
+" }}}
+" {{{ vim-syntax-expand
+" Like abbreviations, but _head can detect if first character on line, and
+" doesn't require you to press space to expand
+Plug 'Wolfy87/vim-syntax-expand'
+autocmd FileType javascript inoremap <silent> <buffer> @ <C-r>=syntax_expand#expand("@", "this")<CR>
+autocmd FileType javascript inoremap <silent> <buffer> # <C-r>=syntax_expand#expand("#", ".prototype.")<CR>
+autocmd FileType javascript inoremap <silent> <buffer> < <C-r>=syntax_expand#expand_head("<", "return ")<CR>
+autocmd FileType javascript inoremap <silent> <buffer> >> <C-r>=syntax_expand#expand(">>", "=>")<CR>
+
 " }}}
 call plug#end()
 
@@ -844,8 +886,6 @@ map  _|
 map f _<bar>
 " }}}
 
-imap jj <ESC>
-
 map ,1 1
 map ,2 2
 map ,3 3
@@ -1020,7 +1060,7 @@ nnoremap <silent> <C-A> :ZoomToggle<CR>
 " }}}
 
 " {{{ Abbreviations
-abbreviate --- -----------------------------------------------------------------------------------------
+" abbreviate --- -----------------------------------------------------------------------------------------
 " }}}
 
 " {{{ Colorscheme
@@ -1071,6 +1111,18 @@ highlight GitGutterDelete       guibg=#502020
 " hi GitGutterDeleteLine       guibg=#502020
 " hi GitGutterChangeDeleteLine " default: links to GitGutterChangeLineDefault
 " }}}
+" }}}
+
+" {{{ Macros / macro-like mappings
+
+" Convert React stateless functional class to a full stateful class
+map \c j?constcwclasswea extends React.component ldt{oconstructor(props) {super(props);this.state = {};}render() {]}O}v%:s/props/this.props=
+map \f j?classcwconstelct{ = (props) => /constructor$V%d/render$%dddd[{v%:s/this.props/props
+" }}}
+
+" {{{ Conceal
+set conceallevel=1
+set concealcursor=cnv
 " }}}
 
 " {{{ .vimrc
