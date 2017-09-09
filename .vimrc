@@ -13,6 +13,7 @@ set autoread
 set nowrap
 
 " If you enable wrap, break on spaces or tabs
+set linebreak
 set breakat=\ ^I
 
 " Don't change directory to current buffer.
@@ -89,8 +90,10 @@ set hidden
 " Command history
 set history=1000
 
-set linebreak
+" Don't insert two spaces after a join command
 set nojoinspaces
+
+
 set magic
 set browsedir=buffer
 set nobackup
@@ -286,8 +289,56 @@ map ,b :Dispatch npm run build<CR>
 " map ,z :Copen<CR>
 map ,z :VimuxZoomRunner<CR>
 " }}}
+" {{{ vim-tmux-navigator
+" Ctrl + J/K/H/L to move to different Vim or Tmux panes.
+Plug 'christoomey/vim-tmux-navigator'
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_save_on_switch = 2
+" }}}
+" {{{ UltiSnips
+Plug 'SirVer/ultisnips'
+nmap <leader><leader>s :UltiSnipsEdit<CR>
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+" }}}
+" {{{ YouCompleteMe
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_log_level = 'debug'
+let g:ycm_cache_omnifunc = 1
+
+
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
+" These don't work as well as tern_for_vim
+" nmap <silent> gd :YcmCompleter GoTo<CR>
+" nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" }}}
 
 " 2 - Great
+" {{{ Surround
+" Plug 'tpope/vim-surround'
+" }}}
+" {{{ Workspace
+Plug 'thaerkh/vim-workspace'
+nmap <leader><leader>w :ToggleWorkspace<CR>
+" }}}
+" {{{ CtrlSF
+Plug 'dyng/ctrlsf.vim'
+map <F3> :CtrlSF ""<LEFT>
+nmap <leader><leader>8 "hyiw:CtrlSF <c-r>h<CR>
+nmap <leader>/ :CtrlSF ""<LEFT>
+nmap <leader><leader>/ :CtrlSF "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" }}}
 " {{{ vim-simple-todo
 Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
 let g:simple_todo_map_keys = 0
@@ -317,8 +368,10 @@ let g:codi#aliases = {
       \ }
 " }}}
 " {{{ Commentary
-Plug 'tpope/vim-commentary'
 " Comment out a line of code with <c-/>
+Plug 'tpope/vim-commentary'
+nmap   <Plug>CommentaryLine
+vmap   <Plug>Commentary
 " }}}
 " {{{ Trailer Trash - Remove trailing spaces
 Plug 'csexton/trailertrash.vim'
@@ -337,190 +390,21 @@ let g:goldenview__enable_default_mapping = 0
 " nmap <silent> <C-N>  <Plug>GoldenViewNext
 " nmap <silent> <C-P>  <Plug>GoldenViewPrevious
 " }}}
-
-" 3 - Decent
-Plug 'tpope/vim-sensible'  " Default settings for Vim. I probably already have these in my VimRC, need to review.
-Plug 'tpope/vim-sleuth'  " Auto set file tab settings based on current file or other files in directory
 " {{{ Vim Deus (colorscheme)
 Plug 'ajmwagar/vim-deus'
 " }}}
-
-" 4 - Could do without
-" Plug 'jiangmiao/auto-pairs'
-
-" 5 - New / Evaluating
-" Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
-Plug 'tmhedberg/matchit'
-Plug 'lambacck/python_matchit'
-Plug 'Chun-Yang/vim-action-ag'
-Plug 'qstrahl/vim-matchmaker'
-Plug 'haya14busa/incsearch.vim'
-nmap   <Plug>CommentaryLine
-vmap   <Plug>Commentary
-Plug 'honza/vim-snippets'
-Plug 'Chiel92/vim-autoformat'
-Plug 'flazz/vim-colorschemes'
-Plug 'gregsexton/gitv'
-Plug 'vim-scripts/MultipleSearch'
-" {{{ vim-javascript
-" This sometimes has issues unfortunately with JSX
-Plug 'pangloss/vim-javascript'
-
-let g:javascript_conceal_function                  = "ƒ"
-let g:javascript_conceal_null                      = "ø"
-let g:javascript_conceal_this                      = "@"
-let g:javascript_conceal_return                    = "◁"
-let g:javascript_conceal_undefined                 = "¿"
-let g:javascript_conceal_NaN                       = "ℕ"
-let g:javascript_conceal_prototype                 = "¶"
-let g:javascript_conceal_static                    = "•"
-let g:javascript_conceal_super                     = "Ω"
-let g:javascript_conceal_arrow_function            = "➜"
-let g:javascript_conceal_noarg_arrow_function      = "🞅"
-let g:javascript_conceal_underscore_arrow_function = "🞅"
-
-" }}}
-" {{{ vim-tmux-navigator
-" Ctrl + J/K/H/L to move to different Vim or Tmux panes.
-Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:tmux_navigator_save_on_switch = 2
-" }}}
-Plug 'dyng/ctrlsf.vim'
-Plug 'rubik/vim-radon'
-" {{{ UltiSnips
-Plug 'SirVer/ultisnips'
-" Fix directory UltiSnipsEdit places snippets in
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" }}}
-Plug 'derekwyatt/vim-scala'
-" {{{ EasyMotion
-Plug 'easymotion/vim-easymotion'
-let g:EasyMotion_smartcase = 1
-" }}}
-Plug 'tpope/vim-surround'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'terryma/vim-smooth-scroll'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'tpope/vim-obsession'
-Plug 'thaerkh/vim-workspace'
-Plug 'posva/vim-vue'
-" {{{ Airline / Lightline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline#extensions#tabline#enabled = 0
-let g:airline_powerline_fonts = 0
-" let g:airline_theme='minimalist'
-let g:airline_theme='deus'
-" let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
-let g:airline_section_a = '%{expand("%:p:t")}'
-" let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
-" let g:airline_section_c = '%{substitute(substitute(expand("%:p"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
-let g:airline_section_b = '%{expand("%:p:h:t")}'
-let g:airline_section_c = '%{expand("%:p:h:h:t")}'
-" let g:airline_section_c = '%{join(split(expand("%:p", 1), "/")[0])}'
-" let g:airline_section_c = '%{getcwd()}'
-" let g:airline_section_c = '%{substitute(substitute(expand("%:p:h"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-let g:airline_section_error = ''
-let g:airline_section_warning = ''
-let g:airline_inactive_collapse = 0
-
-
-" let g:AutoPairsShortcutToggle = '<c-a>'
-" }}}
-Plug 'elixir-lang/vim-elixir'
-Plug 'leafgarland/typescript-vim'
-Plug 'fatih/vim-go'
-Plug 'tpope/vim-repeat'
-" {{{ FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-Plug 'junegunn/fzf.vim'
-let g:fzf_buffers_jump = 1
-" }}}
+" {{{ vim-indent-object
+" Indentation object: cai, cii, vai, vii, dai, dii, etc.
+" Also: aI to select one line above and below, to get e.g. an HTML tag name.
 Plug 'michaeljsmith/vim-indent-object'
-" Plug 'rhysd/clever-f.vim'
-Plug 'nelstrom/vim-visual-star-search'
-Plug 'wellle/targets.vim'
-" {{{ Grepper
-Plug 'mhinz/vim-grepper'
-map <F3> :GrepperAg ""<LEFT>
-nmap <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
-nmap <leader>/ :GrepperAg ""<LEFT>
-nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-
-" Search only open buffers
-function! ToggleGrepperBuffersMode()
-  if g:grepper.buffers
-    let g:grepper.buffers = 0
-    echo "Grepper will search all files"
-  else
-    let g:grepper.buffers = 1
-    echo "Grepper will search only open buffers"
-  endif
-endfunction
-map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>
-
-nmap gr "hyiw:GrepperAg <c-r>h<CR>
-" nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
-nmap gi :GrepperAg %:p:t:r<CR>
-" map <F4> "hyiw:GrepperAg <c-r>h<CR>
-let g:grepper = {}
-runtime autoload/grepper.vim
-let g:grepper.jump = 1
-let g:grepper.stop = 500
 " }}}
-" Plug 'mtth/scratch.vim'
+" {{{ Eunuch
+" Commands like :Rename, :Delete, :Mkdir, :Find
 Plug 'tpope/vim-eunuch'
-Plug 'sjl/gundo.vim'
-" Shouldn't be needed
-" since tern is built in to YouCompleteMe now, if using flag
-" {{{ tern_for_vim
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-" nmap <silent> gd :TernDef<CR>
-nmap <silent> gt :TernDef<CR>
-nmap <silent> gD :TernDef<CR>
 " }}}
-" {{{ Dash.app
-Plug 'rizzatti/dash.vim'
-nmap <silent> <leader>d <Plug>DashSearch
-let g:dash_map = {
-      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
-      \ }
-" }}}
-" Plug 'moll/vim-node'
-Plug 'othree/html5.vim'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'ervandew/supertab'
-" {{{ YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_log_level = 'debug'
-let g:ycm_cache_omnifunc = 1
-
-
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
-" These don't work as well as tern_for_vim
-" nmap <silent> gd :YcmCompleter GoTo<CR>
-" nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
+" {{{ Vim-Repeat
+" Repeat more sensible commands with .
+Plug 'tpope/vim-repeat'
 " }}}
 " {{{ Neoformat (Prettier)
 Plug 'sbdchd/neoformat'
@@ -559,7 +443,174 @@ let g:neoformat_basic_format_trim = 1
 let g:neoformat_only_msg_on_error = 1
 
 " }}}
+
+" 3 - Decent
+" {{{ Airline / Lightline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_powerline_fonts = 0
+" let g:airline_theme='minimalist'
+let g:airline_theme='deus'
+" let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
+let g:airline_section_a = '%{expand("%:p:t")}'
+" let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
+" let g:airline_section_c = '%{substitute(substitute(expand("%:p"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
+let g:airline_section_b = '%{expand("%:p:h:t")}'
+let g:airline_section_c = '%{expand("%:p:h:h:t")}'
+" let g:airline_section_c = '%{join(split(expand("%:p", 1), "/")[0])}'
+" let g:airline_section_c = '%{getcwd()}'
+" let g:airline_section_c = '%{substitute(substitute(expand("%:p:h"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
+let g:airline_inactive_collapse = 0
+
+
+" let g:AutoPairsShortcutToggle = '<c-a>'
+" }}}
+" {{{ vim-smooth-scroll
+Plug 'terryma/vim-smooth-scroll'
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>
+" }}}
+Plug 'tpope/vim-sleuth'  " Auto set file tab settings based on current file or other files in directory
+Plug 'tmhedberg/matchit' " Use % to match HTML tags
+Plug 'flazz/vim-colorschemes'
+" {{{ vim-javascript
+" This sometimes has issues unfortunately with JSX
+Plug 'pangloss/vim-javascript'
+
+let g:javascript_conceal_function                  = "ƒ"
+let g:javascript_conceal_null                      = "ø"
+let g:javascript_conceal_this                      = "@"
+let g:javascript_conceal_return                    = "◁"
+let g:javascript_conceal_undefined                 = "¿"
+let g:javascript_conceal_NaN                       = "ℕ"
+let g:javascript_conceal_prototype                 = "¶"
+let g:javascript_conceal_static                    = "•"
+let g:javascript_conceal_super                     = "Ω"
+let g:javascript_conceal_arrow_function            = "➜"
+let g:javascript_conceal_noarg_arrow_function      = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
+
+" }}}
+" {{{ incsearch
+" Extended search and fuzzy search
+" Fuzzy search allows you to exclude spaces and such
+" While searching, <c-j> can go to next PAGE of matches before pressing enter
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+" map /  <Plug>(incsearch-fuzzy-/)
+" map ? <Plug>(incsearch-fuzzy-?)
+map z/ <Plug>(incsearch-stay)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
+" }}}
+" {{{ EasyMotion
+Plug 'easymotion/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+" }}}
+" {{{ vim-visual-star-search
+" Allow you to use * and # on visually selected text
+Plug 'nelstrom/vim-visual-star-search'
+" }}}
+" {{{ Clever-F
+" The f key will reuse f and F to go next, instead of ; and ,
+" Also, jumps to the next line if no more matches on current line
+Plug 'rhysd/clever-f.vim'
+" {{{ Targets
+" daa - delete an argument
+Plug 'wellle/targets.vim'
+" }}}
+" }}}
+" {{{ Grepper
+" Use Ag to search using :GrepperAg, and :copen when finished
+" CtrlSF is an alternative, but that doesn't allow :cnext or immediate search
+Plug 'mhinz/vim-grepper'
+map <F3> :GrepperAg ""<LEFT>
+" nmap <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
+" nmap <leader>/ :GrepperAg ""<LEFT>
+" nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+
+" Search only open buffers
+function! ToggleGrepperBuffersMode()
+  if g:grepper.buffers
+    let g:grepper.buffers = 0
+    echo "Grepper will search all files"
+  else
+    let g:grepper.buffers = 1
+    echo "Grepper will search only open buffers"
+  endif
+endfunction
+map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>
+
+nmap gr "hyiw:GrepperAg <c-r>h<CR>
+" nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
+nmap gi :GrepperAg %:p:t:r<CR>
+" map <F4> "hyiw:GrepperAg <c-r>h<CR>
+let g:grepper = {}
+runtime autoload/grepper.vim
+let g:grepper.jump = 1
+let g:grepper.stop = 500
+" }}}
+" {{{ tern_for_vim
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+" nmap <silent> gd :TernDef<CR>
+nmap <silent> gt :TernDef<CR>
+nmap <silent> gD :TernDef<CR>
+" }}}
+" {{{ Dash.app
+Plug 'rizzatti/dash.vim'
+nmap <silent> <leader>d <Plug>DashSearch
+let g:dash_map = {
+      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
+      \ }
+" }}}
+" {{{ Vim Trailing Whitespace
+Plug 'bronson/vim-trailing-whitespace'
+" }}}
+
+" 4 - Could do without
+" {{{ Colorscheme switcher
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
+noremap <F9> :RandomColorScheme<CR>:colo<CR>
+" }}}
+" {{{ matchmaker
+" Highlight word under cursor
+Plug 'qstrahl/vim-matchmaker'
+let g:matchmaker_enable_startup = 1
+let g:matchmaker_matchpriority = 1
+" }}}
+" Plug 'jiangmiao/auto-pairs'
+" Nice additions to netrw, but still not fun to rename/move/etc
+" Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
+" {{{ FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
+let g:fzf_buffers_jump = 1
+" }}}
+" {{{ Targets.vim
+" Adds a few text objects, like:
+" * aa / ia - an argument
+Plug 'wellle/targets.vim'
+"}}}
+" {{{ Gundo
+" Use :Gundo to time travel undo history
+Plug 'sjl/gundo.vim'
+nmap <leader>u :GundoToggle<CR>
+" }}}
+
+" 5 - New / Evaluating
 Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'lodash,react,flux,d3'
+
 Plug 'othree/jspc.vim'
 " {{{ ALE
 Plug 'w0rp/ale'  " Async linting
@@ -616,7 +667,6 @@ Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use sing
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader><leader>h <Esc>:call ToggleHardMode()<CR>
 " }}}
-Plug 'dominikduda/vim_current_word'  " Show the currently selected word highlighted
 " {{{ visual-split
 Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
 vmap <leader>s :'<,'>VSSplitAbove<CR>
@@ -645,11 +695,6 @@ Plug 'dracula/vim'
 Plug 'tpope/vim-unimpaired'
 " {{{ Interesting Words
 Plug 'lfv89/vim-interestingwords'
-"}}}
-" {{{ Targets.vim
-" Adds a few text objects, like:
-" * aa / ia - an argument
-Plug 'wellle/targets.vim'
 "}}}
 " {{{ Targets.vim
 " Press Enter to select the closest text object. Press Enter again to expand
@@ -822,7 +867,6 @@ map <F5> :NERDTreeToggle<CR>
 noremap <F6> :!tig %<CR>
 nmap <F7> "hyiw:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
 vmap <F7> "hy:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
-noremap <F9> :RandomColorScheme<CR>:colo<CR>
 map <F12> "hyiw:Dash <c-r>h<CR>
 vmap <F12> "hy:Dash <c-r>h<CR>
 " }}}
@@ -832,10 +876,8 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 " map <leader>/ "hyiw:Ag
 nmap <leader><leader>i :PlugInstall<CR>
 nmap <leader><leader>j :join<CR>
-nmap <leader><leader>s :UltiSnipsEdit<CR>
 nmap <leader><leader>u :PlugClean!<CR>
 nmap <leader><leader>v :sp ~/dotfiles/.vimrc<CR>
-nmap <leader><leader>w :ToggleWorkspace<CR>
 
 map <leader>c :bd<CR>
 " map <leader>l :set list!<CR>
@@ -848,7 +890,6 @@ nmap <leader>oo !open https://www.google.com/search?q=javascript+
 nmap <leader>q :q<CR>
 nmap <leader>s :sp<CR>
 nmap <leader>t :NERDTreeFind<CR>
-nmap <leader>u :GundoToggle<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>
 
@@ -931,9 +972,6 @@ map L ]}
 " map <leader>l ]}
 map <silent> <leader>h :BufSurfBack<CR>
 map <silent> <leader>l :BufSurfForward<CR>
-
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>
 
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
@@ -1110,6 +1148,9 @@ highlight GitGutterDelete       guibg=#502020
 " hi GitGutterChangeLine       guibg=#305aa2
 " hi GitGutterDeleteLine       guibg=#502020
 " hi GitGutterChangeDeleteLine " default: links to GitGutterChangeLineDefault
+" }}}
+" {{{ matchmaker
+hi default Matchmaker term=underline    ctermbg=238     guibg=#555555
 " }}}
 " }}}
 
