@@ -1,17 +1,28 @@
 {
-  "ecmaVersion": 6,
   "libs": [
-    "browser",
-    "react"
+    "browser"
   ],
-  "dontLoad": [
-    "node_modules/**"
+  "loadEagerly": [
+    "bower_components/ember/ember.js"
+  ],
+  "dontLoad":[
+    "node_modules",
+    "dist",
+    "tmp",
+    "vendor"
+  ],
+  "exclude": [
+    "node_modules/**",
+    ".git/**",
+    "*.min.js",
+    "*.prod.js",
+    "*.debug.js",
+    "tmp",
+    "vendor"
   ],
   "plugins": {
-    "node_resolve": {},
-    "es_modules": {},
-    "webpack": {
-      "configPath": "../node_modules/react-scripts/config/webpack.config.dev.js"
-    }
+    "node": {},
+    "complete_strings": {},
+    "es_modules": {}
   }
 }

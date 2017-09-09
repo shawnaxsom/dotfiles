@@ -20,11 +20,13 @@ set breakat=\ ^I
 set noautochdir
 set nolist
 
-" Use GUI colors if supported, with more colors available
-set termguicolors
+" Don't fully collapse windows when doing <c-w>_ or <c-w>|
+" set winheight=7
+" set winwidth=7
+" set winminwidth=7
+" set winminheight=7
 
 " If you open up gVim for whatever reason
-set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -36,6 +38,8 @@ set virtualedit=all
 " allow copy/paste using system clipboard (otherwise have to use "+)
 if $TMUX == ''  " disable in TMux as it breaks copy / paste and is not needed
   set clipboard=unnamed
+else
+  set clipboard^=unnamed
 endif
 
 " The basics
@@ -45,21 +49,46 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-set scrolloff=17
-set cindent
+" set scrolloff=17
+
+" Use Bash shell syntax for :! (even if you are in Fish or ZSH)
 set shell=bash
-set more " Use MORE as pager
+
+" Use MORE as pager
+set more
+
+" Don't redraw screen when using a macro or register
 set lazyredraw
+
+" Improve smoothness of redrawing
 set ttyfast
+
+" Send the corrent mouse codes over when clicking
 set ttymouse=xterm2
+
+" When closing off brackets, briefly show the matching bracket
 set showmatch
+
+" Default to splitting in the bottom and left
 set splitbelow
 set splitright
+
+" Default substitute to s//g
 set gdefault
+
+" If doing :q with unsaved changes, ask to quit, rather than just failing
 set confirm
+
+" Vertically split diffs with vimdiff
 set diffopt=vertical
+
+" Allow background buffers (e.g. edit another file while current file still
+" has changes to save)
 set hidden
+
+" Command history
 set history=1000
+
 set linebreak
 set nojoinspaces
 set magic
@@ -68,6 +97,7 @@ set nocursorline
 set nobackup
 set nowritebackup
 set number
+set numberwidth=7
 set relativenumber
 
 set complete=.,w,b,u,t
@@ -146,7 +176,8 @@ let mapleader = "\<Space>"
 
 " How long leader key and other key combinations will wait for another key
 " press
-set timeoutlen=800
+" set timeoutlen=800
+set timeoutlen=200
 
 " }}}
 
@@ -168,26 +199,27 @@ elseif executable('ack')
   set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
 endif
 
-let g:ctrlp_cmd = 'CtrlPMRU'
+" let g:ctrlp_cmd = 'CtrlPMRU'
 " let g:ctrlp_cmd = 'CtrlPBookmarkDir'
 " let g:ctrlp_cmd = 'CtrlPLastMode'
-" let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_use_caching = 0
-let g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 0
 let g:ctrlp_regexp = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_match_current_file = 0
 let g:ctrlp_match_window = 'bottom,order:btt'
-let g:ctrlp_switch_buffer = 0
+let g:ctrlp_switch_buffer = 'e'
+let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_default_input = 0
-let g:ctrlp_types = ['fil', 'mru']
+let g:ctrlp_types = ['buf', 'mru', 'fil']
 let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
 let g:ctrlp_mruf_relative = 1
 
 " let g:ctrlp_extensions = ['line', 'changes', 'bookmarkdir']
-let g:ctrlp_extensions = []
+let g:ctrlp_extensions = ['']
 " Using ag is faster, BUT wildignore doesn't work
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " let g:ctrlp_use_caching = 0
@@ -234,17 +266,24 @@ map ,d :Dispatch<SPACE>
 map ,i :call VimuxInspectRunner()<CR>
 " map ,z :VimuxZoomRunner<CR>
 " map ,r :call VimuxPromptCommand("npm start")<CR>
-map ,r :Dispatch npm start<CR>
+" map ,r :Dispatch npm start<CR>
+map ,r :call VimuxRunCommand("npm start")<CR>
 " map ,q :call VimuxPromptCommand("env NODE_ENV=qa npm start")<CR>
-map ,q :Dispatch env NODE_ENV=qa npm start<CR>
+" map ,q :Dispatch env NODE_ENV=qa npm start<CR>
+map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>
+augroup vimux
+  autocmd!
+  autocmd BufEnter */api/* map <buffer> ,q :call VimuxRunCommand("npm run build; and env NODE_ENV=qa npm start")<CR>
+augroup END
+map ,c :call VimuxInterruptRunner()<CR>
 map ,t :Dispatch npm test<CR>
 map ,f :Dispatch npm test -- --tests %
 map ,b :Dispatch npm run build<CR>
-map ,z :Copen<CR>
+" map ,z :Copen<CR>
+map ,z :VimuxZoomRunner<CR>
 " }}}
 
 " 2 - Great
-Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
 " {{{ vim-simple-todo
 Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
 let g:simple_todo_map_keys = 0
@@ -262,11 +301,12 @@ augroup simpletodo
   autocmd BufEnter .scratch imap <buffer> ,i <Plug>(simple-todo-new)
   autocmd BufEnter .scratch imap <buffer> ,o <Plug>(simple-todo-new)
   autocmd BufLeave .scratch w
+  autocmd BufEnter .scratch abbreviate <buffer> [ [ ]
 augroup END
 " }}}
 " {{{ Codi
 Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
-nmap <leader>c :Codi!!<CR>
+nmap <leader><leader>c :Codi!!<CR>
 let g:codi#aliases = {
       \ 'javascript.jsx': 'javascript',
       \ }
@@ -282,15 +322,29 @@ augroup removetrailingspaces
   autocmd BufWritePre * TrailerTrim
 augroup END
 " }}}
+" {{{ GoldenView
+" Auto resize windows when switching windows
+Plug 'zhaocai/GoldenView.Vim'
+let g:goldenview__enable_default_mapping = 0
+" nmap <silent> <C-S>  <Plug>GoldenViewSplit
+" nmap <silent> <leader>m   <Plug>GoldenViewSwitchMain
+" nmap <silent> <leader><leader>m <Plug>GoldenViewSwitchToggle
+" nmap <silent> <C-N>  <Plug>GoldenViewNext
+" nmap <silent> <C-P>  <Plug>GoldenViewPrevious
+" }}}
 
 " 3 - Decent
 Plug 'tpope/vim-sensible'  " Default settings for Vim. I probably already have these in my VimRC, need to review.
 Plug 'tpope/vim-sleuth'  " Auto set file tab settings based on current file or other files in directory
+" {{{ Vim Deus (colorscheme)
+Plug 'ajmwagar/vim-deus'
+" }}}
 
 " 4 - Could do without
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " 5 - New / Evaluating
+" Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
 Plug 'tmhedberg/matchit'
 Plug 'lambacck/python_matchit'
 Plug 'Chun-Yang/vim-action-ag'
@@ -303,7 +357,6 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'flazz/vim-colorschemes'
 Plug 'gregsexton/gitv'
 Plug 'vim-scripts/MultipleSearch'
-Plug 'terryma/vim-expand-region'
 Plug 'pangloss/vim-javascript'
 " {{{ vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
@@ -338,13 +391,15 @@ Plug 'xolox/vim-colorscheme-switcher'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tpope/vim-obsession'
+Plug 'thaerkh/vim-workspace'
 Plug 'posva/vim-vue'
 " {{{ Airline / Lightline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
-let g:airline_theme='minimalist'
+" let g:airline_theme='minimalist'
+let g:airline_theme='deus'
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
 " let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
@@ -379,6 +434,27 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 " {{{ Grepper
 Plug 'mhinz/vim-grepper'
+map <F3> :GrepperAg ""<LEFT>
+nmap <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
+nmap <leader>/ :GrepperAg ""<LEFT>
+nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+
+" Search only open buffers
+function! ToggleGrepperBuffersMode()
+  if g:grepper.buffers
+    let g:grepper.buffers = 0
+    echo "Grepper will search all files"
+  else
+    let g:grepper.buffers = 1
+    echo "Grepper will search only open buffers"
+  endif
+endfunction
+map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>
+
+nmap gr "hyiw:GrepperAg <c-r>h<CR>
+" nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
+nmap gi :GrepperAg %:p:t:r<CR>
+" map <F4> "hyiw:GrepperAg <c-r>h<CR>
 let g:grepper = {}
 runtime autoload/grepper.vim
 let g:grepper.jump = 1
@@ -392,7 +468,7 @@ Plug 'sjl/gundo.vim'
 " {{{ tern_for_vim
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 " nmap <silent> gd :TernDef<CR>
-nmap <silent> gD :TernDef<CR>
+nmap <silent> gt :TernDef<CR>
 " }}}
 " {{{ Dash.app
 Plug 'rizzatti/dash.vim'
@@ -407,6 +483,12 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'ervandew/supertab'
 " {{{ YouCompleteMe
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_log_level = 'debug'
+let g:ycm_cache_omnifunc = 1
+
+
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 " These don't work as well as tern_for_vim
 " nmap <silent> gd :YcmCompleter GoTo<CR>
 " nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -466,7 +548,39 @@ let g:ale_fixers = {
       \   ],
       \}
 " }}}
-" Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
+" {{{ NERDTree
+Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
+Plug 'Xuyuanp/nerdtree-git-plugin'
+" autocmd VimEnter * NERDTree
+let g:NERDTreeMinimalUI        = 1
+let g:NERDTreeShowBookmarks    = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeDirArrows        = 1
+let g:NERDTreeQuitOnOpen       = 0
+
+" augroup nerdtree
+"   autocmd!
+"   autocmd BufRead NERD_tree_* python map ,r :Dispatch python %:p<CR>
+" augroup END
+
+" function! ToggleNERDTreeFind()
+"   if g:NERDTree.IsOpen()
+"     execute ':NERDTreeClose'
+"   else
+"     " execute ':NERDTreeFind'
+"     " execute ':NERDTree'
+"     execute ':NERDTreeFind'
+"   endif
+" endfunction
+
+" noremap _ :e %:p:h<CR>
+noremap _ :NERDTreeClose<CR>
+" noremap - :call ToggleNERDTreeFind()<CR>
+noremap - :topleft NERDTreeFind<CR>
+" noremap - :topleft NERDTree<CR>
+" noremap _ :NERDTree<CR>
+map <leader>b :Bookmark<space>
+" }}}
 Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
 Plug 'chrisbra/NrrwRgn'  " :NR on selected text to open focused split that syncs
 Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
@@ -494,11 +608,15 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " noremap - :e %:p:h<CR>
 " noremap - :Dirvish %<CR>
 " noremap - :Dirvish %:p:h<CR>
-let g:dirvish_relative_paths = 1
+" let g:dirvish_relative_paths = 1
 " }}}
 Plug 'int3/vim-extradite'
 Plug 'farmergreg/vim-lastplace'
+" {{{ Tabular
+" Uses :Tabularize /character(s)
 Plug 'godlygeek/tabular'
+vmap gt :Tabularize /
+" }}}
 Plug 'dracula/vim'
 Plug 'tpope/vim-unimpaired'
 " {{{ Interesting Words
@@ -514,25 +632,35 @@ Plug 'wellle/targets.vim'
 " to the next largest text object,
 Plug 'gcmt/wildfire.vim'
 "}}}
+" {{{ Qlist
+" Show [I (buffer matches for word under cursor) in a Quickfix window :copen
 Plug 'romainl/vim-qlist'
+nmap <leader>8 :Ilist <CR>
+nmap <leader>* :Ilist <CR>
+" }}}
 " {{{ Ranger.vim Ranger integration
-Plug 'francoiscabrol/ranger.vim'
+" Plug 'francoiscabrol/ranger.vim'
 " map - :Ranger<CR>
+" map - :e %:p:h<CR>
 " }}}
-" {{{ Vim-Lion
-" Align text using a motion. E.g. vipgl= aligns equals signs in a paragraph
-Plug 'tommcdo/vim-lion'
+" {{{ CloseTag
+Plug 'alvan/vim-closetag'
+let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.xml'
 " }}}
-" {{{ VimFiler
-Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/unite.vim'
-autocmd FileType vimfiler nmap <buffer> - <Plug>(vimfiler_switch_to_parent_directory)
-nmap - :call VimFilerExplorer()<CR>
-" autocmd FileType vimfiler nmap <buffer> - :call VimFilerExplorer()<CR>
-" autocmd FileType vimfiler nmap <buffer> - :e %:p:h<CR>
-" let g:vimfiler_as_default_explorer = 1
-" noremap - :e %:p:h<CR>
-" nmap - :VimFilerBufferDir<CR>
+Plug 'altercation/vim-colors-solarized'
+
+" {{{ Vim Maximizer
+Plug 'szw/vim-maximizer'
+nmap <leader>f :MaximizerToggle<CR>
+" }}}
+" {{{ Vim-Pad
+" :Pad new
+" :Pad ls
+Plug 'fmoralesc/vim-pad'
+let g:pad#dir = '~/notes/'
+" }}}
+" {{{ Peekaboo
+Plug 'junegunn/vim-peekaboo'
 " }}}
 call plug#end()
 
@@ -543,9 +671,12 @@ call plug#end()
 " {{{ Python
 let g:pymode_options_max_line_length=120
 let g:python_highlight_all=1
-autocmd! Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
-autocmd! Syntax python setlocal foldmethod=indent
-autocmd! Syntax python normal zR
+augroup pythonsettings
+  autocmd!
+  autocmd Syntax python setlocal tabstop=4 shiftwidth=4 shiftround expandtab autoindent smarttab smartindent
+  autocmd Syntax python setlocal foldmethod=indent
+  autocmd Syntax python normal zR
+augroup END
 augroup pythondispatch
   autocmd!
   autocmd FileType python map ,r :Dispatch python %:p<CR>
@@ -644,8 +775,6 @@ augroup END
 " {{{ Function Keys
 map <F1> :map <F1> :!
 map <F2> "hyiw:%s/<c-r>h//c<LEFT><LEFT>
-map <F3> :GrepperAg ""<LEFT>
-" map <F4> "hyiw:GrepperAg <c-r>h<CR>
 " map <F4> "hyiw:Ag <c-r>h
 map <F5> :NERDTreeToggle<CR>
 noremap <F6> :!tig %<CR>
@@ -658,32 +787,28 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 
 " {{{ Leader <Space>
 
-
-
 " map <leader>/ "hyiw:Ag
-map <leader>/ "hyiw:GrepperAg ""<LEFT>
-map <leader>8 "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
-map <leader><leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
-map <leader><leader>i :PlugInstall<CR>
-map <leader><leader>j :join<CR>
-map <leader><leader>s :UltiSnipsEdit<CR>
-map <leader><leader>u :PlugClean!<CR>
-map <leader><leader>v :sp ~/.dotfiles/.vimrc<CR>
-map <leader><leader>w :ToggleWorkspace<CR>
-" map <leader>c :q<CR>
-map <leader>f :file<CR>
+nmap <leader><leader>i :PlugInstall<CR>
+nmap <leader><leader>j :join<CR>
+nmap <leader><leader>s :UltiSnipsEdit<CR>
+nmap <leader><leader>u :PlugClean!<CR>
+nmap <leader><leader>v :sp ~/dotfiles/.vimrc<CR>
+nmap <leader><leader>w :ToggleWorkspace<CR>
+
+map <leader>c :bd<CR>
 " map <leader>l :set list!<CR>
 " map <leader>o :copen<CR>
-map <leader>oo !open https://www.google.com/search?q=javascript+
-map <leader>oh !open https://github.com/search?q=
-map <leader>on "pyi":!open https://www.npmjs.com/package/p
 " map <leader>p :set paste!<CR>
-map <leader>q :q<CR>
+" nmap <leader>8 "hyiw:Ag <c-r>h<CR>:nohlsearch<CR>
+nmap <leader>oh !open https://github.com/search?q=
+nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
+nmap <leader>oo !open https://www.google.com/search?q=javascript+
+nmap <leader>q :q<CR>
 nmap <leader>s :sp<CR>
-map <leader>t :NERDTreeFind<CR>
-map <leader>u :GundoToggle<CR>
-map <leader>v :vsp<CR>
-map <leader>w :w<CR>
+nmap <leader>t :NERDTreeFind<CR>
+nmap <leader>u :GundoToggle<CR>
+nmap <leader>v :vsp<CR>
+nmap <leader>w :w<CR>
 
 " Diff put to grab changes using comma
 " noremap , :diffput<CR>
@@ -691,17 +816,32 @@ map <leader>w :w<CR>
 " Go to next / previous change (GitGutter)
 nmap <leader>j ]c
 nmap <leader>k [c
-map <leader>0 :set foldlevel=0<CR>
-map <leader>1 :set foldlevel=1<CR>
-map <leader>2 :set foldlevel=2<CR>
-map <leader>3 :set foldlevel=3<CR>
-map <leader>4 :set foldlevel=4<CR>
-map <leader>5 :set foldlevel=5<CR>
-map <leader>6 :set foldlevel=6<CR>
-map <leader>7 :set foldlevel=7<CR>
-" map <leader>8 :set foldlevel=8<CR>
-map <leader>9 :set foldlevel=999<CR>
+nmap <leader>0 :set foldlevel=0<CR>
+nmap <leader>1 :set foldlevel=1<CR>
+nmap <leader>2 :set foldlevel=2<CR>
+nmap <leader>3 :set foldlevel=3<CR>
+nmap <leader>4 :set foldlevel=4<CR>
+nmap <leader>5 :set foldlevel=5<CR>
+nmap <leader>6 :set foldlevel=6<CR>
+nmap <leader>7 :set foldlevel=7<CR>
+" nmap <leader>8 :set foldlevel=8<CR>
+nmap <leader>9 :set foldlevel=999<CR>
 
+" }}}
+
+" {{{ Visual Mode
+vmap I :norm I
+vmap A :norm A
+vmap \ :norm<space>
+vmap s :sort<CR>
+vmap r :s/
+" vmap S :s/  " Interferes with Surround...
+vmap M :join<CR>
+" }}}
+
+" {{{ Window Keys
+map  _|
+map f _<bar>
 " }}}
 
 imap jj <ESC>
@@ -724,13 +864,12 @@ map <leader><tab> <c-^>
 noremap <c-f> :cnext<CR>
 noremap <c-b> :cprev<CR>
 
-map gs :topleft 8split ~/.scratch<CR>
+" map gs :topleft 12split ~/.scratch<CR>
+map gs :topleft split ~/.scratch<CR>
 
 " Center screen when going through search results
 " nnoremap <silent> n nzz
 " nnoremap <silent> N Nzz
-
-map \ :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 map Q :cprev<CR>
 map <c-q> :cnext<CR>
@@ -753,8 +892,8 @@ map L ]}
 map <silent> <leader>h :BufSurfBack<CR>
 map <silent> <leader>l :BufSurfForward<CR>
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 35, 1)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 35, 1)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>
 
 vmap <leader><leader>n :norm
 nmap <leader><leader>g :%g/
@@ -791,44 +930,41 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
-nmap gr "hyiw:GrepperAg <c-r>h<CR>
-" nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
-nmap gi :GrepperAg %:p:t:r<CR>
 nmap gR :YcmCompleter GoToReferences<CR>
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 
-map ; :
+map ; 
 
 " }}}
 
 " {{{ Functions
 
-" if !exists('*RangerExplorer')
-"   function RangerExplorer()
-"       exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-"       if filereadable('/tmp/vim_ranger_current_file')
-"           exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-"           call system('rm /tmp/vim_ranger_current_file')
-"       endif
-"       redraw!
-"   endfun
-" endif
+if !exists('*RangerExplorer')
+  function RangerExplorer()
+      exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+      if filereadable('/tmp/vim_ranger_current_file')
+          exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+          call system('rm /tmp/vim_ranger_current_file')
+      endif
+      redraw!
+  endfun
+endif
 " map - :call RangerExplorer()<CR>
 
-function! VimFilerExplorer()
-  if expand("%:t") == "vimfiler:default"
-    execute <Plug>(vimfiler_switch_to_parent_directory)
-  else
-    call vimfiler#custom#profile('default', 'context', {
-          \ 'safe' : 0,
-          \ 'edit_action' : 'tabopen',
-          \ })
-    VimFilerBufferDir -find -buffer-name=explorer -force-quit
-    echom expand("%")
-    " echom "Bar"
-  endif
-endfun
-map - :call VimFilerExplorer()<CR>
+" function! VimFilerExplorer()
+"   if expand("%:t") == "vimfiler:default"
+"     execute <Plug>(vimfiler_switch_to_parent_directory)
+"   else
+"     call vimfiler#custom#profile('default', 'context', {
+"           \ 'safe' : 0,
+"           \ 'edit_action' : 'tabopen',
+"           \ })
+"     VimFilerBufferDir -find -buffer-name=explorer -force-quit
+"     echom expand("%")
+"     " echom "Bar"
+"   endif
+" endfun
+" map - :call VimFilerExplorer()<CR>
 
 function! NeatFoldText()
   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
@@ -866,9 +1002,31 @@ augroup fugitive
     \ set bufhidden=delete
 augroup END
 
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-A> :ZoomToggle<CR>
+
+" }}}
+
+" {{{ Abbreviations
+abbreviate --- -----------------------------------------------------------------------------------------
 " }}}
 
 " {{{ Colorscheme
+set termguicolors
+set background=dark
+
 " colorscheme beekai
 " colorscheme badwolf
 " colorscheme molokai
@@ -879,11 +1037,13 @@ augroup END
 syntax on
 " colorscheme null
 " colorscheme predawn
-" set background=dark
 " colorscheme zenburn
 " colorscheme elflord
 " colorscheme gruvbox
-colorscheme dracula
+" colorscheme dracula
+" colorscheme solarized
+" colorscheme monokai
+colorscheme deus
 " }}} Colorscheme
 
 " {{{ Highlights
@@ -891,17 +1051,21 @@ colorscheme dracula
 "
 " {{{ Highlight current line
 set cursorline
-hi cursorLine term=bold cterm=bold guibg=#444444
+highlight cursorLine term=bold cterm=bold guibg=#444444
+" }}}
+" {{{ Highlight column 80
+set colorcolumn=80
+highlight ColorColumn ctermbg=240 guibg=#3a3a3a
 " }}}
 
 " {{{ vim_current_word
-hi CurrentWord term=reverse ctermfg=235 ctermbg=214 guifg=#282828 guibg=#fabd2f
-hi CurrentWordTwins guibg=#587474 gui=underline  ctermbg=2 cterm=underline
+highlight CurrentWord term=reverse ctermfg=235 ctermbg=214 guifg=#282828 guibg=#fabd2f
+highlight CurrentWordTwins guibg=#587474 gui=underline  ctermbg=2 cterm=underline
 " }}}
 " {{{ gitgutter
-hi GitGutterAdd          guibg=#368430
-hi GitGutterChange       guibg=#305aa2
-hi GitGutterDelete       guibg=#502020
+highlight GitGutterAdd          guibg=#368430
+highlight GitGutterChange       guibg=#305aa2
+highlight GitGutterDelete       guibg=#502020
 " hi GitGutterAddLine          guibg=#368430
 " hi GitGutterChangeLine       guibg=#305aa2
 " hi GitGutterDeleteLine       guibg=#502020

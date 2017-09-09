@@ -1,9 +1,10 @@
-a:/Users/shawn.axsom/dev/ambyint/packages/web/src/actions
 A:/Users/shawn.axsom/dev/ambyint/packages/api
+W:/Users/shawn.axsom/dev/ambyint/packages/web
+a:/Users/shawn.axsom/dev/ambyint/packages/web/src/actions
 c:/Users/shawn.axsom/dev/ambyint/packages/web/src/components
 e:/Users/shawn.axsom/dev/ambyint/packages/web/src/epics
-w:/Users/shawn.axsom/dev/ambyint/packages/web
-':/Users/shawn.axsom/dev/ambyint/packages/web
+d:/Users/shawn.axsom/dotfiles
+':/Users/shawn.axsom/.vim
 k:/Users/shawn.axsom/dev/ambyint/packages/web/src/models/parse-well
 j:/Users/shawn.axsom/dev/ambyint/packages/web/src/models/parse-well
 o:/Users/shawn.axsom/dev/ambyint/packages/web/src/routes
@@ -11,5 +12,5 @@ p:/Users/shawn.axsom/dev/ambyint/packages/web/src/parsers
 s:/Users/shawn.axsom/dev/ambyint/packages/web/src/reducers
 r:/Users/shawn.axsom/dev/ambyint/packages/web/src/routes
 u:/Users/shawn.axsom/dev/ambyint/packages/web/src/utils
-W:/Users/shawn.axsom/dev/ambyint/packages/web
+w:/Users/shawn.axsom/dev/ambyint/packages/web
 z:/Users/shawn.axsom/.config/ranger

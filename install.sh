@@ -31,7 +31,7 @@ fi
   fi
 
   echo "Creating symbolic link $2"
-  ln -s ~/.dotfiles/$1 $2
+  ln -s ~/dotfiles/$1 $2
 }
 
 
