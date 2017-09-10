@@ -747,7 +747,9 @@ let g:pad#dir = '~/notes/'
 " -----------------------------------------------------------------------------------------
 " {{{ vim-paste-easy
 " Automatically :set paste when it detects you have pasted text
-Plug 'roxma/vim-paste-easy'
+" I don't think this plays well with conceal, jumps cursor when it falsely
+" detects paste
+" Plug 'roxma/vim-paste-easy'
 " }}}
 " {{{ Tagbar
 Plug 'majutsushi/tagbar'
@@ -1144,6 +1146,8 @@ hi LineNr guifg=#4a4a4a
 " Convert React stateless functional class to a full stateful class
 map \c j?constcwclasswea extends React.component ldt{oconstructor(props) {super(props);this.state = {};}render() {]}O}v%:s/props/this.props=
 map \f j?classcwconstelct{ = (props) => /constructor$V%d/render$%dddd[{v%:s/this.props/props
+map \m yiw20HopA() {}k
+"OpA() {}
 " }}}
 
 " {{{ Conceal
