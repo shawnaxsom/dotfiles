@@ -124,7 +124,6 @@ set smartcase
 set foldmethod=indent
 set foldnestmax=8
 set foldlevelstart=2
-set foldmethod=indent
 
 " Don't show tab bar
 set showtabline=0
@@ -328,7 +327,7 @@ let g:javascript_conceal_underscore_arrow_function = "🞅"
 " 2 - Great
 " -----------------------------------------------------------------------------------------
 " {{{ Surround
-" Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " }}}
 " {{{ Workspace
 Plug 'thaerkh/vim-workspace'
@@ -337,9 +336,14 @@ nmap <leader><leader>w :ToggleWorkspace<CR>
 " {{{ CtrlSF
 Plug 'dyng/ctrlsf.vim'
 map <F3> :CtrlSF ""<LEFT>
-nmap <leader><leader>8 "hyiw:CtrlSF <c-r>h<CR>
+nmap <leader>8 "hyiw:CtrlSF <c-r>h<CR>
 nmap <leader>/ :CtrlSF ""<LEFT>
 nmap <leader><leader>/ :CtrlSF "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" }}}
+" {{{ Quickfix-Reflector
+" Edit files within any quickfix window, then save to dynamically update files
+" Works very similar to CtrlSF, but with quickfix rather than own window
+Plug 'stefandtw/quickfix-reflector.vim'
 " }}}
 " {{{ vim-simple-todo
 Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
@@ -367,6 +371,8 @@ augroup END
 " {{{ Codi
 Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
 nmap <leader><leader>c :Codi!!<CR>
+map <leader>c :bd<CR>
+map <leader>C :CloseHiddenBuffers<CR>
 let g:codi#aliases = {
       \ 'javascript.jsx': 'javascript',
       \ }
@@ -474,14 +480,22 @@ let g:NERDTreeQuitOnOpen       = 0
 "     execute ':NERDTreeFind'
 "   endif
 " endfunction
-
 " noremap _ :e %:p:h<CR>
-noremap _ :NERDTreeClose<CR>
+" noremap _ :NERDTreeClose<CR>
 " noremap - :call ToggleNERDTreeFind()<CR>
 noremap - :topleft NERDTreeFind<CR>
 " noremap - :topleft NERDTree<CR>
 " noremap _ :NERDTree<CR>
 map <leader>b :Bookmark<space>
+" }}}
+" {{{ Tagbar
+Plug 'majutsushi/tagbar'
+map _ :Tagbar<CR>
+let g:tagbar_autoclose = 0
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_case_insensitive = 1
 " }}}
 " {{{ yankstack
 Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
@@ -501,7 +515,8 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 " let g:airline_theme='minimalist'
-let g:airline_theme='deus'
+" let g:airline_theme='deus'
+let g:airline_theme='hybrid'
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
 " let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
@@ -638,7 +653,7 @@ noremap <F9> :RandomColorScheme<CR>:colo<CR>
 " {{{ matchmaker
 " Highlight word under cursor
 Plug 'qstrahl/vim-matchmaker'
-" let g:matchmaker_enable_startup = 1
+let g:matchmaker_enable_startup = 1
 let g:matchmaker_matchpriority = 1
 " }}}
 " {{{ Auto-Pairs
@@ -733,6 +748,9 @@ let g:pad#dir = '~/notes/'
 " {{{ vim-paste-easy
 " Automatically :set paste when it detects you have pasted text
 Plug 'roxma/vim-paste-easy'
+" }}}
+" {{{ Tagbar
+Plug 'majutsushi/tagbar'
 " }}}
 call plug#end()
 
@@ -1043,6 +1061,22 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-A> :ZoomToggle<CR>
 
+vmap \em :call ExtractMethod()<CR>
+function! ExtractMethod() range
+  let name = inputdialog("Name of new method: ")
+  '<
+  exe "normal! O\<BS>" . name ."()\<CR>{\<Esc>"
+  '>
+  exe "normal! oreturn ;\<CR>}\<Esc>k"
+  s/return/\/\/ return/ge
+  normal! j%
+  normal! kf(
+  exe "normal! yyPi// = \<Esc>wdwA;\<Esc>"
+  normal! ==
+  normal! j0w
+endfunction
+
+
 " }}}
 
 " {{{ Abbreviations
@@ -1076,17 +1110,17 @@ colorscheme deus
 " These come after Colorscheme so they don't get overwritten
 "
 " {{{ Highlight current line
-set cursorline
+set nocursorline
 highlight cursorLine term=bold cterm=bold guibg=#444444
 " }}}
 " {{{ Highlight column 80
-set colorcolumn=80
+set colorcolumn=
 highlight ColorColumn ctermbg=240 guibg=#3a3a3a
 " }}}
 
 " {{{ vim_current_word
-highlight CurrentWord term=reverse ctermfg=235 ctermbg=214 guifg=#282828 guibg=#fabd2f
-highlight CurrentWordTwins guibg=#587474 gui=underline  ctermbg=2 cterm=underline
+" highlight CurrentWord term=reverse ctermfg=235 ctermbg=214 guifg=#282828 guibg=#fabd2f
+" highlight CurrentWordTwins guibg=#587474 gui=underline  ctermbg=2 cterm=underline
 " }}}
 " {{{ gitgutter
 highlight GitGutterAdd          guibg=#368430
@@ -1099,6 +1133,9 @@ highlight GitGutterDelete       guibg=#502020
 " }}}
 " {{{ matchmaker
 hi default Matchmaker term=underline    ctermbg=238     guibg=#555555
+" }}}
+" {{{ Numbers
+hi LineNr guifg=#4a4a4a
 " }}}
 " }}}
 

@@ -73,6 +73,7 @@ alias lt='ls -lat'
 alias h='head'
 alias t='tail'
 alias r='ranger'
+alias p='pwd'
 
 function gR
   git reset --hard;
