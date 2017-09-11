@@ -77,7 +77,7 @@ alias p='pwd'
 # alias f='find . -name'
 
 function f
-  find . -name '*$argv*'
+  find . -name "*$argv*"
 end
 
 function gR
