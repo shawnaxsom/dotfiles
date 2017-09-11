@@ -332,6 +332,9 @@ Plug 'tpope/vim-surround'
 " {{{ Workspace
 Plug 'thaerkh/vim-workspace'
 nmap <leader><leader>w :ToggleWorkspace<CR>
+" Don't enable at the same time as vim-better-whitespace or it messes up
+" search when autosave happens
+let g:workspace_autosave_untrailspaces = 0
 " }}}
 " {{{ CtrlSF
 Plug 'dyng/ctrlsf.vim'
@@ -383,12 +386,15 @@ Plug 'tpope/vim-commentary'
 nmap   <Plug>CommentaryLine
 vmap   <Plug>Commentary
 " }}}
-" {{{ Trailer Trash - Remove trailing spaces
-Plug 'csexton/trailertrash.vim'
-augroup removetrailingspaces
-  autocmd!
-  autocmd BufWritePre * TrailerTrim
-augroup END
+" {{{ vim-better-whitespace
+" Strip trailing whitespace on save
+Plug 'ntpeters/vim-better-whitespace'
+autocmd BufEnter * EnableStripWhitespaceOnSave
+" }}}
+" {{{ vim-paste-easy
+" Automatically :set paste when it detects the very fast typing that occurs
+" when pasting
+Plug 'roxma/vim-paste-easy'
 " }}}
 " {{{ GoldenView
 " Auto resize windows when switching windows
@@ -465,12 +471,10 @@ let g:NERDTreeShowBookmarks    = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeDirArrows        = 1
 let g:NERDTreeQuitOnOpen       = 0
-
 " augroup nerdtree
 "   autocmd!
 "   autocmd BufRead NERD_tree_* python map ,r :Dispatch python %:p<CR>
 " augroup END
-
 " function! ToggleNERDTreeFind()
 "   if g:NERDTree.IsOpen()
 "     execute ':NERDTreeClose'
@@ -745,12 +749,6 @@ let g:pad#dir = '~/notes/'
 " -----------------------------------------------------------------------------------------
 " 5 - New / Evaluating
 " -----------------------------------------------------------------------------------------
-" {{{ vim-paste-easy
-" Automatically :set paste when it detects you have pasted text
-" I don't think this plays well with conceal, jumps cursor when it falsely
-" detects paste
-" Plug 'roxma/vim-paste-easy'
-" }}}
 " {{{ Tagbar
 Plug 'majutsushi/tagbar'
 " }}}
