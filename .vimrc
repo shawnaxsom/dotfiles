@@ -501,7 +501,7 @@ let g:tagbar_case_insensitive = 1
 Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
 let g:yankstack_map_keys = 0
 " Remove S as a yank key, otherwise interferes with vim surround S in visual
-let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 's', 'x', 'X', 'y', 'Y']
+let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " }}}
@@ -515,8 +515,8 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 " let g:airline_theme='minimalist'
-" let g:airline_theme='deus'
-let g:airline_theme='hybrid'
+let g:airline_theme='deus'
+" let g:airline_theme='hybrid'
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
 " let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'

@@ -65,7 +65,6 @@ alias gp='git pull'
 alias gpr='git pull-request'
 alias gs='git status'
 alias vs='vim -S'
-alias f='find . -name'
 alias g='grep'
 alias c='cd'
 alias l='ls'
@@ -74,6 +73,12 @@ alias h='head'
 alias t='tail'
 alias r='ranger'
 alias p='pwd'
+
+# alias f='find . -name'
+
+function f
+  find . -name '*$argv*'
+end
 
 function gR
   git reset --hard;
