@@ -1,0 +1,684 @@
+             terminal	ranger/rifle.conf	/^ext x?html?, has w3m,             terminal = w3m "$@"$/;"	k
+            terminal	ranger/rifle.conf	/^ext x?html?, has lynx,            terminal = lynx -- "$@"$/;"	k
+           terminal	ranger/rifle.conf	/^ext x?html?, has links,           terminal = links "$@"$/;"	k
+          terminal	ranger/rifle.conf	/^ext x?html?, has elinks,          terminal = elinks "$@"$/;"	k
+          terminal	ranger/rifle.conf	/^ext x?html?, has links2,          terminal = links2 "$@"$/;"	k
+        pager_move  up	ranger/rc.conf	/^pmap  <up>        pager_move  up=1$/;"	k
+        taskview_move up	ranger/rc.conf	/^tmap <up>        taskview_move up=1$/;"	k
+       move right	ranger/rc.conf	/^map <CR>       move right=1$/;"	k
+       move up	ranger/rc.conf	/^map <UP>       move up=1$/;"	k
+       pager_move  down	ranger/rc.conf	/^pmap  <C-d>       pager_move  down=0.5  pages=True$/;"	k
+       pager_move  to	ranger/rc.conf	/^pmap  <end>       pager_move  to=-1$/;"	k
+       pager_move  up	ranger/rc.conf	/^pmap  <C-u>       pager_move  up=0.5    pages=True$/;"	k
+       taskview_move down	ranger/rc.conf	/^tmap <C-d>       taskview_move down=0.5  pages=True$/;"	k
+       taskview_move to	ranger/rc.conf	/^tmap <end>       taskview_move to=-1$/;"	k
+       taskview_move up	ranger/rc.conf	/^tmap <C-u>       taskview_move up=0.5    pages=True$/;"	k
+       terminal	ranger/rifle.conf	/^ext docx?, has catdoc,       terminal = catdoc -- "$@" | "$PAGER"$/;"	k
+      move to	ranger/rc.conf	/^map <END>      move to=-1$/;"	k
+      pager_move  down	ranger/rc.conf	/^pmap  <down>      pager_move  down=1$/;"	k
+      pager_move  left	ranger/rc.conf	/^pmap  <left>      pager_move  left=4$/;"	k
+      pager_move  to	ranger/rc.conf	/^pmap  <home>      pager_move  to=0$/;"	k
+      taskview_move down	ranger/rc.conf	/^tmap <down>      taskview_move down=1$/;"	k
+      taskview_move to	ranger/rc.conf	/^tmap <home>      taskview_move to=0$/;"	k
+     move down	ranger/rc.conf	/^map <DOWN>     move down=1$/;"	k
+     move left	ranger/rc.conf	/^map <LEFT>     move left=1$/;"	k
+     move to	ranger/rc.conf	/^map <HOME>     move to=0$/;"	k
+     pager_move  right	ranger/rc.conf	/^pmap  <right>     pager_move  right=4$/;"	k
+    move right	ranger/rc.conf	/^map <RIGHT>    move right=1$/;"	k
+    pager_move  up	ranger/rc.conf	/^pmap  <pageup>    pager_move  up=1.0    pages=True$/;"	k
+    taskview_move up	ranger/rc.conf	/^tmap <pageup>    taskview_move up=1.0    pages=True$/;"	k
+   move up	ranger/rc.conf	/^map <PAGEUP>   move up=1     pages=True$/;"	k
+  label editor	ranger/rifle.conf	/^mime ^text,  label editor = $EDITOR -- "$@"$/;"	k
+  label pager	ranger/rifle.conf	/^mime ^text,  label pager  = "$PAGER" -- "$@"$/;"	k
+  pager_move  down	ranger/rc.conf	/^pmap  <pagedown>  pager_move  down=1.0  pages=True$/;"	k
+  taskview_move down	ranger/rc.conf	/^tmap <pagedown>  taskview_move down=1.0  pages=True$/;"	k
+ X	ranger/rifle.conf	/^ext nes, has fceux, X         = fceux "$1"$/;"	k
+ X	ranger/rifle.conf	/^ext s[wmf]c, has zsnes, X     = zsnes "$1"$/;"	k
+ X	ranger/rifle.conf	/^label wallpaper, number 11, mime ^image, has feh, X = feh --bg-scale "$1"$/;"	k
+ X	ranger/rifle.conf	/^label wallpaper, number 12, mime ^image, has feh, X = feh --bg-tile "$1"$/;"	k
+ X	ranger/rifle.conf	/^label wallpaper, number 13, mime ^image, has feh, X = feh --bg-center "$1"$/;"	k
+ X	ranger/rifle.conf	/^label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"$/;"	k
+ flag f	ranger/rifle.conf	/^ext                        sxc|xlsx?|xlt|xlw|gnm|gnumeric, has gnumeric,    X, flag f = gnumeric/;"	k
+ flag f	ranger/rifle.conf	/^ext                        sxc|xlsx?|xlt|xlw|gnm|gnumeric, has kspread,     X, flag f = kspread /;"	k
+ flag f	ranger/rifle.conf	/^ext djvu, has atril,  X, flag f = atril -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext djvu, has evince, X, flag f = evince -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext djvu, has zathura,X, flag f = zathura -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has apvlv,    X, flag f = apvlv -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has atril,    X, flag f = atril -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has epdfview, X, flag f = epdfview -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has evince,   X, flag f = evince -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has llpp,     X, flag f = llpp "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has mupdf,    X, flag f = mupdf "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has mupdf-x11,X, flag f = mupdf-x11 "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has okular,   X, flag f = okular -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has qpdfview, X, flag f = qpdfview "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has xpdf,     X, flag f = xpdf -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pdf, has zathura,  X, flag f = zathura -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext pptx?|od[dfgpst]|docx?|sxc|xlsx?|xlt|xlw|gnm|gnumeric, has libreoffice, X, flag f = libreoff/;"	k
+ flag f	ranger/rifle.conf	/^ext pptx?|od[dfgpst]|docx?|sxc|xlsx?|xlt|xlw|gnm|gnumeric, has ooffice,     X, flag f = ooffice /;"	k
+ flag f	ranger/rifle.conf	/^ext pptx?|od[dfgpst]|docx?|sxc|xlsx?|xlt|xlw|gnm|gnumeric, has soffice,     X, flag f = soffice /;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has chromium,       X, flag f = chromium -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has dwb,            X, flag f = dwb -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has epiphany,       X, flag f = epiphany -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has firefox,        X, flag f = firefox -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has iceweasel,      X, flag f = iceweasel -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has jumanji,        X, flag f = jumanji -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has konqueror,      X, flag f = konqueror -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has luakit,         X, flag f = luakit -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has midori,         X, flag f = midori -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has opera,          X, flag f = opera -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has qutebrowser,    X, flag f = qutebrowser -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has seamonkey,      X, flag f = seamonkey -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has surf,           X, flag f = surf -- file:\/\/"$1"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has uzbl,           X, flag f = uzbl -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has uzbl-browser,   X, flag f = uzbl-browser -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has uzbl-core,      X, flag f = uzbl-core -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has uzbl-tabbed,    X, flag f = uzbl-tabbed -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has vimprobable,    X, flag f = vimprobable -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext x?html?, has vimprobable2,   X, flag f = vimprobable2 -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^ext xcf,                    X, flag f = gimp -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has eog,       X, flag f = eog -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has eom,       X, flag f = eom -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has feh,       X, flag f = feh -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has gimp,      X, flag f = gimp -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has mirage,    X, flag f = mirage -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has pqiv,      X, flag f = pqiv -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has ristretto, X, flag f = ristretto "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image, has sxiv,      X, flag f = sxiv -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image\/svg, has display,  X, flag f = display -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^image\/svg, has inkscape, X, flag f = inkscape -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video,       has mplayer,  X, flag f = mplayer -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video,       has mplayer,  X, flag f = mplayer -fs -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video,       has mplayer2, X, flag f = mplayer2 -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video,       has mplayer2, X, flag f = mplayer2 -fs -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video,       has mpv,      X, flag f = mpv -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video,       has mpv,      X, flag f = mpv --fs -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video|audio, has gmplayer, X, flag f = gmplayer -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video|audio, has smplayer, X, flag f = smplayer "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video|audio, has totem,    X, flag f = totem -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video|audio, has totem,    X, flag f = totem --fullscreen -- "$@"$/;"	k
+ flag f	ranger/rifle.conf	/^mime ^video|audio, has vlc,      X, flag f = vlc -- "$@"$/;"	k
+ has 7z	ranger/rifle.conf	/^ext 7z, has 7z = 7z -p l "$@" | "$PAGER"$/;"	k
+ has als	ranger/rifle.conf	/^ext ace|ar|arc|bz2?|cab|cpio|cpt|deb|dgc|dmg|gz,  has als     = als -- "$@" | "$PAGER"$/;"	k
+ has als	ranger/rifle.conf	/^ext iso|jar|msi|pkg|rar|shar|tar|tgz|xar|xpi|xz|zip, has als     = als -- "$@" | "$PAGER"$/;"	k
+ has aunpack	ranger/rifle.conf	/^ext 7z|ace|ar|arc|bz2?|cab|cpio|cpt|deb|dgc|dmg|gz,  has aunpack = aunpack -- "$@"$/;"	k
+ has aunpack	ranger/rifle.conf	/^ext iso|jar|msi|pkg|rar|shar|tar|tgz|xar|xpi|xz|zip, has aunpack = aunpack -- "$@"$/;"	k
+ has mplayer	ranger/rifle.conf	/^mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"$/;"	k
+ has mplayer	ranger/rifle.conf	/^mime ^video, terminal, !X, has mplayer   = mplayer -- "$@"$/;"	k
+ has mplayer2	ranger/rifle.conf	/^mime ^audio|ogg$, terminal, has mplayer2 = mplayer2 -- "$@"$/;"	k
+ has mplayer2	ranger/rifle.conf	/^mime ^video, terminal, !X, has mplayer2  = mplayer2 -- "$@"$/;"	k
+ has mpv	ranger/rifle.conf	/^mime ^audio|ogg$, terminal, has mpv      = mpv -- "$@"$/;"	k
+ has mpv	ranger/rifle.conf	/^mime ^video, terminal, !X, has mpv       = mpv -- "$@"$/;"	k
+ has tar	ranger/rifle.conf	/^ext tar|gz, has tar = tar vvtf "$@" | "$PAGER"$/;"	k
+ has tar	ranger/rifle.conf	/^ext tar|gz, has tar = tar vvxf "$@"$/;"	k
+ has wildmidi	ranger/rifle.conf	/^ext midi?,        terminal, has wildmidi = wildmidi -- "$@"$/;"	k
+ mark_files toggle	ranger/rc.conf	/^map <Space> mark_files toggle=True$/;"	k
+ move down	ranger/rc.conf	/^map <PAGEDOWN> move down=1   pages=True$/;"	k
+ tag_toggle tag	ranger/rc.conf	/^map "<any>  tag_toggle tag=%any$/;"	k
+!	.vimrc	/^map ! :!$/;"	m
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/1c8b98d/
+,b	.vimrc	/^map ,b :Dispatch npm run build<CR>$/;"	m
+,c	.vimrc	/^map ,c :call VimuxInterruptRunner()<CR>$/;"	m
+,d	.vimrc	/^map ,d :Dispatch<SPACE>$/;"	m
+,f	.vimrc	/^map ,f :Dispatch npm test -- --tests %$/;"	m
+,i	.vimrc	/^map ,i :call VimuxInspectRunner()<CR>$/;"	m
+,q	.vimrc	/^map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>$/;"	m
+,r	.vimrc	/^map ,r :call VimuxRunCommand("npm start")<CR>$/;"	m
+,t	.vimrc	/^map ,t :Dispatch npm test<CR>$/;"	m
+,v	.vimrc	/^map ,v :call VimuxPromptCommand("npm start")<CR>$/;"	m
+,z	.vimrc	/^map ,z :VimuxZoomRunner<CR>$/;"	m
+-	.vimrc	/^noremap - :NERDTreeFind<CR>$/;"	m
+.	.vimrc	/^vnoremap . :normal .<CR>$/;"	m
+/	.vimrc	/^map \/  <Plug>(incsearch-forward)$/;"	m
+/	.vimrc	/^nnoremap \/ \/\\v$/;"	m
+/	.vimrc	/^vnoremap \/ \/\\v$/;"	m
+<C-A>	.vimrc	/^nnoremap <silent> <C-A> :ZoomToggle<CR>$/;"	m
+<F10>	.vimrc	/^map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'$/;"	m
+<F12>	.vimrc	/^map <F12> "hyiw:Dash <c-r>h<CR>$/;"	m
+<F12>	.vimrc	/^vmap <F12> "hy:Dash <c-r>h<CR>$/;"	m
+<F1>	.vimrc	/^map <F1> :map <F1> :!$/;"	m
+<F2>	.vimrc	/^map <F2> "hyiw:%s\/<c-r>h\/\/c<LEFT><LEFT>$/;"	m
+<F3>	.vimrc	/^map <F3> :CtrlSF -R ""<LEFT>$/;"	m
+<F3>	.vimrc	/^map <F3> :GrepperAg ""<LEFT>$/;"	m
+<F5>	.vimrc	/^map <F5> :NERDTreeToggle<CR>$/;"	m
+<F6>	.vimrc	/^noremap <F6> :!tig %<CR>$/;"	m
+<F7>	.vimrc	/^nmap <F7> "hyiw:!open 'https:\/\/www.google.com\/search?newwindow=1&site=&source=hp&q=<c-r>h'$/;"	m
+<F7>	.vimrc	/^vmap <F7> "hy:!open 'https:\/\/www.google.com\/search?newwindow=1&site=&source=hp&q=<c-r>h'$/;"	m
+<F8>	.vimrc	/^map <F8> :norm <c-a><CR>:w<BAR>:colo null<CR>$/;"	m
+<F9>	.vimrc	/^noremap <F9> :RandomColorScheme<CR>:colo<CR>$/;"	m
+<S-F10>	.vimrc	/^map <S-F10> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")<CR>$/;"	m
+<S-F8>	.vimrc	/^map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>$/;"	m
+<bar>	.vimrc	/^vmap <bar> :g\/$/;"	m
+<c-d>	.vimrc	/^noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>$/;"	m
+<c-f>	.vimrc	/^nnoremap <silent> <c-f> :CtrlPLine<CR>$/;"	m
+<c-u>	.vimrc	/^noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>$/;"	m
+<c-z>	.vimrc	/^imap <c-z> <c-y>,$/;"	m
+<leader>/	.vimrc	/^nmap <leader>\/ :CtrlSF -R ""<LEFT>$/;"	m
+<leader>0	.vimrc	/^nmap <leader>0 :set foldlevel=0<CR>$/;"	m
+<leader>1	.vimrc	/^nmap <leader>1 :set foldlevel=1<CR>$/;"	m
+<leader>2	.vimrc	/^nmap <leader>2 :set foldlevel=2<CR>$/;"	m
+<leader>3	.vimrc	/^nmap <leader>3 :set foldlevel=3<CR>$/;"	m
+<leader>4	.vimrc	/^nmap <leader>4 :set foldlevel=4<CR>$/;"	m
+<leader>5	.vimrc	/^nmap <leader>5 :set foldlevel=5<CR>$/;"	m
+<leader>6	.vimrc	/^nmap <leader>6 :set foldlevel=6<CR>$/;"	m
+<leader>7	.vimrc	/^nmap <leader>7 :set foldlevel=7<CR>$/;"	m
+<leader>8	.vimrc	/^nmap <leader>8 "hyiw:CtrlSF -R <c-r>h<CR>\/<c-r>h<CR>$/;"	m
+<leader>9	.vimrc	/^nmap <leader>9 :set foldlevel=999<CR>$/;"	m
+<leader><leader>/	.vimrc	/^nmap <leader><leader>\/ :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>$/;"	m
+<leader><leader>b	.vimrc	/^map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>$/;"	m
+<leader><leader>c	.vimrc	/^nmap <leader><leader>c :Codi!!<CR>$/;"	m
+<leader><leader>i	.vimrc	/^nmap <leader><leader>i :PlugInstall<CR>$/;"	m
+<leader><leader>j	.vimrc	/^nmap <leader><leader>j :join<CR>$/;"	m
+<leader><leader>s	.vimrc	/^nmap <leader><leader>s :UltiSnipsEdit<CR>$/;"	m
+<leader><leader>t	.vimrc	/^nmap <leader><leader>t :sp ~\/dotfiles\/.ctags<CR>$/;"	m
+<leader><leader>u	.vimrc	/^nmap <leader><leader>u :PlugClean!<CR>$/;"	m
+<leader><leader>v	.vimrc	/^nmap <leader><leader>v :sp ~\/dotfiles\/.vimrc<CR>$/;"	m
+<leader><leader>w	.vimrc	/^nmap <leader><leader>w :ToggleWorkspace<CR>$/;"	m
+<leader><tab>	.vimrc	/^map <leader><tab> <c-^>$/;"	m
+<leader>C	.vimrc	/^nmap <leader>C :CloseHiddenBuffers<CR>$/;"	m
+<leader>K	.vimrc	/^nnoremap <silent> <leader>K :call UncolorAllWords()<cr>$/;"	m
+<leader>P	.vimrc	/^nmap <leader>P <Plug>yankstack_substitute_newer_paste$/;"	m
+<leader>b	.vimrc	/^map <leader>b :Bookmark<space>$/;"	m
+<leader>c	.vimrc	/^map <leader>c :bd<CR>$/;"	m
+<leader>d	.vimrc	/^nmap <silent> <leader>d <Plug>DashSearch$/;"	m
+<leader>f	.vimrc	/^nmap <leader>f <bar>_$/;"	m
+<leader>gL	.vimrc	/^map <leader>gL :Glog<BAR>:bot copen<CR>$/;"	m
+<leader>gP	.vimrc	/^map <leader>gP :Gpush<CR>$/;"	m
+<leader>gR	.vimrc	/^map <leader>gR :Gread<CR>$/;"	m
+<leader>gb	.vimrc	/^map <leader>gb :Gblame<CR>$/;"	m
+<leader>gc	.vimrc	/^map <leader>gc :Gcommit<CR>i$/;"	m
+<leader>gd	.vimrc	/^map <leader>gd :Gdiff<CR>$/;"	m
+<leader>ge	.vimrc	/^map <leader>ge :Gedit<CR>$/;"	m
+<leader>gh	.vimrc	/^map <leader>gh :Gbrowse<CR>$/;"	m
+<leader>gl	.vimrc	/^map <leader>gl :Extradite<CR>$/;"	m
+<leader>gp	.vimrc	/^map <leader>gp :Gpull<CR>$/;"	m
+<leader>gs	.vimrc	/^map <leader>gs :Gstatus<CR>$/;"	m
+<leader>gw	.vimrc	/^map <leader>gw :Gwrite<CR>$/;"	m
+<leader>j	.vimrc	/^nmap <leader>j ]c$/;"	m
+<leader>k	.vimrc	/^nmap <leader>k [c$/;"	m
+<leader>k	.vimrc	/^nnoremap <silent> <leader>k :call InterestingWords('n')<cr>$/;"	m
+<leader>l	.vimrc	/^nmap <leader>l yiw{oconsole.error(""", ")^$/;"	m
+<leader>l	.vimrc	/^vmap <leader>l y{oconsole.error(""", ")^$/;"	m
+<leader>oh	.vimrc	/^nmap <leader>oh !open https:\/\/github.com\/search?q=$/;"	m
+<leader>on	.vimrc	/^nmap <leader>on "pyi":!open https:\/\/www.npmjs.com\/package\/p$/;"	m
+<leader>oo	.vimrc	/^nmap <leader>oo !open https:\/\/www.google.com\/search?q=javascript+$/;"	m
+<leader>p	.vimrc	/^nmap <leader>p <Plug>yankstack_substitute_older_paste$/;"	m
+<leader>q	.vimrc	/^nmap <leader>q :q<CR>$/;"	m
+<leader>s	.vimrc	/^nmap <leader>s :sp<CR>$/;"	m
+<leader>s	.vimrc	/^vmap <leader>s :sort<CR>$/;"	m
+<leader>u	.vimrc	/^nmap <leader>u :GundoToggle<CR>$/;"	m
+<leader>v	.vimrc	/^nmap <leader>v :vsp<CR>$/;"	m
+<leader>w	.vimrc	/^nmap <leader>w :w<CR>$/;"	m
+=	.vimrc	/^nmap <silent> = :Neoformat<CR>$/;"	m
+?	.vimrc	/^map ?  <Plug>(incsearch-backward)$/;"	m
+A	.vimrc	/^vmap A :norm A$/;"	m
+AS_YOU_TYPE	ranger/commands_full.py	/^    AS_YOU_TYPE     = 't'$/;"	v	class:scout
+AUTO_OPEN	ranger/commands_full.py	/^    AUTO_OPEN       = 'a'$/;"	v	class:scout
+CurrentAttributeA	.vimrc	/^function! CurrentAttributeA()$/;"	f
+CurrentDelimitedA	.vimrc	/^function! CurrentDelimitedA()$/;"	f
+FILTER	ranger/commands_full.py	/^    FILTER          = 'f'$/;"	v	class:scout
+FILTER_DIRS	ranger/commands_full.py	/^    FILTER_DIRS  = 'd'$/;"	v	class:filter_inode_type
+FILTER_FILES	ranger/commands_full.py	/^    FILTER_FILES = 'f'$/;"	v	class:filter_inode_type
+FILTER_LINKS	ranger/commands_full.py	/^    FILTER_LINKS = 'l'$/;"	v	class:filter_inode_type
+H	.vimrc	/^map H [{$/;"	m
+I	.tmux.conf	/^setw -g window-status-current-format " #F#I:#W#F "$/;"	k
+I	.tmux.conf	/^setw -g window-status-format " #F#I:#W#F "$/;"	k
+I	.vimrc	/^vmap I :norm I$/;"	m
+IGNORE_CASE	ranger/commands_full.py	/^    IGNORE_CASE     = 'i'$/;"	v	class:scout
+INVERT	ranger/commands_full.py	/^    INVERT          = 'v'$/;"	v	class:scout
+J	.vimrc	/^map J }zz$/;"	m
+K	.vimrc	/^map K {zz$/;"	m
+KEEP_OPEN	ranger/commands_full.py	/^    KEEP_OPEN       = 'k'$/;"	v	class:scout
+L	.vimrc	/^map L ]}$/;"	m
+M	.vimrc	/^vmap M :join<CR>$/;"	m
+MARK	ranger/commands_full.py	/^    MARK            = 'm'$/;"	v	class:scout
+N	.vimrc	/^nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>$/;"	m
+N	.vimrc	/^nnoremap <silent> N Nzz$/;"	m
+NeatFoldText	.vimrc	/^function! NeatFoldText()$/;"	f
+OPEN_ON_ENTER	ranger/commands_full.py	/^    OPEN_ON_ENTER   = 'e'$/;"	v	class:scout
+P	.vimrc	/^nnoremap P ]P$/;"	m
+PATH_RE	ranger/commands_full.py	/^    PATH_RE = re.compile(r'^\\s*path="?(.*?)"?\\s*$')$/;"	v	class:setlocal
+PERM_FILTER	ranger/commands_full.py	/^    PERM_FILTER     = 'p'$/;"	v	class:scout
+Rg	.vimrc	/^command! -bang -nargs=* Rg$/;"	c
+S	.vimrc	/^nmap S v$h<Plug>VSurround$/;"	m
+SMART_CASE	ranger/commands_full.py	/^    SMART_CASE      = 's'$/;"	v	class:scout
+SM_GLOB	ranger/commands_full.py	/^    SM_GLOB         = 'g'$/;"	v	class:scout
+SM_LETTERSKIP	ranger/commands_full.py	/^    SM_LETTERSKIP   = 'l'$/;"	v	class:scout
+SM_REGEX	ranger/commands_full.py	/^    SM_REGEX        = 'r'$/;"	v	class:scout
+SessionLoad	Session.vim	/^let SessionLoad = 1$/;"	v
+SessionLoad	fish/Session.vim	/^let SessionLoad = 1$/;"	v
+StripTrailingWhitespace	.vimrc	/^function! StripTrailingWhitespace ()$/;"	f
+ToggleGrepperBuffersMode	.vimrc	/^function! ToggleGrepperBuffersMode()$/;"	f
+UNMARK	ranger/commands_full.py	/^    UNMARK          = 'M'$/;"	v	class:scout
+X	ranger/rifle.conf	/^ext s[wmf]c, has snes9x-gtk,X = snes9x-gtk "$1"$/;"	k
+Y	.vimrc	/^noremap Y y\$$/;"	m
+ZoomToggle	.vimrc	/^command! ZoomToggle call s:ZoomToggle()$/;"	c
+\\	.vimrc	/^vmap \\ :norm<space>^$/;"	m
+\x17\x06	.vimrc	/^map  _|$/;"	m
+\x17f	.vimrc	/^map f _<bar>$/;"	m
+\x1F	.vimrc	/^nmap   <Plug>CommentaryLine$/;"	m
+\x1F	.vimrc	/^vmap   <Plug>Commentary$/;"	m
+_	.vimrc	/^map _ :Tagbar<CR>$/;"	m
+__init__	ranger/commands_full.py	/^    def __init__(self, *args, **kws):$/;"	m	class:scout
+_build_regex	ranger/commands_full.py	/^    def _build_regex(self):$/;"	m	class:scout
+_command_name	ranger/commands_full.py	/^    _command_name = "meta"$/;"	v	class:prompt_metadata
+_console_chain	ranger/commands_full.py	/^    _console_chain = None$/;"	v	class:prompt_metadata
+_count	ranger/commands_full.py	/^    def _count(self, move=False, offset=0):$/;"	m	class:scout
+_fill_console	ranger/commands_full.py	/^    def _fill_console(self, key):$/;"	m	class:prompt_metadata
+_get_app_flags_mode	ranger/commands_full.py	/^    def _get_app_flags_mode(self, string):$/;"	m	class:open_with
+_is_app	ranger/commands_full.py	/^    def _is_app(self, arg):$/;"	m	class:open_with
+_is_flags	ranger/commands_full.py	/^    def _is_flags(self, arg):$/;"	m	class:open_with
+_is_mode	ranger/commands_full.py	/^    def _is_mode(self, arg):$/;"	m	class:open_with
+_process_command_stack	ranger/commands_full.py	/^    def _process_command_stack(self):$/;"	m	class:prompt_metadata
+_question_callback	ranger/commands_full.py	/^    def _question_callback(self, files, answer):$/;"	m	class:delete
+alias	ranger/commands_full.py	/^class alias(Command):$/;"	c
+allow_abbrev	ranger/commands_full.py	/^    allow_abbrev = False$/;"	v	class:delete
+allow_abbrev	ranger/commands_full.py	/^    allow_abbrev = False$/;"	v	class:quit_bang
+array	.ctags	/^--regex-JavaScript=\/^(var)?[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[ \\t]*\\[\/\\3\//;"	k	langdef:js
+backward	ranger/rc.conf	/^cmap <A-d>        eval fm.ui.console.delete_word(backward=False)$/;"	k
+badwolf_tex	badwolf.vim	/^augroup badwolf_tex$/;"	a
+bulkrename	ranger/commands_full.py	/^class bulkrename(Command):$/;"	c
+callback	ranger/commands_full.py	/^        def callback(answer):$/;"	f	member:help_.execute	file:
+cancel	ranger/commands_full.py	/^    def cancel(self):$/;"	m	class:scout
+cd	ranger/commands_full.py	/^class cd(Command):$/;"	c
+chain	ranger/commands_full.py	/^class chain(Command):$/;"	c
+chmod	ranger/commands_full.py	/^class chmod(Command):$/;"	c
+cmap	ranger/commands_full.py	/^class cmap(map_):$/;"	c
+colors_name	badwolf.vim	/^let colors_name = "badwolf"$/;"	v
+console	ranger/commands_full.py	/^class console(Command):$/;"	c
+context	ranger/commands_full.py	/^    context = 'browser'$/;"	v	class:alias
+context	ranger/commands_full.py	/^    context = 'browser'$/;"	v	class:copymap
+context	ranger/commands_full.py	/^    context = 'browser'$/;"	v	class:cunmap
+context	ranger/commands_full.py	/^    context = 'browser'$/;"	v	class:map_
+context	ranger/commands_full.py	/^    context = 'browser'$/;"	v	class:unmap
+context	ranger/commands_full.py	/^    context = 'console'$/;"	v	class:cmap
+context	ranger/commands_full.py	/^    context = 'console'$/;"	v	class:copycmap
+context	ranger/commands_full.py	/^    context = 'pager'$/;"	v	class:copypmap
+context	ranger/commands_full.py	/^    context = 'pager'$/;"	v	class:pmap
+context	ranger/commands_full.py	/^    context = 'pager'$/;"	v	class:punmap
+context	ranger/commands_full.py	/^    context = 'taskview'$/;"	v	class:copytmap
+context	ranger/commands_full.py	/^    context = 'taskview'$/;"	v	class:tmap
+context	ranger/commands_full.py	/^    context = 'taskview'$/;"	v	class:tunmap
+copy_buffer_filename	ranger/commands_full.py	/^    copy_buffer_filename = 'copy_buffer'$/;"	v	class:load_copy_buffer
+copy_buffer_filename	ranger/commands_full.py	/^    copy_buffer_filename = 'copy_buffer'$/;"	v	class:save_copy_buffer
+copycmap	ranger/commands_full.py	/^class copycmap(copymap):$/;"	c
+copymap	ranger/commands_full.py	/^class copymap(Command):$/;"	c
+copypmap	ranger/commands_full.py	/^class copypmap(copymap):$/;"	c
+copytmap	ranger/commands_full.py	/^class copytmap(copymap):$/;"	c
+create_symlink	install.sh	/^create_symlink() {$/;"	f
+cunmap	ranger/commands_full.py	/^class cunmap(unmap):$/;"	c
+default_linemode	ranger/commands_full.py	/^class default_linemode(Command):$/;"	c
+delete	ranger/commands_full.py	/^class delete(Command):$/;"	c
+dirarg	ranger/rc.conf	/^map dG  eval fm.cut(dirarg=dict(to=-1), narg=quantifier)$/;"	k
+dirarg	ranger/rc.conf	/^map dgg eval fm.cut(dirarg=dict(to=0), narg=quantifier)$/;"	k
+dirarg	ranger/rc.conf	/^map dj  eval fm.cut(dirarg=dict(down=1), narg=quantifier)$/;"	k
+dirarg	ranger/rc.conf	/^map dk  eval fm.cut(dirarg=dict(up=1), narg=quantifier)$/;"	k
+dirarg	ranger/rc.conf	/^map yG  eval fm.copy(dirarg=dict(to=-1), narg=quantifier)$/;"	k
+dirarg	ranger/rc.conf	/^map ygg eval fm.copy(dirarg=dict(to=0), narg=quantifier)$/;"	k
+dirarg	ranger/rc.conf	/^map yj  eval fm.copy(dirarg=dict(down=1), narg=quantifier)$/;"	k
+dirarg	ranger/rc.conf	/^map yk  eval fm.copy(dirarg=dict(up=1), narg=quantifier)$/;"	k
+do_mark	ranger/commands_full.py	/^    do_mark = False$/;"	v	class:unmark_tag
+do_mark	ranger/commands_full.py	/^    do_mark = True$/;"	v	class:mark_tag
+dump	ranger/scope.sh	/^dump() { \/bin\/echo "$output"; }$/;"	f
+echo	ranger/commands_full.py	/^class echo(Command):$/;"	c
+edit	ranger/commands_full.py	/^class edit(Command):$/;"	c
+esc	ranger/commands_full.py	/^        from ranger.ext.shell_escape import shell_escape as esc$/;"	x	member:bulkrename.execute	file:
+escape_macros_for_shell	ranger/commands_full.py	/^    escape_macros_for_shell = True$/;"	v	class:delete
+escape_macros_for_shell	ranger/commands_full.py	/^    escape_macros_for_shell = True$/;"	v	class:shell
+eval_	ranger/commands_full.py	/^class eval_(Command):$/;"	c
+executable	ranger/rifle.conf	/^mime application\/x-executable = "$1"$/;"	k
+execute	ranger/commands.py	/^    def execute(self):$/;"	m	class:my_edit
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:alias
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:bulkrename
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:cd
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:chain
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:chmod
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:console
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:copymap
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:default_linemode
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:delete
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:echo
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:edit
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:eval_
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:filter_inode_type
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:flat
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:grep
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:help_
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:linemode
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:load_copy_buffer
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:map_
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:mark_tag
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:meta
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:mkdir
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:open_with
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:prompt_metadata
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:quit
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:quitall
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:relink
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:rename
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:rename_append
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:save_copy_buffer
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:scout
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:set_
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:setintag
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:setlocal
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:shell
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:stage
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:terminal
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:touch
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:unmap
+execute	ranger/commands_full.py	/^    def execute(self):$/;"	m	class:unstage
+ext 1	ranger/rifle.conf	/^ext 1                         = man "$1"$/;"	k
+ext exe	ranger/rifle.conf	/^ext exe                       = wine "$1"$/;"	k
+ext js	ranger/rifle.conf	/^ext js  = node -- "$1"$/;"	k
+ext php	ranger/rifle.conf	/^ext php = php -- "$1"$/;"	k
+ext pl	ranger/rifle.conf	/^ext pl  = perl -- "$1"$/;"	k
+ext py	ranger/rifle.conf	/^ext py  = python -- "$1"$/;"	k
+ext rb	ranger/rifle.conf	/^ext rb  = ruby -- "$1"$/;"	k
+ext sh	ranger/rifle.conf	/^ext sh  = sh -- "$1"$/;"	k
+filemarks	.vimrc	/^augroup filemarks$/;"	a
+filter_inode_type	ranger/commands_full.py	/^class filter_inode_type(Command):$/;"	c
+flat	ranger/commands_full.py	/^class flat(Command):$/;"	c
+fugitive	.vimrc	/^augroup fugitive$/;"	a
+function	.ctags	/^--regex-JavaScript=\/(jQuery|\\$)\\([ \\t]*([^ \\t]*)[ \\t]*\\)\\.bind\\([ \\t]*['"](.*)['"]\/\\/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^([ \\t]*)(describe|context|it)[ \\t]*\\([ \\t]*["'](.*)["']\/.\\1\\3\/f,fu/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*[:=][ \\t]*function\/\\2/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]*describe[ \\t]*\\([ \\t]*["'](.*)["']\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]*function[ \\t]*([A-Za-z0-9_$]+)[ \\t]*\\(\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]*var[ \\t]+([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[ \\t]functio/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]{2}([a-zA-Z]+)[ ]=[ ].*\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]{2}([a-zA-Z]+)\\(.*\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^var[ \\t]+([A-Za-z0-9._$]+)[ \\t]*=[ \\t]*[A-Za-z0-9_$]+.extend\/\\1\/f,fu/;"	k	langdef:js
+g:NERDTreeAutoDeleteBuffer	.vimrc	/^let g:NERDTreeAutoDeleteBuffer = 1$/;"	v
+g:NERDTreeDirArrows	.vimrc	/^let g:NERDTreeDirArrows        = 1$/;"	v
+g:NERDTreeMinimalUI	.vimrc	/^let g:NERDTreeMinimalUI        = 1$/;"	v
+g:NERDTreeQuitOnOpen	.vimrc	/^let g:NERDTreeQuitOnOpen       = 0$/;"	v
+g:NERDTreeShowBookmarks	.vimrc	/^let g:NERDTreeShowBookmarks    = 1$/;"	v
+g:SuperTabDefaultCompletionType	.vimrc	/^let g:SuperTabDefaultCompletionType = '<C-n>'$/;"	v
+g:UltiSnipsEditSplit	.vimrc	/^let g:UltiSnipsEditSplit="vertical"$/;"	v
+g:UltiSnipsExpandTrigger	.vimrc	/^let g:UltiSnipsExpandTrigger = "<tab>"$/;"	v
+g:UltiSnipsJumpBackwardTrigger	.vimrc	/^let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"$/;"	v
+g:UltiSnipsJumpForwardTrigger	.vimrc	/^let g:UltiSnipsJumpForwardTrigger = "<tab>"$/;"	v
+g:UltiSnipsSnippetDirectories	.vimrc	/^let g:UltiSnipsSnippetDirectories = ['~\/.vim\/UltiSnips', 'UltiSnips']$/;"	v
+g:VimuxHeight	.vimrc	/^let g:VimuxHeight = "20"$/;"	v
+g:VimuxPromptString	.vimrc	/^let g:VimuxPromptString = "Vimux>  $ "$/;"	v
+g:airline#extensions#tabline#enabled	.vimrc	/^let g:airline#extensions#tabline#enabled = 0$/;"	v
+g:airline_inactive_collapse	.vimrc	/^let g:airline_inactive_collapse = 0$/;"	v
+g:airline_powerline_fonts	.vimrc	/^let g:airline_powerline_fonts = 0$/;"	v
+g:airline_section_a	.vimrc	/^let g:airline_section_a = '%{expand("%:p:t")}'$/;"	v
+g:airline_section_b	.vimrc	/^let g:airline_section_b = '%{expand("%:p:h:t")}'$/;"	v
+g:airline_section_c	.vimrc	/^let g:airline_section_c = '%{expand("%:p:h:h:t")}'$/;"	v
+g:airline_section_error	.vimrc	/^let g:airline_section_error = ''$/;"	v
+g:airline_section_warning	.vimrc	/^let g:airline_section_warning = ''$/;"	v
+g:airline_section_x	.vimrc	/^let g:airline_section_x = ''$/;"	v
+g:airline_section_y	.vimrc	/^let g:airline_section_y = ''$/;"	v
+g:airline_section_z	.vimrc	/^let g:airline_section_z = ''$/;"	v
+g:airline_theme	.vimrc	/^let g:airline_theme='deus'$/;"	v
+g:badwolf_css_props_highlight	badwolf.vim	/^    let g:badwolf_css_props_highlight = 0$/;"	v
+g:badwolf_html_link_underline	badwolf.vim	/^    let g:badwolf_html_link_underline = 1$/;"	v
+g:codi#aliases	.vimrc	/^let g:codi#aliases = {$/;"	v
+g:colors_name	null.vim	/^let g:colors_name="null"$/;"	v
+g:colors_name	sift.vim	/^let g:colors_name="sift"$/;"	v
+g:ctrlp_by_filename	.vimrc	/^let g:ctrlp_by_filename = 0$/;"	v
+g:ctrlp_cmd	.vimrc	/^let g:ctrlp_cmd = 'CtrlPBuffer'$/;"	v
+g:ctrlp_default_input	.vimrc	/^let g:ctrlp_default_input = 0$/;"	v
+g:ctrlp_extensions	.vimrc	/^let g:ctrlp_extensions = ['']$/;"	v
+g:ctrlp_match_current_file	.vimrc	/^let g:ctrlp_match_current_file = 0$/;"	v
+g:ctrlp_match_window	.vimrc	/^let g:ctrlp_match_window = 'bottom,order:btt'$/;"	v
+g:ctrlp_match_window_reversed	.vimrc	/^let g:ctrlp_match_window_reversed = 0$/;"	v
+g:ctrlp_mruf_exclude	.vimrc	/^let g:ctrlp_mruf_exclude = '.*\/temp\/.*' " MacOSX\/Linux$/;"	v
+g:ctrlp_mruf_relative	.vimrc	/^let g:ctrlp_mruf_relative = 1$/;"	v
+g:ctrlp_regexp	.vimrc	/^let g:ctrlp_regexp = 0$/;"	v
+g:ctrlp_reuse_window	.vimrc	/^let g:ctrlp_reuse_window = 'netrw\\|help\\|quickfix'$/;"	v
+g:ctrlp_switch_buffer	.vimrc	/^let g:ctrlp_switch_buffer = 'e'$/;"	v
+g:ctrlp_types	.vimrc	/^let g:ctrlp_types = ['buf', 'mru', 'fil']$/;"	v
+g:ctrlp_use_caching	.vimrc	/^  let g:ctrlp_use_caching = 0$/;"	v
+g:ctrlp_use_caching	.vimrc	/^let g:ctrlp_use_caching = 0$/;"	v
+g:ctrlp_user_command	.vimrc	/^  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~\/.agignore -g ""'$/;"	v
+g:ctrlp_user_command	.vimrc	/^  let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~\/.agignore --glob ""'$/;"	v
+g:ctrlp_working_path_mode	.vimrc	/^let g:ctrlp_working_path_mode = 'ra'$/;"	v
+g:dash_map	.vimrc	/^let g:dash_map = {$/;"	v
+g:fzf_buffers_jump	.vimrc	/^let g:fzf_buffers_jump = 1$/;"	v
+g:grepper	.vimrc	/^    let g:grepper.buffers = 0$/;"	v
+g:grepper	.vimrc	/^    let g:grepper.buffers = 1$/;"	v
+g:grepper	.vimrc	/^let g:grepper = {}$/;"	v
+g:grepper	.vimrc	/^let g:grepper.jump = 1$/;"	v
+g:grepper	.vimrc	/^let g:grepper.stop = 500$/;"	v
+g:gutentags_ctags_exclude	.vimrc	/^let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*', 'temp*']$/;"	v
+g:javascript_conceal_NaN	.vimrc	/^let g:javascript_conceal_NaN                       = "ℕ"$/;"	v
+g:javascript_conceal_arrow_function	.vimrc	/^let g:javascript_conceal_arrow_function            = "➜"$/;"	v
+g:javascript_conceal_function	.vimrc	/^let g:javascript_conceal_function                  = "ƒ"$/;"	v
+g:javascript_conceal_noarg_arrow_function	.vimrc	/^let g:javascript_conceal_noarg_arrow_function      = "🞅"$/;"	v
+g:javascript_conceal_null	.vimrc	/^let g:javascript_conceal_null                      = "ø"$/;"	v
+g:javascript_conceal_prototype	.vimrc	/^let g:javascript_conceal_prototype                 = "¶"$/;"	v
+g:javascript_conceal_return	.vimrc	/^let g:javascript_conceal_return                    = "◁"$/;"	v
+g:javascript_conceal_static	.vimrc	/^let g:javascript_conceal_static                    = "•"$/;"	v
+g:javascript_conceal_super	.vimrc	/^let g:javascript_conceal_super                     = "Ω"$/;"	v
+g:javascript_conceal_this	.vimrc	/^let g:javascript_conceal_this                      = "@"$/;"	v
+g:javascript_conceal_undefined	.vimrc	/^let g:javascript_conceal_undefined                 = "¿"$/;"	v
+g:javascript_conceal_underscore_arrow_function	.vimrc	/^let g:javascript_conceal_underscore_arrow_function = "🞅"$/;"	v
+g:neoformat_basic_format_align	.vimrc	/^let g:neoformat_basic_format_align = 1$/;"	v
+g:neoformat_basic_format_retab	.vimrc	/^let g:neoformat_basic_format_retab = 1$/;"	v
+g:neoformat_basic_format_trim	.vimrc	/^let g:neoformat_basic_format_trim = 1$/;"	v
+g:neoformat_enabled_javascript	.vimrc	/^let g:neoformat_enabled_javascript = ['prettier']$/;"	v
+g:neoformat_javascript_prettier	.vimrc	/^let g:neoformat_javascript_prettier = {$/;"	v
+g:neoformat_only_msg_on_error	.vimrc	/^let g:neoformat_only_msg_on_error = 1$/;"	v
+g:neoformat_try_formatprg	.vimrc	/^let g:neoformat_try_formatprg = 1$/;"	v
+g:neoformat_verbose	.vimrc	/^let g:neoformat_verbose = 0$/;"	v
+g:netrw_keepdir	.vimrc	/^let g:netrw_keepdir=1$/;"	v
+g:netrw_localrmdir	.vimrc	/^let g:netrw_localrmdir='rm -r'$/;"	v
+g:pymode_options_max_line_length	.vimrc	/^let g:pymode_options_max_line_length=120$/;"	v
+g:python_highlight_all	.vimrc	/^let g:python_highlight_all=1$/;"	v
+g:simple_todo_map_keys	.vimrc	/^let g:simple_todo_map_keys = 0$/;"	v
+g:tagbar_autoclose	.vimrc	/^let g:tagbar_autoclose = 1$/;"	v
+g:tagbar_autofocus	.vimrc	/^let g:tagbar_autofocus = 1$/;"	v
+g:tagbar_case_insensitive	.vimrc	/^let g:tagbar_case_insensitive = 1$/;"	v
+g:tagbar_compact	.vimrc	/^let g:tagbar_compact = 1$/;"	v
+g:tagbar_sort	.vimrc	/^let g:tagbar_sort = 0$/;"	v
+g:tmux_navigator_disable_when_zoomed	.vimrc	/^let g:tmux_navigator_disable_when_zoomed = 1$/;"	v
+g:tmux_navigator_save_on_switch	.vimrc	/^let g:tmux_navigator_save_on_switch = 2$/;"	v
+g:used_javascript_libs	.vimrc	/^let g:used_javascript_libs = 'lodash,react,flux,d3'$/;"	v
+g:workspace_autosave	.vimrc	/^let g:workspace_autosave = 0$/;"	v
+g:workspace_autosave_untrailspaces	.vimrc	/^let g:workspace_autosave_untrailspaces = 0$/;"	v
+g:yankstack_map_keys	.vimrc	/^let g:yankstack_map_keys = 0$/;"	v
+g:yankstack_yank_keys	.vimrc	/^let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']$/;"	v
+g:ycm_cache_omnifunc	.vimrc	/^let g:ycm_cache_omnifunc = 1$/;"	v
+g:ycm_key_list_previous_completion	.vimrc	/^let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']$/;"	v
+g:ycm_key_list_select_completion	.vimrc	/^let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']$/;"	v
+g:ycm_log_level	.vimrc	/^let g:ycm_log_level = 'debug'$/;"	v
+g:ycm_show_diagnostics_ui	.vimrc	/^let g:ycm_show_diagnostics_ui = 1$/;"	v
+gD	.vimrc	/^nmap <silent> gD :TernDef<CR>$/;"	m
+gi	.vimrc	/^nmap gi :GrepperAg %:p:t:r<CR>$/;"	m
+gr	.vimrc	/^nmap gr "hyiw:GrepperAg <c-r>h<CR>$/;"	m
+grep	ranger/commands_full.py	/^class grep(Command):$/;"	c
+gs	.vimrc	/^map gs :topleft split ~\/.scratch<CR>$/;"	m
+gt	.vimrc	/^nmap <silent> gt :TernDef<CR>$/;"	m
+gt	.vimrc	/^vmap gt :Tabularize \/$/;"	m
+help_	ranger/commands_full.py	/^class help_(Command):$/;"	c
+install_cmake	install.sh	/^install_cmake() {$/;"	f
+is_directory_with_files	ranger/commands_full.py	/^        def is_directory_with_files(f):$/;"	f	member:delete.execute	file:
+is_fzf	.tmux.conf	/^is_fzf="ps -o state= -o comm= -t '#{pane_tty}' \\$/;"	k
+is_vim	.tmux.conf	/^is_vim="ps -o state= -o comm= -t '#{pane_tty}' \\$/;"	k
+j	.vimrc	/^nnoremap j gj$/;"	m
+js	.ctags	/^--langdef=js$/;"	l
+k	.vimrc	/^nnoremap k gk$/;"	m
+left	ranger/rc.conf	/^cmap <a-left>   eval fm.ui.console.move_word(left=1)$/;"	k
+left	ranger/rc.conf	/^cmap <left>  eval fm.ui.console.move(left=1)$/;"	k
+linemode	ranger/commands_full.py	/^class linemode(default_linemode):$/;"	c
+load_copy_buffer	ranger/commands_full.py	/^class load_copy_buffer(Command):$/;"	c
+map	ranger/rc.conf	/^map :  console$/;"	k
+map	ranger/rc.conf	/^map =  chmod$/;"	k
+map J  move down	ranger/rc.conf	/^map J  move down=0.5  pages=True$/;"	k
+map K  move up	ranger/rc.conf	/^map K  move up=0.5    pages=True$/;"	k
+map N  search_next forward	ranger/rc.conf	/^map N  search_next forward=False$/;"	k
+map ca search_next order	ranger/rc.conf	/^map ca search_next order=atime$/;"	k
+map cc search_next order	ranger/rc.conf	/^map cc search_next order=ctime$/;"	k
+map ci search_next order	ranger/rc.conf	/^map ci search_next order=mimetype$/;"	k
+map cm search_next order	ranger/rc.conf	/^map cm search_next order=mtime$/;"	k
+map cs search_next order	ranger/rc.conf	/^map cs search_next order=size$/;"	k
+map ct search_next order	ranger/rc.conf	/^map ct search_next order=tag$/;"	k
+map da cut mode	ranger/rc.conf	/^map da cut mode=add$/;"	k
+map dr cut mode	ranger/rc.conf	/^map dr cut mode=remove$/;"	k
+map dt cut mode	ranger/rc.conf	/^map dt cut mode=toggle$/;"	k
+map oA chain set sort	ranger/rc.conf	/^map oA chain set sort=atime;     set sort_reverse=True$/;"	k
+map oB chain set sort	ranger/rc.conf	/^map oB chain set sort=basename;  set sort_reverse=True$/;"	k
+map oC chain set sort	ranger/rc.conf	/^map oC chain set sort=ctime;     set sort_reverse=True$/;"	k
+map oE chain set sort	ranger/rc.conf	/^map oE chain set sort=extension; set sort_reverse=True$/;"	k
+map oM chain set sort	ranger/rc.conf	/^map oM chain set sort=mtime;     set sort_reverse=True$/;"	k
+map oN chain set sort	ranger/rc.conf	/^map oN chain set sort=natural;   set sort_reverse=True$/;"	k
+map oS chain set sort	ranger/rc.conf	/^map oS chain set sort=size;      set sort_reverse=True$/;"	k
+map oT chain set sort	ranger/rc.conf	/^map oT chain set sort=type;      set sort_reverse=True$/;"	k
+map oa chain set sort	ranger/rc.conf	/^map oa chain set sort=atime;     set sort_reverse=False$/;"	k
+map ob chain set sort	ranger/rc.conf	/^map ob chain set sort=basename;  set sort_reverse=False$/;"	k
+map oc chain set sort	ranger/rc.conf	/^map oc chain set sort=ctime;     set sort_reverse=False$/;"	k
+map oe chain set sort	ranger/rc.conf	/^map oe chain set sort=extension; set sort_reverse=False$/;"	k
+map om chain set sort	ranger/rc.conf	/^map om chain set sort=mtime;     set sort_reverse=False$/;"	k
+map on chain set sort	ranger/rc.conf	/^map on chain set sort=natural;   set sort_reverse=False$/;"	k
+map os chain set sort	ranger/rc.conf	/^map os chain set sort=size;      set sort_reverse=False$/;"	k
+map ot chain set sort	ranger/rc.conf	/^map ot chain set sort=type;      set sort_reverse=False$/;"	k
+map oz set sort	ranger/rc.conf	/^map oz set sort=random$/;"	k
+map pL paste_symlink relative	ranger/rc.conf	/^map pL paste_symlink relative=True$/;"	k
+map pO paste overwrite	ranger/rc.conf	/^map pO paste overwrite=True append=True$/;"	k
+map pP paste append	ranger/rc.conf	/^map pP paste append=True$/;"	k
+map pl paste_symlink relative	ranger/rc.conf	/^map pl paste_symlink relative=False$/;"	k
+map po paste overwrite	ranger/rc.conf	/^map po paste overwrite=True$/;"	k
+map uV      toggle_visual_mode reverse	ranger/rc.conf	/^map uV      toggle_visual_mode reverse=True$/;"	k
+map uv      mark_files all	ranger/rc.conf	/^map uv      mark_files all=True val=False$/;"	k
+map v       mark_files all	ranger/rc.conf	/^map v       mark_files all=True toggle=True$/;"	k
+map ya copy mode	ranger/rc.conf	/^map ya copy mode=add$/;"	k
+map yr copy mode	ranger/rc.conf	/^map yr copy mode=remove$/;"	k
+map yt copy mode	ranger/rc.conf	/^map yt copy mode=toggle$/;"	k
+map_	ranger/commands_full.py	/^class map_(Command):$/;"	c
+mapleader	.vimrc	/^let mapleader = "\\<Space>"$/;"	v
+mark_tag	ranger/commands_full.py	/^class mark_tag(Command):$/;"	c
+meta	ranger/commands_full.py	/^class meta(prompt_metadata):$/;"	c
+mkdir	ranger/commands_full.py	/^class mkdir(Command):$/;"	c
+my_edit	ranger/commands.py	/^class my_edit(Command):$/;"	c
+n	.vimrc	/^nnoremap <silent> n :nohlsearch<cr>:call WordNavigation('forward')<cr>$/;"	m
+n	.vimrc	/^nnoremap <silent> n nzz$/;"	m
+name	ranger/commands_full.py	/^    name = 'eval'$/;"	v	class:eval_
+name	ranger/commands_full.py	/^    name = 'help'$/;"	v	class:help_
+name	ranger/commands_full.py	/^    name = 'map'$/;"	v	class:map_
+name	ranger/commands_full.py	/^    name = 'quit!'$/;"	v	class:quit_bang
+name	ranger/commands_full.py	/^    name = 'set'  # don't override the builtin set class$/;"	v	class:set_
+object	.ctags	/^--regex-JavaScript=\/^(var)?[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[ \\t]*\\{\/\\3\//;"	k	langdef:js
+open_with	ranger/commands_full.py	/^class open_with(Command):$/;"	c
+p	.vimrc	/^nnoremap p ]p$/;"	m
+php	ranger/rifle.conf	/^!mime ^text, label editor, ext xml|json|csv|tex|py|pl|rb|js|sh|php = $EDITOR -- "$@"$/;"	k
+php	ranger/rifle.conf	/^!mime ^text, label pager,  ext xml|json|csv|tex|py|pl|rb|js|sh|php = "$PAGER" -- "$@"$/;"	k
+php	ranger/rifle.conf	/^label editor, !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php  = $EDITOR -- "$@"$/;"	k
+php	ranger/rifle.conf	/^label pager,  !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php  = "$PAGER" -- "$@"$/;"	k
+pmap	ranger/commands_full.py	/^class pmap(map_):$/;"	c
+position	ranger/rc.conf	/^map I  eval fm.open_console('rename ' + fm.thisfile.relative_path.replace("%", "%%"), position=7/;"	k
+prompt_metadata	ranger/commands_full.py	/^class prompt_metadata(Command):$/;"	c
+punmap	ranger/commands_full.py	/^class punmap(unmap):$/;"	c
+pythondispatch	.vimrc	/^augroup pythondispatch$/;"	a
+pythonsettings	.vimrc	/^augroup pythonsettings$/;"	a
+quick	ranger/commands_full.py	/^    def quick(self):$/;"	m	class:scout
+quit	ranger/commands_full.py	/^class quit(Command):$/;"	c
+quit_bang	ranger/commands_full.py	/^class quit_bang(quitall):$/;"	c
+quitall	ranger/commands_full.py	/^class quitall(Command):$/;"	c
+r	.vimrc	/^vmap r :S\/$/;"	m
+relink	ranger/commands_full.py	/^class relink(Command):$/;"	c
+rename	ranger/commands_full.py	/^class rename(Command):$/;"	c
+rename_append	ranger/commands_full.py	/^class rename_append(Command):$/;"	c
+resolve_macros	ranger/commands_full.py	/^    resolve_macros = False$/;"	v	class:alias
+resolve_macros	ranger/commands_full.py	/^    resolve_macros = False$/;"	v	class:eval_
+resolve_macros	ranger/commands_full.py	/^    resolve_macros = False$/;"	v	class:map_
+right	ranger/rc.conf	/^cmap <a-right>  eval fm.ui.console.move_word(right=1)$/;"	k
+right	ranger/rc.conf	/^cmap <end>   eval fm.ui.console.move(right=-1, absolute=True)$/;"	k
+right	ranger/rc.conf	/^cmap <home>  eval fm.ui.console.move(right=0, absolute=True)$/;"	k
+right	ranger/rc.conf	/^cmap <right> eval fm.ui.console.move(right=1)$/;"	k
+s	.vimrc	/^nmap s viw<Plug>VSurround$/;"	m
+s	.vimrc	/^vmap s <Plug>VSurround$/;"	m
+s:HL	badwolf.vim	/^function! s:HL(group, fg, ...)$/;"	f
+s:ZoomToggle	.vimrc	/^function! s:ZoomToggle() abort$/;"	f
+s:bwc	badwolf.vim	/^let s:bwc = {}$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.blackestgravel = ['141413', 232]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.blackgravel    = ['1c1b1a', 233]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.brightgravel   = ['d9cec3', 252]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.coal = ['000000', 16]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.coffee    = ['c7915b', 173]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.dalespale = ['fade3e', 221]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.darkgravel     = ['242321', 235]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.darkroast = ['88633f', 95]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.deepergravel   = ['35322d', 236]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.deepgravel     = ['45413b', 238]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.dirtyblonde = ['f4cf86', 222]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.dress = ['ff9eb8', 211]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.gravel         = ['857f78', 243]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.lightgravel    = ['998f84', 245]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.lime = ['aeee00', 154]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.mediumgravel   = ['666462', 241]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.orange = ['ffa724', 214]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.plain = ['f8f6f2', 15]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.saltwatertaffy = ['8cffba', 121]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.snow = ['ffffff', 15]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.taffy = ['ff2c4b', 196]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.tardis = ['0a9dff', 39]$/;"	v
+s:bwc	badwolf.vim	/^let s:bwc.toffee = ['b88853', 137]$/;"	v
+s:gutter	badwolf.vim	/^    let s:gutter = 'blackestgravel'$/;"	v
+s:gutter	badwolf.vim	/^    let s:gutter = 'blackgravel'$/;"	v
+s:isAtStartOfLine	.vimrc	/^function! s:isAtStartOfLine(mapping)$/;"	f
+s:l	Session.vim	/^let s:l = 963 - ((55 * winheight(0) + 14) \/ 28)$/;"	v
+s:l	fish/Session.vim	/^let s:l = 81 - ((21 * winheight(0) + 21) \/ 42)$/;"	v
+s:prevcountcache	.vimrc	/^let s:prevcountcache=[[], 0]$/;"	v
+s:so_save	Session.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:so_save	fish/Session.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:sx	fish/Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:tabline	badwolf.vim	/^        let s:tabline = 'blackestgravel'$/;"	v
+s:tabline	badwolf.vim	/^        let s:tabline = 'blackgravel'$/;"	v
+s:tabline	badwolf.vim	/^        let s:tabline = 'darkgravel'$/;"	v
+s:tabline	badwolf.vim	/^        let s:tabline = 'deepgravel'$/;"	v
+s:tabline	badwolf.vim	/^    let s:tabline = 'blackgravel'$/;"	v
+s:wipebuf	Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+s:wipebuf	fish/Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+safepipe	ranger/scope.sh	/^safepipe() { "$@"; test $? = 0 -o $? = 141; }$/;"	f
+save_copy_buffer	ranger/commands_full.py	/^class save_copy_buffer(Command):$/;"	c
+scout	ranger/commands_full.py	/^class scout(Command):$/;"	c
+set_	ranger/commands_full.py	/^class set_(Command):$/;"	c
+setintag	ranger/commands_full.py	/^class setintag(setlocal):$/;"	c
+setlocal	ranger/commands_full.py	/^class setlocal(set_):$/;"	c
+shell	ranger/commands_full.py	/^class shell(Command):$/;"	c
+simpletodo	.vimrc	/^augroup simpletodo$/;"	a
+stage	ranger/commands_full.py	/^class stage(Command):$/;"	c
+stripwhitespace	.vimrc	/^augroup stripwhitespace$/;"	a
+tab	ranger/commands.py	/^    def tab(self, tabnum):$/;"	m	class:my_edit
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:cd
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:default_linemode
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:delete
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:edit
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:meta
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:mkdir
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:open_with
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:relink
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:rename
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:scout
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:set_
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:shell
+tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:touch
+terminal	ranger/commands_full.py	/^class terminal(Command):$/;"	c
+tmap	ranger/commands_full.py	/^class tmap(map_):$/;"	c
+touch	ranger/commands_full.py	/^class touch(Command):$/;"	c
+trim	ranger/scope.sh	/^trim() { head -n "$maxln"; }$/;"	f
+try	ranger/scope.sh	/^try() { output=$(eval '"$@"'); }$/;"	f
+tunmap	ranger/commands_full.py	/^class tunmap(unmap):$/;"	c
+unmap	ranger/commands_full.py	/^class unmap(Command):$/;"	c
+unmark_tag	ranger/commands_full.py	/^class unmark_tag(mark_tag):$/;"	c
+unstage	ranger/commands_full.py	/^class unstage(Command):$/;"	c
+v	.vimrc	/^vmap v :'<,'>VSSplitAbove<CR>$/;"	m
+var	.ctags	/^--regex-JavaScript=\/^(var)?[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[^{\\[]*$\/\\3\/r/;"	k	langdef:js
+vimux	.vimrc	/^augroup vimux$/;"	a
+z/	.vimrc	/^map z\/ <Plug>(incsearch-fuzzy-\/)$/;"	m
+z?	.vimrc	/^map z? <Plug>(incsearch-fuzzy-?)$/;"	m
+¬	.vimrc	/^map ¬ <c-w>l$/;"	m
+˙	.vimrc	/^map ˙ <c-w>h$/;"	m
+˚	.vimrc	/^map ˚ <c-w>k$/;"	m
+∆	.vimrc	/^map ∆ <c-w>j$/;"	m

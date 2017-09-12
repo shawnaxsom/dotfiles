@@ -53,6 +53,7 @@ mkdir -p ~/.config
 
 create_symlink    .vimrc            ~/.vimrc
 create_symlink    .vimrc            ~/.nvimrc
+create_symlink    .ctags            ~/.ctags
 create_symlink    UltiSnips         ~/.vim/UltiSnips
 create_symlink    fish              ~/.config/fish
 create_symlink    ranger            ~/.config/ranger
