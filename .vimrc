@@ -809,7 +809,7 @@ let g:tagbar_case_insensitive = 1
 " }}}
 " {{{ Gutentags
 Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*', 'temp*']
+let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*', 'temp*', 'package*json']
 5
 " }}}
 " {{{ lfv89/vim-interestingwords

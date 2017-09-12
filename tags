@@ -280,7 +280,6 @@ _question_callback	ranger/commands_full.py	/^    def _question_callback(self, fi
 alias	ranger/commands_full.py	/^class alias(Command):$/;"	c
 allow_abbrev	ranger/commands_full.py	/^    allow_abbrev = False$/;"	v	class:delete
 allow_abbrev	ranger/commands_full.py	/^    allow_abbrev = False$/;"	v	class:quit_bang
-array	.ctags	/^--regex-JavaScript=\/^(var)?[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[ \\t]*\\[\/\\3\//;"	k	langdef:js
 backward	ranger/rc.conf	/^cmap <A-d>        eval fm.ui.console.delete_word(backward=False)$/;"	k
 badwolf_tex	badwolf.vim	/^augroup badwolf_tex$/;"	a
 bulkrename	ranger/commands_full.py	/^class bulkrename(Command):$/;"	c
@@ -289,6 +288,18 @@ cancel	ranger/commands_full.py	/^    def cancel(self):$/;"	m	class:scout
 cd	ranger/commands_full.py	/^class cd(Command):$/;"	c
 chain	ranger/commands_full.py	/^class chain(Command):$/;"	c
 chmod	ranger/commands_full.py	/^class chmod(Command):$/;"	c
+class	.ctags	/^--regex-JavaScript=\/^[ \\t]*with.*\\(([a-zA-Z]+)\\);\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-JavaScript=\/^class[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-JavaScript=\/^export[ ]const[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-JavaScript=\/^export[ ]default.*component=\\{([a-zA-Z]+)\\}.*\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-JavaScript=\/^export[ ]default[ ]([a-zA-Z]+);\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-JavaScript=\/^export[ ]default[ ].*\\(([a-zA-Z]+)\\);\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-js=\/^[ \\t]*with.*\\(([a-zA-Z]+)\\);\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-js=\/^class[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-js=\/^export[ ]const[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-js=\/^export[ ]default.*component=\\{([a-zA-Z]+)\\}.*\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-js=\/^export[ ]default[ ]([a-zA-Z]+);\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-js=\/^export[ ]default[ ].*\\(([a-zA-Z]+)\\);\/\\1\/f,class\/$/;"	k	langdef:js
 cmap	ranger/commands_full.py	/^class cmap(map_):$/;"	c
 colors_name	badwolf.vim	/^let colors_name = "badwolf"$/;"	v
 console	ranger/commands_full.py	/^class console(Command):$/;"	c
@@ -386,15 +397,16 @@ filemarks	.vimrc	/^augroup filemarks$/;"	a
 filter_inode_type	ranger/commands_full.py	/^class filter_inode_type(Command):$/;"	c
 flat	ranger/commands_full.py	/^class flat(Command):$/;"	c
 fugitive	.vimrc	/^augroup fugitive$/;"	a
-function	.ctags	/^--regex-JavaScript=\/(jQuery|\\$)\\([ \\t]*([^ \\t]*)[ \\t]*\\)\\.bind\\([ \\t]*['"](.*)['"]\/\\/;"	k	langdef:js
-function	.ctags	/^--regex-JavaScript=\/^([ \\t]*)(describe|context|it)[ \\t]*\\([ \\t]*["'](.*)["']\/.\\1\\3\/f,fu/;"	k	langdef:js
-function	.ctags	/^--regex-JavaScript=\/^[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*[:=][ \\t]*function\/\\2/;"	k	langdef:js
-function	.ctags	/^--regex-JavaScript=\/^[ \\t]*describe[ \\t]*\\([ \\t]*["'](.*)["']\/\\1\/f,function\/$/;"	k	langdef:js
-function	.ctags	/^--regex-JavaScript=\/^[ \\t]*function[ \\t]*([A-Za-z0-9_$]+)[ \\t]*\\(\/\\1\/f,function\/$/;"	k	langdef:js
-function	.ctags	/^--regex-JavaScript=\/^[ \\t]*var[ \\t]+([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[ \\t]functio/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]+const[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]+let[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]+var[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,function\/$/;"	k	langdef:js
 function	.ctags	/^--regex-JavaScript=\/^[ \\t]{2}([a-zA-Z]+)[ ]=[ ].*\/\\1\/f,function\/$/;"	k	langdef:js
-function	.ctags	/^--regex-JavaScript=\/^[ \\t]{2}([a-zA-Z]+)\\(.*\/\\1\/f,function\/$/;"	k	langdef:js
-function	.ctags	/^--regex-JavaScript=\/^var[ \\t]+([A-Za-z0-9._$]+)[ \\t]*=[ \\t]*[A-Za-z0-9_$]+.extend\/\\1\/f,fu/;"	k	langdef:js
+function	.ctags	/^--regex-JavaScript=\/^[ \\t]{2}([a-zA-Z]+)\\(.*\\{\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-js=\/^[ \\t]+const[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-js=\/^[ \\t]+let[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-js=\/^[ \\t]+var[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-js=\/^[ \\t]{2}([a-zA-Z]+)[ ]=[ ].*\/\\1\/f,function\/$/;"	k	langdef:js
+function	.ctags	/^--regex-js=\/^[ \\t]{2}([a-zA-Z]+)\\(.*\\{\/\\1\/f,function\/$/;"	k	langdef:js
 g:NERDTreeAutoDeleteBuffer	.vimrc	/^let g:NERDTreeAutoDeleteBuffer = 1$/;"	v
 g:NERDTreeDirArrows	.vimrc	/^let g:NERDTreeDirArrows        = 1$/;"	v
 g:NERDTreeMinimalUI	.vimrc	/^let g:NERDTreeMinimalUI        = 1$/;"	v
@@ -450,7 +462,7 @@ g:grepper	.vimrc	/^    let g:grepper.buffers = 1$/;"	v
 g:grepper	.vimrc	/^let g:grepper = {}$/;"	v
 g:grepper	.vimrc	/^let g:grepper.jump = 1$/;"	v
 g:grepper	.vimrc	/^let g:grepper.stop = 500$/;"	v
-g:gutentags_ctags_exclude	.vimrc	/^let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*', 'temp*']$/;"	v
+g:gutentags_ctags_exclude	.vimrc	/^let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*', 'temp*', 'packa/;"	v
 g:javascript_conceal_NaN	.vimrc	/^let g:javascript_conceal_NaN                       = "ℕ"$/;"	v
 g:javascript_conceal_arrow_function	.vimrc	/^let g:javascript_conceal_arrow_function            = "➜"$/;"	v
 g:javascript_conceal_function	.vimrc	/^let g:javascript_conceal_function                  = "ƒ"$/;"	v
@@ -567,7 +579,6 @@ name	ranger/commands_full.py	/^    name = 'help'$/;"	v	class:help_
 name	ranger/commands_full.py	/^    name = 'map'$/;"	v	class:map_
 name	ranger/commands_full.py	/^    name = 'quit!'$/;"	v	class:quit_bang
 name	ranger/commands_full.py	/^    name = 'set'  # don't override the builtin set class$/;"	v	class:set_
-object	.ctags	/^--regex-JavaScript=\/^(var)?[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[ \\t]*\\{\/\\3\//;"	k	langdef:js
 open_with	ranger/commands_full.py	/^class open_with(Command):$/;"	c
 p	.vimrc	/^nnoremap p ]p$/;"	m
 php	ranger/rifle.conf	/^!mime ^text, label editor, ext xml|json|csv|tex|py|pl|rb|js|sh|php = $EDITOR -- "$@"$/;"	k
@@ -674,7 +685,6 @@ unmap	ranger/commands_full.py	/^class unmap(Command):$/;"	c
 unmark_tag	ranger/commands_full.py	/^class unmark_tag(mark_tag):$/;"	c
 unstage	ranger/commands_full.py	/^class unstage(Command):$/;"	c
 v	.vimrc	/^vmap v :'<,'>VSSplitAbove<CR>$/;"	m
-var	.ctags	/^--regex-JavaScript=\/^(var)?[ \\t]*([A-Za-z0-9_$]*\\.)*([A-Za-z0-9_$]+)[ \\t]*=[^{\\[]*$\/\\3\/r/;"	k	langdef:js
 vimux	.vimrc	/^augroup vimux$/;"	a
 z/	.vimrc	/^map z\/ <Plug>(incsearch-fuzzy-\/)$/;"	m
 z?	.vimrc	/^map z? <Plug>(incsearch-fuzzy-?)$/;"	m

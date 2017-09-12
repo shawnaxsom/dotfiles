@@ -1,19 +1,26 @@
 --langdef=js
 --langmap=js:.js
 
---regex-JavaScript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\3/a,array/
---regex-JavaScript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\{/\3/o,object/
---regex-JavaScript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[^{\[]*$/\3/r,var/
-
---regex-JavaScript=/^var[ \t]+([A-Za-z0-9._$]+)[ \t]*=[ \t]*[A-Za-z0-9_$]+.extend/\1/f,function/
---regex-JavaScript=/^[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*[:=][ \t]*function/\2/f,function/
---regex-JavaScript=/^[ \t]*function[ \t]*([A-Za-z0-9_$]+)[ \t]*\(/\1/f,function/
---regex-JavaScript=/^[ \t]*var[ \t]+([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[ \t]function/\2/f,function/
-
---regex-JavaScript=/(jQuery|\$)\([ \t]*([^ \t]*)[ \t]*\)\.bind\([ \t]*['"](.*)['"]/\2.\3/f,function/
-
---regex-JavaScript=/^[ \t]*describe[ \t]*\([ \t]*["'](.*)["']/\1/f,function/
---regex-JavaScript=/^([ \t]*)(describe|context|it)[ \t]*\([ \t]*["'](.*)["']/.\1\3/f,function/
-
---regex-JavaScript=/^[ \t]{2}([a-zA-Z]+)\(.*/\1/f,function/
+--regex-JavaScript=/^class[ ]([a-zA-Z]+).*/\1/f,class/
+--regex-JavaScript=/^[ \t]{2}([a-zA-Z]+)\(.*\{/\1/f,function/
 --regex-JavaScript=/^[ \t]{2}([a-zA-Z]+)[ ]=[ ].*/\1/f,function/
+--regex-JavaScript=/^[ \t]+const[ ]([a-zA-Z]+)[ ]=[ ].*=>/\1/f,function/
+--regex-JavaScript=/^[ \t]+var[ ]([a-zA-Z]+)[ ]=[ ].*=>/\1/f,function/
+--regex-JavaScript=/^[ \t]+let[ ]([a-zA-Z]+)[ ]=[ ].*=>/\1/f,function/
+--regex-JavaScript=/^export[ ]const[ ]([a-zA-Z]+).*/\1/f,class/
+--regex-JavaScript=/^export[ ]default.*component=\{([a-zA-Z]+)\}.*/\1/f,class/
+--regex-JavaScript=/^export[ ]default[ ]([a-zA-Z]+);/\1/f,class/
+--regex-JavaScript=/^export[ ]default[ ].*\(([a-zA-Z]+)\);/\1/f,class/
+--regex-JavaScript=/^[ \t]*with.*\(([a-zA-Z]+)\)/\1/f,class/
+
+--regex-js=/^class[ ]([a-zA-Z]+).*/\1/f,class/
+--regex-js=/^[ \t]{2}([a-zA-Z]+)\(.*\{/\1/f,function/
+--regex-js=/^[ \t]{2}([a-zA-Z]+)[ ]=[ ].*/\1/f,function/
+--regex-js=/^[ \t]+const[ ]([a-zA-Z]+)[ ]=[ ].*=>/\1/f,function/
+--regex-js=/^[ \t]+var[ ]([a-zA-Z]+)[ ]=[ ].*=>/\1/f,function/
+--regex-js=/^[ \t]+let[ ]([a-zA-Z]+)[ ]=[ ].*=>/\1/f,function/
+--regex-js=/^export[ ]const[ ]([a-zA-Z]+).*/\1/f,class/
+--regex-js=/^export[ ]default.*component=\{([a-zA-Z]+)\}.*/\1/f,class/
+--regex-js=/^export[ ]default[ ]([a-zA-Z]+);/\1/f,class/
+--regex-js=/^export[ ]default[ ].*\(([a-zA-Z]+)\);/\1/f,class/
+--regex-js=/^[ \t]*with.*\(([a-zA-Z]+)\)/\1/f,class/
