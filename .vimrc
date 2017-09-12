@@ -176,7 +176,7 @@ call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
-" {{{ Ctrl P
+" {{{ CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
 nnoremap <silent> <c-f> :CtrlPLine<CR>
 if executable('rg')
@@ -336,6 +336,8 @@ nmap <leader>C :CloseHiddenBuffers<CR>
 " search when autosave happens
 let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave = 0
+" No .undodir
+let g:workspace_persist_undo_history = 0
 " }}}
 
 " -----------------------------------------------------------------------------------------
@@ -501,7 +503,7 @@ noremap - :NERDTreeFind<CR>
 " noremap - :NERDTree<CR>
 " noremap - :topleft NERDTree<CR>
 " noremap _ :NERDTree<CR>
-map <leader>b :Bookmark<space>
+map <leader><leader>b :Bookmark<space>
 " }}}
 " {{{ yankstack
 Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
@@ -819,6 +821,7 @@ nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 nnoremap <silent> n :nohlsearch<cr>:call WordNavigation('forward')<cr>
 nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>
 " }}}
+Plug 'jeetsukumaran/vim-buffergator'
 call plug#end()
 
 function! s:isAtStartOfLine(mapping)
@@ -903,6 +906,7 @@ augroup filemarks
   autocmd BufEnter */api/*           normal! mA
   autocmd BufEnter */api/*           normal! mA
 
+  autocmd BufWinLeave */src/* normal! mQ
   autocmd InsertEnter */src/* normal! mI
   autocmd TextChanged	*/src/* normal! mO
   autocmd TextChangedI */src/* normal! mO
@@ -1007,7 +1011,9 @@ map  _|
 map f _<bar>
 " }}}
 
-" {{{ Change default behavior
+" {{{ Default behavior overrides
+
+nnoremap g} :split<CR>gd
 
 " Always search regular regex - no escape characters needed
 nnoremap / /\v
@@ -1092,18 +1098,6 @@ augroup stripwhitespace
   autocmd!
   autocmd BufWritePre * call StripTrailingWhitespace()
 augroup END
-
-function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-set foldtext=NeatFoldText()
 
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
 command! -bang -nargs=* Rg
@@ -1249,6 +1243,19 @@ set conceallevel=0
 set concealcursor=
 " }}}
 
+" {{{ Folding
+" function! NeatFoldText()
+"   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+"   let lines_count = v:foldend - v:foldstart + 1
+"   let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+"   let foldchar = matchstr(&fillchars, 'fold:\zs.')
+"   let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+"   let foldtextend = lines_count_text . repeat(foldchar, 8)
+"   let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+"   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+" endfunction
+" set foldtext=NeatFoldText()
+" }}}
 
 " {{{ Text Objects
 call textobj#user#plugin('htmlattribute', {

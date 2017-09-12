@@ -171,6 +171,7 @@
 <leader>8	.vimrc	/^nmap <leader>8 "hyiw:CtrlSF -R <c-r>h<CR>\/<c-r>h<CR>$/;"	m
 <leader>9	.vimrc	/^nmap <leader>9 :set foldlevel=999<CR>$/;"	m
 <leader><leader>/	.vimrc	/^nmap <leader><leader>\/ :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>$/;"	m
+<leader><leader>b	.vimrc	/^map <leader><leader>b :Bookmark<space>$/;"	m
 <leader><leader>b	.vimrc	/^map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>$/;"	m
 <leader><leader>c	.vimrc	/^nmap <leader><leader>c :Codi!!<CR>$/;"	m
 <leader><leader>i	.vimrc	/^nmap <leader><leader>i :PlugInstall<CR>$/;"	m
@@ -184,7 +185,6 @@
 <leader>C	.vimrc	/^nmap <leader>C :CloseHiddenBuffers<CR>$/;"	m
 <leader>K	.vimrc	/^nnoremap <silent> <leader>K :call UncolorAllWords()<cr>$/;"	m
 <leader>P	.vimrc	/^nmap <leader>P <Plug>yankstack_substitute_newer_paste$/;"	m
-<leader>b	.vimrc	/^map <leader>b :Bookmark<space>$/;"	m
 <leader>c	.vimrc	/^map <leader>c :bd<CR>$/;"	m
 <leader>d	.vimrc	/^nmap <silent> <leader>d <Plug>DashSearch$/;"	m
 <leader>f	.vimrc	/^nmap <leader>f <bar>_$/;"	m
@@ -240,7 +240,6 @@ M	.vimrc	/^vmap M :join<CR>$/;"	m
 MARK	ranger/commands_full.py	/^    MARK            = 'm'$/;"	v	class:scout
 N	.vimrc	/^nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>$/;"	m
 N	.vimrc	/^nnoremap <silent> N Nzz$/;"	m
-NeatFoldText	.vimrc	/^function! NeatFoldText()$/;"	f
 OPEN_ON_ENTER	ranger/commands_full.py	/^    OPEN_ON_ENTER   = 'e'$/;"	v	class:scout
 P	.vimrc	/^nnoremap P ]P$/;"	m
 PATH_RE	ranger/commands_full.py	/^    PATH_RE = re.compile(r'^\\s*path="?(.*?)"?\\s*$')$/;"	v	class:setlocal
@@ -288,13 +287,13 @@ cancel	ranger/commands_full.py	/^    def cancel(self):$/;"	m	class:scout
 cd	ranger/commands_full.py	/^class cd(Command):$/;"	c
 chain	ranger/commands_full.py	/^class chain(Command):$/;"	c
 chmod	ranger/commands_full.py	/^class chmod(Command):$/;"	c
-class	.ctags	/^--regex-JavaScript=\/^[ \\t]*with.*\\(([a-zA-Z]+)\\);\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-JavaScript=\/^[ \\t]*with.*\\(([a-zA-Z]+)\\)\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-JavaScript=\/^class[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-JavaScript=\/^export[ ]const[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-JavaScript=\/^export[ ]default.*component=\\{([a-zA-Z]+)\\}.*\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-JavaScript=\/^export[ ]default[ ]([a-zA-Z]+);\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-JavaScript=\/^export[ ]default[ ].*\\(([a-zA-Z]+)\\);\/\\1\/f,class\/$/;"	k	langdef:js
-class	.ctags	/^--regex-js=\/^[ \\t]*with.*\\(([a-zA-Z]+)\\);\/\\1\/f,class\/$/;"	k	langdef:js
+class	.ctags	/^--regex-js=\/^[ \\t]*with.*\\(([a-zA-Z]+)\\)\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-js=\/^class[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-js=\/^export[ ]const[ ]([a-zA-Z]+).*\/\\1\/f,class\/$/;"	k	langdef:js
 class	.ctags	/^--regex-js=\/^export[ ]default.*component=\\{([a-zA-Z]+)\\}.*\/\\1\/f,class\/$/;"	k	langdef:js
@@ -498,6 +497,7 @@ g:tmux_navigator_save_on_switch	.vimrc	/^let g:tmux_navigator_save_on_switch = 2
 g:used_javascript_libs	.vimrc	/^let g:used_javascript_libs = 'lodash,react,flux,d3'$/;"	v
 g:workspace_autosave	.vimrc	/^let g:workspace_autosave = 0$/;"	v
 g:workspace_autosave_untrailspaces	.vimrc	/^let g:workspace_autosave_untrailspaces = 0$/;"	v
+g:workspace_persist_undo_history	.vimrc	/^let g:workspace_persist_undo_history = 0$/;"	v
 g:yankstack_map_keys	.vimrc	/^let g:yankstack_map_keys = 0$/;"	v
 g:yankstack_yank_keys	.vimrc	/^let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']$/;"	v
 g:ycm_cache_omnifunc	.vimrc	/^let g:ycm_cache_omnifunc = 1$/;"	v
@@ -512,6 +512,7 @@ grep	ranger/commands_full.py	/^class grep(Command):$/;"	c
 gs	.vimrc	/^map gs :topleft split ~\/.scratch<CR>$/;"	m
 gt	.vimrc	/^nmap <silent> gt :TernDef<CR>$/;"	m
 gt	.vimrc	/^vmap gt :Tabularize \/$/;"	m
+g}	.vimrc	/^nnoremap g} :split<CR>gd$/;"	m
 help_	ranger/commands_full.py	/^class help_(Command):$/;"	c
 install_cmake	install.sh	/^install_cmake() {$/;"	f
 is_directory_with_files	ranger/commands_full.py	/^        def is_directory_with_files(f):$/;"	f	member:delete.execute	file:
@@ -637,7 +638,7 @@ s:bwc	badwolf.vim	/^let s:bwc.toffee = ['b88853', 137]$/;"	v
 s:gutter	badwolf.vim	/^    let s:gutter = 'blackestgravel'$/;"	v
 s:gutter	badwolf.vim	/^    let s:gutter = 'blackgravel'$/;"	v
 s:isAtStartOfLine	.vimrc	/^function! s:isAtStartOfLine(mapping)$/;"	f
-s:l	Session.vim	/^let s:l = 963 - ((55 * winheight(0) + 14) \/ 28)$/;"	v
+s:l	Session.vim	/^let s:l = 813 - ((100 * winheight(0) + 20) \/ 41)$/;"	v
 s:l	fish/Session.vim	/^let s:l = 81 - ((21 * winheight(0) + 21) \/ 42)$/;"	v
 s:prevcountcache	.vimrc	/^let s:prevcountcache=[[], 0]$/;"	v
 s:so_save	Session.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
