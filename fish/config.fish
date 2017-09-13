@@ -9,10 +9,6 @@ alias ......='../../../../..'
 alias .......='../../../../../..'
 alias ........='../../../../../../..'
 
-if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
-  alias vim='/usr/local/Cellar/vim/8.0.0130/bin/vim'
-end
-
 set -x TERM xterm-256color
 set -x EDITOR /usr/local/bin/vim
 
@@ -73,6 +69,7 @@ alias h='head'
 alias t='tail'
 alias r='ranger'
 alias p='pwd'
+alias x='exit'
 
 # alias f='find . -name'
 
@@ -96,11 +93,17 @@ function gacp
   git push;
 end
 
-function v
+if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
+  set vim '/usr/local/Cellar/vim/8.0.0130/bin/vim'
+else
+  set vim '/usr/local/bin/vim'
+end
+function vim
   # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
   if test -e $PWD/Session.vim
-    env NODE_PATH="src" vim -S $argv
+    env NODE_PATH="src" $vim -S $argv
   else
-    env NODE_PATH="src" vim $argv
+    env NODE_PATH="src" $vim $argv
   end
 end
+alias v='vim'

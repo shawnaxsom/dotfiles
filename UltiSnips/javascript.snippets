@@ -65,15 +65,15 @@ $1($2) {
 endsnippet
 
 snippet log "Console Log"
-console.error("$1")$0
+console.warn("$1")$0
 endsnippet
 
 snippet logo "Console Log an object"
-console.error("$1", $1)$0
+console.warn("$1", $1)$0
 endsnippet
 
 snippet logos "Console Log an object, pretty printed"
-console.error("$1", JSON.stringify($1, null, 2))$0
+console.warn("$1", JSON.stringify($1, null, 2))$0
 endsnippet
 
 snippet trace "Console Trace"
@@ -139,4 +139,17 @@ endsnippet
 
 snippet cn
 className='$0'
+endsnippet
+
+snippet ///
+/**
+ * ${0:description}
+ * @param {Object} employee - The employee who is responsible for the project.
+ */
+endsnippet
+
+snippet spreadIf
+...spreadIf($1, {
+  $0
+}),
 endsnippet

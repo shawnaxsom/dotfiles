@@ -155,11 +155,9 @@
 <S-F10>	.vimrc	/^map <S-F10> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")<CR>$/;"	m
 <S-F8>	.vimrc	/^map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>$/;"	m
 <bar>	.vimrc	/^vmap <bar> :g\/$/;"	m
-<c-d>	.vimrc	/^noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>$/;"	m
 <c-f>	.vimrc	/^nnoremap <silent> <c-f> :CtrlPLine<CR>$/;"	m
-<c-u>	.vimrc	/^noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>$/;"	m
 <c-z>	.vimrc	/^imap <c-z> <c-y>,$/;"	m
-<leader>/	.vimrc	/^nmap <leader>\/ :CtrlSF -R ""<LEFT>$/;"	m
+<leader>/	.vimrc	/^nmap <leader>\/ :GrepperAg ""<LEFT>$/;"	m
 <leader>0	.vimrc	/^nmap <leader>0 :set foldlevel=0<CR>$/;"	m
 <leader>1	.vimrc	/^nmap <leader>1 :set foldlevel=1<CR>$/;"	m
 <leader>2	.vimrc	/^nmap <leader>2 :set foldlevel=2<CR>$/;"	m
@@ -168,9 +166,10 @@
 <leader>5	.vimrc	/^nmap <leader>5 :set foldlevel=5<CR>$/;"	m
 <leader>6	.vimrc	/^nmap <leader>6 :set foldlevel=6<CR>$/;"	m
 <leader>7	.vimrc	/^nmap <leader>7 :set foldlevel=7<CR>$/;"	m
-<leader>8	.vimrc	/^nmap <leader>8 "hyiw:CtrlSF -R <c-r>h<CR>\/<c-r>h<CR>$/;"	m
+<leader>8	.vimrc	/^nmap <leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>$/;"	m
+<leader>8	.vimrc	/^vmap <leader>8 "hy:GrepperAg <c-r>h<CR>:nohlsearch<CR>$/;"	m
 <leader>9	.vimrc	/^nmap <leader>9 :set foldlevel=999<CR>$/;"	m
-<leader><leader>/	.vimrc	/^nmap <leader><leader>\/ :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>$/;"	m
+<leader><leader>/	.vimrc	/^nmap <leader><leader>\/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>$/;"	m
 <leader><leader>b	.vimrc	/^map <leader><leader>b :Bookmark<space>$/;"	m
 <leader><leader>b	.vimrc	/^map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>$/;"	m
 <leader><leader>c	.vimrc	/^nmap <leader><leader>c :Codi!!<CR>$/;"	m
@@ -179,12 +178,12 @@
 <leader><leader>s	.vimrc	/^nmap <leader><leader>s :UltiSnipsEdit<CR>$/;"	m
 <leader><leader>t	.vimrc	/^nmap <leader><leader>t :sp ~\/dotfiles\/.ctags<CR>$/;"	m
 <leader><leader>u	.vimrc	/^nmap <leader><leader>u :PlugClean!<CR>$/;"	m
-<leader><leader>v	.vimrc	/^nmap <leader><leader>v :sp ~\/dotfiles\/.vimrc<CR>$/;"	m
-<leader><leader>w	.vimrc	/^nmap <leader><leader>w :ToggleWorkspace<CR>$/;"	m
+<leader><leader>v	.vimrc	/^nmap <leader><leader>v :vsp ~\/dotfiles\/.vimrc<CR>$/;"	m
+<leader><leader>w	.vimrc	/^nmap <leader><leader>w :Obsess<CR>$/;"	m
 <leader><tab>	.vimrc	/^map <leader><tab> <c-^>$/;"	m
-<leader>C	.vimrc	/^nmap <leader>C :CloseHiddenBuffers<CR>$/;"	m
 <leader>K	.vimrc	/^nnoremap <silent> <leader>K :call UncolorAllWords()<cr>$/;"	m
 <leader>P	.vimrc	/^nmap <leader>P <Plug>yankstack_substitute_newer_paste$/;"	m
+<leader>Q	.vimrc	/^nmap <leader>Q :q<CR>$/;"	m
 <leader>c	.vimrc	/^map <leader>c :bd<CR>$/;"	m
 <leader>d	.vimrc	/^nmap <silent> <leader>d <Plug>DashSearch$/;"	m
 <leader>f	.vimrc	/^nmap <leader>f <bar>_$/;"	m
@@ -200,11 +199,9 @@
 <leader>gp	.vimrc	/^map <leader>gp :Gpull<CR>$/;"	m
 <leader>gs	.vimrc	/^map <leader>gs :Gstatus<CR>$/;"	m
 <leader>gw	.vimrc	/^map <leader>gw :Gwrite<CR>$/;"	m
-<leader>j	.vimrc	/^nmap <leader>j ]c$/;"	m
-<leader>k	.vimrc	/^nmap <leader>k [c$/;"	m
 <leader>k	.vimrc	/^nnoremap <silent> <leader>k :call InterestingWords('n')<cr>$/;"	m
-<leader>l	.vimrc	/^nmap <leader>l yiw{oconsole.error(""", ")^$/;"	m
-<leader>l	.vimrc	/^vmap <leader>l y{oconsole.error(""", ")^$/;"	m
+<leader>l	.vimrc	/^nmap <leader>l yiw{oconsole.warn(""", ")^$/;"	m
+<leader>l	.vimrc	/^vmap <leader>l y{oconsole.warn(""", ")^$/;"	m
 <leader>oh	.vimrc	/^nmap <leader>oh !open https:\/\/github.com\/search?q=$/;"	m
 <leader>on	.vimrc	/^nmap <leader>on "pyi":!open https:\/\/www.npmjs.com\/package\/p$/;"	m
 <leader>oo	.vimrc	/^nmap <leader>oo !open https:\/\/www.google.com\/search?q=javascript+$/;"	m
@@ -214,8 +211,9 @@
 <leader>s	.vimrc	/^vmap <leader>s :sort<CR>$/;"	m
 <leader>u	.vimrc	/^nmap <leader>u :GundoToggle<CR>$/;"	m
 <leader>v	.vimrc	/^nmap <leader>v :vsp<CR>$/;"	m
-<leader>w	.vimrc	/^nmap <leader>w :w<CR>$/;"	m
-=	.vimrc	/^nmap <silent> = :Neoformat<CR>$/;"	m
+<leader>w	.vimrc	/^nmap <leader>w :wa<CR>$/;"	m
+<leader>z	.vimrc	/^nmap <leader>z :Goyo<CR>$/;"	m
+=	.vimrc	/^nmap <silent> = :Neoformat prettier<CR>:w<CR>$/;"	m
 ?	.vimrc	/^map ?  <Plug>(incsearch-backward)$/;"	m
 A	.vimrc	/^vmap A :norm A$/;"	m
 AS_YOU_TYPE	ranger/commands_full.py	/^    AS_YOU_TYPE     = 't'$/;"	v	class:scout
@@ -232,14 +230,14 @@ I	.tmux.conf	/^setw -g window-status-format " #F#I:#W#F "$/;"	k
 I	.vimrc	/^vmap I :norm I$/;"	m
 IGNORE_CASE	ranger/commands_full.py	/^    IGNORE_CASE     = 'i'$/;"	v	class:scout
 INVERT	ranger/commands_full.py	/^    INVERT          = 'v'$/;"	v	class:scout
-J	.vimrc	/^map J }zz$/;"	m
-K	.vimrc	/^map K {zz$/;"	m
+J	.vimrc	/^map J 7jzz$/;"	m
+K	.vimrc	/^map K 7kzz$/;"	m
 KEEP_OPEN	ranger/commands_full.py	/^    KEEP_OPEN       = 'k'$/;"	v	class:scout
 L	.vimrc	/^map L ]}$/;"	m
 M	.vimrc	/^vmap M :join<CR>$/;"	m
 MARK	ranger/commands_full.py	/^    MARK            = 'm'$/;"	v	class:scout
 N	.vimrc	/^nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>$/;"	m
-N	.vimrc	/^nnoremap <silent> N Nzz$/;"	m
+N	.vimrc	/^nnoremap <silent> N NzzzO$/;"	m
 OPEN_ON_ENTER	ranger/commands_full.py	/^    OPEN_ON_ENTER   = 'e'$/;"	v	class:scout
 P	.vimrc	/^nnoremap P ]P$/;"	m
 PATH_RE	ranger/commands_full.py	/^    PATH_RE = re.compile(r'^\\s*path="?(.*?)"?\\s*$')$/;"	v	class:setlocal
@@ -258,11 +256,13 @@ UNMARK	ranger/commands_full.py	/^    UNMARK          = 'M'$/;"	v	class:scout
 X	ranger/rifle.conf	/^ext s[wmf]c, has snes9x-gtk,X = snes9x-gtk "$1"$/;"	k
 Y	.vimrc	/^noremap Y y\$$/;"	m
 ZoomToggle	.vimrc	/^command! ZoomToggle call s:ZoomToggle()$/;"	c
+[q	.vimrc	/^nmap [q :cprev<CR>$/;"	m
 \\	.vimrc	/^vmap \\ :norm<space>^$/;"	m
 \x17\x06	.vimrc	/^map  _|$/;"	m
 \x17f	.vimrc	/^map f _<bar>$/;"	m
 \x1F	.vimrc	/^nmap   <Plug>CommentaryLine$/;"	m
 \x1F	.vimrc	/^vmap   <Plug>Commentary$/;"	m
+]q	.vimrc	/^nmap ]q :cnext<CR>$/;"	m
 _	.vimrc	/^map _ :Tagbar<CR>$/;"	m
 __init__	ranger/commands_full.py	/^    def __init__(self, *args, **kws):$/;"	m	class:scout
 _build_regex	ranger/commands_full.py	/^    def _build_regex(self):$/;"	m	class:scout
@@ -454,8 +454,10 @@ g:ctrlp_use_caching	.vimrc	/^let g:ctrlp_use_caching = 0$/;"	v
 g:ctrlp_user_command	.vimrc	/^  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~\/.agignore -g ""'$/;"	v
 g:ctrlp_user_command	.vimrc	/^  let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~\/.agignore --glob ""'$/;"	v
 g:ctrlp_working_path_mode	.vimrc	/^let g:ctrlp_working_path_mode = 'ra'$/;"	v
+g:ctrlsf_confirm_save	.vimrc	/^let g:ctrlsf_confirm_save = 0$/;"	v
 g:dash_map	.vimrc	/^let g:dash_map = {$/;"	v
 g:fzf_buffers_jump	.vimrc	/^let g:fzf_buffers_jump = 1$/;"	v
+g:gitgutter_highlight_lines	.vimrc	/^let g:gitgutter_highlight_lines = 0$/;"	v
 g:grepper	.vimrc	/^    let g:grepper.buffers = 0$/;"	v
 g:grepper	.vimrc	/^    let g:grepper.buffers = 1$/;"	v
 g:grepper	.vimrc	/^let g:grepper = {}$/;"	v
@@ -495,9 +497,6 @@ g:tagbar_sort	.vimrc	/^let g:tagbar_sort = 0$/;"	v
 g:tmux_navigator_disable_when_zoomed	.vimrc	/^let g:tmux_navigator_disable_when_zoomed = 1$/;"	v
 g:tmux_navigator_save_on_switch	.vimrc	/^let g:tmux_navigator_save_on_switch = 2$/;"	v
 g:used_javascript_libs	.vimrc	/^let g:used_javascript_libs = 'lodash,react,flux,d3'$/;"	v
-g:workspace_autosave	.vimrc	/^let g:workspace_autosave = 0$/;"	v
-g:workspace_autosave_untrailspaces	.vimrc	/^let g:workspace_autosave_untrailspaces = 0$/;"	v
-g:workspace_persist_undo_history	.vimrc	/^let g:workspace_persist_undo_history = 0$/;"	v
 g:yankstack_map_keys	.vimrc	/^let g:yankstack_map_keys = 0$/;"	v
 g:yankstack_yank_keys	.vimrc	/^let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']$/;"	v
 g:ycm_cache_omnifunc	.vimrc	/^let g:ycm_cache_omnifunc = 1$/;"	v
@@ -574,7 +573,7 @@ meta	ranger/commands_full.py	/^class meta(prompt_metadata):$/;"	c
 mkdir	ranger/commands_full.py	/^class mkdir(Command):$/;"	c
 my_edit	ranger/commands.py	/^class my_edit(Command):$/;"	c
 n	.vimrc	/^nnoremap <silent> n :nohlsearch<cr>:call WordNavigation('forward')<cr>$/;"	m
-n	.vimrc	/^nnoremap <silent> n nzz$/;"	m
+n	.vimrc	/^nnoremap <silent> n nzzzO$/;"	m
 name	ranger/commands_full.py	/^    name = 'eval'$/;"	v	class:eval_
 name	ranger/commands_full.py	/^    name = 'help'$/;"	v	class:help_
 name	ranger/commands_full.py	/^    name = 'map'$/;"	v	class:map_
@@ -686,6 +685,7 @@ unmap	ranger/commands_full.py	/^class unmap(Command):$/;"	c
 unmark_tag	ranger/commands_full.py	/^class unmark_tag(mark_tag):$/;"	c
 unstage	ranger/commands_full.py	/^class unstage(Command):$/;"	c
 v	.vimrc	/^vmap v :'<,'>VSSplitAbove<CR>$/;"	m
+vimrc	.vimrc	/^augroup vimrc$/;"	a
 vimux	.vimrc	/^augroup vimux$/;"	a
 z/	.vimrc	/^map z\/ <Plug>(incsearch-fuzzy-\/)$/;"	m
 z?	.vimrc	/^map z? <Plug>(incsearch-fuzzy-?)$/;"	m
