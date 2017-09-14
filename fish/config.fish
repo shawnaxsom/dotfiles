@@ -116,12 +116,12 @@ end
 set nvim '/usr/local/bin/nvim'
 function nvim_session
   # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
-  if [ $argv != "" ]
+  if test (count $argv) = 1
       /usr/local/bin/nvim $argv
   else
     if test -e $PWD/Session.vim
       # env NODE_PATH="src" $nvim $argv -S
-      /usr/local/bin/nvim -S
+      /usr/local/bin/nvim $argv -S
     else
       /usr/local/bin/nvim $argv
     end

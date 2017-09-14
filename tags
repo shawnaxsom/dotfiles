@@ -739,7 +739,7 @@ s:job_abort	nvim/autoload/plug.vim	/^function! s:job_abort()$/;"	f
 s:job_cb	nvim/autoload/plug.vim	/^function! s:job_cb(fn, job, ch, data)$/;"	f
 s:job_exit_cb	nvim/autoload/plug.vim	/^function! s:job_exit_cb(self, data) abort$/;"	f
 s:job_out_cb	nvim/autoload/plug.vim	/^function! s:job_out_cb(self, data) abort$/;"	f
-s:l	Session.vim	/^let s:l = 65 - ((29 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 118 - ((24 * winheight(0) + 20) \/ 41)$/;"	v
 s:l	fish/Session.vim	/^let s:l = 81 - ((21 * winheight(0) + 21) \/ 42)$/;"	v
 s:last_non_empty_line	nvim/autoload/plug.vim	/^function! s:last_non_empty_line(lines)$/;"	f
 s:last_rtp	nvim/autoload/plug.vim	/^let s:last_rtp  = s:escrtp(get(s:split_rtp(), -1, ''))$/;"	v
