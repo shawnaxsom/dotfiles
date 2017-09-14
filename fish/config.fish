@@ -58,7 +58,7 @@ alias gh='git browse'
 alias gl='git log -p'
 alias gmm='git fetch; git merge origin/master'
 alias gp='git pull'
-alias gpr='git pull-request'
+alias gpr='hub pull-request --edit -F ./.github/PULL_REQUEST_TEMPLATE.md'
 alias gs='git status'
 alias vs='vim -S'
 alias g='grep'
@@ -72,6 +72,10 @@ alias p='pwd'
 alias x='exit'
 
 # alias f='find . -name'
+
+function gpm
+  git branch --merged master | grep -v '^ *master$' | xargs git branch -d
+end
 
 function f
   find . -name "*$argv*" | grep $argv
@@ -93,17 +97,37 @@ function gacp
   git push;
 end
 
-if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
-  set vim '/usr/local/Cellar/vim/8.0.0130/bin/vim'
-else
-  set vim '/usr/local/bin/vim'
-end
-function vim
+# if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
+#   set vim '/usr/local/Cellar/vim/8.0.0130/bin/vim'
+# else
+#   set vim '/usr/local/bin/vim'
+# end
+# function vim_session
+#   # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
+#   if test -e $PWD/Session.vim
+#     env NODE_PATH="src" $vim $PWD/Session.vim $argv -S
+#   else
+#     env NODE_PATH="src" $vim $argv
+#   end
+# end
+# alias v='vim_session'
+# alias vim='vim_session'
+
+set nvim '/usr/local/bin/nvim'
+function nvim_session
   # Vim Abolish uses vim -S / mksession. Use :Abolish to start tracking a project. This will load the last session / open files.
-  if test -e $PWD/Session.vim
-    env NODE_PATH="src" $vim -S $argv
+  if [ $argv != "" ]
+      /usr/local/bin/nvim $argv
   else
-    env NODE_PATH="src" $vim $argv
+    if test -e $PWD/Session.vim
+      # env NODE_PATH="src" $nvim $argv -S
+      /usr/local/bin/nvim -S
+    else
+      /usr/local/bin/nvim $argv
+    end
   end
 end
-alias v='vim'
+alias nv='nvim_session'
+alias nvim='nvim_session'
+alias v='nvim_session'
+alias vim='nvim_session'

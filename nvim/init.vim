@@ -68,7 +68,7 @@ set lazyredraw
 set ttyfast
 
 " Send the corrent mouse codes over when clicking
-set ttymouse=xterm2
+" set ttymouse=xterm2
 
 " When closing off brackets, briefly show the matching bracket
 set noshowmatch
@@ -169,6 +169,16 @@ let mapleader = "\<Space>"
 set timeoutlen=1500
 " set ttimeoutlen=0
 
+" Minimize how often you see "Press enter or type a command to continue"
+set shortmess=a
+set cmdheight=2
+
+" }
+
+" { Neovim specific options
+
+" Show interactive preview of substitute changes when using :%s///
+set inccommand="split"
 " }
 
 " { Plugins
@@ -179,13 +189,13 @@ call plug#begin('~/.vim/bundle')
 " { CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
 nnoremap <silent> <c-f> :CtrlPLine<CR>
-if executable('rg')
-  set grepprg=rg
-  let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('ag')
+if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
+  let g:ctrlp_use_caching = 0
+elseif executable('rg')
+  set grepprg=rg
+  let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
   let g:ctrlp_use_caching = 0
 elseif executable('ack')
   set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
@@ -310,6 +320,33 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 " }
+
+" if !has('nvim')
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+" Plug 'roxma/nvim-completion-manager'
+" let g:cm_refresh_length=2
+" " let g:cm_matcher = {'module': 'cm_matchers.abbrev_matcher'}
+" let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
+
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'ervandew/supertab'
+" Plug 'othree/jspc.vim'
+" let g:deoplete#enable_at_startup = 1
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+" let g:deoplete#omni#functions = {}
+" let g:deoplete#omni#functions.javascript = [
+"   \ 'tern#Complete',
+"   \ 'jspc#omni'
+" \]
+" " set completeopt=longest,menuone,preview
+" let g:deoplete#sources = {}
+" " let g:deoplete#sources['javascript.jsx'] = ['buffer', 'tag', 'file', 'ultisnips', 'ternjs']
+" let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs', 'tag', 'buffer']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+" " let g:tern#command = ['tern']
+" " let g:tern#arguments = ['--persistent']
+
 " { vim-polyglot
 " Collection of language plugins.
 " Includes: 'pangloss/vim-javascript'
@@ -333,7 +370,7 @@ let g:javascript_conceal_underscore_arrow_function = "🞅"
 " management. Add vim -S Session.vim alias in your fish.config or .bashrc.
 " :qa to exit Vim with all panes intact.
 Plug 'tpope/vim-obsession'
-nmap <leader><leader>w :Obsess<CR>
+nmap <leader><leader>w :Obsess!<CR>
 " }
 " { Abolish
 " %S/foo/bar will replace smart-casing
@@ -369,11 +406,11 @@ let g:ctrlsf_confirm_save = 0
 " Use Ag to search using :GrepperAg, and :copen when finished
 " CtrlSF is an alternative, but that doesn't allow :cnext or immediate search
 Plug 'mhinz/vim-grepper'
-map <F3> :GrepperAg ""<LEFT>
-nmap <leader>8 "hyiw:GrepperAg <c-r>h<CR>:nohlsearch<CR>
-vmap <leader>8 "hy:GrepperAg <c-r>h<CR>:nohlsearch<CR>
-nmap <leader>/ :GrepperAg ""<LEFT>
-nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+map <F3> :GrepperAg -Q ""<LEFT>
+nmap <leader>8 "hyiw:GrepperAg -Q <c-r>h<CR>:nohlsearch<CR>
+vmap <leader>8 "hy:GrepperAg -Q <c-r>h<CR>:nohlsearch<CR>
+nmap <leader>/ :GrepperAg -Q ""<LEFT>
+nmap <leader><leader>/ :GrepperAg -Q "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 " Search only open buffers
 function! ToggleGrepperBuffersMode()
   if g:grepper.buffers
@@ -745,11 +782,6 @@ Plug 'wellle/targets.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'lodash,react,flux,d3'
 " }
-" { JSPC
-" Argument omnicompletion
-" I'm not sure if this one actually works with YouCompleteMe?
-Plug 'othree/jspc.vim'
-" }
 " { HardMode
 " Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
@@ -974,7 +1006,8 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 nmap <leader><leader>i :PlugInstall<CR>
 " nmap <leader><leader>j :join<CR>
 nmap <leader><leader>u :PlugClean!<CR>
-nmap <leader><leader>v :vsp ~/dotfiles/.vimrc<CR>
+" nmap <leader><leader>v :vsp ~/dotfiles/.vimrc<CR>
+nmap <leader><leader>v :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader><leader>t :sp ~/dotfiles/.ctags<CR>
 
 map <leader>c :bd<CR>
@@ -1039,8 +1072,8 @@ vnoremap / /\v
 vnoremap . :normal .<CR>
 
 " Center screen and open folds when going through search results
-nnoremap <silent> n nzzzO
-nnoremap <silent> N NzzzO
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
 
 " Don't skip wrapped lines
 nnoremap j gj
@@ -1305,12 +1338,12 @@ endfunction
 " }
 " }
 
-" { .vimrc
-augroup vimrc
+" { .vimrc / init.vim
+augroup config
   autocmd!
-  " autocmd FileType vim setlocal foldmethod=marker
-  autocmd BufWritePost .vimrc source %
-  autocmd BufWritePost .vimrc set modeline | doautocmd BufRead
-  autocmd BufReadPost .vimrc normal `.
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd BufWritePost init.vim source %
+  autocmd BufWritePost init.vim set modeline | doautocmd BufRead
+  " autocmd BufReadPost init.vim normal `.
 augroup END
 " }
