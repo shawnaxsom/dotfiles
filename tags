@@ -152,6 +152,16 @@
 <F7>	.vimrc	/^vmap <F7> "hy:!open 'https:\/\/www.google.com\/search?newwindow=1&site=&source=hp&q=<c-r>h'$/;"	m
 <F8>	.vimrc	/^map <F8> :norm <c-a><CR>:w<BAR>:colo null<CR>$/;"	m
 <F9>	.vimrc	/^noremap <F9> :RandomColorScheme<CR>:colo<CR>$/;"	m
+<Leader><Leader>j	.vimrc	/^map <Leader><Leader>j <Plug>(easymotion-j)$/;"	m
+<Leader><Leader>k	.vimrc	/^map <Leader><Leader>k <Plug>(easymotion-k)$/;"	m
+<Leader>L	.vimrc	/^map <Leader>L <Plug>(easymotion-bd-jk)$/;"	m
+<Leader>L	.vimrc	/^nmap <Leader>L <Plug>(easymotion-overwin-line)$/;"	m
+<Leader>j	.vimrc	/^map <Leader>j <Plug>(easymotion-w)$/;"	m
+<Leader>k	.vimrc	/^map <Leader>k <Plug>(easymotion-b)$/;"	m
+<Leader>v	.vimrc	/^map  <Leader>v <Plug>(easymotion-bd-f)$/;"	m
+<Leader>v	.vimrc	/^nmap <Leader>v <Plug>(easymotion-overwin-f)$/;"	m
+<Leader>w	.vimrc	/^map  <Leader>w <Plug>(easymotion-bd-w)$/;"	m
+<Leader>w	.vimrc	/^nmap <Leader>w <Plug>(easymotion-overwin-w)$/;"	m
 <S-F10>	.vimrc	/^map <S-F10> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")<CR>$/;"	m
 <S-F8>	.vimrc	/^map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>$/;"	m
 <bar>	.vimrc	/^vmap <bar> :g\/$/;"	m
@@ -174,16 +184,14 @@
 <leader><leader>b	.vimrc	/^map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>$/;"	m
 <leader><leader>c	.vimrc	/^nmap <leader><leader>c :Codi!!<CR>$/;"	m
 <leader><leader>i	.vimrc	/^nmap <leader><leader>i :PlugInstall<CR>$/;"	m
-<leader><leader>j	.vimrc	/^nmap <leader><leader>j :join<CR>$/;"	m
+<leader><leader>q	.vimrc	/^nmap <leader><leader>q :qa<CR>$/;"	m
 <leader><leader>s	.vimrc	/^nmap <leader><leader>s :UltiSnipsEdit<CR>$/;"	m
 <leader><leader>t	.vimrc	/^nmap <leader><leader>t :sp ~\/dotfiles\/.ctags<CR>$/;"	m
 <leader><leader>u	.vimrc	/^nmap <leader><leader>u :PlugClean!<CR>$/;"	m
 <leader><leader>v	.vimrc	/^nmap <leader><leader>v :vsp ~\/dotfiles\/.vimrc<CR>$/;"	m
 <leader><leader>w	.vimrc	/^nmap <leader><leader>w :Obsess<CR>$/;"	m
 <leader><tab>	.vimrc	/^map <leader><tab> <c-^>$/;"	m
-<leader>K	.vimrc	/^nnoremap <silent> <leader>K :call UncolorAllWords()<cr>$/;"	m
-<leader>P	.vimrc	/^nmap <leader>P <Plug>yankstack_substitute_newer_paste$/;"	m
-<leader>Q	.vimrc	/^nmap <leader>Q :q<CR>$/;"	m
+<leader>Q	.vimrc	/^nmap <leader>Q :qa<CR>$/;"	m
 <leader>c	.vimrc	/^map <leader>c :bd<CR>$/;"	m
 <leader>d	.vimrc	/^nmap <silent> <leader>d <Plug>DashSearch$/;"	m
 <leader>f	.vimrc	/^nmap <leader>f <bar>_$/;"	m
@@ -199,13 +207,13 @@
 <leader>gp	.vimrc	/^map <leader>gp :Gpull<CR>$/;"	m
 <leader>gs	.vimrc	/^map <leader>gs :Gstatus<CR>$/;"	m
 <leader>gw	.vimrc	/^map <leader>gw :Gwrite<CR>$/;"	m
-<leader>k	.vimrc	/^nnoremap <silent> <leader>k :call InterestingWords('n')<cr>$/;"	m
+<leader>j	.vimrc	/^nmap <leader>j <Plug>(easymotion-bd-j)$/;"	m
+<leader>k	.vimrc	/^nmap <leader>k <Plug>(easymotion-bd-k)$/;"	m
 <leader>l	.vimrc	/^nmap <leader>l yiw{oconsole.warn(""", ")^$/;"	m
 <leader>l	.vimrc	/^vmap <leader>l y{oconsole.warn(""", ")^$/;"	m
 <leader>oh	.vimrc	/^nmap <leader>oh !open https:\/\/github.com\/search?q=$/;"	m
 <leader>on	.vimrc	/^nmap <leader>on "pyi":!open https:\/\/www.npmjs.com\/package\/p$/;"	m
 <leader>oo	.vimrc	/^nmap <leader>oo !open https:\/\/www.google.com\/search?q=javascript+$/;"	m
-<leader>p	.vimrc	/^nmap <leader>p <Plug>yankstack_substitute_older_paste$/;"	m
 <leader>q	.vimrc	/^nmap <leader>q :q<CR>$/;"	m
 <leader>s	.vimrc	/^nmap <leader>s :sp<CR>$/;"	m
 <leader>s	.vimrc	/^vmap <leader>s :sort<CR>$/;"	m
@@ -230,19 +238,18 @@ I	.tmux.conf	/^setw -g window-status-format " #F#I:#W#F "$/;"	k
 I	.vimrc	/^vmap I :norm I$/;"	m
 IGNORE_CASE	ranger/commands_full.py	/^    IGNORE_CASE     = 'i'$/;"	v	class:scout
 INVERT	ranger/commands_full.py	/^    INVERT          = 'v'$/;"	v	class:scout
-J	.vimrc	/^map J 7jzz$/;"	m
-K	.vimrc	/^map K 7kzz$/;"	m
+J	.vimrc	/^map J 5jzz$/;"	m
+K	.vimrc	/^map K 5kzz$/;"	m
 KEEP_OPEN	ranger/commands_full.py	/^    KEEP_OPEN       = 'k'$/;"	v	class:scout
 L	.vimrc	/^map L ]}$/;"	m
 M	.vimrc	/^vmap M :join<CR>$/;"	m
 MARK	ranger/commands_full.py	/^    MARK            = 'm'$/;"	v	class:scout
-N	.vimrc	/^nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>$/;"	m
 N	.vimrc	/^nnoremap <silent> N NzzzO$/;"	m
 OPEN_ON_ENTER	ranger/commands_full.py	/^    OPEN_ON_ENTER   = 'e'$/;"	v	class:scout
-P	.vimrc	/^nnoremap P ]P$/;"	m
 PATH_RE	ranger/commands_full.py	/^    PATH_RE = re.compile(r'^\\s*path="?(.*?)"?\\s*$')$/;"	v	class:setlocal
 PERM_FILTER	ranger/commands_full.py	/^    PERM_FILTER     = 'p'$/;"	v	class:scout
 Rg	.vimrc	/^command! -bang -nargs=* Rg$/;"	c
+S	.vimrc	/^nmap S <Plug>(easymotion-bd-w)$/;"	m
 S	.vimrc	/^nmap S v$h<Plug>VSurround$/;"	m
 SMART_CASE	ranger/commands_full.py	/^    SMART_CASE      = 's'$/;"	v	class:scout
 SM_GLOB	ranger/commands_full.py	/^    SM_GLOB         = 'g'$/;"	v	class:scout
@@ -257,7 +264,7 @@ X	ranger/rifle.conf	/^ext s[wmf]c, has snes9x-gtk,X = snes9x-gtk "$1"$/;"	k
 Y	.vimrc	/^noremap Y y\$$/;"	m
 ZoomToggle	.vimrc	/^command! ZoomToggle call s:ZoomToggle()$/;"	c
 [q	.vimrc	/^nmap [q :cprev<CR>$/;"	m
-\\	.vimrc	/^vmap \\ :norm<space>^$/;"	m
+\\	.vimrc	/^vmap \\ :norm<space>w$/;"	m
 \x17\x06	.vimrc	/^map  _|$/;"	m
 \x17f	.vimrc	/^map f _<bar>$/;"	m
 \x1F	.vimrc	/^nmap   <Plug>CommentaryLine$/;"	m
@@ -406,6 +413,7 @@ function	.ctags	/^--regex-js=\/^[ \\t]+let[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,func
 function	.ctags	/^--regex-js=\/^[ \\t]+var[ ]([a-zA-Z]+)[ ]=[ ].*=>\/\\1\/f,function\/$/;"	k	langdef:js
 function	.ctags	/^--regex-js=\/^[ \\t]{2}([a-zA-Z]+)[ ]=[ ].*\/\\1\/f,function\/$/;"	k	langdef:js
 function	.ctags	/^--regex-js=\/^[ \\t]{2}([a-zA-Z]+)\\(.*\\{\/\\1\/f,function\/$/;"	k	langdef:js
+g:EasyMotion_smartcase	.vimrc	/^let g:EasyMotion_smartcase = 1$/;"	v
 g:NERDTreeAutoDeleteBuffer	.vimrc	/^let g:NERDTreeAutoDeleteBuffer = 1$/;"	v
 g:NERDTreeDirArrows	.vimrc	/^let g:NERDTreeDirArrows        = 1$/;"	v
 g:NERDTreeMinimalUI	.vimrc	/^let g:NERDTreeMinimalUI        = 1$/;"	v
@@ -431,6 +439,9 @@ g:airline_section_x	.vimrc	/^let g:airline_section_x = ''$/;"	v
 g:airline_section_y	.vimrc	/^let g:airline_section_y = ''$/;"	v
 g:airline_section_z	.vimrc	/^let g:airline_section_z = ''$/;"	v
 g:airline_theme	.vimrc	/^let g:airline_theme='deus'$/;"	v
+g:ale_fixers	.vimrc	/^let g:ale_fixers = {$/;"	v
+g:ale_javascript_eslint_executable	.vimrc	/^let g:ale_javascript_eslint_executable='\/usr\/local\/bin\/eslint'$/;"	v
+g:ale_javascript_eslint_use_global	.vimrc	/^let g:ale_javascript_eslint_use_global = 1$/;"	v
 g:badwolf_css_props_highlight	badwolf.vim	/^    let g:badwolf_css_props_highlight = 0$/;"	v
 g:badwolf_html_link_underline	badwolf.vim	/^    let g:badwolf_html_link_underline = 1$/;"	v
 g:codi#aliases	.vimrc	/^let g:codi#aliases = {$/;"	v
@@ -488,6 +499,10 @@ g:netrw_keepdir	.vimrc	/^let g:netrw_keepdir=1$/;"	v
 g:netrw_localrmdir	.vimrc	/^let g:netrw_localrmdir='rm -r'$/;"	v
 g:pymode_options_max_line_length	.vimrc	/^let g:pymode_options_max_line_length=120$/;"	v
 g:python_highlight_all	.vimrc	/^let g:python_highlight_all=1$/;"	v
+g:qs_first_occurrence_highlight_color	.vimrc	/^let g:qs_first_occurrence_highlight_color = 7$/;"	v
+g:qs_highlight_on_keys	.vimrc	/^let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']$/;"	v
+g:qs_highlight_on_keys	.vimrc	/^let g:qs_highlight_on_keys = ['f', 'F']$/;"	v
+g:qs_second_occurrence_highlight_color	.vimrc	/^let g:qs_second_occurrence_highlight_color = 8$/;"	v
 g:simple_todo_map_keys	.vimrc	/^let g:simple_todo_map_keys = 0$/;"	v
 g:tagbar_autoclose	.vimrc	/^let g:tagbar_autoclose = 1$/;"	v
 g:tagbar_autofocus	.vimrc	/^let g:tagbar_autofocus = 1$/;"	v
@@ -497,8 +512,6 @@ g:tagbar_sort	.vimrc	/^let g:tagbar_sort = 0$/;"	v
 g:tmux_navigator_disable_when_zoomed	.vimrc	/^let g:tmux_navigator_disable_when_zoomed = 1$/;"	v
 g:tmux_navigator_save_on_switch	.vimrc	/^let g:tmux_navigator_save_on_switch = 2$/;"	v
 g:used_javascript_libs	.vimrc	/^let g:used_javascript_libs = 'lodash,react,flux,d3'$/;"	v
-g:yankstack_map_keys	.vimrc	/^let g:yankstack_map_keys = 0$/;"	v
-g:yankstack_yank_keys	.vimrc	/^let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']$/;"	v
 g:ycm_cache_omnifunc	.vimrc	/^let g:ycm_cache_omnifunc = 1$/;"	v
 g:ycm_key_list_previous_completion	.vimrc	/^let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']$/;"	v
 g:ycm_key_list_select_completion	.vimrc	/^let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']$/;"	v
@@ -572,7 +585,6 @@ mark_tag	ranger/commands_full.py	/^class mark_tag(Command):$/;"	c
 meta	ranger/commands_full.py	/^class meta(prompt_metadata):$/;"	c
 mkdir	ranger/commands_full.py	/^class mkdir(Command):$/;"	c
 my_edit	ranger/commands.py	/^class my_edit(Command):$/;"	c
-n	.vimrc	/^nnoremap <silent> n :nohlsearch<cr>:call WordNavigation('forward')<cr>$/;"	m
 n	.vimrc	/^nnoremap <silent> n nzzzO$/;"	m
 name	ranger/commands_full.py	/^    name = 'eval'$/;"	v	class:eval_
 name	ranger/commands_full.py	/^    name = 'help'$/;"	v	class:help_
@@ -580,7 +592,6 @@ name	ranger/commands_full.py	/^    name = 'map'$/;"	v	class:map_
 name	ranger/commands_full.py	/^    name = 'quit!'$/;"	v	class:quit_bang
 name	ranger/commands_full.py	/^    name = 'set'  # don't override the builtin set class$/;"	v	class:set_
 open_with	ranger/commands_full.py	/^class open_with(Command):$/;"	c
-p	.vimrc	/^nnoremap p ]p$/;"	m
 php	ranger/rifle.conf	/^!mime ^text, label editor, ext xml|json|csv|tex|py|pl|rb|js|sh|php = $EDITOR -- "$@"$/;"	k
 php	ranger/rifle.conf	/^!mime ^text, label pager,  ext xml|json|csv|tex|py|pl|rb|js|sh|php = "$PAGER" -- "$@"$/;"	k
 php	ranger/rifle.conf	/^label editor, !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php  = $EDITOR -- "$@"$/;"	k
@@ -606,8 +617,7 @@ right	ranger/rc.conf	/^cmap <a-right>  eval fm.ui.console.move_word(right=1)$/;"
 right	ranger/rc.conf	/^cmap <end>   eval fm.ui.console.move(right=-1, absolute=True)$/;"	k
 right	ranger/rc.conf	/^cmap <home>  eval fm.ui.console.move(right=0, absolute=True)$/;"	k
 right	ranger/rc.conf	/^cmap <right> eval fm.ui.console.move(right=1)$/;"	k
-s	.vimrc	/^nmap s viw<Plug>VSurround$/;"	m
-s	.vimrc	/^vmap s <Plug>VSurround$/;"	m
+s	.vimrc	/^nmap s <Plug>(easymotion-s)$/;"	m
 s:HL	badwolf.vim	/^function! s:HL(group, fg, ...)$/;"	f
 s:ZoomToggle	.vimrc	/^function! s:ZoomToggle() abort$/;"	f
 s:bwc	badwolf.vim	/^let s:bwc = {}$/;"	v

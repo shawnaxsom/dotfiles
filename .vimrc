@@ -1,5 +1,3 @@
-" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
-"
 " { Options
 
 " Don't use swap or backup files
@@ -337,14 +335,24 @@ let g:javascript_conceal_underscore_arrow_function = "🞅"
 Plug 'tpope/vim-obsession'
 nmap <leader><leader>w :Obsess<CR>
 " }
+" { Abolish
+" %S/foo/bar will replace smart-casing
+" %S/map{,s}/draw{,ings} will replace variants of the words
+" Also change word naming convention
+" crk - kabob-case
+" crs - snake_case
+" crc - camelCase
+" crm - MixedCase
+Plug 'tpope/tpope-vim-abolish'
+" }
 
 " -----------------------------------------------------------------------------------------
 " 2 - Great
 " -----------------------------------------------------------------------------------------
 " { Surround
 Plug 'tpope/vim-surround'
-vmap s <Plug>VSurround
-nmap s viw<Plug>VSurround
+" vmap s <Plug>VSurround
+" nmap s viw<Plug>VSurround
 nmap S v$h<Plug>VSurround
 " }
 " { CtrlSF
@@ -491,14 +499,14 @@ let g:neoformat_basic_format_trim = 1
 let g:neoformat_only_msg_on_error = 1
 " }
 " { ALE
-" " Plug 'w0rp/ale'  " Async linting
-" let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
-" let g:ale_javascript_eslint_use_global = 1
-" let g:ale_fixers = {
-"       \   'javascript': [
-"       \       'eslint'
-"       \   ],
-"       \}
+" Plug 'w0rp/ale'  " Async linting
+let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_fixers = {
+      \   'javascript': [
+      \       'eslint'
+      \   ],
+      \}
 " }
 " { NERDTree
 Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
@@ -513,12 +521,12 @@ noremap - :NERDTreeFind<CR>
 map <leader><leader>b :Bookmark<space>
 " }
 " { yankstack
-Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
-let g:yankstack_map_keys = 0
-" Remove S as a yank key, otherwise interferes with vim surround S in visual
-let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
+" Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
+" let g:yankstack_map_keys = 0
+" " Remove S as a yank key, otherwise interferes with vim surround S in visual
+" let g:yankstack_yank_keys=['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
+" nmap <leader>p <Plug>yankstack_substitute_older_paste
+" nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " }
 " { Tagbar
 Plug 'majutsushi/tagbar'
@@ -538,6 +546,11 @@ let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*',
 " -----------------------------------------------------------------------------------------
 " 3 - Decent
 " -----------------------------------------------------------------------------------------
+" {{{ vim-paste-easy
+" Automatically :set paste when it detects the very fast typing that occurs
+" when pasting
+Plug 'roxma/vim-paste-easy'
+" }}}
 " { Airline / Lightline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -615,22 +628,38 @@ map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 " }
 " { EasyMotion
-" Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
+nmap <leader>j <Plug>(easymotion-bd-j)
+nmap <leader>k <Plug>(easymotion-bd-k)
+" nmap s <Plug>(easymotion-s2)
 " nmap s <Plug>(easymotion-bd-w)
-" let g:EasyMotion_smartcase = 1
+" nmap S <Plug>(easymotion-s2)
+" nmap S <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s)
+nmap S <Plug>(easymotion-bd-w)
+map <Leader>j <Plug>(easymotion-w)
+map <Leader>k <Plug>(easymotion-b)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+" <Leader>f{char} to move to {char}
+map  <Leader>v <Plug>(easymotion-bd-f)
+nmap <Leader>v <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+" nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+let g:EasyMotion_smartcase = 1
 " }
 " { vim-visual-star-search
 " Allow you to use * and # on visually selected text
 Plug 'nelstrom/vim-visual-star-search'
-" }
-" { Clever-F
-" The f key will reuse f and F to go next, instead of ; and ,
-" Also, jumps to the next line if no more matches on current line
-Plug 'rhysd/clever-f.vim'
-" { Targets
-" daa - delete an argument
-" Plug 'wellle/targets.vim'
-" }
 " }
 " { tern_for_vim
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
@@ -660,6 +689,16 @@ vmap v :'<,'>VSSplitAbove<CR>
 " { vim-lastplace
 " Open files at last closed position
 Plug 'farmergreg/vim-lastplace'
+" }
+" { Wildfire
+" Press Enter to select the closest text object. Press Enter again to expand
+" to the next largest text object,
+Plug 'gcmt/wildfire.vim'
+"}
+" { Gundo
+" Use :Gundo to time travel undo history
+Plug 'sjl/gundo.vim'
+nmap <leader>u :GundoToggle<CR>
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -700,11 +739,6 @@ let g:fzf_buffers_jump = 1
 " * aa / ia - an argument
 Plug 'wellle/targets.vim'
 "}
-" { Gundo
-" Use :Gundo to time travel undo history
-Plug 'sjl/gundo.vim'
-nmap <leader>u :GundoToggle<CR>
-" }
 " { javascript-libraries-syntax
 " Adds some minor extra syntax highlighting for certain libraries
 " Seems pretty minor, like I noticed React in React.Component was highlighted
@@ -738,11 +772,6 @@ Plug 'dracula/vim'
 nmap [q :cprev<CR>
 nmap ]q :cnext<CR>
 " }
-" { Wildfire
-" Press Enter to select the closest text object. Press Enter again to expand
-" to the next largest text object,
-Plug 'gcmt/wildfire.vim'
-"}
 " { Vim Maximizer
 " Plug 'szw/vim-maximizer'
 " nmap <leader>f :MaximizerToggle<CR>
@@ -784,16 +813,6 @@ Plug 'junegunn/vim-peekaboo'
 " { kana/vim-textobj-user
 Plug 'kana/vim-textobj-user'
 " }
-" { Abolish
-" %S/foo/bar will replace smart-casing
-" %S/map{,s}/draw{,ings} will replace variants of the words
-" Also change word naming convention
-" crk - kabob-case
-" crs - snake_case
-" crc - camelCase
-" crm - MixedCase
-Plug 'tpope/tpope-vim-abolish'
-" }
 " { Vim Table Mode
 Plug 'dhruvasagar/vim-table-mode'
 
@@ -812,17 +831,24 @@ inoreabbrev <expr> __
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 " }
 " { lfv89/vim-interestingwords
-Plug 'lfv89/vim-interestingwords'
-nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
-nnoremap <silent> n :nohlsearch<cr>:call WordNavigation('forward')<cr>
-nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>
+" Plug 'lfv89/vim-interestingwords'
+" nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+" nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+" nnoremap <silent> n :nohlsearch<cr>:call WordNavigation('forward')<cr>
+" nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>
 " }
 Plug 'jeetsukumaran/vim-buffergator'
 " { Goyo
 " Dark room, remove distracting Vim elements
 Plug 'junegunn/goyo.vim'
 nmap <leader>z :Goyo<CR>
+" }
+" { Quick Scope
+Plug 'unblevable/quick-scope'
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_highlight_on_keys = ['f', 'F']
+let g:qs_first_occurrence_highlight_color = 7
+let g:qs_second_occurrence_highlight_color = 8
 " }
 call plug#end()
 
@@ -946,7 +972,7 @@ vmap <F12> "hy:Dash <c-r>h<CR>
 " { Leader <Space>
 
 nmap <leader><leader>i :PlugInstall<CR>
-nmap <leader><leader>j :join<CR>
+" nmap <leader><leader>j :join<CR>
 nmap <leader><leader>u :PlugClean!<CR>
 nmap <leader><leader>v :vsp ~/dotfiles/.vimrc<CR>
 nmap <leader><leader>t :sp ~/dotfiles/.ctags<CR>
@@ -956,7 +982,8 @@ nmap <leader>oh !open https://github.com/search?q=
 nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
 nmap <leader>oo !open https://www.google.com/search?q=javascript+
 nmap <leader>q :q<CR>
-nmap <leader>Q :q<CR>
+nmap <leader>Q :qa<CR>
+nmap <leader><leader>q :qa<CR>
 nmap <leader>s :sp<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :wa<CR>
@@ -983,7 +1010,7 @@ nmap <leader>9 :set foldlevel=999<CR>
 " { Visual Mode
 vmap I :norm I
 vmap A :norm A
-vmap \ :norm<space>^
+vmap \ :norm<space>w
 vmap <bar> :g/
 vmap <leader>s :sort<CR>
 nmap <leader>l yiw{oconsole.warn(""", ")^
@@ -1019,11 +1046,6 @@ nnoremap <silent> N NzzzO
 nnoremap j gj
 nnoremap k gk
 
-" Match indent level on paste
-" TODO: this can mess up batch :norm mode pasting
-nnoremap P ]P
-nnoremap p ]p
-
 " Y should copy to end of line, not full line, same as D
 noremap Y y$
 
@@ -1041,8 +1063,8 @@ map ! :!
 " { Navigation in buffer
 " map J }zz
 " map K {zz
-map J 7jzz
-map K 7kzz
+map J 5jzz
+map K 5kzz
 map H [{
 map L ]}
 " vmap J }zz
