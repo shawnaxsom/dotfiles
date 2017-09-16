@@ -24,10 +24,10 @@ set noautochdir
 set nolist
 
 " Don't fully collapse windows when doing <c-w>_ or <c-w>|
-set winheight=5
-set winwidth=30
-set winminwidth=30
-set winminheight=5
+set winheight=11
+set winwidth=22
+set winminwidth=8
+set winminheight=8
 
 " If you open up gVim for whatever reason
 set guioptions-=m  "remove menu bar
@@ -166,8 +166,8 @@ let mapleader = "\<Space>"
 " insert mode. If you start having this timeout apply, something must have set
 " up imap <space> or something similar. Use this to debug:
 " :verbose imap <space>
-set timeoutlen=1500
-" set ttimeoutlen=0
+set timeoutlen=300
+set ttimeoutlen=0
 
 " Minimize how often you see "Press enter or type a command to continue"
 set shortmess=a
@@ -178,7 +178,7 @@ set cmdheight=2
 " { Neovim specific options
 
 " Show interactive preview of substitute changes when using :%s///
-set inccommand="split"
+set inccommand=split
 " }
 
 " { Plugins
@@ -200,10 +200,6 @@ elseif executable('rg')
 elseif executable('ack')
   set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
 endif
-
-" let g:ctrlp_cmd = 'CtrlPMRU'
-" let g:ctrlp_cmd = 'CtrlPBookmarkDir'
-" let g:ctrlp_cmd = 'CtrlPLastMode'
 let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_by_filename = 0
@@ -219,17 +215,7 @@ let g:ctrlp_default_input = 0
 let g:ctrlp_types = ['buf', 'mru', 'fil']
 let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
 let g:ctrlp_mruf_relative = 1
-
-" let g:ctrlp_extensions = ['line', 'changes', 'bookmarkdir']
-let g:ctrlp_extensions = ['']
-" Using ag is faster, BUT wildignore doesn't work
-" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" let g:ctrlp_use_caching = 0
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rst|pyc)$'
-" set wildignore+=env/,node_modules/,dist/,bower_components/,tmp/,jest/
-set wildignore+=env/,dist/,bower_components/,tmp/,jest/
-set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
-set wildignore+=*__Scratch__ " scratch.vim
+let g:ctrlp_extensions = []
 " }
 " { Fugitive / Extradite
 Plug 'tpope/vim-fugitive'
@@ -281,10 +267,10 @@ augroup vimux
   autocmd!
   autocmd BufEnter */api/* map <buffer> ,q :call VimuxRunCommand("npm run build; and env NODE_ENV=qa npm start")<CR>
   autocmd BufEnter */api/* map <buffer> ,t :call VimuxRunCommand("npm test -- --tests " . expand("%"))<CR>
-map ,t :Dispatch npm test<CR>
+" map ,t :Dispatch npm test<CR>
 augroup END
 map ,c :call VimuxInterruptRunner()<CR>
-map ,t :Dispatch npm test<CR>
+" map ,t :Dispatch npm test<CR>
 map ,f :Dispatch npm test -- --tests %
 map ,b :Dispatch npm run build<CR>
 " map ,z :Copen<CR>
@@ -406,11 +392,11 @@ let g:ctrlsf_confirm_save = 0
 " Use Ag to search using :GrepperAg, and :copen when finished
 " CtrlSF is an alternative, but that doesn't allow :cnext or immediate search
 Plug 'mhinz/vim-grepper'
-map <F3> :GrepperAg -Q ""<LEFT>
 nmap <leader>8 "hyiw:GrepperAg -Q <c-r>h<CR>:nohlsearch<CR>
-vmap <leader>8 "hy:GrepperAg -Q <c-r>h<CR>:nohlsearch<CR>
-nmap <leader>/ :GrepperAg -Q ""<LEFT>
-nmap <leader><leader>/ :GrepperAg -Q "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+vmap <leader>8 "hy:GrepperAg -Q '<c-r>h'<CR>
+nmap <leader>/ :GrepperAg ""<LEFT>
+nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+nmap <leader><leader><leader>/ :GrepperAg "" %:p:h:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 " Search only open buffers
 function! ToggleGrepperBuffersMode()
   if g:grepper.buffers
@@ -421,7 +407,7 @@ function! ToggleGrepperBuffersMode()
     echo "Grepper will search only open buffers"
   endif
 endfunction
-map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>
+map <leader><leader>g :call ToggleGrepperBuffersMode()<CR>
 nmap gr "hyiw:GrepperAg <c-r>h<CR>
 " nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
 nmap gi :GrepperAg %:p:t:r<CR>
@@ -461,8 +447,7 @@ augroup END
 " }
 " { Codi
 Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
-nmap <leader><leader>c :Codi!!<CR>
-map <leader>c :bd<CR>
+nmap <leader><leader>r :Codi!!<CR>
 let g:codi#aliases = {
       \ 'javascript.jsx': 'javascript',
       \ }
@@ -536,7 +521,7 @@ let g:neoformat_basic_format_trim = 1
 let g:neoformat_only_msg_on_error = 1
 " }
 " { ALE
-" Plug 'w0rp/ale'  " Async linting
+Plug 'w0rp/ale'  " Async linting
 let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_fixers = {
@@ -554,8 +539,10 @@ let g:NERDTreeShowBookmarks    = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeDirArrows        = 1
 let g:NERDTreeQuitOnOpen       = 0
-noremap - :NERDTreeFind<CR>
-map <leader><leader>b :Bookmark<space>
+" noremap - :NERDTreeFind<CR>
+noremap - :e %:p:h<CR>
+autocmd FileType nerdtree nnoremap <silent><buffer> - :call nerdtree#ui_glue#invokeKeyMap("u")<CR>
+map <leader><leader>B :Bookmark<space>
 " }
 " { yankstack
 " Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
@@ -568,7 +555,7 @@ map <leader><leader>b :Bookmark<space>
 " { Tagbar
 Plug 'majutsushi/tagbar'
 map _ :Tagbar<CR>
-let g:tagbar_autoclose = 1
+let g:tagbar_autoclose = 0
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
@@ -577,17 +564,11 @@ let g:tagbar_case_insensitive = 1
 " { Gutentags
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*', 'temp*', 'package*json']
-5
 " }
 
 " -----------------------------------------------------------------------------------------
 " 3 - Decent
 " -----------------------------------------------------------------------------------------
-" {{{ vim-paste-easy
-" Automatically :set paste when it detects the very fast typing that occurs
-" when pasting
-Plug 'roxma/vim-paste-easy'
-" }}}
 " { Airline / Lightline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -731,7 +712,7 @@ Plug 'farmergreg/vim-lastplace'
 " Press Enter to select the closest text object. Press Enter again to expand
 " to the next largest text object,
 Plug 'gcmt/wildfire.vim'
-"}
+" }
 " { Gundo
 " Use :Gundo to time travel undo history
 Plug 'sjl/gundo.vim'
@@ -770,12 +751,14 @@ Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 let g:fzf_buffers_jump = 1
+" nnoremap <c-p> :Buffers<CR>
+" nnoremap <c-f> :BLines<CR>
 " }
 " { Targets.vim
 " Adds a few text objects, like:
 " * aa / ia - an argument
 Plug 'wellle/targets.vim'
-"}
+" }
 " { javascript-libraries-syntax
 " Adds some minor extra syntax highlighting for certain libraries
 " Seems pretty minor, like I noticed React in React.Component was highlighted
@@ -803,11 +786,16 @@ Plug 'dracula/vim'
 " Plug 'tpope/vim-unimpaired'
 nmap [q :cprev<CR>
 nmap ]q :cnext<CR>
+nmap [b :bprevious<CR>
+nmap ]b :bnext<CR>
+nmap [a :previous<CR>
+nmap ]a :next<CR>
 " }
 " { Vim Maximizer
 " Plug 'szw/vim-maximizer'
 " nmap <leader>f :MaximizerToggle<CR>
-nmap <leader>f <bar>_
+nmap <leader>z <bar>_
+nmap <leader>= =
 " augroup maximizepane
 "   autocmd!
 "   autocmd BufEnter *.{js} :norm |<CR>
@@ -827,9 +815,6 @@ nmap <leader>f <bar>_
 " Conceal quotes in JSON
 Plug 'elzr/vim-json'
 " let g:vim_json_syntax_conceal=1
-" }
-" { Peekaboo
-Plug 'junegunn/vim-peekaboo'
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -863,28 +848,127 @@ inoreabbrev <expr> __
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 " }
 " { lfv89/vim-interestingwords
+" For some reason it is still including default mappings that is interefering
+" with EasyMotion
 " Plug 'lfv89/vim-interestingwords'
-" nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-" nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
-" nnoremap <silent> n :nohlsearch<cr>:call WordNavigation('forward')<cr>
-" nnoremap <silent> N :nohlsearch<cr>:call WordNavigation('backward')<cr>
+" nnoremap <silent> <leader>i :call InterestingWords('n')<cr>
+" nnoremap <silent> <leader>I :call UncolorAllWords()<cr>
+" let g:interestingWordsDefaultMappings = 0
+" let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
 " }
-Plug 'jeetsukumaran/vim-buffergator'
 " { Goyo
 " Dark room, remove distracting Vim elements
-Plug 'junegunn/goyo.vim'
-nmap <leader>z :Goyo<CR>
+" Plug 'junegunn/goyo.vim'
+" nmap <leader>z :Goyo<CR>
 " }
 " { Quick Scope
-Plug 'unblevable/quick-scope'
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:qs_highlight_on_keys = ['f', 'F']
-let g:qs_first_occurrence_highlight_color = 7
-let g:qs_second_occurrence_highlight_color = 8
+" Show best jump character with F or T
+" Conflicting with yankstack
+" Plug 'unblevable/quick-scope'
+" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" let g:qs_highlight_on_keys = ['f', 'F']
+" let g:qs_first_occurrence_highlight_color = 7
+" let g:qs_second_occurrence_highlight_color = 8
+" }
+" { BufSurf
+" Buffer history navigation
+" Plug 'ton/vim-bufsurf'
+" nmap H :BufSurfBack<CR>
+" nmap L :BufSurfForward<CR>
+" }
+" {
+" Plug 'mihaifm/bufstop'
+" nmap <leader>b :BufstopFast<CR>
+" nmap <leader>B :BufstopMode<CR>
+" let g:BufstopSpeedKeys = ["<F1>", "<F2>", "<F3>", "<F4>", "<F5>", "<F6>"]
+" let g:BufstopLeader = ""
+" let g:BufstopAutoSpeedToggle = 1
+
+" Tips:
+" Add searches to buffers GrepperAg, then load all to buffer with: :cdo badd %
+" Delete all buffers: :bufdo bd
+" * C-A to auto complete all glob matches, e.g. :bd **/*<CA>
+nmap <leader>c :bdelete!<CR>
+" nmap <silent> <leader><leader>a :cdo badd %<CR>
+nmap <leader>a :args **/**<LEFT>
+nmap <silent> <leader><leader>c :%bdelete!<CR>
+nmap <leader><leader>f :filter // ls<LEFT><LEFT><LEFT><LEFT>
+nmap <leader>f :find **/*
+nmap <leader><leader>f :find <C-R>=expand('%:h').'/'<CR>
+nmap <leader><leader>b :ls h<CR>:b
+nmap <leader>b :ls<CR>:b
+nmap <leader>] :tjump /
+set wildignore=*.swp,*.bak
+set wildignore+=/usr/**/*
+set wildignore+=env/,dist/,bower_components/,tmp/,jest/
+set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=*__Scratch__ " scratch.vim
+set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
+set wildignore+=*/node_modules/**/*,*/.git/**/*,*/.hg/**/*,*/.svn/**/*
+set wildignore+=tags
+set wildignore+=*.tar.*
+
+" }
+" { vim-renamer
+" Rename and move files and folders in batch as plain text
+" :Renamer
+Plug 'qpkorr/vim-renamer'
+nmap <leader>r :Renamer<CR>
+" }
+" { Vim-Rooter
+" Change directory to project root if you are in a subfolder
+" let g:rooter_patterns = ['app.js']
+" Plug 'airblade/vim-rooter'
+" }
+" { thameera/vimv
+" Alternative to vim-renamer
+Plug 'thameera/vimv'
+" }
+" { Vim-Test
+Plug 'janko-m/vim-test'
+nmap <silent> ,t :TestFile<CR>
+" tnoremap <Leader><ESC> <C-\><C-n>
+nmap <silent> <leader>t :sp term://fish<CR>i
+nmap <C-\> <C-\><C-n> :wincmd p<CR>
+" tnoremap <C-\> <C-\><C-n> :wincmd p<CR>
+tnoremap <C-\> <C-\><C-n>
+tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
+tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
+tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
+tnoremap <C-l> <C-\><C-n>:wincmd l<CR>
+" Map leader+number to jump to pane, also exits terminal mode
+" " Source: http://stackoverflow.com/a/6404246/151007
+" let i = 1
+" " If I have more than 9 windows open I have bigger problems :)
+" while i <= 9
+"   execute 'nnoremap <Leader>'.i.' :'.i.'wincmd w<CR>'
+"   execute 'tnoremap <Leader>' . i . ' <C-\><C-n>' .':' .  i . 'wincmd w<CR>'
+"   let i = i + 1
+" endwhile
+let g:test#runners = {'javascript': ['jest']}
+let g:test#javascript#karma#file_pattern = 'jest'
+let g:test#javascript#jest#file_pattern = '.test.js$'
+let g:test#javascript#jest#executable = 'npm test'
+let g:test#strategy = "neovim"
+" let test#strategy = "neoterm"
+" let test#strategy = "dispatch"
+let test#javascript#jest#options = {
+\ 'suite': '--bail',
+\}
+
 " }
 call plug#end()
 
-" } ======================================================================
+" }
+
+" { Special mappings
+" Automatically add a curly bracket on new line
+execute "inoremap {<CR> {<CR>}<ESC>V=O"
+vmap { S{I
+execute "inoremap (<CR> (<CR>)<ESC>V=O"
+vmap ( S(I
+vmap <BS> :join<CR>
+" }
 
 " { Languages
 
@@ -954,7 +1038,7 @@ augroup filemarks
 
   autocmd BufWinLeave */src/* normal! mQ
   autocmd InsertEnter */src/* normal! mI
-  autocmd TextChanged	*/src/* normal! mO
+  autocmd TextChanged */src/* normal! mO
   autocmd TextChangedI */src/* normal! mO
 augroup END
 " }
@@ -989,18 +1073,6 @@ augroup END
 
 " }
 
-" { Function Keys
-map <F1> :map <F1> :!
-map <F2> "hyiw:%s/<c-r>h//c<LEFT><LEFT>
-" map <F4> "hyiw:Ag <c-r>h
-map <F5> :NERDTreeToggle<CR>
-noremap <F6> :!tig %<CR>
-nmap <F7> "hyiw:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
-vmap <F7> "hy:!open 'https://www.google.com/search?newwindow=1&site=&source=hp&q=<c-r>h'
-map <F12> "hyiw:Dash <c-r>h<CR>
-vmap <F12> "hy:Dash <c-r>h<CR>
-" }
-
 " { Leader <Space>
 
 nmap <leader><leader>i :PlugInstall<CR>
@@ -1010,12 +1082,10 @@ nmap <leader><leader>u :PlugClean!<CR>
 nmap <leader><leader>v :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader><leader>t :sp ~/dotfiles/.ctags<CR>
 
-map <leader>c :bd<CR>
 nmap <leader>oh !open https://github.com/search?q=
 nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
 nmap <leader>oo !open https://www.google.com/search?q=javascript+
 nmap <leader>q :q<CR>
-nmap <leader>Q :qa<CR>
 nmap <leader><leader>q :qa<CR>
 nmap <leader>s :sp<CR>
 nmap <leader>v :vsp<CR>
@@ -1028,15 +1098,15 @@ nmap <leader>w :wa<CR>
 " Switch to previous file
 map <leader><tab> <c-^>
 
-nmap <leader>0 :set foldlevel=0<CR>
-nmap <leader>1 :set foldlevel=1<CR>
-nmap <leader>2 :set foldlevel=2<CR>
-nmap <leader>3 :set foldlevel=3<CR>
-nmap <leader>4 :set foldlevel=4<CR>
-nmap <leader>5 :set foldlevel=5<CR>
-nmap <leader>6 :set foldlevel=6<CR>
-nmap <leader>7 :set foldlevel=7<CR>
-nmap <leader>9 :set foldlevel=999<CR>
+" nmap <leader>0 :set foldlevel=0<CR>
+" nmap <leader>1 :set foldlevel=1<CR>
+" nmap <leader>2 :set foldlevel=2<CR>
+" nmap <leader>3 :set foldlevel=3<CR>
+" nmap <leader>4 :set foldlevel=4<CR>
+" nmap <leader>5 :set foldlevel=5<CR>
+" nmap <leader>6 :set foldlevel=6<CR>
+" nmap <leader>7 :set foldlevel=7<CR>
+" nmap <leader>9 :set foldlevel=999<CR>
 
 " }
 
@@ -1098,8 +1168,11 @@ map ! :!
 " map K {zz
 map J 5jzz
 map K 5kzz
-map H [{
-map L ]}
+" map H [{
+" map L ]}
+map H g;zz
+map L 999g,zz
+
 " vmap J }zz
 " vmap K {zz
 " nmap J :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>zz
@@ -1133,6 +1206,7 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 " }
 
 " { Functions
+
 function! StripTrailingWhitespace ()
   " Don't strip on these filetypes
   if &ft =~ 'sql'
@@ -1249,8 +1323,8 @@ highlight Comment guifg=#999999
 " }
 "
 " { Current line
-set nocursorline
-highlight cursorLine term=bold cterm=bold guibg=#444444
+set cursorline
+highlight cursorLine term=bold cterm=bold guibg=#333333
 " }
 " { Column 80
 set colorcolumn=
@@ -1342,7 +1416,7 @@ endfunction
 augroup config
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
-  autocmd BufWritePost init.vim source %
+  autocmd BufWritePost init.vim source % | setlocal foldmethod=marker
   autocmd BufWritePost init.vim set modeline | doautocmd BufRead
   " autocmd BufReadPost init.vim normal `.
 augroup END

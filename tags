@@ -123,6 +123,7 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/1c8b98d/
+(	nvim/init.vim	/^vmap ( S(I$/;"	m
 ,b	nvim/init.vim	/^map ,b :Dispatch npm run build<CR>$/;"	m
 ,c	nvim/init.vim	/^map ,c :call VimuxInterruptRunner()<CR>$/;"	m
 ,d	nvim/init.vim	/^map ,d :Dispatch<SPACE>$/;"	m
@@ -130,26 +131,19 @@
 ,i	nvim/init.vim	/^map ,i :call VimuxInspectRunner()<CR>$/;"	m
 ,q	nvim/init.vim	/^map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>$/;"	m
 ,r	nvim/init.vim	/^map ,r :call VimuxRunCommand("npm start")<CR>$/;"	m
-,t	nvim/init.vim	/^map ,t :Dispatch npm test<CR>$/;"	m
+,t	nvim/init.vim	/^nmap <silent> ,t :TestFile<CR>$/;"	m
 ,v	nvim/init.vim	/^map ,v :call VimuxPromptCommand("npm start")<CR>$/;"	m
 ,z	nvim/init.vim	/^map ,z :VimuxZoomRunner<CR>$/;"	m
--	nvim/init.vim	/^noremap - :NERDTreeFind<CR>$/;"	m
+-	nvim/init.vim	/^noremap - :e %:p:h<CR>$/;"	m
 .	nvim/init.vim	/^vnoremap . :normal .<CR>$/;"	m
 /	nvim/init.vim	/^map \/  <Plug>(incsearch-forward)$/;"	m
 /	nvim/init.vim	/^nnoremap \/ \/\\v$/;"	m
 /	nvim/init.vim	/^vnoremap \/ \/\\v$/;"	m
+<BS>	nvim/init.vim	/^vmap <BS> :join<CR>$/;"	m
 <C-A>	nvim/init.vim	/^nnoremap <silent> <C-A> :ZoomToggle<CR>$/;"	m
+<C-\\>	nvim/init.vim	/^nmap <C-\\> <C-\\><C-n> :wincmd p<CR>$/;"	m
 <F10>	nvim/init.vim	/^map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'$/;"	m
-<F12>	nvim/init.vim	/^map <F12> "hyiw:Dash <c-r>h<CR>$/;"	m
-<F12>	nvim/init.vim	/^vmap <F12> "hy:Dash <c-r>h<CR>$/;"	m
-<F1>	nvim/init.vim	/^map <F1> :map <F1> :!$/;"	m
-<F2>	nvim/init.vim	/^map <F2> "hyiw:%s\/<c-r>h\/\/c<LEFT><LEFT>$/;"	m
 <F3>	nvim/init.vim	/^map <F3> :CtrlSF -R ""<LEFT>$/;"	m
-<F3>	nvim/init.vim	/^map <F3> :GrepperAg -Q ""<LEFT>$/;"	m
-<F5>	nvim/init.vim	/^map <F5> :NERDTreeToggle<CR>$/;"	m
-<F6>	nvim/init.vim	/^noremap <F6> :!tig %<CR>$/;"	m
-<F7>	nvim/init.vim	/^nmap <F7> "hyiw:!open 'https:\/\/www.google.com\/search?newwindow=1&site=&source=hp&q=<c-r>h'$/;"	m
-<F7>	nvim/init.vim	/^vmap <F7> "hy:!open 'https:\/\/www.google.com\/search?newwindow=1&site=&source=hp&q=<c-r>h'$/;"	m
 <F8>	nvim/init.vim	/^map <F8> :norm <c-a><CR>:w<BAR>:colo null<CR>$/;"	m
 <F9>	nvim/init.vim	/^noremap <F9> :RandomColorScheme<CR>:colo<CR>$/;"	m
 <Leader><Leader>j	nvim/init.vim	/^map <Leader><Leader>j <Plug>(easymotion-j)$/;"	m
@@ -168,34 +162,33 @@
 <c-f>	nvim/init.vim	/^nnoremap <silent> <c-f> :CtrlPLine<CR>$/;"	m
 <c-z>	nvim/init.vim	/^imap <c-z> <c-y>,$/;"	m
 <cr>	nvim/autoload/plug.vim	/^    nnoremap <silent> <buffer> <cr> :silent! call <SID>preview_commit()<cr>$/;"	m
-<leader>/	nvim/init.vim	/^nmap <leader>\/ :GrepperAg -Q ""<LEFT>$/;"	m
-<leader>0	nvim/init.vim	/^nmap <leader>0 :set foldlevel=0<CR>$/;"	m
-<leader>1	nvim/init.vim	/^nmap <leader>1 :set foldlevel=1<CR>$/;"	m
-<leader>2	nvim/init.vim	/^nmap <leader>2 :set foldlevel=2<CR>$/;"	m
-<leader>3	nvim/init.vim	/^nmap <leader>3 :set foldlevel=3<CR>$/;"	m
-<leader>4	nvim/init.vim	/^nmap <leader>4 :set foldlevel=4<CR>$/;"	m
-<leader>5	nvim/init.vim	/^nmap <leader>5 :set foldlevel=5<CR>$/;"	m
-<leader>6	nvim/init.vim	/^nmap <leader>6 :set foldlevel=6<CR>$/;"	m
-<leader>7	nvim/init.vim	/^nmap <leader>7 :set foldlevel=7<CR>$/;"	m
+<leader>/	nvim/init.vim	/^nmap <leader>\/ :GrepperAg ""<LEFT>$/;"	m
 <leader>8	nvim/init.vim	/^nmap <leader>8 "hyiw:GrepperAg -Q <c-r>h<CR>:nohlsearch<CR>$/;"	m
-<leader>8	nvim/init.vim	/^vmap <leader>8 "hy:GrepperAg -Q <c-r>h<CR>:nohlsearch<CR>$/;"	m
-<leader>9	nvim/init.vim	/^nmap <leader>9 :set foldlevel=999<CR>$/;"	m
-<leader><leader>/	nvim/init.vim	/^nmap <leader><leader>\/ :GrepperAg -Q "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>$/;"	m
-<leader><leader>b	nvim/init.vim	/^map <leader><leader>b :Bookmark<space>$/;"	m
-<leader><leader>b	nvim/init.vim	/^map <leader><leader>b :call ToggleGrepperBuffersMode()<CR>$/;"	m
-<leader><leader>c	nvim/init.vim	/^nmap <leader><leader>c :Codi!!<CR>$/;"	m
+<leader>8	nvim/init.vim	/^vmap <leader>8 "hy:GrepperAg -Q '<c-r>h'<CR>$/;"	m
+<leader><leader>/	nvim/init.vim	/^nmap <leader><leader>\/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>$/;"	m
+<leader><leader><leader>/	nvim/init.vim	/^nmap <leader><leader><leader>\/ :GrepperAg "" %:p:h:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT></;"	m
+<leader><leader>B	nvim/init.vim	/^map <leader><leader>B :Bookmark<space>$/;"	m
+<leader><leader>b	nvim/init.vim	/^nmap <leader><leader>b :ls h<CR>:b$/;"	m
+<leader><leader>c	nvim/init.vim	/^nmap <silent> <leader><leader>c :%bdelete!<CR>$/;"	m
+<leader><leader>f	nvim/init.vim	/^nmap <leader><leader>f :filter \/\/ ls<LEFT><LEFT><LEFT><LEFT>$/;"	m
+<leader><leader>f	nvim/init.vim	/^nmap <leader><leader>f :find <C-R>=expand('%:h').'\/'<CR>$/;"	m
+<leader><leader>g	nvim/init.vim	/^map <leader><leader>g :call ToggleGrepperBuffersMode()<CR>$/;"	m
 <leader><leader>i	nvim/init.vim	/^nmap <leader><leader>i :PlugInstall<CR>$/;"	m
 <leader><leader>q	nvim/init.vim	/^nmap <leader><leader>q :qa<CR>$/;"	m
+<leader><leader>r	nvim/init.vim	/^nmap <leader><leader>r :Codi!!<CR>$/;"	m
 <leader><leader>s	nvim/init.vim	/^nmap <leader><leader>s :UltiSnipsEdit<CR>$/;"	m
 <leader><leader>t	nvim/init.vim	/^nmap <leader><leader>t :sp ~\/dotfiles\/.ctags<CR>$/;"	m
 <leader><leader>u	nvim/init.vim	/^nmap <leader><leader>u :PlugClean!<CR>$/;"	m
 <leader><leader>v	nvim/init.vim	/^nmap <leader><leader>v :vsp ~\/.config\/nvim\/init.vim<CR>$/;"	m
 <leader><leader>w	nvim/init.vim	/^nmap <leader><leader>w :Obsess!<CR>$/;"	m
 <leader><tab>	nvim/init.vim	/^map <leader><tab> <c-^>$/;"	m
-<leader>Q	nvim/init.vim	/^nmap <leader>Q :qa<CR>$/;"	m
-<leader>c	nvim/init.vim	/^map <leader>c :bd<CR>$/;"	m
+<leader>=	nvim/init.vim	/^nmap <leader>= =$/;"	m
+<leader>]	nvim/init.vim	/^nmap <leader>] :tjump \/$/;"	m
+<leader>a	nvim/init.vim	/^nmap <leader>a :args **\/**<LEFT>$/;"	m
+<leader>b	nvim/init.vim	/^nmap <leader>b :ls<CR>:b$/;"	m
+<leader>c	nvim/init.vim	/^nmap <leader>c :bdelete!<CR>$/;"	m
 <leader>d	nvim/init.vim	/^nmap <silent> <leader>d <Plug>DashSearch$/;"	m
-<leader>f	nvim/init.vim	/^nmap <leader>f <bar>_$/;"	m
+<leader>f	nvim/init.vim	/^nmap <leader>f :find **\/*$/;"	m
 <leader>gL	nvim/init.vim	/^map <leader>gL :Glog<BAR>:bot copen<CR>$/;"	m
 <leader>gP	nvim/init.vim	/^map <leader>gP :Gpush<CR>$/;"	m
 <leader>gR	nvim/init.vim	/^map <leader>gR :Gread<CR>$/;"	m
@@ -216,12 +209,14 @@
 <leader>on	nvim/init.vim	/^nmap <leader>on "pyi":!open https:\/\/www.npmjs.com\/package\/p$/;"	m
 <leader>oo	nvim/init.vim	/^nmap <leader>oo !open https:\/\/www.google.com\/search?q=javascript+$/;"	m
 <leader>q	nvim/init.vim	/^nmap <leader>q :q<CR>$/;"	m
+<leader>r	nvim/init.vim	/^nmap <leader>r :Renamer<CR>$/;"	m
 <leader>s	nvim/init.vim	/^nmap <leader>s :sp<CR>$/;"	m
 <leader>s	nvim/init.vim	/^vmap <leader>s :sort<CR>$/;"	m
+<leader>t	nvim/init.vim	/^nmap <silent> <leader>t :sp term:\/\/fish<CR>i$/;"	m
 <leader>u	nvim/init.vim	/^nmap <leader>u :GundoToggle<CR>$/;"	m
 <leader>v	nvim/init.vim	/^nmap <leader>v :vsp<CR>$/;"	m
 <leader>w	nvim/init.vim	/^nmap <leader>w :wa<CR>$/;"	m
-<leader>z	nvim/init.vim	/^nmap <leader>z :Goyo<CR>$/;"	m
+<leader>z	nvim/init.vim	/^nmap <leader>z <bar>_$/;"	m
 =	nvim/init.vim	/^nmap <silent> = :Neoformat prettier<CR>:w<CR>$/;"	m
 ?	nvim/init.vim	/^map ?  <Plug>(incsearch-backward)$/;"	m
 A	nvim/init.vim	/^vmap A :norm A$/;"	m
@@ -234,7 +229,7 @@ FILTER	ranger/commands_full.py	/^    FILTER          = 'f'$/;"	v	class:scout
 FILTER_DIRS	ranger/commands_full.py	/^    FILTER_DIRS  = 'd'$/;"	v	class:filter_inode_type
 FILTER_FILES	ranger/commands_full.py	/^    FILTER_FILES = 'f'$/;"	v	class:filter_inode_type
 FILTER_LINKS	ranger/commands_full.py	/^    FILTER_LINKS = 'l'$/;"	v	class:filter_inode_type
-H	nvim/init.vim	/^map H [{$/;"	m
+H	nvim/init.vim	/^map H g;zz$/;"	m
 I	.tmux.conf	/^setw -g window-status-current-format " #F#I:#W#F "$/;"	k
 I	.tmux.conf	/^setw -g window-status-format " #F#I:#W#F "$/;"	k
 I	nvim/init.vim	/^vmap I :norm I$/;"	m
@@ -245,7 +240,7 @@ K	nvim/init.vim	/^map K 5kzz$/;"	m
 KEEP_OPEN	ranger/commands_full.py	/^    KEEP_OPEN       = 'k'$/;"	v	class:scout
 L	nvim/autoload/plug.vim	/^    nnoremap <silent> <buffer> L :call <SID>status_load(line('.'))<cr>$/;"	m
 L	nvim/autoload/plug.vim	/^    xnoremap <silent> <buffer> L :call <SID>status_load(line('.'))<cr>$/;"	m
-L	nvim/init.vim	/^map L ]}$/;"	m
+L	nvim/init.vim	/^map L 999g,zz$/;"	m
 M	nvim/init.vim	/^vmap M :join<CR>$/;"	m
 MARK	ranger/commands_full.py	/^    MARK            = 'm'$/;"	v	class:scout
 N	nvim/init.vim	/^nnoremap <silent> N Nzz$/;"	m
@@ -282,6 +277,8 @@ X	ranger/rifle.conf	/^ext s[wmf]c, has snes9x-gtk,X = snes9x-gtk "$1"$/;"	k
 Y	nvim/init.vim	/^noremap Y y\$$/;"	m
 ZoomToggle	nvim/init.vim	/^command! ZoomToggle call s:ZoomToggle()$/;"	c
 [[	nvim/autoload/plug.vim	/^  nnoremap <silent> <buffer> [[ :silent! call <SID>section('b')<cr>$/;"	m
+[a	nvim/init.vim	/^nmap [a :previous<CR>$/;"	m
+[b	nvim/init.vim	/^nmap [b :bprevious<CR>$/;"	m
 [q	nvim/init.vim	/^nmap [q :cprev<CR>$/;"	m
 \\	nvim/init.vim	/^vmap \\ :norm<space>w$/;"	m
 \x17\x06	nvim/init.vim	/^map  _|$/;"	m
@@ -289,6 +286,8 @@ ZoomToggle	nvim/init.vim	/^command! ZoomToggle call s:ZoomToggle()$/;"	c
 \x1F	nvim/init.vim	/^nmap   <Plug>CommentaryLine$/;"	m
 \x1F	nvim/init.vim	/^vmap   <Plug>Commentary$/;"	m
 ]]	nvim/autoload/plug.vim	/^  nnoremap <silent> <buffer> ]] :silent! call <SID>section('')<cr>$/;"	m
+]a	nvim/init.vim	/^nmap ]a :next<CR>$/;"	m
+]b	nvim/init.vim	/^nmap ]b :bnext<CR>$/;"	m
 ]q	nvim/init.vim	/^nmap ]q :cnext<CR>$/;"	m
 _	nvim/init.vim	/^map _ :Tagbar<CR>$/;"	m
 __init__	ranger/commands_full.py	/^    def __init__(self, *args, **kws):$/;"	m	class:scout
@@ -476,7 +475,7 @@ g:colors_name	sift.vim	/^let g:colors_name="sift"$/;"	v
 g:ctrlp_by_filename	nvim/init.vim	/^let g:ctrlp_by_filename = 0$/;"	v
 g:ctrlp_cmd	nvim/init.vim	/^let g:ctrlp_cmd = 'CtrlPBuffer'$/;"	v
 g:ctrlp_default_input	nvim/init.vim	/^let g:ctrlp_default_input = 0$/;"	v
-g:ctrlp_extensions	nvim/init.vim	/^let g:ctrlp_extensions = ['']$/;"	v
+g:ctrlp_extensions	nvim/init.vim	/^let g:ctrlp_extensions = []$/;"	v
 g:ctrlp_match_current_file	nvim/init.vim	/^let g:ctrlp_match_current_file = 0$/;"	v
 g:ctrlp_match_window	nvim/init.vim	/^let g:ctrlp_match_window = 'bottom,order:btt'$/;"	v
 g:ctrlp_match_window_reversed	nvim/init.vim	/^let g:ctrlp_match_window_reversed = 0$/;"	v
@@ -531,16 +530,17 @@ g:plugs_order	nvim/autoload/plug.vim	/^  let g:plugs_order = []$/;"	v
 g:plugs_order	nvim/autoload/plug.vim	/^  let g:plugs_order = get(g:, 'plugs_order', keys(g:plugs))$/;"	v
 g:pymode_options_max_line_length	nvim/init.vim	/^let g:pymode_options_max_line_length=120$/;"	v
 g:python_highlight_all	nvim/init.vim	/^let g:python_highlight_all=1$/;"	v
-g:qs_first_occurrence_highlight_color	nvim/init.vim	/^let g:qs_first_occurrence_highlight_color = 7$/;"	v
-g:qs_highlight_on_keys	nvim/init.vim	/^let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']$/;"	v
-g:qs_highlight_on_keys	nvim/init.vim	/^let g:qs_highlight_on_keys = ['f', 'F']$/;"	v
-g:qs_second_occurrence_highlight_color	nvim/init.vim	/^let g:qs_second_occurrence_highlight_color = 8$/;"	v
 g:simple_todo_map_keys	nvim/init.vim	/^let g:simple_todo_map_keys = 0$/;"	v
-g:tagbar_autoclose	nvim/init.vim	/^let g:tagbar_autoclose = 1$/;"	v
+g:tagbar_autoclose	nvim/init.vim	/^let g:tagbar_autoclose = 0$/;"	v
 g:tagbar_autofocus	nvim/init.vim	/^let g:tagbar_autofocus = 1$/;"	v
 g:tagbar_case_insensitive	nvim/init.vim	/^let g:tagbar_case_insensitive = 1$/;"	v
 g:tagbar_compact	nvim/init.vim	/^let g:tagbar_compact = 1$/;"	v
 g:tagbar_sort	nvim/init.vim	/^let g:tagbar_sort = 0$/;"	v
+g:test#javascript#jest#executable	nvim/init.vim	/^let g:test#javascript#jest#executable = 'npm test'$/;"	v
+g:test#javascript#jest#file_pattern	nvim/init.vim	/^let g:test#javascript#jest#file_pattern = '.test.js$'$/;"	v
+g:test#javascript#karma#file_pattern	nvim/init.vim	/^let g:test#javascript#karma#file_pattern = 'jest'$/;"	v
+g:test#runners	nvim/init.vim	/^let g:test#runners = {'javascript': ['jest']}$/;"	v
+g:test#strategy	nvim/init.vim	/^let g:test#strategy = "neovim"$/;"	v
 g:this_obsession	Session.vim	/^let g:this_obsession = v:this_session$/;"	v
 g:this_obsession_status	Session.vim	/^let g:this_obsession_status = 2$/;"	v
 g:this_session	Session.vim	/^let g:this_session = v:this_session$/;"	v
@@ -739,7 +739,7 @@ s:job_abort	nvim/autoload/plug.vim	/^function! s:job_abort()$/;"	f
 s:job_cb	nvim/autoload/plug.vim	/^function! s:job_cb(fn, job, ch, data)$/;"	f
 s:job_exit_cb	nvim/autoload/plug.vim	/^function! s:job_exit_cb(self, data) abort$/;"	f
 s:job_out_cb	nvim/autoload/plug.vim	/^function! s:job_out_cb(self, data) abort$/;"	f
-s:l	Session.vim	/^let s:l = 118 - ((24 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 72 - ((26 * winheight(0) + 20) \/ 41)$/;"	v
 s:l	fish/Session.vim	/^let s:l = 81 - ((21 * winheight(0) + 21) \/ 42)$/;"	v
 s:last_non_empty_line	nvim/autoload/plug.vim	/^function! s:last_non_empty_line(lines)$/;"	f
 s:last_rtp	nvim/autoload/plug.vim	/^let s:last_rtp  = s:escrtp(get(s:split_rtp(), -1, ''))$/;"	v
@@ -850,6 +850,7 @@ tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:set_
 tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:shell
 tab	ranger/commands_full.py	/^    def tab(self, tabnum):$/;"	m	class:touch
 terminal	ranger/commands_full.py	/^class terminal(Command):$/;"	c
+test#javascript#jest#options	nvim/init.vim	/^let test#javascript#jest#options = {$/;"	v
 tmap	ranger/commands_full.py	/^class tmap(map_):$/;"	c
 touch	ranger/commands_full.py	/^class touch(Command):$/;"	c
 trim	ranger/scope.sh	/^trim() { head -n "$maxln"; }$/;"	f
@@ -862,6 +863,7 @@ v	nvim/init.vim	/^vmap v :'<,'>VSSplitAbove<CR>$/;"	m
 vimux	nvim/init.vim	/^augroup vimux$/;"	a
 z/	nvim/init.vim	/^map z\/ <Plug>(incsearch-fuzzy-\/)$/;"	m
 z?	nvim/init.vim	/^map z? <Plug>(incsearch-fuzzy-?)$/;"	m
+{	nvim/init.vim	/^vmap { S{I$/;"	m
 ¬	nvim/init.vim	/^map ¬ <c-w>l$/;"	m
 ˙	nvim/init.vim	/^map ˙ <c-w>h$/;"	m
 ˚	nvim/init.vim	/^map ˚ <c-w>k$/;"	m
