@@ -80,6 +80,10 @@ snippet trace "Console Trace"
 console.trace();
 endsnippet
 
+snippet db "Debug"
+debugger;
+endsnippet
+
 snippet for "For loop"
 for (var i = 0; i < $1; i++) {
 	$0
@@ -152,4 +156,10 @@ snippet spreadIf
 ...spreadIf($1, {
   $0
 }),
+endsnippet
+
+snippet ()
+() => {
+  $0
+}
 endsnippet

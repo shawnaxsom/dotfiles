@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/shawn.axsom/dev/ambyint/packages/web/src'
-let g:netrw_dirhist_2='/Users/shawn.axsom/.vim/bundle/nvim-completion-manager/pythonx'
-let g:netrw_dirhist_3='/Users/shawn.axsom/.vim/bundle/nvim-completion-manager'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/shawn.axsom/dev/ambyint/packages/web/src/routes/well/tabs'
+let g:netrw_dirhist_2='/Users/shawn.axsom/dev/ambyint/packages/web/src/routes/well/tabs/setup'
+let g:netrw_dirhist_3='/Users/shawn.axsom/dev/ambyint/packages/web/src/routes/well/tabs/setup/basic-information'
+let g:netrw_dirhist_4='/Users/shawn.axsom/dev/ambyint/packages/web/src/routes/well/tabs/setup'
+let g:netrw_dirhist_5='/Users/shawn.axsom/dev/ambyint/packages/web/src/routes/well/tabs'

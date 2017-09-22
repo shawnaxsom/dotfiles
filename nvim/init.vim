@@ -10,6 +10,7 @@ set noundofile
 
 " Update buffer if file changes outside of Vim, without prompt
 set autoread
+" au CursorHold * checktime
 
 " Don't wrap normally
 set nowrap
@@ -21,12 +22,15 @@ set breakat=\ ^I
 " Don't change directory to current buffer.
 " Some plugins don't work with this enabled, like vimfiler or vimshell
 set noautochdir
-set nolist
+
+" Show tabs, trailing characters as periods
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 " Don't fully collapse windows when doing <c-w>_ or <c-w>|
-set winheight=11
-set winwidth=22
-set winminwidth=8
+set winheight=8
+set winwidth=33
+set winminwidth=33
 set winminheight=8
 
 " If you open up gVim for whatever reason
@@ -53,7 +57,7 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-set scrolloff=3
+set scrolloff=10
 
 " Use Bash shell syntax for :! (even if you are in Fish or ZSH)
 set shell=bash
@@ -131,7 +135,7 @@ set foldlevelstart=999
 set showtabline=0
 
 " Change CWD while navigating in NetRW.
-let g:netrw_keepdir=1
+let g:netrw_keepdir=0
 " Allow netrw to remove non-empty local directories
 let g:netrw_localrmdir='rm -r'
 
@@ -166,7 +170,7 @@ let mapleader = "\<Space>"
 " insert mode. If you start having this timeout apply, something must have set
 " up imap <space> or something similar. Use this to debug:
 " :verbose imap <space>
-set timeoutlen=300
+set timeoutlen=800
 set ttimeoutlen=0
 
 " Minimize how often you see "Press enter or type a command to continue"
@@ -187,35 +191,35 @@ call plug#begin('~/.vim/bundle')
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
 " { CtrlP
-Plug 'ctrlpvim/ctrlp.vim'
-nnoremap <silent> <c-f> :CtrlPLine<CR>
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('rg')
-  set grepprg=rg
-  let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('ack')
-  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
-endif
-let g:ctrlp_cmd = 'CtrlPBuffer'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_by_filename = 0
-let g:ctrlp_regexp = 0
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_match_current_file = 0
-let g:ctrlp_match_window = 'bottom,order:btt'
-let g:ctrlp_switch_buffer = 'e'
-let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_default_input = 0
-let g:ctrlp_types = ['buf', 'mru', 'fil']
-let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_extensions = []
+" Plug 'ctrlpvim/ctrlp.vim'
+" " nnoremap <silent> <c-f> :CtrlPLine<CR>
+" if executable('ag')
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
+"   let g:ctrlp_use_caching = 0
+" elseif executable('rg')
+"   set grepprg=rg
+"   let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
+"   let g:ctrlp_use_caching = 0
+" elseif executable('ack')
+"   set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
+" endif
+" let g:ctrlp_cmd = 'CtrlPBuffer'
+" let g:ctrlp_use_caching = 0
+" let g:ctrlp_by_filename = 0
+" let g:ctrlp_regexp = 0
+" let g:ctrlp_match_window_reversed = 0
+" let g:ctrlp_mruf_relative = 1
+" let g:ctrlp_match_current_file = 0
+" let g:ctrlp_match_window = 'bottom,order:btt'
+" let g:ctrlp_switch_buffer = 'e'
+" let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_default_input = 0
+" let g:ctrlp_types = ['buf', 'mru', 'fil']
+" let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
+" let g:ctrlp_mruf_relative = 1
+" let g:ctrlp_extensions = []
 " }
 " { Fugitive / Extradite
 Plug 'tpope/vim-fugitive'
@@ -242,6 +246,7 @@ map <leader>gL :Glog<BAR>:bot copen<CR>
 " { GitGutter
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_highlight_lines = 0
+let g:gitgutter_map_keys = 0
 " }
 " { Vim-Signature
 " Show markers in gutter
@@ -255,14 +260,27 @@ let g:VimuxPromptString = "Vimux>  $ "
 map ,v :call VimuxPromptCommand("npm start")<CR>
 " Dispatch is better for single tasks, shows quickfix results afterwards
 map ,d :Dispatch<SPACE>
+function! VimuxRunFromClipboard()
+  let clipboardText = @+
+  let clipboardText = substitute(clipboardText, "\n", "", "g")
+  let clipboardText = substitute(clipboardText, "\r", "", "g")
+  let clipboardText = substitute(clipboardText, "^@", "", "g")
+
+  let clipboardText = substitute(clipboardText, "http://", "", "")
+  " let command = ':sp term://' . clipboardText
+  let command = ':!' . clipboardText
+  " echom command
+  execute command
+endfunction
+vmap ,r y:call VimuxRunFromClipboard()<CR>
 map ,i :call VimuxInspectRunner()<CR>
 " map ,z :VimuxZoomRunner<CR>
 " map ,r :call VimuxPromptCommand("npm start")<CR>
 " map ,r :Dispatch npm start<CR>
-map ,r :call VimuxRunCommand("npm start")<CR>
 " map ,q :call VimuxPromptCommand("env NODE_ENV=qa npm start")<CR>
 " map ,q :Dispatch env NODE_ENV=qa npm start<CR>
-map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>
+" map ,r :call VimuxRunCommand("npm start")<CR>
+" map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>
 augroup vimux
   autocmd!
   autocmd BufEnter */api/* map <buffer> ,q :call VimuxRunCommand("npm run build; and env NODE_ENV=qa npm start")<CR>
@@ -284,12 +302,15 @@ let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
 Plug 'SirVer/ultisnips'
-nmap <leader><leader>s :UltiSnipsEdit<CR>
+nmap <leader>es :UltiSnipsEdit<CR>
+let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir = $HOME."/dotfiles/UltiSnips"
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/dotfiles/UltiSnips']
+let g:UltiSnipsEnableSnipMate = 0
 " }
 " { YouCompleteMe
 Plug 'ervandew/supertab'
@@ -367,6 +388,17 @@ nmap <leader><leader>w :Obsess!<CR>
 " crc - camelCase
 " crm - MixedCase
 Plug 'tpope/tpope-vim-abolish'
+nmap <leader>s V:s/
+vmap <leader>s :s/
+nmap <leader>S V:S/
+vmap <leader>S :S/
+nmap <leader><leader>s :%s//
+vmap <leader><leader>s y:%s/+/+
+nmap <leader><leader>S :%S//
+vmap <leader><leader>S y:%S/+/+
+
+" vmap r :S/
+" vmap M :join<CR>
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -374,9 +406,12 @@ Plug 'tpope/tpope-vim-abolish'
 " -----------------------------------------------------------------------------------------
 " { Surround
 Plug 'tpope/vim-surround'
-" vmap s <Plug>VSurround
+vmap s <Plug>VSurround
+vmap s <Plug>VSurround
 " nmap s viw<Plug>VSurround
-nmap S v$h<Plug>VSurround
+" nmap S v$h<Plug>VSurround
+" echo char2nr("i")
+let g:surround_105 = "if (\1if statement: \1) {\r}"
 " }
 " { CtrlSF
 Plug 'dyng/ctrlsf.vim'
@@ -397,6 +432,8 @@ vmap <leader>8 "hy:GrepperAg -Q '<c-r>h'<CR>
 nmap <leader>/ :GrepperAg ""<LEFT>
 nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 nmap <leader><leader><leader>/ :GrepperAg "" %:p:h:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+
+nmap <silent> ,/ :nohlsearch<CR>
 " Search only open buffers
 function! ToggleGrepperBuffersMode()
   if g:grepper.buffers
@@ -410,11 +447,11 @@ endfunction
 map <leader><leader>g :call ToggleGrepperBuffersMode()<CR>
 nmap gr "hyiw:GrepperAg <c-r>h<CR>
 " nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
-nmap gi :GrepperAg %:p:t:r<CR>
+" nmap gi :GrepperAg %:p:t:r<CR>
 " map <F4> "hyiw:GrepperAg <c-r>h<CR>
 let g:grepper = {}
 runtime autoload/grepper.vim
-let g:grepper.jump = 1
+let g:grepper.jump = 0
 let g:grepper.stop = 500
 " }
 " { Quickfix-Reflector
@@ -426,23 +463,26 @@ Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
 let g:simple_todo_map_keys = 0
 " map gs :topleft 12split ~/.scratch<CR>
-map gs :topleft split ~/.scratch<CR>
+map gsh :topleft split ~/habits.scratch<CR>
+map gss :topleft split ~/.scratch<CR>
+map gsp :topleft split ~/personal.scratch<CR>
+map gsw :topleft split ~/work.scratch<CR>
 augroup simpletodo
   autocmd!
-  autocmd BufEnter   .scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter   .scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter   .scratch nmap <buffer> ,o <Plug>(simple-todo-below)
-  autocmd BufEnter   .scratch nmap <buffer> x <Plug>(simple-todo-mark-switch)
-  autocmd BufEnter   .scratch nmap <buffer> X :%g/\[x\]/d<CR>
-  " autocmd BufEnter .scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
-  " autocmd BufEnter .scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
-  " autocmd BufEnter .scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
-  autocmd BufEnter   .scratch imap <buffer> [[ <Plug>(simple-todo-new)
-  autocmd BufEnter   .scratch imap <buffer> ,i <Plug>(simple-todo-new)
-  autocmd BufEnter   .scratch imap <buffer> ,o <Plug>(simple-todo-new)
-  autocmd BufLeave   .scratch w
-  autocmd BufEnter   .scratch abbreviate <buffer> [ [ ]
-  autocmd BufRead    .scratch setlocal foldlevel=0
+  autocmd BufEnter   *.scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter   *.scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
+  autocmd BufEnter   *.scratch nmap <buffer> ,o <Plug>(simple-todo-below)
+  autocmd BufEnter   *.scratch nmap <buffer> <leader>x <Plug>(simple-todo-mark-switch)
+  autocmd BufEnter   *.scratch nmap <buffer> <leader><leader>X :%g/\[x\]/d<CR>
+  " autocmd BufEnter *.scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
+  " autocmd BufEnter *.scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
+  " autocmd BufEnter *.scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
+  autocmd BufEnter   *.scratch imap <buffer> [[ <Plug>(simple-todo-new)
+  autocmd BufEnter   *.scratch imap <buffer> ,i <Plug>(simple-todo-new)
+  autocmd BufEnter   *.scratch imap <buffer> ,o <Plug>(simple-todo-new)
+  autocmd BufLeave   *.scratch w
+  autocmd BufEnter   *.scratch abbreviate <buffer> [ [ ]
+  autocmd BufRead    *.scratch setlocal foldlevel=0
 augroup END
 " }
 " { Codi
@@ -496,6 +536,7 @@ let g:neoformat_javascript_prettier = {
             \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
             \ }
             " \ 'args': ['--trailing-comma all', '--no-bracket-spacing', '--single-quote', '--no-semi'],
+            " \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_verbose = 0
 " augroup fmt
@@ -533,16 +574,16 @@ let g:ale_fixers = {
 " { NERDTree
 Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" autocmd VimEnter * NERDTree
-let g:NERDTreeMinimalUI        = 1
-let g:NERDTreeShowBookmarks    = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeDirArrows        = 1
-let g:NERDTreeQuitOnOpen       = 0
-" noremap - :NERDTreeFind<CR>
-noremap - :e %:p:h<CR>
-autocmd FileType nerdtree nnoremap <silent><buffer> - :call nerdtree#ui_glue#invokeKeyMap("u")<CR>
-map <leader><leader>B :Bookmark<space>
+" " autocmd VimEnter * NERDTree
+" let g:NERDTreeMinimalUI        = 1
+" let g:NERDTreeShowBookmarks    = 1
+" let g:NERDTreeAutoDeleteBuffer = 1
+" let g:NERDTreeDirArrows        = 1
+" let g:NERDTreeQuitOnOpen       = 0
+" " noremap - :NERDTreeFind<CR>
+" noremap - :e %:p:h<CR>
+" autocmd FileType nerdtree nnoremap <silent><buffer> - :call nerdtree#ui_glue#invokeKeyMap("u")<CR>
+" map <leader><leader>B :Bookmark<space>
 " }
 " { yankstack
 " Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
@@ -554,7 +595,7 @@ map <leader><leader>B :Bookmark<space>
 " }
 " { Tagbar
 Plug 'majutsushi/tagbar'
-map _ :Tagbar<CR>
+map + :Tagbar<CR>
 let g:tagbar_autoclose = 0
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
@@ -646,34 +687,48 @@ map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 " }
 " { EasyMotion
-Plug 'easymotion/vim-easymotion'
-nmap <leader>j <Plug>(easymotion-bd-j)
-nmap <leader>k <Plug>(easymotion-bd-k)
-" nmap s <Plug>(easymotion-s2)
-" nmap s <Plug>(easymotion-bd-w)
-" nmap S <Plug>(easymotion-s2)
-" nmap S <Plug>(easymotion-s)
-nmap s <Plug>(easymotion-s)
-nmap S <Plug>(easymotion-bd-w)
-map <Leader>j <Plug>(easymotion-w)
-map <Leader>k <Plug>(easymotion-b)
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-" <Leader>f{char} to move to {char}
-map  <Leader>v <Plug>(easymotion-bd-f)
-nmap <Leader>v <Plug>(easymotion-overwin-f)
+" Plug 'easymotion/vim-easymotion'
+" nmap <leader>j <Plug>(easymotion-bd-j)
+" nmap <leader>k <Plug>(easymotion-bd-k)
+" " nmap s <Plug>(easymotion-s2)
+" " nmap s <Plug>(easymotion-bd-w)
+" " nmap S <Plug>(easymotion-s2)
+" " nmap S <Plug>(easymotion-s)
+" nmap s <Plug>(easymotion-s)
+" nmap S <Plug>(easymotion-bd-w)
+" map <Leader>j <Plug>(easymotion-w)
+" map <Leader>k <Plug>(easymotion-b)
+" map <Leader><Leader>j <Plug>(easymotion-j)
+" map <Leader><Leader>k <Plug>(easymotion-k)
+" " <Leader>f{char} to move to {char}
+" map  <Leader>v <Plug>(easymotion-bd-f)
+" nmap <Leader>v <Plug>(easymotion-overwin-f)
 
-" s{char}{char} to move to {char}{char}
-" nmap s <Plug>(easymotion-overwin-f2)
+" " s{char}{char} to move to {char}{char}
+" " nmap s <Plug>(easymotion-overwin-f2)
 
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+" " Move to line
+" map <Leader>L <Plug>(easymotion-bd-jk)
+" nmap <Leader>L <Plug>(easymotion-overwin-line)
 
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-let g:EasyMotion_smartcase = 1
+" " Move to word
+" map  <Leader>w <Plug>(easymotion-bd-w)
+" nmap <Leader>w <Plug>(easymotion-overwin-w)
+" let g:EasyMotion_smartcase = 1
+" }
+" { Vim-Sneak
+Plug 'justinmk/vim-sneak'
+" nmap s <Plug>SneakLabel_s
+" nmap S <Plug>SneakLabel_S
+" map s <Plug>Sneak_s
+" map S <Plug>Sneak_S
+" let g:sneak#label = 1
+let g:sneak#s_next = 1
+" let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
+let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
+" }
+" { rhysd/clever-f.vim
+Plug 'rhysd/clever-f.vim'
 " }
 " { vim-visual-star-search
 " Allow you to use * and # on visually selected text
@@ -746,13 +801,16 @@ noremap <F9> :RandomColorScheme<CR>:colo<CR>
 " { vim-vinegar
 " Nice additions to netrw, but still not fun to rename/move/etc
 Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
+nnoremap _ :execute 'edit ' . getcwd()<CR>
 " }
 " { FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-Plug 'junegunn/fzf.vim'
-let g:fzf_buffers_jump = 1
-" nnoremap <c-p> :Buffers<CR>
-" nnoremap <c-f> :BLines<CR>
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+" Plug 'junegunn/fzf.vim'
+" " nnoremap <silent> <c-f> :BLines<CR>
+" let g:fzf_buffers_jump = 1
+" nnoremap <c-p> :Files src/<CR>
+" nnoremap <c-b> :Buffers<CR>
+" " nnoremap <c-f> :BLines<CR>
 " }
 " { Targets.vim
 " Adds a few text objects, like:
@@ -771,11 +829,48 @@ let g:used_javascript_libs = 'lodash,react,flux,d3'
 " nnoremap <leader><leader>h <Esc>:call ToggleHardMode()<CR>
 " }
 " { Dirvish
-" Plug 'justinmk/vim-dirvish'  " File manager
-" " noremap - :e %:p:h<CR>
-" noremap - :Dirvish %<CR>
-" noremap - :Dirvish %:p:h<CR>
-" let g:dirvish_relative_paths = 1
+Plug 'justinmk/vim-dirvish'  " File manager
+" noremap - :e %:p:h<CR>
+noremap - :Dirvish %<CR>
+noremap - :Dirvish %:p:h<CR>
+let g:dirvish_mode = ':sort ,^.*[\/],'
+let g:dirvish_relative_paths=1
+function! Relpath(filename)
+	let cwd = getcwd()
+	let s = substitute(a:filename, l:cwd . "/" , "", "")
+	return s
+endfunction
+function! InsertBookmarks()
+  " execute "norm gg:read ~/dotfiles/nvim/bookmarks"
+  execute "norm mZ"
+
+  execute "norm ggI~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  execute "norm I" . substitute(Relpath(expand("%:p")), '/', ' > ', 'g') . ""
+  " execute "norm I> " . substitute(substitute(fnamemodify(expand("%"), ":~:."), '/', '', ''), '/', ' > ', 'g') . ""
+  execute "norm I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+  execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
+  call feedkeys("")
+
+  execute "norm 2\<c-o>0"
+endfunction
+augroup dirvish
+  autocmd!
+  " autocmd FileType dirvish nnoremap <buffer> <leader>r :Renamer %<CR>
+  autocmd FileType dirvish nnoremap <buffer> <leader>r :Shdo! mv {} {}<CR>
+  autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>
+  autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
+  autocmd FileType dirvish nnoremap <buffer> e :e %
+  autocmd FileType dirvish nnoremap <buffer> m :Mkdir %
+  " autocmd FileType dirvish nnoremap <buffer> D :call feedkeys(':!rm -rf %/' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> r :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> D :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
+
+  " Enable :Gstatus and friends.
+  autocmd FileType dirvish call fugitive#detect(@%)
+  autocmd FileType dirvish call InsertBookmarks()
+augroup END
 " }
 " { Dracula (colorscheme)
 Plug 'dracula/vim'
@@ -801,6 +896,11 @@ nmap <leader>= =
 "   autocmd BufEnter *.{js} :norm |<CR>
 "   autocmd BufEnter *.{js} :norm _<CR>
 " augroup END
+augroup maximizepane
+  autocmd!
+  autocmd BufWinEnter,WinEnter *{.js,/} :norm |<CR>
+  autocmd BufWinEnter,WinEnter *{.js,/} :norm _<CR>
+augroup END
 " }
 " { vim-syntax-expand
 " Like abbreviations, but _head can detect if first character on line, and
@@ -820,6 +920,10 @@ Plug 'elzr/vim-json'
 " -----------------------------------------------------------------------------------------
 " 5 - New / Evaluating
 " -----------------------------------------------------------------------------------------
+" { tpope/vim-jdaddy
+" gqaj - Pretty print json
+Plug 'tpope/vim-jdaddy'
+" }
 " { Vim-Pad
 " :Pad new
 " :Pad ls
@@ -861,15 +965,6 @@ inoreabbrev <expr> __
 " Plug 'junegunn/goyo.vim'
 " nmap <leader>z :Goyo<CR>
 " }
-" { Quick Scope
-" Show best jump character with F or T
-" Conflicting with yankstack
-" Plug 'unblevable/quick-scope'
-" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" let g:qs_highlight_on_keys = ['f', 'F']
-" let g:qs_first_occurrence_highlight_color = 7
-" let g:qs_second_occurrence_highlight_color = 8
-" }
 " { BufSurf
 " Buffer history navigation
 " Plug 'ton/vim-bufsurf'
@@ -890,13 +985,20 @@ inoreabbrev <expr> __
 " * C-A to auto complete all glob matches, e.g. :bd **/*<CA>
 nmap <leader>c :bdelete!<CR>
 " nmap <silent> <leader><leader>a :cdo badd %<CR>
+nmap <leader><leader>a :%argdelete<CR>
 nmap <leader>a :args **/**<LEFT>
+nmap <leader>! :argdo<space>
 nmap <silent> <leader><leader>c :%bdelete!<CR>
 nmap <leader><leader>f :filter // ls<LEFT><LEFT><LEFT><LEFT>
 nmap <leader>f :find **/*
 nmap <leader><leader>f :find <C-R>=expand('%:h').'/'<CR>
 nmap <leader><leader>b :ls h<CR>:b
-nmap <leader>b :ls<CR>:b
+
+noremap <c-p> :find **/*
+" noremap <leader>b :ls h<CR>:b<space>
+" noremap <leader>b :ls<CR>:b<space>
+noremap <leader>b :b<space>
+
 nmap <leader>] :tjump /
 set wildignore=*.swp,*.bak
 set wildignore+=/usr/**/*
@@ -913,12 +1015,12 @@ set wildignore+=*.tar.*
 " Rename and move files and folders in batch as plain text
 " :Renamer
 Plug 'qpkorr/vim-renamer'
-nmap <leader>r :Renamer<CR>
+nmap <leader><leader>r :Renamer<CR>
 " }
 " { Vim-Rooter
 " Change directory to project root if you are in a subfolder
-" let g:rooter_patterns = ['app.js']
-" Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['app.js']
+Plug 'airblade/vim-rooter'
 " }
 " { thameera/vimv
 " Alternative to vim-renamer
@@ -928,23 +1030,6 @@ Plug 'thameera/vimv'
 Plug 'janko-m/vim-test'
 nmap <silent> ,t :TestFile<CR>
 " tnoremap <Leader><ESC> <C-\><C-n>
-nmap <silent> <leader>t :sp term://fish<CR>i
-nmap <C-\> <C-\><C-n> :wincmd p<CR>
-" tnoremap <C-\> <C-\><C-n> :wincmd p<CR>
-tnoremap <C-\> <C-\><C-n>
-tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
-tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
-tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
-tnoremap <C-l> <C-\><C-n>:wincmd l<CR>
-" Map leader+number to jump to pane, also exits terminal mode
-" " Source: http://stackoverflow.com/a/6404246/151007
-" let i = 1
-" " If I have more than 9 windows open I have bigger problems :)
-" while i <= 9
-"   execute 'nnoremap <Leader>'.i.' :'.i.'wincmd w<CR>'
-"   execute 'tnoremap <Leader>' . i . ' <C-\><C-n>' .':' .  i . 'wincmd w<CR>'
-"   let i = i + 1
-" endwhile
 let g:test#runners = {'javascript': ['jest']}
 let g:test#javascript#karma#file_pattern = 'jest'
 let g:test#javascript#jest#file_pattern = '.test.js$'
@@ -957,17 +1042,25 @@ let test#javascript#jest#options = {
 \}
 
 " }
+" { BufExplorer
+nmap <leader><leader>b :BufExplorer<CR>gg4j
+Plug 'jlanzarotta/bufexplorer'
+let g:bufExplorerDisableDefaultKeyMapping = 1
+" }
+" { djoshea/vim-autoread
+Plug 'djoshea/vim-autoread'
+" }
 call plug#end()
 
 " }
 
 " { Special mappings
 " Automatically add a curly bracket on new line
-execute "inoremap {<CR> {<CR>}<ESC>V=O"
-vmap { S{I
-execute "inoremap (<CR> (<CR>)<ESC>V=O"
-vmap ( S(I
-vmap <BS> :join<CR>
+" execute "inoremap {<CR> {<CR>}<ESC>V=O"
+" vmap { S{I
+" execute "inoremap (<CR> (<CR>)<ESC>V=O"
+" vmap ( S(I
+" vmap <BS> :join<CR>
 " }
 
 " { Languages
@@ -983,7 +1076,7 @@ augroup pythonsettings
 augroup END
 augroup pythondispatch
   autocmd!
-  autocmd FileType python map ,r :Dispatch python %:p<CR>
+  autocmd FileType python map <buffer> ,r :Dispatch python %:p<CR>
 augroup END
 " }
 
@@ -1045,6 +1138,15 @@ augroup END
 
 " { Mappings
 
+" { Disable bad habits
+" map <c-c> <nop>
+" " imap jj <esc>
+" nmap h <nop>
+" nmap j <nop>
+" nmap k <nop>
+" nmap l <nop>
+" }
+
 " { Comma
 
 " map ,, :b<Space>
@@ -1073,23 +1175,176 @@ augroup END
 
 " }
 
+" URL encode a string. ie. Percent-encode characters as necessary.
+function! UrlEncode(string)
+
+    let result = ""
+
+    let characters = split(a:string, '.\zs')
+    for character in characters
+        if character == " "
+            let result = result . "+"
+        elseif CharacterRequiresUrlEncoding(character)
+            let i = 0
+            while i < strlen(character)
+                let byte = strpart(character, i, 1)
+                let decimal = char2nr(byte)
+                let result = result . "%" . printf("%02x", decimal)
+                let i += 1
+            endwhile
+        else
+            let result = result . character
+        endif
+    endfor
+
+    return result
+
+endfunction
+
+" Returns 1 if the given character should be percent-encoded in a URL encoded
+" string.
+function! CharacterRequiresUrlEncoding(character)
+
+  let ascii_code = char2nr(a:character)
+  if ascii_code >= 48 && ascii_code <= 57
+    return 0
+  elseif ascii_code >= 65 && ascii_code <= 90
+    return 0
+  elseif ascii_code >= 97 && ascii_code <= 122
+    return 0
+  elseif a:character == "-" || a:character == "_" || a:character == "." || a:character == "~"
+    return 0
+  endif
+
+  return 1
+
+endfunction
+
+function! LetMeDuckThatForYou(defaultPhrase)
+  " let search = UrlEncode(a:foo)
+  " let search = 'foo'
+  " echo 'sp term://elinks https://www.google.com/search?q=' . search
+  " execute 'sp term://surfraw google ' . search
+  " execute 'sp term://elinks www.google.com/search?q=' . search
+  " execute 'sp term://elinks www.google.com/search?q=foo'
+  " execute 'sp term://googler --count 2 ' . search
+  " execute 'norm :sp term://googler --count 2 ' . search
+  " call feedkeys(":sp")
+  " call feedkeys(':sp term://googler --count 2 ' . a:foo)
+  " call feedkeys(':vsp term://env BROWSER=elinks googler --count 3 ' . a:foo)
+  " let searchCommand = ':vsp term://env BROWSER=w3m googler --count 3 '
+
+  " let searchCommand = ':vsp term://env BROWSER=elinks googler --count 3 '
+  " let searchCommand = searchCommand . a:foo
+
+  call inputsave()
+  " let phrase = input('Enter search phrase: ', a:defaultPhrase)
+  let phrase = input('', a:defaultPhrase)
+  call inputrestore()
+
+  " let searchCommand = ':vsp term://elinks duckduckgo.com/?q='
+  " let searchCommand = searchCommand . UrlEncode(phrase)
+  let searchCommand = ':vsp term://elinks duckduckgo.com/?q='
+  let searchCommand = searchCommand . UrlEncode(phrase)
+
+  " execute searchCommand
+  " call feedkeys('i')
+  execute '!open https://duckduckgo.com/?q=' . UrlEncode(phrase)
+endfunction
+
+" { Terminal
+nmap <silent> <leader>t :sp term://fish<CR>i
+nmap ,r :sp term://npm start<CR>
+map ,q :sp term://env NODE_ENV=qa npm start<CR>
+" nmap <leader>oh !open https://github.com/search?q=
+" nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
+" nmap <leader>og :sp term://surfraw google javascript i
+" nmap <leader>og :call LetMeDuckThatForYou(expand("<cfile>"))<CR>i
+" nmap <leader>og :call LetMeDuckThatForYou('javascript')<CR>i
+" nmap <leader>o :call LetMeDuckThatForYou(&filetype . ' ')<CR>
+nmap <leader>O :call LetMeDuckThatForYou(&filetype . ' ' . '<c-r><c-w>')<CR>
+nmap <leader>o :call LetMeDuckThatForYou('')<CR>
+vmap <leader>o y:call LetMeDuckThatForYou(&filetype . ' ' . @+)<CR>
+nmap <C-\> <C-\><C-n> :wincmd p<CR>
+" tnoremap <C-\> <C-\><C-n> :wincmd p<CR>
+tnoremap <C-\> <C-\><C-n>
+tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
+tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
+tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
+tnoremap <C-l> <C-\><C-n>:wincmd l<CR>
+" Map leader+number to jump to pane, also exits terminal mode
+" " Source: http://stackoverflow.com/a/6404246/151007
+" let i = 1
+" " If I have more than 9 windows open I have bigger problems :)
+" while i <= 9
+"   execute 'nnoremap <Leader>'.i.' :'.i.'wincmd w<CR>'
+"   execute 'tnoremap <Leader>' . i . ' <C-\><C-n>' .':' .  i . 'wincmd w<CR>'
+"   let i = i + 1
+" endwhile
+" }
+
+function! SetScratchBuffer()
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+endfunction
+function! DiffThis()
+  " normal! ?<<
+  normal! ?^<<<<<<<
+  normal! j
+  normal! V
+  normal! /^=======
+  normal! k
+  normal! "ay
+
+  /^=======
+  normal! j
+  normal! V
+  /^>>>>>>>
+  normal! k
+  normal! "by
+  normal! 
+
+  silent split /tmp/a.js
+  call SetScratchBuffer()
+
+  normal! ggVGd
+  normal! "aP
+  diffthis
+
+  silent vsplit /tmp/b.js
+  call SetScratchBuffer()
+
+  normal! ggVGd
+  normal! "bP
+  diffthis
+
+endfunction
+
+" { Diff a git merge conflict
+" vnoremap <leader>d y:sp orig<CR>P?<<<<<<\jV/======k"ay/=========jV/>>>>>>>>k"by:sp a"aP:diffthis:sp b"bP:diffthis
+" nmap <leader>d :call DiffThis()
+" }
+
 " { Leader <Space>
+
+" copy current absolute filename into register
+nnoremap <leader>yf :let @*=expand('%:p')<CR>
+" copy file contents
+" nnoremap <leader>yf :%y+<cr>
 
 nmap <leader><leader>i :PlugInstall<CR>
 " nmap <leader><leader>j :join<CR>
 nmap <leader><leader>u :PlugClean!<CR>
 " nmap <leader><leader>v :vsp ~/dotfiles/.vimrc<CR>
-nmap <leader><leader>v :vsp ~/.config/nvim/init.vim<CR>
+nmap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader><leader>t :sp ~/dotfiles/.ctags<CR>
 
-nmap <leader>oh !open https://github.com/search?q=
-nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
-nmap <leader>oo !open https://www.google.com/search?q=javascript+
 nmap <leader>q :q<CR>
 nmap <leader><leader>q :qa<CR>
-nmap <leader>s :sp<CR>
+nmap <leader>h :sp<CR>
 nmap <leader>v :vsp<CR>
-nmap <leader>w :wa<CR>
+nmap <leader>w :w<CR>
 
 " Go to next / previous change (GitGutter)
 " nmap <leader>j ]c
@@ -1098,30 +1353,26 @@ nmap <leader>w :wa<CR>
 " Switch to previous file
 map <leader><tab> <c-^>
 
-" nmap <leader>0 :set foldlevel=0<CR>
-" nmap <leader>1 :set foldlevel=1<CR>
-" nmap <leader>2 :set foldlevel=2<CR>
-" nmap <leader>3 :set foldlevel=3<CR>
-" nmap <leader>4 :set foldlevel=4<CR>
-" nmap <leader>5 :set foldlevel=5<CR>
-" nmap <leader>6 :set foldlevel=6<CR>
-" nmap <leader>7 :set foldlevel=7<CR>
-" nmap <leader>9 :set foldlevel=999<CR>
+nmap <leader>0 :set foldlevel=0<CR>
+nmap <leader>1 :set foldlevel=1<CR>
+nmap <leader>2 :set foldlevel=2<CR>
+nmap <leader>3 :set foldlevel=3<CR>
+nmap <leader>4 :set foldlevel=4<CR>
+nmap <leader>5 :set foldlevel=5<CR>
+nmap <leader>6 :set foldlevel=6<CR>
+nmap <leader>7 :set foldlevel=7<CR>
+nmap <leader>9 :set foldlevel=999<CR>
 
 " }
 
 " { Visual Mode
 vmap I :norm I
 vmap A :norm A
-vmap \ :norm<space>w
+vmap <enter> :norm<space>
 vmap <bar> :g/
-vmap <leader>s :sort<CR>
-nmap <leader>l yiw{oconsole.warn(""", ")^
-vmap <leader>l y{oconsole.warn(""", ")^
-
-
-vmap r :S/
-vmap M :join<CR>
+" vmap <leader>s :sort<CR>
+nmap <leader>l yiw{oconsole.warn(`"`, ")^
+vmap <leader>l y{oconsole.warn(`"`, ")^
 " }
 
 " { Window Keys
@@ -1132,11 +1383,16 @@ map f _<bar>
 
 " { Default behavior overrides
 
+noremap ; :
+
 nnoremap g} :split<CR>gd
 
 " Always search regular regex - no escape characters needed
-nnoremap / /\v
-vnoremap / /\v
+" nnoremap / /\v
+" vnoremap / /\v
+" Case insensitive search (but still have case sensitive for :substitute
+nnoremap / /\c
+vnoremap / /\c
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -1146,11 +1402,14 @@ nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 
 " Don't skip wrapped lines
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 " Y should copy to end of line, not full line, same as D
 noremap Y y$
+
+" Ctrl+F to search from top of file
+" nnoremap <c-f> gg/\c
 
 " }
 
@@ -1166,12 +1425,14 @@ map ! :!
 " { Navigation in buffer
 " map J }zz
 " map K {zz
-map J 5jzz
-map K 5kzz
+" map J 5jzz
+" map K 5kzz
+map J 5j
+map K 5k
 " map H [{
 " map L ]}
-map H g;zz
-map L 999g,zz
+map H g;zz0
+map L 999g,zz0
 
 " vmap J }zz
 " vmap K {zz
@@ -1256,7 +1517,7 @@ function! s:ZoomToggle() abort
     endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
-nnoremap <silent> <C-A> :ZoomToggle<CR>
+" nnoremap <silent> <C-A> :ZoomToggle<CR>
 
 " vmap \em :call ExtractMethod()<CR>
 " function! ExtractMethod() range
@@ -1291,31 +1552,31 @@ abbreviate --- -----------------------------------------------------------------
 set termguicolors
 set background=dark
 
-" colorscheme beekai
-" colorscheme badwolf
-" colorscheme molokai
-" colorscheme Monokai
-" colorscheme void
-" colorscheme sift
-" colorscheme darkburn
-syntax on
-" colorscheme null
-" colorscheme predawn
-" colorscheme zenburn
-" colorscheme elflord
+" " colorscheme beekai
+" " colorscheme badwolf
+" " colorscheme molokai
+" " colorscheme Monokai
+" " colorscheme void
+" " colorscheme sift
+" " colorscheme darkburn
+" syntax on
+" " colorscheme null
+" " colorscheme predawn
+" " colorscheme zenburn
+" " colorscheme elflord
 " colorscheme gruvbox
 " colorscheme dracula
-" colorscheme solarized
-" colorscheme monokai
+" " colorscheme solarized
+" " colorscheme monokai
 " colorscheme deus
 colorscheme flattr
-" } Colorscheme
+" " } Colorscheme
 
-" { Highlights
-" These come after Colorscheme so they don't get overwritten
-"
-" { Background
-highlight Normal guibg=#2a2a2a
+" " { Highlights
+" " These come after Colorscheme so they don't get overwritten
+" "
+" " { Background
+highlight Normal guibg=#282828
 " }
 "
 " { Comments
@@ -1346,6 +1607,10 @@ hi default Matchmaker term=underline    ctermbg=238     guibg=#555555
 " { Numbers
 hi LineNr guifg=#777777
 " }
+" " { Search
+highlight IncSearch      cterm=reverse ctermfg=184 ctermbg=234 gui=reverse guifg=#505050 guibg=#f00000
+highlight Search         ctermfg=0     ctermbg=220                         guifg=#f00000 guibg=#505050
+" " }
 " }
 
 " { Macros / macro-like mappings
