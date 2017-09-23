@@ -28,10 +28,10 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 " Don't fully collapse windows when doing <c-w>_ or <c-w>|
-set winheight=8
+set winheight=4
 set winwidth=33
 set winminwidth=33
-set winminheight=8
+set winminheight=4
 
 " If you open up gVim for whatever reason
 set guioptions-=m  "remove menu bar
@@ -186,6 +186,13 @@ set inccommand=split
 " }
 
 " { Plugins
+"
+" " Install Vim Plug if not installed
+" if empty(glob('~/.config/nvim/autoload/plug.vim'))
+"   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+"     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"   autocmd VimEnter * PlugInstall
+" endif
 call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
@@ -312,20 +319,17 @@ let g:UltiSnipsSnippetsDir = $HOME."/dotfiles/UltiSnips"
 let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/dotfiles/UltiSnips']
 let g:UltiSnipsEnableSnipMate = 0
 " }
-" { YouCompleteMe
+" { Supertab
 Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_log_level = 'debug'
-let g:ycm_cache_omnifunc = 1
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
-" These don't work as well as tern_for_vim
-" nmap <silent> gd :YcmCompleter GoTo<CR>
-" nmap <silent> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+" }
+" { YouCompleteMe
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
+" let g:ycm_show_diagnostics_ui = 1
+" let g:ycm_log_level = 'debug'
+" let g:ycm_cache_omnifunc = 1
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " }
 
 " if !has('nvim')
@@ -333,26 +337,57 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " endif
 " Plug 'roxma/nvim-completion-manager'
 " let g:cm_refresh_length=2
-" " let g:cm_matcher = {'module': 'cm_matchers.abbrev_matcher'}
-" let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
+" let g:cm_matcher = {'module': 'cm_matchers.abbrev_matcher'}
+" " let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
 
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'ervandew/supertab'
-" Plug 'othree/jspc.vim'
-" let g:deoplete#enable_at_startup = 1
-" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.javascript = [
-"   \ 'tern#Complete',
-"   \ 'jspc#omni'
-" \]
-" " set completeopt=longest,menuone,preview
+" Plug 'autozimu/LanguageClient-neovim'
+" set hidden
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"     \ 'javascript.jsx': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"     \ }
+" let g:LanguageClient_autoStart = 1
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" { Deoplete
+" Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
+" followed by a property in a string. "rodDimensions." showed all props of
+" random variable.
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
+Plug 'othree/jspc.vim'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
+let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+let g:deoplete#sources#ternjs#filetypes = [
+      \ 'jsx',
+      \ 'javascript.jsx',
+      \ 'vue',
+      \ ]
+let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
 " let g:deoplete#sources = {}
-" " let g:deoplete#sources['javascript.jsx'] = ['buffer', 'tag', 'file', 'ultisnips', 'ternjs']
+" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'tag', 'file', 'ultisnips', 'ternjs']
 " let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs', 'tag', 'buffer']
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-" " let g:tern#command = ['tern']
-" " let g:tern#arguments = ['--persistent']
+" let g:tern#command = ['tern']
+" let g:tern#arguments = ['--persistent']
+" }
 
 " { vim-polyglot
 " Collection of language plugins.
@@ -638,8 +673,8 @@ let s:prevcountcache=[[], 0]
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 " let g:airline_theme='minimalist'
-let g:airline_theme='deus'
-" let g:airline_theme='hybrid'
+" let g:airline_theme='deus'
+let g:airline_theme='hybrid'
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
 " let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
@@ -735,7 +770,9 @@ Plug 'rhysd/clever-f.vim'
 Plug 'nelstrom/vim-visual-star-search'
 " }
 " { tern_for_vim
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
+
 " nmap <silent> gd :TernDef<CR>
 nmap <silent> gt :TernDef<CR>
 nmap <silent> gD :TernDef<CR>
@@ -893,14 +930,9 @@ nmap <leader>z <bar>_
 nmap <leader>= =
 " augroup maximizepane
 "   autocmd!
-"   autocmd BufEnter *.{js} :norm |<CR>
-"   autocmd BufEnter *.{js} :norm _<CR>
+"   autocmd BufWinEnter,WinEnter *{.js,/} :norm |<CR>
+"   autocmd BufWinEnter,WinEnter *{.js,/} :norm _<CR>
 " augroup END
-augroup maximizepane
-  autocmd!
-  autocmd BufWinEnter,WinEnter *{.js,/} :norm |<CR>
-  autocmd BufWinEnter,WinEnter *{.js,/} :norm _<CR>
-augroup END
 " }
 " { vim-syntax-expand
 " Like abbreviations, but _head can detect if first character on line, and
@@ -995,6 +1027,7 @@ nmap <leader><leader>f :find <C-R>=expand('%:h').'/'<CR>
 nmap <leader><leader>b :ls h<CR>:b
 
 noremap <c-p> :find **/*
+noremap <leader>p :find **/*
 " noremap <leader>b :ls h<CR>:b<space>
 " noremap <leader>b :ls<CR>:b<space>
 noremap <leader>b :b<space>
@@ -1049,6 +1082,10 @@ let g:bufExplorerDisableDefaultKeyMapping = 1
 " }
 " { djoshea/vim-autoread
 Plug 'djoshea/vim-autoread'
+" }
+" { edkolev/tmuxline.vim
+" Use your Airline theme automatically in Tmux
+Plug 'edkolev/tmuxline.vim'
 " }
 call plug#end()
 
@@ -1393,6 +1430,8 @@ nnoremap g} :split<CR>gd
 " Case insensitive search (but still have case sensitive for :substitute
 nnoremap / /\c
 vnoremap / /\c
+nnoremap ? ?\c
+vnoremap ? ?\c
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -1429,10 +1468,10 @@ map ! :!
 " map K 5kzz
 map J 5j
 map K 5k
-" map H [{
-" map L ]}
-map H g;zz0
-map L 999g,zz0
+map H [{
+map L ]}
+" map H g;zz0
+" map L 999g,zz0
 
 " vmap J }zz
 " vmap K {zz
@@ -1569,7 +1608,8 @@ set background=dark
 " " colorscheme solarized
 " " colorscheme monokai
 " colorscheme deus
-colorscheme flattr
+" colorscheme flattr
+colorscheme onedark
 " " } Colorscheme
 
 " " { Highlights

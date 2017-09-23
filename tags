@@ -218,6 +218,7 @@
 <leader>l	nvim/init.vim	/^vmap <leader>l y{oconsole.warn(`"`, ")^$/;"	m
 <leader>o	nvim/init.vim	/^nmap <leader>o :call LetMeDuckThatForYou('')<CR>$/;"	m
 <leader>o	nvim/init.vim	/^vmap <leader>o y:call LetMeDuckThatForYou(&filetype . ' ' . @+)<CR>$/;"	m
+<leader>p	nvim/init.vim	/^noremap <leader>p :find **\/*$/;"	m
 <leader>q	nvim/init.vim	/^nmap <leader>q :q<CR>$/;"	m
 <leader>s	nvim/init.vim	/^nmap <leader>s V:s\/$/;"	m
 <leader>s	nvim/init.vim	/^vmap <leader>s :s\/$/;"	m
@@ -229,6 +230,8 @@
 <leader>z	nvim/init.vim	/^nmap <leader>z <bar>_$/;"	m
 =	nvim/init.vim	/^nmap <silent> = :Neoformat prettier<CR>:w<CR>$/;"	m
 ?	nvim/init.vim	/^map ?  <Plug>(incsearch-backward)$/;"	m
+?	nvim/init.vim	/^nnoremap ? ?\\c$/;"	m
+?	nvim/init.vim	/^vnoremap ? ?\\c$/;"	m
 A	nvim/init.vim	/^vmap A :norm A$/;"	m
 AS_YOU_TYPE	ranger/commands_full.py	/^    AS_YOU_TYPE     = 't'$/;"	v	class:scout
 AUTO_OPEN	ranger/commands_full.py	/^    AUTO_OPEN       = 'a'$/;"	v	class:scout
@@ -241,7 +244,7 @@ FILTER	ranger/commands_full.py	/^    FILTER          = 'f'$/;"	v	class:scout
 FILTER_DIRS	ranger/commands_full.py	/^    FILTER_DIRS  = 'd'$/;"	v	class:filter_inode_type
 FILTER_FILES	ranger/commands_full.py	/^    FILTER_FILES = 'f'$/;"	v	class:filter_inode_type
 FILTER_LINKS	ranger/commands_full.py	/^    FILTER_LINKS = 'l'$/;"	v	class:filter_inode_type
-H	nvim/init.vim	/^map H g;zz0$/;"	m
+H	nvim/init.vim	/^map H [{$/;"	m
 I	.tmux.conf	/^setw -g window-status-current-format " #F#I:#W#F "$/;"	k
 I	.tmux.conf	/^setw -g window-status-format " #F#I:#W#F "$/;"	k
 I	nvim/init.vim	/^vmap I :norm I$/;"	m
@@ -253,7 +256,7 @@ K	nvim/init.vim	/^map K 5k$/;"	m
 KEEP_OPEN	ranger/commands_full.py	/^    KEEP_OPEN       = 'k'$/;"	v	class:scout
 L	nvim/autoload/plug.vim	/^    nnoremap <silent> <buffer> L :call <SID>status_load(line('.'))<cr>$/;"	m
 L	nvim/autoload/plug.vim	/^    xnoremap <silent> <buffer> L :call <SID>status_load(line('.'))<cr>$/;"	m
-L	nvim/init.vim	/^map L 999g,zz0$/;"	m
+L	nvim/init.vim	/^map L ]}$/;"	m
 LetMeDuckThatForYou	nvim/init.vim	/^function! LetMeDuckThatForYou(defaultPhrase)$/;"	f
 MARK	ranger/commands_full.py	/^    MARK            = 'm'$/;"	v	class:scout
 N	nvim/init.vim	/^nnoremap <silent> N Nzz$/;"	m
@@ -475,7 +478,7 @@ g:airline_section_warning	nvim/init.vim	/^let g:airline_section_warning = ''$/;"
 g:airline_section_x	nvim/init.vim	/^let g:airline_section_x = ''$/;"	v
 g:airline_section_y	nvim/init.vim	/^let g:airline_section_y = ''$/;"	v
 g:airline_section_z	nvim/init.vim	/^let g:airline_section_z = ''$/;"	v
-g:airline_theme	nvim/init.vim	/^let g:airline_theme='deus'$/;"	v
+g:airline_theme	nvim/init.vim	/^let g:airline_theme='hybrid'$/;"	v
 g:ale_fixers	nvim/init.vim	/^let g:ale_fixers = {$/;"	v
 g:ale_javascript_eslint_executable	nvim/init.vim	/^let g:ale_javascript_eslint_executable='\/usr\/local\/bin\/eslint'$/;"	v
 g:ale_javascript_eslint_use_global	nvim/init.vim	/^let g:ale_javascript_eslint_use_global = 1$/;"	v
@@ -487,6 +490,18 @@ g:colors_name	null.vim	/^let g:colors_name="null"$/;"	v
 g:colors_name	sift.vim	/^let g:colors_name="sift"$/;"	v
 g:ctrlsf_confirm_save	nvim/init.vim	/^let g:ctrlsf_confirm_save = 0$/;"	v
 g:dash_map	nvim/init.vim	/^let g:dash_map = {$/;"	v
+g:deoplete#enable_at_startup	nvim/init.vim	/^let g:deoplete#enable_at_startup = 1$/;"	v
+g:deoplete#enable_camel_case	nvim/init.vim	/^let g:deoplete#enable_camel_case = 1$/;"	v
+g:deoplete#enable_ignore_case	nvim/init.vim	/^let g:deoplete#enable_ignore_case = 1$/;"	v
+g:deoplete#enable_refresh_always	nvim/init.vim	/^let g:deoplete#enable_refresh_always = 1$/;"	v
+g:deoplete#enable_smart_case	nvim/init.vim	/^let g:deoplete#enable_smart_case = 1$/;"	v
+g:deoplete#max_abbr_width	nvim/init.vim	/^let g:deoplete#max_abbr_width = 0$/;"	v
+g:deoplete#max_menu_width	nvim/init.vim	/^let g:deoplete#max_menu_width = 0$/;"	v
+g:deoplete#omni#functions	nvim/init.vim	/^let g:deoplete#omni#functions = {}$/;"	v
+g:deoplete#omni#functions	nvim/init.vim	/^let g:deoplete#omni#functions.javascript = [$/;"	v
+g:deoplete#omni#input_patterns	nvim/init.vim	/^let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})$/;"	v
+g:deoplete#sources#ternjs#docs	nvim/init.vim	/^let g:deoplete#sources#ternjs#docs = 1$/;"	v
+g:deoplete#sources#ternjs#filetypes	nvim/init.vim	/^let g:deoplete#sources#ternjs#filetypes = [$/;"	v
 g:dirvish_mode	nvim/init.vim	/^let g:dirvish_mode = ':sort ,^.*[\\\/],'$/;"	v
 g:dirvish_relative_paths	nvim/init.vim	/^let g:dirvish_relative_paths=1$/;"	v
 g:gitgutter_highlight_lines	nvim/init.vim	/^let g:gitgutter_highlight_lines = 0$/;"	v
@@ -537,6 +552,9 @@ g:tagbar_autofocus	nvim/init.vim	/^let g:tagbar_autofocus = 1$/;"	v
 g:tagbar_case_insensitive	nvim/init.vim	/^let g:tagbar_case_insensitive = 1$/;"	v
 g:tagbar_compact	nvim/init.vim	/^let g:tagbar_compact = 1$/;"	v
 g:tagbar_sort	nvim/init.vim	/^let g:tagbar_sort = 0$/;"	v
+g:tern#arguments	nvim/init.vim	/^let g:tern#arguments = ["--persistent"]$/;"	v
+g:tern#command	nvim/init.vim	/^let g:tern#command = ["tern"]$/;"	v
+g:tern#filetypes	nvim/init.vim	/^let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]$/;"	v
 g:test#javascript#jest#executable	nvim/init.vim	/^let g:test#javascript#jest#executable = 'npm test'$/;"	v
 g:test#javascript#jest#file_pattern	nvim/init.vim	/^let g:test#javascript#jest#file_pattern = '.test.js$'$/;"	v
 g:test#javascript#karma#file_pattern	nvim/init.vim	/^let g:test#javascript#karma#file_pattern = 'jest'$/;"	v
@@ -548,11 +566,6 @@ g:this_session	Session.vim	/^let g:this_session = v:this_session$/;"	v
 g:tmux_navigator_disable_when_zoomed	nvim/init.vim	/^let g:tmux_navigator_disable_when_zoomed = 1$/;"	v
 g:tmux_navigator_save_on_switch	nvim/init.vim	/^let g:tmux_navigator_save_on_switch = 2$/;"	v
 g:used_javascript_libs	nvim/init.vim	/^let g:used_javascript_libs = 'lodash,react,flux,d3'$/;"	v
-g:ycm_cache_omnifunc	nvim/init.vim	/^let g:ycm_cache_omnifunc = 1$/;"	v
-g:ycm_key_list_previous_completion	nvim/init.vim	/^let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']$/;"	v
-g:ycm_key_list_select_completion	nvim/init.vim	/^let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']$/;"	v
-g:ycm_log_level	nvim/init.vim	/^let g:ycm_log_level = 'debug'$/;"	v
-g:ycm_show_diagnostics_ui	nvim/init.vim	/^let g:ycm_show_diagnostics_ui = 1$/;"	v
 gD	nvim/init.vim	/^nmap <silent> gD :TernDef<CR>$/;"	m
 gr	nvim/init.vim	/^nmap gr "hyiw:GrepperAg <c-r>h<CR>$/;"	m
 grep	ranger/commands_full.py	/^class grep(Command):$/;"	c
@@ -618,7 +631,6 @@ map yt copy mode	ranger/rc.conf	/^map yt copy mode=toggle$/;"	k
 map_	ranger/commands_full.py	/^class map_(Command):$/;"	c
 mapleader	nvim/init.vim	/^let mapleader = "\\<Space>"$/;"	v
 mark_tag	ranger/commands_full.py	/^class mark_tag(Command):$/;"	c
-maximizepane	nvim/init.vim	/^augroup maximizepane$/;"	a
 meta	ranger/commands_full.py	/^class meta(prompt_metadata):$/;"	c
 mkdir	ranger/commands_full.py	/^class mkdir(Command):$/;"	c
 my_edit	ranger/commands.py	/^class my_edit(Command):$/;"	c
