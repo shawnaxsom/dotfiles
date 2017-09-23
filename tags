@@ -490,11 +490,13 @@ g:colors_name	null.vim	/^let g:colors_name="null"$/;"	v
 g:colors_name	sift.vim	/^let g:colors_name="sift"$/;"	v
 g:ctrlsf_confirm_save	nvim/init.vim	/^let g:ctrlsf_confirm_save = 0$/;"	v
 g:dash_map	nvim/init.vim	/^let g:dash_map = {$/;"	v
+g:deoplete#buffer#require_same_filetype	nvim/init.vim	/^let g:deoplete#buffer#require_same_filetype = 0$/;"	v
 g:deoplete#enable_at_startup	nvim/init.vim	/^let g:deoplete#enable_at_startup = 1$/;"	v
 g:deoplete#enable_camel_case	nvim/init.vim	/^let g:deoplete#enable_camel_case = 1$/;"	v
 g:deoplete#enable_ignore_case	nvim/init.vim	/^let g:deoplete#enable_ignore_case = 1$/;"	v
 g:deoplete#enable_refresh_always	nvim/init.vim	/^let g:deoplete#enable_refresh_always = 1$/;"	v
 g:deoplete#enable_smart_case	nvim/init.vim	/^let g:deoplete#enable_smart_case = 1$/;"	v
+g:deoplete#file#enable_buffer_path	nvim/init.vim	/^let g:deoplete#file#enable_buffer_path = 0$/;"	v
 g:deoplete#max_abbr_width	nvim/init.vim	/^let g:deoplete#max_abbr_width = 0$/;"	v
 g:deoplete#max_menu_width	nvim/init.vim	/^let g:deoplete#max_menu_width = 0$/;"	v
 g:deoplete#omni#functions	nvim/init.vim	/^let g:deoplete#omni#functions = {}$/;"	v
@@ -752,7 +754,9 @@ s:job_abort	nvim/autoload/plug.vim	/^function! s:job_abort()$/;"	f
 s:job_cb	nvim/autoload/plug.vim	/^function! s:job_cb(fn, job, ch, data)$/;"	f
 s:job_exit_cb	nvim/autoload/plug.vim	/^function! s:job_exit_cb(self, data) abort$/;"	f
 s:job_out_cb	nvim/autoload/plug.vim	/^function! s:job_out_cb(self, data) abort$/;"	f
-s:l	Session.vim	/^let s:l = 72 - ((26 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 25 - ((9 * winheight(0) + 9) \/ 19)$/;"	v
+s:l	Session.vim	/^let s:l = 368 - ((8 * winheight(0) + 9) \/ 18)$/;"	v
+s:l	Session.vim	/^let s:l = 72 - ((8 * winheight(0) + 9) \/ 18)$/;"	v
 s:l	fish/Session.vim	/^let s:l = 81 - ((21 * winheight(0) + 21) \/ 42)$/;"	v
 s:last_non_empty_line	nvim/autoload/plug.vim	/^function! s:last_non_empty_line(lines)$/;"	f
 s:last_rtp	nvim/autoload/plug.vim	/^let s:last_rtp  = s:escrtp(get(s:split_rtp(), -1, ''))$/;"	v

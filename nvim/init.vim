@@ -364,6 +364,8 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_refresh_always = 1
+let g:deoplete#buffer#require_same_filetype = 0
+let g:deoplete#file#enable_buffer_path = 0
 let g:deoplete#max_abbr_width = 0
 let g:deoplete#max_menu_width = 0
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
@@ -1608,8 +1610,8 @@ set background=dark
 " " colorscheme solarized
 " " colorscheme monokai
 " colorscheme deus
-" colorscheme flattr
-colorscheme onedark
+colorscheme flattr
+" colorscheme onedark
 " " } Colorscheme
 
 " " { Highlights
