@@ -185,14 +185,16 @@ set cmdheight=2
 set inccommand=split
 " }
 
+" { Vim-Plug
+" Install Vim Plug if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+" }
+
 " { Plugins
-"
-" " Install Vim Plug if not installed
-" if empty(glob('~/.config/nvim/autoload/plug.vim'))
-"   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-"     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"   autocmd VimEnter * PlugInstall
-" endif
 call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
@@ -232,6 +234,8 @@ call plug#begin('~/.vim/bundle')
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
 Plug 'int3/vim-extradite'
+Plug 'jreybert/vimagit'
+map <leader>gg :Magit<CR>
 map <leader>gc :Gcommit<CR>i
 map <leader>gp :Gpull<CR>
 map <leader>gP :Gpush<CR>
@@ -288,12 +292,13 @@ map ,i :call VimuxInspectRunner()<CR>
 " map ,q :Dispatch env NODE_ENV=qa npm start<CR>
 " map ,r :call VimuxRunCommand("npm start")<CR>
 " map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>
-augroup vimux
-  autocmd!
-  autocmd BufEnter */api/* map <buffer> ,q :call VimuxRunCommand("npm run build; and env NODE_ENV=qa npm start")<CR>
-  autocmd BufEnter */api/* map <buffer> ,t :call VimuxRunCommand("npm test -- --tests " . expand("%"))<CR>
-" map ,t :Dispatch npm test<CR>
-augroup END
+" augroup vimux
+"   autocmd!
+"   autocmd BufEnter */api/* map <buffer> ,r :call VimuxRunCommand("cd ~/dev/ambyint/packages/api; env NODE_ENV=qa npm start")<CR>
+"   autocmd BufEnter */api/* map <buffer> ,q :call VimuxRunCommand("npm run build; and env NODE_ENV=qa npm start")<CR>
+"   autocmd BufEnter */api/* map <buffer> ,t :call VimuxRunCommand("npm test -- --tests " . expand("%"))<CR>
+" " map ,t :Dispatch npm test<CR>
+" augroup END
 map ,c :call VimuxInterruptRunner()<CR>
 " map ,t :Dispatch npm test<CR>
 map ,f :Dispatch npm test -- --tests %
@@ -309,7 +314,7 @@ let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
 Plug 'SirVer/ultisnips'
-nmap <leader>es :UltiSnipsEdit<CR>
+nmap <leader>eu :UltiSnipsEdit<CR>
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -332,6 +337,8 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " }
 
+" {
+" Plug 'roxma/nvim-completion-manager'
 " if !has('nvim')
 "   Plug 'roxma/vim-hug-neovim-rpc'
 " endif
@@ -339,7 +346,6 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " let g:cm_refresh_length=2
 " let g:cm_matcher = {'module': 'cm_matchers.abbrev_matcher'}
 " " let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
-
 " Plug 'autozimu/LanguageClient-neovim'
 " set hidden
 " let g:LanguageClient_serverCommands = {
@@ -350,15 +356,23 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 " { Deoplete
 " Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
 " followed by a property in a string. "rodDimensions." showed all props of
 " random variable.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#depths = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#case_insensitive = 1
+let g:deoplete#sources#ternjs#include_keywords = 1
+let g:deoplete#sources#ternjs#in_literal = 1
+
+
 Plug 'othree/jspc.vim'
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 0
 let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
@@ -380,15 +394,9 @@ let g:deoplete#sources#ternjs#filetypes = [
       \ 'vue',
       \ ]
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
+" let g:tern#command = ["tern"]
+" let g:tern#arguments = ["--persistent"]
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" let g:deoplete#sources = {}
-" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'tag', 'file', 'ultisnips', 'ternjs']
-" let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs', 'tag', 'buffer']
-" let g:tern#command = ['tern']
-" let g:tern#arguments = ['--persistent']
 " }
 
 " { vim-polyglot
@@ -396,18 +404,18 @@ let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 " Includes: 'pangloss/vim-javascript'
 " Includes: 'mxw/vim-jsx'
 Plug 'sheerun/vim-polyglot'
-let g:javascript_conceal_function                  = "ƒ"
-let g:javascript_conceal_null                      = "ø"
-let g:javascript_conceal_this                      = "@"
-let g:javascript_conceal_return                    = "◁"
-let g:javascript_conceal_undefined                 = "¿"
-let g:javascript_conceal_NaN                       = "ℕ"
-let g:javascript_conceal_prototype                 = "¶"
-let g:javascript_conceal_static                    = "•"
-let g:javascript_conceal_super                     = "Ω"
-let g:javascript_conceal_arrow_function            = "➜"
-let g:javascript_conceal_noarg_arrow_function      = "🞅"
-let g:javascript_conceal_underscore_arrow_function = "🞅"
+" let g:javascript_conceal_function                  = "ƒ"
+" let g:javascript_conceal_null                      = "ø"
+" let g:javascript_conceal_this                      = "@"
+" let g:javascript_conceal_return                    = "◁"
+" let g:javascript_conceal_undefined                 = "¿"
+" let g:javascript_conceal_NaN                       = "ℕ"
+" let g:javascript_conceal_prototype                 = "¶"
+" let g:javascript_conceal_static                    = "•"
+" let g:javascript_conceal_super                     = "Ω"
+" let g:javascript_conceal_arrow_function            = "➜"
+" let g:javascript_conceal_noarg_arrow_function      = "🞅"
+" let g:javascript_conceal_underscore_arrow_function = "🞅"
 " }
 " { vim-obsession
 " Save buffers in session using automation over the built-in session
@@ -497,30 +505,30 @@ let g:grepper.stop = 500
 Plug 'stefandtw/quickfix-reflector.vim'
 " }
 " { vim-simple-todo
-Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
-let g:simple_todo_map_keys = 0
-" map gs :topleft 12split ~/.scratch<CR>
-map gsh :topleft split ~/habits.scratch<CR>
-map gss :topleft split ~/.scratch<CR>
-map gsp :topleft split ~/personal.scratch<CR>
-map gsw :topleft split ~/work.scratch<CR>
-augroup simpletodo
-  autocmd!
-  autocmd BufEnter   *.scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter   *.scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
-  autocmd BufEnter   *.scratch nmap <buffer> ,o <Plug>(simple-todo-below)
-  autocmd BufEnter   *.scratch nmap <buffer> <leader>x <Plug>(simple-todo-mark-switch)
-  autocmd BufEnter   *.scratch nmap <buffer> <leader><leader>X :%g/\[x\]/d<CR>
-  " autocmd BufEnter *.scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
-  " autocmd BufEnter *.scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
-  " autocmd BufEnter *.scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
-  autocmd BufEnter   *.scratch imap <buffer> [[ <Plug>(simple-todo-new)
-  autocmd BufEnter   *.scratch imap <buffer> ,i <Plug>(simple-todo-new)
-  autocmd BufEnter   *.scratch imap <buffer> ,o <Plug>(simple-todo-new)
-  autocmd BufLeave   *.scratch w
-  autocmd BufEnter   *.scratch abbreviate <buffer> [ [ ]
-  autocmd BufRead    *.scratch setlocal foldlevel=0
-augroup END
+" Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
+" let g:simple_todo_map_keys = 0
+" " map gs :topleft 12split ~/.scratch<CR>
+" map gsh :topleft split ~/habits.scratch.md<CR>
+" map gss :topleft split ~/.scratch.md<CR>
+" map gsp :topleft split ~/personal.scratch.md<CR>
+" map gsw :topleft split ~/work.scratch.md<CR>
+" augroup simpletodo
+"   autocmd!
+"   autocmd BufEnter   *.scratch nmap <buffer> [[ <Plug>(simple-todo-new-start-of-line)i
+"   autocmd BufEnter   *.scratch nmap <buffer> ,i <Plug>(simple-todo-new-start-of-line)i
+"   autocmd BufEnter   *.scratch nmap <buffer> ,o <Plug>(simple-todo-below)
+"   autocmd BufEnter   *.scratch nmap <buffer> <leader>x <Plug>(simple-todo-mark-switch)
+"   autocmd BufEnter   *.scratch nmap <buffer> <leader><leader>X :%g/\[x\]/d<CR>
+"   " autocmd BufEnter *.scratch imap <buffer> [[ :norm o<CR><Plug>(simple-todo-new)i
+"   " autocmd BufEnter *.scratch imap <buffer> ,i :norm o<CR><Plug>(simple-todo-new)i
+"   " autocmd BufEnter *.scratch imap <buffer> ,o :norm o<CR><Plug>(simple-todo-new)i
+"   autocmd BufEnter   *.scratch imap <buffer> [[ <Plug>(simple-todo-new)
+"   autocmd BufEnter   *.scratch imap <buffer> ,i <Plug>(simple-todo-new)
+"   autocmd BufEnter   *.scratch imap <buffer> ,o <Plug>(simple-todo-new)
+"   autocmd BufLeave   *.scratch w
+"   autocmd BufEnter   *.scratch abbreviate <buffer> [ [ ]
+"   autocmd BufRead    *.scratch setlocal foldlevel=0
+" augroup END
 " }
 " { Codi
 Plug 'metakirby5/codi.vim'  " Interactive scratch pad, similar to Quokka
@@ -676,7 +684,9 @@ let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 " let g:airline_theme='minimalist'
 " let g:airline_theme='deus'
-let g:airline_theme='hybrid'
+" let g:airline_theme='hybrid'
+" let g:airline_theme='dracula'
+let g:airline_theme='jellybeans'
 " let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
 " let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
@@ -772,12 +782,11 @@ Plug 'rhysd/clever-f.vim'
 Plug 'nelstrom/vim-visual-star-search'
 " }
 " { tern_for_vim
-" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
-
-" nmap <silent> gd :TernDef<CR>
-nmap <silent> gt :TernDef<CR>
-nmap <silent> gD :TernDef<CR>
+" Deoplete is slow with this turned on, yet Deoplete is working fine without
+" it
+" Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
+" nmap <silent> gt :TernDef<CR>
+" nmap <silent> gD :TernDef<CR>
 " }
 " { Dash.app
 Plug 'rizzatti/dash.vim'
@@ -888,10 +897,11 @@ function! InsertBookmarks()
   " execute "norm I> " . substitute(substitute(fnamemodify(expand("%"), ":~:."), '/', '', ''), '/', ' > ', 'g') . ""
   execute "norm I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
-  execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
+  " execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
   call feedkeys("")
 
-  execute "norm 2\<c-o>0"
+  " execute "norm 2\<c-o>0"
+  execute "norm 1\<c-o>0"
 endfunction
 augroup dirvish
   autocmd!
@@ -900,11 +910,13 @@ augroup dirvish
   autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>
   autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
   autocmd FileType dirvish nnoremap <buffer> e :e %
-  autocmd FileType dirvish nnoremap <buffer> m :Mkdir %
+  autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
+  " autocmd FileType dirvish nnoremap <buffer> M :Mkdir %
   " autocmd FileType dirvish nnoremap <buffer> D :call feedkeys(':!rm -rf %/' . expand('<cWORD>'))<CR>
-  autocmd FileType dirvish nnoremap <buffer> r :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
-  autocmd FileType dirvish nnoremap <buffer> D :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> dd :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
   autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
+  autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
 
   " Enable :Gstatus and friends.
   autocmd FileType dirvish call fugitive#detect(@%)
@@ -957,13 +969,6 @@ Plug 'elzr/vim-json'
 " { tpope/vim-jdaddy
 " gqaj - Pretty print json
 Plug 'tpope/vim-jdaddy'
-" }
-" { Vim-Pad
-" :Pad new
-" :Pad ls
-" TODO: This is adding hotkeys to <leader>s, causing a timeout
-" Plug 'fmoralesc/vim-pad'
-" let g:pad#dir = '~/notes/'
 " }
 " { kana/vim-textobj-user
 Plug 'kana/vim-textobj-user'
@@ -1089,6 +1094,34 @@ Plug 'djoshea/vim-autoread'
 " Use your Airline theme automatically in Tmux
 Plug 'edkolev/tmuxline.vim'
 " }
+" { yegappan/mru
+Plug 'yegappan/mru'
+nmap <leader><leader>p :MRU<CR>
+" }
+" { plasticboy/vim-markdown
+Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_level = 2
+let g:vim_markdown_folding_disabled = 0
+map gt :Toch<CR>
+map gsh :topleft split ~/notes/habits.scratch.md<CR>
+map gss :topleft split ~/notes/task.scratch.md<CR>
+map gsp :topleft split ~/notes/personal.scratch.md<CR>
+map gsw :topleft split ~/notes/work.scratch.md<CR>
+augroup markdown
+  autocmd!
+  autocmd BufEnter   *.md setlocal conceallevel=2
+  autocmd BufLeave   *.md w
+augroup END
+" }
+" { vimwiki/vimwiki
+Plug 'vimwiki/vimwiki'
+let g:vimwiki_map_prefix = '<Leader>e'
+augroup vimwiki
+  autocmd!
+  autocmd BufLeave   *.wiki w
+augroup END
+" }
+
 call plug#end()
 
 " }
@@ -1293,8 +1326,16 @@ endfunction
 
 " { Terminal
 nmap <silent> <leader>t :sp term://fish<CR>i
+nmap ,b :sp term://bash %:p<CR>
 nmap ,r :sp term://npm start<CR>
 map ,q :sp term://env NODE_ENV=qa npm start<CR>
+augroup vimux
+  autocmd!
+  autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+  autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+  autocmd BufEnter */api/* map <buffer> ,t :sp term://npm test -- --tests " . expand("%"))<CR>
+" map ,t :Dispatch npm test<CR>
+augroup END
 " nmap <leader>oh !open https://github.com/search?q=
 " nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
 " nmap <leader>og :sp term://surfraw google javascript i
@@ -1412,6 +1453,7 @@ vmap <bar> :g/
 " vmap <leader>s :sort<CR>
 nmap <leader>l yiw{oconsole.warn(`"`, ")^
 vmap <leader>l y{oconsole.warn(`"`, ")^
+vnoremap <c-p> :<c-p>
 " }
 
 " { Window Keys
@@ -1421,6 +1463,10 @@ map f _<bar>
 " }
 
 " { Default behavior overrides
+
+" When doing commands, always scroll through history matching current text
+cmap <c-p> <up>
+cmap <c-n> <down>
 
 noremap ; :
 
@@ -1468,8 +1514,10 @@ map ! :!
 " map K {zz
 " map J 5jzz
 " map K 5kzz
-map J 5j
-map K 5k
+" map J 8j
+" map K 8k
+map J <c-d>
+map K <c-u>
 map H [{
 map L ]}
 " map H g;zz0
@@ -1605,12 +1653,17 @@ set background=dark
 " " colorscheme predawn
 " " colorscheme zenburn
 " " colorscheme elflord
+" colorscheme darkblue
+colorscheme jellybeans
+" colorscheme distinguished
+" colorscheme vividchalk
 " colorscheme gruvbox
 " colorscheme dracula
-" " colorscheme solarized
+" colorscheme solarized
+" colorscheme darkblue
 " " colorscheme monokai
 " colorscheme deus
-colorscheme flattr
+" colorscheme flattr
 " colorscheme onedark
 " " } Colorscheme
 
@@ -1618,7 +1671,7 @@ colorscheme flattr
 " " These come after Colorscheme so they don't get overwritten
 " "
 " " { Background
-highlight Normal guibg=#282828
+" highlight Normal guibg=#282828
 " }
 "
 " { Comments
@@ -1626,8 +1679,8 @@ highlight Comment guifg=#999999
 " }
 "
 " { Current line
-set cursorline
-highlight cursorLine term=bold cterm=bold guibg=#333333
+" set cursorline
+" highlight cursorLine term=bold cterm=bold guibg=#333333
 " }
 " { Column 80
 set colorcolumn=
@@ -1650,8 +1703,8 @@ hi default Matchmaker term=underline    ctermbg=238     guibg=#555555
 hi LineNr guifg=#777777
 " }
 " " { Search
-highlight IncSearch      cterm=reverse ctermfg=184 ctermbg=234 gui=reverse guifg=#505050 guibg=#f00000
-highlight Search         ctermfg=0     ctermbg=220                         guifg=#f00000 guibg=#505050
+highlight IncSearch      cterm=reverse ctermfg=184 ctermbg=234 gui=reverse guifg=#f05050 guibg=#505050
+highlight Search         ctermfg=0     ctermbg=220             gui=reverse guifg=#f08080 guibg=#505050
 " " }
 " }
 

@@ -9,7 +9,7 @@ alias ......='../../../../..'
 alias .......='../../../../../..'
 alias ........='../../../../../../..'
 
-set -x TERM xterm-256color
+set -x TERM screen-256color
 set -x EDITOR /usr/local/bin/vim
 
 alias mux='tmuxinator'
