@@ -258,6 +258,8 @@ map <leader>gL :Glog<BAR>:bot copen<CR>
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_highlight_lines = 0
 let g:gitgutter_map_keys = 0
+noremap ]c :GitGutterNextHunk<CR>
+noremap [c :GitGutterPrevHunk<CR>
 " }
 " { Vim-Signature
 " Show markers in gutter
@@ -361,19 +363,21 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " followed by a property in a string. "rodDimensions." showed all props of
 " random variable.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#depths = 1
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#case_insensitive = 1
-let g:deoplete#sources#ternjs#include_keywords = 1
-let g:deoplete#sources#ternjs#in_literal = 1
+" TODO TernJS slows down Deoplete considerably
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
+" let g:deoplete#sources#ternjs#types = 1
+" let g:deoplete#sources#ternjs#depths = 1
+" let g:deoplete#sources#ternjs#docs = 1
+" let g:deoplete#sources#ternjs#case_insensitive = 1
+" let g:deoplete#sources#ternjs#include_keywords = 1
+" let g:deoplete#sources#ternjs#in_literal = 1
 
 
 Plug 'othree/jspc.vim'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 0
-let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#auto_refresh_delay = 0
+" let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
@@ -385,18 +389,21 @@ let g:deoplete#max_menu_width = 0
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
   \ 'jspc#omni'
 \]
-let g:deoplete#sources#ternjs#filetypes = [
-      \ 'jsx',
-      \ 'javascript.jsx',
-      \ 'vue',
-      \ ]
-let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
-" let g:tern#command = ["tern"]
-" let g:tern#arguments = ["--persistent"]
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+" let g:deoplete#omni#functions.javascript = [
+"   \ 'tern#Complete',
+"   \ 'jspc#omni'
+" \]
+" let g:deoplete#sources#ternjs#filetypes = [
+"       \ 'jsx',
+"       \ 'javascript.jsx',
+"       \ 'vue',
+"       \ ]
+" let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
+" " let g:tern#command = ["tern"]
+" " let g:tern#arguments = ["--persistent"]
+" let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 " }
 
 " { vim-polyglot
@@ -433,7 +440,7 @@ nmap <leader><leader>w :Obsess!<CR>
 " crc - camelCase
 " crm - MixedCase
 Plug 'tpope/tpope-vim-abolish'
-nmap <leader>s V:s/
+nmap <leader>s yiwV:s/"/"
 vmap <leader>s :s/
 nmap <leader>S V:S/
 vmap <leader>S :S/
@@ -444,6 +451,28 @@ vmap <leader><leader>S y:%S/+/+
 
 " vmap r :S/
 " vmap M :join<CR>
+" }
+" { vim-rest-console
+Plug 'diepm/vim-rest-console'
+let g:vrc_trigger = '<C-s>'
+" let g:vrc_set_default_mapping = 0
+" augroup vrc
+"   autocmd!
+"   autocmd FileType rest map <buffer> <c-s> :call VrcQuery()<CR>
+" augroup END
+let g:vrc_output_buffer_name = '__VRC_OUTPUT.json'
+" let g:vrc_response_default_content_type = 'json'
+let g:vrc_response_default_content_type = 'application/json'
+let g:vrc_header_content_type = 'application/json; charset=utf-8'
+let g:vrc_auto_format_response_enabled = 1
+let g:vrc_auto_format_response_patterns = {
+      \ 'json': 'jq .',
+      \ 'xml': 'xmllint --format -',
+      \}
+" VRC sometimes has issues formatting response without --silent
+let g:vrc_curl_opts={
+      \'--silent': ''
+      \}
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -1107,6 +1136,7 @@ map gsh :topleft split ~/notes/habits.scratch.md<CR>
 map gss :topleft split ~/notes/task.scratch.md<CR>
 map gsp :topleft split ~/notes/personal.scratch.md<CR>
 map gsw :topleft split ~/notes/work.scratch.md<CR>
+map gsr :topleft split ~/notes/queries.rest<CR>
 augroup markdown
   autocmd!
   autocmd BufEnter   *.md setlocal conceallevel=2
@@ -1121,7 +1151,6 @@ augroup vimwiki
   autocmd BufLeave   *.wiki w
 augroup END
 " }
-
 call plug#end()
 
 " }
