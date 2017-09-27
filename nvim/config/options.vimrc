@@ -1,0 +1,183 @@
+" -----------------------------------------------------------------------------------------
+"  Options
+" -----------------------------------------------------------------------------------------
+
+" Don't use swap or backup files
+set noswapfile
+set nobackup
+set nowritebackup
+
+" No undodir, don't undo past last close
+set noundofile
+
+" Update buffer if file changes outside of Vim, without prompt
+set autoread
+" au CursorHold * checktime
+
+" Don't wrap normally
+set nowrap
+
+" If you enable wrap, break on spaces or tabs
+set linebreak
+set breakat=\ ^I
+
+" Don't change directory to current buffer.
+" Some plugins don't work with this enabled, like vimfiler or vimshell
+set noautochdir
+
+" Show tabs, trailing characters as periods
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+
+" Don't fully collapse windows when doing <c-w>_ or <c-w>|
+set winheight=5
+set winwidth=20
+set winminwidth=20
+set winminheight=5
+
+" If you open up gVim for whatever reason
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+" allow cursor to stay in same column while scrolling
+set virtualedit=all
+set nostartofline
+
+" allow copy/paste using system clipboard (otherwise have to use "+)
+set clipboard=unnamed
+
+" The basics
+set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
+
+" Allow backspace to go past beginning of line
+set backspace=indent,eol,start
+
+" Keep cursor centered -- this is choppy if scrolling multiple splits
+set scrolloff=3
+
+" Use Bash shell syntax for :! (even if you are in Fish or ZSH)
+set shell=bash
+
+" Use MORE as pager
+set more
+
+" Don't redraw screen when using a macro or register
+set lazyredraw
+
+" Improve smoothness of redrawing
+set ttyfast
+
+" Send the current mouse codes over when clicking
+" set ttymouse=xterm2
+
+" When closing off brackets, briefly show the matching bracket
+set noshowmatch
+
+" Default to splitting in the bottom and left
+set splitbelow
+set splitright
+
+" Default substitute to s//g
+set gdefault
+
+" If doing :q with unsaved changes, ask to quit, rather than just failing
+set confirm
+
+" Vertically split diffs with vimdiff
+set diffopt=vertical
+
+" Allow background buffers (e.g. edit another file while current file still
+" has changes to save)
+set hidden
+
+" Command history
+set history=1000
+
+" Don't insert two spaces after a join command
+set nojoinspaces
+
+" Line numbers
+set number
+set relativenumber
+set numberwidth=6
+
+" Wildmenu completion mentu when pressing tab
+set wildcharm=<TAB>
+set wildmenu
+set wildmode=list,full
+set wildchar=<Tab>
+
+" Always show the statusline
+set laststatus=2
+
+" Statusline (if Airline is not loaded)
+set statusline=%f
+set statusline+=%=        " Switch to the right side
+set statusline+=%#warningmsg#
+
+" Search settings
+set incsearch
+set hlsearch
+set noignorecase              " affects both searching and find/replace
+set smartcase
+set wrapscan                  " Wrap to top of file after searching through full file
+
+" Fold settings
+set foldmethod=indent
+set foldnestmax=8
+set foldlevelstart=999
+
+" Don't show tab bar
+set showtabline=0
+
+" Change CWD while navigating in NetRW.
+let g:netrw_keepdir=0
+" Allow netrw to remove non-empty local directories
+let g:netrw_localrmdir='rm -r'
+
+" Auto indent settings
+filetype plugin indent on
+set autoindent
+set smartindent
+
+" Allow the :find command to search current directory recursively for a file
+" E.g. :find myfile.text
+" https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
+" NOTE: Add additional paths in .vimrc
+set path=.,/usr/include,,
+
+" Allow gf to find JavaScript file references without extension
+set suffixesadd=.js,.jsx
+
+" Set window title to include current filename.
+" or use in iterm2: press cmd+shift+o and search for filename of a window
+set t_ts=]1;
+set t_fs=
+set title
+
+" Fix Vim background in Tmux, don't break colors at end of line.
+set t_ut=
+set t_Co=256
+
+" Use space button for leader
+let mapleader = "\<Space>"
+
+" How long leader key and other key combinations will wait for another key
+" NOTE: Usually the timeout shouldn't be needed for <leader> / <space> in
+" insert mode. If you start having this timeout apply, something must have set
+" up imap <space> or something similar. Use this to debug:
+" :verbose imap <space>
+set timeoutlen=800
+set ttimeoutlen=0
+
+" Minimize how often you see "Press enter or type a command to continue"
+set shortmess=a
+set cmdheight=2
+
+" -----------------------------------------------------------------------------------------
+"  Neovim specific settings
+" -----------------------------------------------------------------------------------------
+" Show interactive preview of substitute changes when using :%s///
+set inccommand=split
