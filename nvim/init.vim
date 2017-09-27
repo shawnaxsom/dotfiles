@@ -28,10 +28,10 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 " Don't fully collapse windows when doing <c-w>_ or <c-w>|
-set winheight=4
+set winheight=1
 set winwidth=33
 set winminwidth=33
-set winminheight=4
+set winminheight=1
 
 " If you open up gVim for whatever reason
 set guioptions-=m  "remove menu bar
@@ -44,11 +44,7 @@ set virtualedit=all
 set nostartofline
 
 " allow copy/paste using system clipboard (otherwise have to use "+)
-if $TMUX == ''  " disable in TMux as it breaks copy / paste and is not needed
-  set clipboard=unnamed
-else
-  set clipboard=unnamed
-endif
+set clipboard=unnamed
 
 " The basics
 set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
@@ -71,7 +67,7 @@ set lazyredraw
 " Improve smoothness of redrawing
 set ttyfast
 
-" Send the corrent mouse codes over when clicking
+" Send the current mouse codes over when clicking
 " set ttymouse=xterm2
 
 " When closing off brackets, briefly show the matching bracket
@@ -147,7 +143,8 @@ set smartindent
 " Allow the :find command to search current directory recursively for a file
 " E.g. :find myfile.text
 " https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
-set path+=**
+" NOTE: Add additional paths in .vimrc
+set path=.,/usr/include,,
 
 " Allow gf to find JavaScript file references without extension
 set suffixesadd=.js,.jsx
@@ -199,9 +196,57 @@ call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
+" { Dirvish
+Plug 'justinmk/vim-dirvish'  " File manager
+noremap - :Dirvish %<CR>
+noremap - :Dirvish %:p:h<CR>
+let g:dirvish_mode = ':sort ,^.*[\/],'
+let g:dirvish_relative_paths=1
+function! Relpath(filename)
+	let cwd = getcwd()
+	let s = substitute(a:filename, l:cwd . "/" , "", "")
+	return s
+endfunction
+function! InsertBookmarks()
+  " execute "norm gg:read ~/dotfiles/nvim/bookmarks"
+  execute "norm mZ"
+
+  execute "norm ggI~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  execute "norm I" . substitute(Relpath(expand("%:p")), '/', ' > ', 'g') . ""
+  " execute "norm I> " . substitute(substitute(fnamemodify(expand("%"), ":~:."), '/', '', ''), '/', ' > ', 'g') . ""
+  execute "norm I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+  " execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
+  call feedkeys("")
+
+  " execute "norm 2\<c-o>0"
+  execute "norm 1\<c-o>0"
+endfunction
+augroup dirvish
+  autocmd!
+  " autocmd FileType dirvish nnoremap <buffer> <leader>r :Renamer %<CR>
+  autocmd FileType dirvish nnoremap <buffer> <leader>r :Shdo! mv {} {}<CR>
+  autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>
+  autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
+  autocmd FileType dirvish nnoremap <buffer> e :e %
+  autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
+  " autocmd FileType dirvish nnoremap <buffer> M :Mkdir %
+  " autocmd FileType dirvish nnoremap <buffer> D :call feedkeys(':!rm -rf %/' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> dd :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
+  autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
+
+  " Enable :Gstatus and friends.
+  autocmd FileType dirvish call fugitive#detect(@%)
+  autocmd FileType dirvish call InsertBookmarks()
+augroup END
+" }
 " { CtrlP
 " Plug 'ctrlpvim/ctrlp.vim'
 " " nnoremap <silent> <c-f> :CtrlPLine<CR>
+"
+" :nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
 " if executable('ag')
 "   set grepprg=ag\ --nogroup\ --nocolor
 "   let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
@@ -248,11 +293,6 @@ map <leader>gw :Gwrite<CR>
 map <leader>gh :Gbrowse<CR>
 map <leader>gl :Extradite<CR>
 map <leader>gL :Glog<BAR>:bot copen<CR>
-" augroup gitlog
-"   autocmd!
-"   autocmd FileType git nmap J /diff<CR> | nmap K k?diff<CR>
-" augroup END
-" autocmd! BufRead,BufNewFile fugitive* git nmap <leader>J /diff<CR>
 " }
 " { GitGutter
 Plug 'airblade/vim-gitgutter'
@@ -260,10 +300,6 @@ let g:gitgutter_highlight_lines = 0
 let g:gitgutter_map_keys = 0
 noremap ]c :GitGutterNextHunk<CR>
 noremap [c :GitGutterPrevHunk<CR>
-" }
-" { Vim-Signature
-" Show markers in gutter
-" Plug 'kshenoy/vim-signature'
 " }
 " { Vimux / Dispatch
 Plug 'tpope/vim-dispatch'
@@ -280,32 +316,14 @@ function! VimuxRunFromClipboard()
   let clipboardText = substitute(clipboardText, "^@", "", "g")
 
   let clipboardText = substitute(clipboardText, "http://", "", "")
-  " let command = ':sp term://' . clipboardText
   let command = ':!' . clipboardText
-  " echom command
   execute command
 endfunction
 vmap ,r y:call VimuxRunFromClipboard()<CR>
 map ,i :call VimuxInspectRunner()<CR>
-" map ,z :VimuxZoomRunner<CR>
-" map ,r :call VimuxPromptCommand("npm start")<CR>
-" map ,r :Dispatch npm start<CR>
-" map ,q :call VimuxPromptCommand("env NODE_ENV=qa npm start")<CR>
-" map ,q :Dispatch env NODE_ENV=qa npm start<CR>
-" map ,r :call VimuxRunCommand("npm start")<CR>
-" map ,q :call VimuxRunCommand("env NODE_ENV=qa npm start")<CR>
-" augroup vimux
-"   autocmd!
-"   autocmd BufEnter */api/* map <buffer> ,r :call VimuxRunCommand("cd ~/dev/ambyint/packages/api; env NODE_ENV=qa npm start")<CR>
-"   autocmd BufEnter */api/* map <buffer> ,q :call VimuxRunCommand("npm run build; and env NODE_ENV=qa npm start")<CR>
-"   autocmd BufEnter */api/* map <buffer> ,t :call VimuxRunCommand("npm test -- --tests " . expand("%"))<CR>
-" " map ,t :Dispatch npm test<CR>
-" augroup END
 map ,c :call VimuxInterruptRunner()<CR>
-" map ,t :Dispatch npm test<CR>
 map ,f :Dispatch npm test -- --tests %
 map ,b :Dispatch npm run build<CR>
-" map ,z :Copen<CR>
 map ,z :VimuxZoomRunner<CR>
 " }
 " { vim-tmux-navigator
@@ -330,54 +348,15 @@ let g:UltiSnipsEnableSnipMate = 0
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 " }
-" { YouCompleteMe
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer'  }
-" let g:ycm_show_diagnostics_ui = 1
-" let g:ycm_log_level = 'debug'
-" let g:ycm_cache_omnifunc = 1
-" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" }
-
-" {
-" Plug 'roxma/nvim-completion-manager'
-" if !has('nvim')
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" Plug 'roxma/nvim-completion-manager'
-" let g:cm_refresh_length=2
-" let g:cm_matcher = {'module': 'cm_matchers.abbrev_matcher'}
-" " let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
-" Plug 'autozimu/LanguageClient-neovim'
-" set hidden
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"     \ 'javascript.jsx': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"     \ }
-" let g:LanguageClient_autoStart = 1
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 " { Deoplete
 " Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
 " followed by a property in a string. "rodDimensions." showed all props of
 " random variable.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" TODO TernJS slows down Deoplete considerably
-" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-" let g:deoplete#sources#ternjs#types = 1
-" let g:deoplete#sources#ternjs#depths = 1
-" let g:deoplete#sources#ternjs#docs = 1
-" let g:deoplete#sources#ternjs#case_insensitive = 1
-" let g:deoplete#sources#ternjs#include_keywords = 1
-" let g:deoplete#sources#ternjs#in_literal = 1
-
-
 Plug 'othree/jspc.vim'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#auto_refresh_delay = 0
-" let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
@@ -391,38 +370,43 @@ let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
   \ 'jspc#omni'
 \]
+" TODO TernJS slows down Deoplete considerably
 " let g:deoplete#omni#functions.javascript = [
 "   \ 'tern#Complete',
 "   \ 'jspc#omni'
 " \]
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
+" let g:deoplete#sources#ternjs#types = 1
+" let g:deoplete#sources#ternjs#depths = 1
+" let g:deoplete#sources#ternjs#docs = 1
+" let g:deoplete#sources#ternjs#case_insensitive = 1
+" let g:deoplete#sources#ternjs#include_keywords = 1
+" let g:deoplete#sources#ternjs#in_literal = 1
+" let g:deoplete#sources#ternjs#docs = 1
 " let g:deoplete#sources#ternjs#filetypes = [
 "       \ 'jsx',
 "       \ 'javascript.jsx',
 "       \ 'vue',
 "       \ ]
 " let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
-" " let g:tern#command = ["tern"]
-" " let g:tern#arguments = ["--persistent"]
-" let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 " }
-
 " { vim-polyglot
 " Collection of language plugins.
 " Includes: 'pangloss/vim-javascript'
 " Includes: 'mxw/vim-jsx'
 Plug 'sheerun/vim-polyglot'
-" let g:javascript_conceal_function                  = "ƒ"
-" let g:javascript_conceal_null                      = "ø"
-" let g:javascript_conceal_this                      = "@"
-" let g:javascript_conceal_return                    = "◁"
-" let g:javascript_conceal_undefined                 = "¿"
-" let g:javascript_conceal_NaN                       = "ℕ"
-" let g:javascript_conceal_prototype                 = "¶"
-" let g:javascript_conceal_static                    = "•"
-" let g:javascript_conceal_super                     = "Ω"
-" let g:javascript_conceal_arrow_function            = "➜"
-" let g:javascript_conceal_noarg_arrow_function      = "🞅"
-" let g:javascript_conceal_underscore_arrow_function = "🞅"
+let g:javascript_conceal_function                  = "ƒ"
+let g:javascript_conceal_null                      = "ø"
+let g:javascript_conceal_this                      = "@"
+let g:javascript_conceal_return                    = "◁"
+let g:javascript_conceal_undefined                 = "¿"
+let g:javascript_conceal_NaN                       = "ℕ"
+let g:javascript_conceal_prototype                 = "¶"
+let g:javascript_conceal_static                    = "•"
+let g:javascript_conceal_super                     = "Ω"
+let g:javascript_conceal_arrow_function            = "➜"
+let g:javascript_conceal_noarg_arrow_function      = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
 " }
 " { vim-obsession
 " Save buffers in session using automation over the built-in session
@@ -448,31 +432,22 @@ nmap <leader><leader>s :%s//
 vmap <leader><leader>s y:%s/+/+
 nmap <leader><leader>S :%S//
 vmap <leader><leader>S y:%S/+/+
-
-" vmap r :S/
-" vmap M :join<CR>
 " }
 " { vim-rest-console
 Plug 'diepm/vim-rest-console'
-let g:vrc_trigger = '<C-s>'
-" let g:vrc_set_default_mapping = 0
-" augroup vrc
-"   autocmd!
-"   autocmd FileType rest map <buffer> <c-s> :call VrcQuery()<CR>
-" augroup END
+let g:vrc_set_default_mapping = 0
+augroup vrc
+  autocmd!
+  autocmd FileType rest map <buffer> <c-s> :call VrcQuery()<CR>
+  autocmd BufLeave   *.rest silent w
+augroup END
 let g:vrc_output_buffer_name = '__VRC_OUTPUT.json'
-" let g:vrc_response_default_content_type = 'json'
 let g:vrc_response_default_content_type = 'application/json'
 let g:vrc_header_content_type = 'application/json; charset=utf-8'
 let g:vrc_auto_format_response_enabled = 1
-let g:vrc_auto_format_response_patterns = {
-      \ 'json': 'jq .',
-      \ 'xml': 'xmllint --format -',
-      \}
+let g:vrc_auto_format_response_patterns = { 'json': 'jq .', 'xml': 'xmllint --format -' }
 " VRC sometimes has issues formatting response without --silent
-let g:vrc_curl_opts={
-      \'--silent': ''
-      \}
+let g:vrc_curl_opts={ '--silent': '' }
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -482,32 +457,19 @@ let g:vrc_curl_opts={
 Plug 'tpope/vim-surround'
 vmap s <Plug>VSurround
 vmap s <Plug>VSurround
-" nmap s viw<Plug>VSurround
-" nmap S v$h<Plug>VSurround
-" echo char2nr("i")
-let g:surround_105 = "if (\1if statement: \1) {\r}"
-" }
-" { CtrlSF
-Plug 'dyng/ctrlsf.vim'
-map <F3> :CtrlSF -R ""<LEFT>
-" vmap <leader>8 "hy:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
-" nmap <leader>8 "hyiw:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
-" nmap <leader>/ :CtrlSF -R ""<LEFT>
-" nmap <leader><leader>/ :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-let g:ctrlsf_confirm_save = 0
-
 " }
 " { Grepper
+" Like :grep but a smoother experience. No display of text or flickering.
 " Use Ag to search using :GrepperAg, and :copen when finished
 " CtrlSF is an alternative, but that doesn't allow :cnext or immediate search
 Plug 'mhinz/vim-grepper'
 nmap <leader>8 "hyiw:GrepperAg -Q <c-r>h<CR>:nohlsearch<CR>
 vmap <leader>8 "hy:GrepperAg -Q '<c-r>h'<CR>
-nmap <leader>/ :GrepperAg ""<LEFT>
+nmap <leader>/ :Grepper<CR>
 nmap <leader><leader>/ :GrepperAg "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 nmap <leader><leader><leader>/ :GrepperAg "" %:p:h:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-
 nmap <silent> ,/ :nohlsearch<CR>
+" let g:grepper.tools = ['ag', 'ack', 'grep', 'findstr', 'rg', 'pt', 'sift', 'git', ]
 " Search only open buffers
 function! ToggleGrepperBuffersMode()
   if g:grepper.buffers
@@ -518,7 +480,17 @@ function! ToggleGrepperBuffersMode()
     echo "Grepper will search only open buffers"
   endif
 endfunction
-map <leader><leader>g :call ToggleGrepperBuffersMode()<CR>
+map ]gb :call ToggleGrepperBuffersMode()<CR>
+function! ToggleGrepperDirectoryMode()
+  if g:grepper.dir == 'file'
+    let g:grepper.dir = 'cwd'
+    echo "Grepper will search all files"
+  else
+    let g:grepper.dir = 'file'
+    echo "Grepper will search only current directory"
+  endif
+endfunction
+map ]gd :call ToggleGrepperDirectoryMode()<CR>
 nmap gr "hyiw:GrepperAg <c-r>h<CR>
 " nmap gi :GrepperAg '%{expand("%:p:t:r")}'<CR>
 " nmap gi :GrepperAg %:p:t:r<CR>
@@ -527,11 +499,15 @@ let g:grepper = {}
 runtime autoload/grepper.vim
 let g:grepper.jump = 0
 let g:grepper.stop = 500
+let g:grepper.highlight = 1
+" This is similar to CtrlSF
+let g:grepper.side = 0
 " }
 " { Quickfix-Reflector
 " Edit files within any quickfix window, then save to dynamically update files
 " Works very similar to CtrlSF, but with quickfix rather than own window
-Plug 'stefandtw/quickfix-reflector.vim'
+" Maybe I should just use :Doline (vim-qf) or :cdo instead
+" Plug 'stefandtw/quickfix-reflector.vim'
 " }
 " { vim-simple-todo
 " Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
@@ -645,20 +621,6 @@ let g:ale_fixers = {
       \   ],
       \}
 " }
-" { NERDTree
-Plug 'scrooloose/nerdtree'  " File browsing with :E . or :NERDTreeFind
-Plug 'Xuyuanp/nerdtree-git-plugin'
-" " autocmd VimEnter * NERDTree
-" let g:NERDTreeMinimalUI        = 1
-" let g:NERDTreeShowBookmarks    = 1
-" let g:NERDTreeAutoDeleteBuffer = 1
-" let g:NERDTreeDirArrows        = 1
-" let g:NERDTreeQuitOnOpen       = 0
-" " noremap - :NERDTreeFind<CR>
-" noremap - :e %:p:h<CR>
-" autocmd FileType nerdtree nnoremap <silent><buffer> - :call nerdtree#ui_glue#invokeKeyMap("u")<CR>
-" map <leader><leader>B :Bookmark<space>
-" }
 " { yankstack
 " Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
 " let g:yankstack_map_keys = 0
@@ -680,35 +642,31 @@ let g:tagbar_case_insensitive = 1
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_ctags_exclude = ['*node_modules*', '*bower_components*', 'tmp*', 'temp*', 'package*json']
 " }
+" { vim-visual-star-search
+" Allow you to use * and # on visually selected text
+Plug 'nelstrom/vim-visual-star-search'
+" }
+" { vim-lastplace
+" Open files at last closed position
+Plug 'farmergreg/vim-lastplace'
+" }
 
 " -----------------------------------------------------------------------------------------
 " 3 - Decent
 " -----------------------------------------------------------------------------------------
-" { Airline / Lightline
+" " { CtrlSF
+" Plug 'dyng/ctrlsf.vim'
+" map <F3> :CtrlSF -R ""<LEFT>
+" " vmap <leader>8 "hy:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
+" " nmap <leader>8 "hyiw:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
+" " nmap <leader>/ :CtrlSF -R ""<LEFT>
+" " nmap <leader><leader>/ :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" let g:ctrlsf_confirm_save = 0
+" " }
+" { Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let s:prevcountcache=[[], 0]
-" function! ShowCount()
-"     let key=[@/, b:changedtick]
-"     if s:prevcountcache[0]==#key
-"         return s:prevcountcache[1]
-"     endif
-"     let s:prevcountcache[0]=key
-"     let s:prevcountcache[1]=0
-"     let pos=getpos('.')
-"     try
-"         redir => subscount
-"         silent %s///gne
-"         redir END
-"         let result=matchstr(subscount, '\d\+')
-"         let s:prevcountcache[1]=result
-"         return result
-"     finally
-"         call setpos('.', pos)
-"     endtry
-" endfunction
-" set ruler
-" let &statusline='%{ShowCount()} %<%f %h%m%r%=%-14.(%l,%c%V%) %P'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 0
 " let g:airline_theme='minimalist'
@@ -716,28 +674,15 @@ let g:airline_powerline_fonts = 0
 " let g:airline_theme='hybrid'
 " let g:airline_theme='dracula'
 let g:airline_theme='jellybeans'
-" let g:airline_section_a = '%{substitute(expand("%:p:h"), getcwd(), "", "")}'
 let g:airline_section_a = '%{expand("%:p:t")}'
-" let g:airline_section_b = '/%{split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0]}'
-" let g:airline_section_c = '%{substitute(substitute(expand("%:p"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
 let g:airline_section_b = '%{expand("%:p:h:t")}'
 let g:airline_section_c = '%{expand("%:p:h:h:t")}'
-" let g:airline_section_c = '%{join(split(expand("%:p", 1), "/")[0])}'
-" let g:airline_section_c = '%{getcwd()}'
-" let g:airline_section_c = '%{substitute(substitute(expand("%:p:h"), getcwd(), "", ""), "/" . split(substitute(expand("%:p:h"), getcwd(), "", ""), "/")[0], "", "")}'
 let g:airline_section_x = ''
 let g:airline_section_y = ''
-" let g:airline_section_z = '%{ShowCount()}'
 let g:airline_section_z = ''
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
 let g:airline_inactive_collapse = 0
-" let g:AutoPairsShortcutToggle = '<c-a>'
-" }
-" { vim-smooth-scroll
-Plug 'terryma/vim-smooth-scroll'
-" noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>
-" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>
 " }
 " { vim-sleuth
 " Auto set file tab settings based on current file or other files in directory
@@ -762,60 +707,19 @@ map ?  <Plug>(incsearch-backward)
 map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 " }
-" { EasyMotion
-" Plug 'easymotion/vim-easymotion'
-" nmap <leader>j <Plug>(easymotion-bd-j)
-" nmap <leader>k <Plug>(easymotion-bd-k)
-" " nmap s <Plug>(easymotion-s2)
-" " nmap s <Plug>(easymotion-bd-w)
-" " nmap S <Plug>(easymotion-s2)
-" " nmap S <Plug>(easymotion-s)
-" nmap s <Plug>(easymotion-s)
-" nmap S <Plug>(easymotion-bd-w)
-" map <Leader>j <Plug>(easymotion-w)
-" map <Leader>k <Plug>(easymotion-b)
-" map <Leader><Leader>j <Plug>(easymotion-j)
-" map <Leader><Leader>k <Plug>(easymotion-k)
-" " <Leader>f{char} to move to {char}
-" map  <Leader>v <Plug>(easymotion-bd-f)
-" nmap <Leader>v <Plug>(easymotion-overwin-f)
-
-" " s{char}{char} to move to {char}{char}
-" " nmap s <Plug>(easymotion-overwin-f2)
-
-" " Move to line
-" map <Leader>L <Plug>(easymotion-bd-jk)
-" nmap <Leader>L <Plug>(easymotion-overwin-line)
-
-" " Move to word
-" map  <Leader>w <Plug>(easymotion-bd-w)
-" nmap <Leader>w <Plug>(easymotion-overwin-w)
-" let g:EasyMotion_smartcase = 1
-" }
 " { Vim-Sneak
 Plug 'justinmk/vim-sneak'
-" nmap s <Plug>SneakLabel_s
-" nmap S <Plug>SneakLabel_S
+nmap s <Plug>SneakLabel_s
+nmap S <Plug>SneakLabel_S
 " map s <Plug>Sneak_s
 " map S <Plug>Sneak_S
-" let g:sneak#label = 1
-let g:sneak#s_next = 1
+let g:sneak#label = 1
+" let g:sneak#s_next = 1
 " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
 let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
 " }
 " { rhysd/clever-f.vim
 Plug 'rhysd/clever-f.vim'
-" }
-" { vim-visual-star-search
-" Allow you to use * and # on visually selected text
-Plug 'nelstrom/vim-visual-star-search'
-" }
-" { tern_for_vim
-" Deoplete is slow with this turned on, yet Deoplete is working fine without
-" it
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
-" nmap <silent> gt :TernDef<CR>
-" nmap <silent> gD :TernDef<CR>
 " }
 " { Dash.app
 Plug 'rizzatti/dash.vim'
@@ -827,38 +731,15 @@ let g:dash_map = {
 " { Vim Trailing Whitespace
 Plug 'bronson/vim-trailing-whitespace'
 " }
-" { winresizer
-Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
-" }
-" { visual-split
-" Alternatively, open a new buffer similarly that syncs: https://github.com/chrisbra/NrrwRgn
-Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
-" vmap <leader>s :'<,'>VSSplitAbove<CR>
-vmap v :'<,'>VSSplitAbove<CR>
-" }
-" { vim-lastplace
-" Open files at last closed position
-Plug 'farmergreg/vim-lastplace'
-" }
-" { Wildfire
-" Press Enter to select the closest text object. Press Enter again to expand
-" to the next largest text object,
-Plug 'gcmt/wildfire.vim'
-" }
-" { Gundo
-" Use :Gundo to time travel undo history
-Plug 'sjl/gundo.vim'
-nmap <leader>u :GundoToggle<CR>
-" }
-
-" -----------------------------------------------------------------------------------------
-" 4 - Could do without
-" -----------------------------------------------------------------------------------------
-" { Tabular
-" Uses :Tabularize /character(s)
-Plug 'godlygeek/tabular'
-vmap gt :Tabularize /
-" }
+" " { winresizer
+" Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
+" " }
+" " { visual-split
+" " Alternatively, open a new buffer similarly that syncs: https://github.com/chrisbra/NrrwRgn
+" Plug 'wellle/visual-split.vim'  " Get a perfectly sized split for a section by selecting and doing <leader>s
+" " vmap <leader>s :'<,'>VSSplitAbove<CR>
+" vmap v :'<,'>VSSplitAbove<CR>
+" " }
 " { Colorscheme switcher
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -866,109 +747,27 @@ noremap <F9> :RandomColorScheme<CR>:colo<CR>
 " }
 " { matchmaker
 " Highlight word under cursor
-" Plug 'qstrahl/vim-matchmaker'
-" let g:matchmaker_enable_startup = 1
-" let g:matchmaker_matchpriority = 1
+Plug 'qstrahl/vim-matchmaker'
+let g:matchmaker_enable_startup = 1
+let g:matchmaker_matchpriority = 1
 " }
 " { Auto-Pairs
 " Auto close brackets
 " Great until you want to do a macro or enclose existing text
-" Plug 'jiangmiao/auto-pairs'
-" }
-" { vim-vinegar
-" Nice additions to netrw, but still not fun to rename/move/etc
-Plug 'tpope/vim-vinegar'  " Improve file management with NetRW (press -)
-nnoremap _ :execute 'edit ' . getcwd()<CR>
+Plug 'jiangmiao/auto-pairs'
 " }
 " { FZF
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
 " " nnoremap <silent> <c-f> :BLines<CR>
 " let g:fzf_buffers_jump = 1
 " nnoremap <c-p> :Files src/<CR>
 " nnoremap <c-b> :Buffers<CR>
 " " nnoremap <c-f> :BLines<CR>
 " }
-" { Targets.vim
-" Adds a few text objects, like:
-" * aa / ia - an argument
-Plug 'wellle/targets.vim'
-" }
-" { javascript-libraries-syntax
-" Adds some minor extra syntax highlighting for certain libraries
-" Seems pretty minor, like I noticed React in React.Component was highlighted
-Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'lodash,react,flux,d3'
-" }
-" { HardMode
-" Plug 'wikitopian/hardmode'  " :call HardMode() to force yourself to not use single motions
-" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-" nnoremap <leader><leader>h <Esc>:call ToggleHardMode()<CR>
-" }
-" { Dirvish
-Plug 'justinmk/vim-dirvish'  " File manager
-" noremap - :e %:p:h<CR>
-noremap - :Dirvish %<CR>
-noremap - :Dirvish %:p:h<CR>
-let g:dirvish_mode = ':sort ,^.*[\/],'
-let g:dirvish_relative_paths=1
-function! Relpath(filename)
-	let cwd = getcwd()
-	let s = substitute(a:filename, l:cwd . "/" , "", "")
-	return s
-endfunction
-function! InsertBookmarks()
-  " execute "norm gg:read ~/dotfiles/nvim/bookmarks"
-  execute "norm mZ"
-
-  execute "norm ggI~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  execute "norm I" . substitute(Relpath(expand("%:p")), '/', ' > ', 'g') . ""
-  " execute "norm I> " . substitute(substitute(fnamemodify(expand("%"), ":~:."), '/', '', ''), '/', ' > ', 'g') . ""
-  execute "norm I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-
-  " execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
-  call feedkeys("")
-
-  " execute "norm 2\<c-o>0"
-  execute "norm 1\<c-o>0"
-endfunction
-augroup dirvish
-  autocmd!
-  " autocmd FileType dirvish nnoremap <buffer> <leader>r :Renamer %<CR>
-  autocmd FileType dirvish nnoremap <buffer> <leader>r :Shdo! mv {} {}<CR>
-  autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>
-  autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
-  autocmd FileType dirvish nnoremap <buffer> e :e %
-  autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
-  " autocmd FileType dirvish nnoremap <buffer> M :Mkdir %
-  " autocmd FileType dirvish nnoremap <buffer> D :call feedkeys(':!rm -rf %/' . expand('<cWORD>'))<CR>
-  autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
-  autocmd FileType dirvish nnoremap <buffer> dd :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
-  autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
-  autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
-
-  " Enable :Gstatus and friends.
-  autocmd FileType dirvish call fugitive#detect(@%)
-  autocmd FileType dirvish call InsertBookmarks()
-augroup END
-" }
-" { Dracula (colorscheme)
-Plug 'dracula/vim'
-" }
-" { Unimpaired
-" This has mappings for "=" that conflict with my mapping for Prettier /
-" Neoformat
-" Plug 'tpope/vim-unimpaired'
-nmap [q :cprev<CR>
-nmap ]q :cnext<CR>
-nmap [b :bprevious<CR>
-nmap ]b :bnext<CR>
-nmap [a :previous<CR>
-nmap ]a :next<CR>
-" }
 " { Vim Maximizer
-" Plug 'szw/vim-maximizer'
-" nmap <leader>f :MaximizerToggle<CR>
+Plug 'szw/vim-maximizer'
+nmap <leader>f :MaximizerToggle<CR>
 nmap <leader>z <bar>_
 nmap <leader>= =
 " augroup maximizepane
@@ -977,19 +776,28 @@ nmap <leader>= =
 "   autocmd BufWinEnter,WinEnter *{.js,/} :norm _<CR>
 " augroup END
 " }
-" { vim-syntax-expand
-" Like abbreviations, but _head can detect if first character on line, and
-" doesn't require you to press space to expand
-" Plug 'Wolfy87/vim-syntax-expand'
-" autocmd FileType javascript inoremap <silent> <buffer> @ <C-r>=syntax_expand#expand("@", "this")<CR>
-" autocmd FileType javascript inoremap <silent> <buffer> # <C-r>=syntax_expand#expand("#", ".prototype.")<CR>
-" autocmd FileType javascript inoremap <silent> <buffer> < <C-r>=syntax_expand#expand_head("<", "return ")<CR>
-" autocmd FileType javascript inoremap <silent> <buffer> >> <C-r>=syntax_expand#expand(">>", "=>")<CR>
+
+" -----------------------------------------------------------------------------------------
+" 4 - Could do without
+" -----------------------------------------------------------------------------------------
+" { Gundo
+" Use :Gundo to time travel undo history
+Plug 'sjl/gundo.vim'
+nmap <leader>u :GundoToggle<CR>
 " }
-" { vim-json
-" Conceal quotes in JSON
-Plug 'elzr/vim-json'
-" let g:vim_json_syntax_conceal=1
+" { Tabular
+" Uses :Tabularize /character(s)
+Plug 'godlygeek/tabular'
+vmap gt :Tabularize /
+" }
+" { javascript-libraries-syntax
+" Adds some minor extra syntax highlighting for certain libraries
+" Seems pretty minor, like I noticed React in React.Component was highlighted
+Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'lodash,react,flux,d3'
+" }
+" { Dracula (colorscheme)
+Plug 'dracula/vim'
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -1002,83 +810,16 @@ Plug 'tpope/vim-jdaddy'
 " { kana/vim-textobj-user
 Plug 'kana/vim-textobj-user'
 " }
-" { Vim Table Mode
-Plug 'dhruvasagar/vim-table-mode'
-
-function! s:isAtStartOfLine(mapping)
-  let text_before_cursor = getline('.')[0 : col('.')-1]
-  let mapping_pattern = '\V' . escape(a:mapping, '\')
-  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
-  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
-endfunction
-
-inoreabbrev <expr> <bar><bar>
-          \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
-inoreabbrev <expr> __
-          \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
-" }
-" { lfv89/vim-interestingwords
-" For some reason it is still including default mappings that is interefering
-" with EasyMotion
-" Plug 'lfv89/vim-interestingwords'
-" nnoremap <silent> <leader>i :call InterestingWords('n')<cr>
-" nnoremap <silent> <leader>I :call UncolorAllWords()<cr>
-" let g:interestingWordsDefaultMappings = 0
-" let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
-" }
 " { Goyo
 " Dark room, remove distracting Vim elements
-" Plug 'junegunn/goyo.vim'
-" nmap <leader>z :Goyo<CR>
+Plug 'junegunn/goyo.vim'
+nmap <leader>d :Goyo<CR>
 " }
 " { BufSurf
 " Buffer history navigation
 " Plug 'ton/vim-bufsurf'
 " nmap H :BufSurfBack<CR>
 " nmap L :BufSurfForward<CR>
-" }
-" {
-" Plug 'mihaifm/bufstop'
-" nmap <leader>b :BufstopFast<CR>
-" nmap <leader>B :BufstopMode<CR>
-" let g:BufstopSpeedKeys = ["<F1>", "<F2>", "<F3>", "<F4>", "<F5>", "<F6>"]
-" let g:BufstopLeader = ""
-" let g:BufstopAutoSpeedToggle = 1
-
-" Tips:
-" Add searches to buffers GrepperAg, then load all to buffer with: :cdo badd %
-" Delete all buffers: :bufdo bd
-" * C-A to auto complete all glob matches, e.g. :bd **/*<CA>
-nmap <leader>c :bdelete!<CR>
-" nmap <silent> <leader><leader>a :cdo badd %<CR>
-nmap <leader><leader>a :%argdelete<CR>
-nmap <leader>a :args **/**<LEFT>
-nmap <leader>! :argdo<space>
-nmap <silent> <leader><leader>c :%bdelete!<CR>
-nmap <leader><leader>f :filter // ls<LEFT><LEFT><LEFT><LEFT>
-nmap <leader>f :find **/*
-nmap <leader><leader>f :find <C-R>=expand('%:h').'/'<CR>
-nmap <leader><leader>b :ls h<CR>:b
-
-noremap <c-p> :find **/*
-noremap <leader>p :find **/*
-" noremap <leader>b :ls h<CR>:b<space>
-" noremap <leader>b :ls<CR>:b<space>
-noremap <leader>b :b<space>
-
-nmap <leader>] :tjump /
-set wildignore=*.swp,*.bak
-set wildignore+=/usr/**/*
-set wildignore+=env/,dist/,bower_components/,tmp/,jest/
-set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
-set wildignore+=*__Scratch__ " scratch.vim
-set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
-set wildignore+=*/node_modules/**/*,*/.git/**/*,*/.hg/**/*,*/.svn/**/*
-set wildignore+=tags
-set wildignore+=*.tar.*
-
 " }
 " { vim-renamer
 " Rename and move files and folders in batch as plain text
@@ -1133,14 +874,18 @@ let g:vim_markdown_folding_level = 2
 let g:vim_markdown_folding_disabled = 0
 map gt :Toch<CR>
 map gsh :topleft split ~/notes/habits.scratch.md<CR>
-map gss :topleft split ~/notes/task.scratch.md<CR>
+map gsl :topleft split ~/notes/links.scratch.md<CR>
+map gsm :topleft split ~/notes/meetings.scratch.md<CR>
 map gsp :topleft split ~/notes/personal.scratch.md<CR>
-map gsw :topleft split ~/notes/work.scratch.md<CR>
 map gsr :topleft split ~/notes/queries.rest<CR>
+map gss :topleft 5split ~/notes/task.scratch.md<CR>
+map gst :topleft 1split ~/notes/task.scratch.md<CR><c-w>p
+map gsv :topleft split ~/notes/vim.scratch.md<CR>
+map gsw :topleft split ~/notes/work.scratch.md<CR>
+
 augroup markdown
   autocmd!
-  autocmd BufEnter   *.md setlocal conceallevel=2
-  autocmd BufLeave   *.md w
+  autocmd BufLeave   *.md silent w
 augroup END
 " }
 " { vimwiki/vimwiki
@@ -1148,21 +893,70 @@ Plug 'vimwiki/vimwiki'
 let g:vimwiki_map_prefix = '<Leader>e'
 augroup vimwiki
   autocmd!
-  autocmd BufLeave   *.wiki w
+  autocmd BufLeave   *.wiki silent w
 augroup END
 " }
+" { vim-qf
+" Enhancements to the Quickfix window
+" Better behavior, like closing Vim if quickfix is last window
+" :Keep or :Reject to filter quickfix
+" :Dolines or :Dofiles to perform :cdo/:ldo on lines or just the files
+Plug 'romainl/vim-qf'
+" }
+" { vim-qlist
+" :Ilist - Add word under cursor to quickfix
+" [I - Same thing
+Plug 'romainl/vim-qlist'
+" }
+" { embear/vim-localvimrc
+" Put a .lvimrc file in a project to have project specific settings
+" Example settings:
+" set path+=actions/
+" set path+=components/forms/**
+" augroup localfilemarks
+"   autocmd!
+"   autocmd BufEnter */parsers/*       normal! mP
+"   autocmd BufEnter */epics/*         normal! mE
+" augroup END
+Plug 'embear/vim-localvimrc'
+let g:localvimrc_ask = 0
+augroup localvimrc
+  autocmd!
+  autocmd BufWinEnter *      silent LocalVimRC
+augroup END
+" }
+
 call plug#end()
-
 " }
 
-" { Special mappings
-" Automatically add a curly bracket on new line
-" execute "inoremap {<CR> {<CR>}<ESC>V=O"
-" vmap { S{I
-" execute "inoremap (<CR> (<CR>)<ESC>V=O"
-" vmap ( S(I
-" vmap <BS> :join<CR>
+" { Buffers and Find
+" Tips:
+" Add searches to buffers GrepperAg, then load all to buffer with: :cdo badd %
+" Delete all buffers: :bufdo bd
+" * C-A to auto complete all glob matches, e.g. :bd **/*<CA>
+nmap <leader>c :bdelete!<CR>
+nmap <leader><leader>a :%argdelete<CR>
+nmap <leader>a :args **/**<LEFT>
+nmap <leader>! :argdo<space>
+nmap <silent> <leader><leader>c :%bdelete!<CR>
+nmap <leader><leader>f :filter // ls<LEFT><LEFT><LEFT><LEFT>
+noremap <c-p> :find *
+noremap <leader>p :find *
+nmap <leader><leader>b :ls h<CR>:b
+noremap <leader>b :b<space>
+
+nmap <leader>] :tjump /
+set wildignore=*.swp,*.bak
+set wildignore+=/usr/**/*
+set wildignore+=env/,dist/,bower_components/,tmp/,jest/
+set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
+set wildignore+=*__Scratch__ " scratch.vim
+set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
+set wildignore+=*/node_modules/**/*,*/.git/**/*,*/.hg/**/*,*/.svn/**/*
+set wildignore+=tags
+set wildignore+=*.tar.*
 " }
+
 
 " { Languages
 
@@ -1181,36 +975,9 @@ augroup pythondispatch
 augroup END
 " }
 
-" { Javascript
-" nmap gd :TernDef<CR>
-" nmap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" nnoremap gf 0f"lv$F/"py:FZF<CR>foo
-" nnoremap gf :call TagsUnderCursor()<CR>
-" map <leader>rn :!node %:p<CR>
-" autocmd FileType javascript,javascript.jsx nmap gd :TernDef<CR>
-" autocmd! FileType javascript,javascript.jsx nmap <leader>r :!node %:p<CR>
-" autocmd! FileType javascript.jsx map ,r :call VimuxRunCommand("npm start")
-" autocmd! FileType javascript.jsx map ,t :call VimuxRunCommand("npm start")
-" augroup javascript
-"   autocmd!
-"   autocmd FileType javascript,javascript.jsx map <buffer> ,r :call VimuxRunCommand("npm start")<CR>
-"   autocmd FileType javascript,javascript.jsx map <buffer> ,t :Dispatch npm test<CR>
-
-"   autocmd FileType javascript,javascript.jsx setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
-"   autocmd FileType javascript,javascript.jsx setlocal makeprg=/usr/local/bin/eslint
-"   autocmd FileType javascript,javascript.jsx command! -buffer Make silent make % | silent redraw! | silent wincmd p | cw
-"   autocmd BufWritePost *.js Make
-" augroup END
-" }
-
 " { Other Languages
-" autocmd! Syntax c,cpp,xml,html,xhtml setlocal foldmethod=syntax
-" autocmd! Syntax c,cpp,xml,html,xhtml,perl normal zR
 autocmd! Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
-" autocmd! Syntax javascript map <F1> :!node %:p<CR>
 autocmd! Syntax ruby map <F1> :!./bin/rails server<CR>
-
-" Vue.js .vue file set filetype on load
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }
 
@@ -1218,18 +985,9 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " { File Marks
 " Automatically bookmark last files accessed by directory
-augroup filemarks
+augroup globalfilemarks
   autocmd!
   autocmd BufEnter *.{js,jsx,coffee} normal! mJ
-  autocmd BufEnter */parsers/*       normal! mP
-  autocmd BufEnter */epics/*         normal! mE
-  autocmd BufEnter */routes/*        normal! mR
-  autocmd BufEnter */reducers/*      normal! mS
-  autocmd BufEnter */components/*    normal! mC
-  autocmd BufEnter */utils/*         normal! mU
-  autocmd BufEnter */api/*           normal! mA
-  autocmd BufEnter */api/*           normal! mA
-
   autocmd BufWinLeave */src/* normal! mQ
   autocmd InsertEnter */src/* normal! mI
   autocmd TextChanged */src/* normal! mO
@@ -1238,43 +996,6 @@ augroup END
 " }
 
 " { Mappings
-
-" { Disable bad habits
-" map <c-c> <nop>
-" " imap jj <esc>
-" nmap h <nop>
-" nmap j <nop>
-" nmap k <nop>
-" nmap l <nop>
-" }
-
-" { Comma
-
-" map ,, :b<Space>
-" map ,f :find<Space>
-" map ,e :find epics/**/**<LEFT>
-" map ,p :find parsers/**/**<LEFT>
-" map ,c :find components/**/**<LEFT>
-" map ,re :find reducers/**/**<LEFT>
-" map ,ro :find routes/**/**<LEFT>
-" map ,, :CtrlPLine<CR>
-" map ,, :BLines<CR>
-" map ,f :CtrlPMRUFiles<CR>
-" map ,e :CtrlPMRUFiles epics/<CR>
-" map ,p :CtrlPMRUFiles parsers/<CR>
-" map ,c :CtrlPMRUFiles components/<CR>
-" map ,re :CtrlPMRUFiles reducers/<CR>
-" map ,ro :CtrlPMRUFiles routes/<CR>
-" map <c-p> :History<CR>
-" map ,, :Marks<CR>
-" map ,f :FZF<CR>
-" map ,e :FZF epics/<CR>
-" map ,p :FZF parsers/<CR>
-" map ,c :FZF components/<CR>
-" map ,re :FZF reducers/<CR>
-" map ,ro :FZF routes/<CR>
-
-" }
 
 " URL encode a string. ie. Percent-encode characters as necessary.
 function! UrlEncode(string)
@@ -1339,17 +1060,12 @@ function! LetMeDuckThatForYou(defaultPhrase)
   " let searchCommand = searchCommand . a:foo
 
   call inputsave()
-  " let phrase = input('Enter search phrase: ', a:defaultPhrase)
   let phrase = input('', a:defaultPhrase)
   call inputrestore()
 
-  " let searchCommand = ':vsp term://elinks duckduckgo.com/?q='
-  " let searchCommand = searchCommand . UrlEncode(phrase)
   let searchCommand = ':vsp term://elinks duckduckgo.com/?q='
   let searchCommand = searchCommand . UrlEncode(phrase)
 
-  " execute searchCommand
-  " call feedkeys('i')
   execute '!open https://duckduckgo.com/?q=' . UrlEncode(phrase)
 endfunction
 
@@ -1365,31 +1081,15 @@ augroup vimux
   autocmd BufEnter */api/* map <buffer> ,t :sp term://npm test -- --tests " . expand("%"))<CR>
 " map ,t :Dispatch npm test<CR>
 augroup END
-" nmap <leader>oh !open https://github.com/search?q=
-" nmap <leader>on "pyi":!open https://www.npmjs.com/package/p
-" nmap <leader>og :sp term://surfraw google javascript i
-" nmap <leader>og :call LetMeDuckThatForYou(expand("<cfile>"))<CR>i
-" nmap <leader>og :call LetMeDuckThatForYou('javascript')<CR>i
-" nmap <leader>o :call LetMeDuckThatForYou(&filetype . ' ')<CR>
 nmap <leader>O :call LetMeDuckThatForYou(&filetype . ' ' . '<c-r><c-w>')<CR>
 nmap <leader>o :call LetMeDuckThatForYou('')<CR>
 vmap <leader>o y:call LetMeDuckThatForYou(&filetype . ' ' . @+)<CR>
 nmap <C-\> <C-\><C-n> :wincmd p<CR>
-" tnoremap <C-\> <C-\><C-n> :wincmd p<CR>
 tnoremap <C-\> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
 tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
 tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
 tnoremap <C-l> <C-\><C-n>:wincmd l<CR>
-" Map leader+number to jump to pane, also exits terminal mode
-" " Source: http://stackoverflow.com/a/6404246/151007
-" let i = 1
-" " If I have more than 9 windows open I have bigger problems :)
-" while i <= 9
-"   execute 'nnoremap <Leader>'.i.' :'.i.'wincmd w<CR>'
-"   execute 'tnoremap <Leader>' . i . ' <C-\><C-n>' .':' .  i . 'wincmd w<CR>'
-"   let i = i + 1
-" endwhile
 " }
 
 function! SetScratchBuffer()
@@ -1398,7 +1098,6 @@ function! SetScratchBuffer()
   setlocal noswapfile
 endfunction
 function! DiffThis()
-  " normal! ?<<
   normal! ?^<<<<<<<
   normal! j
   normal! V
@@ -1430,11 +1129,6 @@ function! DiffThis()
 
 endfunction
 
-" { Diff a git merge conflict
-" vnoremap <leader>d y:sp orig<CR>P?<<<<<<\jV/======k"ay/=========jV/>>>>>>>>k"by:sp a"aP:diffthis:sp b"bP:diffthis
-" nmap <leader>d :call DiffThis()
-" }
-
 " { Leader <Space>
 
 " copy current absolute filename into register
@@ -1443,9 +1137,7 @@ nnoremap <leader>yf :let @*=expand('%:p')<CR>
 " nnoremap <leader>yf :%y+<cr>
 
 nmap <leader><leader>i :PlugInstall<CR>
-" nmap <leader><leader>j :join<CR>
 nmap <leader><leader>u :PlugClean!<CR>
-" nmap <leader><leader>v :vsp ~/dotfiles/.vimrc<CR>
 nmap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader><leader>t :sp ~/dotfiles/.ctags<CR>
 
@@ -1454,10 +1146,6 @@ nmap <leader><leader>q :qa<CR>
 nmap <leader>h :sp<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>
-
-" Go to next / previous change (GitGutter)
-" nmap <leader>j ]c
-" nmap <leader>k [c
 
 " Switch to previous file
 map <leader><tab> <c-^>
@@ -1479,86 +1167,18 @@ vmap I :norm I
 vmap A :norm A
 vmap <enter> :norm<space>
 vmap <bar> :g/
-" vmap <leader>s :sort<CR>
 nmap <leader>l yiw{oconsole.warn(`"`, ")^
 vmap <leader>l y{oconsole.warn(`"`, ")^
 vnoremap <c-p> :<c-p>
 " }
 
-" { Window Keys
-" Maximize window
-map  _|
-map f _<bar>
-" }
-
-" { Default behavior overrides
-
-" When doing commands, always scroll through history matching current text
-cmap <c-p> <up>
-cmap <c-n> <down>
-
-noremap ; :
-
-nnoremap g} :split<CR>gd
-
-" Always search regular regex - no escape characters needed
-" nnoremap / /\v
-" vnoremap / /\v
-" Case insensitive search (but still have case sensitive for :substitute
-nnoremap / /\c
-vnoremap / /\c
-nnoremap ? ?\c
-vnoremap ? ?\c
-
-" allow the . to execute once for each line of a visual selection
-vnoremap . :normal .<CR>
-
-" Center screen and open folds when going through search results
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-
-" Don't skip wrapped lines
-" nnoremap j gj
-" nnoremap k gk
-
-" Y should copy to end of line, not full line, same as D
-noremap Y y$
-
-" Ctrl+F to search from top of file
-" nnoremap <c-f> gg/\c
-
-" }
-
-" { Changelist
-" Use c-f and c-b to move through quickfix, e.g. when using Grepper
-" noremap <c-f> :cnext<CR>
-" noremap <c-b> :cprev<CR>
-
 map ! :!
-" }
-
 
 " { Navigation in buffer
-" map J }zz
-" map K {zz
-" map J 5jzz
-" map K 5kzz
-" map J 8j
-" map K 8k
 map J <c-d>
 map K <c-u>
 map H [{
 map L ]}
-" map H g;zz0
-" map L 999g,zz0
-
-" vmap J }zz
-" vmap K {zz
-" nmap J :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>zz
-" nmap K :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>zz
-" nmap H zk
-" nmap L zj
-" nmap ; /class\\|const \[A-Z\]\\|default<CR>zt
 " }
 
 " { Navigate panes
@@ -1569,7 +1189,6 @@ map ∆ <c-w>j
 map ˚ <c-w>k
 map ¬ <c-w>l
 " }
-
 
 imap <c-z> <c-y>,
 
@@ -1584,7 +1203,73 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 
 " }
 
+" { Default behavior overrides
+
+nmap <enter> vap
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+elseif executable('rg')
+  set grepprg=rg
+elseif executable('ack')
+  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
+endif
+
+" When doing commands, always scroll through history matching current text
+cmap <c-p> <up>
+cmap <c-n> <down>
+
+" noremap ; :
+
+nnoremap g} :split<CR>gd
+
+" Case insensitive search (but still have case sensitive for :substitute
+nnoremap / /\c
+vnoremap / /\c
+nnoremap ? ?\c
+vnoremap ? ?\c
+
+" allow the . to execute once for each line of a visual selection
+vnoremap . :normal .<CR>
+
+" Center screen and open folds when going through search results
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+
+" Don't skip wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" Y should copy to end of line, not full line, same as D
+noremap Y y$
+
+nmap [q :cprev<CR>
+nmap ]q :cnext<CR>
+nmap [b :bprevious<CR>
+nmap ]b :bnext<CR>
+nmap [a :previous<CR>
+nmap ]a :next<CR>
+
+" }
+
+
 " { Functions
+" Automatically create directories that don't exist if doing
+" e.g. :e ./path/that/doesnt/exist/bar.js
+function! <SID>AutoMkdir() abort
+  let l:dir = expand('<afile>:p:h')
+  let l:file = expand('<afile>:t')
+  if !isdirectory(l:dir)
+    call mkdir(l:dir, 'p')
+    silent execute 'bw ' . l:dir . '/' . l:file
+    silent execute 'e ' . l:dir . '/' . l:file
+  endif
+endfunction
+augroup AutoMkdir
+  autocmd!
+  autocmd BufWritePre,FileWritePre,BufNewFile *
+        \ call <SID>AutoMkdir()
+augroup END
 
 function! StripTrailingWhitespace ()
   " Don't strip on these filetypes
@@ -1637,29 +1322,6 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 " nnoremap <silent> <C-A> :ZoomToggle<CR>
 
-" vmap \em :call ExtractMethod()<CR>
-" function! ExtractMethod() range
-"   let name = inputdialog("Name of new method: ")
-"   '<
-"   exe "normal! O\<BS>" . name ."()\<CR>{\<Esc>"
-"   '>
-"   exe "normal! oreturn ;\<CR>}\<Esc>k"
-"   s/return/\/\/ return/ge
-"   normal! j%
-"   normal! kf(
-"   exe "normal! yyPi// = \<Esc>wdwA;\<Esc>"
-"   normal! ==
-"   normal! j0w
-" endfunction
-
-
-" }
-
-" { Formatting
-" autocmd FileType javascript set formatprg=prettier\ --stdin\ --trailing-comma\ all\ --no-bracket-spacing
-" autocmd BufWritePre *.js :normal mFggVGgq'
-" nmap <silent> = ggVGgq
-" xnoremap <silent> = gq
 " }
 
 " { Abbreviations
@@ -1683,14 +1345,14 @@ set background=dark
 " " colorscheme zenburn
 " " colorscheme elflord
 " colorscheme darkblue
-colorscheme jellybeans
+" colorscheme jellybeans
 " colorscheme distinguished
 " colorscheme vividchalk
 " colorscheme gruvbox
 " colorscheme dracula
 " colorscheme solarized
 " colorscheme darkblue
-" " colorscheme monokai
+colorscheme monokai
 " colorscheme deus
 " colorscheme flattr
 " colorscheme onedark
@@ -1748,8 +1410,8 @@ highlight Search         ctermfg=0     ctermbg=220             gui=reverse guifg
 " }
 
 " { Conceal
-set conceallevel=0
-set concealcursor=
+set conceallevel=2
+set concealcursor=vnc
 " }
 
 " { Folding
@@ -1810,3 +1472,4 @@ augroup config
   " autocmd BufReadPost init.vim normal `.
 augroup END
 " }
+
