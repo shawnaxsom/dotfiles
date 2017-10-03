@@ -42,6 +42,10 @@ snippet div
 <div>$1</div>$0
 endsnippet
 
+snippet ex
+export default $0;
+endsnippet
+
 snippet default
 export default $0;
 endsnippet
@@ -65,15 +69,15 @@ $1($2) {
 endsnippet
 
 snippet log "Console Log"
-console.warn("$1")
+console.warn("ZZZ ", "$1")
 endsnippet
 
 snippet logo "Console Log an object"
-console.warn("$1", $1)
+console.warn("ZZZ ", "$1", $1)
 endsnippet
 
 snippet logos "Console Log an object, pretty printed"
-console.warn("$1", JSON.stringify($1, null, 2))
+console.warn("ZZZ ", "$1", JSON.stringify($1, null, 2))
 endsnippet
 
 snippet trace "Console Trace"

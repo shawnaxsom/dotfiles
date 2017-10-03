@@ -7,8 +7,9 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-" No undodir, don't undo past last close
-set noundofile
+" Ability to undo after closing Vim
+set undofile
+set undolevels=5000
 
 " Update buffer if file changes outside of Vim, without prompt
 set autoread
@@ -25,15 +26,22 @@ set breakat=\ ^I
 " Some plugins don't work with this enabled, like vimfiler or vimshell
 set noautochdir
 
-" Show tabs, trailing characters as periods
-set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+" Show tabs, trailing characters as periods, but not in e.g. help files
+augroup listchars
+  autocmd!
+  autocmd FileType javascript.jsx setlocal list
+  autocmd FileType javascript.jsx setlocal listchars=tab:>.,trail:.,extends:#,nbsp:.
+augroup END
 
-" Don't fully collapse windows when doing <c-w>_ or <c-w>|
-set winheight=5
-set winwidth=20
-set winminwidth=20
-set winminheight=5
+" Keep windows at a good size
+set winheight=10
+set winwidth=90
+set winminwidth=25
+set winminheight=3
+" set winheight=3
+" set winwidth=90
+" set winminwidth=25
+" set winminheight=3
 
 " If you open up gVim for whatever reason
 set guioptions-=m  "remove menu bar
@@ -55,7 +63,8 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-set scrolloff=3
+set scrolloff=10
+set sidescrolloff=30
 
 " Use Bash shell syntax for :! (even if you are in Fish or ZSH)
 set shell=bash
@@ -106,16 +115,9 @@ set numberwidth=6
 " Wildmenu completion mentu when pressing tab
 set wildcharm=<TAB>
 set wildmenu
-set wildmode=list,full
+" set wildmode=list,full
+set wildmode=full:list
 set wildchar=<Tab>
-
-" Always show the statusline
-set laststatus=2
-
-" Statusline (if Airline is not loaded)
-set statusline=%f
-set statusline+=%=        " Switch to the right side
-set statusline+=%#warningmsg#
 
 " Search settings
 set incsearch
@@ -175,6 +177,12 @@ set ttimeoutlen=0
 " Minimize how often you see "Press enter or type a command to continue"
 set shortmess=a
 set cmdheight=2
+
+" Allow completion of tags using omnicompletion <c-x><c-o>
+set omnifunc=htmlcomplete#CompleteTags
+
+" Don't let netrw be included when doing <c-^>
+let g:netrw_altfile = 1
 
 " -----------------------------------------------------------------------------------------
 "  Neovim specific settings

@@ -14,7 +14,6 @@ set background=dark
 " " colorscheme predawn
 " " colorscheme zenburn
 " " colorscheme elflord
-" colorscheme darkblue
 " colorscheme jellybeans
 " colorscheme distinguished
 " colorscheme vividchalk
@@ -24,15 +23,17 @@ set background=dark
 " colorscheme darkblue
 " colorscheme monokai
 " colorscheme deus
-colorscheme flattr
+" colorscheme flattr
 " colorscheme onedark
+" colorscheme pencil
+colorscheme nova
 " " } Colorscheme
 
 " " { Highlights
 " " These come after Colorscheme so they don't get overwritten
 " "
 " " { Background
-" highlight Normal guibg=#282828
+highlight Normal guibg=#404040
 " }
 "
 " { Comments
@@ -40,12 +41,20 @@ highlight Comment guifg=#999999
 " }
 "
 " { Current line
-" set cursorline
-" highlight cursorLine term=bold cterm=bold guibg=#333333
+augroup CursorLine
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
+highlight cursorLine term=bold cterm=bold guibg=#654535
+" }
+" { matchmaker
+hi default Matchmaker term=underline    ctermbg=238     guibg=#756555
 " }
 " { Column 80
-set colorcolumn=
-highlight ColorColumn ctermbg=240 guibg=#3a3a3a
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=240 guibg=#303030
+hi ColorColumn guibg=#222222 guifg=#000000
 " }
 
 " { vim_current_word
@@ -57,9 +66,6 @@ highlight GitGutterAdd          guibg=#505050
 highlight GitGutterChange       guibg=#505050
 highlight GitGutterDelete       guibg=#505050
 " }
-" { matchmaker
-hi default Matchmaker term=underline    ctermbg=238     guibg=#555555
-" }
 " { Numbers
 hi LineNr guifg=#777777
 " }
@@ -68,4 +74,3 @@ highlight IncSearch      cterm=reverse ctermfg=184 ctermbg=234 gui=reverse guifg
 highlight Search         ctermfg=0     ctermbg=220             gui=reverse guifg=#f08080 guibg=#505050
 " " }
 " }
-

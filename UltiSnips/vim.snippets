@@ -1,0 +1,12 @@
+snippet fun
+function! $1 ()
+  $0
+endfunction
+endsnippet
+
+snippet au
+augroup $1
+  autocmd!
+  autocmd $0
+augroup END
+endsnippet

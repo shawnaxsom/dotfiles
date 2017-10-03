@@ -67,4 +67,27 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 " nnoremap <silent> <C-A> :ZoomToggle<CR>
 
+
+" MRU command-line completion
+function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
+    return filter(copy(v:oldfiles), 'v:val =~ a:ArgLead')
+endfunction
+
+" MRU function
+function! s:MRUDo(command, arg)
+    if a:command == "tabedit"
+        execute a:command . " " . a:arg . "|lcd %:p:h"
+    else
+        execute a:command . " " . a:arg
+    endif
+endfunction
+
+" commands
+command! -nargs=1 -complete=customlist,<sid>MRUComplete MRU call <sid>MRUDo('edit', <f-args>)
+command! -nargs=1 -complete=customlist,<sid>MRUComplete MS call <sid>MRUDo('split', <f-args>)
+command! -nargs=1 -complete=customlist,<sid>MRUComplete MV call <sid>MRUDo('vsplit', <f-args>)
+command! -nargs=1 -complete=customlist,<sid>MRUComplete MT call <sid>MRUDo('tabedit', <f-args>)
 " }
+"
+command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+

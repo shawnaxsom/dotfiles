@@ -72,28 +72,6 @@ function! LetMeDuckThatForYou(defaultPhrase)
   execute '!open https://duckduckgo.com/?q=' . UrlEncode(phrase)
 endfunction
 
-" { Terminal
-nmap <silent> <leader>t :sp term://fish<CR>i
-nmap ,b :sp term://bash %:p<CR>
-nmap ,r :sp term://npm start<CR>
-map ,q :sp term://env NODE_ENV=qa npm start<CR>
-augroup vimux
-  autocmd!
-  autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
-  autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
-  autocmd BufEnter */api/* map <buffer> ,t :sp term://npm test -- --tests " . expand("%"))<CR>
-" map ,t :Dispatch npm test<CR>
-augroup END
-nmap <leader>O :call LetMeDuckThatForYou(&filetype . ' ' . '<c-r><c-w>')<CR>
-nmap <leader>o :call LetMeDuckThatForYou('')<CR>
-vmap <leader>o y:call LetMeDuckThatForYou(&filetype . ' ' . @+)<CR>
-nmap <C-\> <C-\><C-n> :wincmd p<CR>
-tnoremap <C-\> <C-\><C-n>
-tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
-tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
-tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
-tnoremap <C-l> <C-\><C-n>:wincmd l<CR>
-" }
 
 function! SetScratchBuffer()
   setlocal buftype=nofile
@@ -141,7 +119,6 @@ nnoremap <leader>yf :let @*=expand('%:p')<CR>
 
 nmap <leader><leader>i :PlugInstall<CR>
 nmap <leader><leader>u :PlugClean!<CR>
-nmap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
 nmap <leader><leader>t :sp ~/dotfiles/.ctags<CR>
 
 nmap <leader>q :q<CR>
@@ -170,28 +147,81 @@ vmap I :norm I
 vmap A :norm A
 vmap <enter> :norm<space>
 vmap <bar> :g/
-nmap <leader>l yiw{oconsole.warn(`"`, ")^
-vmap <leader>l y{oconsole.warn(`"`, ")^
 vnoremap <c-p> :<c-p>
 " }
 
 map ! :!
 
-" { Navigation in buffer
-noremap J 5j
-noremap K 5k
-map H [{
-map L ]}
-" }
+" -----------------------------------------------------------------------------------------
+" Smooth Scrolling
+" -----------------------------------------------------------------------------------------
+let g:is_smooth_scrolling = 0
+function! SmoothScroll(direction, screen_fraction)
+  if !g:is_smooth_scrolling
+    let g:is_smooth_scrolling = 1
+    let topline = line("w0")
+    let botline = line("w$")
+    let lines_per_scroll = 1
+    let lines_to_scroll = (botline - topline) / a:screen_fraction
 
-" { Navigate panes
+    let c = 0
+    while c <= (lines_to_scroll / lines_per_scroll)
+      execute 'norm ' . lines_per_scroll . a:direction
+      redraw
+      sleep 17m
+      redraw
+      let c += 1
+    endwhile
+    let g:is_smooth_scrolling = 0
+  endif
+endfunction
+" noremap J 7j
+nnoremap <silent> <c-d> :call SmoothScroll('j', 1)<CR>
+nnoremap <silent> <c-u> :call SmoothScroll('k', 1)<CR>
+" nnoremap <silent> J :call SmoothScroll('j', 5)<CR>
+" nnoremap <silent> K :call SmoothScroll('k', 5)<CR>
+nnoremap <silent> J 5j
+nnoremap <silent> K 5k
+vnoremap J 2j
+vnoremap K 2k
+
+" -----------------------------------------------------------------------------------------
+" H / L - Navigation in buffer
+" -----------------------------------------------------------------------------------------
+function! GoToFuncStart()
+  let save_pos = getpos(".")
+  let lnum = line(".")
+  let col = col(".")
+  echohl ModeMsg
+  call search('^[ ]\{0,2\}[a-zA-Z].*\({\|(\)$', 'bW')
+endfun
+function! GoToNextFunc()
+  let save_pos = getpos(".")
+  let lnum = line(".")
+  let col = col(".")
+  echohl ModeMsg
+  call search('^[ ]\{0,2\}[#a-zA-Z].*\({\|(\)$', 'W')
+endfun
+" map H [{
+" map L ]}
+map <silent> H :call GoToFuncStart()<CR>
+map <silent> L :call GoToNextFunc()<CR>
+augroup h_and_l
+  autocmd!
+  autocmd BufEnter *.vimrc nnoremap <buffer> H {
+  autocmd BufEnter *.vimrc nnoremap <buffer> L }
+augroup END
+
+" -----------------------------------------------------------------------------------------
+" Navigate panes
+" -----------------------------------------------------------------------------------------
 " Use '$ cat' to find the keys to map to
 " http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 map ˙ <c-w>h
 map ∆ <c-w>j
 map ˚ <c-w>k
 map ¬ <c-w>l
-" }
+" -----------------------------------------------------------------------------------------
 
 imap <c-z> <c-y>,
 
@@ -206,25 +236,45 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 
 " }
 
-" { Default behavior overrides
+" -----------------------------------------------------------------------------------------
+" Default behavior overrides
+" -----------------------------------------------------------------------------------------
 
-nmap <enter> vap
+" Reselect text when changing indentation
+xnoremap < <gv
+xnoremap > >gv
 
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-elseif executable('rg')
-  set grepprg=rg
-elseif executable('ack')
-  set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
+" GF on any variable in the file that was imported (at least in ES6)
+augroup gotofile
+  autocmd!
+  autocmd FileType javascript,javascript.jsx nnoremap <buffer> <silent> gf :norm "/yiw<CR>:norm gd<CR>:norm vi"gf<CR>:norm ggn<CR>:norm 0<CR>:nohls<CR>
+augroup END
+" GP - Go To Preview, GF the file in a split window
+nmap gp :split<CR>gf
+
+" Escape clears highlighting also
+nnoremap <silent> <esc> :noh<return><esc>
+
+" Rename with search
+nnoremap c* *Ncgn
+nnoremap c# #NcgN
+
+augroup enterbehavior
+  autocmd!
+  autocmd BufWinEnter,WinEnter *{.js} nmap <buffer> <enter> :'<,'>norm<space>
+augroup END
+
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column\ --vimgrep
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " When doing commands, always scroll through history matching current text
 cmap <c-p> <up>
 cmap <c-n> <down>
 
-" noremap ; :
-
-nnoremap g} :split<CR>gd
+" Pressing shift all the time is annoying
+noremap ; :
 
 " Case insensitive search (but still have case sensitive for :substitute
 nnoremap / /\c
@@ -240,30 +290,31 @@ nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 
 " Don't skip wrapped lines
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 " Y should copy to end of line, not full line, same as D
 noremap Y y$
 
+" Unimpaired keys
 nmap [q :cprev<CR>
 nmap ]q :cnext<CR>
 nmap [b :bprevious<CR>
 nmap ]b :bnext<CR>
 nmap [a :previous<CR>
 nmap ]a :next<CR>
+nmap [l :lprev<CR>
+nmap ]l :lnext<CR>
 
-nmap <leader>f <bar>_
-nmap <leader><leader>f =
-nmap <leader>d =
+" Maximize pane
+nmap <leader>z <bar>_
+nmap <leader><leader>z =
 nmap <leader>= =
-nmap <leader>z =
-" augroup maximizepane
-"   autocmd!
-"   autocmd BufWinEnter,WinEnter *{.js,/} :norm |<CR>
-"   autocmd BufWinEnter,WinEnter *{.js,/} :norm _<CR>
-" augroup END
 
 nmap <leader>; g;999g,
-" }
+
+map <leader>m :20messages<CR>
+
+noremap gg gg0
+noremap G G0
 
