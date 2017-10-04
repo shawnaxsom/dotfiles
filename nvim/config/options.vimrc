@@ -116,7 +116,8 @@ set numberwidth=6
 set wildcharm=<TAB>
 set wildmenu
 " set wildmode=list,full
-set wildmode=full:list
+" set wildmode=full:list
+set wildmode=full
 set wildchar=<Tab>
 
 " Search settings
@@ -183,6 +184,19 @@ set omnifunc=htmlcomplete#CompleteTags
 
 " Don't let netrw be included when doing <c-^>
 let g:netrw_altfile = 1
+
+
+" Tell vim to remember certain things when we exit,
+" including oldfiles history length
+"  '150  :  MRU / :oldfiles - marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+if has('nvim')
+  set shada='150,\"1000,:1,n~/.vim/shada
+else
+  set viminfo=\'150,\"100,:20,%
+endif
 
 " -----------------------------------------------------------------------------------------
 "  Neovim specific settings

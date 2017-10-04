@@ -25,16 +25,6 @@ noremap <leader><leader>f :call FilterFind()<CR>
 " command! -bang -complete=file FFind silent! call FilterFind()
 noremap <leader>f :find *
 
-" Tell vim to remember certain things when we exit
-"  '150  :  MRU / :oldfiles - marks will be remembered for up to 10 previously edited files
-"  "100 :  will save up to 100 lines for each register
-"  :20  :  up to 20 lines of command-line history will be remembered
-"  %    :  saves and restores the buffer list
-if has('nvim')
-  set shada='150,\"1000,:1,n~/.vim/shada
-else
-  set viminfo=\'150,\"100,:20,%
-endif
 function! FilterOldfiles ()
   let name = input('MRU File: ')
   if name == ""
@@ -43,7 +33,6 @@ function! FilterOldfiles ()
     call feedkeys(":filter " . join(split(name, " "), ".*/.*/.*") . " browse oldfiles\<CR>")
   endif
 endfunction
-" noremap <leader>o :filter /src/ browse oldfiles<CR>
 
 
 " MRU command-line completion
@@ -53,24 +42,12 @@ function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
     \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
     \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
 
-  return filter(lines, 'v:val =~ a:ArgLead')
-endfunction
+  for word in split(a:CmdLine, " ")[1:]
+      let lines = filter(lines, 'v:val =~ "' . word . '"')
+  endfor
 
-" MRU function
-function! s:MRUDo(command, arg)
-    if a:command == "tabedit"
-        execute a:command . " " . a:arg . "|lcd %:p:h"
-    else
-        execute a:command . " " . a:arg
-    endif
+  return lines
 endfunction
-
-" commands
-" command! -nargs=1 -complete=customlist,<sid>MRUComplete MRU call <sid>MRUDo('edit', <f-args>)
-" command! -nargs=1 -complete=customlist,<sid>MRUComplete MS call <sid>MRUDo('split', <f-args>)
-" command! -nargs=1 -complete=customlist,<sid>MRUComplete MV call <sid>MRUDo('vsplit', <f-args>)
-" command! -nargs=1 -complete=customlist,<sid>MRUComplete MT call <sid>MRUDo('tabedit', <f-args>)
-" }
 
 function! MRU (arg)
   " Used some code ideas from these:
@@ -83,23 +60,25 @@ function! MRU (arg)
     \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
     \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
 
+  echom a:arg
+
   for word in split(a:arg, " ")
     let lines = filter(lines, 'v:val =~ "' . word . '"')
   endfor
 
-  " let data = map(copy(lines), '{"filename": v:val, "text": "called from here", "lnum": 1}')
-  let data = map(copy(lines), '{"filename": v:val, "text": "", "lnum": ""}')
-
-  call setqflist(data)
-  copen
+  if len(lines) == 1
+    execute 'e ' . lines[0]
+  else
+    let data = map(copy(lines), '{"filename": v:val, "text": "", "lnum": ""}')
+    call setqflist(data)
+    copen
+  endif
 endfunction
-command! -nargs=1 -complete=customlist,<sid>MRUComplete MRU call MRU(<f-args>)
+" command! -nargs=1 -complete=customlist,<sid>MRUComplete MRU call MRU(<f-args>)
+command! -nargs=* -complete=customlist,<sid>MRUComplete MRU call MRU(<q-args>)
 noremap <leader>o :MRU<space>
 noremap <leader><leader>o :call FilterOldfiles()<CR>
-" noremap <leader>m :call FilterOldfiles()<CR>
-" noremap <leader>o :MRU<space>
-" " noremap <leader>m :MRU<space>
-" noremap <leader>o :browse oldfiles<CR>
+
 
 function! FilterBuffers ()
   let name = input('Buffer: ')
