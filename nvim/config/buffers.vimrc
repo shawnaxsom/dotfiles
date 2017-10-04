@@ -46,6 +46,9 @@ function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
       let lines = filter(lines, 'v:val =~ "' . word . '"')
   endfor
 
+  " Dedup
+  let lines = filter(copy(lines), 'index(lines, v:val, v:key+1)==-1')
+
   return lines
 endfunction
 
@@ -65,6 +68,9 @@ function! MRU (arg)
   for word in split(a:arg, " ")
     let lines = filter(lines, 'v:val =~ "' . word . '"')
   endfor
+
+  " Dedup
+  let lines = filter(copy(lines), 'index(lines, v:val, v:key+1)==-1')
 
   if len(lines) == 1
     execute 'e ' . lines[0]
