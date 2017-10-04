@@ -36,11 +36,8 @@ endfunction
 
 
 " MRU command-line completion
-function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
-  let lines = extend(
-    \ filter(copy(v:oldfiles),
-    \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
-    \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+function! ListComplete(lines, ArgLead, CmdLine, CursorPos)
+  let lines = a:lines
 
   for word in split(a:CmdLine, " ")[1:]
       let lines = filter(lines, 'v:val =~ "' . word . '"')
@@ -51,19 +48,13 @@ function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
 
   return lines
 endfunction
-
-function! MRU (arg)
+function! QuickfixOrGotoFile (lines, arg)
   " Used some code ideas from these:
   " * https://github.com/junegunn/fzf/issues/301
   " * https://vi.stackexchange.com/questions/6019/is-it-possible-to-populate-the-quickfix-list-with-the-errors-of-vimscript-functi
   " * https://www.reddit.com/r/vim/comments/finj2/how_do_you_put_information_in_the_quickfix_window/
   " * https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
-  let lines = extend(
-    \ filter(copy(v:oldfiles),
-    \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
-    \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
-
-  echom a:arg
+  let lines = a:lines
 
   for word in split(a:arg, " ")
     let lines = filter(lines, 'v:val =~ "' . word . '"')
@@ -80,21 +71,34 @@ function! MRU (arg)
     copen
   endif
 endfunction
-" command! -nargs=1 -complete=customlist,<sid>MRUComplete MRU call MRU(<f-args>)
-command! -nargs=* -complete=customlist,<sid>MRUComplete MRU call MRU(<q-args>)
-noremap <leader>o :MRU<space>
-noremap <leader><leader>o :call FilterOldfiles()<CR>
 
 
-function! FilterBuffers ()
-  let name = input('Buffer: ')
-  call feedkeys(":filter " . join(split(name, " "), "*") . " browse buffers\<CR>")
+function! MruLines ()
+  return extend(
+    \ filter(copy(v:oldfiles),
+    \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
+    \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
 endfunction
-nmap <leader><leader>b :call FilterBuffers()<CR>
-noremap <leader>b :b<space>
-nmap <leader><leader>p :call FilterBuffers()<CR>
-noremap <leader>p :b<space>
-noremap <c-p> :b<space>
+function! MruComplete (ArgLead, CmdLine, CursorPos)
+  return ListComplete(MruLines(), a:ArgLead, a:CmdLine, a:CursorPos)
+endfunction
+function! MruQuickfixOrGotoFile (arg)
+  call QuickfixOrGotoFile(MruLines(), a:arg)
+endfunction
+command! -nargs=* -complete=customlist,MruComplete MRU call MruQuickfixOrGotoFile(<q-args>)
+noremap <leader>o :MRU<space>
+
+
+
+" function! FilterBuffers ()
+"   let name = input('Buffer: ')
+"   call feedkeys(":filter " . join(split(name, " "), "*") . " browse buffers\<CR>")
+" endfunction
+" nmap <leader><leader>b :call FilterBuffers()<CR>
+" noremap <leader>b :b<space>
+" nmap <leader><leader>p :call FilterBuffers()<CR>
+" noremap <leader>p :b<space>
+" noremap <c-p> :b<space>
 
 
 nmap <leader>] :tjump /
