@@ -64,7 +64,7 @@ set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
 set scrolloff=10
-set sidescrolloff=30
+set sidescrolloff=15
 
 " Use Bash shell syntax for :! (even if you are in Fish or ZSH)
 set shell=bash

@@ -2,6 +2,9 @@ function! Lint ()
   let save_pos = getpos(".")
   silent make
   call setpos('.', save_pos)
+  if qf#GetList() != []
+    cfirst
+  endif
 endfunction
 if executable('eslint')
   " set errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
@@ -17,7 +20,7 @@ function! Format()
     if v:shell_error != 0
       let format_error = join(getline(line("'["), line("']")), "\n")
       undo
-      echo format_error
+      " echo format_error
     end
   else
     norm ggVG=

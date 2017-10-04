@@ -1,7 +1,7 @@
 " http://learnvimscriptthehardway.stevelosh.com/chapters/32.html
 "
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --case-sensitive
 elseif executable('rg')
   set grepprg=rg
 elseif executable('ack')

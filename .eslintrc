@@ -12,6 +12,7 @@
     "func-names": [0], //added to ease of migration
     "import/no-extraneous-dependencies": [0],
     "import/no-unresolved": [0],
+    "import/prefer-default-export": [0],
     "import/extensions": [0],
     "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
     "jsx-a11y/href-no-hash": "off",

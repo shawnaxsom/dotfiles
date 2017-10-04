@@ -1,3 +1,6 @@
+map gcc :topleft split ~/Dropbox/cheatsheets/<CR>
+
+map gsd :topleft split ~/Dropbox/notes/data.scratch.md<CR>
 map gsh :topleft split ~/Dropbox/notes/habits.scratch.md<CR>
 map gsl :topleft split ~/Dropbox/notes/links.scratch.md<CR>
 map gsm :topleft split ~/Dropbox/notes/meetings.scratch.md<CR>

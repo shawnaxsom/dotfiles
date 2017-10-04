@@ -5,7 +5,7 @@
 augroup globalfilemarks
   autocmd!
   autocmd InsertEnter *.{js,jsx,coffee} normal! mJ
-  autocmd BufWinLeave */src/* normal! mQ
+  " autocmd BufWinLeave */src/* normal! mQ
   autocmd InsertEnter */src/* normal! mI
   autocmd TextChanged */src/* normal! mO
   autocmd TextChangedI */src/* normal! mO

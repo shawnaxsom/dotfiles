@@ -69,15 +69,15 @@ $1($2) {
 endsnippet
 
 snippet log "Console Log"
-console.warn("ZZZ ", "$1")
+console.warn("ZZZ $2", "$1")
 endsnippet
 
 snippet logo "Console Log an object"
-console.warn("ZZZ ", "$1", $1)
+console.warn("ZZZ $2", "$1", $1)
 endsnippet
 
 snippet logos "Console Log an object, pretty printed"
-console.warn("ZZZ ", "$1", JSON.stringify($1, null, 2))
+console.warn("ZZZ $2", "$1", JSON.stringify($1, null, 2))
 endsnippet
 
 snippet trace "Console Trace"

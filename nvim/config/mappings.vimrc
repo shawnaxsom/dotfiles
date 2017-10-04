@@ -176,8 +176,8 @@ function! SmoothScroll(direction, screen_fraction)
   endif
 endfunction
 " noremap J 7j
-nnoremap <silent> <c-d> :call SmoothScroll('j', 1)<CR>
-nnoremap <silent> <c-u> :call SmoothScroll('k', 1)<CR>
+" nnoremap <silent> <c-d> :call SmoothScroll('j', 1)<CR>
+" nnoremap <silent> <c-u> :call SmoothScroll('k', 1)<CR>
 " nnoremap <silent> J :call SmoothScroll('j', 5)<CR>
 " nnoremap <silent> K :call SmoothScroll('k', 5)<CR>
 nnoremap <silent> J 5j
@@ -263,11 +263,6 @@ augroup enterbehavior
   autocmd!
   autocmd BufWinEnter,WinEnter *{.js} nmap <buffer> <enter> :'<,'>norm<space>
 augroup END
-
-if executable("ag")
-    set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column\ --vimgrep
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
-endif
 
 " When doing commands, always scroll through history matching current text
 cmap <c-p> <up>

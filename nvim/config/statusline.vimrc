@@ -27,8 +27,8 @@ map <leader>X :echo ShowFuncName()<CR>
 
 " hi StatusLine guibg=#0333f3
 " hi StatusLineNC guibg=#533333
-hi StatusLineFile guibg=#5bcbfb
-hi StatusLineFileInactive guibg=#6b3b7b
+hi StatusLineFile guibg=#9bcb8b
+hi StatusLineFileInactive guibg=#7bab9b
 hi StatusLineExtension guibg=#000000
 hi StatusLineFolder guibg=#333333
 hi StatusLineActive guibg=#444444

@@ -477,6 +477,10 @@ Plug 'tpope/vim-repeat'
 " let g:neoformat_enabled_javascript = ['prettier']
 " let g:neoformat_verbose = 0
 " nmap <silent> = :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
+" augroup neoformat
+"   autocmd!
+"   autocmd BufWritePre *.js :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
+" augroup END
 " let g:neoformat_try_formatprg = 1
 " let g:neoformat_basic_format_align = 1
 " let g:neoformat_basic_format_retab = 1
@@ -617,14 +621,38 @@ Plug 'junegunn/fzf.vim'
 " Search all lines in all files
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
 command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s',
-\  'down':    '40%'})
+\ 'source':  reverse(s:all_files()),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' })
+function! s:all_files()
+  return extend(
+  \ filter(copy(v:oldfiles),
+  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
+  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+endfunction
 nnoremap <leader>O :FZFMru<CR>
 nnoremap <leader>B :Buffers<CR>
-" " " nnoremap <silent> <c-f> :BLines<CR>
-" " let g:fzf_buffers_jump = 1
+let g:fzf_buffers_jump = 1
+" :Ag - allows "?" to open preview window
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>,
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \                 <bang>0)
+let g:fzf_colors =
+  \ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 " nnoremap <c-p> :FZF<CR>
 " nnoremap <leader>p :FZF<CR>
 " nnoremap <c-b> :Buffers<CR>
@@ -787,13 +815,15 @@ Plug 'zanglg/nova.vim'
 " { Valloric/MatchTagAlways
 " Similar to matchmaker, but for highlighting surrounding tag
 Plug 'Valloric/MatchTagAlways'
+let g:mta_set_default_matchtag_color = 0
+let g:mta_use_matchparen_group = 0
 let g:mta_filetypes = {
-\ 'javascript.jsx': 1,
-\ 'html' : 1,
-\ 'xhtml' : 1,
-\ 'xml' : 1,
-\ 'jinja' : 1,
-\ }
+  \ 'javascript.jsx': 1,
+  \ 'html' : 1,
+  \ 'xhtml' : 1,
+  \ 'xml' : 1,
+  \ 'jinja' : 1,
+  \ }
 " }
 
 call plug#end()

@@ -46,15 +46,18 @@ augroup CursorLine
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
 augroup END
-highlight cursorLine term=bold cterm=bold guibg=#654535
+highlight cursorLine term=bold cterm=bold guibg=#755545
 " }
 " { matchmaker
-hi default Matchmaker term=underline    ctermbg=238     guibg=#756555
+highlight Matchmaker guibg=#755545
+" }
+" { MatchTagAlways
+highlight MatchTag guibg=#755545
 " }
 " { Column 80
 " set colorcolumn=80
 " highlight ColorColumn ctermbg=240 guibg=#303030
-hi ColorColumn guibg=#222222 guifg=#000000
+highlight ColorColumn guibg=#222222 guifg=#000000
 " }
 
 " { vim_current_word
