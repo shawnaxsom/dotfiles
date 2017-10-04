@@ -8,22 +8,16 @@ nmap <leader><leader>a :%argdelete<CR>
 nmap <leader>a :args **/**<LEFT>
 nmap <leader>! :argdo<space>
 nmap <silent> <leader><leader>c :%bdelete!<CR>
-" nmap <leader><leader>f :filter // ls<LEFT><LEFT><LEFT><LEFT>
 
-" noremap <c-p> :find *
-" noremap <leader>p :find *
+" function! FilterFind ()
+"   let name = input('Find: ')
+"   if name == ""
+"     call feedkeys(":find **/*" . name . "*\<LEFT>")
+"   else
+"     call feedkeys(":find **/*" . join(split(name, " "), "*/**/*") . "*\<c-d>\<tab>")
+"   endif
+" endfunction
 " noremap <leader>f :find *
-function! FilterFind ()
-  let name = input('Find: ')
-  if name == ""
-    call feedkeys(":find **/*" . name . "*\<LEFT>")
-  else
-    call feedkeys(":find **/*" . join(split(name, " "), "*/**/*") . "*\<c-d>\<tab>")
-  endif
-endfunction
-noremap <leader><leader>f :call FilterFind()<CR>
-" command! -bang -complete=file FFind silent! call FilterFind()
-noremap <leader>f :find *
 
 function! FilterOldfiles ()
   let name = input('MRU File: ')
@@ -88,6 +82,31 @@ endfunction
 command! -nargs=* -complete=customlist,MruComplete MRU call MruQuickfixOrGotoFile(<q-args>)
 noremap <leader>o :MRU<space>
 
+
+function! BuffersLines ()
+  return map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)')
+endfunction
+function! BuffersComplete (ArgLead, CmdLine, CursorPos)
+  return ListComplete(BuffersLines(), a:ArgLead, a:CmdLine, a:CursorPos)
+endfunction
+function! BuffersQuickfixOrGotoFile (arg)
+  call QuickfixOrGotoFile(BuffersLines(), a:arg)
+endfunction
+command! -nargs=* -complete=customlist,BuffersComplete BUFFERS call BuffersQuickfixOrGotoFile(<q-args>)
+noremap <leader>b :BUFFERS<space>
+
+
+function! FilesLines ()
+  return split(globpath('.', '**'), '\n')
+endfunction
+function! FilesComplete (ArgLead, CmdLine, CursorPos)
+  return ListComplete(FilesLines(), a:ArgLead, a:CmdLine, a:CursorPos)
+endfunction
+function! FilesQuickfixOrGotoFile (arg)
+  call QuickfixOrGotoFile(FilesLines(), a:arg)
+endfunction
+command! -nargs=* -complete=customlist,FilesComplete FILES call FilesQuickfixOrGotoFile(<q-args>)
+noremap <leader>f :FILES<space>
 
 
 " function! FilterBuffers ()
