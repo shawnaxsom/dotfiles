@@ -28,34 +28,36 @@ function! FilterOldfiles ()
   endif
 endfunction
 
+function! Dedup (lines)
+  return filter(copy(a:lines), 'index(a:lines, v:val, v:key+1)==-1')
+endfunction
 
 " MRU command-line completion
 function! ListComplete(lines, ArgLead, CmdLine, CursorPos)
   let lines = a:lines
 
   for word in split(a:CmdLine, " ")[1:]
-      let lines = filter(lines, 'v:val =~ "' . word . '"')
+    let lines = filter(lines, 'v:val =~ "' . word . '"')
   endfor
 
-  " Dedup
-  let lines = filter(copy(lines), 'index(lines, v:val, v:key+1)==-1')
+  let lines = Dedup(lines)
 
   return lines
 endfunction
 function! QuickfixOrGotoFile (lines, arg)
-  " Used some code ideas from these:
+  " Good resources for some of the code here, some lines were borrowed:
   " * https://github.com/junegunn/fzf/issues/301
   " * https://vi.stackexchange.com/questions/6019/is-it-possible-to-populate-the-quickfix-list-with-the-errors-of-vimscript-functi
   " * https://www.reddit.com/r/vim/comments/finj2/how_do_you_put_information_in_the_quickfix_window/
   " * https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
+  " * http://learnvimscriptthehardway.stevelosh.com/chapters/40.html
   let lines = a:lines
 
   for word in split(a:arg, " ")
     let lines = filter(lines, 'v:val =~ "' . word . '"')
   endfor
 
-  " Dedup
-  let lines = filter(copy(lines), 'index(lines, v:val, v:key+1)==-1')
+  let lines = Dedup(lines)
 
   if len(lines) == 1
     execute 'e ' . lines[0]
@@ -109,15 +111,21 @@ command! -nargs=* -complete=customlist,FilesComplete FILES call FilesQuickfixOrG
 noremap <leader>f :FILES<space>
 
 
-" function! FilterBuffers ()
-"   let name = input('Buffer: ')
-"   call feedkeys(":filter " . join(split(name, " "), "*") . " browse buffers\<CR>")
-" endfunction
-" nmap <leader><leader>b :call FilterBuffers()<CR>
-" noremap <leader>b :b<space>
-" nmap <leader><leader>p :call FilterBuffers()<CR>
-" noremap <leader>p :b<space>
-" noremap <c-p> :b<space>
+function! AllLines ()
+  let lines = MruLines()
+  let lines = extend(lines, BuffersLines())
+  let lines = extend(lines, FilesLines())
+  return lines
+endfunction
+function! AllComplete (ArgLead, CmdLine, CursorPos)
+  return ListComplete(AllLines(), a:ArgLead, a:CmdLine, a:CursorPos)
+endfunction
+function! AllQuickfixOrGotoFile (arg)
+  call QuickfixOrGotoFile(AllLines(), a:arg)
+endfunction
+command! -nargs=* -complete=customlist,AllComplete ALL call AllQuickfixOrGotoFile(<q-args>)
+noremap <leader>p :ALL<space>
+noremap <c-p> :ALL<space>
 
 
 nmap <leader>] :tjump /

@@ -185,7 +185,6 @@ set omnifunc=htmlcomplete#CompleteTags
 " Don't let netrw be included when doing <c-^>
 let g:netrw_altfile = 1
 
-
 " Tell vim to remember certain things when we exit,
 " including oldfiles history length
 "  '150  :  MRU / :oldfiles - marks will be remembered for up to 10 previously edited files
