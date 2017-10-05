@@ -313,3 +313,4 @@ map <leader>m :20messages<CR>
 noremap gg gg0
 noremap G G0
 
+map gx :!open <cWORD><CR>

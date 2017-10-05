@@ -74,8 +74,9 @@ alias x='exit'
 
 # alias f='find . -name'
 
+# Git Prune Merged
 function gpm
-  git branch --merged master | grep -v '^ *master$' | xargs git branch -d
+  git branch --merged master | grep -v 'master' | xargs git branch -d
 end
 
 function f

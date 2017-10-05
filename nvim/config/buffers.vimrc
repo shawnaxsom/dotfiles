@@ -44,13 +44,14 @@ function! ListComplete(lines, ArgLead, CmdLine, CursorPos)
 
   return lines
 endfunction
-function! QuickfixOrGotoFile (lines, arg)
+function! GetMatches (lines, arg)
   " Good resources for some of the code here, some lines were borrowed:
   " * https://github.com/junegunn/fzf/issues/301
   " * https://vi.stackexchange.com/questions/6019/is-it-possible-to-populate-the-quickfix-list-with-the-errors-of-vimscript-functi
   " * https://www.reddit.com/r/vim/comments/finj2/how_do_you_put_information_in_the_quickfix_window/
   " * https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
   " * http://learnvimscriptthehardway.stevelosh.com/chapters/40.html
+  " * https://github.com/romainl/vim-tinyMRU
   let lines = a:lines
 
   for word in split(a:arg, " ")
@@ -59,12 +60,27 @@ function! QuickfixOrGotoFile (lines, arg)
 
   let lines = Dedup(lines)
 
-  if len(lines) == 1
+  " Remove relative path prefix, not necessary if your path is correct and can
+  " lead to duplicates if some have relative path and some don't.
+  let lines = Dedup(map(copy(lines), 'substitute(v:val, "^./", "", "g")'))
+
+  return lines
+endfunction
+function! QuickfixOrGotoFile (lines, arg)
+  let lines = GetMatches(a:lines, a:arg)
+
+  if len(lines) > 0
+    " echom 'e ' . lines[0]
     execute 'e ' . lines[0]
-  else
-    let data = map(copy(lines), '{"filename": v:val, "text": "", "lnum": ""}')
-    call setqflist(data)
-    copen
+    " if len(lines) == 1
+    "   echom 'e ' . lines[0]
+    "   execute 'e ' . lines[0]
+    " else
+    "   echom string(lines)
+    "   let data = map(copy(lines), '{"filename": v:val, "text": "", "lnum": ""}')
+    "   call setqflist(data)
+    "   copen
+    " endif
   endif
 endfunction
 
@@ -98,30 +114,57 @@ command! -nargs=* -complete=customlist,BuffersComplete BUFFERS call BuffersQuick
 noremap <leader>b :BUFFERS<space>
 
 
-function! FilesLines ()
-  return split(globpath('.', '**'), '\n')
+function! FilesLines (ArgLead)
+  if a:ArgLead =~ '\.\/.*' || a:ArgLead =~ '\/.*'
+    " User must have used completion, last argument is probably full path
+    let args = split(a:ArgLead, ' ')
+    return [ args[len(args) - 1] ]
+  endif
+
+  " Just uses the first word if there are multiple. A little slower
+  " but more flexible in ordering of words and subdirectories.
+  " Other words get filtered out in QuickfixOrGotoFile()
+  let firstArg = split(a:ArgLead, ' ')[0]
+  " let lines = globpath('.', '**/*' . firstArg . '*', 0, 1)
+  " Limit to just JavaScript for now, and don't include folders
+  " let lines = globpath('.', '**/*' . firstArg . '*/**/*.js', 0, 1)
+  " echom firstArg
+  " echom string(lines)
+  " echom "find . -path '*" . firstArg . "*' -type f"
+  " echom system("find . -path '*" . firstArg . "*' -type f")
+  let excludeFolders = '-not -path "*/node_modules/*" -not -path "*/.git/*" -not -path "*/bower_components/*"'
+  let lines = split(system("find . -path '*" . firstArg . "*' -type f " . excludeFolders), '\n')
+  " echom string(lines)
+  return lines
 endfunction
 function! FilesComplete (ArgLead, CmdLine, CursorPos)
-  return ListComplete(FilesLines(), a:ArgLead, a:CmdLine, a:CursorPos)
+  return ListComplete(FilesLines(a:ArgLead), a:ArgLead, a:CmdLine, a:CursorPos)
 endfunction
 function! FilesQuickfixOrGotoFile (arg)
-  call QuickfixOrGotoFile(FilesLines(), a:arg)
+  call QuickfixOrGotoFile(FilesLines(a:arg), a:arg)
 endfunction
 command! -nargs=* -complete=customlist,FilesComplete FILES call FilesQuickfixOrGotoFile(<q-args>)
 noremap <leader>f :FILES<space>
 
 
-function! AllLines ()
-  let lines = MruLines()
-  let lines = extend(lines, BuffersLines())
-  let lines = extend(lines, FilesLines())
+function! AllLines (ArgLead)
+  let lines = GetMatches(BuffersLines(), a:ArgLead)
+
+  if len(lines) == 0
+    let lines = extend(lines, GetMatches(MruLines(), a:ArgLead))
+  endif
+
+  if len(lines) == 0
+    " Only run FilesLines if no matches from other two? For performance.
+    let lines = extend(lines, FilesLines(a:ArgLead))
+  endif
   return lines
 endfunction
 function! AllComplete (ArgLead, CmdLine, CursorPos)
-  return ListComplete(AllLines(), a:ArgLead, a:CmdLine, a:CursorPos)
+  return ListComplete(AllLines(a:ArgLead), a:ArgLead, a:CmdLine, a:CursorPos)
 endfunction
 function! AllQuickfixOrGotoFile (arg)
-  call QuickfixOrGotoFile(AllLines(), a:arg)
+  call QuickfixOrGotoFile(AllLines(a:arg), a:arg)
 endfunction
 command! -nargs=* -complete=customlist,AllComplete ALL call AllQuickfixOrGotoFile(<q-args>)
 noremap <leader>p :ALL<space>
@@ -131,10 +174,10 @@ noremap <c-p> :ALL<space>
 nmap <leader>] :tjump /
 set wildignore=*.swp,*.bak
 set wildignore+=/usr/**/*
-set wildignore+=env/,dist/,bower_components/,tmp/,jest/
+set wildignore+=*/env/*,*/dist/*,*/bower_components/*,*/tmp/*,*/jest/*
 set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
-set wildignore+=*/node_modules/*,*/.git/**/*,*/.hg/**/*,*/.svn/**/*
+set wildignore+=*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=tags
 set wildignore+=*.tar.*
 " }

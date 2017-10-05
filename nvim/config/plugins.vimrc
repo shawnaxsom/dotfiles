@@ -172,6 +172,7 @@ let g:UltiSnipsEnableSnipMate = 0
 " random variable.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'othree/jspc.vim'
+Plug 'wellle/tmux-complete.vim'
 " Deoplete might have less flickering with this
 set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
@@ -322,25 +323,25 @@ let g:vrc_curl_opts={ '--silent': '' }
 Plug 'blueyed/vim-qf_resize'
 " }
 " { ALE
-" " :ALEFix to autogically fix any lint errors that have an obvious fix.
-" " Add rules to ~/.eslintrc to ignore certain lint errors.
-" Plug 'w0rp/ale'  " Async linting
-" nnoremap <leader>F :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
-" nnoremap + :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
-" let g:ale_list_window_size = 2
-" let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
-" let g:ale_javascript_eslint_use_global = 1
-" let g:ale_fixers = { 'javascript': [ 'eslint' ] }
-" let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-" let g:ale_sign_warning = '.'
-" let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-" let g:ale_lint_on_text_changed = 0
-" let g:ale_open_list = 0
-" let g:ale_set_loclist = 1
-" let g:ale_set_quickfix = 0
-" let g:ale_set_highlights = 1
-" let g:ale_set_signs = 1
-" let g:ale_echo_cursor = 1
+" :ALEFix to autogically fix any lint errors that have an obvious fix.
+" Add rules to ~/.eslintrc to ignore certain lint errors.
+Plug 'w0rp/ale'  " Async linting
+nnoremap <leader>F :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
+nnoremap + :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
+let g:ale_list_window_size = 2
+let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_fixers = { 'javascript': [ 'eslint' ] }
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_lint_on_text_changed = 0
+let g:ale_open_list = 0
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_set_highlights = 1
+let g:ale_set_signs = 1
+let g:ale_echo_cursor = 1
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -467,25 +468,25 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 " }
 " { Neoformat (Prettier)
-" Plug 'sbdchd/neoformat'
-" let g:neoformat_javascript_prettier = {
-"             \ 'exe': 'prettier',
-"             \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
-"             \ }
-"             " \ 'args': ['--trailing-comma all', '--no-bracket-spacing', '--single-quote', '--no-semi'],
-"             " \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
-" let g:neoformat_enabled_javascript = ['prettier']
-" let g:neoformat_verbose = 0
-" nmap <silent> = :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
-" augroup neoformat
-"   autocmd!
-"   autocmd BufWritePre *.js :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
-" augroup END
-" let g:neoformat_try_formatprg = 1
-" let g:neoformat_basic_format_align = 1
-" let g:neoformat_basic_format_retab = 1
-" let g:neoformat_basic_format_trim = 1
-" let g:neoformat_only_msg_on_error = 1
+Plug 'sbdchd/neoformat'
+let g:neoformat_javascript_prettier = {
+            \ 'exe': 'prettier',
+            \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
+            \ }
+            " \ 'args': ['--trailing-comma all', '--no-bracket-spacing', '--single-quote', '--no-semi'],
+            " \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_verbose = 0
+nmap <silent> = :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
+augroup neoformat
+  autocmd!
+  autocmd BufWritePost *.js Neoformat prettier | ALEFix | ALELint
+augroup END
+let g:neoformat_try_formatprg = 1
+let g:neoformat_basic_format_align = 1
+let g:neoformat_basic_format_retab = 1
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_only_msg_on_error = 1
 " }
 " { yankstack
 " Plug 'maxbrunsfeld/vim-yankstack'  " Clipboard history by repeating <leader>p, was still remapping s key when I told it not to
@@ -746,6 +747,8 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_level = 2
 let g:vim_markdown_folding_disabled = 0
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_no_default_key_mappings = 1
 " }
 " " { vimwiki/vimwiki
 " Plug 'vimwiki/vimwiki'

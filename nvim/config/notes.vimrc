@@ -1,4 +1,4 @@
-map gcc :topleft split ~/Dropbox/cheatsheets/<CR>
+" map gcc :topleft split ~/Dropbox/cheatsheets/<CR>
 
 map gsd :topleft split ~/Dropbox/notes/data.scratch.md<CR>
 map gsh :topleft split ~/Dropbox/notes/habits.scratch.md<CR>
