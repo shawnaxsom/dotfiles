@@ -42,6 +42,10 @@ if test -d ~/Library/Android/sdk/platform-tools
   set -gx PATH ~/Library/Android/sdk/platform-tools $PATH
 end
 
+if test -d ~/.cargo/bin
+  set -gx PATH ~/.cargo/bin $PATH
+end
+
 # https://hub.github.com/
 alias git='hub'
 
@@ -133,3 +137,4 @@ alias nv='nvim_session'
 alias nvim='nvim_session'
 alias v='nvim_session'
 alias vim='nvim_session'
+

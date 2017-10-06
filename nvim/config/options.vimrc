@@ -54,7 +54,8 @@ set virtualedit=all
 set nostartofline
 
 " allow copy/paste using system clipboard (otherwise have to use "+)
-set clipboard=unnamed
+" set clipboard=unnamed
+set clipboard=unnamed,unnamedplus
 
 " The basics
 set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
@@ -63,7 +64,7 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-set scrolloff=10
+set scrolloff=12
 set sidescrolloff=15
 
 " Use Bash shell syntax for :! (even if you are in Fish or ZSH)
@@ -79,7 +80,8 @@ set lazyredraw
 set ttyfast
 
 " Send the current mouse codes over when clicking
-" set ttymouse=xterm2
+" set ttymouse=xterm
+set mouse=a
 
 " When closing off brackets, briefly show the matching bracket
 set noshowmatch

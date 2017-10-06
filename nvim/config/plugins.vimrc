@@ -146,14 +146,13 @@ map ,z :VimuxZoomRunner<CR>
 " { vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
 Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_disable_when_zoomed = 0
 let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
 Plug 'SirVer/ultisnips'
 nmap <leader>eu :UltiSnipsEdit<CR>
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
@@ -480,7 +479,7 @@ let g:neoformat_verbose = 0
 nmap <silent> = :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
 augroup neoformat
   autocmd!
-  autocmd BufWritePost *.js Neoformat prettier | ALEFix | ALELint
+  autocmd BufWritePost *.js Neoformat prettier | ALELint
 augroup END
 let g:neoformat_try_formatprg = 1
 let g:neoformat_basic_format_align = 1
@@ -531,25 +530,25 @@ Plug 'farmergreg/vim-lastplace'
 " let g:ctrlsf_confirm_save = 0
 " " }
 " { Airline
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" let s:prevcountcache=[[], 0]
-" let g:airline#extensions#tabline#enabled = 0
-" let g:airline_powerline_fonts = 0
-" " let g:airline_theme='minimalist'
-" " let g:airline_theme='deus'
-" " let g:airline_theme='hybrid'
-" " let g:airline_theme='dracula'
-" let g:airline_theme='jellybeans'
-" let g:airline_section_a = '%{expand("%:p:t")}'
-" let g:airline_section_b = '%{expand("%:p:h:t")}'
-" let g:airline_section_c = '%{expand("%:p:h:h:t")}'
-" let g:airline_section_x = ''
-" let g:airline_section_y = ''
-" let g:airline_section_z = ''
-" let g:airline_section_error = ''
-" let g:airline_section_warning = ''
-" let g:airline_inactive_collapse = 0
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let s:prevcountcache=[[], 0]
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_powerline_fonts = 1
+" let g:airline_theme='minimalist'
+" let g:airline_theme='deus'
+" let g:airline_theme='hybrid'
+" let g:airline_theme='dracula'
+let g:airline_theme='jellybeans'
+let g:airline_section_a = '%{expand("%:p:t")}'
+let g:airline_section_b = '%{expand("%:p:h:t")}'
+let g:airline_section_c = '%{expand("%:p:h:h:t")}'
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
+let g:airline_inactive_collapse = 0
 " }
 " { vim-sleuth
 " Auto set file tab settings based on current file or other files in directory
@@ -801,8 +800,8 @@ augroup END
 " }
 " { terryma/vim-smooth-scroll
 " Plug 'terryma/vim-smooth-scroll'
-" nnoremap <silent> J :call smooth_scroll#down(&scroll*1/2, 20, 1)<CR>
-" nnoremap <silent> K :call smooth_scroll#up(&scroll*1/2, 20, 1)<CR>
+" nnoremap <silent> J :call smooth_scroll#down(&scroll*1/2, 50, 1)<CR>
+" nnoremap <silent> K :call smooth_scroll#up(&scroll*1/2, 50, 1)<CR>
 " }
 " { blueyed/vim-diminactive
 " Dim background color of inactive panes
@@ -810,7 +809,7 @@ augroup END
 " Plug 'blueyed/vim-diminactive'
 " }
 " { ap/vim-buftabline
-Plug 'ap/vim-buftabline'
+" Plug 'ap/vim-buftabline'
 " }
 " { Nova colorscheme
 Plug 'zanglg/nova.vim'
@@ -827,6 +826,9 @@ let g:mta_filetypes = {
   \ 'xml' : 1,
   \ 'jinja' : 1,
   \ }
+" }
+" { vim-quickly
+Plug 'axs221/vim-quickly'
 " }
 
 call plug#end()

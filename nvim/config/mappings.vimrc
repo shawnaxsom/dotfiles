@@ -143,7 +143,7 @@ nmap <leader>9 :set foldlevel=999<CR>
 " }
 
 " { Visual Mode
-vmap I :norm I
+vmap I :norm i
 vmap A :norm A
 vmap <enter> :norm<space>
 vmap <bar> :g/
@@ -161,7 +161,7 @@ function! SmoothScroll(direction, screen_fraction)
     let g:is_smooth_scrolling = 1
     let topline = line("w0")
     let botline = line("w$")
-    let lines_per_scroll = 1
+    let lines_per_scroll = 2
     let lines_to_scroll = (botline - topline) / a:screen_fraction
 
     let c = 0
@@ -178,10 +178,10 @@ endfunction
 " noremap J 7j
 " nnoremap <silent> <c-d> :call SmoothScroll('j', 1)<CR>
 " nnoremap <silent> <c-u> :call SmoothScroll('k', 1)<CR>
-" nnoremap <silent> J :call SmoothScroll('j', 5)<CR>
-" nnoremap <silent> K :call SmoothScroll('k', 5)<CR>
-nnoremap <silent> J 5j
-nnoremap <silent> K 5k
+nnoremap <silent> J :call SmoothScroll('j', 10)<CR>
+nnoremap <silent> K :call SmoothScroll('k', 10)<CR>
+" nnoremap <silent> J 5j
+" nnoremap <silent> K 5k
 vnoremap J 2j
 vnoremap K 2k
 
@@ -244,10 +244,12 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 xnoremap < <gv
 xnoremap > >gv
 
-" GF on any variable in the file that was imported (at least in ES6)
+" gf on any variable in the file that was imported (at least in ES6)
+" Also, use gF by default, which allows jumping to line number e.g. filename.js:180
+nnoremap gf gF
 augroup gotofile
   autocmd!
-  autocmd FileType javascript,javascript.jsx nnoremap <buffer> <silent> gf :norm "/yiw<CR>:norm gd<CR>:norm vi"gf<CR>:norm ggn<CR>:norm 0<CR>:nohls<CR>
+  autocmd FileType javascript,javascript.jsx nnoremap <buffer> <silent> gf :norm "/yiw<CR>:norm gd<CR>:norm vi"gF<CR>:norm ggn<CR>:norm 0<CR>:nohls<CR>
 augroup END
 " GP - Go To Preview, GF the file in a split window
 nmap gp :split<CR>gf
