@@ -829,6 +829,7 @@ let g:mta_filetypes = {
 " }
 " { vim-quickly
 Plug 'axs221/vim-quickly'
+let g:quickly_enable_default_key_mappings = 1
 " }
 
 call plug#end()
