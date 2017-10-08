@@ -240,6 +240,10 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 " Default behavior overrides
 " -----------------------------------------------------------------------------------------
 
+" Clear command box and search easily
+nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
+nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
+
 " Reselect text when changing indentation
 xnoremap < <gv
 xnoremap > >gv
@@ -253,9 +257,6 @@ augroup gotofile
 augroup END
 " GP - Go To Preview, GF the file in a split window
 nmap gp :split<CR>gf
-
-" Escape clears highlighting also
-nnoremap <silent> <esc> :noh<return><esc>
 
 " Rename with search
 nnoremap c* *Ncgn

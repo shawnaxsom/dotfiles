@@ -23,7 +23,6 @@ nmap <leader>.8 "hyiw:Grep <c-r>h %:p:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT
 nmap <leader>..8 "hyiw:Grep <c-r>h %:p:h:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 nmap <leader><leader>. :Grep "" %:p:h:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 nnoremap <silent> gr :execute 'Grep import.*' . expand("%:t:r")<CR>
-nmap <silent> ,/ :nohlsearch<CR>
 
 " open the quickfix window automatically
 augroup automaticquickfix

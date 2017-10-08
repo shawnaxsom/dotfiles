@@ -29,7 +29,8 @@
     "quotes": [2, "double", "avoid-escape"],
     "react/jsx-filename-extension": 0,
     "react/jsx-indent": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "space-before-function-paren": 0
   },
   "globals": {
     "cordova": true,

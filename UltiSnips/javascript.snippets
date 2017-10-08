@@ -172,3 +172,11 @@ snippet ()
   $0
 }
 endsnippet
+
+snippet input
+<input
+  type="text"
+  value={this.state.$1}
+  onChange={event => this.setState({$1: event.target.value})}
+/>
+endsnippet

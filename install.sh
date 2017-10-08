@@ -74,6 +74,7 @@ create_symlink   null.vim            ~/.vim/colors/null.vim
 create_symlink   nvim                ~/.config/nvim
 create_symlink   ranger              ~/.config/ranger
 create_symlink   sift.vim            ~/.vim/colors/sift.vim
+create_symlink   alacritty           ~/.config/alacritty
 
 # Hyper doesn't seem to like symlinks
 cp                .hyper.js         ~/.hyper.js

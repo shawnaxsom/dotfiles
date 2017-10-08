@@ -767,9 +767,14 @@ let g:vim_markdown_no_default_key_mappings = 1
 Plug 'romainl/vim-qf'
 " }
 " { vim-qlist
+" :help include-search
+" [I will search for the word under cursor in both the current file and the
+" included files.
 " :Ilist - Add word under cursor to quickfix
 " [I - Same thing
 Plug 'romainl/vim-qlist'
+" Find ES6 import syntax
+set include=from[\ ]
 " }
 " { embear/vim-localvimrc
 " Put a .lvimrc file in a project to have project specific settings
@@ -830,6 +835,8 @@ let g:mta_filetypes = {
 " { vim-quickly
 Plug 'axs221/vim-quickly'
 let g:quickly_enable_default_key_mappings = 1
+let g:quickly_always_jump_to_first_result = 1
+let g:quickly_open_quickfix_window = 0
 " }
 
 call plug#end()
