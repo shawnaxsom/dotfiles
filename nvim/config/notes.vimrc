@@ -132,5 +132,8 @@ augroup markdown
   autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>i
   autocmd BufEnter   *.md nnoremap <buffer> <leader>x :call CheckTodo()<CR>
   autocmd BufEnter   *.md nnoremap <buffer> <leader><leader>x :%g/\[x\]/d<CR>
+
+  autocmd BufEnter   *.md xnoremap <buffer> <s-tab> :s/^  //<CR>:set nohls<CR>gv
+  autocmd BufEnter   *.md xnoremap <buffer> <tab> :norm! I<tab><CR>gv
 augroup END
 
