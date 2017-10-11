@@ -42,6 +42,16 @@ if test -d ~/Library/Android/sdk/platform-tools
   set -gx PATH ~/Library/Android/sdk/platform-tools $PATH
 end
 
+if test -d ~/Library/Python/2.7/bin/
+  # Needed for Elastic Beanstalk CLI
+  set -gx PATH ~/Library/Python/2.7/bin/ $PATH
+end
+
+if test -d ~/Library/Python/3.4/bin/
+  # Needed for Elastic Beanstalk CLI
+  set -gx PATH ~/Library/Python/3.4/bin/ $PATH
+end
+
 if test -d ~/.cargo/bin
   set -gx PATH ~/.cargo/bin $PATH
 end
@@ -59,7 +69,8 @@ alias gcm='git checkout master'
 alias gd='git diff'
 alias gf='git fetch'
 alias gh='git browse'
-alias gl='git log -p'
+alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit '
+alias glp='git log -p'
 alias gmm='git fetch; git merge origin/master'
 alias gp='git pull'
 alias gpr='hub pull-request --edit -F ./.github/PULL_REQUEST_TEMPLATE.md'
@@ -138,6 +149,8 @@ alias nvim='nvim_session'
 alias v='nvim_session'
 alias vim='nvim_session'
 
+
+alias do-horizonal='ssh -i ~/.ssh/id_rsa root@67.205.177.3'
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`

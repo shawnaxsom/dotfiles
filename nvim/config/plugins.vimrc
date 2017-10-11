@@ -13,6 +13,12 @@ call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
+" { vim-quickly
+Plug 'axs221/vim-quickly'
+let g:quickly_enable_default_key_mappings = 1
+let g:quickly_always_jump_to_first_result = 1
+let g:quickly_open_quickfix_window = 0
+" }
 " { Dirvish
 Plug 'justinmk/vim-dirvish'  " File manager
 noremap - :Dirvish %<CR>
@@ -146,7 +152,7 @@ map ,z :VimuxZoomRunner<CR>
 " { vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
 Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_disable_when_zoomed = 0
+let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
@@ -535,10 +541,6 @@ Plug 'vim-airline/vim-airline-themes'
 let s:prevcountcache=[[], 0]
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='minimalist'
-" let g:airline_theme='deus'
-" let g:airline_theme='hybrid'
-" let g:airline_theme='dracula'
 let g:airline_theme='jellybeans'
 let g:airline_section_a = '%{expand("%:p:t")}'
 let g:airline_section_b = '%{expand("%:p:h:t")}'
@@ -574,15 +576,15 @@ Plug 'flazz/vim-colorschemes'
 " map z? <Plug>(incsearch-fuzzy-?)
 " }
 " { Vim-Sneak
-Plug 'justinmk/vim-sneak'
-nmap s <Plug>SneakLabel_s
-nmap S <Plug>SneakLabel_S
-" map s <Plug>Sneak_s
-" map S <Plug>Sneak_S
-let g:sneak#label = 1
-" let g:sneak#s_next = 1
-" let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
-let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
+" Plug 'justinmk/vim-sneak'
+" nmap s <Plug>SneakLabel_s
+" nmap S <Plug>SneakLabel_S
+" " map s <Plug>Sneak_s
+" " map S <Plug>Sneak_S
+" let g:sneak#label = 1
+" " let g:sneak#s_next = 1
+" " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
+" let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
 " }
 " { Dash.app
 Plug 'rizzatti/dash.vim'
@@ -702,8 +704,9 @@ nmap <leader><leader>r :Renamer<CR>
 " }
 " { Vim-Rooter
 " Change directory to project root if you are in a subfolder
-let g:rooter_patterns = ['app.js']
 Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['app.js']
+let g:rooter_silent_chdir = 1
 " }
 " { thameera/vimv
 " Alternative to vim-renamer
@@ -743,11 +746,11 @@ Plug 'edkolev/tmuxline.vim'
 " nmap <leader><leader>p :MRU<CR>
 " }
 " { plasticboy/vim-markdown
-Plug 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_level = 2
-let g:vim_markdown_folding_disabled = 0
-let g:vim_markdown_new_list_item_indent = 2
-let g:vim_markdown_no_default_key_mappings = 1
+" Plug 'plasticboy/vim-markdown'
+" let g:vim_markdown_folding_level = 2
+" let g:vim_markdown_folding_disabled = 0
+" let g:vim_markdown_new_list_item_indent = 2
+" let g:vim_markdown_no_default_key_mappings = 1
 " }
 " " { vimwiki/vimwiki
 " Plug 'vimwiki/vimwiki'
@@ -831,12 +834,6 @@ let g:mta_filetypes = {
   \ 'xml' : 1,
   \ 'jinja' : 1,
   \ }
-" }
-" { vim-quickly
-Plug 'axs221/vim-quickly'
-let g:quickly_enable_default_key_mappings = 1
-let g:quickly_always_jump_to_first_result = 1
-let g:quickly_open_quickfix_window = 0
 " }
 
 call plug#end()

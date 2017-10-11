@@ -65,7 +65,7 @@ set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
 set scrolloff=12
-set sidescrolloff=15
+set sidescrolloff=5
 
 " Use Bash shell syntax for :! (even if you are in Fish or ZSH)
 set shell=bash
@@ -189,14 +189,14 @@ let g:netrw_altfile = 1
 
 " Tell vim to remember certain things when we exit,
 " including oldfiles history length
-"  '150  :  MRU / :oldfiles - marks will be remembered for up to 10 previously edited files
-"  "100 :  will save up to 100 lines for each register
-"  :20  :  up to 20 lines of command-line history will be remembered
-"  %    :  saves and restores the buffer list
+"  '250  :  MRU / :oldfiles - marks will be remembered for up to 10 previously edited files
+"  "100  :  will save up to 100 lines for each register
+"  :100  :  up to 20 lines of command-line history will be remembered
+"  %     :  saves and restores the buffer list
 if has('nvim')
-  set shada='150,\"1000,:1,n~/.vim/shada
+  set shada='250,\"100,:100,n~/.vim/shada
 else
-  set viminfo=\'150,\"100,:20,%
+  set viminfo=\'250,\"100,:100,%
 endif
 
 " -----------------------------------------------------------------------------------------

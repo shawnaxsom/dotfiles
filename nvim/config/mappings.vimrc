@@ -204,8 +204,10 @@ function! GoToNextFunc()
 endfun
 " map H [{
 " map L ]}
-map <silent> H :call GoToFuncStart()<CR>
-map <silent> L :call GoToNextFunc()<CR>
+" map <silent> H :call GoToFuncStart()<CR>
+" map <silent> L :call GoToNextFunc()<CR>
+map <silent> H 0?^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
+map <silent> L $/^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
 augroup h_and_l
   autocmd!
   autocmd BufEnter *.vimrc nnoremap <buffer> H {

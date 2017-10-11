@@ -19,6 +19,7 @@
     "jsx-a11y/href-no-hash": "off",
     "max-len": [0],
     "no-confusing-arrow": [0],
+    "no-mixed-operators": 0,
     "no-param-reassign": 0,
     "no-return-assign": [0],
     "no-shadow": [0], //added to ease of migration
@@ -29,6 +30,8 @@
     "quotes": [2, "double", "avoid-escape"],
     "react/jsx-filename-extension": 0,
     "react/jsx-indent": 0,
+    "react/jsx-wrap-multilines": 0,
+    "react/no-array-index-key": 0,
     "react/prop-types": 0,
     "space-before-function-paren": 0
   },

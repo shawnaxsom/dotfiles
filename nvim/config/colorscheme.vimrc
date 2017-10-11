@@ -27,17 +27,22 @@ set background=dark
 " colorscheme onedark
 " colorscheme pencil
 colorscheme nova
+" colorscheme candyman
+" colorscheme 3dglasses
 " " } Colorscheme
 
 " " { Highlights
 " " These come after Colorscheme so they don't get overwritten
 " "
 " " { Background
-highlight Normal guibg=#404040
+" highlight Normal guibg=#404040
 " }
 "
 " { Comments
 highlight Comment guifg=#999999
+" }
+" { Matching Parens
+highlight MatchParen guibg=#a0a080 guifg=#fff000
 " }
 "
 " { Current line
@@ -46,13 +51,13 @@ augroup CursorLine
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
 augroup END
-highlight cursorLine term=bold cterm=bold guibg=#656565
+highlight cursorLine term=bold cterm=bold guibg=#252525
 " }
 " { Visual Selection
 highlight Visual term=bold cterm=bold guibg=#2555a5
 " }
 " { matchmaker
-highlight Matchmaker guibg=#656565
+highlight Matchmaker guibg=#454545
 " }
 " { MatchTagAlways
 highlight MatchTag guibg=#656565

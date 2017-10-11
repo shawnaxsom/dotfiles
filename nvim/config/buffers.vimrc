@@ -5,6 +5,33 @@ nmap <leader>! :argdo<space>
 nmap <silent> <leader><leader>c :%bdelete!<CR>
 nnoremap <leader>l :ls<CR>
 
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+nnoremap _ :call ToggleList("Quickfix List", 'c')<CR>
+
 nmap <leader>] :tjump /
 set wildignore=*.swp,*.bak
 set wildignore+=/usr/**/*
@@ -14,6 +41,10 @@ set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dl
 set wildignore+=*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=tags
 set wildignore+=*.tar.*
+set wildignore+=*.git/*
+set wildignore+=*fonts/*
+set wildignore+=*.ico,*.svg,*.png,*.jpg,*.jpeg
+set wildignore+=*.DS_STORE*
 
 function! WhatChangedLines ()
   let lines = split(system("git whatchanged --oneline --name-only --since='1 month ago' --author='hawn' --pretty=format:"), "\n")
@@ -56,3 +87,4 @@ function! MostRecentlyModifiedQuickfixOrGotoFile (arg)
 endfunction
 command! -nargs=* -complete=customlist,MostRecentlyModifiedComplete QuicklyMostRecentlyModified call MostRecentlyModifiedQuickfixOrGotoFile(<q-args>)
 nnoremap <leader>M :QuicklyMostRecentlyModified<space>
+
