@@ -15,8 +15,10 @@ nnoremap gsw :topleft split ~/Dropbox/notes/work.scratch.md<CR>
 let s:blank_line  = "^$"
 let s:bullet      = "^[ ]*\\*"
 let s:bullet_only = "^[ ]*\\*[ ]*$"
-let s:todo        = "^[ ]*\\[ \]"
-let s:todo_only   = "^[ ]*\\[ \][ ]*$"
+let s:checked_todo        = "^[ ]*\\[x\]"
+let s:unchecked_todo        = "^[ ]*\\[ \]"
+let s:todo        = "^[ ]*\\[[ x]\]"
+let s:todo_only   = "^[ ]*\\[[ x]\][ ]*$"
 
 function! InsertAsteriskOrCheck (from_linenr, insert_at_offset, cursor_shift)
   let line = getline(a:from_linenr)
@@ -104,6 +106,16 @@ function! Dedent ()
   call cursor(line("."), len(getline(".")) + 1, 1)
 endfunction
 
+function! CheckTodo ()
+  let line = getline(".")
+
+  if line =~ s:checked_todo
+    call setline('.', substitute(getline("."), "\[x\]", " ", ""))
+  elseif line =~ s:unchecked_todo
+    call setline('.', substitute(getline("."), "\[ \]", "x", ""))
+  endif
+endfunction
+
 augroup markdown
   autocmd!
   autocmd BufLeave   *.md silent w
@@ -111,11 +123,14 @@ augroup markdown
   autocmd BufEnter   *.md inoremap <buffer> <silent> <backspace> :call Backspace()<CR>
   autocmd BufEnter   *.md inoremap <buffer> <s-tab> :call Dedent()<CR>
   autocmd BufEnter   *.md inoremap <buffer> <tab> :call Indent()<CR>
-  autocmd BufEnter   *.md nnoremap <buffer> O :call InsertAsteriskOrCheck(line('.'), -1, 0)<CR>i
-  autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>i
   autocmd BufEnter   *.md inoremap <buffer> <enter> :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>
   autocmd BufEnter   *.md inoremap <buffer> * :call CompleteNewBullet()<CR>
   autocmd BufEnter   *.md inoremap <buffer> [ :call CompleteNewTodo()<CR>
   autocmd BufEnter   *.md inoremap <buffer> <c-u> :call DeleteLine()<CR>
+
+  autocmd BufEnter   *.md nnoremap <buffer> O :call InsertAsteriskOrCheck(line('.'), -1, 0)<CR>i
+  autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>i
+  autocmd BufEnter   *.md nnoremap <buffer> <leader>x :call CheckTodo()<CR>
+  autocmd BufEnter   *.md nnoremap <buffer> <leader><leader>x :%g/\[x\]/d<CR>
 augroup END
 
