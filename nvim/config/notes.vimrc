@@ -59,10 +59,10 @@ function! DeleteLine ()
 
     let newline = getline(".")
 
-    if newline =~ s:bullet || newline =~ s:todo_only
-      call cursor(line("."), len(getline(line("."))) + 1, 1)
+    if newline =~ s:bullet_only || newline =~ s:todo_only
+      call cursor(line(".") - 1, len(getline(line(".") - 1)) + 1, 1)
     else
-      call cursor(line("."), len(getline(line("."))), 1)
+      call cursor(line(".") - 1, len(getline(line(".") - 1)), 1)
     endif
 endfunction
 
