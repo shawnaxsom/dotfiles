@@ -161,6 +161,7 @@ set suffixesadd=.js,.jsx
 set t_ts=]1;
 set t_fs=
 set title
+set titlestring=vim\ %t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
 
 " Fix Vim background in Tmux, don't break colors at end of line.
 set t_ut=

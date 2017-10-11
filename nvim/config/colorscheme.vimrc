@@ -57,7 +57,7 @@ highlight cursorLine term=bold cterm=bold guibg=#252525
 highlight Visual term=bold cterm=bold guibg=#2555a5
 " }
 " { matchmaker
-highlight Matchmaker guibg=#454545
+highlight Matchmaker guibg=#954545
 " }
 " { MatchTagAlways
 highlight MatchTag guibg=#656565
