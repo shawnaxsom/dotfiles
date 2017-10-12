@@ -536,21 +536,21 @@ Plug 'farmergreg/vim-lastplace'
 " let g:ctrlsf_confirm_save = 0
 " " }
 " { Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let s:prevcountcache=[[], 0]
-let g:airline#extensions#tabline#enabled = 0
-let g:airline_powerline_fonts = 1
-let g:airline_theme='jellybeans'
-let g:airline_section_a = '%{expand("%:p:t")}'
-let g:airline_section_b = '%{expand("%:p:h:t")}'
-let g:airline_section_c = '%{expand("%:p:h:h:t")}'
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-let g:airline_section_error = ''
-let g:airline_section_warning = ''
-let g:airline_inactive_collapse = 0
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" let s:prevcountcache=[[], 0]
+" let g:airline#extensions#tabline#enabled = 0
+" let g:airline_powerline_fonts = 1
+" let g:airline_theme='jellybeans'
+" let g:airline_section_a = '%{expand("%:p:t")}'
+" let g:airline_section_b = '%{expand("%:p:h:t")}'
+" let g:airline_section_c = '%{expand("%:p:h:h:t")}'
+" let g:airline_section_x = ''
+" let g:airline_section_y = ''
+" let g:airline_section_z = ''
+" let g:airline_section_error = ''
+" let g:airline_section_warning = ''
+" let g:airline_inactive_collapse = 0
 " }
 " { vim-sleuth
 " Auto set file tab settings based on current file or other files in directory

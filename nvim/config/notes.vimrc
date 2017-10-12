@@ -116,6 +116,33 @@ function! CheckTodo ()
   endif
 endfunction
 
+function! ClearTodos ()
+  let save_pos = getpos(".")
+
+  call cursor(1, 0, 0)
+
+  call search("\\[x\\]", "c")
+  let line = getline(".")
+
+  echom line
+
+  while line =~ s:checked_todo
+    delete
+
+    let line = getline(line("."))
+    while line !~ s:unchecked_todo && line !~ s:checked_todo && line !~ s:blank_line
+      " Remove any notes that went along with a todo
+      delete
+      let line = getline(line("."))
+    endwhile
+
+    call search("\\[x\\]", "c")
+    let line = getline(".")
+  endwhile
+
+  call setpos('.', save_pos)
+endfunction
+
 augroup markdown
   autocmd!
   autocmd BufLeave   *.md silent w
@@ -131,7 +158,7 @@ augroup markdown
   autocmd BufEnter   *.md nnoremap <buffer> O :call InsertAsteriskOrCheck(line('.'), -1, 0)<CR>i
   autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>i
   autocmd BufEnter   *.md nnoremap <buffer> <leader>x :call CheckTodo()<CR>
-  autocmd BufEnter   *.md nnoremap <buffer> <leader><leader>x :%g/\[x\]/d<CR>
+  autocmd BufEnter   *.md nnoremap <buffer> <leader><leader>x :call ClearTodos()<CR>
 
   autocmd BufEnter   *.md xnoremap <buffer> <s-tab> :s/^  //<CR>:set nohls<CR>gv
   autocmd BufEnter   *.md xnoremap <buffer> <tab> :norm! I<tab><CR>gv
