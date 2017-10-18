@@ -109,27 +109,27 @@ colors:
     cyan:    '0x70e0ba'
     white:   '0xffffff'
 
-  # Bright colors
-  bright:
-    black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xe7c547'
-    blue:    '0x7aa6da'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
-    white:   '0xffffff'
+  # # Bright colors
+  # bright:
+  #   black:   '0x666666'
+  #   red:     '0xff3334'
+  #   green:   '0x9ec400'
+  #   yellow:  '0xe7c547'
+  #   blue:    '0x7aa6da'
+  #   magenta: '0xb77ee0'
+  #   cyan:    '0x54ced6'
+  #   white:   '0xffffff'
 
-  # Dim colors (Optional)
-  dim:
-    black:   '0x333333'
-    red:     '0xf2777a'
-    green:   '0x99cc99'
-    yellow:  '0xffcc66'
-    blue:    '0x6699cc'
-    magenta: '0xcc99cc'
-    cyan:    '0x66cccc'
-    white:   '0xdddddd'
+  # # Dim colors (Optional)
+  # dim:
+  #   black:   '0x333333'
+  #   red:     '0xf2777a'
+  #   green:   '0x99cc99'
+  #   yellow:  '0xffcc66'
+  #   blue:    '0x6699cc'
+  #   magenta: '0xcc99cc'
+  #   cyan:    '0x66cccc'
+  #   white:   '0xdddddd'
 
 
 # Visual Bell
@@ -159,7 +159,7 @@ visual_bell:
   duration: 0
 
 # Background opacity
-background_opacity: 0.97
+background_opacity: 1.0
 
 # Key bindings
 #

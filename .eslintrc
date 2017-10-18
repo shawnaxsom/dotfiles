@@ -21,9 +21,11 @@
     "no-confusing-arrow": [0],
     "no-mixed-operators": 0,
     "no-param-reassign": 0,
+    "no-plusplus": 0,
     "no-return-assign": [0],
     "no-shadow": [0], //added to ease of migration
     "no-use-before-define": [0], //added to ease of migration
+    "no-underscore-dangle": 0,
     "object-curly-spacing": [0],
     "prefer-arrow-callback": [0], //added to ease of migration
     "prefer-template": [0], //added to ease of migration

@@ -126,6 +126,7 @@ nmap <leader><leader>q :qa<CR>
 nmap <leader>h :sp<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>
+nmap <leader>x A // ZZZZ<ESC>0
 
 " Switch to previous file
 map <leader><tab> <c-^>
@@ -161,7 +162,7 @@ function! SmoothScroll(direction, screen_fraction)
     let g:is_smooth_scrolling = 1
     let topline = line("w0")
     let botline = line("w$")
-    let lines_per_scroll = 2
+    let lines_per_scroll = 3
     let lines_to_scroll = (botline - topline) / a:screen_fraction
 
     let c = 0
@@ -178,10 +179,10 @@ endfunction
 " noremap J 7j
 " nnoremap <silent> <c-d> :call SmoothScroll('j', 1)<CR>
 " nnoremap <silent> <c-u> :call SmoothScroll('k', 1)<CR>
-nnoremap <silent> J :call SmoothScroll('j', 10)<CR>
-nnoremap <silent> K :call SmoothScroll('k', 10)<CR>
-" nnoremap <silent> J 5j
-" nnoremap <silent> K 5k
+" nnoremap <silent> J :call SmoothScroll('j', 10)<CR>
+" nnoremap <silent> K :call SmoothScroll('k', 10)<CR>
+nnoremap <silent> J 2j
+nnoremap <silent> K 2k
 vnoremap J 2j
 vnoremap K 2k
 
@@ -242,6 +243,12 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 " Default behavior overrides
 " -----------------------------------------------------------------------------------------
 
+" Move selected text up and down, or change indentation, with arrow keys
+xnoremap <up> <esc>'<kdd'>pgv
+xnoremap <down> <esc>'>jdd'<Pgv
+xnoremap <left> <gv
+xnoremap <right> >gv
+
 " Clear command box and search easily
 nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
@@ -299,12 +306,18 @@ noremap Y y$
 " Unimpaired keys
 nmap [q :cprev<CR>
 nmap ]q :cnext<CR>
+nmap [w :cpfile<CR>
+nmap ]w :cnfile<CR>
+nmap [e :colder<CR>
+nmap ]e :cnewer<CR>
 nmap [b :bprevious<CR>
 nmap ]b :bnext<CR>
 nmap [a :previous<CR>
 nmap ]a :next<CR>
 nmap [l :lprev<CR>
 nmap ]l :lnext<CR>
+nmap [f -k<CR>
+nmap ]f -j<CR>
 
 " Maximize pane
 nmap <leader>z <bar>_

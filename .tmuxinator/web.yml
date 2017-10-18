@@ -7,7 +7,7 @@ root: ~/dev/ambyint/packages/
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-# pre: sudo /etc/rc.d/mysqld start
+# pre: forever start -c "env NODE_ENV=qa npm start" /Users/shawn.axsom/dev/ambyint/packages/api
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
@@ -38,31 +38,37 @@ windows:
         - nvim
         - npm start
         # - npm test
-        - cd ~/dev/ambyint/packages/api; env NODE_ENV=qa npm start
+        # - cd ~/dev/ambyint/packages/api; env NODE_ENV=qa npm start
   - api:
       root: ~/dev/ambyint/packages/api
       layout: main-horizontal
       panes:
         - nvim
-        - watchmedo shell-command --patterns="*test.js" --ignore-patterns="*.tmp*" --recursive --command='echo ${watch_src_path} && npm test -- --tests "${watch_src_path}"'
-  - uiV2:
-      root: ~/dev/ambyint/packages/ambyint.ui
-      panes:
-        - nvim
-  - uiV1:
-      root: ~/dev/pumpwell/WellEXPERT2.Web/
-      panes:
-        - nvim
-  - codi:
-      root: ~/codi/
-      layout: main-horizontal
-      panes:
-        - nvim codi.js
-        -
-  - social:
-      root: ~/
-      layout: main-horizontal
-      panes:
-        - twterm
-        - rtv
-        - weechat
+        # - watchmedo shell-command --patterns="*test.js" --ignore-patterns="*.tmp*" --recursive --command='npm run build; and env NODE_ENV=qa npm start'
+        # - watchmedo shell-command --patterns="*test.js" --ignore-patterns="*.tmp*" --recursive --command='echo ${watch_src_path} && npm test -- --tests "${watch_src_path}"'
+        # - chokidar '**/*test.js' --silent --initial --ignore "*.tmp*" -c 'npm run build; and env NODE_ENV=qa npm start'
+        - forever --sourceDir /Users/shawn.axsom/dev/ambyint/packages/api -c "env NODE_ENV=qa npm start" /
+        - chokidar '**/*test.js' --silent --ignore "*.tmp*" -c 'npm run build-js'
+
+
+  # - uiV2:
+  #     root: ~/dev/ambyint/packages/ambyint.ui
+  #     panes:
+  #       - nvim
+  # - uiV1:
+  #     root: ~/dev/pumpwell/WellEXPERT2.Web/
+  #     panes:
+  #       - nvim
+  # - codi:
+  #     root: ~/codi/
+  #     layout: main-horizontal
+  #     panes:
+  #       - nvim codi.js
+  #       -
+  # - social:
+  #     root: ~/
+  #     layout: main-horizontal
+  #     panes:
+  #       - twterm
+  #       - rtv
+  #       - weechat

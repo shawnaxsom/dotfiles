@@ -25,8 +25,6 @@ function! ShowFuncName()
 endfun
 map <leader>X :echo ShowFuncName()<CR>
 
-" hi StatusLine guibg=#0333f3
-" hi StatusLineNC guibg=#533333
 hi StatusLineFile guibg=#9bcb8b guifg=#000000
 hi StatusLineFileInactive guibg=#7bab9b guifg=#504000
 hi StatusLineExtension guibg=#000000
@@ -51,16 +49,13 @@ function! SetActiveStatusLine ()
   setlocal statusline+=\ %#StatusLineFolder# " Change colors
   setlocal statusline+=\ \ \ %{expand('%:h:h:t')}
   setlocal statusline+=/%{expand('%:h:t')}
+  setlocal statusline+=/%{expand('%:t')}
 
   setlocal statusline+=\ \ %#StatusLineActive# " Change colors
 
   setlocal statusline+=%=        " Switch to the right side
   setlocal statusline+=%<        " Truncate here if too long
   setlocal statusline+=%{g:git_branch}
-  " setlocal statusline+=\ %{fugitive#statusline()}
-  setlocal statusline+=\ |
-  " setlocal statusline+=%{ShowFuncName()}
-  " setlocal statusline+=%#warningmsg#
 endfunction
 
 function! SetInactiveStatusLine ()
@@ -76,16 +71,13 @@ function! SetInactiveStatusLine ()
   setlocal statusline+=\ %#StatusLineFolder# " Change colors
   setlocal statusline+=\ \ \ %{expand('%:h:h:t')}
   setlocal statusline+=/%{expand('%:h:t')}
+  setlocal statusline+=/%{expand('%:t')}
 
   setlocal statusline+=\ \ %#StatusLineInactive#" Change colors
 
   setlocal statusline+=%=        " Switch to the right side
   setlocal statusline+=%<        " Truncate here if too long
   setlocal statusline+=%{g:git_branch}
-  " setlocal statusline+=\ %{fugitive#statusline()}
-  setlocal statusline+=\ |
-  " setlocal statusline+=%{ShowFuncName()}
-  " setlocal statusline+=%#warningmsg#
 endfunction
 
 augroup statusline
@@ -95,5 +87,3 @@ augroup statusline
 augroup END
 
 call SetActiveStatusLine()
-
-" set statusline=%<%f%=\ [%1*%M%*%n%R%H]\ %-19(%3l,%02c%03V%)%O'%02b'

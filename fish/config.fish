@@ -9,7 +9,7 @@ alias ......='../../../../..'
 alias .......='../../../../../..'
 alias ........='../../../../../../..'
 
-set -x TERM screen-256color
+set -x TERM xterm-256color
 set -x EDITOR /usr/local/bin/vim
 
 alias mux='tmuxinator'
@@ -62,7 +62,7 @@ alias git='hub'
 
 alias gP='git push'
 alias ga='git add .'
-alias gb='git browse'
+alias gb='git branch'
 alias gc-='git checkout -'
 alias gc='git commit'
 alias gcm='git checkout master'
@@ -72,7 +72,7 @@ alias gh='git browse'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit '
 alias glp='git log -p'
 alias gmm='git fetch; git merge origin/master'
-alias gp='git pull'
+alias gp='git pull; and echo; and git push; and echo; and git status; and echo'
 alias gpr='hub pull-request --edit -F ./.github/PULL_REQUEST_TEMPLATE.md'
 alias gs='git status'
 alias vs='vim -S'
@@ -90,7 +90,7 @@ alias x='exit'
 # alias f='find . -name'
 
 # Git Prune Merged
-function gpm
+function gprune
   git branch --merged master | grep -v 'master' | xargs git branch -d
 end
 
@@ -151,6 +151,7 @@ alias vim='nvim_session'
 
 
 alias do-horizonal='ssh -i ~/.ssh/id_rsa root@67.205.177.3'
+alias aws-horizonal='ssh -i ~/.ssh/ShawnEC2.pem ubuntu@52.206.194.188'
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`

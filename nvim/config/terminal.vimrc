@@ -1,7 +1,11 @@
 " -----------------------------------------------------------------------------------------
 " Terminal mappings
 " -----------------------------------------------------------------------------------------
-nmap <silent> <leader>t :sp term://fish<CR>i
+function! OpenTerminalHere ()
+  execute "sp term://cd '" . expand("%:p:h") . "'; fish"
+  startinsert
+endfunction
+nmap <silent> <leader>t :call OpenTerminalHere()<CR>
 nmap ,b :sp term://bash %:p<CR>
 nmap ,r :sp term://npm start<CR>
 nmap ,t :sp term://npm run test<CR>

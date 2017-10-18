@@ -127,7 +127,7 @@ set incsearch
 set hlsearch
 set noignorecase              " affects both searching and find/replace
 set smartcase
-set wrapscan                  " Wrap to top of file after searching through full file
+set nowrapscan                  " Wrap to top of file after searching through full file
 
 " Fold settings
 set foldmethod=indent
@@ -166,6 +166,9 @@ set titlestring=vim\ %t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
 " Fix Vim background in Tmux, don't break colors at end of line.
 set t_ut=
 set t_Co=256
+let &t_8f = "<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
+
 
 " Use space button for leader
 let mapleader = "\<Space>"
@@ -180,7 +183,7 @@ set ttimeoutlen=0
 
 " Minimize how often you see "Press enter or type a command to continue"
 set shortmess=a
-set cmdheight=2
+set cmdheight=3
 
 " Allow completion of tags using omnicompletion <c-x><c-o>
 set omnifunc=htmlcomplete#CompleteTags

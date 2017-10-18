@@ -3,7 +3,7 @@ nnoremap gsc :topleft split ~/Dropbox/cheatsheets/<CR>
 nnoremap gsd :topleft split ~/Dropbox/notes/daily.scratch.md<CR>
 nnoremap gsg :topleft split ~/Dropbox/notes/goals.scratch.md<CR>
 nnoremap gsh :topleft split ~/Dropbox/notes/habits.scratch.md<CR>
-nnoremap gsl :topleft split ~/Dropbox/notes/links.scratch.md<CR>
+nnoremap gsl :topleft split ~/Dropbox/notes/learning.scratch.md<CR>
 nnoremap gsm :topleft split ~/Dropbox/notes/meetings.scratch.md<CR>
 nnoremap gsp :topleft split ~/Dropbox/notes/personal.scratch.md<CR>
 nnoremap gsr :topleft split ~/Dropbox/notes/queries.rest<CR>
@@ -110,9 +110,9 @@ function! CheckTodo ()
   let line = getline(".")
 
   if line =~ s:checked_todo
-    call setline('.', substitute(getline("."), "\[x\]", " ", ""))
+    call setline('.', substitute(getline("."), "\\[x\\]", "[ ]", ""))
   elseif line =~ s:unchecked_todo
-    call setline('.', substitute(getline("."), "\[ \]", "x", ""))
+    call setline('.', substitute(getline("."), "\\[ \\]", "[x]", ""))
   endif
 endfunction
 
@@ -159,8 +159,15 @@ augroup markdown
   autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>i
   autocmd BufEnter   *.md nnoremap <buffer> <leader>x :call CheckTodo()<CR>
   autocmd BufEnter   *.md nnoremap <buffer> <leader><leader>x :call ClearTodos()<CR>
+  autocmd BufEnter   *.md nnoremap <buffer> [[ ?^\[ \]<CR>:nohls<CR>
+  autocmd BufEnter   *.md nnoremap <buffer> ]] /^\[ \]<CR>:nohls<CR>
+  " autocmd BufEnter   *.md nnoremap <buffer> K ?^\[ \]<CR>:nohls<CR>
+  " autocmd BufEnter   *.md nnoremap <buffer> J /^\[ \]<CR>:nohls<CR>
+  autocmd BufEnter   *.md nnoremap <silent><buffer> K :silent! ?^#<CR>:silent nohls<CR>
+  autocmd BufEnter   *.md nnoremap <silent><buffer> J :silent! /^#<CR>:silent nohls<CR>
 
   autocmd BufEnter   *.md xnoremap <buffer> <s-tab> :s/^  //<CR>:set nohls<CR>gv
   autocmd BufEnter   *.md xnoremap <buffer> <tab> :norm! I<tab><CR>gv
+
 augroup END
 
