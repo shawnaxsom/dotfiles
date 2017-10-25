@@ -115,8 +115,8 @@ set history=1000
 set nojoinspaces
 
 " Line numbers
-set nonumber
-set norelativenumber
+set number
+set relativenumber
 set numberwidth=4
 
 " Wildmenu completion mentu when pressing tab
@@ -214,3 +214,9 @@ endif
 " -----------------------------------------------------------------------------------------
 " Show interactive preview of substitute changes when using :%s///
 set inccommand=split
+
+" For usage with https://hub.github.com
+augroup pullrequest
+  autocmd!
+  autocmd BufEnter PULLREQ_EDITMSG setlocal filetype=markdown
+augroup END

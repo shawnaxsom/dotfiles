@@ -1,0 +1,93 @@
+# The latest default .slate file can be found here:
+# https://github.com/jigish/slate/blob/master/Slate/default.slate
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config layoutFocusOnActivate true
+
+bind r:alt relaunch
+
+# bind a:alt push left bar-resize:screenSizeX/2
+# bind d:alt push right bar-resize:screenSizeX/2
+# bind w:alt push up bar-resize:screenSizeY/2
+# bind s:alt push down bar-resize:screenSizeY/2
+
+# Resize Bindings
+# bind d:alt       resize +10% +0
+# bind a:alt        resize -10% +0
+# bind w:alt          resize +0   -10%
+# bind s:alt        resize +0   +10%
+# bind d:ctrl;alt  resize -10% +0 bottom-right
+# bind a:ctrl;alt   resize +10% +0 bottom-right
+# bind w:ctrl;alt     resize +0   +10% bottom-right
+# bind s:ctrl;alt   resize +0   -10% bottom-right
+
+
+
+# Nudge Bindings
+# bind d:shift;alt nudge +10% +0
+# bind a:shift;alt  nudge -10% +0
+# bind w:shift;alt    nudge +0   -10%
+# bind s:shift;alt  nudge +0   +10%
+
+# Throw Bindings
+# bind 1:ctrl;alt         throw 0 resize
+# bind 2:ctrl;alt         throw 1 resize
+# bind 3:ctrl;alt         throw 2 resize
+# bind d:ctrl;alt;cmd throw right resize
+# bind a:ctrl;alt;cmd  throw left  resize
+# bind w:ctrl;alt;cmd    throw up    resize
+# bind s:ctrl;alt;cmd  throw down  resize
+
+# Focus Bindings
+# bind d:cmd    focus right
+# bind a:cmd     focus left
+# bind w:cmd       focus up
+# bind s:cmd     focus down
+# bind w:cmd;alt   focus behind
+# bind s:cmd;alt focus behind
+
+# Window Hints
+# bind esc:cmd hint
+
+alias maximize        push right bar-resize:screenSizeX
+alias pushRight       push right bar-resize:screenSizeX/2
+alias pushLeft        push left bar-resize:screenSizeX/2
+alias pushUp          push up bar-resize:screenSizeY/2
+alias pushDown        push down bar-resize:screenSizeY/2
+alias pushTopRight    corner top-right resize:screenSizeX/2;screenSizeY/2
+alias pushTopLeft     corner top-left resize:screenSizeX/2;screenSizeY/2
+alias pushBottomRight corner bottom-right resize:screenSizeX/2;screenSizeY/2
+alias pushBottomLeft  corner bottom-left resize:screenSizeX/2;screenSizeY/2
+
+layout code 'iTerm2' ${pushLeft}
+layout code 'Google Chrome' ${pushRight}
+
+layout slack 'Slack' ${maximize}
+
+layout mongo 'iTerm2' ${pushLeft}
+layout mongo 'Google Chrome' ${pushTopRight}
+layout mongo 'Robo 3T' ${pushBottomRight}
+
+layout trello 'Trello' ${pushLeft}
+layout trello 'Google Chrome' ${pushRight}
+
+bind `:alt ${maximize}
+bind 1:alt layout code
+bind 2:alt layout slack
+bind 3:alt layout mongo
+bind 4:alt layout trello
+
+
+
+# Push Bindings
+bind s:alt ${maximize}
+bind d:alt ${pushRight}
+bind a:alt ${pushLeft}
+bind w:alt ${pushUp}
+bind x:alt ${pushDown}
+bind e:alt ${pushTopRight}
+bind q:alt ${pushTopLeft}
+bind c:alt ${pushBottomRight}
+bind z:alt ${pushBottomLeft}

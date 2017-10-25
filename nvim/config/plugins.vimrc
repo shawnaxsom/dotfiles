@@ -756,7 +756,7 @@ Plug 'tpope/vim-rsi'
 " }
 " { chaoren/vim-wordmotion
 " Use camelCase etc for word motions like w/b/e
-Plug 'chaoren/vim-wordmotion'
+" Plug 'chaoren/vim-wordmotion'
 " }
 
 call plug#end()
