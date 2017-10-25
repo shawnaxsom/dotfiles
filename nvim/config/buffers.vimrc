@@ -3,7 +3,7 @@ nmap <leader><leader>a :%argdelete<CR>
 nmap <leader>a :args **/**<LEFT>
 nmap <leader>! :argdo<space>
 nmap <silent> <leader><leader>c :%bdelete!<CR>
-nnoremap <leader>l :ls<CR>
+" nnoremap <leader>l :ls<CR>
 
 function! GetBufferList()
   redir =>buflist
@@ -31,6 +31,7 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 nnoremap _ :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap <leader>l :call ToggleList("Quickfix List", 'c')<CR>
 
 nmap <leader>] :tjump /
 set wildignore=*.swp,*.bak
@@ -39,12 +40,13 @@ set wildignore+=*/env/*,*/dist/*,*/bower_components/*,*/tmp/*,*/jest/*
 set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
 set wildignore+=*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*
-set wildignore+=tags
+set wildignore+=*tags*
 set wildignore+=*.tar.*
 set wildignore+=*.git/*
 set wildignore+=*fonts/*
 set wildignore+=*.ico,*.svg,*.png,*.jpg,*.jpeg
 set wildignore+=*.DS_STORE*
+set wildignore+=*Session.vim*
 
 function! WhatChangedLines ()
   let lines = split(system("git whatchanged --oneline --name-only --since='1 month ago' --author='hawn' --pretty=format:"), "\n")
@@ -66,25 +68,33 @@ command! -nargs=* -complete=customlist,WhatChangedComplete QuicklyWhatChanged ca
 nnoremap <leader>W :QuicklyWhatChanged<space>
 
 function! AnyLines (ArgLead)
-  let lines = GetMatches(BufferLines(), a:ArgLead)
+  let lines = GetMatches(MostRecentlyModifiedLines(a:ArgLead, 5), a:ArgLead)
+  let lines = Dedup(extend(lines, GetMatches(BufferLines(), a:ArgLead)))
   let lines = Dedup(extend(lines, GetMatches(MruLines(), a:ArgLead)))
   let lines = Dedup(extend(lines, GetMatches(WhatChangedLines(), a:ArgLead)))
 
   if len(lines) == 0
-    let lines = extend(lines, FilesLines(a:ArgLead))
+    let lines = extend(lines, FindLines(a:ArgLead))
   endif
   return lines
 endfunction
 
-function! MostRecentlyModifiedLines ()
-  return split(system("find . -type f -print0 | xargs -0 stat -f '%m %N' | grep -v '.git\|node_modules' | sort -rn | head -100 | cut -f2- -d' '"), "\n")
+function! MostRecentlyModifiedLines (ArgLead, Count)
+  let argLead = Maybe(a:ArgLead)
+
+  if argLead =~ '\.\/.*' || argLead =~ '\/.*'
+    " User must have used completion, last argument is probably full path
+    let args = split(argLead, ' ')
+    return [ args[len(args) - 1] ]
+  endif
+
+  return split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -name '*" . argLead . "*' -print0 | xargs -0 ls -t | head -n " . a:Count), "\n")
 endfunction
 function! MostRecentlyModifiedComplete (ArgLead, CmdLine, CursorPos)
-  return ListComplete(MostRecentlyModifiedLines(), a:ArgLead, a:CmdLine, a:CursorPos)
+  return ListComplete(MostRecentlyModifiedLines(Maybe(a:ArgLead), 50), Maybe(a:ArgLead), Maybe(a:CmdLine), a:CursorPos)
 endfunction
 function! MostRecentlyModifiedQuickfixOrGotoFile (arg)
-  call QuickfixOrGotoFile(MostRecentlyModifiedLines(), a:arg)
+  call QuickfixOrGotoFile(MostRecentlyModifiedLines(a:arg, 50), a:arg)
 endfunction
 command! -nargs=* -complete=customlist,MostRecentlyModifiedComplete QuicklyMostRecentlyModified call MostRecentlyModifiedQuickfixOrGotoFile(<q-args>)
-nnoremap <leader>M :QuicklyMostRecentlyModified<space>
-
+nnoremap <leader>m :QuicklyMostRecentlyModified<space>

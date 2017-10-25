@@ -1,20 +1,21 @@
 " { Functions
 " Automatically create directories that don't exist if doing
 " e.g. :e ./path/that/doesnt/exist/bar.js
-function! <SID>AutoMkdir() abort
-  let l:dir = expand('<afile>:p:h')
-  let l:file = expand('<afile>:t')
-  if !isdirectory(l:dir)
-    call mkdir(l:dir, 'p')
-    silent execute 'bw ' . l:dir . '/' . l:file
-    silent execute 'e ' . l:dir . '/' . l:file
-  endif
-endfunction
-augroup AutoMkdir
-  autocmd!
-  autocmd BufWritePre,FileWritePre,BufNewFile *
-        \ call <SID>AutoMkdir()
-augroup END
+" NOTE: Removed for now, as often improper commands could lead to extra directories
+" function! <SID>AutoMkdir() abort
+"   let l:dir = expand('<afile>:p:h')
+"   let l:file = expand('<afile>:t')
+"   if !isdirectory(l:dir)
+"     call mkdir(l:dir, 'p')
+"     silent execute 'bw ' . l:dir . '/' . l:file
+"     silent execute 'e ' . l:dir . '/' . l:file
+"   endif
+" endfunction
+" augroup AutoMkdir
+"   autocmd!
+"   autocmd BufWritePre,FileWritePre,BufNewFile *
+"         \ call <SID>AutoMkdir()
+" augroup END
 
 function! StripTrailingWhitespace ()
   " Don't strip on these filetypes
@@ -68,4 +69,3 @@ command! ZoomToggle call s:ZoomToggle()
 " nnoremap <silent> <C-A> :ZoomToggle<CR>
 "
 command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
-

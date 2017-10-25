@@ -127,6 +127,7 @@ nmap <leader>h :sp<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>
 nmap <leader>x A // ZZZZ<ESC>0
+nmap <leader><leader>x :Grep "ZZZZ"<CR>
 
 " Switch to previous file
 map <leader><tab> <c-^>
@@ -146,7 +147,7 @@ nmap <leader>9 :set foldlevel=999<CR>
 " { Visual Mode
 vmap I :norm i
 vmap A :norm A
-vmap <enter> :norm<space>
+" vmap <enter> :norm<space>
 vmap <bar> :g/
 vnoremap <c-p> :<c-p>
 " }
@@ -181,10 +182,14 @@ endfunction
 " nnoremap <silent> <c-u> :call SmoothScroll('k', 1)<CR>
 " nnoremap <silent> J :call SmoothScroll('j', 10)<CR>
 " nnoremap <silent> K :call SmoothScroll('k', 10)<CR>
-nnoremap <silent> J 2j
-nnoremap <silent> K 2k
-vnoremap J 2j
-vnoremap K 2k
+" nnoremap <silent> J 7j
+" nnoremap <silent> K 7k
+nnoremap <silent> J }
+nnoremap <silent> K {
+" vnoremap J 2j
+" vnoremap K 2k
+vnoremap J }
+vnoremap K {
 
 " -----------------------------------------------------------------------------------------
 " H / L - Navigation in buffer
@@ -203,12 +208,12 @@ function! GoToNextFunc()
   echohl ModeMsg
   call search('^[ ]\{0,2\}[#a-zA-Z].*\({\|(\)$', 'W')
 endfun
-" map H [{
-" map L ]}
+map H [{
+map L ]}
 " map <silent> H :call GoToFuncStart()<CR>
 " map <silent> L :call GoToNextFunc()<CR>
-map <silent> H 0?^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
-map <silent> L $/^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
+" map <silent> H 0?^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
+" map <silent> L $/^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
 augroup h_and_l
   autocmd!
   autocmd BufEnter *.vimrc nnoremap <buffer> H {
@@ -259,22 +264,21 @@ xnoremap > >gv
 
 " gf on any variable in the file that was imported (at least in ES6)
 " Also, use gF by default, which allows jumping to line number e.g. filename.js:180
-nnoremap gf gF
-augroup gotofile
-  autocmd!
-  autocmd FileType javascript,javascript.jsx nnoremap <buffer> <silent> gf :norm "/yiw<CR>:norm gd<CR>:norm vi"gF<CR>:norm ggn<CR>:norm 0<CR>:nohls<CR>
-augroup END
-" GP - Go To Preview, GF the file in a split window
-nmap gp :split<CR>gf
+" nnoremap gf gF
+" augroup gotofile
+"   autocmd!
+"   autocmd FileType javascript,javascript.jsx nnoremap <buffer> <silent> gf :norm "/yiw<CR>:norm gd<CR>:norm vi"gF<CR>:norm ggn<CR>:norm 0<CR>:nohls<CR>
+" augroup END
+" nmap gp :split<CR>gf
 
 " Rename with search
 nnoremap c* *Ncgn
 nnoremap c# #NcgN
 
-augroup enterbehavior
-  autocmd!
-  autocmd BufWinEnter,WinEnter *{.js} nmap <buffer> <enter> :'<,'>norm<space>
-augroup END
+" augroup enterbehavior
+"   autocmd!
+"   autocmd BufWinEnter,WinEnter *{.js} nmap <buffer> <enter> :'<,'>norm<space>
+" augroup END
 
 " When doing commands, always scroll through history matching current text
 cmap <c-p> <up>
@@ -297,8 +301,8 @@ nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 
 " Don't skip wrapped lines
-" nnoremap j gj
-" nnoremap k gk
+nnoremap j gj
+nnoremap k gk
 
 " Y should copy to end of line, not full line, same as D
 noremap Y y$
@@ -318,6 +322,10 @@ nmap [l :lprev<CR>
 nmap ]l :lnext<CR>
 nmap [f -k<CR>
 nmap ]f -j<CR>
+nmap [ow :set wrap<CR>
+nmap ]ow :set nowrap<CR>
+nmap [on :set number relativenumber<CR>
+nmap ]on :set nonumber norelativenumber<CR>:GitGutterDisable<CR>
 
 " Maximize pane
 nmap <leader>z <bar>_
@@ -326,7 +334,7 @@ nmap <leader>= =
 
 nmap <leader>; g;999g,
 
-map <leader>m :20messages<CR>
+map <leader><leader>m :20messages<CR>
 
 noremap gg gg0
 noremap G G0

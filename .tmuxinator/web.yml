@@ -49,7 +49,11 @@ windows:
         # - chokidar '**/*test.js' --silent --initial --ignore "*.tmp*" -c 'npm run build; and env NODE_ENV=qa npm start'
         - forever --sourceDir /Users/shawn.axsom/dev/ambyint/packages/api -c "env NODE_ENV=qa npm start" /
         - chokidar '**/*test.js' --silent --ignore "*.tmp*" -c 'npm run build-js'
-
+  - testharness:
+      root: ~/dev/ambyint/packages/test-harness
+      panes:
+        - nvim
+        - env NODE_ENV=qa PORT=1200 node server.js
 
   # - uiV2:
   #     root: ~/dev/ambyint/packages/ambyint.ui

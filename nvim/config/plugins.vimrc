@@ -33,15 +33,12 @@ endfunction
 function! InsertBookmarks()
   " execute "norm gg:read ~/dotfiles/nvim/bookmarks"
   execute "norm mZ"
-
   execute "norm ggI~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   execute "norm I" . substitute(Relpath(expand("%:p")), '/', ' > ', 'g') . ""
   " execute "norm I> " . substitute(substitute(fnamemodify(expand("%"), ":~:."), '/', '', ''), '/', ' > ', 'g') . ""
   execute "norm I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-
   " execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
   call feedkeys("")
-
   " execute "norm 2\<c-o>0"
   execute "norm 1\<c-o>0"
 endfunction
@@ -57,7 +54,6 @@ augroup dirvish
   autocmd FileType dirvish nnoremap <buffer> dd :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
   autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
   autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
-
   " Enable :Gstatus and friends.
   autocmd FileType dirvish call fugitive#detect(@%)
   " autocmd FileType dirvish call InsertBookmarks()
@@ -137,7 +133,6 @@ function! VimuxRunFromClipboard()
   let clipboardText = substitute(clipboardText, "\n", "", "g")
   let clipboardText = substitute(clipboardText, "\r", "", "g")
   let clipboardText = substitute(clipboardText, "^@", "", "g")
-
   let clipboardText = substitute(clipboardText, "http://", "", "")
   let command = ':!' . clipboardText
   execute command
@@ -152,7 +147,7 @@ map ,z :VimuxZoomRunner<CR>
 " { vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
 Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_disable_when_zoomed = 0
 let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
@@ -208,53 +203,40 @@ let g:deoplete#omni#functions.javascript = [
 \]
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 let g:deoplete#sources#ternjs#timeout = 1
-
 " Whether to include the types of the completions in the result data. Default: 0
 let g:deoplete#sources#ternjs#types = 1
-
 " Whether to include the distance (in scopes for variables, in prototypes for
 " properties) between the completions and the origin position in the result
 " data. Default: 0
 let g:deoplete#sources#ternjs#depths = 1
-
 " Whether to include documentation strings (if found) in the result data.
 " Default: 0
 let g:deoplete#sources#ternjs#docs = 1
-
 " When on, only completions that match the current word at the given point will
 " be returned. Turn this off to get all results, so that you can filter on the
 " client side. Default: 1
 let g:deoplete#sources#ternjs#filter = 0
-
 " Whether to use a case-insensitive compare between the current word and
 " potential completions. Default 0
 let g:deoplete#sources#ternjs#case_insensitive = 1
-
 " When completing a property and no completions are found, Tern will use some
 " heuristics to try and return some properties anyway. Set this to 0 to
 " turn that off. Default: 1
 let g:deoplete#sources#ternjs#guess = 0
-
 " Determines whether the result set will be sorted. Default: 1
 let g:deoplete#sources#ternjs#sort = 0
-
 " When disabled, only the text before the given position is considered part of
 " the word. When enabled (the default), the whole variable name that the cursor
 " is on will be included. Default: 1
 let g:deoplete#sources#ternjs#expand_word_forward = 0
-
 " Whether to ignore the properties of Object.prototype unless they have been
 " spelled out by at least to characters. Default: 1
 let g:deoplete#sources#ternjs#omit_object_prototype = 0
-
 " Whether to include JavaScript keywords when completing something that is not
 " a property. Default: 0
 let g:deoplete#sources#ternjs#include_keywords = 1
-
 " If completions should be returned when inside a literal. Default: 1
 let g:deoplete#sources#ternjs#in_literal = 0
-
-
 "Add extra filetypes
 let g:deoplete#sources#ternjs#filetypes = [
                 \ 'jsx',
@@ -485,7 +467,7 @@ let g:neoformat_verbose = 0
 nmap <silent> = :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
 augroup neoformat
   autocmd!
-  autocmd BufWritePost *.js Neoformat prettier | ALELint
+  autocmd BufWritePost **/web/**/*.js Neoformat prettier | ALELint
 augroup END
 let g:neoformat_try_formatprg = 1
 let g:neoformat_basic_format_align = 1
@@ -521,6 +503,23 @@ Plug 'nelstrom/vim-visual-star-search'
 " { vim-lastplace
 " Open files at last closed position
 Plug 'farmergreg/vim-lastplace'
+" }
+" { djoshea/vim-autoread
+" Automatically update buffers when changed externally
+" Seems to work better than the built-in capabilities
+Plug 'djoshea/vim-autoread'
+" }
+" { vim-qf
+" Enhancements to the Quickfix window
+" Better behavior, like closing Vim if quickfix is last window
+" :Keep or :Reject to filter quickfix
+" :Dolines or :Dofiles to perform :cdo/:ldo on lines or just the files
+Plug 'romainl/vim-qf'
+augroup vim-qf
+  autocmd!
+  autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>
+  autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>
+augroup END
 " }
 
 " -----------------------------------------------------------------------------------------
@@ -609,7 +608,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-colorscheme-switcher'
 noremap <F9> :RandomColorScheme<CR>:colo<CR>
-noremap <leader>r :RandomColorScheme<CR>:colo<CR>
+noremap <leader><leader>r :RandomColorScheme<CR>:colo<CR>
 " }
 " { matchmaker
 " Highlight word under cursor
@@ -660,124 +659,8 @@ let g:fzf_colors =
 " nnoremap <c-b> :Buffers<CR>
 " nnoremap <leader>b :Buffers<CR>
 " }
-
-" -----------------------------------------------------------------------------------------
-" 4 - Could do without
-" -----------------------------------------------------------------------------------------
-" { Gundo
-" Use :Gundo to time travel undo history
-Plug 'sjl/gundo.vim'
-nmap <leader>u :GundoToggle<CR>
-" }
-" { Tabular
-" Uses :Tabularize /character(s)
-Plug 'godlygeek/tabular'
-vmap gt :Tabularize /
-" }
-" { javascript-libraries-syntax
-" Adds some minor extra syntax highlighting for certain libraries
-" Seems pretty minor, like I noticed React in React.Component was highlighted
-Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'lodash,react,flux,d3'
-" }
-" { Dracula (colorscheme)
-Plug 'dracula/vim'
-" }
-
-" -----------------------------------------------------------------------------------------
-" 5 - New / Evaluating
-" -----------------------------------------------------------------------------------------
-" { kana/vim-textobj-user
-Plug 'kana/vim-textobj-user'
-" }
-" { BufSurf
-" Buffer history navigation
-" Plug 'ton/vim-bufsurf'
-" nmap <silent> H :BufSurfBack<CR>
-" nmap <silent> L :BufSurfForward<CR>
-" }
-" { vim-renamer
-" Rename and move files and folders in batch as plain text
-" :Renamer
-Plug 'qpkorr/vim-renamer'
-nmap <leader><leader>r :Renamer<CR>
-" }
-" { Vim-Rooter
-" Change directory to project root if you are in a subfolder
-Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['app.js']
-let g:rooter_silent_chdir = 1
-" }
-" { thameera/vimv
-" Alternative to vim-renamer
-Plug 'thameera/vimv'
-" }
-" { Vim-Test
-" Plug 'janko-m/vim-test'
-" TODO: They are going to be fixing the issue with not finding Jest in
-"       package.json
-" nmap <silent> ,t :TestFile<CR>
-" " tnoremap <Leader><ESC> <C-\><C-n>
-" let g:test#runners = {'javascript': ['jest']}
-" let g:test#javascript#karma#file_pattern = 'jest'
-" let g:test#javascript#jest#file_pattern = '.test.js$'
-" let g:test#javascript#jest#executable = 'npm test'
-" let g:test#strategy = "neovim"
-" " let test#strategy = "neoterm"
-" " let test#strategy = "dispatch"
-" let test#javascript#jest#options = { 'suite': '--bail', }
-
-" }
-" { BufExplorer
-nmap <leader><leader>l :BufExplorer<CR>gg4j
-Plug 'jlanzarotta/bufexplorer'
-let g:bufExplorerDisableDefaultKeyMapping = 1
-let g:bufExplorerSortBy='fullpath'
-" }
-" { djoshea/vim-autoread
-Plug 'djoshea/vim-autoread'
-" }
-" { edkolev/tmuxline.vim
-" Use your Airline theme automatically in Tmux
-Plug 'edkolev/tmuxline.vim'
-" }
-" { yegappan/mru
-" Plug 'yegappan/mru'
-" nmap <leader><leader>p :MRU<CR>
-" }
-" { plasticboy/vim-markdown
-" Plug 'plasticboy/vim-markdown'
-" let g:vim_markdown_folding_level = 2
-" let g:vim_markdown_folding_disabled = 0
-" let g:vim_markdown_new_list_item_indent = 2
-" let g:vim_markdown_no_default_key_mappings = 1
-" }
-" " { vimwiki/vimwiki
-" Plug 'vimwiki/vimwiki'
-" let g:vimwiki_map_prefix = '<Leader>e'
-" let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/'}]
-
-" augroup vimwiki
-"   autocmd!
-"   autocmd BufLeave   *.wiki silent w
-" augroup END
-" " }
-" { vim-qf
-" Enhancements to the Quickfix window
-" Better behavior, like closing Vim if quickfix is last window
-" :Keep or :Reject to filter quickfix
-" :Dolines or :Dofiles to perform :cdo/:ldo on lines or just the files
-Plug 'romainl/vim-qf'
-" }
-" { vim-qlist
-" :help include-search
-" [I will search for the word under cursor in both the current file and the
-" included files.
-" :Ilist - Add word under cursor to quickfix
-" [I - Same thing
-Plug 'romainl/vim-qlist'
-" Find ES6 import syntax
-set include=from[\ ]
+" { Nova colorscheme
+Plug 'zanglg/nova.vim'
 " }
 " { embear/vim-localvimrc
 " Put a .lvimrc file in a project to have project specific settings
@@ -796,31 +679,62 @@ augroup localvimrc
   autocmd BufWinEnter *      silent LocalVimRC
 augroup END
 " }
-" { yuttie/comfortable-motion.vim
-" Plug 'yuttie/comfortable-motion.vim'
-" " let g:comfortable_motion_no_default_key_mappings = 1
-" nnoremap <silent> J :call comfortable_motion#flick(100)<CR>
-" nnoremap <silent> K :call comfortable_motion#flick(-100)<CR>
-" " let g:comfortable_motion_friction = 150.0
-" " let g:comfortable_motion_air_drag = 3.0
-" " let g:comfortable_motion_friction = 100.0
-" " let g:comfortable_motion_air_drag = 2.0
+
+" -----------------------------------------------------------------------------------------
+" 4 - Could do without
+" -----------------------------------------------------------------------------------------
+" { Gundo
+" Use :Gundo to time travel undo history
+Plug 'sjl/gundo.vim'
+nmap <leader>u :GundoToggle<CR>
 " }
-" { terryma/vim-smooth-scroll
-" Plug 'terryma/vim-smooth-scroll'
-" nnoremap <silent> J :call smooth_scroll#down(&scroll*1/2, 50, 1)<CR>
-" nnoremap <silent> K :call smooth_scroll#up(&scroll*1/2, 50, 1)<CR>
+" { Tabular
+" Uses :Tabularize /character(s)
+Plug 'godlygeek/tabular'
+vmap gt :Tabularize /
 " }
-" { blueyed/vim-diminactive
-" Dim background color of inactive panes
-" Uses ColorColumn for highlighting color by default
-" Plug 'blueyed/vim-diminactive'
+" { kana/vim-textobj-user
+Plug 'kana/vim-textobj-user'
 " }
-" { ap/vim-buftabline
-" Plug 'ap/vim-buftabline'
+
+" -----------------------------------------------------------------------------------------
+" 5 - New / Evaluating
+" -----------------------------------------------------------------------------------------
+" { vim-renamer
+" Rename and move files and folders in batch as plain text
+" :Renamer
+Plug 'qpkorr/vim-renamer'
+nmap <leader><leader>r :Renamer<CR>
 " }
-" { Nova colorscheme
-Plug 'zanglg/nova.vim'
+" { Vim-Rooter
+" " Change directory to project root if you are in a subfolder
+" Plug 'airblade/vim-rooter'
+" let g:rooter_patterns = ['app.js']
+" let g:rooter_silent_chdir = 1
+" }
+" { thameera/vimv
+" Alternative to vim-renamer
+Plug 'thameera/vimv'
+" }
+" " { BufExplorer
+" nmap <leader><leader>l :BufExplorer<CR>gg4j
+" Plug 'jlanzarotta/bufexplorer'
+" let g:bufExplorerDisableDefaultKeyMapping = 1
+" let g:bufExplorerSortBy='fullpath'
+" " }
+" { edkolev/tmuxline.vim
+" Use your Airline theme automatically in Tmux
+Plug 'edkolev/tmuxline.vim'
+" }
+" { vim-qlist
+" :help include-search
+" [I will search for the word under cursor in both the current file and the
+" included files.
+" :Ilist - Add word under cursor to quickfix
+" [I - Same thing
+Plug 'romainl/vim-qlist'
+" Find ES6 import syntax
+set include=from[\ ]
 " }
 " { Valloric/MatchTagAlways
 " Similar to matchmaker, but for highlighting surrounding tag
@@ -834,6 +748,15 @@ let g:mta_filetypes = {
   \ 'xml' : 1,
   \ 'jinja' : 1,
   \ }
+" }
+" { tpope/vim-rsi
+" Use command line mappings in insert mode like:
+" <c-a> and <c-e> to go to start and end of line
+Plug 'tpope/vim-rsi'
+" }
+" { chaoren/vim-wordmotion
+" Use camelCase etc for word motions like w/b/e
+Plug 'chaoren/vim-wordmotion'
 " }
 
 call plug#end()

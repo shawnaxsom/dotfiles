@@ -60,6 +60,20 @@ end
 alias git='hub'
 
 
+function dps
+  docker ps $argv | awk -F '[ ][ ]+' '{ print $1 "%" $2 "%" $3 }' | column -s "%" -t
+end
+
+function dlog
+  docker ps | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
+end
+function dloga
+  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
+end
+# function dlog
+#   awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
+# end
+
 alias gP='git push'
 alias ga='git add .'
 alias gb='git branch'
@@ -67,6 +81,7 @@ alias gc-='git checkout -'
 alias gc='git commit'
 alias gcm='git checkout master'
 alias gd='git diff'
+alias gdm='git diff master..'
 alias gf='git fetch'
 alias gh='git browse'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit '
@@ -75,6 +90,7 @@ alias gmm='git fetch; git merge origin/master'
 alias gp='git pull; and echo; and git push; and echo; and git status; and echo'
 alias gpr='hub pull-request --edit -F ./.github/PULL_REQUEST_TEMPLATE.md'
 alias gs='git status'
+
 alias vs='vim -S'
 alias g='grep'
 alias gv='grep -v'
@@ -86,6 +102,8 @@ alias t='tail'
 alias r='ranger'
 alias p='pwd'
 alias x='exit'
+alias vp='/usr/local/bin/nvim -c "set ft=man modifiable"  -'
+alias page='/usr/local/bin/nvim -c "set ft=man modifiable"  -'
 
 # alias f='find . -name'
 

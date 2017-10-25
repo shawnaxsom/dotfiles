@@ -13,10 +13,10 @@ source $HOME/.config/nvim/config/terminal.vimrc
 source $HOME/.config/nvim/config/abbreviations.vimrc
 source $HOME/.config/nvim/config/textobjects.vimrc
 source $HOME/.config/nvim/config/lint.vimrc
-
-" Mappings to edit certain files
 source $HOME/.config/nvim/config/notes.vimrc
 source $HOME/.config/nvim/config/edits.vimrc
+source $HOME/.config/nvim/config/refactorings.vimrc
+source $HOME/.config/nvim/config/packagejson.vimrc
 
 augroup config
   autocmd!

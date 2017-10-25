@@ -25,12 +25,12 @@ function! ShowFuncName()
 endfun
 map <leader>X :echo ShowFuncName()<CR>
 
-hi StatusLineFile guibg=#9bcb8b guifg=#000000
-hi StatusLineFileInactive guibg=#7bab9b guifg=#504000
-hi StatusLineExtension guibg=#000000
-hi StatusLineFolder guibg=#333333
-hi StatusLineActive guibg=#444444
-hi StatusLineInactive guifg=#f88888 guibg=#101a1f
+hi StatusLineFile guibg=#9bfb9b guifg=#000000
+hi StatusLineFileInactive guibg=#7bbb9b guifg=#504000
+hi StatusLineExtensionActive guibg=#ffff00 guifg=#555555
+hi StatusLineExtensionInactive guibg=#698a8a guifg=#555555
+hi StatusLineActive guibg=#c9fB99
+hi StatusLineInactive guibg=#888888
 " }
 
 hi User1 term=inverse,bold gui=inverse,bold guifg=#ff0000
@@ -43,19 +43,17 @@ function! SetActiveStatusLine ()
   setlocal statusline+=%1*%m  " Modifications, highlighted with User1 (red)
   setlocal statusline+=%#StatusLineFile# " Change colors
   setlocal statusline+=\ \ %{expand('%:t:r')}
-  setlocal statusline+=\ %#StatusLineExtension# " Change colors
+  setlocal statusline+=\ %#StatusLineExtensionActive# " Change colors
   setlocal statusline+=\ %{expand('%:t:e')}
 
-  setlocal statusline+=\ %#StatusLineFolder# " Change colors
+  setlocal statusline+=\ \ %#StatusLineActive# " Change colors
   setlocal statusline+=\ \ \ %{expand('%:h:h:t')}
   setlocal statusline+=/%{expand('%:h:t')}
   setlocal statusline+=/%{expand('%:t')}
 
-  setlocal statusline+=\ \ %#StatusLineActive# " Change colors
-
   setlocal statusline+=%=        " Switch to the right side
   setlocal statusline+=%<        " Truncate here if too long
-  setlocal statusline+=%{g:git_branch}
+  " setlocal statusline+=%{g:git_branch}
 endfunction
 
 function! SetInactiveStatusLine ()
@@ -65,19 +63,17 @@ function! SetInactiveStatusLine ()
   setlocal statusline+=%1*%m  " Modifications, highlighted with User1 (red)
   setlocal statusline+=%#StatusLineFileInactive# " Change colors
   setlocal statusline+=\ \ %{expand('%:t:r')}
-  setlocal statusline+=\ %#StatusLineExtension# " Change colors
+  setlocal statusline+=\ %#StatusLineExtensionInactive# " Change colors
   setlocal statusline+=\ %{expand('%:t:e')}
 
-  setlocal statusline+=\ %#StatusLineFolder# " Change colors
+  setlocal statusline+=\ \ %#StatusLineInactive#" Change colors
   setlocal statusline+=\ \ \ %{expand('%:h:h:t')}
   setlocal statusline+=/%{expand('%:h:t')}
   setlocal statusline+=/%{expand('%:t')}
 
-  setlocal statusline+=\ \ %#StatusLineInactive#" Change colors
-
   setlocal statusline+=%=        " Switch to the right side
   setlocal statusline+=%<        " Truncate here if too long
-  setlocal statusline+=%{g:git_branch}
+  " setlocal statusline+=%{g:git_branch}
 endfunction
 
 augroup statusline

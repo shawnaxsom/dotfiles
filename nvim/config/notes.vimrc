@@ -19,24 +19,31 @@ let s:checked_todo        = "^[ ]*\\[x\]"
 let s:unchecked_todo        = "^[ ]*\\[ \]"
 let s:todo        = "^[ ]*\\[[ x]\]"
 let s:todo_only   = "^[ ]*\\[[ x]\][ ]*$"
+let s:with_leading_space = "^[ ]\\+"
+
+function! GetLeadingSpace ()
+  let leading_space = substitute(getline("."), "[^ ].*$", "", "")
+  return leading_space
+endfunction
 
 function! InsertAsteriskOrCheck (from_linenr, insert_at_offset, cursor_shift)
   let line = getline(a:from_linenr)
   let to_linenr = a:from_linenr + a:insert_at_offset
   let move_to_line = a:from_linenr + a:cursor_shift
-  if line =~ s:bullet_only || line =~ s:todo_only
+  let leading_space = GetLeadingSpace()
+
+  if line =~ s:with_leading_space && (line =~ s:bullet_only || line =~ s:todo_only)
+    call Dedent()
+  elseif line =~ s:bullet_only || line =~ s:todo_only
     call setline('.', "")
     call cursor(line("."), 1, 0)
   elseif line =~ s:bullet
-    echom "foo"
-    call append(to_linenr, "*")
+    call append(to_linenr, leading_space . "*")
     call cursor(move_to_line, len(getline(move_to_line)) + 1, 1)
   elseif line =~ s:todo
-    echom "bar"
-    call append(to_linenr, "[ ]")
+    call append(to_linenr, leading_space . "[ ]")
     call cursor(move_to_line, len(getline(move_to_line)) + 1, 1)
   else
-    echom "baz"
     call append(a:from_linenr + a:insert_at_offset, "")
     call cursor(move_to_line, 1, 0)
   endif
@@ -71,7 +78,6 @@ function! Backspace ()
   if line =~ s:bullet_only || line =~ s:todo_only
     call DeleteLine()
   else
-    " call feedkeys("=DoBackspace()\<CR>", "n")
     call feedkeys("=DoBackspace()\<CR>", "n")
   endif
 endfunction
@@ -81,6 +87,10 @@ function! CompleteNewBullet ()
 
   if line =~ s:blank_line
     call feedkeys("=\"* \"\<CR>")
+  elseif line =~ s:bullet_only
+    call Indent()
+  elseif line =~ s:todo_only
+    call feedkeys("S=\"* \"\<CR>")
   else
     call feedkeys("=\"*\"\<CR>")
   endif
@@ -91,19 +101,27 @@ function! CompleteNewTodo ()
 
   if line =~ s:blank_line
     call feedkeys("=\"[ ] \"\<CR>")
+  elseif line =~ s:todo_only
+    call Indent()
+  elseif line =~ s:bullet_only
+    call feedkeys("S=\"[ ] \"\<CR>")
   else
     call feedkeys("=\"[ ]\"\<CR>")
   endif
 endfunction
 
+function! Chomp(string)
+  return substitute(a:string, '[ ]\+$', '', '')
+endfunction
+
 function! Indent ()
   call setline('.', "  " . getline("."))
-  call cursor(line("."), len(getline(".")) + 1, 1)
+  call cursor(line("."), len(Chomp(getline("."))) + 1, 1)
 endfunction
 
 function! Dedent ()
   call setline('.', substitute(getline("."), "^  ", "", ""))
-  call cursor(line("."), len(getline(".")) + 1, 1)
+  call cursor(line("."), len(Chomp(getline("."))) + 1, 1)
 endfunction
 
 function! CheckTodo ()
@@ -123,8 +141,6 @@ function! ClearTodos ()
 
   call search("\\[x\\]", "c")
   let line = getline(".")
-
-  echom line
 
   while line =~ s:checked_todo
     delete
@@ -163,8 +179,8 @@ augroup markdown
   autocmd BufEnter   *.md nnoremap <buffer> ]] /^\[ \]<CR>:nohls<CR>
   " autocmd BufEnter   *.md nnoremap <buffer> K ?^\[ \]<CR>:nohls<CR>
   " autocmd BufEnter   *.md nnoremap <buffer> J /^\[ \]<CR>:nohls<CR>
-  autocmd BufEnter   *.md nnoremap <silent><buffer> K :silent! ?^#<CR>:silent nohls<CR>
-  autocmd BufEnter   *.md nnoremap <silent><buffer> J :silent! /^#<CR>:silent nohls<CR>
+  " autocmd BufEnter   *.md nnoremap <silent><buffer> K :silent! ?^#<CR>:silent nohls<CR>
+  " autocmd BufEnter   *.md nnoremap <silent><buffer> J :silent! /^#<CR>:silent nohls<CR>
 
   autocmd BufEnter   *.md xnoremap <buffer> <s-tab> :s/^  //<CR>:set nohls<CR>gv
   autocmd BufEnter   *.md xnoremap <buffer> <tab> :norm! I<tab><CR>gv

@@ -42,7 +42,7 @@ nmap <leader>.8 "hyiw:Grep <c-r>h %:p:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT
 nmap <leader>..8 "hyiw:Grep <c-r>h %:p:h:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 nmap <leader><leader>. :Grep "" %:p:h:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 
-nnoremap <silent> gr :call GrepAndJumpIfSingleResult("import.*/" . expand("%:t:r"), 1, 1)<CR>
+nnoremap <silent> gr :call GrepAndJumpIfSingleResult("import.*/" . expand("%:t:r") . '"', 1, 1)<CR>
 
 " open the quickfix window automatically
 " augroup automaticquickfix

@@ -15,12 +15,16 @@ set undolevels=5000
 set autoread
 " au CursorHold * checktime
 
-" Don't wrap normally
-set nowrap
-
-" If you enable wrap, break on spaces or tabs
+" Wrap
+set wrap
 set linebreak
-set breakat=\ ^I
+" set breakat=\ ^I!@*-+;:,./?(
+set breakat=\ ^I!@*+;:,./?(
+" set showbreak=>>>\|
+set showbreak=~\|
+set breakindent
+set breakindentopt=shift:8
+set listchars+=precedes:<,extends:>
 
 " Don't change directory to current buffer.
 " Some plugins don't work with this enabled, like vimfiler or vimshell
@@ -64,8 +68,9 @@ set tabstop=2 shiftwidth=2 shiftround expandtab autoindent smarttab smartindent
 set backspace=indent,eol,start
 
 " Keep cursor centered -- this is choppy if scrolling multiple splits
-set scrolloff=12
-set sidescrolloff=5
+set scrolloff=999
+set sidescrolloff=999
+set sidescroll=10
 
 " Use Bash shell syntax for :! (even if you are in Fish or ZSH)
 set shell=bash
@@ -110,9 +115,9 @@ set history=1000
 set nojoinspaces
 
 " Line numbers
-set number
-set relativenumber
-set numberwidth=6
+set nonumber
+set norelativenumber
+set numberwidth=4
 
 " Wildmenu completion mentu when pressing tab
 set wildcharm=<TAB>
@@ -127,7 +132,7 @@ set incsearch
 set hlsearch
 set noignorecase              " affects both searching and find/replace
 set smartcase
-set nowrapscan                  " Wrap to top of file after searching through full file
+set wrapscan                  " Wrap to top of file after searching through full file
 
 " Fold settings
 set foldmethod=indent
@@ -152,6 +157,7 @@ set smartindent
 " https://stackoverflow.com/questions/3554719/find-a-file-via-recursive-directory-search-in-vim
 " NOTE: Add additional paths in .vimrc
 set path=.,/usr/include,,
+set path+=src
 
 " Allow gf to find JavaScript file references without extension
 set suffixesadd=.js,.jsx

@@ -7,7 +7,6 @@
 "  }
 "})'
 
-
 function! ExecuteMongoQuery ()
   let save_pos = getpos(".")
 
