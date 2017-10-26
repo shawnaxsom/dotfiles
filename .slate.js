@@ -75,6 +75,7 @@ bindLayout("q:alt", ["iTerm2"]);
 bindLayout("w:alt", ["Google Chrome"]);
 bindLayout("e:alt", ["Slack"]);
 bindLayout("r:alt", ["Robo 3T"]);
+bindLayout("t:alt", ["Trello"]);
 
 // slate.bind("q:alt", push("top-left"));
 // slate.bind("w:alt", push("top", "3"));

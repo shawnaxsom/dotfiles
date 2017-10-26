@@ -49,9 +49,9 @@ augroup dirvish
   autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
   autocmd FileType dirvish nnoremap <buffer> e :e %
   autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
-  autocmd FileType dirvish nnoremap <buffer> mk :Mkdir %
+  autocmd FileType dirvish nnoremap <buffer> mk :execute "Mkdir %" . input("Mkdir: Folder Name? ")<BAR>normal R<CR>
   autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
-  autocmd FileType dirvish nnoremap <buffer> dd :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
+  autocmd FileType dirvish nnoremap <silent><buffer><expr> dd (confirm("Are you sure?", "&Yes\n&No") == 1 ? ":!rm -rf " . expand('<cWORD>') . "<CR>:normal R<CR>" : "")
   autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
   autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
   autocmd FileType dirvish nnoremap <buffer> ~ :e $HOME<CR>
