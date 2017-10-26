@@ -6,7 +6,7 @@ config nudgePercentOf screenSize
 config resizePercentOf screenSize
 config layoutFocusOnActivate true
 
-bind r:alt relaunch
+bind r:shift;alt relaunch
 
 # bind a:alt push left bar-resize:screenSizeX/2
 # bind d:alt push right bar-resize:screenSizeX/2

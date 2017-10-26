@@ -38,10 +38,10 @@ augroup listchars
 augroup END
 
 " Keep windows at a good size
-set winheight=10
-set winwidth=90
-set winminwidth=25
-set winminheight=3
+set winheight=30
+set winwidth=30
+" set winminwidth=5
+" set winminheight=3
 " set winheight=3
 " set winwidth=90
 " set winminwidth=25

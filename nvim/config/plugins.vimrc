@@ -146,6 +146,14 @@ map ,c :call VimuxInterruptRunner()<CR>
 map ,f :Dispatch npm test -- --tests %
 map ,b :Dispatch npm run build<CR>
 map ,z :VimuxZoomRunner<CR>
+augroup vimux
+  autocmd!
+  autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+  autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+  autocmd BufEnter */api/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
+  autocmd BufEnter */optimization/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
+" map ,t :Dispatch npm test<CR>
+augroup END
 " }
 " { vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.

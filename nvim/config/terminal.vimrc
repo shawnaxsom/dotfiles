@@ -10,13 +10,14 @@ nmap ,b :sp term://bash %:p<CR>
 nmap ,r :sp term://npm start<CR>
 nmap ,t :vsp term://npm run test<CR>H:startinsert<CR>
 map ,q :sp term://env NODE_ENV=qa npm start<CR>
-augroup vimux
-  autocmd!
-  autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
-  autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
-  autocmd BufEnter */api/* map <buffer> ,t :sp term://npm test -- --tests " . expand("%"))<CR>
-" map ,t :Dispatch npm test<CR>
-augroup END
+" augroup vimux
+"   autocmd!
+"   autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+"   autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+"   autocmd BufEnter */api/* map <buffer> ,t :sp term://npm test -- --tests " . expand("%"))<CR>
+"   " autocmd BufEnter */optimization/* map <buffer> ,t :execute 'sp term://npm test -- --tests "' . expand("%") . '"'<CR>startinsert<CR>
+" " map ,t :Dispatch npm test<CR>
+" augroup END
 " nmap <leader>O :call LetMeDuckThatForYou(&filetype . ' ' . '<c-r><c-w>')<CR>
 " nmap <leader>o :call LetMeDuckThatForYou('')<CR>
 " vmap <leader>o y:call LetMeDuckThatForYou(&filetype . ' ' . @+)<CR>

@@ -31,14 +31,14 @@ const push = (direction, divisor = "2") => {
 };
 
 
-const basicLayout = (name, apps) => {
+const basicLayout = (name, apps, before = {}) => {
   let layoutLocationOrder = ["left", "top-right", "bottom-right"];
   if (apps.length >= 4) {
     layoutLocationOrder = ["top-left", "bottom-left", "top-right", "bottom-right"];
   }
 
   const layout = {
-    // _before_: {operations: push("bottom-right")},
+    _before_: before,
     _after_: {operations: apps.filter(app => app).map(app => focus(app)).reverse()},
   };
 
@@ -66,19 +66,22 @@ const basicLayout = (name, apps) => {
   return slate.layout(name, layout);
 };
 
-const bindLayout = (key, windows) => slate.bind(key, slate.operation("layout", { name: basicLayout(key, windows) }));
+const bindLayout = (key, windows, before) => slate.bind(key, slate.operation("layout", { name: basicLayout(key, windows, before) }));
 bindLayout("`:alt", ["iTerm2"]);
 bindLayout("1:alt", ["iTerm2", "Google Chrome"]);
-bindLayout("2:alt", ["iTerm2", "Google Chrome", null]);
-bindLayout("3:alt", ["iTerm2", "Google Chrome", "Slack"]);
-bindLayout("4:alt", ["iTerm2", "Google Chrome", "Slack", "Trello"]);
+bindLayout("2:alt", ["iTerm2", "Google Chrome", null], {operations: push("bottom-right")});
+bindLayout("3:alt", ["iTerm2", "Google Chrome", "Slack", "Robo 3T"]);
+bindLayout("q:alt", ["iTerm2"]);
+bindLayout("w:alt", ["Google Chrome"]);
+bindLayout("e:alt", ["Slack"]);
+bindLayout("r:alt", ["Robo 3T"]);
 
-slate.bind("q:alt", push("top-left"));
-slate.bind("w:alt", push("top", "3"));
-slate.bind("e:alt", push("top-right"));
-slate.bind("a:alt", push("left"));
-slate.bind("s:alt", maximize);
-slate.bind("d:alt", push("right"));
-slate.bind("z:alt", push("bottom-left"));
-slate.bind("x:alt", push("bottom", "3"));
+// slate.bind("q:alt", push("top-left"));
+// slate.bind("w:alt", push("top", "3"));
+// slate.bind("e:alt", push("top-right"));
+// slate.bind("a:alt", push("left"));
+// slate.bind("s:alt", maximize);
+// slate.bind("d:alt", push("right"));
+// slate.bind("z:alt", push("bottom-left"));
+// slate.bind("x:alt", push("bottom", "3"));
 slate.bind("c:alt", push("bottom-right"));
