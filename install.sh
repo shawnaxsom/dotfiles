@@ -63,6 +63,7 @@ create_symlink   .offlineimaprc            ~/.offlineimaprc
 create_symlink   .screenrc                 ~/.screenrc
 create_symlink   .signature                ~/.signature
 create_symlink   .slate                    ~/.slate
+create_symlink   .slate.js                 ~/.slate.js
 create_symlink   .surf                     ~/.surf
 create_symlink   .tern-config              ~/.tern-config
 create_symlink   .tmux.conf                ~/.tmux.conf

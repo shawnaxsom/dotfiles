@@ -51,43 +51,41 @@ bind r:alt relaunch
 # Window Hints
 # bind esc:cmd hint
 
-alias maximize        push right bar-resize:screenSizeX
-alias pushRight       push right bar-resize:screenSizeX/2
-alias pushLeft        push left bar-resize:screenSizeX/2
-alias pushUp          push up bar-resize:screenSizeY/2
-alias pushDown        push down bar-resize:screenSizeY/2
-alias pushTopRight    corner top-right resize:screenSizeX/2;screenSizeY/2
-alias pushTopLeft     corner top-left resize:screenSizeX/2;screenSizeY/2
-alias pushBottomRight corner bottom-right resize:screenSizeX/2;screenSizeY/2
-alias pushBottomLeft  corner bottom-left resize:screenSizeX/2;screenSizeY/2
+# --------------------------------------------------------------------
 
-layout code 'iTerm2' ${pushLeft}
-layout code 'Google Chrome' ${pushRight}
-
-layout slack 'Slack' ${maximize}
-
-layout mongo 'iTerm2' ${pushLeft}
-layout mongo 'Google Chrome' ${pushTopRight}
-layout mongo 'Robo 3T' ${pushBottomRight}
-
-layout trello 'Trello' ${pushLeft}
-layout trello 'Google Chrome' ${pushRight}
-
-bind `:alt ${maximize}
-bind 1:alt layout code
-bind 2:alt layout slack
-bind 3:alt layout mongo
-bind 4:alt layout trello
-
-
-
-# Push Bindings
-bind s:alt ${maximize}
-bind d:alt ${pushRight}
-bind a:alt ${pushLeft}
-bind w:alt ${pushUp}
-bind x:alt ${pushDown}
-bind e:alt ${pushTopRight}
-bind q:alt ${pushTopLeft}
-bind c:alt ${pushBottomRight}
-bind z:alt ${pushBottomLeft}
+# alias maximize        push left bar-resize:screenSizeX
+# alias pushRight       push right bar-resize:screenSizeX/2
+# alias pushLeft        push left bar-resize:screenSizeX/2
+# alias pushUp          push up bar-resize:screenSizeY/2
+# alias pushDown        push down bar-resize:screenSizeY/2
+# alias pushTopRight    corner top-right resize:screenSizeX/2;screenSizeY/2
+# alias pushTopLeft     corner top-left resize:screenSizeX/2;screenSizeY/2
+# alias pushBottomRight corner bottom-right resize:screenSizeX/2;screenSizeY/2
+# alias pushBottomLeft  corner bottom-left resize:screenSizeX/2;screenSizeY/2
+#
+# layout fullterm 'iTerm2' ${maximize}
+# bind `:alt layout fullterm
+#
+# layout code 'iTerm2' ${pushLeft}
+# layout code 'Google Chrome' ${pushRight}
+# bind 1:alt layout code
+#
+# layout codewithcorneropen 'iTerm2' ${pushLeft}
+# layout codewithcorneropen 'Google Chrome' ${pushTopRight}
+# bind 2:alt layout codewithcorneropen
+#
+# layout chrome 'Google Chrome' ${maximize}
+# bind 3:alt layout chrome
+#
+# layout slack 'Slack' ${maximize}
+# bind 4:alt layout slack
+#
+# bind s:alt ${maximize}
+# bind d:alt ${pushRight}
+# bind a:alt ${pushLeft}
+# bind w:alt ${pushUp}
+# bind x:alt ${pushDown}
+# bind e:alt ${pushTopRight}
+# bind q:alt ${pushTopLeft}
+# bind c:alt ${pushBottomRight}
+# bind z:alt ${pushBottomLeft}

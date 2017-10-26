@@ -54,6 +54,9 @@ augroup dirvish
   autocmd FileType dirvish nnoremap <buffer> dd :call feedkeys(':!rm -rf ' . expand('<cWORD>'))<CR>
   autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
   autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
+  autocmd FileType dirvish nnoremap <buffer> ~ :e $HOME<CR>
+  autocmd FileType dirvish nnoremap <buffer> ` :e $HOME<CR>
+  autocmd FileType dirvish nnoremap <buffer> _ :e .<CR>
   " Enable :Gstatus and friends.
   autocmd FileType dirvish call fugitive#detect(@%)
   " autocmd FileType dirvish call InsertBookmarks()

@@ -170,6 +170,7 @@ augroup markdown
   autocmd BufEnter   *.md inoremap <buffer> * :call CompleteNewBullet()<CR>
   autocmd BufEnter   *.md inoremap <buffer> [ :call CompleteNewTodo()<CR>
   autocmd BufEnter   *.md inoremap <buffer> <c-u> :call DeleteLine()<CR>
+  autocmd BufEnter   *.md inoremap <buffer> <space> :call Space()<CR>
 
   autocmd BufEnter   *.md nnoremap <buffer> O :call InsertAsteriskOrCheck(line('.'), -1, 0)<CR>i
   autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>i

@@ -56,6 +56,9 @@ function! WhatChangedLines ()
   if len(lines) == 0
     let lines = split(system("git whatchanged --oneline --name-only --since='1 year ago' --pretty=format:"), "\n")
   endif
+
+  let lines = WithinPwd(lines)
+  let lines = RelativePath(lines)
   return lines
 endfunction
 function! WhatChangedComplete (ArgLead, CmdLine, CursorPos)
@@ -76,6 +79,9 @@ function! AnyLines (ArgLead)
   if len(lines) == 0
     let lines = extend(lines, FindLines(a:ArgLead))
   endif
+
+  let lines = WithinPwd(lines)
+  let lines = RelativePath(lines)
   return lines
 endfunction
 
@@ -88,7 +94,10 @@ function! MostRecentlyModifiedLines (ArgLead, Count)
     return [ args[len(args) - 1] ]
   endif
 
-  return split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -name '*" . argLead . "*' -print0 | xargs -0 ls -t | head -n " . a:Count), "\n")
+  let lines = split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -name '*" . argLead . "*' -print0 | xargs -0 ls -t | head -n " . a:Count), "\n")
+  let lines = WithinPwd(lines)
+  let lines = RelativePath(lines)
+  return lines
 endfunction
 function! MostRecentlyModifiedComplete (ArgLead, CmdLine, CursorPos)
   return ListComplete(MostRecentlyModifiedLines(Maybe(a:ArgLead), 50), Maybe(a:ArgLead), Maybe(a:CmdLine), a:CursorPos)
