@@ -13,12 +13,12 @@ const maximize = slate.operation("push", {
   style: "bar-resize:screenSizeX"
 });
 
-const push = direction => {
+const push = (direction, divisor = "2") => {
   if (direction.indexOf("-") >= 0) {
     return slate.operation("corner", {
       direction,
-      width: "screenSizeX/2",
-      height: "screenSizeY/2",
+      width: `screenSizeX/${divisor}`,
+      height: `screenSizeY/${divisor}`,
       screen: 0
     });
   }
@@ -26,7 +26,7 @@ const push = direction => {
   return slate.operation("push", {
     screen: "0",
     direction,
-    style: "bar-resize:screenSizeX/2"
+    style: `bar-resize:screenSizeX/${divisor}`
   });
 };
 
@@ -74,16 +74,11 @@ bindLayout("3:alt", ["iTerm2", "Google Chrome", "Slack"]);
 bindLayout("4:alt", ["iTerm2", "Google Chrome", "Slack", "Trello"]);
 
 slate.bind("q:alt", push("top-left"));
-slate.bind("w:alt", push("top"));
+slate.bind("w:alt", push("top", "3"));
 slate.bind("e:alt", push("top-right"));
 slate.bind("a:alt", push("left"));
 slate.bind("s:alt", maximize);
 slate.bind("d:alt", push("right"));
 slate.bind("z:alt", push("bottom-left"));
-slate.bind("x:alt", push("bottom"));
+slate.bind("x:alt", push("bottom", "3"));
 slate.bind("c:alt", push("bottom-right"));
-
-// var switcher = slate.operation("switch");
-// slate.bind("f:alt", switcher);
-var switcher = slate.operation("switch");
-slate.bind("tab:cmd", switcher);
