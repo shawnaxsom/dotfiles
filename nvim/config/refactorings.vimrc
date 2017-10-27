@@ -10,4 +10,5 @@ function! ExtractToFile ()
   normal! "aP
 endfunction
 
-vnoremap <leader>r :<c-u>call ExtractToFile()<CR>
+vnoremap \f :<c-u>call ExtractToFile()<CR>
+nnoremap \m "ayiw?^  [a-zA-Z]kOoa() {}k

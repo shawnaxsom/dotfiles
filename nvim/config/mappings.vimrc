@@ -301,8 +301,8 @@ nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 
 " Don't skip wrapped lines
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
 
 " Y should copy to end of line, not full line, same as D
 noremap Y y$

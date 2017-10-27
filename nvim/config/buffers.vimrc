@@ -47,6 +47,8 @@ set wildignore+=*fonts/*
 set wildignore+=*.ico,*.svg,*.png,*.jpg,*.jpeg
 set wildignore+=*.DS_STORE*
 set wildignore+=*Session.vim*
+set wildignore+=*/build/*
+set wildignore+=*/.tern-port
 
 function! WhatChangedLines ()
   let lines = split(system("git whatchanged --oneline --name-only --since='1 month ago' --author='hawn' --pretty=format:"), "\n")
@@ -94,7 +96,7 @@ function! MostRecentlyModifiedLines (ArgLead, Count)
     return [ args[len(args) - 1] ]
   endif
 
-  let lines = split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -name '*" . argLead . "*' -print0 | xargs -0 ls -t | head -n " . a:Count), "\n")
+  let lines = split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -path '*" . argLead . "*' -print0 | xargs -0 ls -t | head -n " . a:Count), "\n")
   let lines = WithinPwd(lines)
   let lines = RelativePath(lines)
   return lines

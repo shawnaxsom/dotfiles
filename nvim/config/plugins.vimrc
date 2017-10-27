@@ -42,14 +42,20 @@ function! InsertBookmarks()
   " execute "norm 2\<c-o>0"
   execute "norm 1\<c-o>0"
 endfunction
+function! AddExtension (path, defaultExtension)
+  if a:path !~ "\.[a-zA-Z0-9]\+$"
+    return a:path . a:defaultExtension
+  endif
+  return a:path
+endfunction
 augroup dirvish
   autocmd!
   autocmd FileType dirvish nnoremap <buffer> <leader>r :Shdo! mv {} {}<CR>
   autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>
   autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
-  autocmd FileType dirvish nnoremap <buffer> e :e %
+  autocmd FileType dirvish nnoremap <silent><buffer> e :execute "e " . AddExtension(input("Edit: File Name? ", expand('%:p')), ".js")<BAR>normal R<CR>
   autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
-  autocmd FileType dirvish nnoremap <buffer> mk :execute "Mkdir %" . input("Mkdir: Folder Name? ")<BAR>normal R<CR>
+  autocmd FileType dirvish nnoremap <buffer> mk :execute "Mkdir " . input("Mkdir: Folder Name? ", expand('%:p'))<BAR>normal R<CR>
   autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
   autocmd FileType dirvish nnoremap <silent><buffer><expr> dd (confirm("Are you sure?", "&Yes\n&No") == 1 ? ":!rm -rf " . expand('<cWORD>') . "<CR>:normal R<CR>" : "")
   autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
@@ -433,6 +439,7 @@ let g:codi#aliases = {
 Plug 'tpope/vim-commentary'
 nmap   <Plug>CommentaryLine
 vmap   <Plug>Commentary
+vmap gx  `<^i{/* `>$a */}
 " }
 " { vim-better-whitespace
 " Strip trailing whitespace on save

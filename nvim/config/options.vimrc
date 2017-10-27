@@ -21,7 +21,8 @@ set linebreak
 " set breakat=\ ^I!@*-+;:,./?(
 set breakat=\ ^I!@*+;:,./?(
 " set showbreak=>>>\|
-set showbreak=~\|
+" set showbreak=~\|
+set showbreak=\|
 set breakindent
 set breakindentopt=shift:8
 set listchars+=precedes:<,extends:>
@@ -39,13 +40,13 @@ augroup END
 
 " Keep windows at a good size
 set winheight=30
-set winwidth=30
-" set winminwidth=5
-" set winminheight=3
-" set winheight=3
-" set winwidth=90
+set winwidth=300
 " set winminwidth=25
-" set winminheight=3
+" set winminheight=0
+augroup winsizing
+  autocmd!
+  autocmd FileType qf setlocal winminheight=4 winheight=4
+augroup END
 
 " If you open up gVim for whatever reason
 set guioptions-=m  "remove menu bar
@@ -115,8 +116,8 @@ set history=1000
 set nojoinspaces
 
 " Line numbers
-set number
-set relativenumber
+set nonumber
+set norelativenumber
 set numberwidth=4
 
 " Wildmenu completion mentu when pressing tab
