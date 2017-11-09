@@ -133,9 +133,9 @@ set lazyredraw
 " Improve smoothness of redrawing
 set ttyfast
 
-" Send the current mouse codes over when clicking
-" set ttymouse=xterm
-set mouse=a
+" NOTE: Add this to .tmux.conf to be able to scroll still without mouse on:
+" set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+set mouse=
 
 " When closing off brackets, briefly show the matching bracket
 set noshowmatch
