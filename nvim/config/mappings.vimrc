@@ -259,8 +259,8 @@ nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 " Reselect text when changing indentation
-xnoremap < <gv
-xnoremap > >gv
+" xnoremap < <gv
+" xnoremap > >gv
 
 " gf on any variable in the file that was imported (at least in ES6)
 " Also, use gF by default, which allows jumping to line number e.g. filename.js:180
@@ -297,8 +297,8 @@ vnoremap ? ?\c
 vnoremap . :normal .<CR>
 
 " Center screen and open folds when going through search results
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
+nnoremap <silent> n nzzzO
+nnoremap <silent> N NzzzO
 
 " Don't skip wrapped lines
 noremap j gj

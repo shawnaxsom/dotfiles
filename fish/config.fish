@@ -63,6 +63,10 @@ alias git='hub'
 function dps
   docker ps $argv | awk -F '[ ][ ]+' '{ print $1 "%" $2 "%" $3 }' | column -s "%" -t
 end
+function dpsi
+  # Docker PS interactive - return ID to be used in other commands
+  dps $argv | fzf | awk '{ print $1 }'
+end
 
 function dlog
   docker ps | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
@@ -70,9 +74,21 @@ end
 function dloga
   docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
 end
+function dlogwatch
+  watch "fish -c 'dloga $argv'"
+end
+function dstop
+  set id (dpsi)
+  docker stop $id
+end
 # function dlog
 #   awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
 # end
+
+function psf
+  # ps FZF, returning the ID to feed into other commands
+  ps -o pid,command | fzf --preview="ps {1}" --preview-window=down:8:wrap --header-lines=1 | awk '{ print $1 }'
+end
 
 alias gP='git push'
 alias ga='git add .'

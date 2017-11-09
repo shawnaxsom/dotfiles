@@ -26,6 +26,14 @@ set showbreak=\|
 set breakindent
 set breakindentopt=shift:8
 set listchars+=precedes:<,extends:>
+augroup wrapifactive
+  " Only wrap if active. Wrapping gets to be excessive if an inactive split
+  " window is very small; I mainly want to wrap if I am an active window and
+  " it is over 80 characters or so.
+  autocmd!
+  autocmd BufEnter * setlocal wrap
+  autocmd BufLeave * setlocal nowrap
+augroup END
 
 " Don't change directory to current buffer.
 " Some plugins don't work with this enabled, like vimfiler or vimshell
@@ -39,14 +47,54 @@ augroup listchars
 augroup END
 
 " Keep windows at a good size
-set winheight=30
-set winwidth=300
-" set winminwidth=25
-" set winminheight=0
-augroup winsizing
-  autocmd!
-  autocmd FileType qf setlocal winminheight=4 winheight=4
+" silent! set winheight=9
+" silent! set winminheight=9
+" silent! let &winheight = &lines - 9
+" silent! set winwidth=40
+" silent! set winminwidth=40
+" silent! let &winwidth = &columns - 40
+" augroup winsizing
+"   autocmd!
+"   autocmd FileType qf setlocal winminheight=4 winheight=4
+" augroup END
+
+" set noequalalways winminheight=0 winheight=9999 helpheight=9999
+" set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
+" set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
+
+let minheight=3
+let minwidth=25
+set noequalalways
+exec 'set winheight=' . max([minheight, 1])
+exec 'set winwidth=' . max([minwidth, 1])
+exec 'set winminheight=' . minheight
+exec 'set winminwidth=' . minwidth
+augroup maximizepane
+  autocmd WinEnter * if &filetype != 'qf' | wincmd _ | execute "wincmd |" | else | silent! resize 4 | endif
 augroup END
+
+" augroup maximizepane
+"   autocmd!
+"   " autocmd BufWinEnter,WinEnter *{.js,/} :norm ^W|<CR>
+"   " autocmd BufWinEnter,WinEnter *{.js,/} :norm ^W_<CR>
+"   " autocmd BufEnter * :silent! setlocal winwidth=400
+"   " autocmd BufEnter * :silent! setlocal winheight=400
+"   " autocmd FileType qf :silent! setlocal winheight=4 winminheight=4
+"   " autocmd FileType qf resize 5 | setlocal winfixheight
+"   " autocmd BufWinEnter * if &filetype != 'qf' | :silent! setlocal winheight=400  | endif
+"   " autocmd BufWinEnter * if &filetype != 'qf' | :silent! setlocal winwidth=400   | endif
+"   " autocmd BufWinEnter * if &filetype != 'qf' | wincmd _  | endif
+"   " autocmd WinEnter * if &filetype != 'qf' | wincmd _  | endif
+"   " autocmd FileType qf resize 5 | setlocal winfixheight
+"   " autocmd WinEnter * if &filetype != 'qf' | resize 999  | endif
+"   " autocmd WinEnter * if &filetype != 'qf' | resize 999 | else | resize 4 | endif
+"   " autocmd WinEnter * if &filetype != 'qf' | wincmd _ | else | resize 4 | endif
+"   autocmd WinEnter,BufWinEnter * wincmd _
+" augroup END
+" augroup winmaximize
+"   autocmd!
+"   autocmd BufWinEnter * if &l:buftype != 'qf' | wincmd _ | endif
+" augroup END
 
 " If you open up gVim for whatever reason
 set guioptions-=m  "remove menu bar

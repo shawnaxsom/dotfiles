@@ -44,25 +44,32 @@ windows:
       layout: main-horizontal
       panes:
         - nvim
+        - dlogwatch api
         # - watchmedo shell-command --patterns="*test.js" --ignore-patterns="*.tmp*" --recursive --command='npm run build; and env NODE_ENV=qa npm start'
         # - watchmedo shell-command --patterns="*test.js" --ignore-patterns="*.tmp*" --recursive --command='echo ${watch_src_path} && npm test -- --tests "${watch_src_path}"'
         # - chokidar '**/*test.js' --silent --initial --ignore "*.tmp*" -c 'npm run build; and env NODE_ENV=qa npm start'
-        - forever --sourceDir /Users/shawn.axsom/dev/ambyint/packages/api -c "env NODE_ENV=qa npm start" /
-        - chokidar '**/*test.js' --silent --ignore "*.tmp*" -c 'npm run build-js'
+        # - forever --sourceDir /Users/shawn.axsom/dev/ambyint/packages/api -c "env NODE_ENV=qa npm start" /
+        # - chokidar '**/*test.js' --silent --ignore "*.tmp*" -c 'npm run build-js'
   - testharness:
       root: ~/dev/ambyint/packages/test-harness
       panes:
         - nvim
         - env NODE_ENV=qa PORT=1200 node server.js
 
-  # - uiV2:
-  #     root: ~/dev/ambyint/packages/ambyint.ui
-  #     panes:
-  #       - nvim
-  # - uiV1:
-  #     root: ~/dev/pumpwell/WellEXPERT2.Web/
-  #     panes:
-  #       - nvim
+  - uiV1:
+      root: ~/dev/ambyint/packages/ambyint.ui
+      panes:
+        - nvim
+        - npm run web
+  - uiV0:
+      root: ~/dev/pumpwell/WellEXPERT2.Web/
+      panes:
+        - nvim
+  - admin:
+      root: ~/dev/ambyint/packages/ambyint-platform-admin
+      panes:
+        - nvim
+        - yarn start
   # - codi:
   #     root: ~/codi/
   #     layout: main-horizontal

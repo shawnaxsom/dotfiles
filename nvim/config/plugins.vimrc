@@ -19,6 +19,9 @@ let g:quickly_enable_default_key_mappings = 1
 let g:quickly_always_jump_to_first_result = 1
 let g:quickly_open_quickfix_window = 0
 " }
+" { vim-byline
+Plug 'axs221/vim-byline'
+" }
 " { Dirvish
 Plug 'justinmk/vim-dirvish'  " File manager
 noremap - :Dirvish %<CR>
@@ -43,10 +46,10 @@ function! InsertBookmarks()
   execute "norm 1\<c-o>0"
 endfunction
 function! AddExtension (path, defaultExtension)
-  if a:path !~ "\.[a-zA-Z0-9]\+$"
-    return a:path . a:defaultExtension
+  if a:path =~ '\.[a-zA-Z0-9]\+'
+    return a:path
   endif
-  return a:path
+  return a:path . a:defaultExtension
 endfunction
 augroup dirvish
   autocmd!
@@ -55,6 +58,7 @@ augroup dirvish
   autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
   autocmd FileType dirvish nnoremap <silent><buffer> e :execute "e " . AddExtension(input("Edit: File Name? ", expand('%:p')), ".js")<BAR>normal R<CR>
   autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
+  autocmd FileType dirvish nnoremap <silent><buffer> cp :execute ":!cp " . expand('<cWORD>') . " " . AddExtension(input("Copy: File Name? ", expand('%:p')), ".js")<BAR>normal R<CR>
   autocmd FileType dirvish nnoremap <buffer> mk :execute "Mkdir " . input("Mkdir: Folder Name? ", expand('%:p'))<BAR>normal R<CR>
   autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
   autocmd FileType dirvish nnoremap <silent><buffer><expr> dd (confirm("Are you sure?", "&Yes\n&No") == 1 ? ":!rm -rf " . expand('<cWORD>') . "<CR>:normal R<CR>" : "")
@@ -120,15 +124,6 @@ map <leader>gl :Extradite<CR>
 map <leader>gL :Glog<BAR>:bot copen<CR>
 map <leader>gv :GV<CR>
 " }
-" { GitGutter
-Plug 'airblade/vim-gitgutter'
-let g:gitgutter_highlight_lines = 0
-let g:gitgutter_map_keys = 0
-noremap ]c :GitGutterNextHunk<CR>
-noremap [c :GitGutterPrevHunk<CR>
-noremap <leader>j :GitGutterNextHunk<CR>
-noremap <leader>k :GitGutterPrevHunk<CR>
-" }
 " { Vimux / Dispatch
 Plug 'tpope/vim-dispatch'
 Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
@@ -157,14 +152,14 @@ augroup vimux
   autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
   autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
   autocmd BufEnter */api/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
-  autocmd BufEnter */optimization/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
+  autocmd BufEnter */optimization/*,*/recommendations/*,*/ambyint-platform-admin/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
 " map ,t :Dispatch npm test<CR>
 augroup END
 " }
 " { vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
 Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_disable_when_zoomed = 0
+let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
@@ -179,9 +174,9 @@ let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/dotfiles/UltiSnips']
 let g:UltiSnipsEnableSnipMate = 0
 " }
 " { Supertab
-" Plug 'ervandew/supertab'
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 " }
 " { Deoplete
 " Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
@@ -204,6 +199,7 @@ let g:deoplete#file#enable_buffer_path = 0
 let g:deoplete#max_abbr_width = 0
 let g:deoplete#max_menu_width = 0
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#omni#functions = {}
 let g:jsx_ext_required = 0
 " let g:deoplete#omni#functions.javascript = [
@@ -212,54 +208,54 @@ let g:jsx_ext_required = 0
 " \]
 " }
 " { deoplete-ternjs
-" TODO TernJS slows down Deoplete considerably
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni',
-\]
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-let g:deoplete#sources#ternjs#timeout = 1
-" Whether to include the types of the completions in the result data. Default: 0
-let g:deoplete#sources#ternjs#types = 1
-" Whether to include the distance (in scopes for variables, in prototypes for
-" properties) between the completions and the origin position in the result
-" data. Default: 0
-let g:deoplete#sources#ternjs#depths = 1
-" Whether to include documentation strings (if found) in the result data.
-" Default: 0
-let g:deoplete#sources#ternjs#docs = 1
-" When on, only completions that match the current word at the given point will
-" be returned. Turn this off to get all results, so that you can filter on the
-" client side. Default: 1
-let g:deoplete#sources#ternjs#filter = 0
-" Whether to use a case-insensitive compare between the current word and
-" potential completions. Default 0
-let g:deoplete#sources#ternjs#case_insensitive = 1
-" When completing a property and no completions are found, Tern will use some
-" heuristics to try and return some properties anyway. Set this to 0 to
-" turn that off. Default: 1
-let g:deoplete#sources#ternjs#guess = 0
-" Determines whether the result set will be sorted. Default: 1
-let g:deoplete#sources#ternjs#sort = 0
-" When disabled, only the text before the given position is considered part of
-" the word. When enabled (the default), the whole variable name that the cursor
-" is on will be included. Default: 1
-let g:deoplete#sources#ternjs#expand_word_forward = 0
-" Whether to ignore the properties of Object.prototype unless they have been
-" spelled out by at least to characters. Default: 1
-let g:deoplete#sources#ternjs#omit_object_prototype = 0
-" Whether to include JavaScript keywords when completing something that is not
-" a property. Default: 0
-let g:deoplete#sources#ternjs#include_keywords = 1
-" If completions should be returned when inside a literal. Default: 1
-let g:deoplete#sources#ternjs#in_literal = 0
-"Add extra filetypes
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
-                \ 'vue',
-                \ ]
+" " TODO TernJS slows down Deoplete considerably
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
+" let g:deoplete#omni#functions.javascript = [
+"   \ 'tern#Complete',
+"   \ 'jspc#omni',
+" \]
+" " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" let g:deoplete#sources#ternjs#timeout = 1
+" " Whether to include the types of the completions in the result data. Default: 0
+" let g:deoplete#sources#ternjs#types = 1
+" " Whether to include the distance (in scopes for variables, in prototypes for
+" " properties) between the completions and the origin position in the result
+" " data. Default: 0
+" let g:deoplete#sources#ternjs#depths = 1
+" " Whether to include documentation strings (if found) in the result data.
+" " Default: 0
+" let g:deoplete#sources#ternjs#docs = 1
+" " When on, only completions that match the current word at the given point will
+" " be returned. Turn this off to get all results, so that you can filter on the
+" " client side. Default: 1
+" let g:deoplete#sources#ternjs#filter = 0
+" " Whether to use a case-insensitive compare between the current word and
+" " potential completions. Default 0
+" let g:deoplete#sources#ternjs#case_insensitive = 1
+" " When completing a property and no completions are found, Tern will use some
+" " heuristics to try and return some properties anyway. Set this to 0 to
+" " turn that off. Default: 1
+" let g:deoplete#sources#ternjs#guess = 0
+" " Determines whether the result set will be sorted. Default: 1
+" let g:deoplete#sources#ternjs#sort = 0
+" " When disabled, only the text before the given position is considered part of
+" " the word. When enabled (the default), the whole variable name that the cursor
+" " is on will be included. Default: 1
+" let g:deoplete#sources#ternjs#expand_word_forward = 0
+" " Whether to ignore the properties of Object.prototype unless they have been
+" " spelled out by at least to characters. Default: 1
+" let g:deoplete#sources#ternjs#omit_object_prototype = 0
+" " Whether to include JavaScript keywords when completing something that is not
+" " a property. Default: 0
+" let g:deoplete#sources#ternjs#include_keywords = 1
+" " If completions should be returned when inside a literal. Default: 1
+" let g:deoplete#sources#ternjs#in_literal = 0
+" "Add extra filetypes
+" let g:deoplete#sources#ternjs#filetypes = [
+"                 \ 'jsx',
+"                 \ 'javascript.jsx',
+"                 \ 'vue',
+"                 \ ]
 " }
 " { vim-polyglot
 " Collection of language plugins.
@@ -330,7 +326,7 @@ Plug 'blueyed/vim-qf_resize'
 " :ALEFix to autogically fix any lint errors that have an obvious fix.
 " Add rules to ~/.eslintrc to ignore certain lint errors.
 Plug 'w0rp/ale'  " Async linting
-nnoremap <leader>F :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
+" nnoremap <leader>F :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
 nnoremap + :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
 let g:ale_list_window_size = 2
 let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
@@ -355,6 +351,15 @@ let g:ale_echo_cursor = 1
 Plug 'tpope/vim-surround'
 vmap s <Plug>VSurround
 vmap s <Plug>VSurround
+" }
+" { GitGutter
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_highlight_lines = 0
+let g:gitgutter_map_keys = 0
+noremap ]c :GitGutterNextHunk<CR>
+noremap [c :GitGutterPrevHunk<CR>
+noremap <leader>j :GitGutterNextHunk<CR>
+noremap <leader>k :GitGutterPrevHunk<CR>
 " }
 " { Grepper
 " Like :grep but a smoother experience. No display of text or flickering.
@@ -537,6 +542,8 @@ augroup vim-qf
   autocmd!
   autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>
   autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>
+  autocmd FileType qf vnoremap <buffer> <leader>k y:Keep "<CR>
+  autocmd FileType qf vnoremap <buffer> <leader>r y:Reject "<CR>
 augroup END
 " }
 
@@ -652,6 +659,20 @@ function! s:all_files()
 endfunction
 nnoremap <leader>O :FZFMru<CR>
 nnoremap <leader>B :Buffers<CR>
+
+command! FZFMostRecentlyModified call fzf#run({
+\ 'source':  (s:MostRecentlyModifiedLines()),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' })
+function! s:MostRecentlyModifiedLines ()
+  let lines = split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -print0 | xargs -0 ls -t | head -n " . 50), "\n")
+  let lines = WithinPwd(lines)
+  let lines = RelativePath(lines)
+  let lines = Wildignore(lines)
+  return lines
+endfunction
+nnoremap <leader>M :FZFMostRecentlyModified<CR>
 let g:fzf_buffers_jump = 1
 " :Ag - allows "?" to open preview window
 command! -bang -nargs=* Ag
@@ -725,10 +746,12 @@ Plug 'qpkorr/vim-renamer'
 nmap <leader><leader>r :Renamer<CR>
 " }
 " { Vim-Rooter
-" " Change directory to project root if you are in a subfolder
-" Plug 'airblade/vim-rooter'
-" let g:rooter_patterns = ['app.js']
-" let g:rooter_silent_chdir = 1
+" Change directory to project root if you are in a subfolder
+" If you use /src as project root, this allows proper filename completion
+" from /src without typing /src in your imports.
+Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['server.js']
+let g:rooter_silent_chdir = 1
 " }
 " { thameera/vimv
 " Alternative to vim-renamer
@@ -775,6 +798,9 @@ Plug 'tpope/vim-rsi'
 " { chaoren/vim-wordmotion
 " Use camelCase etc for word motions like w/b/e
 " Plug 'chaoren/vim-wordmotion'
+" }
+" { jiangmiao/auto-pairs
+Plug 'jiangmiao/auto-pairs'
 " }
 
 call plug#end()

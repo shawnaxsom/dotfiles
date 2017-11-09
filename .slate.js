@@ -69,7 +69,6 @@ const basicLayout = (name, apps, before = {}) => {
           "repeat" : true // Keep repeating the function above for all windows in Chrome.
         };
       } else {
-        slate.log("FOOO3", name, app, layoutLocationOrder[i]);
         layout[app] = {
           operations: [push(layoutLocationOrder[i])],
           "ignore-fail" : true, // Chrome has issues sometimes so I add ignore-fail so that Slate doesn't stop the
@@ -101,7 +100,7 @@ bindLayout("w:alt", ["Google Chrome"]);
 bindLayout("e:alt", ["Slack"]);
 bindLayout("r:alt", ["Robo 3T"]);
 bindLayout("t:alt", ["Trello"]);
-bindLayout("s:alt", ["Spotify"]);
+bindLayout("s:alt", ["Spotify", "Google Chrome"]);
 
 // slate.bind("q:alt", push("top-left"));
 // slate.bind("w:alt", push("top", "3"));
