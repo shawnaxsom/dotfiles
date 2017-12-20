@@ -26,6 +26,7 @@ Plug 'axs221/vim-byline'
 Plug 'justinmk/vim-dirvish'  " File manager
 noremap - :Dirvish %<CR>
 noremap - :Dirvish %:p:h<CR>
+noremap _ :Dirvish .<CR>
 let g:dirvish_mode = ':sort ,^.*[\/],'
 let g:dirvish_relative_paths=1
 function! Relpath(filename)
@@ -46,7 +47,7 @@ function! InsertBookmarks()
   execute "norm 1\<c-o>0"
 endfunction
 function! AddExtension (path, defaultExtension)
-  if a:path =~ '\.[a-zA-Z0-9]\+'
+  if a:path =~ '\.[a-zA-Z0-9]\+$'
     return a:path
   endif
   return a:path . a:defaultExtension
@@ -152,7 +153,8 @@ augroup vimux
   autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
   autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
   autocmd BufEnter */api/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
-  autocmd BufEnter */optimization/*,*/recommendations/*,*/ambyint-platform-admin/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
+  autocmd BufEnter */optimization/*,*/recommendations/*,*/ambyint-platform-admin/*,*/iot/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
+  autocmd BufEnter */web/* map <buffer> ,t :Dispatch npm run test<CR>
 " map ,t :Dispatch npm test<CR>
 augroup END
 " }
@@ -343,7 +345,6 @@ let g:ale_set_highlights = 1
 let g:ale_set_signs = 1
 let g:ale_echo_cursor = 1
 " }
-
 " -----------------------------------------------------------------------------------------
 " 2 - Great
 " -----------------------------------------------------------------------------------------
@@ -735,6 +736,11 @@ vmap gt :Tabularize /
 " { kana/vim-textobj-user
 Plug 'kana/vim-textobj-user'
 " }
+" { tpope/vim-unimpaired
+" Mainly use this for next file in same folder. But it has a lot of mappings
+" that conflict with my own and more than I need.
+" Plug 'tpope/vim-unimpaired'
+" }
 
 " -----------------------------------------------------------------------------------------
 " 5 - New / Evaluating
@@ -801,6 +807,9 @@ Plug 'tpope/vim-rsi'
 " }
 " { jiangmiao/auto-pairs
 Plug 'jiangmiao/auto-pairs'
+" }
+" { owickstrom/vim-colors-paramount
+Plug 'owickstrom/vim-colors-paramount'
 " }
 
 call plug#end()

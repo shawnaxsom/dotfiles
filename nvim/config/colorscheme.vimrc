@@ -26,9 +26,10 @@ set background=dark
 " colorscheme flattr
 " colorscheme onedark
 " colorscheme pencil
-colorscheme nova
 " colorscheme candyman
 " colorscheme 3dglasses
+" colorscheme paramount
+colorscheme nova
 " " } Colorscheme
 
 " " { Highlights
@@ -51,7 +52,7 @@ augroup CursorLine
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
 augroup END
-highlight cursorLine term=bold cterm=bold guibg=#252525
+highlight cursorLine term=bold cterm=bold guibg=#254555
 " }
 " { Visual Selection
 highlight Visual term=bold cterm=bold guibg=#2555a5

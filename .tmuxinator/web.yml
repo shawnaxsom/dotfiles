@@ -54,7 +54,7 @@ windows:
       root: ~/dev/ambyint/packages/test-harness
       panes:
         - nvim
-        - env NODE_ENV=qa PORT=1200 node server.js
+        # - env NODE_ENV=qa PORT=1200 node server.js
 
   - uiV1:
       root: ~/dev/ambyint/packages/ambyint.ui
@@ -70,6 +70,11 @@ windows:
       panes:
         - nvim
         - yarn start
+  - ambyint:
+      root: ~/dev/ambyint
+      panes:
+        - nvim
+        - npm run start-infrastructure; npm start;
   # - codi:
   #     root: ~/codi/
   #     layout: main-horizontal

@@ -30,7 +30,6 @@ function! ToggleList(bufname, pfx)
     wincmd p
   endif
 endfunction
-nnoremap _ :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <leader>l :copen<CR>
 
 function! GoToFileIncludeNodeModules ()

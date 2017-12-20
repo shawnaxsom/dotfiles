@@ -31,8 +31,11 @@ augroup wrapifactive
   " window is very small; I mainly want to wrap if I am an active window and
   " it is over 80 characters or so.
   autocmd!
-  autocmd BufEnter * setlocal wrap
-  autocmd BufLeave * setlocal nowrap
+  " autocmd BufEnter * setlocal wrap
+  " autocmd BufLeave * setlocal nowrap
+
+  autocmd BufEnter * if &filetype != 'qf' | setlocal wrap | endif
+  autocmd BufLeave * if &filetype != 'qf' | setlocal nowrap | endif
 augroup END
 
 " Don't change directory to current buffer.
@@ -69,31 +72,8 @@ exec 'set winheight=' . max([minheight, 1])
 exec 'set winwidth=' . max([minwidth, 1])
 exec 'set winminheight=' . minheight
 exec 'set winminwidth=' . minwidth
-augroup maximizepane
-  autocmd WinEnter * if &filetype != 'qf' | wincmd _ | execute "wincmd |" | else | silent! resize 4 | endif
-augroup END
-
 " augroup maximizepane
-"   autocmd!
-"   " autocmd BufWinEnter,WinEnter *{.js,/} :norm ^W|<CR>
-"   " autocmd BufWinEnter,WinEnter *{.js,/} :norm ^W_<CR>
-"   " autocmd BufEnter * :silent! setlocal winwidth=400
-"   " autocmd BufEnter * :silent! setlocal winheight=400
-"   " autocmd FileType qf :silent! setlocal winheight=4 winminheight=4
-"   " autocmd FileType qf resize 5 | setlocal winfixheight
-"   " autocmd BufWinEnter * if &filetype != 'qf' | :silent! setlocal winheight=400  | endif
-"   " autocmd BufWinEnter * if &filetype != 'qf' | :silent! setlocal winwidth=400   | endif
-"   " autocmd BufWinEnter * if &filetype != 'qf' | wincmd _  | endif
-"   " autocmd WinEnter * if &filetype != 'qf' | wincmd _  | endif
-"   " autocmd FileType qf resize 5 | setlocal winfixheight
-"   " autocmd WinEnter * if &filetype != 'qf' | resize 999  | endif
-"   " autocmd WinEnter * if &filetype != 'qf' | resize 999 | else | resize 4 | endif
-"   " autocmd WinEnter * if &filetype != 'qf' | wincmd _ | else | resize 4 | endif
-"   autocmd WinEnter,BufWinEnter * wincmd _
-" augroup END
-" augroup winmaximize
-"   autocmd!
-"   autocmd BufWinEnter * if &l:buftype != 'qf' | wincmd _ | endif
+"   autocmd WinEnter * if &filetype != 'diff' && &filetype != 'gundo' | wincmd _ | execute "wincmd |" | else | silent! resize 4 | endif
 " augroup END
 
 " If you open up gVim for whatever reason
@@ -135,7 +115,7 @@ set ttyfast
 
 " NOTE: Add this to .tmux.conf to be able to scroll still without mouse on:
 " set -g terminal-overrides 'xterm*:smcup@:rmcup@'
-set mouse=
+set mouse=a
 
 " When closing off brackets, briefly show the matching bracket
 set noshowmatch
@@ -236,9 +216,11 @@ let mapleader = "\<Space>"
 set timeoutlen=800
 set ttimeoutlen=0
 
-" Minimize how often you see "Press enter or type a command to continue"
-set shortmess=a
+" Minimize how often you see "Press enter or type a command to continue",
+" Set cmdheight to 2 or 3 or else you will be prompted if text is larger
+" than one line.
 set cmdheight=3
+set shortmess=a
 
 " Allow completion of tags using omnicompletion <c-x><c-o>
 set omnifunc=htmlcomplete#CompleteTags
@@ -269,3 +251,9 @@ augroup pullrequest
   autocmd!
   autocmd BufEnter PULLREQ_EDITMSG setlocal filetype=markdown
 augroup END
+
+" Ensure the cursor is in same line and column when changing buffers
+if v:version >= 700
+  au BufLeave * let b:winview = winsaveview()
+  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+endif

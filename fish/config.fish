@@ -35,6 +35,15 @@ function search
   ag $argv | /usr/local/share/pathpicker/fpp
 end
 
+function agfzf
+  vim (ag $argv | awk -F: '{ print $1 }' | fzf --preview "ag -B 15 -A 15 $argv {}")
+end
+
+function fzfp
+  awk -F: '{ print $1 }' | fzf --preview "cat {}"
+end
+
+
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
@@ -108,6 +117,10 @@ alias gp='git pull; and echo; and git push; and echo; and git status; and echo'
 alias gpr='hub pull-request --edit -F ~/.PULL_REQUEST_TEMPLATE.md'
 alias gs='git status'
 
+alias gwc='git whatchanged --author=".*hawn.*" --no-commit-id --name-only --since="5 days ago"'
+# Files I have added in the last 5 days
+alias gwca='git whatchanged --author=".*hawn.*" --diff-filter=A --no-commit-id --name-only --since="5 days ago"'
+
 alias vs='vim -S'
 alias g='grep'
 alias gv='grep -v'
@@ -121,6 +134,9 @@ alias p='pwd'
 alias x='exit'
 alias vp='/usr/local/bin/nvim -c "set ft=man modifiable"  -'
 alias page='/usr/local/bin/nvim -c "set ft=man modifiable"  -'
+
+# Show ports used by node processes
+alias ports='sudo lsof -iTCP -sTCP:LISTEN -P | grep node'
 
 # alias f='find . -name'
 

@@ -30,9 +30,10 @@ endsnippet
 snippet con "Constructor"
 constructor(props) {
   super(props);
-  $0
-  this.state = {};
+
+  this.state = {$0};
 }
+
 endsnippet
 
 snippet render "React render"
@@ -143,7 +144,7 @@ it('$1', () => {
 endsnippet
 
 snippet expect
-expect($1).to.$2
+expect($1).toEqual($2);
 endsnippet
 
 snippet react
@@ -179,4 +180,10 @@ snippet input
   value={this.state.$1}
   onChange={event => this.setState({$1: event.target.value})}
 />
+endsnippet
+
+snippet promise
+new Promise((resolve, reject) => {
+  $0
+});
 endsnippet

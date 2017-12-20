@@ -254,6 +254,9 @@ xnoremap <down> <esc>'>jdd'<Pgv
 xnoremap <left> <gv
 xnoremap <right> >gv
 
+" Easy normal mode command
+xnoremap n :normal!<SPACE>
+
 " Clear command box and search easily
 nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
@@ -308,6 +311,8 @@ noremap k gk
 noremap Y y$
 
 " Unimpaired keys
+nmap [[ :cprev<CR>
+nmap ]] :cnext<CR>
 nmap [q :cprev<CR>
 nmap ]q :cnext<CR>
 nmap [w :cpfile<CR>

@@ -8,7 +8,7 @@ endfunction
 nmap <silent> <leader>t :call OpenTerminalHere()<CR>
 nmap ,b :sp term://bash %:p<CR>
 nmap ,r :sp term://npm start<CR>
-nmap ,t :vsp term://npm run test<CR>H:startinsert<CR>
+" nmap ,t :vsp term://npm run test<CR>H:startinsert<CR>
 map ,q :sp term://env NODE_ENV=qa npm start<CR>
 " augroup vimux
 "   autocmd!
