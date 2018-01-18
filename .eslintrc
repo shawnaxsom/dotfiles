@@ -15,6 +15,7 @@
     "import/no-unresolved": [0],
     "import/prefer-default-export": [0],
     "indent": [0],
+    "jsx-a11y/href-no-hash": "off",
     "max-len": [0],
     "no-confusing-arrow": [0],
     "no-mixed-operators": 0,

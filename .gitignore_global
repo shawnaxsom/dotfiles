@@ -8,3 +8,5 @@ Session.vim
 tags
 .lvimrc
 *.bak
+tags.lock
+tags.temp

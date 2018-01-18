@@ -83,8 +83,11 @@ end
 function dloga
   docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
 end
+function dlogatail
+  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs --tail 20
+end
 function dlogwatch
-  watch "fish -c 'dloga $argv'"
+  watch "fish -c 'dlogatail $argv'"
 end
 function dstop
   set id (dpsi)
@@ -121,9 +124,16 @@ alias gwc='git whatchanged --author=".*hawn.*" --no-commit-id --name-only --sinc
 # Files I have added in the last 5 days
 alias gwca='git whatchanged --author=".*hawn.*" --diff-filter=A --no-commit-id --name-only --since="5 days ago"'
 
+# All files added in feature branch
+alias gla='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^A" | sort | uniq'
+# All files modified in feature branch
+alias glm='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^M" | sort | uniq'
+# All files added or modified in feature branch
+alias glf='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^[AM]" | sort | uniq'
+
 alias vs='vim -S'
 alias g='grep'
-alias gv='grep -v'
+alias gv='grep -v -e '
 alias c='cd'
 alias l='ls'
 alias lt='ls -lat'

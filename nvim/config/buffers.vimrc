@@ -35,7 +35,15 @@ nnoremap <leader>l :copen<CR>
 function! GoToFileIncludeNodeModules ()
   set wildignore-=*/node_modules/*
   set path+=../node_modules/,./node_modules/
-  normal! gf
+  let l:path = expand('<cWORD>')
+  echom "Path: " . l:path
+  " execute '"pyi"'
+  try
+    normal! gf
+  catch
+    " echo expand("%:p:h") . "/" . substitute(substitute(substitute(l:path, '"', '', 'g'), ';', '', 'g'), '^\./', '', '') . ".js"
+    execute "e " . expand("%:p:h") . "/" . substitute(substitute(substitute(l:path, '"', '', 'g'), ';', '', 'g'), '^\./', '', '') . ".js"
+  endtry
   set wildignore+=*/node_modules/*
   set path-=../node_modules/,./node_modules/
 endfunction

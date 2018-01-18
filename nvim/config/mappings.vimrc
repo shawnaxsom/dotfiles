@@ -331,6 +331,8 @@ nmap [ow :set wrap<CR>
 nmap ]ow :set nowrap<CR>
 nmap [on :set number relativenumber<CR>
 nmap ]on :set nonumber norelativenumber<CR>:GitGutterDisable<CR>
+nmap ]n :next<CR>
+nmap ]p :prev<CR>
 
 " Maximize pane
 nmap <leader>z <bar>_
@@ -345,3 +347,5 @@ noremap gg gg0
 noremap G G0
 
 map gx :!open <cWORD><CR>
+
+map <leader>' "ayiwologo<TAB>a

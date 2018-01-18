@@ -13,6 +13,7 @@ call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
+Plug 'scrooloose/nerdtree'
 " { vim-quickly
 Plug 'axs221/vim-quickly'
 let g:quickly_enable_default_key_mappings = 1
