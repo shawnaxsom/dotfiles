@@ -13,7 +13,6 @@ call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
-Plug 'scrooloose/nerdtree'
 " { vim-quickly
 Plug 'axs221/vim-quickly'
 let g:quickly_enable_default_key_mappings = 1
@@ -264,21 +263,11 @@ let g:jsx_ext_required = 0
 " Collection of language plugins.
 " Includes: 'pangloss/vim-javascript'
 " Includes: 'mxw/vim-jsx'
-Plug 'sheerun/vim-polyglot'
-" let g:javascript_conceal_function                  = "ƒ"
-" let g:javascript_conceal_null                      = "ø"
-" let g:javascript_conceal_this                      = "@"
-" let g:javascript_conceal_return                    = "◁"
-" let g:javascript_conceal_undefined                 = "¿"
-" let g:javascript_conceal_NaN                       = "ℕ"
-" let g:javascript_conceal_prototype                 = "¶"
-" let g:javascript_conceal_static                    = "•"
-" let g:javascript_conceal_super                     = "Ω"
-" let g:javascript_conceal_arrow_function            = "➜"
-" let g:javascript_conceal_noarg_arrow_function      = "🞅"
-" let g:javascript_conceal_underscore_arrow_function = "🞅"
-set conceallevel=0
-set concealcursor=
+" Plug 'sheerun/vim-polyglot'
+" TODO: Removed polyglot for now. It was messing with Vue.js code I was working
+" on. Use individual pieces from it instead.
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 " }
 " { vim-obsession
 " Save buffers in session using automation over the built-in session
