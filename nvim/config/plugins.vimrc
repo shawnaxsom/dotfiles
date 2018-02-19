@@ -148,6 +148,8 @@ map ,c :call VimuxInterruptRunner()<CR>
 map ,f :Dispatch npm test -- --tests %
 map ,b :Dispatch npm run build<CR>
 map ,z :VimuxZoomRunner<CR>
+map ,a :Dispatch npm test<CR>
+map ,t :Dispatch npm test -- --tests %<CR>
 augroup vimux
   autocmd!
   autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
@@ -155,7 +157,6 @@ augroup vimux
   autocmd BufEnter */api/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
   autocmd BufEnter */optimization/*,*/recommendations/*,*/ambyint-platform-admin/*,*/iot/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
   autocmd BufEnter */web/* map <buffer> ,t :Dispatch npm run test<CR>
-" map ,t :Dispatch npm test<CR>
 augroup END
 " }
 " { vim-tmux-navigator
@@ -185,7 +186,7 @@ let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 " followed by a property in a string. "rodDimensions." showed all props of
 " random variable.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'othree/jspc.vim'
+" Plug 'othree/jspc.vim'
 Plug 'wellle/tmux-complete.vim'
 " Deoplete might have less flickering with this
 set completeopt-=preview
@@ -268,6 +269,7 @@ let g:jsx_ext_required = 0
 " on. Use individual pieces from it instead.
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue'
 " }
 " { vim-obsession
 " Save buffers in session using automation over the built-in session
@@ -334,6 +336,8 @@ let g:ale_set_quickfix = 0
 let g:ale_set_highlights = 1
 let g:ale_set_signs = 1
 let g:ale_echo_cursor = 1
+com! ALECheckNow     call ale#Queue(0)
+com! ALEShowCommand  echo ale_linters#python#flake8#GetCommand(bufnr('%'))
 " }
 " -----------------------------------------------------------------------------------------
 " 2 - Great
@@ -800,6 +804,12 @@ Plug 'jiangmiao/auto-pairs'
 " }
 " { owickstrom/vim-colors-paramount
 Plug 'owickstrom/vim-colors-paramount'
+" }
+" { mhartington/nvim-typescript
+" Plug 'mhartington/nvim-typescript'
+" }
+" {
+Plug 'leafgarland/typescript-vim'
 " }
 
 call plug#end()

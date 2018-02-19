@@ -248,6 +248,9 @@ map <S-F8> :norm <c-x><CR>:w<BAR>:colo null<CR>
 " Default behavior overrides
 " -----------------------------------------------------------------------------------------
 
+" Don't copy overwritten text on visual paste
+xnoremap p "_dP
+
 " Move selected text up and down, or change indentation, with arrow keys
 xnoremap <up> <esc>'<kdd'>pgv
 xnoremap <down> <esc>'>jdd'<Pgv

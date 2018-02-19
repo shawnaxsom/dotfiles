@@ -12,6 +12,7 @@
     "func-names": [0], //added to ease of migration
     "import/extensions": [0],
     "import/no-extraneous-dependencies": [0],
+    "import/no-mutable-exports": [0],
     "import/no-unresolved": [0],
     "import/prefer-default-export": [0],
     "indent": [0],
@@ -19,6 +20,7 @@
     "max-len": [0],
     "no-confusing-arrow": [0],
     "no-mixed-operators": 0,
+    "no-nested-ternary": [0],
     "no-param-reassign": 0,
     "no-plusplus": 0,
     "no-return-assign": [0],

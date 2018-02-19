@@ -116,20 +116,27 @@ alias gh='git browse'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit '
 alias glp='git log -p'
 alias gmm='git fetch; git merge origin/master'
+alias grm='git fetch; git rebase origin/master'
 alias gp='git pull; and echo; and git push; and echo; and git status; and echo'
 alias gpr='hub pull-request --edit -F ~/.PULL_REQUEST_TEMPLATE.md'
 alias gs='git status'
+alias gyesterday='git log --since="yesterday"'
+
+function gcount
+  # Count number of lines changed in branch
+  git log --numstat --pretty="%H" origin/master.. | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("+%d, -%d\n", plus, minus)}'
+end
 
 alias gwc='git whatchanged --author=".*hawn.*" --no-commit-id --name-only --since="5 days ago"'
 # Files I have added in the last 5 days
 alias gwca='git whatchanged --author=".*hawn.*" --diff-filter=A --no-commit-id --name-only --since="5 days ago"'
 
-# All files added in feature branch
-alias gla='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^A" | sort | uniq'
+# All files created/added in feature branch
+alias gcreated='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^A" | sort | uniq'
 # All files modified in feature branch
-alias glm='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^M" | sort | uniq'
-# All files added or modified in feature branch
-alias glf='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^[AM]" | sort | uniq'
+alias gmodified='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^M" | sort | uniq'
+# All files created/added or modified in feature branch
+alias gchanged='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^[AM]" | sort | uniq'
 
 alias vs='vim -S'
 alias g='grep'

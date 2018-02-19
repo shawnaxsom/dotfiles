@@ -16,7 +16,7 @@ set autoread
 " au CursorHold * checktime
 
 " Wrap
-set wrap
+set nowrap
 set linebreak
 " set breakat=\ ^I!@*-+;:,./?(
 set breakat=\ ^I!@*+;:,./?(
@@ -26,17 +26,11 @@ set showbreak=\|
 set breakindent
 set breakindentopt=shift:8
 set listchars+=precedes:<,extends:>
-augroup wrapifactive
-  " Only wrap if active. Wrapping gets to be excessive if an inactive split
-  " window is very small; I mainly want to wrap if I am an active window and
-  " it is over 80 characters or so.
-  autocmd!
-  " autocmd BufEnter * setlocal wrap
-  " autocmd BufLeave * setlocal nowrap
-
-  autocmd BufEnter * if &filetype != 'qf' | setlocal wrap | endif
-  autocmd BufLeave * if &filetype != 'qf' | setlocal nowrap | endif
-augroup END
+" augroup wrapifactive
+"   autocmd!
+"   autocmd BufEnter * if &filetype != 'qf' | setlocal wrap | endif
+"   autocmd BufLeave * if &filetype != 'qf' | setlocal nowrap | endif
+" augroup END
 
 " Don't change directory to current buffer.
 " Some plugins don't work with this enabled, like vimfiler or vimshell
