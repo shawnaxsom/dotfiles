@@ -65,3 +65,5 @@ set wildignore+=*.DS_STORE*
 set wildignore+=*Session.vim*
 set wildignore+=*/build/*
 set wildignore+=*/.tern-port
+set wildignore+=*/bin/*
+set wildignore+=*.min.js

@@ -75,20 +75,20 @@ $1($2) {
 endsnippet
 
 snippet log "Console Log"
-console.warn("ZZZZ `!p filename()`", "$1")
+console.warn("ZZZZ `!p filename()`", "$1");$0
 endsnippet
 
-snippet logoo "Console Log an object"
-console.warn("ZZZZ `!p filename()`", {$1})
-endsnippet
+# snippet logoo "Console Log an object"
+# console.warn("ZZZZ `!p filename()`", {$1})
+# endsnippet
 
 snippet logo "Console Log a value"
 console.warn("ZZZZ `!p filename()`", "$1", $1)
 endsnippet
 
-snippet logos "Console Log an object, pretty printed"
-console.warn("ZZZZ `!p filename()`", "$1", JSON.stringify($1, null, 2))
-endsnippet
+# snippet logos "Console Log an object, pretty printed"
+# console.warn("ZZZZ `!p filename()`", "$1", JSON.stringify($1, null, 2))
+# endsnippet
 
 snippet trace "Console Trace"
 console.trace();

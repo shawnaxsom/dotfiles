@@ -13,6 +13,12 @@ call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
+" { vim-db
+" Highlight a query and run in mongo
+Plug 'tpope/vim-db'
+nmap ,q vip:DB mongodb:///localhost:27017/wellexpert2<CR>
+xmap ,q :DB mongodb:///localhost:27017/wellexpert2<CR>
+" }
 " { vim-quickly
 Plug 'axs221/vim-quickly'
 let g:quickly_enable_default_key_mappings = 1
@@ -324,8 +330,9 @@ Plug 'w0rp/ale'  " Async linting
 nnoremap + :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
 let g:ale_list_window_size = 2
 let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
-let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_use_global = 0
 let g:ale_fixers = { 'javascript': [ 'eslint' ] }
+let g:ale_linters = { 'javascript': [ 'eslint' ] }
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file

@@ -1,6 +1,6 @@
 # ~/.tmuxinator/web.yml
 
-name: web
+name: api
 root: ~/dev/ambyint/packages/
 
 # Optional tmux socket
@@ -31,29 +31,28 @@ root: ~/dev/ambyint/packages/
 # post: tmux -CC attach -t web
 
 windows:
-  - web:
-      root: ~/dev/ambyint/packages/web
+  - api:
+      root: ~/dev/ambyint/packages/api
       layout: main-horizontal
       panes:
         - nvim
-        - npm start
+        - dlogwatch api
   - ambyint:
       root: ~/dev/ambyint
       panes:
         - nvim
         - npm run start-infrastructure; npm start;
-  - testharness:
-      root: ~/dev/ambyint/packages/test-harness
+  - alerts:
+      root: ~/dev/ambyint/packages/alerts
       panes:
         - nvim
-        - dlogwatch harness
-  - admin:
-      root: ~/dev/ambyint/packages/ambyint-platform-admin
+  - optimization:
+      root: ~/dev/ambyint/packages/optimization
       panes:
         - nvim
-        - yarn start
-  - uiV1:
-      root: ~/dev/ambyint/packages/ambyint.ui
+        - dlogwatch optimization
+  - iot:
+      root: ~/dev/ambyint/packages/iot
       panes:
         - nvim
-        - npm run web
+        - dlogwatch iot

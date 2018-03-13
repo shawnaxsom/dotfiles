@@ -99,13 +99,18 @@ endfunction
 function! CompleteNewTodo ()
   let line = getline(".")
 
+    echom "0"
   if line =~ s:blank_line
+    echom "1"
     call feedkeys("=\"[ ] \"\<CR>")
   elseif line =~ s:todo_only
+    echom "2"
     call Indent()
   elseif line =~ s:bullet_only
+    echom "3"
     call feedkeys("S=\"[ ] \"\<CR>")
   else
+    echom "4"
     call feedkeys("=\"[ ]\"\<CR>")
   endif
 endfunction
