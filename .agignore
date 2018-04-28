@@ -8,3 +8,5 @@ npm-shrinkwrap.json
 package.json
 README.md
 package-lock.json
+yarn.lock
+Session.vim

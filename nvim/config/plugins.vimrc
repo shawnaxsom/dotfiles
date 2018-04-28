@@ -489,10 +489,14 @@ let g:neoformat_javascript_prettier = {
             " \ 'args': ['--trailing-comma all', '--no-bracket-spacing'],
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_verbose = 0
-nmap <silent> = :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
+" nmap <silent> = :Neoformat prettier<CR>:ALEFix<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
+nmap <silent> = :Neoformat prettier<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
 augroup neoformat
   autocmd!
   autocmd BufWritePost **/web/**/*.js Neoformat prettier | ALELint
+  autocmd BufWritePost **/sandbox/**/*.js Neoformat prettier | ALELint
+  autocmd BufWritePost **/dc*/**/*.{js,ts,tsx} Neoformat prettier | ALELint
+  " autocmd BufWritePost **/side-projects/**/*.js Neoformat prettier | ALELint
 augroup END
 let g:neoformat_try_formatprg = 1
 let g:neoformat_basic_format_align = 1
@@ -813,10 +817,15 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'owickstrom/vim-colors-paramount'
 " }
 " { mhartington/nvim-typescript
-" Plug 'mhartington/nvim-typescript'
+Plug 'mhartington/nvim-typescript'
 " }
-" {
+" { TypeScript plugins
+Plug 'quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'jason0x43/vim-js-indent'
+Plug 'Quramy/vim-dtsm'
+Plug 'mhartington/vim-typings'
 " }
 
 call plug#end()

@@ -1,0 +1,206 @@
+global !p
+def filename():
+    snip.rv += os.path.basename(vim.current.window.buffer.name)
+endglobal
+
+snippet if "if"
+if ($1) {
+  $0
+}
+endsnippet
+
+snippet class "Class"
+class $1 {
+	$0
+}
+endsnippet
+
+snippet component "Component"
+class $1 extends Component {
+  $0
+}
+endsnippet
+
+snippet f "Function"
+function $1($2) {
+	$0
+}
+endsnippet
+
+snippet con "Constructor"
+constructor(props) {
+  super(props);
+
+  this.state = {$0};
+}
+
+endsnippet
+
+snippet render "React render"
+render() {
+  return (
+    $0
+  );
+}
+endsnippet
+
+snippet div
+<div>$1</div>$0
+endsnippet
+
+snippet ex
+export default $0;
+endsnippet
+
+snippet default
+export default $0;
+endsnippet
+
+snippet this "Member variable"
+this.$1 = $1;
+endsnippet
+
+snippet desc "Describe"
+describe("$1", () => {
+  it("$2", () => {
+		$0
+  });
+});
+endsnippet
+
+snippet m "Method (Function on ES6 class)"
+$1($2) {
+	$0
+}
+endsnippet
+
+snippet log "Console Log"
+console.warn("ZZZZ `!p filename()`", "$1");$0
+endsnippet
+
+# snippet logoo "Console Log an object"
+# console.warn("ZZZZ `!p filename()`", {$1})
+# endsnippet
+
+snippet logo "Console Log a value"
+console.warn("ZZZZ `!p filename()`", "$1", $1)
+endsnippet
+
+# snippet logos "Console Log an object, pretty printed"
+# console.warn("ZZZZ `!p filename()`", "$1", JSON.stringify($1, null, 2))
+# endsnippet
+
+snippet trace "Console Trace"
+console.trace();
+endsnippet
+
+snippet db "Debug"
+debugger;
+endsnippet
+
+snippet for "For loop"
+for (var i = 0; i < $1; i++) {
+	$0
+}
+endsnippet
+
+snippet var
+var $1 = $0
+endsnippet
+
+snippet willUpdate "componentWillUpdate" b
+componentWillUpdate(props, state) {
+	$0
+}
+endsnippet
+
+snippet didUpdate "componentDidUpdate" b
+componentDidUpdate(props, state) {
+	$0
+}
+endsnippet
+
+snippet m
+$1($2) {
+	$0
+}
+endsnippet
+
+snippet import "Import module"
+import $1 from '${2:$1}';$0
+endsnippet
+
+snippet require "Require file"
+const $1 = require('${2:$1}');$0
+endsnippet
+snippet req "Require file"
+const $1 = require('${2:$1}');$0
+endsnippet
+
+snippet new
+const $1 = new $2();
+endsnippet
+
+snippet it
+it('$1', () => {
+	$0
+});
+endsnippet
+
+snippet expect
+expect($1).toEqual($2);
+endsnippet
+
+snippet react
+import React, { Component } from 'react';
+endsnippet
+
+snippet cn
+className='$0'
+endsnippet
+
+snippet ///
+/**
+ * ${0:description}
+ * @param {Object} employee - The employee who is responsible for the project.
+ */
+endsnippet
+
+snippet spreadIf
+...spreadIf($1, {
+  $0
+}),
+endsnippet
+
+snippet ()
+() => {
+  $0
+}
+endsnippet
+
+snippet input
+<input
+  type="text"
+  value={this.state.$1}
+  onChange={event => this.setState({$1: event.target.value})}
+/>
+endsnippet
+
+snippet promise
+new Promise((resolve, reject) => {
+  $0
+});
+endsnippet
+
+snippet try
+try {
+  $0
+} catch (err) {
+}
+endsnippet
+
+snippet catch
+catch (err) {
+  $0
+}
+endsnippet

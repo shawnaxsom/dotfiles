@@ -47,7 +47,8 @@ function! GoToFileIncludeNodeModules ()
   set wildignore+=*/node_modules/*
   set path-=../node_modules/,./node_modules/
 endfunction
-nnoremap gf :call GoToFileIncludeNodeModules()<CR>
+" Doesn't work if not js file
+" nnoremap gf :call GoToFileIncludeNodeModules()<CR>
 
 nmap <leader>] :tjump /
 set wildignore=*.swp,*.bak
@@ -56,7 +57,6 @@ set wildignore+=*/env/*,*/dist/*,*/bower_components/*,*/.tmp/*,*/tmp/*,*/jest/*
 set wildignore+=*.so,*.swp,*.zip,*.rst,*.pyc     " Linux/MacOSX
 set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
 set wildignore+=*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*
-set wildignore+=*tags*
 set wildignore+=*.tar.*
 set wildignore+=*.git/*
 set wildignore+=*fonts/*

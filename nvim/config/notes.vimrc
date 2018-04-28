@@ -197,8 +197,8 @@ augroup markdown
   autocmd BufEnter   *.md nnoremap <silent><buffer> x :call CheckTodoIfOnBox()<CR>
   autocmd BufEnter   *.md nnoremap <silent><buffer> <leader>x :call CheckTodo()<CR>
   autocmd BufEnter   *.md nnoremap <buffer> <leader><leader>x :call ClearTodos()<CR>
-  autocmd BufEnter   *.md nnoremap <buffer> [[ ?^\[ \]<CR>:nohls<CR>
-  autocmd BufEnter   *.md nnoremap <buffer> ]] /^\[ \]<CR>:nohls<CR>
+  " autocmd BufEnter   *.md nnoremap <buffer> [[ ?^\[ \]<CR>:nohls<CR>
+  " autocmd BufEnter   *.md nnoremap <buffer> ]] /^\[ \]<CR>:nohls<CR>
   " autocmd BufEnter   *.md nnoremap <buffer> K ?^\[ \]<CR>:nohls<CR>
   " autocmd BufEnter   *.md nnoremap <buffer> J /^\[ \]<CR>:nohls<CR>
   " autocmd BufEnter   *.md nnoremap <silent><buffer> K :silent! ?^#<CR>:silent nohls<CR>
