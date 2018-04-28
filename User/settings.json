@@ -146,17 +146,6 @@
     }
   ],
   "vim.enableNeovim": false,
-  "sync.gist": "b2e075b1526b105d2c5b637efadd3f90",
-  "sync.lastUpload": "2018-04-28T16:09:22.755Z",
-  "sync.autoDownload": true,
-  "sync.autoUpload": true,
-  "sync.lastDownload": "2018-04-28T15:43:21.158Z",
-  "sync.forceDownload": false,
-  "sync.anonymousGist": false,
-  "sync.host": "",
-  "sync.pathPrefix": "",
-  "sync.quietSync": false,
-  "sync.askGistName": false,
   "editor.matchBrackets": false,
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
