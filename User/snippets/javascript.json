@@ -1,0 +1,52 @@
+{
+  "Print to console": {
+    "prefix": "log",
+    "body": ["console.log(\"$1\");"],
+    "description": "Log output to console"
+  },
+  "Print object to console": {
+    "prefix": "logo",
+    "body": ["console.log(\"$1\", $1);"],
+    "description": "Log output to console"
+  },
+  "Arrow function": {
+    "prefix": "arrow",
+    "body": "($1) => $0"
+  },
+  "Functional Component": {
+    "prefix": "fcom",
+    "body": ["const $1 = props => {", "  return (", "    $0", "  );", "}"]
+  },
+  "Component": {
+    "prefix": "com",
+    "body": [
+      "class $1 extends React.Component {",
+      "  render() {",
+      "    return (",
+      "      $0",
+      "    );",
+      "  }",
+      "}"
+    ],
+    "description": "Log output to console"
+  },
+  "Render": {
+    "prefix": "render",
+    "body": ["render() {", "  return (", "    $0", "  );", "}"],
+    "description": "Render component"
+  },
+  "Div": {
+    "prefix": "div",
+    "body": "<div>$0</div>"
+  },
+  "Constructor": {
+    "prefix": "con",
+    "body": [
+      "constructor(props) {",
+      "  super(props);",
+      "",
+      "  this.state = {};",
+      "}"
+    ]
+  }
+}

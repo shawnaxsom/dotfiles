@@ -1,0 +1,179 @@
+{
+  "eslint.autoFixOnSave": true,
+  "javascript.implicitProjectConfig.checkJs": true,
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 17,
+  "editor.wordWrap": "bounded",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.cursorBlinking": "solid",
+  "window.zoomLevel": 0,
+  "vim.disableAnnoyingNeovimMessage": true,
+  "editor.minimap.enabled": false,
+  "editor.minimap.renderCharacters": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.sideBar.location": "left",
+  "prettier.eslintIntegration": true,
+  "vim.hlsearch": true,
+  "vim.easymotion": false,
+  "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
+  "explorer.openEditors.visible": 15,
+  "editor.lineNumbers": "off",
+  "prettier.bracketSpacing": true,
+  "prettier.trailingComma": "all",
+  "search.quickOpen.includeSymbols": false,
+  "editor.snippetSuggestions": "top",
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/package.json"
+      ],
+      "url": "http://json.schemastore.org/package.json"
+    }
+  ],
+  "emmet.syntaxProfiles": {
+    "JavaScript": true,
+    "JavaScript React": true
+  },
+  "vim.otherModesKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "J"
+      ],
+      "after": [
+        "]"
+      ]
+    },
+    {
+      "before": [
+        "K"
+      ],
+      "after": [
+        "["
+      ]
+    }
+  ],
+  "git.enableSmartCommit": true,
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.visible": true,
+  "workbench.colorTheme": "One Monokai",
+  "git.confirmSync": false,
+  "dash.docset.javascript": [
+    "javascript",
+    "jquery",
+    "jqueryui",
+    "jquerym",
+    "react",
+    "angularjs",
+    "backbone",
+    "marionette",
+    "meteor",
+    "sproutcore",
+    "moo",
+    "prototype",
+    "bootstrap",
+    "foundation",
+    "lodash",
+    "underscore",
+    "ember",
+    "sencha",
+    "extjs",
+    "titanium",
+    "knockout",
+    "zepto",
+    "yui",
+    "d3",
+    "svg",
+    "dojo",
+    "coffee",
+    "nodejs",
+    "express",
+    "grunt",
+    "mongoose",
+    "moment",
+    "require",
+    "awsjs",
+    "jasmine",
+    "sails",
+    "sinon",
+    "chai",
+    "html",
+    "css",
+    "cordova",
+    "phonegap",
+    "unity3d",
+    "materialui"
+  ],
+  "zenMode.fullScreen": false,
+  "vim.otherModesKeyBindings": [
+    {
+      "before": [
+        "J"
+      ],
+      "after": [
+        "}"
+      ]
+    },
+    {
+      "before": [
+        "K"
+      ],
+      "after": [
+        "{"
+      ]
+    },
+    {
+      "before": [
+        "H"
+      ],
+      "after": [
+        "[",
+        "{"
+      ]
+    },
+    {
+      "before": [
+        "L"
+      ],
+      "after": [
+        "]",
+        "}"
+      ]
+    }
+  ],
+  "vim.enableNeovim": false,
+  "sync.gist": "b2e075b1526b105d2c5b637efadd3f90",
+  "sync.lastUpload": "2018-04-28T16:09:22.755Z",
+  "sync.autoDownload": true,
+  "sync.autoUpload": true,
+  "sync.lastDownload": "2018-04-28T15:43:21.158Z",
+  "sync.forceDownload": false,
+  "sync.anonymousGist": false,
+  "sync.host": "",
+  "sync.pathPrefix": "",
+  "sync.quietSync": false,
+  "sync.askGistName": false,
+  "editor.matchBrackets": false,
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": false,
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": false,
+    "suppressWelcomeNotice": true
+  },
+  "explorer.confirmDragAndDrop": false,
+  "gitlens.keymap": "alternate",
+  "sync.removeExtensions": true,
+  "sync.syncExtensions": true,
+  "vim.neovimPath": "/usr/local/bin/nvim",
+  "editor.autoIndent": false
+}

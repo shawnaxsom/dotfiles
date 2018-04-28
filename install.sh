@@ -10,8 +10,8 @@ install_cmake() {
 
 create_symlink() {
   if [ $prompted_to_delete=false ]; then
-    if [ ! -L $2 ]; then
-      if [ -f $2 ] || [ -d $2 ]; then
+    if [ ! -L "$2" ]; then
+      if [ -f "$2" ] || [ -d "$2" ]; then
         read -p "Non-symbolic file already exists, okay to delete? (y/n)" yn
 
         case $yn in
@@ -25,13 +25,13 @@ create_symlink() {
 fi
 fi
 
-  if [ -L $2 ] || [ -f $2 ] || [ -d $2 ]; then
+  if [ -L "$2" ] || [ -f "$2" ] || [ -d "$2" ]; then
     echo "Removing symbolic link $2"
-    rm -rf $2
+    rm -rf "$2"
   fi
 
   echo "Creating symbolic link $2"
-  ln -s ~/dotfiles/$1 $2
+  ln -s ~/dotfiles/$1 "$2"
 }
 
 
@@ -78,6 +78,7 @@ create_symlink   ranger                    ~/.config/ranger
 create_symlink   sift.vim                  ~/.vim/colors/sift.vim
 create_symlink   alacritty                 ~/.config/alacritty
 create_symlink   .PULL_REQUEST_TEMPLATE.md ~/.PULL_REQUEST_TEMPLATE.md
+create_symlink   User/                     ~/Library/Application\ Support/Code/User
 
 # Hyper doesn't seem to like symlinks
 cp                .hyper.js         ~/.hyper.js

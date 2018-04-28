@@ -493,9 +493,9 @@ let g:neoformat_verbose = 0
 nmap <silent> = :Neoformat prettier<CR>:ALELint<CR>:w<CR>:redraw<CR>:lfirst<CR>
 augroup neoformat
   autocmd!
-  autocmd BufWritePost **/web/**/*.js Neoformat prettier | ALELint
-  autocmd BufWritePost **/sandbox/**/*.js Neoformat prettier | ALELint
-  autocmd BufWritePost **/dc*/**/*.{js,ts,tsx} Neoformat prettier | ALELint
+  autocmd BufWritePre **/web/**/*.js Neoformat prettier
+  autocmd BufWritePre **/sandbox/**/*.js Neoformat prettier
+  autocmd BufWritePre **/dc*/**/*.{js,ts,tsx} Neoformat prettier
   " autocmd BufWritePost **/side-projects/**/*.js Neoformat prettier | ALELint
 augroup END
 let g:neoformat_try_formatprg = 1
