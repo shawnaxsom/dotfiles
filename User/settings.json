@@ -1,5 +1,7 @@
 {
-  "eslint.autoFixOnSave": true,
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": true,
+  "eslint.autoFixOnSave": false,
   "javascript.implicitProjectConfig.checkJs": true,
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
@@ -11,7 +13,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "vim.disableAnnoyingNeovimMessage": true,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
