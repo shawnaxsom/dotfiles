@@ -163,6 +163,7 @@ augroup vimux
   autocmd BufEnter */api/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
   autocmd BufEnter */optimization/*,*/recommendations/*,*/ambyint-platform-admin/*,*/iot/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
   autocmd BufEnter */web/* map <buffer> ,t :Dispatch npm run test<CR>
+  autocmd BufEnter */utils/* map <buffer> ,t :Dispatch npm run test<CR>
 augroup END
 " }
 " { vim-tmux-navigator
@@ -191,30 +192,24 @@ let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 " Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
 " followed by a property in a string. "rodDimensions." showed all props of
 " random variable.
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'othree/jspc.vim'
-Plug 'wellle/tmux-complete.vim'
-" Deoplete might have less flickering with this
-set completeopt-=preview
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#auto_refresh_delay = 30
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#buffer#require_same_filetype = 0
-let g:deoplete#file#enable_buffer_path = 0
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#omni#functions = {}
-let g:jsx_ext_required = 0
-" let g:deoplete#omni#functions.javascript = [
-"   \ 'htmlcomplete#CompleteTags',
-"   \ 'jspc#omni',
-" \]
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'wellle/tmux-complete.vim'
+" set completeopt-=preview
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#auto_complete_delay = 0
+" let g:deoplete#auto_refresh_delay = 30
+" let g:deoplete#enable_ignore_case = 1
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#enable_camel_case = 1
+" let g:deoplete#enable_refresh_always = 1
+" let g:deoplete#buffer#require_same_filetype = 0
+" let g:deoplete#file#enable_buffer_path = 0
+" let g:deoplete#max_abbr_width = 0
+" let g:deoplete#max_menu_width = 0
+" let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+" let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#omni#functions = {}
+" let g:jsx_ext_required = 0
 " }
 " { deoplete-ternjs
 " " TODO TernJS slows down Deoplete considerably

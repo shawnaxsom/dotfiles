@@ -42,17 +42,8 @@ windows:
       panes:
         - nvim
         - npm run start-infrastructure; npm start;
-  - alerts:
-      root: ~/dev/ambyint/packages/alerts
-      panes:
-        - nvim
   - optimization:
       root: ~/dev/ambyint/packages/optimization
       panes:
         - nvim
         - dlogwatch optimization
-  - iot:
-      root: ~/dev/ambyint/packages/iot
-      panes:
-        - nvim
-        - dlogwatch iot

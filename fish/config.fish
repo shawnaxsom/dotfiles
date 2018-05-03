@@ -78,24 +78,22 @@ function dpsi
 end
 
 function dlog
-  docker ps | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
+  docker ps | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1 | vim -
 end
 function dloga
-  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
+  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1 | vim -R -
 end
+alias dl='dloga'
 function dlogatail
-  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs --tail 20
+  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1  --tail 10
 end
 function dlogwatch
-  watch "fish -c 'dlogatail $argv'"
+  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1  --follow
 end
 function dstop
   set id (dpsi)
   docker stop $id
 end
-# function dlog
-#   awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs
-# end
 
 function psf
   # ps FZF, returning the ID to feed into other commands
@@ -117,7 +115,8 @@ alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %
 alias glp='git log -p'
 alias gmm='git fetch; git merge origin/master'
 alias grm='git fetch; git rebase origin/master'
-alias gp='git pull; and echo; and git push; and echo; and git status; and echo'
+# alias gp='git pull; and echo; and git push; and echo; and git status; and echo'
+alias gp='git pull; and echo; and git status; and echo'
 alias gpr='hub pull-request --edit -F ~/.PULL_REQUEST_TEMPLATE.md'
 alias gs='git status'
 alias gyesterday='git log --since="yesterday"'
@@ -135,11 +134,11 @@ alias gwc='git whatchanged --author=".*hawn.*" --no-commit-id --name-only --sinc
 alias gwca='git whatchanged --author=".*hawn.*" --diff-filter=A --no-commit-id --name-only --since="5 days ago"'
 
 # All files created/added in feature branch
-alias gcreated='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^A" | sort | uniq'
+alias gcreated='git log origin/master...  --pretty=oneline --name-status . | g "^A" | sort | uniq'
 # All files modified in feature branch
-alias gmodified='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^M" | sort | uniq'
+alias gmodified='git log origin/master...  --pretty=oneline --name-status . | g "^M" | sort | uniq'
 # All files created/added or modified in feature branch
-alias gchanged='git log origin/master...  --pretty=oneline --name-status . | gv test | g "^[AM]" | sort | uniq'
+alias gchanged='git log origin/master...  --pretty=oneline --name-status . | g "^[AM]" | sort | uniq'
 
 # Revert to a certain date
 # Can use relative time, like 6 months ago
@@ -240,11 +239,11 @@ alias aws-horizonal='ssh -i ~/.ssh/ShawnEC2.pem ubuntu@52.206.194.188'
 
 # VirtualFish - Python virtualenv wrapper
 set -x VIRTUALFISH_HOME ~/.virtualenvs
-set -x VIRTUALFISH_DEFAULT_PYTHON python3.6
+# set -x VIRTUALFISH_DEFAULT_PYTHON python3.6
 # alias python='python3.6'
 # alias python3='python3.6'
-eval (python3.6 -m virtualfish)
-alias pip='pip3.6'
+# eval (python3.6 -m virtualfish)
+# alias pip='pip3.6'
 
 function rebuild
   cd ~/dev/ambyint/packages; and npm start /Users/shawn.axsom/dev/ambyint/packages; and cd -;

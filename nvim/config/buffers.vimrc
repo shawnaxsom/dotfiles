@@ -30,7 +30,19 @@ function! ToggleList(bufname, pfx)
     wincmd p
   endif
 endfunction
-nnoremap <leader>l :copen<CR>
+
+function! s:ToggleQf()
+  for buffer in tabpagebuflist()
+    if bufname(buffer) == ''
+      " then it should be the quickfix window
+      cclose
+      return
+    endif
+  endfor
+
+  copen
+endfunction
+nnoremap <leader>l :call <SID>ToggleQf()<cr>
 
 function! GoToFileIncludeNodeModules ()
   set wildignore-=*/node_modules/*

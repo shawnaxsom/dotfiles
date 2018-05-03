@@ -18,7 +18,6 @@ function! GrepAndJumpIfSingleResult (args, exclude_current_file, always_jump_to_
 
   let results = map(copy(results), '{"filename": split(v:val, ":")[0], "text": join(split(v:val, ":")[2:], ":"), "lnum": split(v:val, ":")[1]}')
 
-  " echom string(results)
   call setqflist(results)
 
   " if len(getqflist()) <= 1
