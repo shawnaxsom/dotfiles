@@ -10,3 +10,5 @@ tags
 *.bak
 tags.lock
 tags.temp
+launch.json
+.vscode
