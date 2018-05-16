@@ -303,8 +303,9 @@ vnoremap ? ?\c
 vnoremap . :normal .<CR>
 
 " Center screen and open folds when going through search results
-nnoremap <silent> n nzzzO
-nnoremap <silent> N NzzzO
+" TODO: this can be slow and show a warning if no folds are found
+" nnoremap <silent> n nzzzO
+" nnoremap <silent> N NzzzO
 
 " Don't skip wrapped lines
 noremap j gj

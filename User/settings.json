@@ -1,5 +1,7 @@
 {
-  "eslint.autoFixOnSave": true,
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": true,
+  "eslint.autoFixOnSave": false,
   "javascript.implicitProjectConfig.checkJs": true,
   "editor.formatOnType": true,
   "editor.formatOnSave": true,

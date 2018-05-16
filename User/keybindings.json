@@ -5,15 +5,8 @@
     "command": "workbench.action.openRecent"
   },
   {
-    "key": "ctrl+r",
-    "command": "-workbench.action.openRecent"
-  },
-  {
-    "key": "shift+cmd+b",
-    "command": "workbench.action.tasks.runTask"
-  },
-  {
-    "key": "shift+cmd+b",
-    "command": "-workbench.action.tasks.build"
+    "key": "enter",
+    "command": "-renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
   }
 ]

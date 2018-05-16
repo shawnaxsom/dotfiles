@@ -88,3 +88,8 @@ highlight IncSearch      cterm=reverse ctermfg=184 ctermbg=234 gui=reverse guifg
 highlight Search         ctermfg=0     ctermbg=220             gui=reverse guifg=#f08080 guibg=#505050
 " " }
 " }
+
+hi DiffAdd      guibg=#5af540 guifg=#05293d
+hi DiffDelete   guibg=#aa0500 guifg=#a5293d
+hi DiffChange   guibg=#5aa5f0 guifg=#05293d
+hi DiffText     guibg=#faa5f0 guifg=#f5293d
