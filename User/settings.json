@@ -9,7 +9,7 @@
   "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 17,
-  "editor.wordWrap": "bounded",
+  "editor.wordWrap": "off",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
@@ -62,7 +62,7 @@
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "One Monokai",
+  "workbench.colorTheme": "Monokai",
   "git.confirmSync": false,
   "dash.docset.javascript": [
     "javascript",
@@ -147,7 +147,7 @@
       ]
     }
   ],
-  "vim.enableNeovim": false,
+  "vim.enableNeovim": true,
   "editor.matchBrackets": false,
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
@@ -166,5 +166,14 @@
   "sync.removeExtensions": true,
   "sync.syncExtensions": true,
   "vim.neovimPath": "/usr/local/bin/nvim",
-  "editor.autoIndent": false
+  "editor.autoIndent": false,
+  "search.location": "panel",
+  "workbench.startupEditor": "newUntitledFile",
+  "git.autofetch": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
+  "vim.useSystemClipboard": true,
+  "vim.visualstar": true
 }
