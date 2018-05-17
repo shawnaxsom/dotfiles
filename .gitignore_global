@@ -10,6 +10,10 @@ tags
 *.bak
 tags.lock
 tags.temp
+launch.json
+.vscode
+local.json
+User/workspaceStorage
 settings.json
 tasks.json
 User/workspaceStorage

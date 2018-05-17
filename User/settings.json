@@ -13,7 +13,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": -1,
   "vim.disableAnnoyingNeovimMessage": true,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
@@ -175,5 +175,8 @@
     "**/bower_components": true
   },
   "vim.useSystemClipboard": true,
-  "vim.visualstar": true
+  "vim.visualstar": true,
+  "terminal.integrated.shell.linux": "/usr/local/bin/fish",
+  "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+  "git.autofetch": true
 }
