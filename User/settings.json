@@ -169,5 +169,6 @@
   "editor.autoIndent": false,
   "terminal.integrated.shell.linux": "/usr/local/bin/fish",
   "terminal.integrated.shell.osx": "/usr/local/bin/fish",
-  "git.autofetch": true
+  "git.autofetch": true,
+  "gitlens.historyExplorer.enabled": true
 }
