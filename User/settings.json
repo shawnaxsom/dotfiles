@@ -13,7 +13,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": -1,
+  "window.zoomLevel": 0,
   "vim.disableAnnoyingNeovimMessage": true,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
@@ -172,11 +172,16 @@
   "git.autofetch": true,
   "search.exclude": {
     "**/node_modules": true,
-    "**/bower_components": true
+    "**/bower_components": true,
+    ".*": true,
+    "*.json": true,
+    "*.md": true,
   },
   "vim.useSystemClipboard": true,
   "vim.visualstar": true,
   "terminal.integrated.shell.linux": "/usr/local/bin/fish",
   "terminal.integrated.shell.osx": "/usr/local/bin/fish",
-  "git.autofetch": true
+  "git.autofetch": true,
+  "gitlens.historyExplorer.enabled": true,
+  "search.useIgnoreFiles": true
 }
