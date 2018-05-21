@@ -175,7 +175,7 @@
     "**/bower_components": true,
     ".*": true,
     "*.json": true,
-    "*.md": true,
+    "*.md": true
   },
   "vim.useSystemClipboard": true,
   "vim.visualstar": true,
