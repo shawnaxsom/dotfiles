@@ -1,12 +1,16 @@
 // Place your key bindings in this file to overwrite the defaults
 [
   {
-    "key": "cmd+r",
-    "command": "workbench.action.openRecent"
-  },
-  {
     "key": "enter",
     "command": "-renameFile",
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+  },
+  {
+    "key": "cmd+t",
+    "command": "workbench.action.tasks.test"
+  },
+  {
+    "key": "cmd+r",
+    "command": "workbench.action.openRecent"
   }
 ]

@@ -78,10 +78,12 @@ function dpsi
 end
 
 function dlog
-  docker ps | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1 | vim -
+  # docker ps | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1 | vim -
+  docker ps | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1
 end
 function dloga
-  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1 | vim -R -
+  # docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1 | vim -R -
+  docker ps -a | awk "/$argv/ { print \$1 }" | head -1 | xargs docker logs 2>&1
 end
 alias dl='dloga'
 function dlogatail
