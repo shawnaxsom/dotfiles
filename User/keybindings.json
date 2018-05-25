@@ -1,10 +1,6 @@
 // Place your key bindings in this file to overwrite the defaults
 [
   {
-    "key": "cmd+t",
-    "command": "workbench.action.tasks.test"
-  },
-  {
     "key": "cmd+r",
     "command": "workbench.action.openRecent"
   }
