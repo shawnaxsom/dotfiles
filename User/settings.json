@@ -1,7 +1,6 @@
 {
   "typescript.validate.enable": true,
   "javascript.validate.enable": true,
-  "eslint.autoFixOnSave": false,
   "javascript.implicitProjectConfig.checkJs": true,
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
@@ -13,11 +12,9 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": -1,
-  "vim.disableAnnoyingNeovimMessage": true,
+  "window.zoomLevel": 0,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
-  "workbench.iconTheme": "material-icon-theme",
   "workbench.sideBar.location": "left",
   "prettier.eslintIntegration": true,
   "vim.hlsearch": true,
@@ -62,7 +59,7 @@
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Monokai",
+  "workbench.colorTheme": "Sapphire (Bright)",
   "git.confirmSync": false,
   "dash.docset.javascript": [
     "javascript",
@@ -169,10 +166,12 @@
   "editor.autoIndent": false,
   "search.location": "panel",
   "workbench.startupEditor": "newUntitledFile",
-  "git.autofetch": true,
   "search.exclude": {
     "**/node_modules": true,
-    "**/bower_components": true
+    "**/bower_components": true,
+    ".*": true,
+    "*.json": true,
+    "*.md": true
   },
   "vim.useSystemClipboard": true,
   "vim.visualstar": true,
@@ -188,5 +187,9 @@
     "**/.DS_Store": true,
     "**/node_modules": true,
     "**/.webpack": true
-  }
+  },
+  "search.useIgnoreFiles": true,
+  "npm.enableScriptExplorer": true,
+  "workbench.iconTheme": "vscode-great-icons",
+  "jest.pathToJest": "npm test --"
 }
