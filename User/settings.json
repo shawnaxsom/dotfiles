@@ -38,7 +38,7 @@
     "JavaScript": true,
     "JavaScript React": true
   },
-  "vim.otherModesKeyBindingsNonRecursive": [
+  "vim.normalModeKeyBindingsNonRecursive": [
     {
       "before": [
         "J"
@@ -108,7 +108,7 @@
     "materialui"
   ],
   "zenMode.fullScreen": false,
-  "vim.otherModesKeyBindings": [
+  "vim.normalModeKeyBindings": [
     {
       "before": [
         "J"
@@ -160,8 +160,6 @@
   },
   "explorer.confirmDragAndDrop": false,
   "gitlens.keymap": "alternate",
-  "sync.removeExtensions": true,
-  "sync.syncExtensions": true,
   "vim.neovimPath": "/usr/local/bin/nvim",
   "editor.autoIndent": false,
   "search.location": "panel",
