@@ -1,194 +1,195 @@
 {
-  "typescript.validate.enable": true,
-  "javascript.validate.enable": true,
-  "javascript.implicitProjectConfig.checkJs": true,
-  "editor.formatOnType": false,
-  "editor.formatOnSave": false,
-  "editor.formatOnPaste": false,
-  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 17,
-  "editor.wordWrap": "on",
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.cursorBlinking": "solid",
-  "window.zoomLevel": 1,
-  "editor.minimap.enabled": false,
-  "editor.minimap.renderCharacters": true,
-  "workbench.sideBar.location": "left",
-  "prettier.eslintIntegration": true,
-  "vim.hlsearch": true,
-  "vim.easymotion": false,
-  "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "explorer.openEditors.visible": 15,
-  "editor.lineNumbers": "off",
-  "prettier.bracketSpacing": true,
-  "prettier.trailingComma": "all",
-  "search.quickOpen.includeSymbols": false,
-  "editor.snippetSuggestions": "top",
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "/package.json"
-      ],
-      "url": "http://json.schemastore.org/package.json"
-    }
-  ],
-  "emmet.syntaxProfiles": {
-    "JavaScript": true,
-    "JavaScript React": true
-  },
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": [
-        "J"
-      ],
-      "after": [
-        "]"
-      ]
+    "typescript.validate.enable": true,
+    "javascript.validate.enable": true,
+    "editor.formatOnType": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 17,
+    "editor.wordWrap": "on",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.cursorBlinking": "solid",
+    "window.zoomLevel": -1,
+    "editor.minimap.enabled": false,
+    "editor.minimap.renderCharacters": true,
+    "workbench.sideBar.location": "left",
+    "prettier.eslintIntegration": true,
+    "vim.hlsearch": true,
+    "vim.easymotion": false,
+    "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
+    "explorer.openEditors.visible": 15,
+    "editor.lineNumbers": "off",
+    "prettier.bracketSpacing": true,
+    "prettier.trailingComma": "all",
+    "search.quickOpen.includeSymbols": false,
+    "editor.snippetSuggestions": "top",
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/package.json"
+            ],
+            "url": "http://json.schemastore.org/package.json"
+        }
+    ],
+    "emmet.syntaxProfiles": {
+        "JavaScript": true,
+        "JavaScript React": true
     },
-    {
-      "before": [
-        "K"
-      ],
-      "after": [
-        "["
-      ]
-    }
-  ],
-  "git.enableSmartCommit": true,
-  "workbench.statusBar.visible": true,
-  "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Dracula Soft",
-  "git.confirmSync": false,
-  "dash.docset.javascript": [
-    "javascript",
-    "jquery",
-    "jqueryui",
-    "jquerym",
-    "react",
-    "angularjs",
-    "backbone",
-    "marionette",
-    "meteor",
-    "sproutcore",
-    "moo",
-    "prototype",
-    "bootstrap",
-    "foundation",
-    "lodash",
-    "underscore",
-    "ember",
-    "sencha",
-    "extjs",
-    "titanium",
-    "knockout",
-    "zepto",
-    "yui",
-    "d3",
-    "svg",
-    "dojo",
-    "coffee",
-    "nodejs",
-    "express",
-    "grunt",
-    "mongoose",
-    "moment",
-    "require",
-    "awsjs",
-    "jasmine",
-    "sails",
-    "sinon",
-    "chai",
-    "html",
-    "css",
-    "cordova",
-    "phonegap",
-    "unity3d",
-    "materialui"
-  ],
-  "zenMode.fullScreen": false,
-  "vim.normalModeKeyBindings": [
-    {
-      "before": [
-        "J"
-      ],
-      "after": [
-        "}"
-      ]
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "J"
+            ],
+            "after": [
+                "]"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "after": [
+                "["
+            ]
+        }
+    ],
+    "git.enableSmartCommit": true,
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "workbench.colorTheme": "Dracula Soft",
+    "git.confirmSync": false,
+    "dash.docset.javascript": [
+        "javascript",
+        "jquery",
+        "jqueryui",
+        "jquerym",
+        "react",
+        "angularjs",
+        "backbone",
+        "marionette",
+        "meteor",
+        "sproutcore",
+        "moo",
+        "prototype",
+        "bootstrap",
+        "foundation",
+        "lodash",
+        "underscore",
+        "ember",
+        "sencha",
+        "extjs",
+        "titanium",
+        "knockout",
+        "zepto",
+        "yui",
+        "d3",
+        "svg",
+        "dojo",
+        "coffee",
+        "nodejs",
+        "express",
+        "grunt",
+        "mongoose",
+        "moment",
+        "require",
+        "awsjs",
+        "jasmine",
+        "sails",
+        "sinon",
+        "chai",
+        "html",
+        "css",
+        "cordova",
+        "phonegap",
+        "unity3d",
+        "materialui"
+    ],
+    "zenMode.fullScreen": false,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "J"
+            ],
+            "after": [
+                "}"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "after": [
+                "{"
+            ]
+        },
+        {
+            "before": [
+                "H"
+            ],
+            "after": [
+                "[",
+                "{"
+            ]
+        },
+        {
+            "before": [
+                "L"
+            ],
+            "after": [
+                "]",
+                "}"
+            ]
+        }
+    ],
+    "vim.enableNeovim": true,
+    "editor.matchBrackets": false,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
     },
-    {
-      "before": [
-        "K"
-      ],
-      "after": [
-        "{"
-      ]
+    "explorer.confirmDragAndDrop": false,
+    "gitlens.keymap": "alternate",
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "editor.autoIndent": false,
+    "search.location": "panel",
+    "workbench.startupEditor": "newUntitledFile",
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        ".*": true,
+        "*-lock.json": true,
+        "*.md": true,
+        "**/build": true,
     },
-    {
-      "before": [
-        "H"
-      ],
-      "after": [
-        "[",
-        "{"
-      ]
+    "vim.useSystemClipboard": true,
+    "vim.visualstar": true,
+    "terminal.integrated.shell.linux": "/usr/local/bin/fish",
+    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+    "git.autofetch": true,
+    "gitlens.historyExplorer.enabled": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/.webpack": true,
+        "/var/folders": true,
     },
-    {
-      "before": [
-        "L"
-      ],
-      "after": [
-        "]",
-        "}"
-      ]
-    }
-  ],
-  "vim.enableNeovim": true,
-  "editor.matchBrackets": false,
-  "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": false,
-    "suppressCommitNotFoundWarning": false,
-    "suppressFileNotUnderSourceControlWarning": false,
-    "suppressGitVersionWarning": false,
-    "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false,
-    "suppressResultsExplorerNotice": false,
-    "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": false,
-    "suppressWelcomeNotice": true
-  },
-  "explorer.confirmDragAndDrop": false,
-  "gitlens.keymap": "alternate",
-  "vim.neovimPath": "/usr/local/bin/nvim",
-  "editor.autoIndent": false,
-  "search.location": "panel",
-  "workbench.startupEditor": "newUntitledFile",
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true,
-    ".*": true,
-    "*.json": true,
-    "*.md": true
-  },
-  "vim.useSystemClipboard": true,
-  "vim.visualstar": true,
-  "terminal.integrated.shell.linux": "/usr/local/bin/fish",
-  "terminal.integrated.shell.osx": "/usr/local/bin/fish",
-  "git.autofetch": true,
-  "gitlens.historyExplorer.enabled": true,
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/.webpack": true
-  },
-  "search.useIgnoreFiles": true,
-  "npm.enableScriptExplorer": true,
-  "workbench.iconTheme": "vscode-great-icons",
-  "jest.pathToJest": "npm test --",
-  "editor.wrappingIndent": "deepIndent"
+    "search.useIgnoreFiles": true,
+    "npm.enableScriptExplorer": true,
+    "workbench.iconTheme": "vscode-great-icons",
+    "jest.pathToJest": "npm test --",
+    "editor.wrappingIndent": "deepIndent"
 }
