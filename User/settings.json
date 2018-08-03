@@ -59,7 +59,7 @@
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Dracula Soft",
+  "workbench.colorTheme": "Visual Studio Dark",
   "git.confirmSync": false,
   "dash.docset.javascript": [
     "javascript",
@@ -168,7 +168,7 @@
     "**/node_modules": true,
     "**/bower_components": true,
     ".*": true,
-    "*.json": true,
+    "*-lock.json": true,
     "*.md": true
   },
   "vim.useSystemClipboard": true,
@@ -184,11 +184,14 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/node_modules": true,
+    "**/.tmp": true,
     "**/.webpack": true
   },
   "search.useIgnoreFiles": true,
   "npm.enableScriptExplorer": true,
   "workbench.iconTheme": "vscode-great-icons",
   "jest.pathToJest": "npm test --",
-  "editor.wrappingIndent": "deepIndent"
+  "editor.wrappingIndent": "deepIndent",
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "explorer.confirmDelete": false,
 }

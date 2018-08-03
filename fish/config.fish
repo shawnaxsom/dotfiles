@@ -137,6 +137,7 @@ alias gwca='git whatchanged --author=".*hawn.*" --diff-filter=A --no-commit-id -
 
 # All files created/added in feature branch
 alias gcreated='git log origin/master...  --pretty=oneline --name-status . | g "^A" | sort | uniq'
+alias gadded=gcreated
 # All files modified in feature branch
 alias gmodified='git log origin/master...  --pretty=oneline --name-status . | g "^M" | sort | uniq'
 # All files created/added or modified in feature branch
@@ -246,6 +247,17 @@ set -x VIRTUALFISH_HOME ~/.virtualenvs
 # alias python3='python3.6'
 # eval (python3.6 -m virtualfish)
 # alias pip='pip3.6'
+
+function clear_screen
+  # https://stackoverflow.com/questions/2198377/how-to-clear-previous-output-in-terminal-in-mac-os-x
+  # Don't just move screen down on Mac, actually clear the screen as well
+  clear; and printf '\e[3J'
+end
+
+function test_on_change
+  echo "$argv"
+  chokidar '**/*.js' --ignore "*.tmp*" --debounce 1500 --throttle 0 --ignore "node_modules" -c "clear_screen; and npm test -- --tests $argv"
+end
 
 function rebuild
   cd ~/dev/ambyint/packages; and npm start /Users/shawn.axsom/dev/ambyint/packages; and cd -;
