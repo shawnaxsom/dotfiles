@@ -1,7 +1,6 @@
 {
   "typescript.validate.enable": true,
   "javascript.validate.enable": true,
-  "javascript.implicitProjectConfig.checkJs": true,
   "editor.formatOnType": false,
   "editor.formatOnSave": false,
   "editor.formatOnPaste": false,
@@ -12,7 +11,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 2,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
   "workbench.sideBar.location": "left",
@@ -44,22 +43,22 @@
         "J"
       ],
       "after": [
-        "]"
+        "}"
       ]
-    },
-    {
-      "before": [
-        "K"
-      ],
-      "after": [
-        "["
-      ]
+},
+{
+  "before": [
+    "K"
+  ],
+  "after": [
+    "{"
+  ]
     }
   ],
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.colorTheme": "Dracula Soft",
   "git.confirmSync": false,
   "dash.docset.javascript": [
     "javascript",
@@ -116,14 +115,14 @@
       "after": [
         "}"
       ]
-    },
-    {
-      "before": [
-        "K"
-      ],
-      "after": [
-        "{"
-      ]
+},
+{
+  "before": [
+    "K"
+  ],
+  "after": [
+    "{"
+  ]
     },
     {
       "before": [
@@ -131,16 +130,16 @@
       ],
       "after": [
         "[",
-        "{"
-      ]
-    },
-    {
-      "before": [
-        "L"
-      ],
-      "after": [
-        "]",
-        "}"
+          "{"
+        ]
+          },
+          {
+            "before": [
+              "L"
+            ],
+            "after": [
+              "]",
+              "}"
       ]
     }
   ],
@@ -169,7 +168,8 @@
     "**/bower_components": true,
     ".*": true,
     "*-lock.json": true,
-    "*.md": true
+    "*.md": true,
+    "**/build": true
   },
   "vim.useSystemClipboard": true,
   "vim.visualstar": true,
@@ -178,14 +178,15 @@
   "git.autofetch": true,
   "gitlens.historyExplorer.enabled": true,
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
     "**/.DS_Store": true,
-    "**/node_modules": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
     "**/.tmp": true,
-    "**/.webpack": true
+    "**/.webpack": true,
+    "**/CVS": true,
+    "**/node_modules": true,
+    "/var/folders": true
   },
   "search.useIgnoreFiles": true,
   "npm.enableScriptExplorer": true,
@@ -193,5 +194,5 @@
   "jest.pathToJest": "npm test --",
   "editor.wrappingIndent": "deepIndent",
   "javascript.updateImportsOnFileMove.enabled": "never",
-  "explorer.confirmDelete": false,
+  "explorer.confirmDelete": false
 }
