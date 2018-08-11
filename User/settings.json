@@ -11,7 +11,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 1,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
   "workbench.sideBar.location": "left",
@@ -58,7 +58,7 @@
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Dracula Soft",
+  "workbench.colorTheme": "One Monokai",
   "git.confirmSync": false,
   "dash.docset.javascript": [
     "javascript",
@@ -161,7 +161,7 @@
   "gitlens.keymap": "alternate",
   "vim.neovimPath": "/usr/local/bin/nvim",
   "editor.autoIndent": false,
-  "search.location": "panel",
+  "search.location": "sidebar",
   "workbench.startupEditor": "newUntitledFile",
   "search.exclude": {
     "**/node_modules": true,
@@ -194,5 +194,15 @@
   "jest.pathToJest": "npm test --",
   "editor.wrappingIndent": "deepIndent",
   "javascript.updateImportsOnFileMove.enabled": "never",
-  "explorer.confirmDelete": false
+  "explorer.confirmDelete": false,
+  "mocha.files.glob": "test/**/*-test.js",
+  "mocha.requires": [
+    "babel-polyfill",
+    "babel-register"
+  ],
+  "mocha.env": {
+    "NODE_PATH": ""
+  },
+  "relativePath.excludedExtensions": [
+  ],
 }

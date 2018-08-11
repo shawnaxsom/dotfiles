@@ -823,4 +823,6 @@ Plug 'Quramy/vim-dtsm'
 Plug 'mhartington/vim-typings'
 " }
 
+Plug 'elixir-editors/vim-elixir'
+
 call plug#end()
