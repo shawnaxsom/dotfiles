@@ -29,9 +29,9 @@ set background=dark
 " colorscheme candyman
 " colorscheme 3dglasses
 " colorscheme paramount
-" colorscheme nova
+colorscheme nova
 " colorscheme zenburn
-colorscheme oceandeep
+" colorscheme oceandeep
 " " } Colorscheme
 
 " " { Highlights

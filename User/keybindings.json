@@ -2,5 +2,25 @@
   {
     "key": "cmd+r",
     "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+cmd+]",
+    "command": "search.action.focusNextSearchResult",
+    "when": "hasSearchResult"
+  },
+  {
+    "key": "f4",
+    "command": "-search.action.focusNextSearchResult",
+    "when": "hasSearchResult"
+  },
+  {
+    "key": "ctrl+cmd+[",
+    "command": "search.action.focusPreviousSearchResult",
+    "when": "hasSearchResult"
+  },
+  {
+    "key": "shift+f4",
+    "command": "-search.action.focusPreviousSearchResult",
+    "when": "hasSearchResult"
   }
 ]
