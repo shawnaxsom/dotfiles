@@ -11,7 +11,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": -1,
+  "window.zoomLevel": 0,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
   "workbench.sideBar.location": "left",
@@ -174,5 +174,7 @@
   },
   "relativePath.excludedExtensions": [],
   "javascript.implicitProjectConfig.checkJs": true,
-  "breadcrumbs.enabled": true
+  "breadcrumbs.enabled": true,
+  "editor.showFoldingControls": "always",
+  "vim.foldfix": true
 }
