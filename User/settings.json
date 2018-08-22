@@ -17,7 +17,7 @@
   "workbench.sideBar.location": "left",
   "prettier.eslintIntegration": true,
   "vim.hlsearch": true,
-  "vim.easymotion": false,
+  "vim.easymotion": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
   "explorer.openEditors.visible": 15,
   "editor.lineNumbers": "off",
@@ -176,5 +176,8 @@
   "javascript.implicitProjectConfig.checkJs": true,
   "breadcrumbs.enabled": true,
   "editor.showFoldingControls": "always",
-  "vim.foldfix": true
+  "vim.foldfix": true,
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground": "#ff0000"
+  }
 }
