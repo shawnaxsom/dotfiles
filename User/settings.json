@@ -11,7 +11,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": -1,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
   "workbench.sideBar.location": "left",
@@ -27,9 +27,7 @@
   "editor.snippetSuggestions": "top",
   "json.schemas": [
     {
-      "fileMatch": [
-        "/package.json"
-      ],
+      "fileMatch": ["/package.json"],
       "url": "http://json.schemastore.org/package.json"
     }
   ],
@@ -39,20 +37,12 @@
   },
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "J"
-      ],
-      "after": [
-        "}"
-      ]
-},
-{
-  "before": [
-    "K"
-  ],
-  "after": [
-    "{"
-  ]
+      "before": ["J"],
+      "after": ["}"]
+    },
+    {
+      "before": ["K"],
+      "after": ["{"]
     }
   ],
   "git.enableSmartCommit": true,
@@ -109,38 +99,20 @@
   "zenMode.fullScreen": false,
   "vim.normalModeKeyBindings": [
     {
-      "before": [
-        "J"
-      ],
-      "after": [
-        "}"
-      ]
-},
-{
-  "before": [
-    "K"
-  ],
-  "after": [
-    "{"
-  ]
+      "before": ["J"],
+      "after": ["}"]
     },
     {
-      "before": [
-        "H"
-      ],
-      "after": [
-        "[",
-          "{"
-        ]
-          },
-          {
-            "before": [
-              "L"
-            ],
-            "after": [
-              "]",
-              "}"
-      ]
+      "before": ["K"],
+      "after": ["{"]
+    },
+    {
+      "before": ["H"],
+      "after": ["[", "{"]
+    },
+    {
+      "before": ["L"],
+      "after": ["]", "}"]
     }
   ],
   "vim.enableNeovim": true,
@@ -196,13 +168,11 @@
   "javascript.updateImportsOnFileMove.enabled": "never",
   "explorer.confirmDelete": false,
   "mocha.files.glob": "test/**/*-test.js",
-  "mocha.requires": [
-    "babel-polyfill",
-    "babel-register"
-  ],
+  "mocha.requires": ["babel-polyfill", "babel-register"],
   "mocha.env": {
     "NODE_PATH": ""
   },
-  "relativePath.excludedExtensions": [
-  ],
+  "relativePath.excludedExtensions": [],
+  "javascript.implicitProjectConfig.checkJs": true,
+  "breadcrumbs.enabled": true
 }
