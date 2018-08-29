@@ -35,16 +35,6 @@
     "JavaScript": true,
     "JavaScript React": true
   },
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["J"],
-      "after": ["}"]
-    },
-    {
-      "before": ["K"],
-      "after": ["{"]
-    }
-  ],
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
@@ -97,25 +87,7 @@
     "materialui"
   ],
   "zenMode.fullScreen": false,
-  "vim.normalModeKeyBindings": [
-    {
-      "before": ["J"],
-      "after": ["}"]
-    },
-    {
-      "before": ["K"],
-      "after": ["{"]
-    },
-    {
-      "before": ["H"],
-      "after": ["[", "{"]
-    },
-    {
-      "before": ["L"],
-      "after": ["]", "}"]
-    }
-  ],
-  "vim.enableNeovim": true,
+  "vim.enableNeovim": false,
   "editor.matchBrackets": false,
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
@@ -176,8 +148,37 @@
   "javascript.implicitProjectConfig.checkJs": true,
   "breadcrumbs.enabled": true,
   "editor.showFoldingControls": "always",
-  "vim.foldfix": true,
   "workbench.colorCustomizations": {
     "editorIndentGuide.activeBackground": "#ff0000"
-  }
+  },
+  "editor.quickSuggestionsDelay": 0,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "vim.foldfix": true,
+  "vim.history": 500,
+  "vim.substituteGlobalFlag": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["J"],
+      "after": ["}"]
+    },
+    {
+      "before": ["K"],
+      "after": ["{"]
+    },
+    {
+      "before": ["H"],
+      "after": ["[", "{"]
+    },
+    {
+      "before": ["L"],
+      "after": ["]", "}"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [">"],
+      "after": [">", "g", "v"]
+    }
+  ],
 }

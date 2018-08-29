@@ -145,8 +145,8 @@ nmap <leader>9 :set foldlevel=999<CR>
 " }
 
 " { Visual Mode
-vmap I :norm i
-vmap A :norm A
+" vmap I :norm i
+" vmap A :norm A
 " vmap <enter> :norm<space>
 vmap <bar> :g/
 vnoremap <c-p> :<c-p>
