@@ -49,12 +49,12 @@ highlight MatchParen guibg=#a0a080 guifg=#fff000
 " }
 "
 " { Current line
-augroup CursorLine
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
-augroup END
-highlight cursorLine term=bold cterm=bold guibg=#254555
+" augroup CursorLine
+"     autocmd!
+"     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"     autocmd WinLeave * setlocal nocursorline
+" augroup END
+" highlight cursorLine term=bold cterm=bold guibg=#254555
 " }
 " { Visual Selection
 highlight Visual term=bold cterm=bold guibg=#2555a5

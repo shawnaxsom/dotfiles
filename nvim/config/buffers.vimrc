@@ -80,3 +80,4 @@ set wildignore+=*/.tern-port
 set wildignore+=*/bin/*
 set wildignore+=*.min.js
 set wildignore+=*/.webpack/*
+set wildignore+=*/out/*

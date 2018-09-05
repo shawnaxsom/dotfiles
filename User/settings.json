@@ -181,4 +181,5 @@
       "after": [">", "g", "v"]
     }
   ],
+  "typescript.updateImportsOnFileMove.enabled": "never",
 }

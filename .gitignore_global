@@ -18,6 +18,7 @@ settings.json
 tasks.json
 User/workspaceStorage
 jsconfig.json
+out/
 
 # Quokka: https://github.com/wallabyjs/quokka/issues/28
 modulePatch.js

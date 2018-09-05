@@ -17,3 +17,5 @@ __tests__
 wellexpert2/
 ambyint.ui/
 saved-event-streams/
+*.js.map
+out/
