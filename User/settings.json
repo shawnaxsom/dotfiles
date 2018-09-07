@@ -38,7 +38,7 @@
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "One Monokai",
+  "workbench.colorTheme": "Palenight Operator",
   "git.confirmSync": false,
   "dash.docset.javascript": [
     "javascript",
@@ -182,4 +182,5 @@
     }
   ],
   "typescript.updateImportsOnFileMove.enabled": "never",
+  "nodeTdd.activateOnStartup": false
 }
