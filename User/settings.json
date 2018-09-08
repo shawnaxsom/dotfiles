@@ -2,7 +2,7 @@
   "typescript.validate.enable": true,
   "javascript.validate.enable": true,
   "editor.formatOnType": false,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
@@ -11,7 +11,7 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": 0,
+  "window.zoomLevel": -2,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
   "workbench.sideBar.location": "left",
@@ -87,7 +87,7 @@
     "materialui"
   ],
   "zenMode.fullScreen": false,
-  "vim.enableNeovim": false,
+  "vim.enableNeovim": true,
   "editor.matchBrackets": false,
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
@@ -151,7 +151,6 @@
   "workbench.colorCustomizations": {
     "editorIndentGuide.activeBackground": "#ff0000"
   },
-  "editor.quickSuggestionsDelay": 0,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "vim.foldfix": true,
@@ -179,8 +178,19 @@
     {
       "before": [">"],
       "after": [">", "g", "v"]
+    },
+    {
+      "before": ["<"],
+      "after": ["<", "g", "v"]
     }
   ],
   "typescript.updateImportsOnFileMove.enabled": "never",
-  "nodeTdd.activateOnStartup": false
+  "editor.quickSuggestionsDelay": 10,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.suggestSelection": "recentlyUsedByPrefix"
 }
