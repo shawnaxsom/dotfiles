@@ -256,7 +256,7 @@ end
 
 function test_on_change
   echo "$argv"
-  chokidar '**/*.js' --ignore "*.tmp*" --debounce 1500 --initial --throttle 0 --ignore "node_modules" -c "clear_screen; and npm test -- --tests $argv"
+  chokidar '**/*.js' --ignore "*.tmp*" --debounce 1500 --initial --throttle 0 --ignore "node_modules" -c "clear_screen; and npm run unit -- --tests $argv"
 end
 
 function rebuild
