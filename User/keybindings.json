@@ -23,4 +23,8 @@
     "command": "-search.action.focusPreviousSearchResult",
     "when": "hasSearchResult"
   },
+  {
+    "key": "cmd+9",
+    "command": "workbench.action.terminal.focus"
+  },
 ]
