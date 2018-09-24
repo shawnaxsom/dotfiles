@@ -201,5 +201,12 @@
   ],
   "vim.disableExtension": false,
   "vim.statusBarColorControl": true,
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "github.hosts": [
+    {
+      "host": "http://github.com",
+      "username": "oauth",
+      "token": "system"
+    }
+  ]
 }
