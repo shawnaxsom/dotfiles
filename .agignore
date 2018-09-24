@@ -9,6 +9,8 @@ README.md
 package-lock.json
 yarn.lock
 Session.vim
+tmp/
+dist/
 
 __tests__
 *.test.js

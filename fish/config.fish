@@ -259,6 +259,11 @@ function test_on_change
   chokidar '**/*.js' --ignore "*.tmp*" --debounce 1500 --initial --throttle 0 --ignore "node_modules" -c "clear_screen; and npm test -- --tests $argv"
 end
 
+function run_on_change
+  echo "$argv"
+  chokidar '**/*.js' --ignore "*.tmp*" --debounce 1500 --initial --throttle 0 --ignore "node_modules" -c "clear_screen; and $argv"
+end
+
 function rebuild
   cd ~/dev/ambyint/packages; and npm start /Users/shawn.axsom/dev/ambyint/packages; and cd -;
 end

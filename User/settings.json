@@ -1,17 +1,15 @@
 {
-  "typescript.validate.enable": true,
+	"typescript.validate.enable": true,
   "javascript.validate.enable": true,
   "editor.formatOnType": false,
-  "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
-  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontLigatures": true,
   "editor.fontSize": 17,
   "editor.wordWrap": "off",
+  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.cursorBlinking": "solid",
-  "window.zoomLevel": -2,
+  "window.zoomLevel": -1,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
   "workbench.sideBar.location": "left",
@@ -24,7 +22,6 @@
   "prettier.bracketSpacing": true,
   "prettier.trailingComma": "all",
   "search.quickOpen.includeSymbols": false,
-  "editor.snippetSuggestions": "top",
   "json.schemas": [
     {
       "fileMatch": ["/package.json"],
@@ -38,7 +35,7 @@
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Palenight Operator",
+  "workbench.colorTheme": "Nord",
   "git.confirmSync": false,
   "dash.docset.javascript": [
     "javascript",
@@ -87,7 +84,6 @@
     "materialui"
   ],
   "zenMode.fullScreen": false,
-  "vim.enableNeovim": true,
   "editor.matchBrackets": false,
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
@@ -149,7 +145,10 @@
   "breadcrumbs.enabled": true,
   "editor.showFoldingControls": "always",
   "workbench.colorCustomizations": {
-    "editorIndentGuide.activeBackground": "#ff0000"
+    "editorIndentGuide.activeBackground": "#ff0000",
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f"
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -192,5 +191,15 @@
     "strings": true
   },
   "editor.suggestOnTriggerCharacters": true,
-  "editor.suggestSelection": "recentlyUsedByPrefix"
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "prettier.requireConfig": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["L"],
+      "after": ["$"]
+    }
+  ],
+  "vim.disableExtension": false,
+  "vim.statusBarColorControl": true,
+  "editor.fontLigatures": true
 }

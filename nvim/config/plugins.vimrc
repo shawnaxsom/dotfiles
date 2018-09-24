@@ -98,7 +98,7 @@ nnoremap <leader>p :CtrlP<CR>
  elseif executable('ack')
    set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
  endif
- let g:ctrlp_cmd = 'CtrlPBuffer'
+ let g:ctrlp_cmd = 'CtrlPLastMode'
  let g:ctrlp_use_caching = 0
  let g:ctrlp_by_filename = 0
  let g:ctrlp_regexp = 0
@@ -195,8 +195,8 @@ let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 " Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
 " followed by a property in a string. "rodDimensions." showed all props of
 " random variable.
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'wellle/tmux-complete.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'wellle/tmux-complete.vim'
 " set completeopt-=preview
 " let g:deoplete#enable_at_startup = 1
 " let g:deoplete#auto_complete_delay = 0
@@ -830,5 +830,8 @@ Plug 'mhartington/vim-typings'
 " }
 
 Plug 'elixir-editors/vim-elixir'
+Plug 'dsawardekar/ember.vim'
+Plug 'mustache/vim-mustache-handlebars'
+" Plug 'python-mode/python-mode'
 
 call plug#end()
