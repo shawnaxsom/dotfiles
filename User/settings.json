@@ -1,212 +1,247 @@
 {
-	"typescript.validate.enable": true,
-  "javascript.validate.enable": true,
-  "editor.formatOnType": false,
-  "editor.formatOnPaste": false,
-  "editor.fontSize": 17,
-  "editor.wordWrap": "off",
-  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.cursorBlinking": "solid",
-  "window.zoomLevel": -1,
-  "editor.minimap.enabled": false,
-  "editor.minimap.renderCharacters": true,
-  "workbench.sideBar.location": "left",
-  "prettier.eslintIntegration": true,
-  "vim.hlsearch": true,
-  "vim.easymotion": true,
-  "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "explorer.openEditors.visible": 15,
-  "editor.lineNumbers": "off",
-  "prettier.bracketSpacing": true,
-  "prettier.trailingComma": "all",
-  "search.quickOpen.includeSymbols": false,
-  "json.schemas": [
-    {
-      "fileMatch": ["/package.json"],
-      "url": "http://json.schemastore.org/package.json"
-    }
-  ],
-  "emmet.syntaxProfiles": {
-    "JavaScript": true,
-    "JavaScript React": true
-  },
-  "git.enableSmartCommit": true,
-  "workbench.statusBar.visible": true,
-  "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Nord",
-  "git.confirmSync": false,
-  "dash.docset.javascript": [
-    "javascript",
-    "jquery",
-    "jqueryui",
-    "jquerym",
-    "react",
-    "angularjs",
-    "backbone",
-    "marionette",
-    "meteor",
-    "sproutcore",
-    "moo",
-    "prototype",
-    "bootstrap",
-    "foundation",
-    "lodash",
-    "underscore",
-    "ember",
-    "sencha",
-    "extjs",
-    "titanium",
-    "knockout",
-    "zepto",
-    "yui",
-    "d3",
-    "svg",
-    "dojo",
-    "coffee",
-    "nodejs",
-    "express",
-    "grunt",
-    "mongoose",
-    "moment",
-    "require",
-    "awsjs",
-    "jasmine",
-    "sails",
-    "sinon",
-    "chai",
-    "html",
-    "css",
-    "cordova",
-    "phonegap",
-    "unity3d",
-    "materialui"
-  ],
-  "zenMode.fullScreen": false,
-  "editor.matchBrackets": false,
-  "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": false,
-    "suppressCommitNotFoundWarning": false,
-    "suppressFileNotUnderSourceControlWarning": false,
-    "suppressGitVersionWarning": false,
-    "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false,
-    "suppressResultsExplorerNotice": false,
-    "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": false,
-    "suppressWelcomeNotice": true
-  },
-  "explorer.confirmDragAndDrop": false,
-  "gitlens.keymap": "alternate",
-  "vim.neovimPath": "/usr/local/bin/nvim",
-  "editor.autoIndent": false,
-  "search.location": "sidebar",
-  "workbench.startupEditor": "newUntitledFile",
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true,
-    ".*": true,
-    "*-lock.json": true,
-    "*.md": true,
-    "**/build": true
-  },
-  "vim.useSystemClipboard": true,
-  "vim.visualstar": true,
-  "terminal.integrated.shell.linux": "/usr/local/bin/fish",
-  "terminal.integrated.shell.osx": "/usr/local/bin/fish",
-  "git.autofetch": true,
-  "gitlens.historyExplorer.enabled": true,
-  "files.exclude": {
-    "**/.DS_Store": false,
-    "**/.git": false,
-    "**/.hg": false,
-    "**/.svn": false,
-    "**/.tmp": false,
-    "**/.webpack": false,
-    "**/CVS": false,
-    "**/node_modules": false,
-    "/var/folders": false
-  },
-  "search.useIgnoreFiles": true,
-  "npm.enableScriptExplorer": true,
-  "workbench.iconTheme": "vscode-great-icons",
-  "jest.pathToJest": "npm test --",
-  "editor.wrappingIndent": "deepIndent",
-  "javascript.updateImportsOnFileMove.enabled": "never",
-  "explorer.confirmDelete": false,
-  "mocha.files.glob": "test/**/*-test.js",
-  "mocha.requires": ["babel-polyfill", "babel-register"],
-  "mocha.env": {
-    "NODE_PATH": ""
-  },
-  "relativePath.excludedExtensions": [],
-  "javascript.implicitProjectConfig.checkJs": true,
-  "breadcrumbs.enabled": true,
-  "editor.showFoldingControls": "always",
-  "workbench.colorCustomizations": {
-    "editorIndentGuide.activeBackground": "#ff0000",
-    "statusBar.background": "#005f5f",
-    "statusBar.noFolderBackground": "#005f5f",
-    "statusBar.debuggingBackground": "#005f5f"
-  },
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-  "vim.foldfix": true,
-  "vim.history": 500,
-  "vim.substituteGlobalFlag": true,
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["J"],
-      "after": ["}"]
+    "breadcrumbs.enabled": true,
+    "dash.docset.javascript": [
+        "angularjs",
+        "awsjs",
+        "backbone",
+        "bootstrap",
+        "chai",
+        "coffee",
+        "cordova",
+        "css",
+        "d3",
+        "dojo",
+        "ember",
+        "express",
+        "extjs",
+        "foundation",
+        "grunt",
+        "html",
+        "jasmine",
+        "javascript",
+        "jquery",
+        "jquerym",
+        "jqueryui",
+        "knockout",
+        "lodash",
+        "marionette",
+        "materialui",
+        "meteor",
+        "moment",
+        "mongoose",
+        "moo",
+        "nodejs",
+        "phonegap",
+        "prototype",
+        "react",
+        "require",
+        "sails",
+        "sencha",
+        "sinon",
+        "sproutcore",
+        "svg",
+        "titanium",
+        "underscore",
+        "unity3d",
+        "yui",
+        "zepto"
+    ],
+    "editor.autoIndent": false,
+    "editor.cursorBlinking": "solid",
+    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 17,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.insertSpaces": true,
+    "editor.lineNumbers": "off",
+    "editor.matchBrackets": false,
+    "editor.minimap.enabled": false,
+    "editor.minimap.renderCharacters": true,
+    "editor.quickSuggestions": {
+        "comments": true,
+        "other": true,
+        "strings": true
     },
-    {
-      "before": ["K"],
-      "after": ["{"]
+    "editor.quickSuggestionsDelay": 10,
+    "editor.showFoldingControls": "always",
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.suggestSelection": "recentlyUsedByPrefix",
+    "editor.tabSize": 2,
+    "editor.wordWrap": "off",
+    "editor.wrappingIndent": "deepIndent",
+    "emmet.syntaxProfiles": {
+        "JavaScript": true,
+        "JavaScript React": true
     },
-    {
-      "before": ["H"],
-      "after": ["[", "{"]
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.openEditors.visible": 15,
+    "files.exclude": {
+        "**/.DS_Store": false,
+        "**/.git": false,
+        "**/.hg": false,
+        "**/.svn": false,
+        "**/.tmp": false,
+        "**/.webpack": false,
+        "**/CVS": false,
+        "**/node_modules": false,
+        "/var/folders": false
     },
-    {
-      "before": ["L"],
-      "after": ["]", "}"]
-    }
-  ],
-  "vim.visualModeKeyBindingsNonRecursive": [
-    {
-      "before": [">"],
-      "after": [">", "g", "v"]
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "github.hosts": [
+        {
+            "host": "http://github.com",
+            "token": "system",
+            "username": "oauth"
+        },
+        {
+            "host": "https://github.com",
+            "token": "system",
+            "username": "oauth"
+        }
+    ],
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
     },
-    {
-      "before": ["<"],
-      "after": ["<", "g", "v"]
-    }
-  ],
-  "typescript.updateImportsOnFileMove.enabled": "never",
-  "editor.quickSuggestionsDelay": 10,
-  "editor.quickSuggestions": {
-    "other": true,
-    "comments": true,
-    "strings": true
-  },
-  "editor.suggestOnTriggerCharacters": true,
-  "editor.suggestSelection": "recentlyUsedByPrefix",
-  "prettier.requireConfig": true,
-  "vim.visualModeKeyBindingsNonRecursive": [
-    {
-      "before": ["L"],
-      "after": ["$"]
-    }
-  ],
-  "vim.disableExtension": false,
-  "vim.statusBarColorControl": true,
-  "editor.fontLigatures": true,
-  "github.hosts": [
-    {
-      "host": "http://github.com",
-      "username": "oauth",
-      "token": "system"
-    }
-  ]
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.keymap": "alternate",
+    "javascript.implicitProjectConfig.checkJs": true,
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "javascript.validate.enable": true,
+    "jest.pathToJest": "npm test --",
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/package.json"
+            ],
+            "url": "http://json.schemastore.org/package.json"
+        }
+    ],
+    "mocha.env": {
+        "NODE_PATH": ""
+    },
+    "mocha.files.glob": "test/**/*-test.js",
+    "mocha.requires": [
+        "babel-polyfill",
+        "babel-register"
+    ],
+    "npm.enableScriptExplorer": true,
+    "prettier.bracketSpacing": true,
+    "prettier.eslintIntegration": true,
+    "prettier.requireConfig": true,
+    "prettier.trailingComma": "all",
+    "relativePath.excludedExtensions": [],
+    "search.exclude": {
+        "**/bower_components": true,
+        "**/build": true,
+        "**/node_modules": true,
+        "*-lock.json": true,
+        "*.md": true,
+        ".*": true
+    },
+    "search.location": "sidebar",
+    "search.quickOpen.includeSymbols": false,
+    "search.useIgnoreFiles": true,
+    "terminal.integrated.shell.linux": "/usr/local/bin/fish",
+    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+    "typescript.updateImportsOnFileMove.enabled": "never",
+    "typescript.validate.enable": true,
+    "vim.disableExtension": false,
+    "vim.easymotion": true,
+    "vim.foldfix": true,
+    "vim.history": 500,
+    "vim.hlsearch": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "after": [
+                "[",
+                "{"
+            ],
+            "before": [
+                "H"
+            ]
+        },
+        {
+            "after": [
+                "]",
+                "}"
+            ],
+            "before": [
+                "L"
+            ]
+        },
+        {
+            "after": [
+                "{"
+            ],
+            "before": [
+                "K"
+            ]
+        },
+        {
+            "after": [
+                "}"
+            ],
+            "before": [
+                "J"
+            ]
+        }
+    ],
+    "vim.statusBarColorControl": true,
+    "vim.substituteGlobalFlag": true,
+    "vim.useSystemClipboard": true,
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "after": [
+                "<",
+                "g",
+                "v"
+            ],
+            "before": [
+                "<"
+            ]
+        },
+        {
+            "after": [
+                ">",
+                "g",
+                "v"
+            ],
+            "before": [
+                ">"
+            ]
+        }
+    ],
+    "vim.visualstar": true,
+    "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
+    "window.zoomLevel": 0,
+    "workbench.activityBar.visible": true,
+    "workbench.colorCustomizations": {
+        "editorIndentGuide.activeBackground": "#ff0000",
+        "statusBar.background": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f"
+    },
+    "workbench.colorTheme": "Night Owl",
+    "workbench.editor.showTabs": true,
+    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.sideBar.location": "left",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.statusBar.visible": true,
+    "zenMode.fullScreen": false
 }
