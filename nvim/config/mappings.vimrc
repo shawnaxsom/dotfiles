@@ -353,3 +353,5 @@ noremap G G0
 map gx :!open <cWORD><CR>
 
 map <leader>' "ayiwologo<TAB>a
+
+" nnoremap d "_d

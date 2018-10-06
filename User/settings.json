@@ -52,6 +52,7 @@
     "editor.fontLigatures": true,
     "editor.fontSize": 17,
     "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
     "editor.formatOnType": false,
     "editor.insertSpaces": true,
     "editor.lineNumbers": "off",
@@ -200,36 +201,26 @@
             "before": [
                 "J"
             ]
-        }
-    ],
+        }    ],
     "vim.statusBarColorControl": true,
     "vim.substituteGlobalFlag": true,
     "vim.useSystemClipboard": true,
     "vim.visualModeKeyBindingsNonRecursive": [
         {
             "after": [
-                "<",
-                "g",
-                "v"
+                "\"",
+                "_",
+                "d",
+                "P"
             ],
             "before": [
-                "<"
-            ]
-        },
-        {
-            "after": [
-                ">",
-                "g",
-                "v"
-            ],
-            "before": [
-                ">"
+                "p"
             ]
         }
     ],
     "vim.visualstar": true,
     "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-    "window.zoomLevel": 0,
+    "window.zoomLevel": -1,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "editorIndentGuide.activeBackground": "#ff0000",
@@ -243,5 +234,15 @@
     "workbench.sideBar.location": "left",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.statusBar.visible": true,
-    "zenMode.fullScreen": false
+    "zenMode.fullScreen": false,
+    "workbench.settings.editor": "json",
+    "prettier.singleQuote": false,
+    "prettier.useTabs": true,
+    "prettier.tabWidth": 2,
+     "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
 }
