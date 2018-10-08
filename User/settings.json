@@ -170,6 +170,14 @@
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "after": [
+                "k"
+            ],
+            "before": [
+                "<Command-u>"
+            ]
+        },
+        {
+            "after": [
                 "[",
                 "{"
             ],
@@ -224,9 +232,9 @@
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "editorIndentGuide.activeBackground": "#ff0000",
-        "statusBar.background": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f"
+        "statusBar.background": "#FFFFFF",
+        "statusBar.debuggingBackground": "#FFFFFF",
+        "statusBar.noFolderBackground": "#FFFFFF"
     },
     "workbench.colorTheme": "Night Owl",
     "workbench.editor.showTabs": true,
@@ -245,4 +253,19 @@
             "after": ["<Esc>"]
         }
     ],
+    "zenMode.fullScreen": false,
+    "vim.statusBarColors.normal": "#FFFFFF",
+    "vim.statusBarColors.insert": "#FFDDDD",
+    "vim.statusBarColors.replace": "#FFDDCC",
+    "vim.statusBarColors.visual": "#CCCCFF",
+    "vim.statusBarColors.visualblock": "#CCCCFF",
+    "vim.statusBarColors.visualline": "#CCCCFF",
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.tips.enabled": false,
+    "workbench.view.alwaysShowHeaderActions": true,
+    "workbench.editor.labelFormat": "short",
+    "workbench.editor.revealIfOpen": true,
+    "workbench.editor.swipeToNavigate": true,
+    "workbench.settings.openDefaultKeybindings": false,
+    "workbench.settings.openDefaultSettings": false,
 }
