@@ -108,6 +108,7 @@ alias gb='git branch'
 alias gc-='git checkout -'
 alias gc='git commit'
 alias gcm='git checkout master'
+alias gcd='git checkout develop'
 alias gd='git diff'
 alias gdm='git diff master..'
 alias gdq='git diff quality..'
@@ -261,7 +262,7 @@ end
 
 function run_on_change
   echo "$argv"
-  chokidar '**/*.js' --ignore "*.tmp*" --debounce 1500 --initial --throttle 0 --ignore "node_modules" -c "clear_screen; and $argv"
+  chokidar '**/*.{js,jsx,ts,tsx}' --ignore "*.tmp*" --debounce 1500 --initial --throttle 0 --ignore "node_modules" -c "clear_screen; and $argv"
 end
 
 function rebuild
