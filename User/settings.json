@@ -1,58 +1,11 @@
 {
   "breadcrumbs.enabled": true,
-  "dash.docset.javascript": [
-      "angularjs",
-      "awsjs",
-      "backbone",
-      "bootstrap",
-      "chai",
-      "coffee",
-      "cordova",
-      "css",
-      "d3",
-      "dojo",
-      "ember",
-      "express",
-      "extjs",
-      "foundation",
-      "grunt",
-      "html",
-      "jasmine",
-      "javascript",
-      "jquery",
-      "jquerym",
-      "jqueryui",
-      "knockout",
-      "lodash",
-      "marionette",
-      "materialui",
-      "meteor",
-      "moment",
-      "mongoose",
-      "moo",
-      "nodejs",
-      "phonegap",
-      "prototype",
-      "react",
-      "require",
-      "sails",
-      "sencha",
-      "sinon",
-      "sproutcore",
-      "svg",
-      "titanium",
-      "underscore",
-      "unity3d",
-      "yui",
-      "zepto"
-  ],
   "editor.autoIndent": false,
   "editor.cursorBlinking": "solid",
   "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 17,
-  "editor.formatOnPaste": false,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
   "editor.lineNumbers": "off",
@@ -60,9 +13,9 @@
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
   "editor.quickSuggestions": {
-      "comments": true,
-      "other": true,
-      "strings": true
+    "comments": true,
+    "other": true,
+    "strings": true
   },
   "editor.quickSuggestionsDelay": 10,
   "editor.showFoldingControls": "always",
@@ -72,13 +25,13 @@
   "editor.wordWrap": "on",
   "editor.wrappingIndent": "deepIndent",
   "emmet.syntaxProfiles": {
-      "JavaScript": true,
-      "JavaScript React": true
+    "JavaScript": true,
+    "JavaScript React": true
   },
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.openEditors.visible": 15,
-"files.exclude": {
+  "files.exclude": {
     "**/.DS_Store": false,
     "**/.git": false,
     "**/.hg": false,
@@ -88,71 +41,44 @@
     "**/CVS": false,
     "**/node_modules": false,
     "/var/folders": false
-},
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "git.autofetch": true,
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
-  "github.hosts": [
-      {
-          "host": "http://github.com",
-          "token": "system",
-          "username": "oauth"
-      },
-      {
-          "host": "https://github.com",
-          "token": "system",
-          "username": "oauth"
-      }
-  ],
   "gitlens.advanced.messages": {
-      "suppressCommitHasNoPreviousCommitWarning": false,
-      "suppressCommitNotFoundWarning": false,
-      "suppressFileNotUnderSourceControlWarning": false,
-      "suppressGitVersionWarning": false,
-      "suppressLineUncommittedWarning": false,
-      "suppressNoRepositoryWarning": false,
-      "suppressResultsExplorerNotice": false,
-      "suppressShowKeyBindingsNotice": true,
-      "suppressUpdateNotice": false,
-      "suppressWelcomeNotice": true
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": false,
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": false,
+    "suppressWelcomeNotice": true
   },
   "gitlens.historyExplorer.enabled": true,
   "gitlens.keymap": "alternate",
   "javascript.implicitProjectConfig.checkJs": true,
   "javascript.updateImportsOnFileMove.enabled": "never",
   "javascript.validate.enable": true,
-  "jest.pathToJest": "npm test --",
   "json.schemas": [
-      {
-          "fileMatch": [
-              "/package.json"
-          ],
-          "url": "http://json.schemastore.org/package.json"
-      }
-  ],
-  "mocha.env": {
-      "NODE_PATH": ""
-  },
-  "mocha.files.glob": "test/**/*-test.js",
-  "mocha.requires": [
-      "babel-polyfill",
-      "babel-register"
+    {
+      "fileMatch": ["/package.json"],
+      "url": "http://json.schemastore.org/package.json"
+    }
   ],
   "npm.enableScriptExplorer": true,
-  "prettier.bracketSpacing": true,
-  "prettier.eslintIntegration": true,
-  "prettier.requireConfig": true,
-  "prettier.trailingComma": "all",
   "relativePath.excludedExtensions": [],
   "search.exclude": {
-      "**/bower_components": true,
-      "**/build": true,
-      "**/node_modules": true,
-      "*-lock.json": true,
-      "*.md": true,
-      ".*": true
+    "**/bower_components": true,
+    "**/build": true,
+    "**/node_modules": true,
+    "*-lock.json": true,
+    "*.md": true,
+    ".*": true
   },
   "search.location": "sidebar",
   "search.quickOpen.includeSymbols": false,
@@ -169,83 +95,49 @@
   "vim.neovimPath": "/usr/local/bin/nvim",
   "vim.leader": "<Space>",
   "vim.normalModeKeyBindingsNonRecursive": [
-      {
-          "commands": [
-              "editor.action.rename"
-          ],
-          "before": [
-              "<Leader>",
-              "r"
-          ]
-      },
-      {
-          "commands": [
-              "workbench.action.files.save"
-          ],
-          "before": [
-              "<Leader>",
-              "w"
-          ]
-      },
-      {
-          "after": [
-              "[",
-              "{"
-          ],
-          "before": [
-              "H"
-          ]
-      },
-      {
-          "after": [
-              "]",
-              "}"
-          ],
-          "before": [
-              "L"
-          ]
-      },
-      {
-          "after": [
-              "{"
-          ],
-          "before": [
-              "K"
-          ]
-      },
-      {
-          "after": [
-              "}"
-          ],
-          "before": [
-              "J"
-          ]
-      }    ],
+    {
+      "commands": ["editor.action.rename"],
+      "before": ["<Leader>", "r"]
+    },
+    {
+      "commands": ["workbench.action.files.save"],
+      "before": ["<Leader>", "w"]
+    },
+    {
+      "after": ["[", "{"],
+      "before": ["H"]
+    },
+    {
+      "after": ["]", "}"],
+      "before": ["L"]
+    },
+    {
+      "after": ["{"],
+      "before": ["K"]
+    },
+    {
+      "after": ["}"],
+      "before": ["J"]
+    }
+  ],
   "vim.statusBarColorControl": true,
   "vim.substituteGlobalFlag": true,
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
-      {
-          "after": [
-              "\"",
-              "_",
-              "d",
-              "P"
-          ],
-          "before": [
-              "p"
-          ]
-      }
+    {
+      "after": ["\"", "_", "d", "P"],
+      "before": ["p"]
+    }
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
   "window.zoomLevel": -1,
   "workbench.activityBar.visible": true,
 "workbench.colorCustomizations": {
-    "editorIndentGuide.activeBackground": "#ff0000",
-    "statusBar.background": "#FFFFFF",
-    "statusBar.debuggingBackground": "#FFFFFF",
-    "statusBar.noFolderBackground": "#FFFFFF"
+  "editorIndentGuide.activeBackground": "#ff0000",
+  "statusBar.background": "#FFFFFF",
+  "statusBar.debuggingBackground": "#FFFFFF",
+  "statusBar.noFolderBackground": "#FFFFFF"
 },
   "workbench.colorTheme": "One Monokai",
   "workbench.editor.showTabs": true,
@@ -253,23 +145,15 @@
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.statusBar.visible": true,
-  "prettier.singleQuote": false,
-  "prettier.useTabs": true,
-  "prettier.tabWidth": 2,
   "vim.useCtrlKeys": true,
   "vim.handleKeys": {
-      "<C-a>": true
+    "<C-a>": true
   },
   "vim.insertModeKeyBindings": [
-      {
-          "before": [
-              "<C-a>"
-          ],
-          "after": [
-              "<Esc>",
-              "I"
-          ]
-      },
+    {
+      "before": ["<C-a>"],
+      "after": ["<Esc>", "I"]
+    }
   ],
   "vim.statusBarColors.normal": "#FFFFFF",
   "vim.statusBarColors.insert": "#FFDDDD",
@@ -286,5 +170,5 @@
   "workbench.settings.openDefaultKeybindings": false,
   "workbench.settings.openDefaultSettings": false,
   "zenMode.centerLayout": false,
-"zenMode.fullScreen": false,
+  "zenMode.fullScreen": false
 }
