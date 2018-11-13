@@ -275,3 +275,7 @@ set -gx PATH $PATH $ANDROID_HOME/tools
 set -gx PATH $PATH $ANDROID_HOME/tools/bin
 set -gx PATH $PATH $ANDROID_HOME/platform-tools
 set -gx PATH $PATH $ANDROID_HOME/emulator
+
+# Fastlane for React Native development
+set -x PATH $HOME/.fastlane/bin $PATH
+

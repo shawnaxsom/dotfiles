@@ -5,7 +5,6 @@
   "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 17,
-  "editor.formatOnSave": true,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
   "editor.lineNumbers": "off",
@@ -32,15 +31,17 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.openEditors.visible": 15,
   "files.exclude": {
-    "**/.DS_Store": false,
-    "**/.git": false,
-    "**/.hg": false,
-    "**/.svn": false,
-    "**/.tmp": false,
-    "**/.webpack": false,
-    "**/CVS": false,
-    "**/node_modules": false,
-    "/var/folders": false
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.tmp": true,
+    "**/.webpack": true,
+    "**/CVS": true,
+    "**/node_modules": true,
+    "/var/folders": true,
+    "**/.jest": true,
+    "**/.github": true
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -133,12 +134,12 @@
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
   "window.zoomLevel": -1,
   "workbench.activityBar.visible": true,
-"workbench.colorCustomizations": {
-  "editorIndentGuide.activeBackground": "#ff0000",
-  "statusBar.background": "#FFFFFF",
-  "statusBar.debuggingBackground": "#FFFFFF",
-  "statusBar.noFolderBackground": "#FFFFFF"
-},
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground": "#ff0000",
+    "statusBar.background": "#FFFFFF",
+    "statusBar.debuggingBackground": "#FFFFFF",
+    "statusBar.noFolderBackground": "#FFFFFF"
+  },
   "workbench.colorTheme": "One Monokai",
   "workbench.editor.showTabs": true,
   "workbench.iconTheme": "vscode-great-icons",
@@ -169,6 +170,7 @@
   "workbench.editor.swipeToNavigate": true,
   "workbench.settings.openDefaultKeybindings": false,
   "workbench.settings.openDefaultSettings": false,
+  "zenMode.fullScreen": false,
   "zenMode.centerLayout": false,
-  "zenMode.fullScreen": false
+  "editor.formatOnSave": true
 }
