@@ -79,7 +79,11 @@
     "**/node_modules": true,
     "*-lock.json": true,
     "*.md": true,
-    ".*": true
+    ".*": true,
+    "yarn.lock": true,
+    "**/*.java": true,
+    "**/*.pbxproj": true,
+    "**/*.m": true
   },
   "search.location": "sidebar",
   "search.quickOpen.includeSymbols": false,
@@ -172,5 +176,6 @@
   "workbench.settings.openDefaultSettings": false,
   "zenMode.fullScreen": false,
   "zenMode.centerLayout": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "scrolloff.scrolloff": 5
 }
