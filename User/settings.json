@@ -7,7 +7,7 @@
   "editor.fontSize": 17,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
-  "editor.lineNumbers": "off",
+  "editor.lineNumbers": "relative",
   "editor.matchBrackets": false,
   "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
