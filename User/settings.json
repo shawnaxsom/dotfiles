@@ -2,8 +2,6 @@
   "breadcrumbs.enabled": true,
   "editor.autoIndent": false,
   "editor.cursorBlinking": "solid",
-  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontLigatures": true,
   "editor.fontSize": 17,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
@@ -41,7 +39,8 @@
     "**/node_modules": true,
     "/var/folders": true,
     "**/.jest": true,
-    "**/.github": true
+    "**/.github": true,
+    "**/index.d.ts": true
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -125,7 +124,6 @@
       "before": ["J"]
     }
   ],
-  "vim.statusBarColorControl": true,
   "vim.substituteGlobalFlag": true,
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -139,12 +137,9 @@
   "window.zoomLevel": -1,
   "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
-    "editorIndentGuide.activeBackground": "#ff0000",
-    "statusBar.background": "#FFFFFF",
-    "statusBar.debuggingBackground": "#FFFFFF",
-    "statusBar.noFolderBackground": "#FFFFFF"
+    "editorIndentGuide.activeBackground": "#ff0000"
   },
-  "workbench.colorTheme": "One Monokai",
+  "workbench.colorTheme": "Andromeda Colorizer",
   "workbench.editor.showTabs": true,
   "workbench.iconTheme": "vscode-great-icons",
   "workbench.sideBar.location": "left",
@@ -160,12 +155,6 @@
       "after": ["<Esc>", "I"]
     }
   ],
-  "vim.statusBarColors.normal": "#FFFFFF",
-  "vim.statusBarColors.insert": "#FFDDDD",
-  "vim.statusBarColors.replace": "#FFDDCC",
-  "vim.statusBarColors.visual": "#CCCCFF",
-  "vim.statusBarColors.visualblock": "#CCCCFF",
-  "vim.statusBarColors.visualline": "#CCCCFF",
   "workbench.statusBar.feedback.visible": false,
   "workbench.tips.enabled": false,
   "workbench.view.alwaysShowHeaderActions": true,
@@ -177,5 +166,8 @@
   "zenMode.fullScreen": false,
   "zenMode.centerLayout": false,
   "editor.formatOnSave": true,
-  "scrolloff.scrolloff": 5
+  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "search.usePCRE2": true,
+  "search.useGlobalIgnoreFiles": true,
+  "workbench.editor.highlightModifiedTabs": true
 }
