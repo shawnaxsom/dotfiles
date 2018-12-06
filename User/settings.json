@@ -98,32 +98,6 @@
   "vim.hlsearch": true,
   "vim.neovimPath": "/usr/local/bin/nvim",
   "vim.leader": "<Space>",
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "commands": ["editor.action.rename"],
-      "before": ["<Leader>", "r"]
-    },
-    {
-      "commands": ["workbench.action.files.save"],
-      "before": ["<Leader>", "w"]
-    },
-    {
-      "after": ["[", "{"],
-      "before": ["H"]
-    },
-    {
-      "after": ["]", "}"],
-      "before": ["L"]
-    },
-    {
-      "after": ["{"],
-      "before": ["K"]
-    },
-    {
-      "after": ["}"],
-      "before": ["J"]
-    }
-  ],
   "vim.substituteGlobalFlag": true,
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -134,7 +108,7 @@
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "window.zoomLevel": -1,
+  "window.zoomLevel": -2,
   "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
     "editorIndentGuide.activeBackground": "#ff0000"
@@ -169,5 +143,7 @@
   "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "search.usePCRE2": true,
   "search.useGlobalIgnoreFiles": true,
-  "workbench.editor.highlightModifiedTabs": true
+  "workbench.editor.highlightModifiedTabs": true,
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true
 }
