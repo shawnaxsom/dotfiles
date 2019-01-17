@@ -48,5 +48,110 @@
     "key": "ctrl+h",
     "command": "-extension.vim_ctrl+h",
     "when": "editorTextFocus && vim.active && vim.use<C-h> && !inDebugRepl"
+  },
+  {
+    "key": "cmd+i",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "-editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-expandLineSelection",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "cmd+]",
+    "command": "-editor.action.indentLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+[",
+    "command": "-editor.action.outdentLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+[",
+    "command": "editor.fold",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+cmd+[",
+    "command": "-editor.fold",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+]",
+    "command": "editor.unfold",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+cmd+]",
+    "command": "-editor.unfold",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+[",
+    "command": "editor.foldRecursively",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+k cmd+[",
+    "command": "-editor.foldRecursively",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+[",
+    "command": "-workbench.action.previousEditor"
+  },
+  {
+    "key": "shift+cmd+]",
+    "command": "editor.unfoldRecursively",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+k cmd+]",
+    "command": "-editor.unfoldRecursively",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+]",
+    "command": "-workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+cmd+k",
+    "command": "editsHistory.moveCursorToPreviousEdit"
+  },
+  {
+    "key": "cmd+j",
+    "command": "-editsHistory.moveCursorToPreviousEdit"
+  },
+  {
+    "key": "ctrl+shift+cmd+k",
+    "command": "editsHistory.moveCursorToPreviouslyEditedFile"
+  },
+  {
+    "key": "shift+cmd+j",
+    "command": "-editsHistory.moveCursorToPreviouslyEditedFile"
+  },
+  {
+    "key": "ctrl+shift+cmd+j",
+    "command": "editsHistory.moveCursorToNextEditedFile"
+  },
+  {
+    "key": "shift+cmd+k",
+    "command": "-editsHistory.moveCursorToNextEditedFile"
+  },
+  {
+    "key": "ctrl+cmd+j",
+    "command": "editsHistory.moveCursorToNextEdit"
+  },
+  {
+    "key": "cmd+k",
+    "command": "-editsHistory.moveCursorToNextEdit"
   }
 ]

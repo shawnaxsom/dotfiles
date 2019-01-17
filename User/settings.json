@@ -1,23 +1,13 @@
 {
   "breadcrumbs.enabled": true,
-  "editor.autoIndent": false,
   "editor.cursorBlinking": "solid",
   "editor.fontSize": 17,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
   "editor.lineNumbers": "relative",
   "editor.matchBrackets": false,
-  "editor.minimap.enabled": false,
   "editor.minimap.renderCharacters": true,
-  "editor.quickSuggestions": {
-    "comments": true,
-    "other": true,
-    "strings": true
-  },
-  "editor.quickSuggestionsDelay": 10,
   "editor.showFoldingControls": "always",
-  "editor.suggestOnTriggerCharacters": true,
-  "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.wrappingIndent": "deepIndent",
@@ -31,16 +21,16 @@
   "files.exclude": {
     "**/.DS_Store": true,
     "**/.git": true,
+    "**/.github": true,
     "**/.hg": true,
+    "**/.jest": true,
     "**/.svn": true,
     "**/.tmp": true,
     "**/.webpack": true,
     "**/CVS": true,
+    "**/index.d.ts": true,
     "**/node_modules": true,
-    "/var/folders": true,
-    "**/.jest": true,
-    "**/.github": true,
-    "**/index.d.ts": true
+    "/var/folders": true
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -48,15 +38,8 @@
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": false,
-    "suppressCommitNotFoundWarning": false,
-    "suppressFileNotUnderSourceControlWarning": false,
-    "suppressGitVersionWarning": false,
-    "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false,
-    "suppressResultsExplorerNotice": false,
+    "suppressFileNotUnderSourceControlWarning": true,
     "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": false,
     "suppressWelcomeNotice": true
   },
   "gitlens.historyExplorer.enabled": true,
@@ -66,7 +49,9 @@
   "javascript.validate.enable": true,
   "json.schemas": [
     {
-      "fileMatch": ["/package.json"],
+      "fileMatch": [
+        "/package.json"
+      ],
       "url": "http://json.schemastore.org/package.json"
     }
   ],
@@ -102,18 +87,25 @@
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
     {
-      "after": ["\"", "_", "d", "P"],
-      "before": ["p"]
+      "after": [
+        "\"",
+        "_",
+        "d",
+        "P"
+      ],
+      "before": [
+        "p"
+      ]
     }
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "window.zoomLevel": -2,
+  "window.zoomLevel": -1,
   "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
     "editorIndentGuide.activeBackground": "#ff0000"
   },
-  "workbench.colorTheme": "Andromeda Colorizer",
+  "workbench.colorTheme": "Lei Dark",
   "workbench.editor.showTabs": true,
   "workbench.iconTheme": "vscode-great-icons",
   "workbench.sideBar.location": "left",
@@ -125,8 +117,13 @@
   },
   "vim.insertModeKeyBindings": [
     {
-      "before": ["<C-a>"],
-      "after": ["<Esc>", "I"]
+      "before": [
+        "<C-a>"
+      ],
+      "after": [
+        "<Esc>",
+        "I"
+      ]
     }
   ],
   "workbench.statusBar.feedback.visible": false,
@@ -145,5 +142,327 @@
   "search.useGlobalIgnoreFiles": true,
   "workbench.editor.highlightModifiedTabs": true,
   "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.lineHistory.enabled": true
+  "gitlens.views.lineHistory.enabled": true,
+  "editor.parameterHints.enabled": false,
+  "dash.fileNameToDocsetMap": {
+    "[dD]ocker*": [
+      "docker"
+    ],
+    "Vagrantfile": [
+      "vagrant"
+    ],
+    "gruntfile.js": [
+      "grunt"
+    ],
+    "gulpfile.js": [
+      "gulp"
+    ]
+  },
+  "dash.languageIdToDocsetMap": {
+    "ansible": [
+      "ansible"
+    ],
+    "ansible-advanced": [
+      "ansible"
+    ],
+    "css": [
+      "css",
+      "bootstrap",
+      "foundation",
+      "less",
+      "awesome",
+      "cordova",
+      "phonegap"
+    ],
+    "clojure": [
+      "clojure"
+    ],
+    "coffee": [
+      "coffee"
+    ],
+    "cpp": [
+      "cpp",
+      "net",
+      "boost",
+      "qt",
+      "cvcpp",
+      "cocos2dx",
+      "c",
+      "manpages"
+    ],
+    "csharp": [
+      "net",
+      "mono",
+      "unity3d"
+    ],
+    "dart": [
+      "dartlang",
+      "polymerdart",
+      "angulardart"
+    ],
+    "elixir": [
+      "elixir"
+    ],
+    "elm": [
+      "elm"
+    ],
+    "erlang": [
+      "erlang"
+    ],
+    "go": [
+      "go",
+      "godoc"
+    ],
+    "haskell": [
+      "haskell"
+    ],
+    "haml": [
+      "haml"
+    ],
+    "html": [
+      "html",
+      "svg",
+      "css",
+      "bootstrap",
+      "foundation",
+      "awesome",
+      "statamic",
+      "javascript",
+      "jquery",
+      "jqueryui",
+      "jquerym",
+      "angularjs",
+      "backbone",
+      "marionette",
+      "meteor",
+      "moo",
+      "prototype",
+      "ember",
+      "lodash",
+      "underscore",
+      "sencha",
+      "extjs",
+      "knockout",
+      "zepto",
+      "cordova",
+      "phonegap",
+      "yui"
+    ],
+    "jade": [
+      "jade"
+    ],
+    "java": [
+      "java",
+      "javafx",
+      "grails",
+      "groovy",
+      "playjava",
+      "spring",
+      "cvj",
+      "processing"
+    ],
+    "javascript": [
+      "angularjs",
+      "awsjs",
+      "backbone",
+      "bootstrap",
+      "chai",
+      "coffee",
+      "cordova",
+      "css",
+      "d3",
+      "dojo",
+      "ember",
+      "express",
+      "extjs",
+      "foundation",
+      "grunt",
+      "html",
+      "jasmine",
+      "javascript",
+      "jquery",
+      "jquerym",
+      "jqueryui",
+      "knockout",
+      "lodash",
+      "marionette",
+      "meteor",
+      "moment",
+      "mongoose",
+      "moo",
+      "nodejs",
+      "phonegap",
+      "prototype",
+      "ramda",
+      "react",
+      "require",
+      "sails",
+      "sencha",
+      "sequelize",
+      "sinon",
+      "sproutcore",
+      "svg",
+      "titanium",
+      "underscore",
+      "unity3d",
+      "yui",
+      "zepto"
+    ],
+    "javascriptreact": [
+      "react"
+    ],
+    "julia": [
+      "julia"
+    ],
+    "less": [
+      "less"
+    ],
+    "lua": [
+      "lua",
+      "corona"
+    ],
+    "markdown": [
+      "markdown"
+    ],
+    "objective-c": [
+      "iphoneos",
+      "macosx",
+      "watchos",
+      "tvos",
+      "appledoc",
+      "cocos2d",
+      "cocos3d",
+      "kobold2d",
+      "sparrow",
+      "c",
+      "manpages"
+    ],
+    "perl": [
+      "perl",
+      "manpages"
+    ],
+    "php": [
+      "php",
+      "wordpress",
+      "drupal",
+      "zend",
+      "laravel",
+      "yii",
+      "joomla",
+      "ee",
+      "codeigniter",
+      "cakephp",
+      "phpunit",
+      "symfony",
+      "typo3",
+      "twig",
+      "smarty",
+      "craft",
+      "phpp",
+      "html",
+      "statamic",
+      "mysql",
+      "sqlite",
+      "mongodb",
+      "psql",
+      "redis"
+    ],
+    "pde": [
+      "processing"
+    ],
+    "puppet": [
+      "puppet"
+    ],
+    "python": [
+      "python",
+      "django",
+      "twisted",
+      "sphinx",
+      "flask",
+      "tornado",
+      "sqlalchemy",
+      "numpy",
+      "scipy",
+      "salt",
+      "pandas",
+      "matplotlib",
+      "cvp"
+    ],
+    "r": [
+      "r"
+    ],
+    "ruby": [
+      "ruby",
+      "rubygems",
+      "rails"
+    ],
+    "rust": [
+      "rust"
+    ],
+    "sass": [
+      "sass",
+      "compass",
+      "bourbon",
+      "neat",
+      "susy",
+      "css"
+    ],
+    "scala": [
+      "scala",
+      "akka",
+      "playscala"
+    ],
+    "shellscript": [
+      "bash",
+      "manpages"
+    ],
+    "sql": [
+      "mysql",
+      "sqlite",
+      "psql"
+    ],
+    "stylus": [
+      "stylus"
+    ],
+    "swift": [
+      "swift",
+      "iphoneos",
+      "macosx",
+      "watchos",
+      "tvos",
+      "appledoc"
+    ],
+    "tcl": [
+      "tcl"
+    ],
+    "typescript": [
+      "lodash",
+      "ramda",
+      "typescript",
+      "javascript"
+    ],
+    "yaml": [
+      "chef",
+      "ansible"
+    ],
+    "haxe": [
+      "haxe"
+    ],
+    "terraform": [
+      "terraform"
+    ]
+  },
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "gitlens.codeLens.enabled": false,
+  "gitlens.blame.ignoreWhitespace": true,
+  "gitlens.recentChanges.toggleMode": "window",
+  "gitlens.blame.heatmap.location": "left",
+  "gitlens.heatmap.ageThreshold": "2",
+  "gitlens.heatmap.toggleMode": "window",
+  "gitlens.blame.heatmap.enabled": false,
+  "editor.minimap.enabled": false,
+  "editor.renderIndentGuides": false,
+  "gitlens.hovers.currentLine.details": false,
+  "gitlens.currentLine.scrollable": false,
+  "gitlens.currentLine.enabled": false
 }
