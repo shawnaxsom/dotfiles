@@ -248,6 +248,7 @@ set -x VIRTUALFISH_HOME ~/.virtualenvs
 # alias python3='python3.6'
 # eval (python3.6 -m virtualfish)
 # alias pip='pip3.6'
+# eval (python -m virtualfish)
 
 function clear_screen
   # https://stackoverflow.com/questions/2198377/how-to-clear-previous-output-in-terminal-in-mac-os-x
@@ -279,3 +280,7 @@ set -gx PATH $PATH $ANDROID_HOME/platform-tools
 # Fastlane for React Native development
 set -x PATH $HOME/.fastlane/bin $PATH
 
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /Users/shawnaxsom/dev/fsri-lms/lambda/node_modules/tabtab/.completions/slss.fish ]; and . /Users/shawnaxsom/dev/fsri-lms/lambda/node_modules/tabtab/.completions/slss.fish

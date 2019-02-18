@@ -19,18 +19,18 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.openEditors.visible": 15,
   "files.exclude": {
-    "**/.DS_Store": true,
-    "**/.git": true,
-    "**/.github": true,
-    "**/.hg": true,
-    "**/.jest": true,
-    "**/.svn": true,
-    "**/.tmp": true,
-    "**/.webpack": true,
-    "**/CVS": true,
-    "**/index.d.ts": true,
-    "**/node_modules": true,
-    "/var/folders": true
+    "**/.DS_Store": false,
+    "**/.git": false,
+    "**/.github": false,
+    "**/.hg": false,
+    "**/.jest": false,
+    "**/.svn": false,
+    "**/.tmp": false,
+    "**/.webpack": false,
+    "**/CVS": false,
+    "**/index.d.ts": false,
+    "**/node_modules": false,
+    "/var/folders": false
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -49,25 +49,29 @@
   "javascript.validate.enable": true,
   "json.schemas": [
     {
-      "fileMatch": [
-        "/package.json"
-      ],
+      "fileMatch": ["/package.json"],
       "url": "http://json.schemastore.org/package.json"
     }
   ],
   "npm.enableScriptExplorer": true,
   "relativePath.excludedExtensions": [],
   "search.exclude": {
+    ".*": true,
+    "*-lock.json": true,
+    "*.md": true,
+    "**/*.java": true,
+    "**/*.m": true,
+    "**/*.pbxproj": true,
     "**/bower_components": true,
     "**/build": true,
     "**/node_modules": true,
-    "*-lock.json": true,
-    "*.md": true,
-    ".*": true,
+    "**/venv": true,
     "yarn.lock": true,
-    "**/*.java": true,
-    "**/*.pbxproj": true,
-    "**/*.m": true
+    "**/.cache": true,
+    "**/package-lock.json": true,
+    "**/*.map": true,
+    "**/yarn.lock": true,
+    "**/static/d/**": true
   },
   "search.location": "sidebar",
   "search.quickOpen.includeSymbols": false,
@@ -87,15 +91,8 @@
   "vim.useSystemClipboard": true,
   "vim.visualModeKeyBindingsNonRecursive": [
     {
-      "after": [
-        "\"",
-        "_",
-        "d",
-        "P"
-      ],
-      "before": [
-        "p"
-      ]
+      "after": ["\"", "_", "d", "P"],
+      "before": ["p"]
     }
   ],
   "vim.visualstar": true,
@@ -117,13 +114,8 @@
   },
   "vim.insertModeKeyBindings": [
     {
-      "before": [
-        "<C-a>"
-      ],
-      "after": [
-        "<Esc>",
-        "I"
-      ]
+      "before": ["<C-a>"],
+      "after": ["<Esc>", "I"]
     }
   ],
   "workbench.statusBar.feedback.visible": false,
@@ -145,26 +137,14 @@
   "gitlens.views.lineHistory.enabled": true,
   "editor.parameterHints.enabled": false,
   "dash.fileNameToDocsetMap": {
-    "[dD]ocker*": [
-      "docker"
-    ],
-    "Vagrantfile": [
-      "vagrant"
-    ],
-    "gruntfile.js": [
-      "grunt"
-    ],
-    "gulpfile.js": [
-      "gulp"
-    ]
+    "[dD]ocker*": ["docker"],
+    "Vagrantfile": ["vagrant"],
+    "gruntfile.js": ["grunt"],
+    "gulpfile.js": ["gulp"]
   },
   "dash.languageIdToDocsetMap": {
-    "ansible": [
-      "ansible"
-    ],
-    "ansible-advanced": [
-      "ansible"
-    ],
+    "ansible": ["ansible"],
+    "ansible-advanced": ["ansible"],
     "css": [
       "css",
       "bootstrap",
@@ -174,51 +154,17 @@
       "cordova",
       "phonegap"
     ],
-    "clojure": [
-      "clojure"
-    ],
-    "coffee": [
-      "coffee"
-    ],
-    "cpp": [
-      "cpp",
-      "net",
-      "boost",
-      "qt",
-      "cvcpp",
-      "cocos2dx",
-      "c",
-      "manpages"
-    ],
-    "csharp": [
-      "net",
-      "mono",
-      "unity3d"
-    ],
-    "dart": [
-      "dartlang",
-      "polymerdart",
-      "angulardart"
-    ],
-    "elixir": [
-      "elixir"
-    ],
-    "elm": [
-      "elm"
-    ],
-    "erlang": [
-      "erlang"
-    ],
-    "go": [
-      "go",
-      "godoc"
-    ],
-    "haskell": [
-      "haskell"
-    ],
-    "haml": [
-      "haml"
-    ],
+    "clojure": ["clojure"],
+    "coffee": ["coffee"],
+    "cpp": ["cpp", "net", "boost", "qt", "cvcpp", "cocos2dx", "c", "manpages"],
+    "csharp": ["net", "mono", "unity3d"],
+    "dart": ["dartlang", "polymerdart", "angulardart"],
+    "elixir": ["elixir"],
+    "elm": ["elm"],
+    "erlang": ["erlang"],
+    "go": ["go", "godoc"],
+    "haskell": ["haskell"],
+    "haml": ["haml"],
     "html": [
       "html",
       "svg",
@@ -248,9 +194,7 @@
       "phonegap",
       "yui"
     ],
-    "jade": [
-      "jade"
-    ],
+    "jade": ["jade"],
     "java": [
       "java",
       "javafx",
@@ -308,22 +252,11 @@
       "yui",
       "zepto"
     ],
-    "javascriptreact": [
-      "react"
-    ],
-    "julia": [
-      "julia"
-    ],
-    "less": [
-      "less"
-    ],
-    "lua": [
-      "lua",
-      "corona"
-    ],
-    "markdown": [
-      "markdown"
-    ],
+    "javascriptreact": ["react"],
+    "julia": ["julia"],
+    "less": ["less"],
+    "lua": ["lua", "corona"],
+    "markdown": ["markdown"],
     "objective-c": [
       "iphoneos",
       "macosx",
@@ -337,10 +270,7 @@
       "c",
       "manpages"
     ],
-    "perl": [
-      "perl",
-      "manpages"
-    ],
+    "perl": ["perl", "manpages"],
     "php": [
       "php",
       "wordpress",
@@ -367,12 +297,8 @@
       "psql",
       "redis"
     ],
-    "pde": [
-      "processing"
-    ],
-    "puppet": [
-      "puppet"
-    ],
+    "pde": ["processing"],
+    "puppet": ["puppet"],
     "python": [
       "python",
       "django",
@@ -388,69 +314,20 @@
       "matplotlib",
       "cvp"
     ],
-    "r": [
-      "r"
-    ],
-    "ruby": [
-      "ruby",
-      "rubygems",
-      "rails"
-    ],
-    "rust": [
-      "rust"
-    ],
-    "sass": [
-      "sass",
-      "compass",
-      "bourbon",
-      "neat",
-      "susy",
-      "css"
-    ],
-    "scala": [
-      "scala",
-      "akka",
-      "playscala"
-    ],
-    "shellscript": [
-      "bash",
-      "manpages"
-    ],
-    "sql": [
-      "mysql",
-      "sqlite",
-      "psql"
-    ],
-    "stylus": [
-      "stylus"
-    ],
-    "swift": [
-      "swift",
-      "iphoneos",
-      "macosx",
-      "watchos",
-      "tvos",
-      "appledoc"
-    ],
-    "tcl": [
-      "tcl"
-    ],
-    "typescript": [
-      "lodash",
-      "ramda",
-      "typescript",
-      "javascript"
-    ],
-    "yaml": [
-      "chef",
-      "ansible"
-    ],
-    "haxe": [
-      "haxe"
-    ],
-    "terraform": [
-      "terraform"
-    ]
+    "r": ["r"],
+    "ruby": ["ruby", "rubygems", "rails"],
+    "rust": ["rust"],
+    "sass": ["sass", "compass", "bourbon", "neat", "susy", "css"],
+    "scala": ["scala", "akka", "playscala"],
+    "shellscript": ["bash", "manpages"],
+    "sql": ["mysql", "sqlite", "psql"],
+    "stylus": ["stylus"],
+    "swift": ["swift", "iphoneos", "macosx", "watchos", "tvos", "appledoc"],
+    "tcl": ["tcl"],
+    "typescript": ["lodash", "ramda", "typescript", "javascript"],
+    "yaml": ["chef", "ansible"],
+    "haxe": ["haxe"],
+    "terraform": ["terraform"]
   },
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "gitlens.codeLens.enabled": false,
