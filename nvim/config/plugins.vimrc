@@ -98,7 +98,7 @@ nnoremap <leader>p :CtrlP<CR>
  elseif executable('ack')
    set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
  endif
- let g:ctrlp_cmd = 'CtrlPLastMode'
+ let g:ctrlp_cmd = 'CtrlPMRUFiles'
  let g:ctrlp_use_caching = 0
  let g:ctrlp_by_filename = 0
  let g:ctrlp_regexp = 0
