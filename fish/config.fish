@@ -65,6 +65,10 @@ if test -d ~/.cargo/bin
   set -gx PATH ~/.cargo/bin $PATH
 end
 
+if test -d /usr/local/Cellar/ruby/2.6.3/bin/
+  set -gx PATH /usr/local/Cellar/ruby/2.6.3/bin/ $PATH
+end
+
 # https://hub.github.com/
 alias git='hub'
 

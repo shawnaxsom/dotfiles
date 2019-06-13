@@ -108,7 +108,8 @@ nnoremap <leader>p :CtrlP<CR>
  let g:ctrlp_match_window = 'bottom,order:btt'
  let g:ctrlp_switch_buffer = 'e'
  let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
- let g:ctrlp_working_path_mode = 'ra'
+ " let g:ctrlp_working_path_mode = 'ra'
+ let g:ctrlp_working_path_mode = 'a'
  let g:ctrlp_default_input = 0
  let g:ctrlp_types = ['buf', 'mru', 'fil']
  let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
@@ -177,7 +178,7 @@ let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
 Plug 'SirVer/ultisnips'
-nmap <leader>eu :UltiSnipsEdit<CR>
+" nmap <leader>eu :UltiSnipsEdit<CR>
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"

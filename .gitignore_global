@@ -22,3 +22,8 @@ out/
 
 # Quokka: https://github.com/wallabyjs/quokka/issues/28
 modulePatch.js
+
+# Kinetica
+persist/gpudb
+.project
+bin/

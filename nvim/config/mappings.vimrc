@@ -354,4 +354,7 @@ map gx :!open <cWORD><CR>
 
 map <leader>' "ayiwologo<TAB>a
 
+map <leader>e :e **/*
+map <leader>b :buffer<SPACE>
+
 " nnoremap d "_d

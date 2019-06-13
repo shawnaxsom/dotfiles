@@ -29,9 +29,12 @@ set background=dark
 " colorscheme candyman
 " colorscheme 3dglasses
 " colorscheme paramount
-colorscheme nova
 " colorscheme zenburn
 " colorscheme oceandeep
+" colorscheme winter
+" colorscheme nova
+" colorscheme dusk
+colorscheme jhlight
 " " } Colorscheme
 
 " " { Highlights
@@ -42,10 +45,10 @@ colorscheme nova
 " }
 "
 " { Comments
-highlight Comment guifg=#999999
+" highlight Comment guifg=#999999
 " }
 " { Matching Parens
-highlight MatchParen guibg=#a0a080 guifg=#fff000
+" highlight MatchParen guibg=#a0a080 guifg=#fff000
 " }
 "
 " { Current line
@@ -57,18 +60,18 @@ highlight MatchParen guibg=#a0a080 guifg=#fff000
 " highlight cursorLine term=bold cterm=bold guibg=#254555
 " }
 " { Visual Selection
-highlight Visual term=bold cterm=bold guibg=#2555a5
+" highlight Visual term=bold cterm=bold guibg=#2555a5
 " }
 " { matchmaker
-highlight Matchmaker guibg=#954545
+" highlight Matchmaker guibg=#954545
 " }
 " { MatchTagAlways
-highlight MatchTag guibg=#656565
+" highlight MatchTag guibg=#656565
 " }
 " { Column 80
 " set colorcolumn=80
 " highlight ColorColumn ctermbg=240 guibg=#303030
-highlight ColorColumn guibg=#222222 guifg=#000000
+" highlight ColorColumn guibg=#222222 guifg=#000000
 " }
 
 " { vim_current_word
