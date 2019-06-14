@@ -33,8 +33,7 @@ set background=dark
 " colorscheme oceandeep
 " colorscheme winter
 " colorscheme nova
-" colorscheme dusk
-colorscheme jhlight
+colorscheme dusk
 " " } Colorscheme
 
 " " { Highlights

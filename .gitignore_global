@@ -27,3 +27,5 @@ modulePatch.js
 persist/gpudb
 .project
 bin/
+.classpath
+.settings/

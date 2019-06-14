@@ -104,7 +104,7 @@
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "window.zoomLevel": -2,
+  "window.zoomLevel": -1,
   "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
     "editorIndentGuide.activeBackground": "#ff0000"
