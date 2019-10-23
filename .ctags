@@ -1,4 +1,4 @@
---langdef=js
+y-langdef=js
 --langmap=js:.js
 
 --regex-JavaScript=/^class[ ]([a-zA-Z]+).*/\1/f,class/

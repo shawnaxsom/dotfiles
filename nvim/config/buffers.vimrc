@@ -81,3 +81,6 @@ set wildignore+=*/bin/*
 set wildignore+=*.min.js
 set wildignore+=*/.webpack/*
 set wildignore+=*/out/*
+set wildignore+=*.pyc
+set wildignore+=*/htmlcov/*
+set wildignore+=*__pycache__/*

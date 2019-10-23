@@ -23,6 +23,14 @@ alias surf='surf google.com'
 alias ack='ack-grep'
 alias forecast='grc -es --colour=auto weather ind -f'
 
+function tmux
+  if test (count $argv) = 0
+    tmux new-session -s (bash -c 'echo ${PWD##*/}')
+  else
+    /usr/local/bin/tmux $argv
+  end
+end
+
 function google
   elinks "https://www.google.com/search?q=$argv"
 end
@@ -36,7 +44,7 @@ function search
 end
 
 function agfzf
-  vim (ag $argv | awk -F: '{ print $1 }' | fzf --preview "ag -B 15 -A 15 $argv {}")
+  vim (ag $argv | awk -F: '{ print $1 }' | fzf --preview "ag -B 5 -A 5 $argv {}")
 end
 
 function fzfp

@@ -2,21 +2,22 @@
   "search.exclude": {
     ".*": true,
     "*-lock.json": true,
+    "*.json": true,
     "*.md": true,
+    "**/.cache": true,
     "**/*.class": true,
+    "**/*.log": true,
     "**/*.m": true,
+    "**/*.map": true,
     "**/*.pbxproj": true,
     "**/bower_components": true,
     "**/build": true,
     "**/node_modules": true,
-    "**/venv": true,
-    "yarn.lock": true,
-    "**/.cache": true,
     "**/package-lock.json": true,
-    "**/*.map": true,
-    "**/yarn.lock": true,
     "**/static/d/**": true,
-    "**/*.log": true,
+    "**/venv": true,
+    "**/yarn.lock": true,
+    "yarn.lock": true
   },
   "breadcrumbs.enabled": true,
   "editor.cursorBlinking": "solid",
@@ -27,8 +28,6 @@
   "editor.matchBrackets": false,
   "editor.minimap.renderCharacters": true,
   "editor.showFoldingControls": "always",
-  "editor.tabSize": 2,
-  "editor.wordWrap": "on",
   "editor.wrappingIndent": "deepIndent",
   "emmet.syntaxProfiles": {
     "JavaScript": true,
@@ -38,22 +37,29 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.openEditors.visible": 15,
   "files.exclude": {
+    ".DS_Store": true,
+    ".git": true,
+    ".vscode": true,
+    "**/__pycache__": true,
+    "**/.classpath": true,
     "**/.DS_Store": false,
+    "**/.factorypath": true,
     "**/.git": false,
     "**/.github": false,
     "**/.hg": false,
     "**/.jest": false,
+    "**/.project": true,
+    "**/.pytest_cache": true,
+    "**/.serverless": true,
+    "**/.settings": true,
     "**/.svn": false,
     "**/.tmp": false,
     "**/.webpack": false,
     "**/CVS": false,
     "**/index.d.ts": false,
-    "**/node_modules": false,
+    "**/node_modules": true,
     "/var/folders": false,
-    "**/.classpath": true,
-    "**/.project": true,
-    "**/.settings": true,
-    "**/.factorypath": true
+    "venv/**": true
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -107,9 +113,11 @@
   "window.zoomLevel": -1,
   "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
-    "editorIndentGuide.activeBackground": "#ff0000"
+    "editorIndentGuide.activeBackground": "#ff0000",
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f"
   },
-  "workbench.colorTheme": "Quiet Light",
   "workbench.editor.showTabs": true,
   "workbench.iconTheme": "vscode-great-icons",
   "workbench.sideBar.location": "left",
@@ -348,5 +356,35 @@
   "gitlens.hovers.currentLine.details": false,
   "gitlens.currentLine.scrollable": false,
   "gitlens.currentLine.enabled": false,
-  "editor.formatOnSave": true
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.suggest.localityBonus": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "python.jediEnabled": false,
+  "editor.tabSize": 2,
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "workbench.colorTheme": "Winter is Coming (Dark Black - No Italics)",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.list.keyboardNavigation": "filter",
+  "vim.enableNeovim": true,
+  "editor.cursorSurroundingLines": 50,
+  "vim.statusBarColorControl": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

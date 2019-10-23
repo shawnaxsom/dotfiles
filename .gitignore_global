@@ -19,6 +19,8 @@ tasks.json
 User/workspaceStorage
 jsconfig.json
 out/
+.DS_Store
+*.swp
 
 # Quokka: https://github.com/wallabyjs/quokka/issues/28
 modulePatch.js
@@ -29,3 +31,48 @@ persist/gpudb
 bin/
 .classpath
 .settings/
+
+# Python Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python Distribution / packaging
+.Python build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec
+
+# Python py.test
+.coverage
+htmlcov/
+
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+
+# PyCharm
+.idea
+
+# Java / Maven build artifacts
+target/

@@ -33,6 +33,7 @@ set background=dark
 " colorscheme oceandeep
 " colorscheme winter
 " colorscheme nova
+" colorscheme kiss
 colorscheme dusk
 " " } Colorscheme
 
