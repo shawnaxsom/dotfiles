@@ -1,7 +1,7 @@
 # ~/.tmuxinator/usps.yml
 
-name: usps
-root: ~/dev/samedaysim/
+name: navigator
+root: ~/dev/navi-gator/
 
 # Optional tmux socket
 # socket_name: foo
@@ -31,22 +31,9 @@ root: ~/dev/samedaysim/
 # post: tmux -CC attach -t web
 
 windows:
-  - docker:
-      root: ~/dev/samedaysim
+  - server:
+      root: ~/dev/navi-gator/server
       layout: main-horizontal
       panes:
-        - docker-compose -f ./docker-compose-dev-sim-route.yml up
-        - docker-compose -f ./docker-compose-just-gpudb.yml up
-        - curl http://localhost:8888/load-base-data
-  - web:
-      root: ~/dev/samedaysim/web
-      layout: main-horizontal
-      panes:
-        - env SIM_API_URL="http://localhost:8888" AGENT_API_URL="http://localhost:8886" SIM_WEB_URL="http://localhost:4200" MAILER_WEB_URL="http://localhost:4201" npm start
-        - fish
-  - web-mailer:
-      root: ~/dev/samedaysim/web-mailer
-      layout: main-horizontal
-      panes:
-        - env SIM_API_URL="http://localhost:8888" AGENT_API_URL="http://localhost:8886" SIM_WEB_URL="http://localhost:4200" MAILER_WEB_URL="http://localhost:4201" npm start
-        - fish
+        - vim
+        - npm run dev

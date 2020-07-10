@@ -4,7 +4,7 @@
     "command": "workbench.action.openRecent"
   },
   {
-    "key": "ctrl+cmd+]",
+    "key": "ctrl+cmd+n",
     "command": "search.action.focusNextSearchResult",
     "when": "hasSearchResult"
   },
@@ -14,7 +14,7 @@
     "when": "hasSearchResult"
   },
   {
-    "key": "ctrl+cmd+[",
+    "key": "ctrl+cmd+p",
     "command": "search.action.focusPreviousSearchResult",
     "when": "hasSearchResult"
   },
@@ -85,11 +85,6 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "cmd+]",
-    "command": "editor.unfold",
-    "when": "editorTextFocus"
-  },
-  {
     "key": "alt+cmd+]",
     "command": "-editor.unfold",
     "when": "editorTextFocus"
@@ -123,7 +118,7 @@
     "command": "-workbench.action.nextEditor"
   },
   {
-    "key": "ctrl+cmd+k",
+    "key": "ctrl+shift+cmd+k",
     "command": "editsHistory.moveCursorToPreviousEdit"
   },
   {
@@ -131,15 +126,11 @@
     "command": "-editsHistory.moveCursorToPreviousEdit"
   },
   {
-    "key": "ctrl+shift+cmd+k",
-    "command": "editsHistory.moveCursorToPreviouslyEditedFile"
-  },
-  {
     "key": "shift+cmd+j",
     "command": "-editsHistory.moveCursorToPreviouslyEditedFile"
   },
   {
-    "key": "ctrl+shift+cmd+j",
+    "key": "ctrl+cmd+j",
     "command": "editsHistory.moveCursorToNextEditedFile"
   },
   {
@@ -147,11 +138,41 @@
     "command": "-editsHistory.moveCursorToNextEditedFile"
   },
   {
-    "key": "ctrl+cmd+j",
+    "key": "ctrl+shift+cmd+j",
     "command": "editsHistory.moveCursorToNextEdit"
   },
   {
     "key": "cmd+k",
     "command": "-editsHistory.moveCursorToNextEdit"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "editsHistory.moveCursorToNextEditInSameFile"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "-editsHistory.moveCursorToNextEditInSameFile"
+  },
+  {
+    "key": "ctrl+shift+k",
+    "command": "editsHistory.moveCursorToPreviousEditInSameFile"
+  },
+  {
+    "key": "shift+cmd+u",
+    "command": "-editsHistory.moveCursorToPreviousEditInSameFile"
+  },
+  {
+    "key": "ctrl+cmd+k",
+    "command": "editsHistory.moveCursorToPreviouslyEditedFile"
+  },
+  {
+    "key": "cmd+]",
+    "command": "editor.unfold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "alt+cmd+]",
+    "command": "-editor.unfold",
+    "when": "editorTextFocus && foldingEnabled"
   }
 ]

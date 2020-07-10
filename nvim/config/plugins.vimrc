@@ -136,39 +136,39 @@ map <leader>gL :Glog<BAR>:bot copen<CR>
 map <leader>gv :GV<CR>
 " }
 " { Vimux / Dispatch
-Plug 'tpope/vim-dispatch'
-Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
-let g:VimuxHeight = "20"
-let g:VimuxPromptString = "Vimux>  $ "
-map ,v :call VimuxPromptCommand("npm start")<CR>
-" Dispatch is better for single tasks, shows quickfix results afterwards
-map ,d :Dispatch<SPACE>
-function! VimuxRunFromClipboard()
-  let clipboardText = @+
-  let clipboardText = substitute(clipboardText, "\n", "", "g")
-  let clipboardText = substitute(clipboardText, "\r", "", "g")
-  let clipboardText = substitute(clipboardText, "^@", "", "g")
-  let clipboardText = substitute(clipboardText, "http://", "", "")
-  let command = ':!' . clipboardText
-  execute command
-endfunction
-vmap ,r y:call VimuxRunFromClipboard()<CR>
-map ,i :call VimuxInspectRunner()<CR>
-map ,c :call VimuxInterruptRunner()<CR>
-map ,f :Dispatch npm test -- --tests %
-map ,b :Dispatch npm run build<CR>
-map ,z :VimuxZoomRunner<CR>
-map ,a :Dispatch npm test<CR>
-map ,t :Dispatch npm test -- --tests %<CR>
-augroup vimux
-  autocmd!
-  autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
-  autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
-  autocmd BufEnter */api/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
-  autocmd BufEnter */optimization/*,*/recommendations/*,*/ambyint-platform-admin/*,*/iot/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
-  autocmd BufEnter */web/* map <buffer> ,t :Dispatch npm run test<CR>
-  autocmd BufEnter */utils/* map <buffer> ,t :Dispatch npm run test<CR>
-augroup END
+" Plug 'tpope/vim-dispatch'
+" Plug 'benmills/vimux'  "  Run external commands in a small split Tmux pane
+" let g:VimuxHeight = "20"
+" let g:VimuxPromptString = "Vimux>  $ "
+" map ,v :call VimuxPromptCommand("npm start")<CR>
+" " Dispatch is better for single tasks, shows quickfix results afterwards
+" map ,d :Dispatch<SPACE>
+" function! VimuxRunFromClipboard()
+"   let clipboardText = @+
+"   let clipboardText = substitute(clipboardText, "\n", "", "g")
+"   let clipboardText = substitute(clipboardText, "\r", "", "g")
+"   let clipboardText = substitute(clipboardText, "^@", "", "g")
+"   let clipboardText = substitute(clipboardText, "http://", "", "")
+"   let command = ':!' . clipboardText
+"   execute command
+" endfunction
+" vmap ,r y:call VimuxRunFromClipboard()<CR>
+" map ,i :call VimuxInspectRunner()<CR>
+" map ,c :call VimuxInterruptRunner()<CR>
+" map ,f :Dispatch npm test -- --tests %
+" map ,b :Dispatch npm run build<CR>
+" map ,z :VimuxZoomRunner<CR>
+" map ,a :Dispatch npm test<CR>
+" map ,t :Dispatch npm test -- --tests %<CR>
+" augroup vimux
+"   autocmd!
+"   autocmd BufEnter */api/* map <buffer> ,r :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+"   autocmd BufEnter */api/* map <buffer> ,q :sp term://npm run build; NODE_ENV=qa npm start")<CR>
+"   autocmd BufEnter */api/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
+"   autocmd BufEnter */optimization/*,*/recommendations/*,*/ambyint-platform-admin/*,*/iot/* map <buffer> ,t :Dispatch npm test -- --tests %<CR>
+"   autocmd BufEnter */web/* map <buffer> ,t :Dispatch npm run test<CR>
+"   autocmd BufEnter */utils/* map <buffer> ,t :Dispatch npm run test<CR>
+" augroup END
 " }
 " { vim-tmux-navigator
 " Ctrl + J/K/H/L to move to different Vim or Tmux panes.
@@ -292,15 +292,15 @@ nmap <leader><leader>w :Obsess!<CR>
 " crc - camelCase
 " crm - MixedCase
 Plug 'tpope/tpope-vim-abolish'
-nmap <leader>S yiwV:s/"/
-vmap <leader>S :s/
-" nmap <leader>s yiwV:S/"/
-nmap <leader>s yiwV:S/
-vmap <leader>s :S/
-nmap <leader><leader>S :%s//
-vmap <leader><leader>S y:%s/+/
-nmap <leader><leader>s :%S//
-vmap <leader><leader>s y:%S/+/
+" nmap <leader>S yiwV:s/"/
+" vmap <leader>S :s/
+" " nmap <leader>s yiwV:S/"/
+" nmap <leader>s yiwV:S/
+" vmap <leader>s :S/
+" nmap <leader><leader>S :%s//
+" vmap <leader><leader>S y:%s/+/
+" nmap <leader><leader>s :%S//
+" vmap <leader><leader>s y:%S/+/
 " }
 " { vim-rest-console
 Plug 'diepm/vim-rest-console'
@@ -792,16 +792,16 @@ set include=from[\ ]
 " }
 " { Valloric/MatchTagAlways
 " Similar to matchmaker, but for highlighting surrounding tag
-Plug 'Valloric/MatchTagAlways'
-let g:mta_set_default_matchtag_color = 0
-let g:mta_use_matchparen_group = 0
-let g:mta_filetypes = {
-  \ 'javascript.jsx': 1,
-  \ 'html' : 1,
-  \ 'xhtml' : 1,
-  \ 'xml' : 1,
-  \ 'jinja' : 1,
-  \ }
+" Plug 'Valloric/MatchTagAlways'
+" let g:mta_set_default_matchtag_color = 0
+" let g:mta_use_matchparen_group = 0
+" let g:mta_filetypes = {
+"   \ 'javascript.jsx': 1,
+"   \ 'html' : 1,
+"   \ 'xhtml' : 1,
+"   \ 'xml' : 1,
+"   \ 'jinja' : 1,
+"   \ }
 " }
 " { tpope/vim-rsi
 " Use command line mappings in insert mode like:
@@ -834,5 +834,10 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'dsawardekar/ember.vim'
 Plug 'mustache/vim-mustache-handlebars'
 " Plug 'python-mode/python-mode'
+" { jceb/vim-orgmode
+Plug 'jceb/vim-orgmode'
+let g:org_agenda_files=['~/org/index.org']
+" }
+
 
 call plug#end()

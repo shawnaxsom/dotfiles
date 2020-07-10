@@ -10,18 +10,54 @@ alias .......='../../../../../..'
 alias ........='../../../../../../..'
 
 set -x TERM xterm-256color
-set -x EDITOR /usr/local/bin/vim
+# set -x EDITOR /usr/bin/vim
+set -x EDITOR "/usr/local/bin/nvim -u ~/.config/nvim/init.vim"
+
 
 alias mux='tmuxinator'
-alias calw='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calw 2'
-alias calm='gcalcli --calendar="Shawn Axsom" --calendar="shawn.axsom@rooksecurity.com" calm'
-alias cal='gcalcli --calendar="shawn.axsom@rooksecurity.com"'
-alias calhome='gcalcli --calendar="Shawn Axsom"'
-alias calwork='gcalcli --calendar="shawn.axsom@rooksecurity.com"'
-alias todo='todotxt-machine'
 alias surf='surf google.com'
 alias ack='ack-grep'
 alias forecast='grc -es --colour=auto weather ind -f'
+
+export TODOTXT_DEFAULT_ACTION=ls
+export TODOTXT_FINAL_FILTER='~/Dropbox/todo/futureTasks'
+# alias todo='todo.sh'
+# alias t='todo.sh'
+# alias tls='todo.sh ls'
+alias next='tls -F "     %z %p |%i| %s %k (due:%D)" -n 3'
+alias today='t ls -F "     %z %p |%i| %s %k (due:%D)" "due:<=0d"'
+alias due='today'
+alias day='today'
+alias tomorrow='t ls "due:<=1d"'
+alias td='today'
+alias work='t ls -n 10 -F "     %z %p |%i| %s %k (due:%D)" @work'
+alias a='tls "(A)"'
+alias b='tls "(B)"'
+alias quick='work @quick'
+alias now='t ls -F "     %z %p |%i| %s %k (due:%D)" @now'
+alias notnow='t ls -g importance -n 15 -- @work -@now'
+alias long='work @long'
+alias recruiting='tls -n 10 @recruiting'
+alias home='tls -n 10 @home'
+alias reading='t ls -n 10 -g priority @reading'
+alias learning='tls -n 10 @learning'
+alias improvement='tls -n 10 @improvement'
+alias productivity='tls -n 10 @productivity'
+alias leslie='tls -n 10 @leslie'
+alias focus='tls -F "      |%i| %s" -n 5 @focus'
+alias inputs='tls -F "      |%i| %s" -n 5 @inputs'
+alias tm='tomorrow'
+alias todo='clear && topydo -t ~/todo.txt -d ~/done.txt'
+alias t='clear && topydo -t ~/todo.txt -d ~/done.txt'
+alias tdo='t do'
+alias tls='clear && topydo -t ~/todo.txt -d ~/done.txt ls -F "     %z %p |%i| %s %k (due:%D)"'
+alias tpr='t lsproj'
+alias ta='t add'
+alias te='t edit -e'
+alias tet='t edit -e "due:<=0d"'
+alias tew='t edit -e "due:<=0d" @work'
+alias tp='topydo -t ~/todo.txt -d ~/done.txt prompt'
+alias tc='topydo -t ~/todo.txt -d ~/done.txt columns'
 
 function tmux
   if test (count $argv) = 0
@@ -114,6 +150,7 @@ function psf
   ps -o pid,command | fzf --preview="ps {1}" --preview-window=down:8:wrap --header-lines=1 | awk '{ print $1 }'
 end
 
+alias cleanup='gd | grep "console.log\|print(\|debugger\|TODO"'
 alias gP='git push'
 alias ga='git add .'
 alias gb='git branch'
@@ -169,7 +206,7 @@ alias c='cd'
 alias l='ls'
 alias lt='ls -lat'
 alias h='head'
-alias t='tail'
+# alias t='tail'
 alias r='ranger'
 alias p='pwd'
 alias x='exit'
@@ -296,3 +333,5 @@ set -x PATH $HOME/.fastlane/bin $PATH
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/shawnaxsom/dev/fsri-lms/lambda/node_modules/tabtab/.completions/slss.fish ]; and . /Users/shawnaxsom/dev/fsri-lms/lambda/node_modules/tabtab/.completions/slss.fish
+
+alias emacs="/usr/local/bin/emacs"

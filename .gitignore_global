@@ -33,7 +33,8 @@ bin/
 .settings/
 
 # Python Environments
-.env
+# .env -- .env files are needed in JavaScript, ignore .env.local instead
+.env.local
 .venv
 env/
 venv/
@@ -48,8 +49,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
 parts/
 sdist/
 var/
@@ -76,3 +75,6 @@ db.sqlite3
 
 # Java / Maven build artifacts
 target/
+
+# Angular
+.angulardoc.json

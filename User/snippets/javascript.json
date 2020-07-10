@@ -48,5 +48,16 @@
       "  this.state = {};",
       "}"
     ]
+  },
+  "describe": {
+    "prefix": "describe",
+    "body": [
+      "describe('$1', function() {",
+      "  it('$2', function() {",
+      "    $0",
+      "    expect(true).to.equal(true)",
+      "  })",
+      "})"
+    ]
   }
 }

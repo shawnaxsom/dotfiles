@@ -11,7 +11,6 @@
     "**/*.map": true,
     "**/*.pbxproj": true,
     "**/bower_components": true,
-    "**/build": true,
     "**/node_modules": true,
     "**/package-lock.json": true,
     "**/static/d/**": true,
@@ -24,10 +23,8 @@
   "editor.fontSize": 17,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
-  "editor.lineNumbers": "relative",
   "editor.matchBrackets": false,
   "editor.minimap.renderCharacters": true,
-  "editor.showFoldingControls": "always",
   "editor.wrappingIndent": "deepIndent",
   "emmet.syntaxProfiles": {
     "JavaScript": true,
@@ -86,7 +83,6 @@
   "relativePath.excludedExtensions": [],
   "merge-conflict.diffViewPosition": "Below",
   "editor.gotoLocation.multiple": "goto",
-  "search.location": "sidebar",
   "search.quickOpen.includeSymbols": false,
   "search.useIgnoreFiles": true,
   "terminal.integrated.shell.linux": "/usr/local/bin/fish",
@@ -102,6 +98,20 @@
   "vim.leader": "<Space>",
   "vim.substituteGlobalFlag": true,
   "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "commands": [
+        "workbench.action.editor.previousChange"
+      ],
+      "before": ["K"]
+    },
+    {
+      "commands": [
+        "workbench.action.editor.nextChange"
+      ],
+      "before": ["J"]
+    }
+  ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
       "after": ["\"", "_", "d", "P"],
@@ -110,16 +120,9 @@
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "window.zoomLevel": -1,
+  "window.zoomLevel": -2,
   "workbench.activityBar.visible": true,
-  "workbench.colorCustomizations": {
-    "editorIndentGuide.activeBackground": "#ff0000",
-    "statusBar.background": "#005f5f",
-    "statusBar.noFolderBackground": "#005f5f",
-    "statusBar.debuggingBackground": "#005f5f"
-  },
-  "workbench.editor.showTabs": true,
-  "workbench.iconTheme": "vscode-great-icons",
+  "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.statusBar.visible": true,
@@ -137,12 +140,10 @@
   "workbench.tips.enabled": false,
   "workbench.view.alwaysShowHeaderActions": true,
   "workbench.editor.labelFormat": "short",
-  "workbench.editor.revealIfOpen": true,
   "workbench.editor.swipeToNavigate": true,
   "workbench.settings.openDefaultKeybindings": false,
   "workbench.settings.openDefaultSettings": false,
   "zenMode.fullScreen": false,
-  "zenMode.centerLayout": false,
   "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "search.usePCRE2": true,
   "search.useGlobalIgnoreFiles": true,
@@ -373,7 +374,7 @@
   "[python]": {
     "editor.tabSize": 4
   },
-  "workbench.colorTheme": "Winter is Coming (Dark Black - No Italics)",
+  "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -381,10 +382,27 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.list.keyboardNavigation": "filter",
-  "vim.enableNeovim": true,
   "editor.cursorSurroundingLines": 50,
-  "vim.statusBarColorControl": true,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "markdown.preview.lineHeight": 0.6,
+  "editor.autoClosingBrackets": "never",
+  "workbench.editor.openSideBySideDirection": "down",
+  "editsHistory.maxHistory": 200,
+  "org-agenda.agendaFiles": [
+    "/Users/shawnaxsom/org/index.org"
+  ],
+  "zenMode.centerLayout": false,
+  "editor.lineNumbers": "relative",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "vim.enableNeovim": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "vim.experimentalOptimizations": true,
+  "search.quickOpen.history.filterSortOrder": "recency",
+  "editor.lineHeight": 36,
+  "workbench.list.smoothScrolling": true
 }

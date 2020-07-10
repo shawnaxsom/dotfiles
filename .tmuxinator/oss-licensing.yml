@@ -1,0 +1,28 @@
+# ~/.tmuxinator/usps.yml
+
+name: oss-licensing
+root: ~/dev/hawkeye/oss-licensing/
+
+pre_window:
+  - export DB_DATABASE=hawkeye_admin
+  - export DB_USER=postgres
+  - export DB_PASSWORD=postgres
+  - export DB_HOST=localhost
+  - export DB_PORT=5432
+  - export DB_SSLMODE=disable
+  - export DB_SSLROOTCERT=
+  - export KEYCLOAK_REALM_CLIENT=master-realm
+  - export KEYCLOAK_ALGORITHM=RS256
+  - export KEYCLOAK_PUBLIC_KEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArP+FtvSDUGHb5fy2LuqWesElzmaPh23oN1YcrHtba6ASw9ed59Fh2aRtT3MKcOrj7wxGAJXV8fVkH/l1JV28q8cFeBCvvumMhEQBwFzSLhQ200ninapkDkmtuOXadaxpzcAbXXyUIvPoreczgDYus4h6bHgFL+hXcctHIBoI6RqoxYkhZWTJ1QtGfEKs5Sd1j9uwBAZc82+13Ha0n+vMG/yiJwk66WH+hLiSuTQy3wX071sYKHcNGZxPt+ESM1wZUi+jXqfwJ0FZQOl3kxP4wPQ7OSnw1E3FXA1jloJX1ClcrfRWX0o2An4wdFgdpDT8CDSg/lGIP7lVU1yC1xQPsQIDAQAB
+
+windows:
+  - web:
+      panes:
+        - npm start
+  - api:
+      root: ~/dev/hawkeye/oss-licensing/api/
+      panes:
+        - source ./venv/bin/activate.fish && python manage.py runserver
+  - keycloak:
+      panes:
+        - docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -p 8080:8080 jboss/keycloak

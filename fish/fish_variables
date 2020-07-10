@@ -3,6 +3,8 @@
 SETUVAR __fish_init_1_50_0:\x1d
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
+SETUVAR __fish_init_3_x:\x1d
+SETUVAR _fish_abbr_mux:tmuxinator
 SETUVAR fish_color_autosuggestion:969896
 SETUVAR fish_color_command:b294bb
 SETUVAR fish_color_comment:f0c674

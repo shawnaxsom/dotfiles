@@ -201,6 +201,7 @@ let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
 
 " Use space button for leader
 let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 " How long leader key and other key combinations will wait for another key
 " NOTE: Usually the timeout shouldn't be needed for <leader> / <space> in
