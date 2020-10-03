@@ -192,6 +192,9 @@ Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 " }
+" { Todo.txt-vim
+Plug 'freitass/todo.txt-vim'
+" }
 " { Deoplete
 " Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
 " followed by a property in a string. "rodDimensions." showed all props of
@@ -357,10 +360,13 @@ vmap s <Plug>VSurround
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_highlight_lines = 0
 let g:gitgutter_map_keys = 0
+set updatetime=200
 noremap ]c :GitGutterNextHunk<CR>
 noremap [c :GitGutterPrevHunk<CR>
-noremap <leader>j :GitGutterNextHunk<CR>
-noremap <leader>k :GitGutterPrevHunk<CR>
+" noremap <leader>j :GitGutterNextHunk<CR>
+" noremap <leader>k :GitGutterPrevHunk<CR>
+noremap J :GitGutterNextHunk<CR>
+noremap K :GitGutterPrevHunk<CR>
 " }
 " { Grepper
 " Like :grep but a smoother experience. No display of text or flickering.

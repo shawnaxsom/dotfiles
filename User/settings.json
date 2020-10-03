@@ -20,7 +20,7 @@
   },
   "breadcrumbs.enabled": true,
   "editor.cursorBlinking": "solid",
-  "editor.fontSize": 17,
+  "editor.fontSize": 18,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
   "editor.matchBrackets": false,
@@ -37,6 +37,7 @@
     ".DS_Store": true,
     ".git": true,
     ".vscode": true,
+    "*.o": true,
     "**/__pycache__": true,
     "**/.classpath": true,
     "**/.DS_Store": false,
@@ -120,7 +121,7 @@
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "window.zoomLevel": -2,
+  "window.zoomLevel": -3,
   "workbench.activityBar.visible": true,
   "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
   "workbench.sideBar.location": "left",
@@ -144,7 +145,6 @@
   "workbench.settings.openDefaultKeybindings": false,
   "workbench.settings.openDefaultSettings": false,
   "zenMode.fullScreen": false,
-  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "search.usePCRE2": true,
   "search.useGlobalIgnoreFiles": true,
   "workbench.editor.highlightModifiedTabs": true,
@@ -404,5 +404,7 @@
   "vim.experimentalOptimizations": true,
   "search.quickOpen.history.filterSortOrder": "recency",
   "editor.lineHeight": 36,
-  "workbench.list.smoothScrolling": true
+  "workbench.list.smoothScrolling": true,
+"editor.fontFamily": "'Hack', 'Inconsolata-g', 'Source Code Pro', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+"python.languageServer": "Microsoft"
 }

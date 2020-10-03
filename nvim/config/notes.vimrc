@@ -44,8 +44,7 @@ function! InsertAsteriskOrCheck (from_linenr, insert_at_offset, cursor_shift)
     call append(to_linenr, leading_space . "[ ]")
     call cursor(move_to_line, len(getline(move_to_line)) + 1, 1)
   else
-    call append(a:from_linenr + a:insert_at_offset, "")
-    call cursor(move_to_line, 1, 0)
+    call feedkeys("\<C-J>")
   endif
 endfunction
 

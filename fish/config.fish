@@ -25,16 +25,25 @@ export TODOTXT_FINAL_FILTER='~/Dropbox/todo/futureTasks'
 # alias t='todo.sh'
 # alias tls='todo.sh ls'
 alias next='tls -F "     %z %p |%i| %s %k (due:%D)" -n 3'
-alias today='t ls -F "     %z %p |%i| %s %k (due:%D)" "due:<=0d"'
+# alias today='t ls -F "     %z %p |%i| %s %k (due:%D)" "due:<=0d"'
+alias today='tls -g desc:due'
 alias due='today'
 alias day='today'
 alias tomorrow='t ls "due:<=1d"'
 alias td='today'
-alias work='t ls -n 10 -F "     %z %p |%i| %s %k (due:%D)" @work'
+# alias work='t ls -n 10 -F "     %z %p |%i| %s %k (due:%D)" @work'
+alias work='tls -n 15 -- -@reading -@learning -@syrus -@home -@productivity -@thedaily -@recruiting -@improvement -@focus -@inputs -@wth -@books -@family -@groceries -@shopping -@outing -@restaurants -@restaurant -@list -@habits -@background -+background'
+alias important='tls -g importance'
 alias a='tls "(A)"'
 alias b='tls "(B)"'
+alias c='tls "(C)"'
+alias d='tls "(D)"'
+alias e='tls "(E)"'
 alias quick='work @quick'
 alias now='t ls -F "     %z %p |%i| %s %k (due:%D)" @now'
+alias must='t ls -F "     %z %p |%i| %s %k (due:%D)" @must'
+alias should='t ls -F "     %z %p |%i| %s %k (due:%D)" @should'
+alias could='t ls -F "     %z %p |%i| %s %k (due:%D)" @could'
 alias notnow='t ls -g importance -n 15 -- @work -@now'
 alias long='work @long'
 alias recruiting='tls -n 10 @recruiting'
@@ -50,7 +59,7 @@ alias tm='tomorrow'
 alias todo='clear && topydo -t ~/todo.txt -d ~/done.txt'
 alias t='clear && topydo -t ~/todo.txt -d ~/done.txt'
 alias tdo='t do'
-alias tls='clear && topydo -t ~/todo.txt -d ~/done.txt ls -F "     %z %p |%i| %s %k (due:%D)"'
+alias tls='clear && topydo -t ~/todo.txt -d ~/done.txt ls -n 15 -F "     %z %p |%i| %s %k (due:%D)"'
 alias tpr='t lsproj'
 alias ta='t add'
 alias te='t edit -e'
@@ -111,6 +120,19 @@ end
 
 if test -d /usr/local/Cellar/ruby/2.6.3/bin/
   set -gx PATH /usr/local/Cellar/ruby/2.6.3/bin/ $PATH
+end
+
+if test -d /usr/local/opt/qt/bin/
+  set -gx PATH /usr/local/opt/qt/bin/ $PATH
+end
+
+if test -d /Users/shawnaxsom/.gem/ruby/2.3.0/bin/
+  set -gx PATH /Users/shawnaxsom/.gem/ruby/2.3.0/bin/ $PATH
+  set -gx PATH /Library/Ruby/Gems/2.3.0/gems/ $PATH
+end
+
+if test -d /Users/shawnaxsom/.rvm/bin/
+  set -gx PATH /Users/shawnaxsom/.rvm/bin/ $PATH
 end
 
 # https://hub.github.com/

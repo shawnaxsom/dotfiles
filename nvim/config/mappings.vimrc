@@ -126,8 +126,9 @@ nmap <leader><leader>q :qa<CR>
 nmap <leader>h :sp<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>
-nmap <leader>x A // ZZZZ<ESC>0
-nmap <leader><leader>x :Grep "ZZZZ"<CR>
+nmap <leader>x 0ix <ESC>0
+nmap <leader>z A // ZZZZ<ESC>0
+nmap <leader><leader>z :Grep "ZZZZ"<CR>
 
 " Switch to previous file
 map <leader><tab> <c-^>
@@ -150,6 +151,10 @@ nmap <leader>9 :set foldlevel=999<CR>
 " vmap <enter> :norm<space>
 vmap <bar> :g/
 vnoremap <c-p> :<c-p>
+vnoremap A :norm A<space>
+vnoremap i :norm i<space><left>
+vnoremap I :norm I<space><left>
+" vnoremap x :norm ix<space><CR>
 " }
 
 map ! :!
@@ -188,8 +193,8 @@ nnoremap <silent> J }
 nnoremap <silent> K {
 " vnoremap J 2j
 " vnoremap K 2k
-vnoremap J }
-vnoremap K {
+" vnoremap J }
+" vnoremap K {
 
 " -----------------------------------------------------------------------------------------
 " H / L - Navigation in buffer
