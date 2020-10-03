@@ -189,8 +189,8 @@ endfunction
 " nnoremap <silent> K :call SmoothScroll('k', 10)<CR>
 " nnoremap <silent> J 7j
 " nnoremap <silent> K 7k
-nnoremap <silent> J }
-nnoremap <silent> K {
+" nnoremap <silent> J }
+" nnoremap <silent> K {
 " vnoremap J 2j
 " vnoremap K 2k
 " vnoremap J }
@@ -322,6 +322,8 @@ noremap Y y$
 " Unimpaired keys
 nmap [[ :cprev<CR>
 nmap ]] :cnext<CR>
+nmap _ :cprev<CR>
+nmap + :cnext<CR>
 nmap [q :cprev<CR>
 nmap ]q :cnext<CR>
 nmap [w :cpfile<CR>
@@ -330,8 +332,12 @@ nmap [e :colder<CR>
 nmap ]e :cnewer<CR>
 nmap [b :bprevious<CR>
 nmap ]b :bnext<CR>
+nmap { :bprevious<CR>
+nmap } :bnext<CR>
 nmap [a :previous<CR>
 nmap ]a :next<CR>
+nmap ( :previous<CR>
+nmap ) :next<CR>
 nmap [l :lprev<CR>
 nmap ]l :lnext<CR>
 nmap [f -k<CR>
@@ -359,7 +365,6 @@ map gx :!open <cWORD><CR>
 
 map <leader>' "ayiwologo<TAB>a
 
-map <leader>e :e **/*
-map <leader>b :buffer<SPACE>
+map <leader>. :cd %:p:h<CR>
 
 " nnoremap d "_d

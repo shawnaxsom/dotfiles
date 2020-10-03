@@ -34,7 +34,7 @@ Plug 'axs221/vim-byline'
 Plug 'justinmk/vim-dirvish'  " File manager
 noremap - :Dirvish %<CR>
 noremap - :Dirvish %:p:h<CR>
-noremap _ :Dirvish .<CR>
+noremap <leader>- :Dirvish .<CR>
 let g:dirvish_mode = ':sort ,^.*[\/],'
 let g:dirvish_relative_paths=1
 function! Relpath(filename)
@@ -126,6 +126,7 @@ map <leader>gp :Gpull<CR>
 map <leader>gP :Gpush<CR>
 map <leader>ge :Gedit<CR>
 map <leader>gs :Gstatus<CR>
+map <leader>gs :Gstatus<CR>
 map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gR :Gread<CR>
@@ -199,8 +200,8 @@ Plug 'freitass/todo.txt-vim'
 " Unlike YouCompleteMe, Deoplete allowed completion in buffer of a variable
 " followed by a property in a string. "rodDimensions." showed all props of
 " random variable.
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'wellle/tmux-complete.vim'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'wellle/tmux-complete.vim'
 " set completeopt-=preview
 " let g:deoplete#enable_at_startup = 1
 " let g:deoplete#auto_complete_delay = 0
@@ -329,7 +330,7 @@ Plug 'blueyed/vim-qf_resize'
 " Add rules to ~/.eslintrc to ignore certain lint errors.
 Plug 'w0rp/ale'  " Async linting
 " nnoremap <leader>F :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
-nnoremap + :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
+nnoremap <leader>= :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
 let g:ale_list_window_size = 2
 let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
 let g:ale_javascript_eslint_use_global = 0

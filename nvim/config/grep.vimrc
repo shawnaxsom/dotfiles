@@ -40,10 +40,10 @@ command! -bang -nargs=* -complete=file Grep silent! grep! <args>
 nmap <leader>8 "hyiw:Grep "<c-r>h"<CR>:nohlsearch<CR>
 vmap <leader>8 "hy:Grep "<c-r>h"<CR>
 nmap <leader>/ "hyiw:Grep ""<left>
-nmap <leader>./ :Grep "" %:p:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-nmap <leader>../ :Grep "" %:p:h:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-nmap <leader>.8 "hyiw:Grep "<c-r>h" %:p:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-nmap <leader>..8 "hyiw:Grep "<c-r>h" %:p:h:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" nmap <leader>./ :Grep "" %:p:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" nmap <leader>../ :Grep "" %:p:h:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" nmap <leader>.8 "hyiw:Grep "<c-r>h" %:p:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" nmap <leader>..8 "hyiw:Grep "<c-r>h" %:p:h:h/*<CR><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 nmap <leader><leader>. :Grep "" %:p:h:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 
 nnoremap <silent> gr :call GrepAndJumpIfSingleResult("import.*/" . expand("%:t:r") . '"', 1, 1)<CR>

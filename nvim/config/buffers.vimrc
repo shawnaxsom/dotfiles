@@ -1,9 +1,16 @@
+map <leader>e :e **/*
+" nnoremap <leader>b :ls<cr>:b<space>
+nnoremap <leader>b :b<space>
+nnoremap <leader>d :ls<cr>:bd<home>
 nmap <leader>c :bdelete!<CR>
+nmap <leader>l :ls<CR>
 nmap <leader><leader>a :%argdelete<CR>
 nmap <leader>a :args **/**<LEFT>
+nmap <leader><leader>a :args<CR>
 nmap <leader>! :argdo<space>
 nmap <silent> <leader><leader>c :%bdelete!<CR>
 " nnoremap <leader>l :ls<CR>
+nnoremap <leader>j :jumps<cr>
 
 function! GetBufferList()
   redir =>buflist
@@ -42,7 +49,7 @@ function! s:ToggleQf()
 
   copen
 endfunction
-nnoremap <leader>l :call <SID>ToggleQf()<cr>
+" nnoremap <leader>l :call <SID>ToggleQf()<cr>
 
 function! GoToFileIncludeNodeModules ()
   set wildignore-=*/node_modules/*
@@ -84,3 +91,10 @@ set wildignore+=*/out/*
 set wildignore+=*.pyc
 set wildignore+=*/htmlcov/*
 set wildignore+=*__pycache__/*
+set wildignore+=.DS_Store
+set wildignore+=*.hpp
+set wildignore+=*.map
+set wildignore+=*.svg
+set wildignore+=*.png
+set wildignore+=*/Pods/*
+set wildignore+=*/syncTargetSnapshots/*

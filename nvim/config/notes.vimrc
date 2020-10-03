@@ -26,7 +26,8 @@ function! GetLeadingSpace ()
   return leading_space
 endfunction
 
-function! InsertAsteriskOrCheck (from_linenr, insert_at_offset, cursor_shift)
+function! InsertAsteriskOrCheck (from_linenr, insert_at_offset, cursor_shift, passthroughKeys)
+  " TODO: passthroughKeys doesn't work, does vimscript support lambdas?
   let line = getline(a:from_linenr)
   let to_linenr = a:from_linenr + a:insert_at_offset
   let move_to_line = a:from_linenr + a:cursor_shift
@@ -44,7 +45,7 @@ function! InsertAsteriskOrCheck (from_linenr, insert_at_offset, cursor_shift)
     call append(to_linenr, leading_space . "[ ]")
     call cursor(move_to_line, len(getline(move_to_line)) + 1, 1)
   else
-    call feedkeys("\<C-J>")
+    call feedkeys(a:passthroughKeys)
   endif
 endfunction
 
@@ -185,14 +186,14 @@ augroup markdown
   autocmd BufEnter   *.md inoremap <buffer> <silent> <backspace> :call Backspace()<CR>
   autocmd BufEnter   *.md inoremap <buffer> <s-tab> :call Dedent()<CR>
   autocmd BufEnter   *.md inoremap <buffer> <tab> :call Indent()<CR>
-  autocmd BufEnter   *.md inoremap <buffer> <enter> :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>
+  " autocmd BufEnter   *.md inoremap <buffer> <enter> :call InsertAsteriskOrCheck(line('.'), 0, 1, "\<C-J>")<CR>
   autocmd BufEnter   *.md inoremap <buffer> * :call CompleteNewBullet()<CR>
   autocmd BufEnter   *.md inoremap <buffer> [ :call CompleteNewTodo()<CR>
   autocmd BufEnter   *.md inoremap <buffer> <c-u> :call DeleteLine()<CR>
   " autocmd BufEnter   *.md inoremap <buffer> <space> :call Space()<CR>
 
-  autocmd BufEnter   *.md nnoremap <buffer> O :call InsertAsteriskOrCheck(line('.'), -1, 0)<CR>i
-  autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1)<CR>i
+  " autocmd BufEnter   *.md nnoremap <buffer> O :call InsertAsteriskOrCheck(line('.'), -1, 0, "k$\<C-J>")<CR>i
+  " autocmd BufEnter   *.md nnoremap <buffer> o :call InsertAsteriskOrCheck(line('.'), 0, 1, "$\<C-J>")<CR>i
   autocmd BufEnter   *.md nnoremap <silent><buffer> x :call CheckTodoIfOnBox()<CR>
   autocmd BufEnter   *.md nnoremap <silent><buffer> <leader>x :call CheckTodo()<CR>
   autocmd BufEnter   *.md nnoremap <buffer> <leader><leader>x :call ClearTodos()<CR>

@@ -39,9 +39,10 @@ set noautochdir
 " Show tabs, trailing characters as periods, but not in e.g. help files
 augroup listchars
   autocmd!
-  autocmd FileType javascript.jsx setlocal list
+  " autocmd FileType javascript.jsx setlocal list
   autocmd FileType javascript.jsx setlocal listchars=tab:>.,trail:.,extends:#,nbsp:.
 augroup END
+set nolist
 
 " Keep windows at a good size
 " silent! set winheight=9
@@ -59,10 +60,11 @@ augroup END
 " set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
 " set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
 
-let minheight=3
+let minheight=3 " Setting this to 3 led to "Not enough room" errors when in quickfix window doing "gev" to open vim directory in Dirvish
 let minwidth=25
 set noequalalways
 exec 'set winheight=' . max([minheight, 1])
+" exec 'set winheight=9999'
 exec 'set winwidth=' . max([minwidth, 1])
 exec 'set winminheight=' . minheight
 exec 'set winminwidth=' . minwidth
