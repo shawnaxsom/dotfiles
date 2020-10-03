@@ -15,6 +15,14 @@ Plug 'VundleVim/Vundle.vim'
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
+" { vim-go
+" Highlight a query and run in mongo
+Plug 'fatih/vim-go'
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au FileType go nmap <Leader>dr <Plug>(go-referrers)
+" }
 " { vim-db
 " Highlight a query and run in mongo
 Plug 'tpope/vim-db'
@@ -178,7 +186,7 @@ let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_save_on_switch = 2
 " }
 " { UltiSnips
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 " nmap <leader>eu :UltiSnipsEdit<CR>
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger = "<tab>"

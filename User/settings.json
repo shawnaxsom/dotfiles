@@ -367,7 +367,7 @@
   },
   "editor.suggest.localityBonus": true,
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "python.jediEnabled": false,
   "editor.tabSize": 2,
@@ -405,6 +405,12 @@
   "search.quickOpen.history.filterSortOrder": "recency",
   "editor.lineHeight": 36,
   "workbench.list.smoothScrolling": true,
-"editor.fontFamily": "'Hack', 'Inconsolata-g', 'Source Code Pro', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-"python.languageServer": "Microsoft"
+  "go.formatTool": "goimports",
+  "go.languageServerExperimentalFeatures": {
+    "diagnostics": true,
+    "documentLink": true
+  },
+  "go.useLanguageServer": true
+  "editor.fontFamily": "'Hack', 'Inconsolata-g', 'Source Code Pro', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "python.languageServer": "Microsoft"
 }

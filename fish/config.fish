@@ -348,6 +348,13 @@ set -gx PATH $PATH $ANDROID_HOME/tools
 set -gx PATH $PATH $ANDROID_HOME/tools/bin
 set -gx PATH $PATH $ANDROID_HOME/platform-tools
 
+# Golang
+set -gx GOPATH $HOME/go
+set -gx GOROOT (brew --prefix golang)/libexec
+set -gx PATH $PATH $GOPATH/bin
+set -gx PATH $PATH $GOROOT/bin
+set -gx GOPRIVATE github.com/docker
+
 # Fastlane for React Native development
 set -x PATH $HOME/.fastlane/bin $PATH
 
@@ -357,3 +364,6 @@ set -x PATH $HOME/.fastlane/bin $PATH
 [ -f /Users/shawnaxsom/dev/fsri-lms/lambda/node_modules/tabtab/.completions/slss.fish ]; and . /Users/shawnaxsom/dev/fsri-lms/lambda/node_modules/tabtab/.completions/slss.fish
 
 alias emacs="/usr/local/bin/emacs"
+
+# Created by `userpath` on 2020-10-01 00:06:52
+set PATH $PATH /Users/shawnaxsom/.local/bin
