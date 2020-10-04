@@ -60,7 +60,7 @@ set nolist
 " set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
 " set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
 
-let minheight=3 " Setting this to 3 led to "Not enough room" errors when in quickfix window doing "gev" to open vim directory in Dirvish
+let minheight=8 " Setting this to 3 led to "Not enough room" errors when in quickfix window doing "gev" to open vim directory in Dirvish
 let minwidth=25
 set noequalalways
 exec 'set winheight=' . max([minheight, 1])
@@ -216,7 +216,7 @@ set ttimeoutlen=0
 " Minimize how often you see "Press enter or type a command to continue",
 " Set cmdheight to 2 or 3 or else you will be prompted if text is larger
 " than one line.
-set cmdheight=3
+set cmdheight=2
 set shortmess=a
 
 " Allow completion of tags using omnicompletion <c-x><c-o>

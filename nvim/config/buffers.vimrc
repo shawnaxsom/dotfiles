@@ -1,9 +1,15 @@
 map <leader>e :e **/*
 " nnoremap <leader>b :ls<cr>:b<space>
 nnoremap <leader>b :b<space>
-nnoremap <leader>d :ls<cr>:bd<home>
+" nnoremap <leader>db :ls<cr>:bd<home>
+nnoremap <leader>db :%bd<cr>
+" nnoremap <leader>da :args<cr>:argd<home>
+nnoremap <leader>da :%argd<cr>
 nmap <leader>c :bdelete!<CR>
-nmap <leader>l :ls<CR>
+" nmap <leader>lb :ls<cr>:b<space>
+command! Qbuffers call setqflist(map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), '{"bufnr":v:val}'))
+nmap <leader>lb :Qbuffers<CR>:copen<CR>
+nmap <leader>la :args<CR>
 nmap <leader><leader>a :%argdelete<CR>
 nmap <leader>a :args **/**<LEFT>
 nmap <leader><leader>a :args<CR>
@@ -49,7 +55,7 @@ function! s:ToggleQf()
 
   copen
 endfunction
-" nnoremap <leader>l :call <SID>ToggleQf()<cr>
+nnoremap <leader><leader>l :call <SID>ToggleQf()<cr> " Show Quickfix
 
 function! GoToFileIncludeNodeModules ()
   set wildignore-=*/node_modules/*
@@ -98,3 +104,4 @@ set wildignore+=*.svg
 set wildignore+=*.png
 set wildignore+=*/Pods/*
 set wildignore+=*/syncTargetSnapshots/*
+set wildignore+=*/vendor/*

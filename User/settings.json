@@ -100,6 +100,8 @@
   "vim.substituteGlobalFlag": true,
   "vim.useSystemClipboard": true,
   "vim.normalModeKeyBindingsNonRecursive": [
+  
+
     {
       "commands": [
         "workbench.action.editor.previousChange"
@@ -111,6 +113,14 @@
         "workbench.action.editor.nextChange"
       ],
       "before": ["J"]
+    },
+    {
+      "after": ["[", "{"],
+      "before": ["H"]
+    },
+    {
+      "after": ["]", "}"],
+      "before": ["L"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -121,7 +131,7 @@
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "window.zoomLevel": -3,
+  "window.zoomLevel": -2,
   "workbench.activityBar.visible": true,
   "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
   "workbench.sideBar.location": "left",
@@ -410,7 +420,7 @@
     "diagnostics": true,
     "documentLink": true
   },
-  "go.useLanguageServer": true
+  "go.useLanguageServer": true,
   "editor.fontFamily": "'Hack', 'Inconsolata-g', 'Source Code Pro', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "python.languageServer": "Microsoft"
 }

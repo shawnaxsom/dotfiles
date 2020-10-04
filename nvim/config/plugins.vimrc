@@ -15,6 +15,18 @@ Plug 'VundleVim/Vundle.vim'
 " -----------------------------------------------------------------------------------------
 " 1 - Essential
 " -----------------------------------------------------------------------------------------
+" { coc.nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'josa42/coc-go'
+Plug 'neoclide/coc-python'
+Plug 'neoclide/coc-tsserver'
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" Make sure coc.nvim completion popup doesn't block the view of the cursor
+" https://github.com/neoclide/coc.nvim/issues/2233
+autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'cursor', 'row': 2, 'col': -25})
+" autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 100)
+" }
 " { vim-go
 " Highlight a query and run in mongo
 Plug 'fatih/vim-go'
@@ -85,44 +97,47 @@ augroup dirvish
   autocmd FileType dirvish nnoremap <buffer> ` :e $HOME<CR>
   autocmd FileType dirvish nnoremap <buffer> _ :e .<CR>
   " Enable :Gstatus and friends.
-  autocmd FileType dirvish call fugitive#detect(@%)
+  " autocmd FileType dirvish call fugitive#detect(@%)
   " autocmd FileType dirvish call InsertBookmarks()
 augroup END
 " }
+" { nginx
+Plug 'chr4/nginx.vim'
+" }
 " { CtrlP
- Plug 'ctrlpvim/ctrlp.vim'
-nnoremap <leader>p :CtrlP<CR>
- " nnoremap <silent> <c-f> :CtrlPLine<CR>
+ " Plug 'ctrlpvim/ctrlp.vim'
+" nnoremap <leader>p :CtrlP<CR>
+ " " nnoremap <silent> <c-f> :CtrlPLine<CR>
 
- :nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
- if executable('ag')
-   set grepprg=ag\ --nogroup\ --nocolor
-   let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
-   let g:ctrlp_use_caching = 0
- elseif executable('rg')
-   set grepprg=rg
-   let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
-   let g:ctrlp_use_caching = 0
- elseif executable('ack')
-   set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
- endif
- let g:ctrlp_cmd = 'CtrlPMRUFiles'
- let g:ctrlp_use_caching = 0
- let g:ctrlp_by_filename = 0
- let g:ctrlp_regexp = 0
- let g:ctrlp_match_window_reversed = 0
- let g:ctrlp_mruf_relative = 1
- let g:ctrlp_match_current_file = 0
- let g:ctrlp_match_window = 'bottom,order:btt'
- let g:ctrlp_switch_buffer = 'e'
- let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
- " let g:ctrlp_working_path_mode = 'ra'
- let g:ctrlp_working_path_mode = 'a'
- let g:ctrlp_default_input = 0
- let g:ctrlp_types = ['buf', 'mru', 'fil']
- let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
- let g:ctrlp_mruf_relative = 1
- let g:ctrlp_extensions = []
+ " :nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
+ " if executable('ag')
+ "   set grepprg=ag\ --nogroup\ --nocolor
+ "   let g:ctrlp_user_command = 'ag %s -l --nocolor --path-to-ignore ~/.agignore -g ""'
+ "   let g:ctrlp_use_caching = 0
+ " elseif executable('rg')
+ "   set grepprg=rg
+ "   let g:ctrlp_user_command = 'rg %s --files --color=never --ignore-file ~/.agignore --glob ""'
+ "   let g:ctrlp_use_caching = 0
+ " elseif executable('ack')
+ "   set grepprg=ack\ -s\ --nogroup\ --nocolor\ --column\ --with-filename
+ " endif
+ " let g:ctrlp_cmd = 'CtrlPMRUFiles'
+ " let g:ctrlp_use_caching = 0
+ " let g:ctrlp_by_filename = 0
+ " let g:ctrlp_regexp = 0
+ " let g:ctrlp_match_window_reversed = 0
+ " let g:ctrlp_mruf_relative = 1
+ " let g:ctrlp_match_current_file = 0
+ " let g:ctrlp_match_window = 'bottom,order:btt'
+ " let g:ctrlp_switch_buffer = 'e'
+ " let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+ " " let g:ctrlp_working_path_mode = 'ra'
+ " let g:ctrlp_working_path_mode = 'a'
+ " let g:ctrlp_default_input = 0
+ " let g:ctrlp_types = ['buf', 'mru', 'fil']
+ " let g:ctrlp_mruf_exclude = '.*/temp/.*' " MacOSX/Linux
+ " let g:ctrlp_mruf_relative = 1
+ " let g:ctrlp_extensions = []
 " }
 " { Fugitive / Extradite
 Plug 'tpope/vim-fugitive'
@@ -331,7 +346,7 @@ let g:vrc_auto_format_response_patterns = { 'json': 'jq .', 'xml': 'xmllint --fo
 let g:vrc_curl_opts={ '--silent': '' }
 " }
 " { blueyed/vim-qf_resize
-Plug 'blueyed/vim-qf_resize'
+" Plug 'blueyed/vim-qf_resize'
 " }
 " { ALE
 " :ALEFix to autogically fix any lint errors that have an obvious fix.
@@ -360,6 +375,12 @@ com! ALEShowCommand  echo ale_linters#python#flake8#GetCommand(bufnr('%'))
 " -----------------------------------------------------------------------------------------
 " 2 - Great
 " -----------------------------------------------------------------------------------------
+" {
+Plug 'RRethy/vim-illuminate'
+let g:Illuminate_delay = 150
+hi illuminatedWord ctermfg=red guibg=#c50040
+let g:Illuminate_highlightUnderCursor = 0
+" }
 " { Surround
 Plug 'tpope/vim-surround'
 vmap s <Plug>VSurround
@@ -369,7 +390,7 @@ vmap s <Plug>VSurround
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_highlight_lines = 0
 let g:gitgutter_map_keys = 0
-set updatetime=200
+set updatetime=100
 noremap ]c :GitGutterNextHunk<CR>
 noremap [c :GitGutterPrevHunk<CR>
 " noremap <leader>j :GitGutterNextHunk<CR>
@@ -471,11 +492,11 @@ vmap gx  `<^i{/* `>$a */}
 " Auto resize windows when switching windows
 " Plug 'zhaocai/GoldenView.Vim'
 " let g:goldenview__enable_default_mapping = 0
-" " nmap <silent> <C-S>  <Plug>GoldenViewSplit
-" " nmap <silent> <leader>m   <Plug>GoldenViewSwitchMain
-" " nmap <silent> <leader><leader>m <Plug>GoldenViewSwitchToggle
-" " nmap <silent> <C-N>  <Plug>GoldenViewNext
-" " nmap <silent> <C-P>  <Plug>GoldenViewPrevious
+" nmap <silent> <C-S>  <Plug>GoldenViewSplit
+" nmap <silent> <leader>m   <Plug>GoldenViewSwitchMain
+" nmap <silent> <leader><leader>m <Plug>GoldenViewSwitchToggle
+" nmap <silent> <C-N>  <Plug>GoldenViewNext
+" nmap <silent> <C-P>  <Plug>GoldenViewPrevious
 " }
 " { Vim Deus (colorscheme)
 Plug 'ajmwagar/vim-deus'
@@ -560,10 +581,14 @@ Plug 'djoshea/vim-autoread'
 Plug 'romainl/vim-qf'
 augroup vim-qf
   autocmd!
-  autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>
-  autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>
-  autocmd FileType qf vnoremap <buffer> <leader>k y:Keep "<CR>
-  autocmd FileType qf vnoremap <buffer> <leader>r y:Reject "<CR>
+  autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>:copen<CR>
+  autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>:copen<CR>
+  " autocmd FileType qf nnoremap <buffer> <leader>k :Keep 
+  " autocmd FileType qf nnoremap <buffer> <leader>r :Reject 
+  autocmd FileType qf nnoremap <buffer> <leader><leader>k :Keep <CR>:copen<CR>
+  autocmd FileType qf nnoremap <buffer> <leader><leader>r :Reject <CR>:copen<CR>
+  autocmd FileType qf vnoremap <buffer> <leader>k y:Keep "<CR>:copen<CR>
+  autocmd FileType qf vnoremap <buffer> <leader>r y:Reject "<CR>:copen<CR>
 augroup END
 " }
 
@@ -641,7 +666,7 @@ let g:dash_map = {
 Plug 'bronson/vim-trailing-whitespace'
 " }
 " " { winresizer
-" Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
+Plug 'simeji/winresizer'  " <c-e> and then h/j/k/l and <enter> to resize window easier
 " " }
 " " { visual-split
 " " Alternatively, open a new buffer similarly that syncs: https://github.com/chrisbra/NrrwRgn
@@ -661,66 +686,77 @@ noremap <leader><leader>r :RandomColorScheme<CR>:colo<CR>
 " let g:matchmaker_enable_startup = 1
 " let g:matchmaker_matchpriority = 1
 " }
+"
+"
+"
+"
+"
 " { FZF
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 " Plug 'junegunn/fzf.vim'
-" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-" " Search all lines in all files
-" command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
-" " command! FZFMru call fzf#run({
-" " \ 'source':  reverse(s:all_files()),
-" " \ 'sink':    'edit',
-" " \ 'options': '-m -x +s',
-" " \ 'down':    '40%' })
-" " function! s:all_files()
-" "   return extend(
-" "   \ filter(copy(v:oldfiles),
-" "   \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
-" "   \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
-" " endfunction
-" nnoremap <leader>p :FZF<CR>
-" nnoremap <leader>m :FZFMru<CR>
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Search all lines in all files
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+command! FZFMru call fzf#run({
+\ 'source':  reverse(s:all_files()),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' })
+function! s:all_files()
+  return extend(
+  \ filter(copy(v:oldfiles),
+  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
+  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+endfunction
+nnoremap <c-p> :FZF<CR>
+nnoremap <leader>p :FZF<CR>
+nnoremap <leader>m :FZFMru<CR>
 " nnoremap <leader>b :Buffers<CR>
-" let g:fzf_mru_relative = 1
+let g:fzf_mru_relative = 1
 
-" command! FZFMostRecentlyModified call fzf#run({
-" \ 'source':  (s:MostRecentlyModifiedLines()),
-" \ 'sink':    'edit',
-" \ 'options': '-m -x +s',
-" \ 'down':    '40%' })
-" function! s:MostRecentlyModifiedLines ()
-"   let lines = split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -print0 | xargs -0 ls -t | head -n " . 50), "\n")
-"   let lines = WithinPwd(lines)
-"   let lines = RelativePath(lines)
-"   let lines = Wildignore(lines)
-"   return lines
-" endfunction
-" nnoremap <leader>M :FZFMostRecentlyModified<CR>
-" let g:fzf_buffers_jump = 1
-" " :Ag - allows "?" to open preview window
-" command! -bang -nargs=* Ag
-"       \ call fzf#vim#ag(<q-args>,
-"       \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-"       \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-"       \                 <bang>0)
-" let g:fzf_colors =
-"   \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-" " nnoremap <c-p> :FZF<CR>
-" " nnoremap <leader>p :FZF<CR>
-" " nnoremap <c-b> :Buffers<CR>
-" " nnoremap <leader>b :Buffers<CR>
+command! FZFMostRecentlyModified call fzf#run({
+\ 'source':  (s:MostRecentlyModifiedLines()),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' })
+function! s:MostRecentlyModifiedLines ()
+  let lines = split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -print0 | xargs -0 ls -t | head -n " . 50), "\n")
+  let lines = WithinPwd(lines)
+  let lines = RelativePath(lines)
+  let lines = Wildignore(lines)
+  return lines
+endfunction
+nnoremap <leader>M :FZFMostRecentlyModified<CR>
+let g:fzf_buffers_jump = 1
+" :Ag - allows "?" to open preview window
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>,
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \                 <bang>0)
+let g:fzf_colors =
+  \ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+" nnoremap <c-p> :FZF<CR>
+" nnoremap <leader>p :FZF<CR>
+" nnoremap <c-b> :Buffers<CR>
+" nnoremap <leader>b :Buffers<CR>
 " }
+"
+"
+"
+"
+"
 " { Nova colorscheme
 Plug 'zanglg/nova.vim'
 " }
@@ -848,6 +884,7 @@ Plug 'mhartington/vim-typings'
 Plug 'elixir-editors/vim-elixir'
 Plug 'dsawardekar/ember.vim'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Plug 'python-mode/python-mode'
 " { jceb/vim-orgmode
 Plug 'jceb/vim-orgmode'

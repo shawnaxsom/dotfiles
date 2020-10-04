@@ -368,3 +368,7 @@ map <leader>' "ayiwologo<TAB>a
 map <leader>. :cd %:p:h<CR>
 
 " nnoremap d "_d
+
+" Grep only in :args list
+" First populate :args with :args *searchterm*
+map <leader><leader>/ :vimgrep // ##<left><left><left><left>

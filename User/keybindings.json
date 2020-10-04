@@ -4,7 +4,7 @@
     "command": "workbench.action.openRecent"
   },
   {
-    "key": "ctrl+cmd+n",
+    "key": "shift+cmd+=",
     "command": "search.action.focusNextSearchResult",
     "when": "hasSearchResult"
   },
@@ -14,7 +14,7 @@
     "when": "hasSearchResult"
   },
   {
-    "key": "ctrl+cmd+p",
+    "key": "shift+cmd+-",
     "command": "search.action.focusPreviousSearchResult",
     "when": "hasSearchResult"
   },

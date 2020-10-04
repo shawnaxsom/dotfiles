@@ -17,7 +17,7 @@ set background=dark
 " colorscheme jellybeans
 " colorscheme distinguished
 " colorscheme vividchalk
-" colorscheme gruvbox
+colorscheme gruvbox
 " colorscheme dracula
 " colorscheme solarized
 " colorscheme darkblue
@@ -34,7 +34,8 @@ set background=dark
 " colorscheme winter
 " colorscheme nova
 " colorscheme kiss
-colorscheme dusk
+" colorscheme dusk
+colorscheme flattr
 " " } Colorscheme
 
 " " { Highlights

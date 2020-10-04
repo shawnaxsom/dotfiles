@@ -15,6 +15,17 @@ augroup pythondispatch
 augroup END
 " }
 
+" { Go
+autocmd Filetype go setlocal makeprg=go\ build
+" }
+
+" {
+augroup nginx_ft
+  au!
+  autocmd BufNewFile,BufRead *.tmpl   set filetype=nginx
+augroup END
+" }
+
 " { Other Languages
 autocmd! Syntax java map <F1> :!javac %:p && java HelloWorld<CR>
 autocmd! Syntax ruby map <F1> :!./bin/rails server<CR>

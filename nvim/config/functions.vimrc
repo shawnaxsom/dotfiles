@@ -66,7 +66,7 @@ function! s:ZoomToggle() abort
     endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
-" nnoremap <silent> <C-A> :ZoomToggle<CR>
+nnoremap <silent> <C-A> :ZoomToggle<CR>
 "
 command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
 
