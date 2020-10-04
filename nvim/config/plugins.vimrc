@@ -18,17 +18,17 @@ Plug 'VundleVim/Vundle.vim'
 " { coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'josa42/coc-go'
-Plug 'neoclide/coc-python'
-Plug 'neoclide/coc-tsserver'
-Plug 'neoclide/coc-git'
-Plug 'neoclide/coc-eslint'
-Plug 'neoclide/coc-lists'
-Plug 'neoclide/coc-css'
-Plug 'neoclide/coc-json'
-Plug 'neoclide/coc-yaml'
-Plug 'neoclide/coc-pairs'
-Plug 'fannheyward/coc-react-refactor'
-Plug 'fannheyward/coc-marketplace'
+Plug 'neoclide/coc-python', { 'do': ':CocInstall coc-python' }
+Plug 'neoclide/coc-tsserver', { 'do': ':CocInstall coc-tsserver' }
+Plug 'neoclide/coc-git', { 'do': ':CocInstall coc-git' }
+Plug 'neoclide/coc-eslint', { 'do': ':CocInstall coc-eslint' }
+Plug 'neoclide/coc-lists', { 'do': ':CocInstall coc-lists' }
+Plug 'neoclide/coc-css', { 'do': ':CocInstall coc-css' }
+Plug 'neoclide/coc-json', { 'do': ':CocInstall coc-json' }
+Plug 'neoclide/coc-yaml', { 'do': ':CocInstall coc-yaml' }
+Plug 'neoclide/coc-pairs', { 'do': ':CocInstall coc-pairs' }
+Plug 'fannheyward/coc-react-refactor', { 'do': ':CocInstall coc-react-refactor' }
+Plug 'fannheyward/coc-marketplace', { 'do': ':CocInstall coc-marketplace' }
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 nmap K <Plug>(coc-git-prevchunk)
@@ -961,8 +961,13 @@ map <leader>k :GitMessenger<CR>
 " let g:lens#height_resize_max = 30
 " let g:lens#disabled_filetypes = ['fzf']
 " }
+" {
+" { Diminactive - Dim the current active pane window
 Plug 'blueyed/vim-diminactive'
-
+" }
+" { Golden Ratio -- better automatic vim pane window resizing
+Plug 'roman/golden-ratio'
+" }
 
 
 
