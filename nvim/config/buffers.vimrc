@@ -1,10 +1,13 @@
 map <leader>e :e **/*
 " nnoremap <leader>b :ls<cr>:b<space>
-nnoremap <leader>b :b<space>
+" nnoremap <leader>b :b<space>
+" nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 " nnoremap <leader>db :ls<cr>:bd<home>
 nnoremap <leader>db :%bd<cr>
 " nnoremap <leader>da :args<cr>:argd<home>
 nnoremap <leader>da :%argd<cr>
+nnoremap <leader>dd :%bd<cr>:%argd<cr>
 nmap <leader>c :bdelete!<CR>
 " nmap <leader>lb :ls<cr>:b<space>
 command! Qbuffers call setqflist(map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), '{"bufnr":v:val}'))

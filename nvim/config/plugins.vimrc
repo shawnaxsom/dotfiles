@@ -20,8 +20,34 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'josa42/coc-go'
 Plug 'neoclide/coc-python'
 Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-git'
+Plug 'neoclide/coc-eslint'
+Plug 'neoclide/coc-lists'
+Plug 'neoclide/coc-css'
+Plug 'neoclide/coc-json'
+Plug 'neoclide/coc-yaml'
+Plug 'neoclide/coc-pairs'
+Plug 'fannheyward/coc-react-refactor'
+Plug 'fannheyward/coc-marketplace'
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+nmap K <Plug>(coc-git-prevchunk)
+nmap J <Plug>(coc-git-nextchunk)
+" https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use U to show documentation in preview window
+nnoremap <silent> U :call <SID>show_documentation()<CR>
+" Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
 " Make sure coc.nvim completion popup doesn't block the view of the cursor
 " https://github.com/neoclide/coc.nvim/issues/2233
 autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'cursor', 'row': 2, 'col': -25})
@@ -34,6 +60,8 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>dr <Plug>(go-referrers)
+au FileType go nmap <Leader>r <Plug>(go-referrers)
+let g:go_doc_keywordprg_enabled = 0
 " }
 " { vim-db
 " Highlight a query and run in mongo
@@ -48,7 +76,7 @@ xmap ,q :DB mongodb:///localhost:27017/wellexpert2<CR>
 " let g:quickly_open_quickfix_window = 0
 " }
 " { vim-byline
-Plug 'axs221/vim-byline'
+" Plug 'axs221/vim-byline'
 " }
 " { Dirvish
 Plug 'justinmk/vim-dirvish'  " File manager
@@ -377,9 +405,9 @@ com! ALEShowCommand  echo ale_linters#python#flake8#GetCommand(bufnr('%'))
 " -----------------------------------------------------------------------------------------
 " {
 Plug 'RRethy/vim-illuminate'
-let g:Illuminate_delay = 150
-hi illuminatedWord ctermfg=red guibg=#c50040
-let g:Illuminate_highlightUnderCursor = 0
+let g:Illuminate_delay = 50
+hi illuminatedWord ctermfg=red guibg=#852040
+let g:Illuminate_highlightUnderCursor = 1
 " }
 " { Surround
 Plug 'tpope/vim-surround'
@@ -387,16 +415,16 @@ vmap s <Plug>VSurround
 vmap s <Plug>VSurround
 " }
 " { GitGutter
-Plug 'airblade/vim-gitgutter'
-let g:gitgutter_highlight_lines = 0
-let g:gitgutter_map_keys = 0
-set updatetime=100
-noremap ]c :GitGutterNextHunk<CR>
-noremap [c :GitGutterPrevHunk<CR>
-" noremap <leader>j :GitGutterNextHunk<CR>
-" noremap <leader>k :GitGutterPrevHunk<CR>
-noremap J :GitGutterNextHunk<CR>
-noremap K :GitGutterPrevHunk<CR>
+" Plug 'airblade/vim-gitgutter'
+" let g:gitgutter_highlight_lines = 0
+" let g:gitgutter_map_keys = 0
+" set updatetime=100
+" noremap ]c :GitGutterNextHunk<CR>
+" noremap [c :GitGutterPrevHunk<CR>
+" " noremap <leader>j :GitGutterNextHunk<CR>
+" " noremap <leader>k :GitGutterPrevHunk<CR>
+" noremap J :GitGutterNextHunk<CR>
+" noremap K :GitGutterPrevHunk<CR>
 " }
 " { Grepper
 " Like :grep but a smoother experience. No display of text or flickering.
@@ -581,12 +609,14 @@ Plug 'djoshea/vim-autoread'
 Plug 'romainl/vim-qf'
 augroup vim-qf
   autocmd!
-  autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>:copen<CR>
-  autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>:copen<CR>
-  " autocmd FileType qf nnoremap <buffer> <leader>k :Keep 
-  " autocmd FileType qf nnoremap <buffer> <leader>r :Reject 
+  " autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>:copen<CR>
+  " autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>:copen<CR>
+  autocmd FileType qf nnoremap <buffer> <leader>k :Keep 
+  autocmd FileType qf nnoremap <buffer> <leader>r :Reject 
   autocmd FileType qf nnoremap <buffer> <leader><leader>k :Keep <CR>:copen<CR>
   autocmd FileType qf nnoremap <buffer> <leader><leader>r :Reject <CR>:copen<CR>
+  " autocmd FileType qf vnoremap <buffer> <leader>k y:Keep "<CR>:copen<CR>
+  " autocmd FileType qf vnoremap <buffer> <leader>r y:Reject "<CR>:copen<CR>
   autocmd FileType qf vnoremap <buffer> <leader>k y:Keep "<CR>:copen<CR>
   autocmd FileType qf vnoremap <buffer> <leader>r y:Reject "<CR>:copen<CR>
 augroup END
@@ -693,25 +723,50 @@ noremap <leader><leader>r :RandomColorScheme<CR>:colo<CR>
 "
 " { FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
+" Plug 'pbogut/fzf-mru.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plug 'tweekmonster/fzf-filemru'
+" let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_preview_window = 'right:30%'
 " Search all lines in all files
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
-command! FZFMru call fzf#run({
-\ 'source':  reverse(s:all_files()),
-\ 'sink':    'edit',
-\ 'options': '-m -x +s',
-\ 'down':    '40%' })
-function! s:all_files()
-  return extend(
-  \ filter(copy(v:oldfiles),
-  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
-  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
-endfunction
-nnoremap <c-p> :FZF<CR>
-nnoremap <leader>p :FZF<CR>
+
+" command! FZFMru call fzf#run({
+" \ 'source':  reverse(s:all_files()),
+" \ 'sink':    'edit',
+" \ 'options': '-m -x +s --no-sort',
+" \ 'down':    '40%' })
+" function! s:all_files()
+"   return extend(v:oldfiles,
+"   \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+" endfunction
+
+" function! fzf#vim#_recent_files()
+"   return fzf#vim#_uniq(map(
+"     \ filter([expand('%')], 'len(v:val)')
+"     \   + filter(map(fzf#vim#_buflisted_sorted(), 'bufname(v:val)'), 'len(v:val)')
+"     \   + filter(copy(v:oldfiles), "filereadable(fnamemodify(v:val, ':p'))"),
+"     \ 'fnamemodify(v:val, ":~:.")'))
+" endfunction
+
+" nnoremap <c-p> :FZFMru --tiebreak=index<CR>
+" nnoremap <leader>o :FZF --tiebreak=index<CR>
+" nnoremap <leader>p :FZFMru --tiebreak=index<CR>
+" nnoremap <leader>m :FZFMru --tiebreak=index<CR>
+" nnoremap <c-p> :FZFMru --no-sort<CR>
+" nnoremap <leader>o :FZF --no-sort<CR>
+" nnoremap <leader>p :FZFMru --no-sort<CR>
+" nnoremap <leader>m :FZFMru --no-sort<CR>
+" nnoremap <leader><leader>b :Buffers<CR>
+nnoremap <c-p> :FZFMru<CR>
+nnoremap <leader>o :FZF --no-sort<CR>
+nnoremap <leader>p :FZFMru<CR>
 nnoremap <leader>m :FZFMru<CR>
-" nnoremap <leader>b :Buffers<CR>
+nnoremap <leader><leader>b :Buffers<CR>
+" nnoremap <leader>m :History<CR>
 let g:fzf_mru_relative = 1
 
 command! FZFMostRecentlyModified call fzf#run({
@@ -864,7 +919,9 @@ Plug 'tpope/vim-rsi'
 " Plug 'chaoren/vim-wordmotion'
 " }
 " { jiangmiao/auto-pairs
-Plug 'jiangmiao/auto-pairs'
+" NOTE: Autopairs messes with brackets that are quoted out when pressing
+"       backspace, buggy. Use coc-pairs instead.
+" Plug 'jiangmiao/auto-pairs'
 " }
 " { owickstrom/vim-colors-paramount
 Plug 'owickstrom/vim-colors-paramount'
@@ -891,5 +948,50 @@ Plug 'jceb/vim-orgmode'
 let g:org_agenda_files=['~/org/index.org']
 " }
 
+" { Git Messenger
+Plug 'rhysd/git-messenger.vim'
+map <leader>k :GitMessenger<CR>
+" }
+" { Lens - automatically resize windows
+" Plug 'camspiers/animate.vim'
+" Plug 'camspiers/lens.vim'
+" let g:lens#width_resize_max = 200
+" let g:lens#width_resize_min = 100
+" let g:lens#height_resize_min = 5
+" let g:lens#height_resize_max = 30
+" let g:lens#disabled_filetypes = ['fzf']
+" }
+Plug 'blueyed/vim-diminactive'
+
+
+
+
+
+
+
+
+" command! FZFMru call fzf#run({
+" \ 'source':  reverse(s:all_files()),
+" \ 'sink':    'edit',
+" \ 'options': '-m -x +s --no-sort',
+" \ 'down':    '40%' })
+" function! s:all_files()
+"   return extend(v:oldfiles,
+"   \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+" endfunction
+
+" function! fzf#vim#_recent_files()
+"   return fzf#vim#_uniq(map(
+"     \ filter([expand('%')], 'len(v:val)')
+"     \   + filter(map(fzf#vim#_buflisted_sorted(), 'bufname(v:val)'), 'len(v:val)')
+"     \   + filter(copy(v:oldfiles), "filereadable(fnamemodify(v:val, ':p'))"),
+"     \ 'fnamemodify(v:val, ":~:.")'))
+" endfunction
+
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '--no-sort',
+\  'down':    '40%'})
 
 call plug#end()

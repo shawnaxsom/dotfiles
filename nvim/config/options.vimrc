@@ -45,6 +45,10 @@ augroup END
 set nolist
 
 " Keep windows at a good size
+set winwidth=100 winminwidth=25
+set winheight=30 winminheight=3
+
+" " Keep windows at a good size
 " silent! set winheight=9
 " silent! set winminheight=9
 " silent! let &winheight = &lines - 9
@@ -60,14 +64,15 @@ set nolist
 " set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
 " set noequalalways winheight=4 winwidth=4 winminheight=4 winminwidth=4
 
-let minheight=8 " Setting this to 3 led to "Not enough room" errors when in quickfix window doing "gev" to open vim directory in Dirvish
-let minwidth=25
-set noequalalways
-exec 'set winheight=' . max([minheight, 1])
-" exec 'set winheight=9999'
-exec 'set winwidth=' . max([minwidth, 1])
-exec 'set winminheight=' . minheight
-exec 'set winminwidth=' . minwidth
+" " Better way of keeping windows at a good size...
+" let minheight=6 " Setting this to 3 led to "Not enough room" errors when in quickfix window doing "gev" to open vim directory in Dirvish
+" let minwidth=25
+" set noequalalways
+" exec 'set winheight=' . max([minheight, 1])
+" exec 'set winwidth=' . max([minwidth, 1])
+" exec 'set winminheight=' . minheight
+" exec 'set winminwidth=' . minwidth
+" Maximize the window size automatically
 " augroup maximizepane
 "   autocmd WinEnter * if &filetype != 'diff' && &filetype != 'gundo' | wincmd _ | execute "wincmd |" | else | silent! resize 4 | endif
 " augroup END
@@ -157,7 +162,7 @@ set incsearch
 set hlsearch
 set noignorecase              " affects both searching and find/replace
 set smartcase
-set wrapscan                  " Wrap to top of file after searching through full file
+set wrapscan                " Wrap to top of file after searching through full file
 
 " Fold settings
 set foldmethod=indent
@@ -217,7 +222,11 @@ set ttimeoutlen=0
 " Set cmdheight to 2 or 3 or else you will be prompted if text is larger
 " than one line.
 set cmdheight=2
-set shortmess=a
+"	This option helps to avoid all the |hit-enter| prompts caused by file
+"	messages, for example  with CTRL-G, and to avoid some other messages.
+"	It is a list of flags:
+" set shortmess=a
+set shortmess+=c
 
 " Allow completion of tags using omnicompletion <c-x><c-o>
 set omnifunc=htmlcomplete#CompleteTags

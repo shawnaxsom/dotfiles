@@ -219,11 +219,11 @@ map L ]}
 " map <silent> L :call GoToNextFunc()<CR>
 " map <silent> H 0?^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
 " map <silent> L $/^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>
-augroup h_and_l
-  autocmd!
-  autocmd BufEnter *.vimrc nnoremap <buffer> H {
-  autocmd BufEnter *.vimrc nnoremap <buffer> L }
-augroup END
+" augroup h_and_l
+"   autocmd!
+"   autocmd BufEnter *.vimrc nnoremap <buffer> H {
+"   autocmd BufEnter *.vimrc nnoremap <buffer> L }
+" augroup END
 
 " -----------------------------------------------------------------------------------------
 " Navigate panes

@@ -5,11 +5,14 @@
 augroup globalfilemarks
   autocmd!
   autocmd InsertEnter *.{js,jsx,coffee} normal! mJ
-  " autocmd BufWinLeave */src/* normal! mQ
-  autocmd InsertEnter */src/* normal! mI
-  autocmd TextChanged */src/* normal! mO
-  autocmd TextChangedI */src/* normal! mO
-  autocmd TextChanged,InsertEnter *.vimrc normal! mV
+  autocmd InsertEnter *.{ts,tsx} normal! mT
+  autocmd InsertEnter *.{py} normal! mP
+  autocmd InsertEnter *.{go} normal! mG
+  " autocmd BufWinLeave */dev/* normal! mQ
+  autocmd InsertEnter */dev/* normal! mI
+  autocmd TextChanged */dev/* normal! mO
+  autocmd TextChangedI */dev/* normal! mO
+  " autocmd TextChanged,InsertEnter *.vimrc normal! mV
 augroup END
 " }
 
