@@ -611,10 +611,12 @@ augroup vim-qf
   autocmd!
   " autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>:copen<CR>
   " autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>:copen<CR>
-  autocmd FileType qf nnoremap <buffer> <leader>k :Keep 
-  autocmd FileType qf nnoremap <buffer> <leader>r :Reject 
-  autocmd FileType qf nnoremap <buffer> <leader><leader>k :Keep <CR>:copen<CR>
-  autocmd FileType qf nnoremap <buffer> <leader><leader>r :Reject <CR>:copen<CR>
+  " autocmd FileType qf nnoremap <buffer> <leader>K :Keep 
+  " autocmd FileType qf nnoremap <buffer> <leader>R :Reject 
+  autocmd FileType qf nnoremap <buffer> <leader>K :Keep<space>
+  autocmd FileType qf nnoremap <buffer> <leader>R :Reject<space>
+  autocmd FileType qf nnoremap <buffer> <leader>k :Keep <CR>:copen<CR>
+  autocmd FileType qf nnoremap <buffer> <leader>r :Reject <CR>:copen<CR>
   " autocmd FileType qf vnoremap <buffer> <leader>k y:Keep "<CR>:copen<CR>
   " autocmd FileType qf vnoremap <buffer> <leader>r y:Reject "<CR>:copen<CR>
   autocmd FileType qf vnoremap <buffer> <leader>k y:Keep "<CR>:copen<CR>
@@ -967,6 +969,8 @@ Plug 'blueyed/vim-diminactive'
 " }
 " { Golden Ratio -- better automatic vim pane window resizing
 Plug 'roman/golden-ratio'
+" Don't resize Quickfix window?
+let golden_ratio_exclude_nonmodifiable = 0
 " }
 
 

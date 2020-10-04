@@ -1,8 +1,8 @@
 map <leader>e :e **/*
 " nnoremap <leader>b :ls<cr>:b<space>
 " nnoremap <leader>b :b<space>
-" nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>b :Buffers<CR>
+" nnoremap <leader>b :CtrlPBuffer<CR>
 " nnoremap <leader>db :ls<cr>:bd<home>
 nnoremap <leader>db :%bd<cr>
 " nnoremap <leader>da :args<cr>:argd<home>

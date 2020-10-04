@@ -46,7 +46,7 @@ set nolist
 
 " Keep windows at a good size
 set winwidth=100 winminwidth=25
-set winheight=30 winminheight=3
+set winheight=30 winminheight=4
 
 " " Keep windows at a good size
 " silent! set winheight=9
