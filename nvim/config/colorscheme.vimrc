@@ -17,7 +17,6 @@ set background=dark
 " colorscheme jellybeans
 " colorscheme distinguished
 " colorscheme vividchalk
-colorscheme gruvbox
 " colorscheme dracula
 " colorscheme solarized
 " colorscheme darkblue
@@ -35,7 +34,8 @@ colorscheme gruvbox
 " colorscheme nova
 " colorscheme kiss
 " colorscheme dusk
-colorscheme flattr
+colorscheme gruvbox
+" colorscheme flattr
 " " } Colorscheme
 
 " " { Highlights
@@ -64,7 +64,7 @@ colorscheme flattr
 " highlight Visual term=bold cterm=bold guibg=#2555a5
 " }
 " { matchmaker
-" highlight Matchmaker guibg=#954545
+highlight Matchmaker guibg=#f5d0c0 guifg=#000000
 " }
 " { MatchTagAlways
 " highlight MatchTag guibg=#656565

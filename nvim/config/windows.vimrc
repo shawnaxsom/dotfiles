@@ -29,3 +29,5 @@ function! ArrangeAllHorizontal (startingAt)
 endfunction
 nnoremap \v :call ArrangeOneLargeVertical()<CR>
 nnoremap \h :call ArrangeOneLargeHorizontal()<CR>
+nnoremap <leader>V :call ArrangeOneLargeVertical()<CR>
+nnoremap <leader>H :call ArrangeOneLargeHorizontal()<CR>

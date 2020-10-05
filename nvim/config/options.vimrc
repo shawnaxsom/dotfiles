@@ -44,9 +44,13 @@ augroup listchars
 augroup END
 set nolist
 
-" Keep windows at a good size
-set winwidth=100 winminwidth=25
-set winheight=30 winminheight=4
+" " Keep windows at a good size
+" set winwidth=100 winminwidth=25
+" set winheight=30 winminheight=4
+set winminwidth=3
+set winwidth=3
+set winminheight=1
+set winheight=1
 
 " " Keep windows at a good size
 " silent! set winheight=9

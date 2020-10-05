@@ -404,10 +404,17 @@ com! ALEShowCommand  echo ale_linters#python#flake8#GetCommand(bufnr('%'))
 " 2 - Great
 " -----------------------------------------------------------------------------------------
 " {
-Plug 'RRethy/vim-illuminate'
-let g:Illuminate_delay = 50
-hi illuminatedWord ctermfg=red guibg=#852040
-let g:Illuminate_highlightUnderCursor = 1
+" Plug 'RRethy/vim-illuminate'
+" let g:Illuminate_delay = 250
+" hi illuminatedWord ctermfg=red guibg=#852040
+" let g:Illuminate_highlightUnderCursor = 1
+" }
+" { matchmaker - Highlight word under cursor
+" NOTE: Change the color in colorscheme.vimrc
+Plug 'qstrahl/vim-matchmaker'
+let g:matchmaker_enable_startup = 1
+let g:matchmaker_matchpriority = 1
+nnoremap ,, :MatchmakerToggle<CR>
 " }
 " { Surround
 Plug 'tpope/vim-surround'
@@ -712,12 +719,6 @@ Plug 'xolox/vim-colorscheme-switcher'
 noremap <F9> :RandomColorScheme<CR>:colo<CR>
 noremap <leader><leader>r :RandomColorScheme<CR>:colo<CR>
 " }
-" { matchmaker
-" Highlight word under cursor
-" Plug 'qstrahl/vim-matchmaker'
-" let g:matchmaker_enable_startup = 1
-" let g:matchmaker_matchpriority = 1
-" }
 "
 "
 "
@@ -735,6 +736,12 @@ let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_preview_window = 'right:30%'
 " Search all lines in all files
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '--no-sort --exact',
+\  'down':    '40%'})
 
 " command! FZFMru call fzf#run({
 " \ 'source':  reverse(s:all_files()),
@@ -764,7 +771,7 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_prev
 " nnoremap <leader>m :FZFMru --no-sort<CR>
 " nnoremap <leader><leader>b :Buffers<CR>
 nnoremap <c-p> :FZFMru<CR>
-nnoremap <leader>o :FZF --no-sort<CR>
+nnoremap <leader>o :FZF --no-sort --exact<CR>
 nnoremap <leader>p :FZFMru<CR>
 nnoremap <leader>m :FZFMru<CR>
 nnoremap <leader><leader>b :Buffers<CR>
@@ -838,24 +845,6 @@ augroup END
 " -----------------------------------------------------------------------------------------
 " 4 - Could do without
 " -----------------------------------------------------------------------------------------
-" { Gundo
-" Use :Gundo to time travel undo history
-Plug 'sjl/gundo.vim'
-nmap <leader>u :GundoToggle<CR>
-" }
-" { Tabular
-" Uses :Tabularize /character(s)
-Plug 'godlygeek/tabular'
-vmap gt :Tabularize /
-" }
-" { kana/vim-textobj-user
-Plug 'kana/vim-textobj-user'
-" }
-" { tpope/vim-unimpaired
-" Mainly use this for next file in same folder. But it has a lot of mappings
-" that conflict with my own and more than I need.
-" Plug 'tpope/vim-unimpaired'
-" }
 
 " -----------------------------------------------------------------------------------------
 " 5 - New / Evaluating
@@ -971,36 +960,10 @@ Plug 'blueyed/vim-diminactive'
 Plug 'roman/golden-ratio'
 " Don't resize Quickfix window?
 let golden_ratio_exclude_nonmodifiable = 0
+let golden_ratio_autocommand = 0
 " }
-
-
-
-
-
-
-
-" command! FZFMru call fzf#run({
-" \ 'source':  reverse(s:all_files()),
-" \ 'sink':    'edit',
-" \ 'options': '-m -x +s --no-sort',
-" \ 'down':    '40%' })
-" function! s:all_files()
-"   return extend(v:oldfiles,
-"   \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
-" endfunction
-
-" function! fzf#vim#_recent_files()
-"   return fzf#vim#_uniq(map(
-"     \ filter([expand('%')], 'len(v:val)')
-"     \   + filter(map(fzf#vim#_buflisted_sorted(), 'bufname(v:val)'), 'len(v:val)')
-"     \   + filter(copy(v:oldfiles), "filereadable(fnamemodify(v:val, ':p'))"),
-"     \ 'fnamemodify(v:val, ":~:.")'))
-" endfunction
-
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '--no-sort',
-\  'down':    '40%'})
+" { kana/vim-textobj-user
+Plug 'kana/vim-textobj-user'
+" }
 
 call plug#end()

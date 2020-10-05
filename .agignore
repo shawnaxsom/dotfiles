@@ -11,12 +11,30 @@ Session.vim
 tmp/
 dist/
 
-__tests__
-*.test.js
-*-test.js
 
 wellexpert2/
 ambyint.ui/
 saved-event-streams/
 *.js.map
 out/
+
+__tests__
+*.test.js
+*-test.js
+*test_*
+*unittest*
+*_test*
+nightwatch/
+*mock_*
+mocks
+*fake_*
+
+mercury*/
+tutum*/
+highland/
+vendor/
+*.py
+*.rst
+*.txt
+swagger/
+swagger.json
