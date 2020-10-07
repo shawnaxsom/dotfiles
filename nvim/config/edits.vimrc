@@ -1,4 +1,5 @@
 " nmap gev :vsp ~/.config/nvim/init.vim<CR>
+nmap gea :sp ~/.agignore<CR>
 nmap gev :sp ~/.config/nvim/config/<CR>
 nmap gep :sp ~/.config/nvim/config/plugins.vimrc<CR>
 nmap geb :sp ~/.config/nvim/config/buffers.vimrc<CR>

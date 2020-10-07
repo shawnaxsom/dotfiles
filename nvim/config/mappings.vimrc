@@ -213,8 +213,10 @@ function! GoToNextFunc()
   echohl ModeMsg
   call search('^[ ]\{0,2\}[#a-zA-Z].*\({\|(\)$', 'W')
 endfun
-map H [{
-map L ]}
+" map H [{
+" map L ]}
+map H [{^
+map L ]}^
 " map <silent> H :call GoToFuncStart()<CR>
 " map <silent> L :call GoToNextFunc()<CR>
 " map <silent> H 0?^[ ]\{0,5\}[a-zA-Z].*{$<CR>^:nohls<CR>

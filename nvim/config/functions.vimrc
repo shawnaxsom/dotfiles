@@ -54,10 +54,22 @@ augroup fugitive
 augroup END
 
 " Zoom / Restore window.
+function! s:KeepZoomed() abort
+    if exists('t:zoomed') && t:zoomed
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    else
+        execute "GoldenRatioResize"
+    endif
+endfunction
+command! KeepZoomed call s:KeepZoomed()
 function! s:ZoomToggle() abort
     if exists('t:zoomed') && t:zoomed
         execute t:zoom_winrestcmd
         let t:zoomed = 0
+
     else
         let t:zoom_winrestcmd = winrestcmd()
         resize
@@ -66,7 +78,20 @@ function! s:ZoomToggle() abort
     endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
-nnoremap <silent> <C-A> :ZoomToggle<CR>
+function! s:ZoomDisable() abort
+    let t:zoomed = 0
+endfunction
+command! ZoomDisable call s:ZoomDisable()
+function! s:Zoom() abort
+    let t:zoom_winrestcmd = winrestcmd()
+    resize
+    vertical resize
+    let t:zoomed = 1
+endfunction
+command! Zoom call s:Zoom()
+autocmd BufWinEnter,WinEnter * KeepZoomed
+" nmap <buffer> <enter> :ZoomDisable<CR>
+nnoremap <silent> <c-a> :ZoomToggle<CR>
 "
 command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
 
