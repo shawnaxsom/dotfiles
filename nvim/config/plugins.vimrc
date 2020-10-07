@@ -56,6 +56,7 @@ autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relat
 " { vim-go
 " Highlight a query and run in mongo
 Plug 'fatih/vim-go'
+let g:go_list_type = "quickfix"
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
@@ -182,7 +183,7 @@ map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gR :Gread<CR>
 map <leader>gw :Gwrite<CR>
-map <leader>gh :Gbrowse<CR>
+map <leader>gh :.Gbrowse<CR>
 map <leader>gl :Extradite<CR>
 map <leader>gL :Glog<BAR>:bot copen<CR>
 map <leader>gv :GV<CR>
@@ -959,8 +960,8 @@ Plug 'blueyed/vim-diminactive'
 " { Golden Ratio -- better automatic vim pane window resizing
 Plug 'roman/golden-ratio'
 " Don't resize Quickfix window?
-let golden_ratio_exclude_nonmodifiable = 0
-let golden_ratio_autocommand = 0
+let golden_ratio_exclude_nonmodifiable = 1
+let golden_ratio_autocommand = 1
 " }
 " { kana/vim-textobj-user
 Plug 'kana/vim-textobj-user'

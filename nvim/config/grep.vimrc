@@ -54,3 +54,11 @@ nmap <leader><leader>. :Grep "" %:p:h:h/*<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LE
 "   autocmd QuickFixCmdPost [^l]* cwindow
 "   autocmd QuickFixCmdPost    l* lwindow
 " augroup END
+
+augroup quickfixoldernewerkeys
+  autocmd!
+  " autocmd WinEnter * if &buftype == 'quickfix' | nnoremap <buffer> H :colder<CR> | endif
+  " autocmd WinEnter * if &buftype == 'quickfix' | nnoremap <buffer> L :cnewer<CR> | endif
+  autocmd FileType qf nnoremap <buffer> H :colder<CR>
+  autocmd FileType qf nnoremap <buffer> L :cnewer<CR>
+augroup END

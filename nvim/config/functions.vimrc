@@ -89,7 +89,7 @@ function! s:Zoom() abort
     let t:zoomed = 1
 endfunction
 command! Zoom call s:Zoom()
-autocmd BufWinEnter,WinEnter * KeepZoomed
+" autocmd BufWinEnter,WinEnter * KeepZoomed  " TODO: this gets errors on Keep/Reject in Quickfix window
 " nmap <buffer> <enter> :ZoomDisable<CR>
 nnoremap <silent> <c-a> :ZoomToggle<CR>
 "

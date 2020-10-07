@@ -47,10 +47,10 @@ set nolist
 " " Keep windows at a good size
 " set winwidth=100 winminwidth=25
 " set winheight=30 winminheight=4
-set winminwidth=3
 set winwidth=3
-set winminheight=1
-set winheight=1
+set winminwidth=3
+set winheight=3
+set winminheight=3
 
 " " Keep windows at a good size
 " silent! set winheight=9
@@ -90,6 +90,9 @@ set guioptions-=L  "remove left-hand scroll bar
 " allow cursor to stay in same column while scrolling
 set virtualedit=all
 set nostartofline
+
+" Cursor Line
+set cursorline
 
 " allow copy/paste using system clipboard (otherwise have to use "+)
 " set clipboard=unnamed

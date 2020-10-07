@@ -30,11 +30,18 @@ mocks
 *fake_*
 
 mercury*/
-tutum*/
-highland/
-vendor/
 *.py
 *.rst
 *.txt
 swagger/
 swagger.json
+
+vendor/
+docs/
+migrations/
+loadtest/
+
+tutum*/
+highland/
+go-salesforce/
+fulfillment/
