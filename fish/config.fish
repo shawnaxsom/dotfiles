@@ -350,7 +350,9 @@ set -gx PATH $PATH $ANDROID_HOME/platform-tools
 
 # Golang
 set -gx GOPATH $HOME/go
-set -gx GOROOT (brew --prefix golang)/libexec
+# This takes a second to run, so using hard-coded path instead
+# set -gx GOROOT (brew --prefix golang)/libexec
+set -gx GOROOT /usr/local/opt/go/libexec
 set -gx PATH $PATH $GOPATH/bin
 set -gx PATH $PATH $GOROOT/bin
 set -gx GOPRIVATE github.com/docker
