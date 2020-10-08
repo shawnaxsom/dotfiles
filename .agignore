@@ -18,17 +18,6 @@ saved-event-streams/
 *.js.map
 out/
 
-__tests__
-*.test.js
-*-test.js
-*test_*
-*unittest*
-*_test*
-nightwatch/
-*mock_*
-mocks
-*fake_*
-
 mercury*/
 *.py
 *.rst

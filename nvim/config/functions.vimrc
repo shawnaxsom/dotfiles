@@ -91,7 +91,7 @@ endfunction
 command! Zoom call s:Zoom()
 " autocmd BufWinEnter,WinEnter * KeepZoomed  " TODO: this gets errors on Keep/Reject in Quickfix window
 " nmap <buffer> <enter> :ZoomDisable<CR>
-nnoremap <silent> <c-a> :ZoomToggle<CR>
+nnoremap <silent> <leader>z :ZoomToggle<CR>
 "
 command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
 

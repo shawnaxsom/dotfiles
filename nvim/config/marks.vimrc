@@ -12,7 +12,7 @@ augroup globalfilemarks
   autocmd InsertEnter */dev/* normal! mI
   autocmd TextChanged */dev/* normal! mO
   autocmd TextChangedI */dev/* normal! mO
-  " autocmd TextChanged,InsertEnter *.vimrc normal! mV
+  autocmd TextChanged,InsertEnter,BufEnter *.vimrc normal! mV
 augroup END
 " }
 

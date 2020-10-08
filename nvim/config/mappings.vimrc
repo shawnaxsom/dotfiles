@@ -352,9 +352,9 @@ nmap ]n :next<CR>
 nmap ]p :prev<CR>
 
 " Maximize pane
-nmap <leader>z <bar>_
-nmap <leader><leader>z =
-nmap <leader>= =
+" nmap <leader>z <bar>_
+" nmap <leader><leader>z =
+" nmap <leader>= =
 
 nmap <leader>; g;999g,
 

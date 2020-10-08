@@ -34,8 +34,8 @@ set background=dark
 " colorscheme nova
 " colorscheme kiss
 " colorscheme dusk
-colorscheme gruvbox
-" colorscheme flattr
+" colorscheme gruvbox
+colorscheme flattr
 " " } Colorscheme
 
 " " { Highlights

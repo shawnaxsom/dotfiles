@@ -77,6 +77,7 @@ create_symlink   nvim                      ~/.config/nvim
 create_symlink   ranger                    ~/.config/ranger
 create_symlink   sift.vim                  ~/.vim/colors/sift.vim
 create_symlink   alacritty                 ~/.config/alacritty
+create_symlink   kitty                     ~/.config/kitty
 create_symlink   .PULL_REQUEST_TEMPLATE.md ~/.PULL_REQUEST_TEMPLATE.md
 create_symlink   User/                     ~/Library/Application\ Support/Code/User
 

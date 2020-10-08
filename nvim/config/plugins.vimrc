@@ -730,19 +730,25 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 " Plug 'pbogut/fzf-mru.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-" Plug 'tweekmonster/fzf-filemru'
-" let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
+Plug 'tweekmonster/fzf-filemru'
+augroup custom_filemru
+  autocmd!
+  autocmd BufWinEnter * UpdateMru
+augroup END
+let g:fzf_filemru_bufwrite = 1
+" let g:fzf_filemru_git_ls = 1
+let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
 " let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_preview_window = 'right:30%'
 " Search all lines in all files
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
 
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '--no-sort --exact',
-\  'down':    '40%'})
+" command! FZFMru call fzf#run({
+" \  'source':  v:oldfiles,
+" \  'sink':    'e',
+" \  'options': '--no-sort --exact',
+" \  'down':    '40%'})
 
 " command! FZFMru call fzf#run({
 " \ 'source':  reverse(s:all_files()),
@@ -771,10 +777,10 @@ command! FZFMru call fzf#run({
 " nnoremap <leader>p :FZFMru --no-sort<CR>
 " nnoremap <leader>m :FZFMru --no-sort<CR>
 " nnoremap <leader><leader>b :Buffers<CR>
-nnoremap <c-p> :FZFMru<CR>
+nnoremap <c-p> :FilesMru --no-sort --exact<CR>
 nnoremap <leader>o :FZF --no-sort --exact<CR>
-nnoremap <leader>p :FZFMru<CR>
-nnoremap <leader>m :FZFMru<CR>
+nnoremap <leader>p :FilesMru --no-sort --exact<CR>
+nnoremap <leader>m :FilesMru --no-sort --exact<CR>
 nnoremap <leader><leader>b :Buffers<CR>
 " nnoremap <leader>m :History<CR>
 let g:fzf_mru_relative = 1
