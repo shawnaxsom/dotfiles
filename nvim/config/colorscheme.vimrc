@@ -58,7 +58,7 @@ colorscheme flattr
 "     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 "     autocmd WinLeave * setlocal nocursorline
 " augroup END
-" highlight cursorLine term=bold cterm=bold guibg=#254555
+highlight cursorLine term=bold cterm=bold guifg=#ffffff guibg=#254585
 " }
 " { Visual Selection
 " highlight Visual term=bold cterm=bold guibg=#2555a5

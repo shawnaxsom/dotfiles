@@ -83,6 +83,6 @@ augroup statusline
   autocmd!
   autocmd BufEnter * call SetActiveStatusLine()
   autocmd BufLeave * call SetInactiveStatusLine()
-  autocmd BufWritePost byline.vim source %
-  autocmd BufWritePost byline.vim set modeline | doautocmd BufRead
+  autocmd BufWritePost statusline.vimrc source %
+  autocmd BufWritePost statusline.vimrc set modeline | doautocmd BufRead
 augroup END

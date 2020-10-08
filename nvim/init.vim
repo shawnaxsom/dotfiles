@@ -1,4 +1,4 @@
-source $HOME/.config/nvim/autoload/plug.vim
+" source $HOME/.config/nvim/autoload/plug.vim
 
 source $HOME/.config/nvim/config/options.vimrc
 source $HOME/.config/nvim/config/plugins.vimrc
@@ -19,10 +19,6 @@ source $HOME/.config/nvim/config/notes.vimrc
 source $HOME/.config/nvim/config/edits.vimrc
 source $HOME/.config/nvim/config/refactorings.vimrc
 source $HOME/.config/nvim/config/packagejson.vimrc
-"
-" {
-"
-" }
 
 augroup config
   autocmd!

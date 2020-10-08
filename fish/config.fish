@@ -191,9 +191,26 @@ alias gmm='git fetch; git merge origin/master'
 alias grm='git fetch; git rebase origin/master'
 # alias gp='git pull; and echo; and git push; and echo; and git status; and echo'
 alias gp='git pull; and echo; and git status; and echo'
-alias gpr='hub pull-request --edit -F ~/.PULL_REQUEST_TEMPLATE.md'
+# alias gpr='hub pull-request --edit -F ~/.PULL_REQUEST_TEMPLATE.md'
+alias pr='hub pull-request --edit'
+alias gpr=pr
 alias gs='git status'
 alias gyesterday='git log --since="yesterday"'
+
+function prforcommit
+  # https://hub.github.com/
+  open (hub api graphql --flat -f q="repo:docker/saas-mega type:pr $argv" -f query='
+    query($q: String!) {
+      search(query: $q, type: ISSUE, first: 3) {
+        nodes {
+          ... on PullRequest {
+            url
+          }
+        }
+      }
+    }
+  ' | awk '/\.url/ { print $2 }')
+end
 
 # Shows changes I made from all branches, helpful to document what I worked on
 alias gweek='git log --pretty=format:"%ad:%an:%d:%B" --date=relative --all --since=1.week.ago --author=".*hawn.*"'

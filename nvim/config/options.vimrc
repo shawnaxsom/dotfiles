@@ -47,10 +47,10 @@ set nolist
 " " Keep windows at a good size
 " set winwidth=100 winminwidth=25
 " set winheight=30 winminheight=4
-set winwidth=3
-set winminwidth=3
-set winheight=3
-set winminheight=3
+set winwidth=6
+set winminwidth=6
+set winheight=6
+set winminheight=6
 
 " " Keep windows at a good size
 " silent! set winheight=9
@@ -152,8 +152,8 @@ set history=1000
 set nojoinspaces
 
 " Line numbers
-set nonumber
-set norelativenumber
+set number
+set relativenumber
 set numberwidth=4
 
 " Wildmenu completion mentu when pressing tab

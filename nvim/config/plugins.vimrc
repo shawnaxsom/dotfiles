@@ -50,19 +50,22 @@ nnoremap <silent> U :call <SID>show_documentation()<CR>
 " nmap <leader>rn <Plug>(coc-rename)
 " Make sure coc.nvim completion popup doesn't block the view of the cursor
 " https://github.com/neoclide/coc.nvim/issues/2233
+" autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 9999)
+" autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'editor', 'row': 0, 'col': 0})
 autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'cursor', 'row': 2, 'col': -25})
 " autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 100)
 " }
 " { vim-go
-" Highlight a query and run in mongo
 Plug 'fatih/vim-go'
 let g:go_list_type = "quickfix"
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>dr <Plug>(go-referrers)
+" au FileType go nmap <Leader>ds <Plug>(go-def-split)
+" au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+" au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+" au FileType go nmap <Leader>dr <Plug>(go-referrers)
 au FileType go nmap <Leader>r <Plug>(go-referrers)
 let g:go_doc_keywordprg_enabled = 0
+map <leader>b :w<CR>:GoBuild<CR>
+map <leader>t :w<CR>:GoTest<CR>
 " }
 " { vim-db
 " Highlight a query and run in mongo
@@ -477,7 +480,7 @@ vmap s <Plug>VSurround
 " Edit files within any quickfix window, then save to dynamically update files
 " Works very similar to CtrlSF, but with quickfix rather than own window
 " Maybe I should just use :Doline (vim-qf) or :cdo instead
-" Plug 'stefandtw/quickfix-reflector.vim'
+Plug 'stefandtw/quickfix-reflector.vim'
 " }
 " { vim-simple-todo
 " Plug 'vitalk/vim-simple-todo'  " Shortcuts to creating todo lists
@@ -636,7 +639,7 @@ augroup END
 " 3 - Decent
 " -----------------------------------------------------------------------------------------
 " " { CtrlSF
-" Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 " map <F3> :CtrlSF -R ""<LEFT>
 " " vmap <leader>8 "hy:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
 " " nmap <leader>8 "hyiw:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
@@ -777,11 +780,30 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_prev
 " nnoremap <leader>p :FZFMru --no-sort<CR>
 " nnoremap <leader>m :FZFMru --no-sort<CR>
 " nnoremap <leader><leader>b :Buffers<CR>
-nnoremap <c-p> :FilesMru --no-sort --exact<CR>
+
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+command! BuffersDelete call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '-m -x +s --no-sort --exact',
+\ }))
+
+nnoremap <c-p> :Buffers<CR>
 nnoremap <leader>o :FZF --no-sort --exact<CR>
-nnoremap <leader>p :FilesMru --no-sort --exact<CR>
+" nnoremap <leader>p :FilesMru --no-sort --exact<CR>
+nnoremap <leader>p :Buffers<CR>
 nnoremap <leader>m :FilesMru --no-sort --exact<CR>
-nnoremap <leader><leader>b :Buffers<CR>
+nnoremap <leader><leader>p :Buffers<CR>
+" nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>d :BuffersDelete<CR>
 " nnoremap <leader>m :History<CR>
 let g:fzf_mru_relative = 1
 
@@ -966,7 +988,7 @@ Plug 'blueyed/vim-diminactive'
 " { Golden Ratio -- better automatic vim pane window resizing
 Plug 'roman/golden-ratio'
 " Don't resize Quickfix window?
-let golden_ratio_exclude_nonmodifiable = 1
+let golden_ratio_exclude_nonmodifiable = 0
 let golden_ratio_autocommand = 1
 " }
 " { kana/vim-textobj-user
