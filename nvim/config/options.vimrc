@@ -20,11 +20,12 @@ set nowrap
 set linebreak
 " set breakat=\ ^I!@*-+;:,./?(
 set breakat=\ ^I!@*+;:,./?(
-" set showbreak=>>>\|
+" set showbreak=>>>>>>>>>>\|
+set showbreak=
 " set showbreak=~\|
-set showbreak=\|
-set breakindent
-set breakindentopt=shift:8
+" set showbreak=\|
+" set breakindent
+" set breakindentopt=shift:8
 set listchars+=precedes:<,extends:>
 " augroup wrapifactive
 "   autocmd!

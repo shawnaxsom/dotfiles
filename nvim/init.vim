@@ -26,4 +26,3 @@ augroup config
   autocmd BufWritePost init.vim,*.vimrc set modeline | doautocmd BufRead
   " autocmd BufReadPost init.vim normal `.
 augroup END
-

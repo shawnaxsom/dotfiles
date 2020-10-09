@@ -112,7 +112,7 @@ function! AddExtension (path, defaultExtension)
   endif
   return a:path . a:defaultExtension
 endfunction
-augroup dirvish
+augroup dirvish_mappings
   autocmd!
   autocmd FileType dirvish nnoremap <buffer> <leader>r :Shdo! mv {} {}<CR>
   autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>

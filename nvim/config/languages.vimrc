@@ -21,10 +21,17 @@ autocmd Filetype go nnoremap <silent> gr :GoReferrers<CR>
 autocmd Filetype go nnoremap <silent> gt :GoTest<CR>
 " }
 
-" {
+" { Nginx
 augroup nginx_ft
   au!
   autocmd BufNewFile,BufRead *.tmpl   set filetype=nginx
+augroup END
+" }
+
+" { Markdown
+augroup nginx_ft
+  au!
+  autocmd BufNewFile,BufRead *.md     set wrap
 augroup END
 " }
 
