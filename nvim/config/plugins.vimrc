@@ -175,6 +175,7 @@ Plug 'chr4/nginx.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'  " Adds :Gbrowse to Fugitive for jumping to the Github repo
 Plug 'int3/vim-extradite'
+" {
 Plug 'junegunn/gv.vim'
 map <leader>gc :Gcommit<CR>i
 map <leader>gp :Gpull<CR>
@@ -190,6 +191,9 @@ map <leader>gh :.Gbrowse<CR>
 map <leader>gl :Extradite<CR>
 map <leader>gL :Glog<BAR>:bot copen<CR>
 map <leader>gv :GV<CR>
+map <leader>gV :GV!<CR>
+map <leader><leader>gv :GV!<CR>
+" }
 " }
 " { Vimux / Dispatch
 " Plug 'tpope/vim-dispatch'
@@ -340,7 +344,14 @@ Plug 'posva/vim-vue'
 " management. Add vim -S Session.vim alias in your fish.config or .bashrc.
 " :qa to exit Vim with all panes intact.
 Plug 'tpope/vim-obsession'
+function! s:CreateSessionIfNotExists() abort
+  if !filereadable("Session.vim")
+    Obsess
+  endif
+endfunction
+command! CreateSessionIfNotExists call s:CreateSessionIfNotExists()
 nmap <leader><leader>w :Obsess!<CR>
+autocmd VimEnter * CreateSessionIfNotExists
 " }
 " { Abolish
 " %S/foo/bar will replace smart-casing
@@ -380,30 +391,30 @@ let g:vrc_curl_opts={ '--silent': '' }
 " { blueyed/vim-qf_resize
 " Plug 'blueyed/vim-qf_resize'
 " }
-" { ALE
-" :ALEFix to autogically fix any lint errors that have an obvious fix.
-" Add rules to ~/.eslintrc to ignore certain lint errors.
-Plug 'w0rp/ale'  " Async linting
-" nnoremap <leader>F :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
-nnoremap <leader>= :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
-let g:ale_list_window_size = 2
-let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
-let g:ale_javascript_eslint_use_global = 0
-let g:ale_fixers = { 'javascript': [ 'eslint' ] }
-let g:ale_linters = { 'javascript': [ 'eslint' ] }
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-let g:ale_lint_on_text_changed = 0
-let g:ale_open_list = 0
-let g:ale_set_loclist = 1
-let g:ale_set_quickfix = 0
-let g:ale_set_highlights = 1
-let g:ale_set_signs = 1
-let g:ale_echo_cursor = 1
-com! ALECheckNow     call ale#Queue(0)
-com! ALEShowCommand  echo ale_linters#python#flake8#GetCommand(bufnr('%'))
-" }
+" " { ALE
+" " :ALEFix to autogically fix any lint errors that have an obvious fix.
+" " Add rules to ~/.eslintrc to ignore certain lint errors.
+" Plug 'w0rp/ale'  " Async linting
+" " nnoremap <leader>F :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
+" nnoremap <leader>= :ALEFix<CR>:ALELint<CR>:ALEFirst<CR>
+" let g:ale_list_window_size = 2
+" let g:ale_javascript_eslint_executable='/usr/local/bin/eslint'
+" let g:ale_javascript_eslint_use_global = 0
+" let g:ale_fixers = { 'javascript': [ 'eslint' ] }
+" let g:ale_linters = { 'javascript': [ 'eslint' ] }
+" let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+" let g:ale_sign_warning = '.'
+" let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+" let g:ale_lint_on_text_changed = 0
+" let g:ale_open_list = 0
+" let g:ale_set_loclist = 1
+" let g:ale_set_quickfix = 0
+" let g:ale_set_highlights = 1
+" let g:ale_set_signs = 1
+" let g:ale_echo_cursor = 1
+" com! ALECheckNow     call ale#Queue(0)
+" com! ALEShowCommand  echo ale_linters#python#flake8#GetCommand(bufnr('%'))
+" " }
 " -----------------------------------------------------------------------------------------
 " 2 - Great
 " -----------------------------------------------------------------------------------------
@@ -719,13 +730,13 @@ Plug 'flazz/vim-colorschemes'
 " " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
 " let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
 " }
-" { Dash.app
-Plug 'rizzatti/dash.vim'
-nmap <silent> <leader>d <Plug>DashSearch
-let g:dash_map = {
-      \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
-      \ }
-" }
+" " { Dash.app
+" Plug 'rizzatti/dash.vim'
+" nmap <silent> <leader>d <Plug>DashSearch
+" let g:dash_map = {
+"       \ 'javascript' : [ 'javascript', 'react', 'materialui', 'rxjs', 'lodash', 'css' ]
+"       \ }
+" " }
 " { Vim Trailing Whitespace
 Plug 'bronson/vim-trailing-whitespace'
 " }
@@ -891,23 +902,23 @@ let g:fzf_colors =
 " { Nova colorscheme
 Plug 'zanglg/nova.vim'
 " }
-" { embear/vim-localvimrc
-" Put a .lvimrc file in a project to have project specific settings
-" Example settings:
-" set path+=actions/
-" set path+=components/forms/**
-" augroup localfilemarks
+" " { embear/vim-localvimrc
+" " Put a .lvimrc file in a project to have project specific settings
+" " Example settings:
+" " set path+=actions/
+" " set path+=components/forms/**
+" " augroup localfilemarks
+" "   autocmd!
+" "   autocmd BufEnter */parsers/*       normal! mP
+" "   autocmd BufEnter */epics/*         normal! mE
+" " augroup END
+" Plug 'embear/vim-localvimrc'
+" let g:localvimrc_ask = 0
+" augroup localvimrc
 "   autocmd!
-"   autocmd BufEnter */parsers/*       normal! mP
-"   autocmd BufEnter */epics/*         normal! mE
+"   autocmd BufWinEnter *      silent LocalVimRC
 " augroup END
-Plug 'embear/vim-localvimrc'
-let g:localvimrc_ask = 0
-augroup localvimrc
-  autocmd!
-  autocmd BufWinEnter *      silent LocalVimRC
-augroup END
-" }
+" " }
 
 " -----------------------------------------------------------------------------------------
 " 4 - Could do without
@@ -940,10 +951,10 @@ Plug 'thameera/vimv'
 " let g:bufExplorerDisableDefaultKeyMapping = 1
 " let g:bufExplorerSortBy='fullpath'
 " " }
-" { edkolev/tmuxline.vim
-" Use your Airline theme automatically in Tmux
-Plug 'edkolev/tmuxline.vim'
-" }
+" " { edkolev/tmuxline.vim
+" " Use your Airline theme automatically in Tmux
+" Plug 'edkolev/tmuxline.vim'
+" " }
 " { vim-qlist
 " :help include-search
 " [I will search for the word under cursor in both the current file and the
@@ -996,8 +1007,8 @@ Plug 'Quramy/vim-dtsm'
 Plug 'mhartington/vim-typings'
 " }
 
-Plug 'elixir-editors/vim-elixir'
-Plug 'dsawardekar/ember.vim'
+" Plug 'elixir-editors/vim-elixir'
+" Plug 'dsawardekar/ember.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Plug 'python-mode/python-mode'
@@ -1035,11 +1046,11 @@ let golden_ratio_autocommand = 1
 Plug 'kana/vim-textobj-user'
 " }
 
-" { vim-github-dashboard
-" :GHActivity
-Plug 'junegunn/vim-github-dashboard'
-Plug 'tyru/open-browser.vim'
-" }
+" " { vim-github-dashboard
+" " :GHActivity
+" Plug 'junegunn/vim-github-dashboard'
+" Plug 'tyru/open-browser.vim'
+" " }
 " { dag/vim-fish
 Plug 'dag/vim-fish'
 " }
@@ -1058,7 +1069,7 @@ Plug 'rhysd/clever-f.vim'
 " }
 " { justinmk/vim-sneak
 Plug 'justinmk/vim-sneak'
-let g:sneak#s_next = 1
+let g:sneak#s_next = 0
 " }
 " { 'easymotion/vim-easymotion'
 " Plug 'easymotion/vim-easymotion'

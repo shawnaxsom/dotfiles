@@ -121,8 +121,8 @@ nmap <leader><leader>i :PlugInstall<CR>
 nmap <leader><leader>u :PlugClean!<CR>
 nmap <leader><leader>t :sp ~/dotfiles/.ctags<CR>
 
-nmap <leader>q :q<CR>
-nmap <leader><leader>q :qa<CR>
+nmap <leader>q :q!<CR>
+nmap <leader><leader>q :qa!<CR>
 nmap <leader>h :sp<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>

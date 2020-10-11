@@ -266,16 +266,49 @@ function gcheckoutdate
 end
 
 alias vs='vim -S'
-alias vimrecent='vim (git diff --name-only HEAD~5..)'
+
+function deletevimsession
+  if test -e $PWD/Session.vim
+    rm $PWD/Session.vim
+  end
+end
+
+# Open vim with buffers for files edited in most recent commits
+function recent
+  deletevimsession
+
+  set commitsToInclude 5
+
+  if test (count $argv) = 1
+    set commitsToInclude "$argv"
+  end
+
+  git diff --name-only HEAD~$commitsToInclude
+end
+alias r='recent'
+alias vimrecent='vim (recent)'
+alias vr='vimrecent'
+
+function changed
+  deletevimsession
+  git ls-files -m
+end
+alias vimchanged='vim (changed)'
+alias c='changed'
+alias vc='vimchanged'
+
+# Load Vim buffers with both most recently changed and currently modified
+alias vcr='vim (string join \n (changed) (recent))'
+alias vrc='vcr'
 
 alias g='grep'
 alias gv='grep -v -e '
-alias c='cd'
+# alias c='cd'
 alias l='ls'
 alias lt='ls -lat'
 alias h='head'
 # alias t='tail'
-alias r='ranger'
+# alias r='ranger'
 # alias p='pwd'
 alias x='exit'
 alias vp='/usr/local/bin/nvim -c "set ft=man modifiable"  -'
