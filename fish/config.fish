@@ -298,7 +298,9 @@ alias c='changed'
 alias vc='vimchanged'
 
 # Load Vim buffers with both most recently changed and currently modified
-alias vcr='vim (string join \n (changed) (recent))'
+function vcr
+  vim (string join \n (changed) (recent $argv))
+end
 alias vrc='vcr'
 
 alias g='grep'
