@@ -283,7 +283,7 @@ function recent
     set commitsToInclude "$argv"
   end
 
-  git diff --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude
+  git diff --name-only --author=shawnaxsom --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude
 end
 alias r='recent'
 alias vimrecent='vim (recent)'
@@ -291,7 +291,7 @@ alias vr='vimrecent'
 
 function changed
   deletevimsession
-  git ls-files -m
+  git ls-files -m --author=shawn
 end
 alias vimchanged='vim (changed)'
 alias c='changed'
