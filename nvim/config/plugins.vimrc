@@ -1033,9 +1033,10 @@ map <leader>k :GitMessenger<CR>
 " }
 " {
 " { Diminactive - Dim the current active pane window
-Plug 'blueyed/vim-diminactive'
-let g:diminactive_use_syntax = 1
-" Plug 'TaDaa/vimade'
+" Plug 'blueyed/vim-diminactive'
+" let g:diminactive_use_syntax = 1
+Plug 'TaDaa/vimade'
+au! BufWinEnter quickfix VimadeBufDisable
 " }
 " { Golden Ratio -- better automatic vim pane window resizing
 Plug 'roman/golden-ratio'

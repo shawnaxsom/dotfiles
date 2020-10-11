@@ -377,3 +377,6 @@ map <leader><leader>/ :vimgrep // ##<left><left><left><left>
 
 " Remove search when pressing escape
 nnoremap <esc> :nohlsearch<BAR>:echo<CR><ESC>
+
+" Avoid blank quickfix and other windows getting saved to sessions
+set sessionoptions-=blank
