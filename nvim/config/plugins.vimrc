@@ -750,9 +750,8 @@ noremap <leader><leader>r :RandomColorScheme<CR>:colo<CR>
 "
 "
 " { FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'pbogut/fzf-mru.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tweekmonster/fzf-filemru'
 augroup custom_filemru
