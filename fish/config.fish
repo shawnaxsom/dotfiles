@@ -266,6 +266,8 @@ function gcheckoutdate
 end
 
 alias vs='vim -S'
+alias vimrecent='vim (git diff --name-only HEAD~5..)'
+
 alias g='grep'
 alias gv='grep -v -e '
 alias c='cd'
