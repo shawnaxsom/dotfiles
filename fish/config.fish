@@ -291,7 +291,7 @@ alias vr='vimrecent'
 
 function changed
   deletevimsession
-  git ls-files -m --author=shawn
+  git ls-files -m
 end
 alias vimchanged='vim (changed)'
 alias c='changed'
