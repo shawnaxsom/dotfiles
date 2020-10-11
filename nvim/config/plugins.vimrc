@@ -24,6 +24,7 @@ Plug 'neoclide/coc-git', { 'do': ':CocInstall coc-git' }
 Plug 'neoclide/coc-eslint', { 'do': ':CocInstall coc-eslint' }
 Plug 'neoclide/coc-lists', { 'do': ':CocInstall coc-lists' }
 Plug 'neoclide/coc-css', { 'do': ':CocInstall coc-css' }
+" Plug 'neoclide/coc-ccls', { 'do': ':CocInstall coc-ccls' }
 Plug 'neoclide/coc-json', { 'do': ':CocInstall coc-json' }
 Plug 'neoclide/coc-yaml', { 'do': ':CocInstall coc-yaml' }
 Plug 'neoclide/coc-pairs', { 'do': ':CocInstall coc-pairs' }
@@ -1099,5 +1100,8 @@ let g:goyo_linenr = 0 " (default: 0)
 map <leader>z :Goyo<CR>:Limelight!!<CR>
 " }
 Plug 'mtth/locate.vim'
+" { vim-cpp-modern: Enhanced C and C++ syntax highlighting
+Plug 'bfrg/vim-cpp-modern'
+" }
 
 call plug#end()
