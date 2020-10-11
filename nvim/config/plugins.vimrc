@@ -894,6 +894,12 @@ let g:fzf_colors =
 " nnoremap <leader>p :FZF<CR>
 " nnoremap <c-b> :Buffers<CR>
 " nnoremap <leader>b :Buffers<CR>
+
+command! -bang -nargs=* FZFChanged
+  \ call fzf#vim#grep(
+  \   'git ls-files -m --full-name .', 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+nnoremap <leader>i :FZFChanged --no-sort<CR>
 " }
 "
 "
