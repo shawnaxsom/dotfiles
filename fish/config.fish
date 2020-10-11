@@ -291,16 +291,18 @@ alias vr='vimrecent'
 
 function changed
   deletevimsession
-  git ls-files -m
+  # git ls-files -m --full-name --line-prefix=(git rev-parse --show-toplevel)/
+  git ls-files -m --full-name . | awk -F / (string join "" '{print "' (git rev-parse --show-toplevel) '/"$0}') | uniq
 end
 alias vimchanged='vim (changed)'
 alias c='changed'
 alias vc='vimchanged'
 
 # Load Vim buffers with both most recently changed and currently modified
-function vcr
-  vim (string join \n (changed) (recent $argv))
+function cr
+  string join \n (recent $argv) (changed)
 end
+alias vcr='vim (cr)'
 alias vrc='vcr'
 
 alias g='grep'
