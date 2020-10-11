@@ -268,7 +268,7 @@ xnoremap <right> >gv
 xnoremap n :normal!<SPACE>
 
 " Clear command box and search easily
-" nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
+nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 " Reselect text when changing indentation

@@ -425,13 +425,13 @@ let g:vrc_curl_opts={ '--silent': '' }
 " hi illuminatedWord ctermfg=red guibg=#852040
 " let g:Illuminate_highlightUnderCursor = 1
 " }
-" " { matchmaker - Highlight word under cursor
-" " NOTE: Change the color in colorscheme.vimrc
-" Plug 'qstrahl/vim-matchmaker'
-" let g:matchmaker_enable_startup = 1
-" let g:matchmaker_matchpriority = 1
-" nnoremap ,, :MatchmakerToggle<CR>
-" " }
+" { matchmaker - Highlight word under cursor
+" NOTE: Change the color in colorscheme.vimrc
+Plug 'qstrahl/vim-matchmaker'
+let g:matchmaker_enable_startup = 1
+let g:matchmaker_matchpriority = 1
+nnoremap ,, :MatchmakerToggle<CR>
+" }
 " { Surround
 Plug 'tpope/vim-surround'
 vmap s <Plug>VSurround
@@ -618,18 +618,18 @@ let g:neoformat_only_msg_on_error = 1
 " { haya14busa/vim-asterisk
 Plug 'haya14busa/vim-asterisk'
 let g:asterisk#keeppos = 1
-map *  <Plug>(asterisk-z*)
-map #  <Plug>(asterisk-z#)
-map g* <Plug>(asterisk-gz*)
-map g# <Plug>(asterisk-gz#)
-" map *   <Plug>(asterisk-*)
-" map #   <Plug>(asterisk-#)
-" map g*  <Plug>(asterisk-g*)
-" map g#  <Plug>(asterisk-g#)
-" map z*  <Plug>(asterisk-z*)
-" map gz* <Plug>(asterisk-gz*)
-" map z#  <Plug>(asterisk-z#)
-" map gz# <Plug>(asterisk-gz#)
+" map *  <Plug>(asterisk-z*)
+" map #  <Plug>(asterisk-z#)
+" map g* <Plug>(asterisk-gz*)
+" map g# <Plug>(asterisk-gz#)
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
 nnoremap c* *Ncgn
 nnoremap c# #NcgN
 " nnoremap <leader>. n.
