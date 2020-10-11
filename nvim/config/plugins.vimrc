@@ -1,5 +1,5 @@
 " { Vim-Plug
-" Install Vim Plug if not installed
+" Ins Vim Plug if not installed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -64,15 +64,15 @@ let g:go_list_type = "quickfix"
 " au FileType go nmap <Leader>dr <Plug>(go-referrers)
 au FileType go nmap <Leader>r <Plug>(go-referrers)
 let g:go_doc_keywordprg_enabled = 0
-map <leader>b :w<CR>:GoBuild<CR>
-map <leader>t :w<CR>:GoTest<CR>
+map <leader>gb :w<CR>:GoBuild<CR>
+map <leader>gt :w<CR>:GoTest<CR>
 " }
-" { vim-db
-" Highlight a query and run in mongo
-Plug 'tpope/vim-db'
-nmap ,q vip:DB mongodb:///localhost:27017/wellexpert2<CR>
-xmap ,q :DB mongodb:///localhost:27017/wellexpert2<CR>
-" }
+" " { vim-db
+" " Highlight a query and run in mongo
+" Plug 'tpope/vim-db'
+" nmap ,q vip:DB mongodb:///localhost:27017/wellexpert2<CR>
+" xmap ,q :DB mongodb:///localhost:27017/wellexpert2<CR>
+" " }
 " { vim-quickly
 " Plug 'axs221/vim-quickly'
 " let g:quickly_enable_default_key_mappings = 1
@@ -413,13 +413,13 @@ com! ALEShowCommand  echo ale_linters#python#flake8#GetCommand(bufnr('%'))
 " hi illuminatedWord ctermfg=red guibg=#852040
 " let g:Illuminate_highlightUnderCursor = 1
 " }
-" { matchmaker - Highlight word under cursor
-" NOTE: Change the color in colorscheme.vimrc
-Plug 'qstrahl/vim-matchmaker'
-let g:matchmaker_enable_startup = 1
-let g:matchmaker_matchpriority = 1
-nnoremap ,, :MatchmakerToggle<CR>
-" }
+" " { matchmaker - Highlight word under cursor
+" " NOTE: Change the color in colorscheme.vimrc
+" Plug 'qstrahl/vim-matchmaker'
+" let g:matchmaker_enable_startup = 1
+" let g:matchmaker_matchpriority = 1
+" nnoremap ,, :MatchmakerToggle<CR>
+" " }
 " { Surround
 Plug 'tpope/vim-surround'
 vmap s <Plug>VSurround
@@ -601,7 +601,26 @@ let g:neoformat_only_msg_on_error = 1
 " }
 " { vim-visual-star-search
 " Allow you to use * and # on visually selected text
-Plug 'nelstrom/vim-visual-star-search'
+" Plug 'nelstrom/vim-visual-star-search'
+" }
+" { haya14busa/vim-asterisk
+Plug 'haya14busa/vim-asterisk'
+let g:asterisk#keeppos = 1
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
+" map *   <Plug>(asterisk-*)
+" map #   <Plug>(asterisk-#)
+" map g*  <Plug>(asterisk-g*)
+" map g#  <Plug>(asterisk-g#)
+" map z*  <Plug>(asterisk-z*)
+" map gz* <Plug>(asterisk-gz*)
+" map z#  <Plug>(asterisk-z#)
+" map gz# <Plug>(asterisk-gz#)
+nnoremap c* *Ncgn
+nnoremap c# #NcgN
+" nnoremap <leader>. n.
 " }
 " { vim-lastplace
 " Open files at last closed position
@@ -641,11 +660,13 @@ augroup END
 " " { CtrlSF
 Plug 'dyng/ctrlsf.vim'
 " map <F3> :CtrlSF -R ""<LEFT>
-" " vmap <leader>8 "hy:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
-" " nmap <leader>8 "hyiw:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
-" " nmap <leader>/ :CtrlSF -R ""<LEFT>
-" " nmap <leader><leader>/ :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-" let g:ctrlsf_confirm_save = 0
+vmap <leader><leader>8 "hy:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
+nmap <leader><leader>8 "hyiw:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
+nmap <leader>s :CtrlSF -R ""<LEFT>
+" vmap <leader>s :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+vmap <leader>s "hy:CtrlSF -R <c-r>h<CR>/<c-r>h<CR>
+" nmap <leader><leader>/ :CtrlSF -R "" %:p:h<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+let g:ctrlsf_confirm_save = 0
 " " }
 " { Airline
 " Plug 'vim-airline/vim-airline'
@@ -795,13 +816,31 @@ command! BuffersDelete call fzf#run(fzf#wrap({
   \ 'sink*': { lines -> s:delete_buffers(lines) },
   \ 'options': '-m -x +s --no-sort --exact',
 \ }))
+" command! BuffersNoSortExact call fzf#run(fzf#wrap({
+"   \ 'source': s:list_buffers(),
+"   \ 'options': '-m -x +s --no-sort --exact',
+" \ }))
+" command! BuffersNoSortExact call fzf#run(fzf#wrap({
+"       \ 'source': s:list_buffers(),
+"       \ 'options': '-m -x +s --no-sort --exact',
+"       \ }))
+" command! BuffersNoSortExact call fzf#vim#buffers({
+"       \ 'options': '-m -x +s --no-sort --exact',
+"       \ })
+" command! BuffersNoSortExact call fzf#vim#buffers(<q-args>, fzf#vim#with_preview(), <bang>0)
+" command! BuffersNoSortExact call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'options': '-m -x +s --no-sort --exact'}), <bang>0)
+" call fzf#vim#gitfiles('?', {'options': '--no-preview'})
+" command! BuffersNoSortExact call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'options': '-m -x +s --no-sort --exact'}), <bang>0)
 
-nnoremap <c-p> :Buffers<CR>
+" command! -bar -bang -nargs=? -complete=buffer BuffersNoSortExact  call fzf#vim#buffers(<q-args>, s(<bang>0, { "placeholder": "{1}" }), <bang>0)
+command! BuffersNoSortExact call fzf#vim#buffers({'options': '-m -x +s --no-sort --exact'})
+
+nnoremap <c-p> :BuffersNoSortExact<CR>
 nnoremap <leader>o :FZF --no-sort --exact<CR>
 " nnoremap <leader>p :FilesMru --no-sort --exact<CR>
-nnoremap <leader>p :Buffers<CR>
+nnoremap <leader>p :BuffersNoSortExact<CR>
 nnoremap <leader>m :FilesMru --no-sort --exact<CR>
-nnoremap <leader><leader>p :Buffers<CR>
+nnoremap <leader><leader>p :BuffersNoSortExact<CR>
 " nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>d :BuffersDelete<CR>
 " nnoremap <leader>m :History<CR>
@@ -984,6 +1023,8 @@ map <leader>k :GitMessenger<CR>
 " {
 " { Diminactive - Dim the current active pane window
 Plug 'blueyed/vim-diminactive'
+let g:diminactive_use_syntax = 1
+" Plug 'TaDaa/vimade'
 " }
 " { Golden Ratio -- better automatic vim pane window resizing
 Plug 'roman/golden-ratio'
@@ -994,5 +1035,59 @@ let golden_ratio_autocommand = 1
 " { kana/vim-textobj-user
 Plug 'kana/vim-textobj-user'
 " }
+
+" { vim-github-dashboard
+" :GHActivity
+Plug 'junegunn/vim-github-dashboard'
+Plug 'tyru/open-browser.vim'
+" }
+" { dag/vim-fish
+Plug 'dag/vim-fish'
+" }
+" { jlanzarotta/bufexplorer
+Plug 'jlanzarotta/bufexplorer'
+let bufExplorerDisableDefaultKeyMapping = 1
+map <leader>b   :BufExplorer<CR>
+let bufExplorerShowRelativePath = 1
+" }
+" { AndrewRadev/bufferize.vim
+" Make buffers out of commands like :Bufferize map
+Plug 'AndrewRadev/bufferize.vim'
+" }
+" { rhysd/clever-f.vim
+Plug 'rhysd/clever-f.vim'
+" }
+" { justinmk/vim-sneak
+Plug 'justinmk/vim-sneak'
+let g:sneak#s_next = 1
+" }
+" { 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
+" map <Leader> <Plug>(easymotion-prefix)
+" map  s <Plug>(easymotion-bd-f)
+" nmap s <Plug>(easymotion-overwin-f)
+" map  S <Plug>(easymotion-bd-f)
+" nmap S <Plug>(easymotion-overwin-f)
+" }
+" { christoomey/vim-conflicted
+" Diff conflicts merging
+Plug 'christoomey/vim-conflicted'
+" Also run: git config --global alias.conflicted '!vim +Conflicted'
+" # Define a custom mergetool called `vim-conflicted` that runs `vim +Conflicted`
+" git config --global mergetool.vim-conflicted.cmd 'vim +Conflicted'
+" # Set the `vim-conflicted` mergetool to be used when `git mergetool` is executed
+" git config --global merge.tool 'vim-conflicted'
+
+" }
+" { junegunn/goyo.vim
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'reedes/vim-pencil'
+let g:goyo_width = 120 " (default: 80)
+let g:goyo_height = '95%' " (default: 85%)
+let g:goyo_linenr = 0 " (default: 0)
+map <leader>z :Goyo<CR>:Limelight!!<CR>
+" }
+Plug 'mtth/locate.vim'
 
 call plug#end()

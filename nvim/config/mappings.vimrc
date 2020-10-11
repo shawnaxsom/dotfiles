@@ -127,8 +127,8 @@ nmap <leader>h :sp<CR>
 nmap <leader>v :vsp<CR>
 nmap <leader>w :w<CR>
 nmap <leader>x 0ix <ESC>0
-nmap <leader>z A // ZZZZ<ESC>0
-nmap <leader><leader>z :Grep "ZZZZ"<CR>
+" nmap <leader>z A // ZZZZ<ESC>0
+" nmap <leader><leader>z :Grep "ZZZZ"<CR>
 
 " Switch to previous file
 map <leader><tab> <c-^>
@@ -149,11 +149,11 @@ nmap <leader>9 :set foldlevel=999<CR>
 " vmap I :norm i
 " vmap A :norm A
 " vmap <enter> :norm<space>
-vmap <bar> :g/
-vnoremap <c-p> :<c-p>
-vnoremap A :norm A<space>
-vnoremap i :norm i<space><left>
-vnoremap I :norm I<space><left>
+" vmap <bar> :g/
+" vnoremap <c-p> :<c-p>
+" vnoremap A :norm A<space>
+" vnoremap i :norm i<space><left>
+" vnoremap I :norm I<space><left>
 " vnoremap x :norm ix<space><CR>
 " }
 
@@ -268,7 +268,7 @@ xnoremap <right> >gv
 xnoremap n :normal!<SPACE>
 
 " Clear command box and search easily
-nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
+" nnoremap <silent> ,/ :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 " Reselect text when changing indentation
@@ -298,7 +298,7 @@ cmap <c-p> <up>
 cmap <c-n> <down>
 
 " Pressing shift all the time is annoying
-noremap ; :
+" noremap ; :
 
 " Case insensitive search (but still have case sensitive for :substitute
 nnoremap / /\c
@@ -374,3 +374,6 @@ map <leader>. :cd %:p:h<CR>
 " Grep only in :args list
 " First populate :args with :args *searchterm*
 map <leader><leader>/ :vimgrep // ##<left><left><left><left>
+
+" Remove search when pressing escape
+nnoremap <esc> :nohlsearch<BAR>:echo<CR><ESC>

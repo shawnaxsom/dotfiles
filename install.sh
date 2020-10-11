@@ -50,6 +50,8 @@ fi
 
 mkdir -p ~/.vim/colors/
 mkdir -p ~/.config
+mkdir -p $HOME/.config/nvim/config/
+touch $HOME/.config/nvim/config/secrets.vimrc
 
 create_symlink   .Xdefaults                ~/.Xdefaults
 create_symlink   .Xmodmap                  ~/.Xmodmap
@@ -81,12 +83,20 @@ create_symlink   kitty                     ~/.config/kitty
 create_symlink   .PULL_REQUEST_TEMPLATE.md ~/.PULL_REQUEST_TEMPLATE.md
 create_symlink   User/                     ~/Library/Application\ Support/Code/User
 
+
 # Hyper doesn't seem to like symlinks
 cp                .hyper.js         ~/.hyper.js
 
 if [ ! -d ~/.vim/bundle ]; then
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
+fi
+
+if [ -d ~/Dropbox/todo/ ]; then
+  if [ ! -L ~/todo.txt ]; then
+    ln -s ~/Dropbox/todo/todo.txt ~/todo.txt
+    ln -s ~/Dropbox/todo/done.txt ~/done.txt
+  fi
 fi
 
 # if [ -f ~/.vim/bundle/YouCompleteMe/install.sh ]; then

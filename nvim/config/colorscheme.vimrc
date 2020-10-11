@@ -64,7 +64,7 @@ highlight cursorLine term=bold cterm=bold guifg=#ffffff guibg=#254585
 " highlight Visual term=bold cterm=bold guibg=#2555a5
 " }
 " { matchmaker
-highlight Matchmaker guibg=#f5d0c0 guifg=#000000
+highlight Matchmaker guibg=#c5c080 guifg=#000000
 " }
 " { MatchTagAlways
 " highlight MatchTag guibg=#656565
@@ -97,3 +97,7 @@ hi DiffAdd      guibg=#5af540 guifg=#05293d
 hi DiffDelete   guibg=#aa0500 guifg=#a5293d
 hi DiffChange   guibg=#5aa5f0 guifg=#05293d
 hi DiffText     guibg=#faa5f0 guifg=#f5293d
+
+" { vim-diminactive
+hi ColorColumn guifg=#444444 guibg=#000000
+" }

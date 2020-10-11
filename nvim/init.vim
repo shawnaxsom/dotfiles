@@ -19,6 +19,7 @@ source $HOME/.config/nvim/config/notes.vimrc
 source $HOME/.config/nvim/config/edits.vimrc
 source $HOME/.config/nvim/config/refactorings.vimrc
 source $HOME/.config/nvim/config/packagejson.vimrc
+source $HOME/.config/nvim/config/secrets.vimrc
 
 augroup config
   autocmd!

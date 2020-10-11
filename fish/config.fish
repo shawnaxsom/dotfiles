@@ -26,13 +26,15 @@ export TODOTXT_FINAL_FILTER='~/Dropbox/todo/futureTasks'
 # alias tls='todo.sh ls'
 alias next='tls -F "     %z %p |%i| %s %k (due:%D)" -n 3'
 # alias today='t ls -F "     %z %p |%i| %s %k (due:%D)" "due:<=0d"'
-alias today='tls -g desc:due'
+# alias today='tls -g desc:due --'
+alias today='tls "due:<=0d"'
+alias tomorrow='tls "due:<=1d"'
 alias due='today'
 alias day='today'
 alias tomorrow='t ls "due:<=1d"'
-alias td='today'
-# alias work='t ls -n 10 -F "     %z %p |%i| %s %k (due:%D)" @work'
-alias work='tls -n 15 -- -@reading -@learning -@syrus -@home -@productivity -@thedaily -@recruiting -@improvement -@focus -@inputs -@wth -@books -@family -@groceries -@shopping -@outing -@restaurants -@restaurant -@list -@habits -@background -+background'
+# alias td='today'
+alias work='t ls -n 10 -F "     %z %p |%i| %s %k (due:%D)" @work'
+# alias work='tls -n 15 -- -@reading -@learning -@syrus -@home -@productivity -@thedaily -@recruiting -@improvement -@focus -@inputs -@wth -@books -@family -@groceries -@shopping -@outing -@restaurants -@restaurant -@list -@habits -@background -+background'
 alias important='tls -g importance'
 alias a='tls "(A)"'
 alias b='tls "(B)"'
@@ -58,16 +60,39 @@ alias inputs='tls -F "      |%i| %s" -n 5 @inputs'
 alias tm='tomorrow'
 alias todo='clear && topydo -t ~/todo.txt -d ~/done.txt'
 alias t='clear && topydo -t ~/todo.txt -d ~/done.txt'
-alias tdo='t do'
-alias tls='clear && topydo -t ~/todo.txt -d ~/done.txt ls -n 15 -F "     %z %p |%i| %s %k (due:%D)"'
+# alias tdo='t do'
+alias td='tdo'
+# alias tls='clear && topydo -t ~/todo.txt -d ~/done.txt ls -n 15 -F "     %z %p |%i| %s %k (due:%D)" --'
 alias tpr='t lsproj'
-alias ta='t add'
+# alias ta='t add'
 alias te='t edit -e'
 alias tet='t edit -e "due:<=0d"'
 alias tew='t edit -e "due:<=0d" @work'
 alias tp='topydo -t ~/todo.txt -d ~/done.txt prompt'
 alias tc='topydo -t ~/todo.txt -d ~/done.txt columns'
 
+function ta
+  t add $argv $LAST_TLS_ARGS
+  eval $LAST_TLS_COMMAND
+  # topydo -t ~/todo.txt -d ~/done.txt ls -n 15 -F "     %z %p |%i| %s %k (due:%D)" -- $argv
+end
+function tdo
+  t do $argv
+  eval $LAST_TLS_COMMAND
+end
+function tls
+  set command (string join " " (status current-command) $argv)
+
+  clear
+  # echo $command
+  topydo -t ~/todo.txt -d ~/done.txt ls -n 15 -F "     %z %p |%i| %s %k (due:%D)" -- $argv
+
+  if string match -q '*tls*' $command
+    set -gx LAST_TLS_COMMAND (string join " " (status current-command) $argv)
+    set -gx LAST_TLS_ARGS $argv
+  end
+end
+alias tl=tls
 function tmux
   if test (count $argv) = 0
     tmux new-session -s (bash -c 'echo ${PWD##*/}')

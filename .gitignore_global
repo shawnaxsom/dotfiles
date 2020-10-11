@@ -1,12 +1,10 @@
 # To use this on a new machine, run:
 # git config --global core.excludesfile ~/.gitignore_global
 
-Session.vim
 .undodir/
 .tern-project/
 .tern-port
 tags
-.lvimrc
 *.bak
 tags.lock
 tags.temp
@@ -21,6 +19,11 @@ jsconfig.json
 out/
 .DS_Store
 *.swp
+
+# Vim / Neovim
+Session.vim
+.lvimrc
+secrets.vimrc
 
 # Quokka: https://github.com/wallabyjs/quokka/issues/28
 modulePatch.js
