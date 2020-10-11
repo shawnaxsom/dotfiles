@@ -283,7 +283,7 @@ function recent
     set commitsToInclude "$argv"
   end
 
-  git diff --name-only HEAD~$commitsToInclude
+  git diff --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude
 end
 alias r='recent'
 alias vimrecent='vim (recent)'

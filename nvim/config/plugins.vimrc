@@ -1064,6 +1064,7 @@ let bufExplorerShowRelativePath = 1
 " { AndrewRadev/bufferize.vim
 " Make buffers out of commands like :Bufferize map
 Plug 'AndrewRadev/bufferize.vim'
+map <leader>? :Bufferize map<CR>
 " }
 " { rhysd/clever-f.vim
 Plug 'rhysd/clever-f.vim'
