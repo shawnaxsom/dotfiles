@@ -367,7 +367,8 @@ map gx :!open <cWORD><CR>
 
 map <leader>' "ayiwologo<TAB>a
 
-map <leader>. :cd %:p:h<CR>
+" See: Rooter in plugins.vimrc
+" map <leader>. :cd %:p:h<CR>
 
 " nnoremap d "_d
 

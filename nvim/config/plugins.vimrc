@@ -83,56 +83,65 @@ map <leader>gt :w<CR>:GoTest<CR>
 " { vim-byline
 " Plug 'axs221/vim-byline'
 " }
-" { Dirvish
-Plug 'justinmk/vim-dirvish'  " File manager
-noremap - :Dirvish %<CR>
-noremap - :Dirvish %:p:h<CR>
-noremap <leader>- :Dirvish .<CR>
-let g:dirvish_mode = ':sort ,^.*[\/],'
-let g:dirvish_relative_paths=1
-function! Relpath(filename)
-        let cwd = getcwd()
-        let s = substitute(a:filename, l:cwd . "/" , "", "")
-        return s
-endfunction
-function! InsertBookmarks()
-  " execute "norm gg:read ~/dotfiles/nvim/bookmarks"
-  execute "norm mZ"
-  execute "norm ggI~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  execute "norm I" . substitute(Relpath(expand("%:p")), '/', ' > ', 'g') . ""
-  " execute "norm I> " . substitute(substitute(fnamemodify(expand("%"), ":~:."), '/', '', ''), '/', ' > ', 'g') . ""
-  execute "norm I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  " execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
-  call feedkeys("")
-  " execute "norm 2\<c-o>0"
-  execute "norm 1\<c-o>0"
-endfunction
-function! AddExtension (path, defaultExtension)
-  if a:path =~ '\.[a-zA-Z0-9]\+$'
-    return a:path
-  endif
-  return a:path . a:defaultExtension
-endfunction
-augroup dirvish_mappings
-  autocmd!
-  autocmd FileType dirvish nnoremap <buffer> <leader>r :Shdo! mv {} {}<CR>
-  autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>
-  autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
-  autocmd FileType dirvish nnoremap <silent><buffer> e :execute "e " . AddExtension(input("Edit: File Name? ", expand('%:p')), ".js")<BAR>normal R<CR>
-  autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
-  autocmd FileType dirvish nnoremap <silent><buffer> cp :execute ":!cp " . expand('<cWORD>') . " " . AddExtension(input("Copy: File Name? ", expand('%:p')), ".js")<BAR>normal R<CR>
-  autocmd FileType dirvish nnoremap <buffer> mk :execute "Mkdir " . input("Mkdir: Folder Name? ", expand('%:p'))<BAR>normal R<CR>
-  autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
-  autocmd FileType dirvish nnoremap <silent><buffer><expr> dd (confirm("Are you sure?", "&Yes\n&No") == 1 ? ":!rm -rf " . expand('<cWORD>') . "<CR>:normal R<CR>" : "")
-  autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
-  autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
-  autocmd FileType dirvish nnoremap <buffer> ~ :e $HOME<CR>
-  autocmd FileType dirvish nnoremap <buffer> ` :e $HOME<CR>
-  autocmd FileType dirvish nnoremap <buffer> _ :e .<CR>
-  " Enable :Gstatus and friends.
-  " autocmd FileType dirvish call fugitive#detect(@%)
-  " autocmd FileType dirvish call InsertBookmarks()
-augroup END
+" " { Dirvish
+" NOTE: Dirvish doesn't work well with Vim-Rooter or autochdir, changing to
+" vim-vinegar for now
+" Plug 'justinmk/vim-dirvish'  " File manager
+" " noremap - :Dirvish %<CR>:cd %:p:h<CR>
+" " noremap - :Dirvish %:p:h<CR>:cd %:p:h<CR>
+" " noremap <leader>- :Dirvish .<CR>:cd %:p:h<CR>
+" noremap - :Dirvish %<CR>
+" noremap - :Dirvish %:p:h<CR>
+" noremap <leader>- :Dirvish .<CR>
+" let g:dirvish_mode = ':sort ,^.*[\/],'
+" let g:dirvish_relative_paths=1
+" function! Relpath(filename)
+"         let cwd = getcwd()
+"         let s = substitute(a:filename, l:cwd . "/" , "", "")
+"         return s
+" endfunction
+" function! InsertBookmarks()
+"   " execute "norm gg:read ~/dotfiles/nvim/bookmarks"
+"   execute "norm mZ"
+"   execute "norm ggI~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+"   execute "norm I" . substitute(Relpath(expand("%:p")), '/', ' > ', 'g') . ""
+"   " execute "norm I> " . substitute(substitute(fnamemodify(expand("%"), ":~:."), '/', '', ''), '/', ' > ', 'g') . ""
+"   execute "norm I~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+"   " execute "norm G:read ~/dotfiles/nvim/bookmarks\<cr>"
+"   call feedkeys("")
+"   " execute "norm 2\<c-o>0"
+"   execute "norm 1\<c-o>0"
+" endfunction
+" function! AddExtension (path, defaultExtension)
+"   if a:path =~ '\.[a-zA-Z0-9]\+$'
+"     return a:path
+"   endif
+"   return a:path . a:defaultExtension
+" endfunction
+" augroup dirvish_mappings
+"   autocmd!
+"   autocmd FileType dirvish cd %:p:h
+"   autocmd FileType dirvish nnoremap <buffer> <leader>r :Shdo! mv {} {}<CR>
+"   autocmd FileType dirvish nnoremap <buffer> <leader>c :Shdo! cp -R {} {}:h<CR>
+"   autocmd FileType dirvish nnoremap <buffer> <leader>d :Shdo! rm -rf {} {}:h<CR>
+"   autocmd FileType dirvish nnoremap <silent><buffer> e :execute "e " . AddExtension(input("Edit: File Name? ", expand('%:p')), ".js")<BAR>normal R<CR>
+"   autocmd FileType dirvish nnoremap <buffer> cp :call feedkeys(':!cp ' . expand('<cWORD>') . ' %')<CR>
+"   autocmd FileType dirvish nnoremap <silent><buffer> cp :execute ":!cp " . expand('<cWORD>') . " " . AddExtension(input("Copy: File Name? ", expand('%:p')), ".js")<BAR>normal R<CR>
+"   autocmd FileType dirvish nnoremap <buffer> mk :execute "Mkdir " . input("Mkdir: Folder Name? ", expand('%:p'))<BAR>normal R<CR>
+"   autocmd FileType dirvish nnoremap <buffer> mv :call feedkeys(':!mv ' . expand('<cWORD>') . ' ' . expand('<cWORD>'))<CR>
+"   autocmd FileType dirvish nnoremap <silent><buffer><expr> dd (confirm("Are you sure?", "&Yes\n&No") == 1 ? ":!rm -rf " . expand('<cWORD>') . "<CR>:normal R<CR>" : "")
+"   autocmd FileType dirvish nnoremap <buffer> ! :Shdo! {}<LEFT><LEFT><LEFT><SPACE>
+"   autocmd FileType dirvish nnoremap <buffer> b :norm gg<CR>:0read ~/dotfiles/nvim/bookmarks<CR>
+"   autocmd FileType dirvish nnoremap <buffer> ~ :e $HOME<CR>
+"   autocmd FileType dirvish nnoremap <buffer> ` :e $HOME<CR>
+"   autocmd FileType dirvish nnoremap <buffer> _ :e .<CR>
+"   " Enable :Gstatus and friends.
+"   " autocmd FileType dirvish call fugitive#detect(@%)
+"   " autocmd FileType dirvish call InsertBookmarks()
+" augroup END
+" " }
+" { tpope/vim-vinegar
+Plug 'tpope/vim-vinegar'
 " }
 " { nginx
 Plug 'chr4/nginx.vim'
@@ -962,9 +971,15 @@ nmap <leader><leader>r :Renamer<CR>
 " Change directory to project root if you are in a subfolder
 " If you use /src as project root, this allows proper filename completion
 " from /src without typing /src in your imports.
+" Unfortunately, vim-dirvish doesn't work well with this on auto
 Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['server.js']
-let g:rooter_silent_chdir = 1
+" let g:rooter_patterns = ['server.js', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'notes']
+let g:rooter_patterns = ['.git', 'Makefile', 'notes']
+let g:rooter_targets = '/,*'
+let g:rooter_silent_chdir = 0
+let g:rooter_manual_only = 0
+" map <leader>. :cd %:p:h<CR>:Rooter<CR>:pwd<CR>
+map <leader>. :Rooter<CR>:pwd<CR>
 " }
 " { thameera/vimv
 " Alternative to vim-renamer
@@ -1130,5 +1145,18 @@ Plug 'mtth/locate.vim'
 " { vim-cpp-modern: Enhanced C and C++ syntax highlighting
 Plug 'bfrg/vim-cpp-modern'
 " }
+
+" Plug 'preservim/nerdtree'
+" " nnoremap - :NERDTreeToggle<CR>
+" nnoremap - :e ..<CR>
+
+" function! SearchNetrw(fname)
+"     if ! search('\V\^' . a:fname . '\$')
+"         call search('^' . substitute(a:fname, '\w\zs.*', '', '') . '.*\/\@<!$')
+"     endif
+" endfunction
+" autocmd VimEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
+" autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
+" autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string("plugins.vimrc") . ')'
 
 call plug#end()
