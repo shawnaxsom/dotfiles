@@ -11,8 +11,8 @@ map <leader>e :e **/*
 nmap <leader>c :bdelete!<CR>
 " nmap <leader>lb :ls<cr>:b<space>
 command! Qbuffers call setqflist(map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), '{"bufnr":v:val}'))
-nmap <leader>lb :Qbuffers<CR>:copen<CR>
-nmap <leader>la :args<CR>
+" nmap <leader>lb :Qbuffers<CR>:copen<CR>
+" nmap <leader>la :args<CR>
 nmap <leader><leader>a :%argdelete<CR>
 nmap <leader>a :args **/**<LEFT>
 nmap <leader><leader>a :args<CR>
@@ -58,7 +58,7 @@ function! s:ToggleQf()
 
   copen
 endfunction
-nnoremap <leader><leader>l :call <SID>ToggleQf()<cr> " Show Quickfix
+" nnoremap <leader><leader>l :call <SID>ToggleQf()<cr> " Show Quickfix
 nnoremap <leader>ll :call <SID>ToggleQf()<cr> " Show Quickfix
 
 function! GoToFileIncludeNodeModules ()

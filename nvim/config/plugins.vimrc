@@ -848,6 +848,8 @@ command! BuffersNoSortExact call fzf#vim#buffers({'options': '-m -x +s --no-sort
 
 command! FZFChanged call fzf#run({'source': 'git diff --name-only --oneline', 'options': '-m -x +s --no-sort --exact', 'sink': 'e', 'left': '40%'})
 
+command! FZFLines call fzf#vim#lines({'options': '-m -x +s --no-sort --exact'})
+
 nnoremap <c-p> :BuffersNoSortExact<CR>
 nnoremap <leader>o :FZF --no-sort --exact<CR>
 " nnoremap <leader>p :FilesMru --no-sort --exact<CR>
@@ -858,6 +860,7 @@ nnoremap <leader><leader>p :BuffersNoSortExact<CR>
 nnoremap <leader>d :BuffersDelete<CR>
 nnoremap <leader>i :FZFChanged<CR>
 " nnoremap <leader>m :History<CR>
+nnoremap <leader>l :FZFLines<CR>
 let g:fzf_mru_relative = 1
 
 command! FZFMostRecentlyModified call fzf#run({
