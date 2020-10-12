@@ -766,10 +766,24 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tweekmonster/fzf-filemru'
+" This is the default extra key bindings
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-f': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 augroup custom_filemru
   autocmd!
   autocmd BufWinEnter * UpdateMru
 augroup END
+let g:fzf_history_dir = "~/fzf/history/"
 let g:fzf_filemru_bufwrite = 1
 " let g:fzf_filemru_git_ls = 1
 let g:fzf_layout = { 'window': 'enew' }
@@ -864,6 +878,7 @@ nnoremap <leader>i :GFiles?<CR>
 nnoremap <leader>l :FZFLines<CR>
 nnoremap <leader>f :Lines func <CR>
 nnoremap <leader>t :Lines func <BAR> var <BAR> const <BAR> := <BAR> type <CR>
+nnoremap <leader>a :Ag func <BAR> var <BAR> const <BAR> := <BAR> type <CR>
 let g:fzf_mru_relative = 1
 
 command! FZFMostRecentlyModified call fzf#run({
