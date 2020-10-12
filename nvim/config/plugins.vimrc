@@ -1064,6 +1064,7 @@ Plug 'jlanzarotta/bufexplorer'
 let bufExplorerDisableDefaultKeyMapping = 1
 map <leader>b   :BufExplorer<CR>
 let bufExplorerShowRelativePath = 1
+let bufExplorerSortBy="fullpath"
 " }
 " { AndrewRadev/bufferize.vim
 " Make buffers out of commands like :Bufferize map

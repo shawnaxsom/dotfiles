@@ -283,7 +283,14 @@ function recent
     set commitsToInclude "$argv"
   end
 
-  git diff --name-only --author=shawnaxsom --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude .
+  # git diff --name-only --author=shawnaxsom --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude .
+  set result (git log --pretty="format:" --author=shawnaxsom --name-only HEAD~$commitsToInclude.. | sort | uniq | grep "\S")
+
+  if test -z $result
+    git log --pretty="format:" --name-only HEAD~$commitsToInclude.. | sort | uniq | grep "\S"
+  else
+    echo $result
+  end
 end
 alias r='recent'
 alias vimrecent='vim (recent)'
