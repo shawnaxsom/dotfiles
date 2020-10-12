@@ -284,10 +284,10 @@ function recent
   end
 
   # git diff --name-only --author=shawnaxsom --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude .
-  set result (git log --pretty="format:" --author=shawnaxsom --name-only HEAD~$commitsToInclude.. | sort | uniq | grep "\S")
+  set result (git log --pretty="format:" --author=shawnaxsom --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S")
 
   if test -z $result
-    git log --pretty="format:" --name-only HEAD~$commitsToInclude.. | sort | uniq | grep "\S"
+    git log --pretty="format:" --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S"
   else
     echo $result
   end
@@ -449,6 +449,10 @@ set -gx GOPRIVATE github.com/docker
 
 # Fastlane for React Native development
 set -x PATH $HOME/.fastlane/bin $PATH
+
+
+# FZF
+set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --no-sort --exact'
 
 
 # tabtab source for slss package
