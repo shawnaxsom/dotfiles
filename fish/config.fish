@@ -284,12 +284,12 @@ function recent
   end
 
   # git diff --name-only --author=shawnaxsom --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude .
-  set result (git log --pretty="format:" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S")
+  set result (git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$"))
 
   if test -z (echo $result)
-    git log --pretty="format:" --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S"
+    git log --pretty="format:%n" --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
   else
-    git log --pretty="format:" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S"
+    git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
   end
 end
 alias r='recent'
