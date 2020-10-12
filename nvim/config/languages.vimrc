@@ -17,6 +17,7 @@ augroup END
 
 " { Go
 autocmd Filetype go setlocal makeprg=go\ build
+autocmd Filetype go nnoremap <silent> gb :GoBuild<CR>
 autocmd Filetype go nnoremap <silent> gr :GoReferrers<CR>
 autocmd Filetype go nnoremap <silent> gt :GoTest<CR>
 " }

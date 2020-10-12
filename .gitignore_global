@@ -81,3 +81,8 @@ target/
 
 # Angular
 .angulardoc.json
+
+# Golang
+# go.mod
+# go.sum
+# vendor/

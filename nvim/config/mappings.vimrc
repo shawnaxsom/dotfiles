@@ -332,14 +332,18 @@ nmap [w :cpfile<CR>
 nmap ]w :cnfile<CR>
 nmap [e :colder<CR>
 nmap ]e :cnewer<CR>
+nmap <leader>- :colder<CR>
+nmap <leader>= :cnewer<CR>
 nmap [b :bprevious<CR>
 nmap ]b :bnext<CR>
 nmap { :bprevious<CR>
 nmap } :bnext<CR>
 nmap [a :previous<CR>
 nmap ]a :next<CR>
-nmap ( :previous<CR>
-nmap ) :next<CR>
+" nmap ( :previous<CR>
+" nmap ) :next<CR>
+nmap ( :clast<CR>
+nmap ) :cfirst<CR>
 nmap [l :lprev<CR>
 nmap ]l :lnext<CR>
 nmap [f -k<CR>

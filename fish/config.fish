@@ -277,19 +277,19 @@ end
 function recent
   deletevimsession
 
-  set commitsToInclude 5
+  set commitsToInclude 4
 
   if test (count $argv) = 1
     set commitsToInclude "$argv"
   end
 
   # git diff --name-only --author=shawnaxsom --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude .
-  set result (git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$"))
+  set result (git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~ --since=@{$commitsToInclude} | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$"))
 
   if test -z (echo $result)
-    git log --pretty="format:%n" --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
+    git log --pretty="format:%n" --name-only --line-prefix=(git rev-parse --show-toplevel)/ --since=@{$commitsToInclude} | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
   else
-    git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
+    git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ --since=@{$commitsToInclude} | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
   end
 end
 alias r='recent'
@@ -440,8 +440,10 @@ set -gx PATH $PATH $ANDROID_HOME/platform-tools
 
 # Golang
 set -gx GOPATH $HOME/go
+
 # This takes a second to run, so using hard-coded path instead
 # set -gx GOROOT (brew --prefix golang)/libexec
+# set -gx PATH /usr/local/go/bin $PATH
 set -gx GOROOT /usr/local/opt/go/libexec
 set -gx PATH $PATH $GOPATH/bin
 set -gx PATH $PATH $GOROOT/bin
@@ -449,6 +451,7 @@ set -gx GOPRIVATE github.com/docker
 
 # Fastlane for React Native development
 set -x PATH $HOME/.fastlane/bin $PATH
+
 
 
 # FZF
@@ -463,3 +466,11 @@ alias emacs="/usr/local/bin/emacs"
 
 # Created by `userpath` on 2020-10-01 00:06:52
 set PATH $PATH /Users/shawnaxsom/.local/bin
+
+# Joplin CLI
+if test -d ~/.joplin-bin/bin/
+  set -gx PATH ~/.joplin-bin/bin/ $PATH
+end
+alias joplin="joplin --profile ~/.config/joplin-desktop/"
+alias jo=joplin
+alias jop=joplin

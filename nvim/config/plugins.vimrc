@@ -65,8 +65,6 @@ let g:go_list_type = "quickfix"
 " au FileType go nmap <Leader>dr <Plug>(go-referrers)
 au FileType go nmap <Leader>r <Plug>(go-referrers)
 let g:go_doc_keywordprg_enabled = 0
-map <leader>gb :w<CR>:GoBuild<CR>
-map <leader>gt :w<CR>:GoTest<CR>
 " }
 " " { vim-db
 " " Highlight a query and run in mongo
@@ -363,25 +361,25 @@ command! CreateSessionIfNotExists call s:CreateSessionIfNotExists()
 nmap <leader><leader>w :Obsess!<CR>
 autocmd VimEnter * CreateSessionIfNotExists
 " }
-" { Abolish
-" %S/foo/bar will replace smart-casing
-" %S/map{,s}/draw{,ings} will replace variants of the words
-" Also change word naming convention
-" crk - kabob-case
-" crs - snake_case
-" crc - camelCase
-" crm - MixedCase
-Plug 'tpope/tpope-vim-abolish'
-" nmap <leader>S yiwV:s/"/
-" vmap <leader>S :s/
-" " nmap <leader>s yiwV:S/"/
-" nmap <leader>s yiwV:S/
-" vmap <leader>s :S/
-" nmap <leader><leader>S :%s//
-" vmap <leader><leader>S y:%s/+/
-" nmap <leader><leader>s :%S//
-" vmap <leader><leader>s y:%S/+/
-" }
+" " { Abolish
+" " %S/foo/bar will replace smart-casing
+" " %S/map{,s}/draw{,ings} will replace variants of the words
+" " Also change word naming convention
+" " crk - kabob-case
+" " crs - snake_case
+" " crc - camelCase
+" " crm - MixedCase
+" Plug 'tpope/tpope-vim-abolish'
+" " nmap <leader>S yiwV:s/"/
+" " vmap <leader>S :s/
+" " " nmap <leader>s yiwV:S/"/
+" " nmap <leader>s yiwV:S/
+" " vmap <leader>s :S/
+" " nmap <leader><leader>S :%s//
+" " vmap <leader><leader>S y:%s/+/
+" " nmap <leader><leader>s :%S//
+" " vmap <leader><leader>s y:%S/+/
+" " }
 " { vim-rest-console
 Plug 'diepm/vim-rest-console'
 let g:vrc_set_default_mapping = 0
