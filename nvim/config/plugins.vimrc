@@ -862,7 +862,8 @@ nnoremap <leader>d :BuffersDelete<CR>
 nnoremap <leader>i :GFiles?<CR>
 " nnoremap <leader>m :History<CR>
 nnoremap <leader>l :FZFLines<CR>
-nnoremap <leader>t :Lines func <CR>
+nnoremap <leader>f :Lines func <CR>
+nnoremap <leader>t :Lines func <BAR> var <BAR> const <BAR> := <BAR> type <CR>
 let g:fzf_mru_relative = 1
 
 command! FZFMostRecentlyModified call fzf#run({
