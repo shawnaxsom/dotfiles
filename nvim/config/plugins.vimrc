@@ -846,7 +846,7 @@ command! BuffersDelete call fzf#run(fzf#wrap({
 " command! -bar -bang -nargs=? -complete=buffer BuffersNoSortExact  call fzf#vim#buffers(<q-args>, s(<bang>0, { "placeholder": "{1}" }), <bang>0)
 command! BuffersNoSortExact call fzf#vim#buffers({'options': '-m -x +s --no-sort --exact'})
 
-command! FZFChanged call fzf#run({'source': 'git diff --name-only --oneline', 'options': '-m -x +s --no-sort --exact', 'sink': 'e', 'left': '40%'})
+" command! FZFChanged call fzf#run({'source': 'git diff --name-only --oneline', 'options': '-m -x +s --no-sort --exact', 'sink': 'edit', 'left': '40%'})
 
 command! FZFLines call fzf#vim#lines({'options': '-m -x +s --no-sort --exact'})
 
@@ -858,7 +858,8 @@ nnoremap <leader>m :FilesMru --no-sort --exact<CR>
 nnoremap <leader><leader>p :BuffersNoSortExact<CR>
 " nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>d :BuffersDelete<CR>
-nnoremap <leader>i :FZFChanged<CR>
+" nnoremap <leader>i :FZFChanged<CR>
+nnoremap <leader>i :GFiles?<CR>
 " nnoremap <leader>m :History<CR>
 nnoremap <leader>l :FZFLines<CR>
 nnoremap <leader>t :Lines func <CR>
