@@ -1097,6 +1097,13 @@ Plug 'dag/vim-fish'
 Plug 'jlanzarotta/bufexplorer'
 let bufExplorerDisableDefaultKeyMapping = 1
 map <leader>b   :BufExplorer<CR>
+augroup bufexplorer_ft
+  au!
+  " Don't accidentally exit Vim if just trying to get out of bufexplorer
+  autocmd FileType bufexplorer nmap <buffer> <leader>q q
+  autocmd FileType bufexplorer nmap <buffer> <leader><leader>q q
+augroup END
+
 let bufExplorerShowRelativePath = 1
 let bufExplorerSortBy="fullpath"
 " }
