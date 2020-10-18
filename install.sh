@@ -82,6 +82,7 @@ create_symlink   alacritty                 ~/.config/alacritty
 create_symlink   kitty                     ~/.config/kitty
 create_symlink   .PULL_REQUEST_TEMPLATE.md ~/.PULL_REQUEST_TEMPLATE.md
 create_symlink   User/                     ~/Library/Application\ Support/Code/User
+create_symlink   .skhdrc                   ~/.skhdrc
 
 
 # Hyper doesn't seem to like symlinks
