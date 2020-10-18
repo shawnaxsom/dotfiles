@@ -5,3 +5,7 @@ set -q XDG_DATA_HOME
 
 # Load Oh My Fish configuration.
 source $OMF_PATH/init.fish
+
+# FZF options
+# https://github.com/jethrokuan/fzf
+set -U FZF_DEFAULT_OPTS "--no-sort --exact"
