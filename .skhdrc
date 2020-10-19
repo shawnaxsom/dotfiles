@@ -105,10 +105,10 @@ shift + alt - w : yabai -m window --resize top:0:-40
 shift + alt - d : yabai -m window --resize right:40:0
 
 # decrease window size
-shift + cmd - a : yabai -m window --resize left:40:0
-shift + cmd - s : yabai -m window --resize bottom:0:-40
-shift + cmd - w : yabai -m window --resize top:0:40
-shift + cmd - d : yabai -m window --resize right:-40:0
+ctrl + alt - a : yabai -m window --resize left:40:0
+ctrl + alt - s : yabai -m window --resize bottom:0:-40
+ctrl + alt - w : yabai -m window --resize top:0:40
+ctrl + alt - d : yabai -m window --resize right:-40:0
 
 # set insertion point in focused container
 ctrl + alt - h : yabai -m window --insert west
@@ -161,5 +161,5 @@ alt - p : yabai -m window --toggle sticky;\
           yabai -m window --toggle pip
 
 # change layout of desktop
-ctrl + alt - a : yabai -m space --layout bsp
-ctrl + alt - d : yabai -m space --layout float
+ctrl + alt - v : yabai -m space --layout bsp
+ctrl + alt - f : yabai -m space --layout float

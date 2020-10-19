@@ -336,8 +336,8 @@ nmap <leader>- :colder<CR>
 nmap <leader>= :cnewer<CR>
 nmap [b :bprevious<CR>
 nmap ]b :bnext<CR>
-nmap { :bprevious<CR>
-nmap } :bnext<CR>
+" nmap { :bprevious<CR>
+" nmap } :bnext<CR>
 nmap [a :previous<CR>
 nmap ]a :next<CR>
 " nmap ( :previous<CR>
