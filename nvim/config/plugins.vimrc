@@ -728,15 +728,15 @@ Plug 'flazz/vim-colorschemes'
 " map z? <Plug>(incsearch-fuzzy-?)
 " }
 " { Vim-Sneak
-" Plug 'justinmk/vim-sneak'
-" nmap s <Plug>SneakLabel_s
-" nmap S <Plug>SneakLabel_S
-" " map s <Plug>Sneak_s
-" " map S <Plug>Sneak_S
-" let g:sneak#label = 1
-" " let g:sneak#s_next = 1
-" " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
-" let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
+Plug 'justinmk/vim-sneak'
+nmap s <Plug>SneakLabel_s
+nmap S <Plug>SneakLabel_S
+" map s <Plug>Sneak_s
+" map S <Plug>Sneak_S
+let g:sneak#label = 1
+" let g:sneak#s_next = 1
+" let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
+let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
 " }
 " " { Dash.app
 " Plug 'rizzatti/dash.vim'
@@ -867,22 +867,25 @@ command! BuffersDelete call fzf#run(fzf#wrap({
 " command! -bar -bang -nargs=? -complete=buffer BuffersNoSortExact  call fzf#vim#buffers(<q-args>, s(<bang>0, { "placeholder": "{1}" }), <bang>0)
 command! BuffersNoSortExact call fzf#vim#buffers({'options': '-m -x +s --no-sort --exact'})
 
+" command! FZFChanged call fzf#run({'source': 'git diff --name-only --oneline', 'options': '-m -x +s --no-sort --exact --no-preview', 'sink': 'edit', 'left': '40%'})
 " command! FZFChanged call fzf#run({'source': 'git diff --name-only --oneline', 'options': '-m -x +s --no-sort --exact', 'sink': 'edit', 'left': '40%'})
 
-command! FZFLines call fzf#vim#lines({'options': '-m -x +s --no-sort --exact'})
+" command! FZFLines call fzf#vim#lines({'options': '-m -x +s --no-sort --exact'})
 
 nnoremap <c-p> :BuffersNoSortExact<CR>
-nnoremap <leader>o :FZF --no-sort --exact<CR>
+nnoremap <leader>O :FZF --no-sort --exact<CR>
 " nnoremap <leader>p :FilesMru --no-sort --exact<CR>
 nnoremap <leader>p :BuffersNoSortExact<CR>
 nnoremap <leader>m :FilesMru --no-sort --exact<CR>
+nnoremap <leader>o :FilesMru --no-sort --exact<CR>
+nnoremap <leader>' :Marks<CR>
 nnoremap <leader><leader>p :BuffersNoSortExact<CR>
 " nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>d :BuffersDelete<CR>
 " nnoremap <leader>i :FZFChanged<CR>
 nnoremap <leader>i :GFiles?<CR>
 " nnoremap <leader>m :History<CR>
-nnoremap <leader>l :FZFLines<CR>
+nnoremap <leader>l :Lines<CR>
 nnoremap <leader>f :Lines func <CR>
 nnoremap <leader>t :Lines func <BAR> var <BAR> const <BAR> := <BAR> type <CR>
 nnoremap <leader>a :Ag func <BAR> var <BAR> const <BAR> := <BAR> type <CR>
@@ -972,7 +975,8 @@ nmap <leader><leader>r :Renamer<CR>
 " Unfortunately, vim-dirvish doesn't work well with this on auto
 Plug 'airblade/vim-rooter'
 " let g:rooter_patterns = ['server.js', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'notes']
-let g:rooter_patterns = ['.git', 'Makefile', 'notes']
+" let g:rooter_patterns = ['.git', 'Makefile', 'notes']
+let g:rooter_patterns = ['.git', 'notes']
 let g:rooter_targets = '/,*'
 let g:rooter_silent_chdir = 0
 let g:rooter_manual_only = 0
@@ -1116,17 +1120,17 @@ map <leader>? :Bufferize map<CR>
 Plug 'rhysd/clever-f.vim'
 " }
 " { justinmk/vim-sneak
-Plug 'justinmk/vim-sneak'
-let g:sneak#s_next = 0
+" Plug 'justinmk/vim-sneak'
+" let g:sneak#s_next = 0
 " }
-" { 'easymotion/vim-easymotion'
+" " { 'easymotion/vim-easymotion'
 " Plug 'easymotion/vim-easymotion'
 " map <Leader> <Plug>(easymotion-prefix)
 " map  s <Plug>(easymotion-bd-f)
 " nmap s <Plug>(easymotion-overwin-f)
 " map  S <Plug>(easymotion-bd-f)
 " nmap S <Plug>(easymotion-overwin-f)
-" }
+" " }
 " { christoomey/vim-conflicted
 " Diff conflicts merging
 Plug 'christoomey/vim-conflicted'
@@ -1144,7 +1148,7 @@ Plug 'reedes/vim-pencil'
 let g:goyo_width = 120 " (default: 80)
 let g:goyo_height = '95%' " (default: 85%)
 let g:goyo_linenr = 0 " (default: 0)
-map <leader>z :Goyo<CR>:Limelight!!<CR>
+map <leader><leader>z :Goyo<CR>:Limelight!!<CR>
 " }
 Plug 'mtth/locate.vim'
 " { vim-cpp-modern: Enhanced C and C++ syntax highlighting
@@ -1163,5 +1167,43 @@ Plug 'bfrg/vim-cpp-modern'
 " autocmd VimEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
 " autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
 " autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string("plugins.vimrc") . ')'
+
+" { chrisbra/NrrwRgn
+" You simply select the region, call :NR and the selected part will open in a new
+" split window while the rest of the buffer will be protected. Once you are finished,
+" simply write the narrowed window (:w) and all the changes will be moved back
+" to the original buffer.
+Plug 'chrisbra/NrrwRgn'
+" vnoremap <leader>z :NR!<CR>
+" nnoremap <silent> <leader>z :WR!<CR>
+" autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string("plugins.vimrc") . ')'
+Plug 'jkramer/vim-narrow'
+vnoremap <leader>z :Narrow<CR>
+nnoremap <leader>z :Widen<CR>
+" }
+" { terryma/vim-multiple-cursors
+" <C-n> to make selections
+" <C-x> to skip, or <C-p> to remove and to to previous
+" c/s/I/A to edit
+Plug 'terryma/vim-multiple-cursors'
+" }
+" { terryma/vim-smooth-scroll
+" Plug 'terryma/vim-smooth-scroll'
+" noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 10, 1)<CR>
+" noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 10, 1)<CR>
+" Plug 'yonchu/accelerated-smooth-scroll'
+" let g:ac_smooth_scroll_du_sleep_time_msec = 20
+Plug 'yuttie/comfortable-motion.vim'
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+let g:comfortable_motion_friction = 70.0
+let g:comfortable_motion_air_drag = 2.5
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_impulse_multiplier = 1.2  " Feel free to increase/decrease this value.
+nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+" Plug 'psliwka/vim-smoothie'
+
+" }
 
 call plug#end()

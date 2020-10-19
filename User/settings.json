@@ -422,5 +422,6 @@
   },
   "go.useLanguageServer": true,
   "editor.fontFamily": "'Hack', 'Inconsolata-g', 'Source Code Pro', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-  "python.languageServer": "Microsoft"
+  "python.languageServer": "Microsoft",
+  "joplin.token": "19f53480a3fa7389e3216e9e50b661713dffdad38dfb9a9232da442f01ca856ae5822f4fff2ae56774435eb5a63828689f9e643d9b187314dafa67551ebbb9b8"
 }

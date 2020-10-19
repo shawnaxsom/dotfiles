@@ -58,8 +58,8 @@ function! s:ToggleQf()
 
   copen
 endfunction
-" nnoremap <leader><leader>l :call <SID>ToggleQf()<cr> " Show Quickfix
-nnoremap <leader>ll :call <SID>ToggleQf()<cr> " Show Quickfix
+nnoremap <leader><leader>l :call <SID>ToggleQf()<cr> " Show Quickfix
+" nnoremap <leader>ll :call <SID>ToggleQf()<cr> " Show Quickfix
 
 function! GoToFileIncludeNodeModules ()
   set wildignore-=*/node_modules/*

@@ -106,3 +106,13 @@ fun! FindFiles(filename)
   call delete(error_file)
 endfun
 command! -nargs=1 FindFile call FindFiles(<q-args>)
+
+" Grep open buffers
+" https://vi.stackexchange.com/questions/2904/how-to-show-search-results-for-all-open-buffers
+" Usually you can do :vimgrep // ##, but that only works on argslist, not
+" buffers
+" map <leader><leader>/ :vimgrep // ##<left><left><left><left>
+command! -bang -nargs=+ Bufgrep execute 'vimgrep<bang><args> ' . join(map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), '"#".v:val'), ' ')
+map <leader><leader>/ :Bufgrep //<LEFT>
+
+

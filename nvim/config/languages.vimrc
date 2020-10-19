@@ -32,7 +32,7 @@ augroup END
 " { Markdown
 augroup nginx_ft
   au!
-  autocmd BufNewFile,BufRead *.md     set wrap
+  " autocmd BufNewFile,BufRead *.md     set wrap
 augroup END
 " }
 

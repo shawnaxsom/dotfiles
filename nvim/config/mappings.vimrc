@@ -369,7 +369,7 @@ noremap G G0
 
 map gx :!open <cWORD><CR>
 
-map <leader>' "ayiwologo<TAB>a
+" map <leader>' "ayiwologo<TAB>a
 
 " See: Rooter in plugins.vimrc
 " map <leader>. :cd %:p:h<CR>
@@ -378,10 +378,17 @@ map <leader>' "ayiwologo<TAB>a
 
 " Grep only in :args list
 " First populate :args with :args *searchterm*
-map <leader><leader>/ :vimgrep // ##<left><left><left><left>
+" map <leader><leader>/ :vimgrep // ##<left><left><left><left>
 
 " Remove search when pressing escape
 nnoremap <esc> :nohlsearch<BAR>:echo<CR><ESC>
 
 " Avoid blank quickfix and other windows getting saved to sessions
 set sessionoptions-=blank
+
+" Show full file path when pressing CTRL+g, not just relative path
+map <C-g> :echo expand('%:p')<CR>
+
+nnoremap <bar> <C-w>_<C-w><bar>
+
+" nmap N gg<space>z/#V/#k<space>z

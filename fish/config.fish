@@ -299,7 +299,7 @@ alias vr='vimrecent'
 function changed
   deletevimsession
   # git ls-files -m --full-name --line-prefix=(git rev-parse --show-toplevel)/
-  git ls-files -m --full-name . | awk -F / (string join "" '{print "' (git rev-parse --show-toplevel) '/"$0}') | uniq
+  git ls-files -mo --exclude-standard --full-name . | awk -F / (string join "" '{print "' (git rev-parse --show-toplevel) '/"$0}') | uniq
 end
 alias vimchanged='vim (changed)'
 alias c='changed'
@@ -455,7 +455,7 @@ set -x PATH $HOME/.fastlane/bin $PATH
 
 
 # FZF
-set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --no-sort --exact'
+set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --no-sort --exact --no-preview'
 
 
 # tabtab source for slss package
@@ -474,3 +474,25 @@ end
 alias joplin="joplin --profile ~/.config/joplin-desktop/"
 alias jo=joplin
 alias jop=joplin
+
+# GPG agent
+set GPG_AGENT_FILE "$HOME/.gpg-agent-info"
+function start_gpg_agent
+  gpg-agent --daemon --write-env-file $GPG_AGENT_FILE
+end
+if which gpg-agent > /dev/null
+  # start agent if there's no agent file
+  if [ ! -f $GPG_AGENT_FILE ]
+    eval ( start_gpg_agent )
+  else
+    # check agent works
+    source $GPG_AGENT_FILE
+    set SOCKET (echo "$GPG_AGENT_INFO"  | cut -d : -f 1)
+    # check agent connection
+    set AGENTCONNECTION ( ! nc -U $SOCKET < /dev/null | grep -q "OK Pleased to meet you" )
+    if "$AGENTCONNECTION"
+      eval ( start_gpg_agent )
+    end
+  end
+  set -gx GPG_TTY (tty)
+end

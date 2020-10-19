@@ -26,11 +26,11 @@ endfun
 map <leader>X :echo ShowFuncName()<CR>
 
 hi StatusLineFile guibg=#9bfb9b guifg=#000000
-hi StatusLineFileInactive guibg=#5b7bab guifg=#504000
+hi StatusLineFileInactive guibg=#3b8b8b guifg=#303030
 hi StatusLineExtensionActive guibg=#555555 guifg=#ffffff
 hi StatusLineExtensionInactive guibg=#333333 guifg=#555555
-hi StatusLineActive guibg=#444444
-hi StatusLineInactive guibg=#222222
+hi StatusLineActive guibg=#449454 guifg=#ffffff gui=bold
+hi StatusLineInactive guibg=#227252
 hi User1 term=inverse,bold gui=inverse,bold guifg=#ff0000
 hi User2 guibg=#bbcbfb
 
@@ -40,20 +40,22 @@ function! SetActiveStatusLine ()
   setlocal statusline=
   setlocal statusline+=%1*%m  " Modifications, highlighted with User1 (red)
   setlocal statusline+=%#StatusLineFile# " Change colors
-  setlocal statusline+=\ \ %{expand('%:t:r')}
-  setlocal statusline+=\ %#StatusLineExtensionActive# " Change colors
-  setlocal statusline+=\ %{expand('%:t:e')}
+  " setlocal statusline+=\ \ %{expand('%:t:r')}
+  " setlocal statusline+=\ %#StatusLineExtensionActive# " Change colors
+  " setlocal statusline+=\ %{expand('%:t:e')}
+  setlocal statusline+=\ \ %{expand('%:t')}
 
   setlocal statusline+=\ \ %#StatusLineActive# " Change colors
   setlocal statusline+=\ \ \ %{expand('%:h:h:t')}
   setlocal statusline+=/%{expand('%:h:t')}
-  setlocal statusline+=/%{expand('%:t')}
+  " setlocal statusline+=/%{expand('%:t')}
 
+  " setlocal statusline+=\ \ \ %#StatusLineFile# " Change colors
   setlocal statusline+=\ \ %=        " Switch to the right side
   " setlocal statusline+=%<        " Truncate here if too long
   " setlocal statusline+=%{get(b:,'coc_git_blame','')}
-  setlocal statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
-  setlocal statusline+=%{g:git_branch}
+  " setlocal statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
+  " setlocal statusline+=\ %{g:git_branch}
 endfunction
 
 function! SetInactiveStatusLine ()
@@ -63,18 +65,21 @@ function! SetInactiveStatusLine ()
   setlocal statusline+=%1*%m  " Modifications, highlighted with User1 (red)
   setlocal statusline+=%#StatusLineFileInactive# " Change colors
   setlocal statusline+=\ \ %{expand('%:t:r')}
-  setlocal statusline+=\ %#StatusLineExtensionInactive# " Change colors
+  " setlocal statusline+=\ %#StatusLineExtensionInactive# " Change colors
   setlocal statusline+=\ %{expand('%:t:e')}
 
   setlocal statusline+=\ \ %#StatusLineInactive#" Change colors
+  " setlocal statusline+=\ \ \ %{expand('%:h:h:t')}
   setlocal statusline+=\ \ \ %{expand('%:h:h:t')}
   setlocal statusline+=/%{expand('%:h:t')}
-  setlocal statusline+=/%{expand('%:t')}
+  " setlocal statusline+=/%{expand('%:h:t')}
+  " setlocal statusline+=/%{expand('%:t')}
 
 
+  " setlocal statusline+=\ \ \ %#StatusLineFileInactive# " Change colors
   setlocal statusline+=\ \ %=        " Switch to the right side
   setlocal statusline+=%<        " Truncate here if too long
-  setlocal statusline+=%{g:git_branch}
+  " setlocal statusline+=\ %{g:git_branch}
 endfunction
 
 call SetActiveStatusLine()
