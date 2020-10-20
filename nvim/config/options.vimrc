@@ -180,8 +180,8 @@ set foldlevelstart=999
 " Don't show tab bar
 set showtabline=0
 
-" Change CWD while navigating in NetRW.
-let g:netrw_keepdir=0
+" Set to 0 to change CWD while navigating in NetRW, like autochdir
+let g:netrw_keepdir=1
 " Allow netrw to remove non-empty local directories
 let g:netrw_localrmdir='rm -r'
 

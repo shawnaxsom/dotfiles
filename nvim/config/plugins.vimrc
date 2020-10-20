@@ -140,6 +140,7 @@ let g:go_doc_keywordprg_enabled = 0
 " " }
 " { tpope/vim-vinegar
 Plug 'tpope/vim-vinegar'
+map <leader>- :e `=getcwd()`<CR>
 " }
 " { nginx
 Plug 'chr4/nginx.vim'
@@ -975,8 +976,8 @@ nmap <leader><leader>r :Renamer<CR>
 " Unfortunately, vim-dirvish doesn't work well with this on auto
 Plug 'airblade/vim-rooter'
 " let g:rooter_patterns = ['server.js', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'notes']
-" let g:rooter_patterns = ['.git', 'Makefile', 'notes']
-let g:rooter_patterns = ['.git', 'notes']
+let g:rooter_patterns = ['.git', 'Makefile', 'notes']
+" let g:rooter_patterns = ['.git', 'notes']
 let g:rooter_targets = '/,*'
 let g:rooter_silent_chdir = 0
 let g:rooter_manual_only = 0
