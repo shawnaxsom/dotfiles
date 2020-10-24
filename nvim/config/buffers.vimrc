@@ -19,7 +19,7 @@ nmap <leader><leader>a :args<CR>
 nmap <leader>! :argdo<space>
 nmap <silent> <leader><leader>c :%bdelete!<CR>
 " nnoremap <leader>l :ls<CR>
-nnoremap <leader>j :jumps<cr>
+" nnoremap <leader>j :jumps<cr>
 
 function! GetBufferList()
   redir =>buflist

@@ -876,6 +876,7 @@ command! BuffersNoSortExact call fzf#vim#buffers({'options': '-m -x +s --no-sort
 nnoremap <c-p> :BuffersNoSortExact<CR>
 nnoremap <leader>O :FZF --no-sort --exact<CR>
 " nnoremap <leader>p :FilesMru --no-sort --exact<CR>
+nnoremap <leader>j :Files<CR>
 nnoremap <leader>p :BuffersNoSortExact<CR>
 nnoremap <leader>m :FilesMru --no-sort --exact<CR>
 nnoremap <leader>o :FilesMru --no-sort --exact<CR>

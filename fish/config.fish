@@ -319,7 +319,8 @@ alias l='ls'
 alias lt='ls -lat'
 alias h='head'
 # alias t='tail'
-# alias r='ranger'
+alias ra='ranger'
+alias ran='ranger'
 # alias p='pwd'
 alias x='exit'
 alias vp='/usr/local/bin/nvim -c "set ft=man modifiable"  -'
@@ -457,6 +458,22 @@ set -x PATH $HOME/.fastlane/bin $PATH
 # FZF
 set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --no-sort --exact --no-preview'
 
+# https://github.com/phiresky/ripgrep-all
+# rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
+function rga-fzf
+  set RG_PREFIX "rga --files-with-matches"
+  set file (
+    FZF_DEFAULT_COMMAND="$RG_PREFIX '$argv'" \
+    fzf --sort --preview="test -n {} && rga --pretty --context 5 {q} {}" \
+	    --phony -q "$1" \
+	    --bind "change:reload:$RG_PREFIX {q}" \
+	    --preview-window="50%:wrap"
+  )
+
+  if test -n (echo "$file")
+    vim (echo "$file")
+  end
+end
 
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
@@ -496,3 +513,4 @@ if which gpg-agent > /dev/null
   end
   set -gx GPG_TTY (tty)
 end
+
