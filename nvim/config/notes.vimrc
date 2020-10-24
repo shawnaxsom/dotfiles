@@ -14,6 +14,7 @@ nnoremap gsw :topleft split ~/Dropbox/notes/work.scratch.md<CR>
 
 " Support jumping to daily notes written using Obsidian Notes, YYYY-MM-DD.md
 " format
+nnoremap gnn :topleft split<CR>'N
 nnoremap gnt :topleft split ~/Dropbox/note-taking/notes/<C-r>=strftime("%Y-%m-%d")<CR>.md<CR>
 nnoremap gny :topleft split ~/Dropbox/note-taking/notes/<C-r>=strftime("%Y-%m-%d", localtime() - 3600 * 24)<CR>.md<CR>
 

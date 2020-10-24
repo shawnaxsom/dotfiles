@@ -28,6 +28,9 @@ Plug 'neoclide/coc-css', { 'do': ':CocInstall coc-css' }
 Plug 'neoclide/coc-json', { 'do': ':CocInstall coc-json' }
 Plug 'neoclide/coc-yaml', { 'do': ':CocInstall coc-yaml' }
 Plug 'neoclide/coc-pairs', { 'do': ':CocInstall coc-pairs' }
+" Automatically move closing curly brackets to a new line after pressing enter
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 Plug 'fannheyward/coc-react-refactor', { 'do': ':CocInstall coc-react-refactor' }
 Plug 'fannheyward/coc-marketplace', { 'do': ':CocInstall coc-marketplace' }
 let g:go_def_mode='gopls'
@@ -55,6 +58,9 @@ nnoremap <silent> U :call <SID>show_documentation()<CR>
 " autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'editor', 'row': 0, 'col': 0})
 autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'cursor', 'row': 2, 'col': -25})
 " autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 100)
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 " }
 " { vim-go
 Plug 'fatih/vim-go'
@@ -438,7 +444,7 @@ let g:vrc_curl_opts={ '--silent': '' }
 Plug 'qstrahl/vim-matchmaker'
 let g:matchmaker_enable_startup = 1
 let g:matchmaker_matchpriority = 1
-nnoremap ,, :MatchmakerToggle<CR>
+" nnoremap ,, :MatchmakerToggle<CR>
 " }
 " { Surround
 Plug 'tpope/vim-surround'
@@ -734,7 +740,7 @@ nmap s <Plug>SneakLabel_s
 nmap S <Plug>SneakLabel_S
 " map s <Plug>Sneak_s
 " map S <Plug>Sneak_S
-let g:sneak#label = 1
+let g:sneak#label = 0
 " let g:sneak#s_next = 1
 " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
 let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
@@ -887,7 +893,8 @@ nnoremap <leader>d :BuffersDelete<CR>
 " nnoremap <leader>i :FZFChanged<CR>
 nnoremap <leader>i :GFiles?<CR>
 " nnoremap <leader>m :History<CR>
-nnoremap <leader>l :Lines<CR>
+nnoremap <leader>j :Files<CR>
+nnoremap <leader><leader>l :Lines<CR>
 nnoremap <leader>f :Lines func <CR>
 nnoremap <leader>t :Lines func <BAR> var <BAR> const <BAR> := <BAR> type <CR>
 nnoremap <leader>a :Ag func <BAR> var <BAR> const <BAR> := <BAR> type <CR>
@@ -970,21 +977,22 @@ Plug 'zanglg/nova.vim'
 Plug 'qpkorr/vim-renamer'
 nmap <leader><leader>r :Renamer<CR>
 " }
-" { Vim-Rooter
-" Change directory to project root if you are in a subfolder
-" If you use /src as project root, this allows proper filename completion
-" from /src without typing /src in your imports.
-" Unfortunately, vim-dirvish doesn't work well with this on auto
-Plug 'airblade/vim-rooter'
-" let g:rooter_patterns = ['server.js', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'notes']
-let g:rooter_patterns = ['.git', 'Makefile', 'notes']
-" let g:rooter_patterns = ['.git', 'notes']
-let g:rooter_targets = '/,*'
-let g:rooter_silent_chdir = 0
-let g:rooter_manual_only = 0
-" map <leader>. :cd %:p:h<CR>:Rooter<CR>:pwd<CR>
-map <leader>. :Rooter<CR>:pwd<CR>
-" }
+" " { Vim-Rooter
+" " Change directory to project root if you are in a subfolder
+" " If you use /src as project root, this allows proper filename completion
+" " from /src without typing /src in your imports.
+" " Unfortunately, vim-dirvish doesn't work well with this on auto
+" Plug 'airblade/vim-rooter'
+" " let g:rooter_patterns = ['server.js', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'notes']
+" let g:rooter_patterns = ['.git', 'Makefile', 'notes']
+" " let g:rooter_patterns = ['.git', 'notes']
+" let g:rooter_targets = '/,*'
+" let g:rooter_silent_chdir = 0
+" let g:rooter_manual_only = 0
+" " map <leader>. :cd %:p:h<CR>:Rooter<CR>:pwd<CR>
+" map <leader>. :Rooter<CR>:pwd<CR>
+map <leader>. :cd %:p:h<CR>
+" " }
 " { thameera/vimv
 " Alternative to vim-renamer
 Plug 'thameera/vimv'
