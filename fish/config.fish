@@ -457,6 +457,9 @@ set -x PATH $HOME/.fastlane/bin $PATH
 
 # FZF
 set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --no-sort --exact --no-preview'
+# Edit ~/.ignore or ~/.rgignore to ignore file patterns
+set -gx FZF_DEFAULT_COMMAND 'rg --files --follow --no-messages'
+
 
 # https://github.com/phiresky/ripgrep-all
 # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
@@ -514,3 +517,5 @@ if which gpg-agent > /dev/null
   set -gx GPG_TTY (tty)
 end
 
+set -gx PATH $PATH /usr/local/bin
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths

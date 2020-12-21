@@ -56,6 +56,8 @@ touch $HOME/.config/nvim/config/secrets.vimrc
 create_symlink   .Xdefaults                ~/.Xdefaults
 create_symlink   .Xmodmap                  ~/.Xmodmap
 create_symlink   .agignore                 ~/.agignore
+create_symlink   .rgignore                 ~/.rgignore
+create_symlink   .ignore                   ~/.ignore
 create_symlink   .ctags                    ~/.ctags
 create_symlink   .elinks                   ~/.elinks
 create_symlink   .eslintrc                 ~/.eslintrc
