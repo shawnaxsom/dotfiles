@@ -86,3 +86,7 @@ target/
 # go.mod
 # go.sum
 # vendor/
+
+# Fish shell
+secret.fish
+secrets.fish

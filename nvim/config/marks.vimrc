@@ -13,6 +13,7 @@ augroup globalfilemarks
   autocmd TextChanged */dev/* normal! mO
   autocmd TextChangedI */dev/* normal! mO
   autocmd TextChanged,InsertEnter,BufEnter *.vimrc normal! mV
+  autocmd BufRead,BufNewFile,BufEnter */note-taking/notes/** normal! mN
 augroup END
 " }
 

@@ -114,8 +114,18 @@ function search
 end
 
 function agfzf
-  vim (ag $argv | awk -F: '{ print $1 }' | fzf --preview "ag -B 5 -A 5 $argv {}")
+  if test (count $argv) = 1
+    set results (ag $argv | awk -F: '{ print $1 }' | fzf --preview "ag -B 5 -A 5 $argv {}")
+  else
+    set results (fzf --preview "ag -B 5 -A 5 $argv {}")
+  end
+
+  if test -n (echo $results)
+    vim (echo $results)
+  end
 end
+alias agf=agfzf
+alias f=agfzf
 
 function fzfp
   awk -F: '{ print $1 }' | fzf --preview "cat {}"
@@ -331,14 +341,14 @@ alias ports='sudo lsof -iTCP -sTCP:LISTEN -P | grep node'
 
 # alias f='find . -name'
 
+function ff
+  find . -name "*$argv*" | grep $argv
+end
+
 # Git Prune Merged
 function gprune
   git branch --merged master | grep -v 'master' | xargs git branch -d
   git branch
-end
-
-function f
-  find . -name "*$argv*" | grep $argv
 end
 
 function gR
@@ -519,3 +529,11 @@ end
 
 set -gx PATH $PATH /usr/local/bin
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+
+# Bitwarden
+alias bwlogin='set -gx BW_SESSION (bw unlock --raw)'
+
+# Any fish secrets that shouldn't be commited
+if test -e $PWD/secret.fish
+  source $PWD/secret.fish
+end
