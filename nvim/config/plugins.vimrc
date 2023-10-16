@@ -146,7 +146,37 @@ let g:go_doc_keywordprg_enabled = 0
 " " }
 " { tpope/vim-vinegar
 Plug 'tpope/vim-vinegar'
-map <leader>- :e `=getcwd()`<CR>
+" map <leader>- :e `=getcwd()`<CR>
+" nmap - <Plug>VinegarUp<BAR>:pwd<CR>
+" nmap - :e ..<CR>
+" function! g:ChangeDirectory()
+"   " exec "norm \<Plug>(VinegarUp)"
+"   e ..
+
+"   " echo (expand("%:p") != "" ? expand("%:p") : expand("%:p:h"))
+" endfunction
+" augroup vinegarcustom
+"   autocmd!
+"   " autocmd FileType netrw nmap - <Plug>VinegarUp
+"   " autocmd FileType netrw echo expand("%:p")
+"   " autocmd FileType netrw call g:EchoPath()
+"   " autocmd FileType netrw echo b:netrw_curdir
+"   autocmd FileType netrw nmap <buffer> - call g:ChangeDirectory()
+"   " autocmd FileType netrw nmap <buffer> - <Plug>VinegarUp<BAR>:echo (expand("%:p") != "" ? expand("%:p") : expand("%:p:h"))<CR>
+"   " autocmd FileType netrw nmap <buffer> - <Plug>VinegarUp<BAR>:echo expand("%:p:h")<CR>
+"   " autocmd FileType netrw nmap <buffer> - <Plug>VinegarUp<BAR>:echo getcwd()<CR>
+"   " autocmd FileType netrw nmap <buffer> <CR> <Plug>NetrwLocalBrowseCheck<BAR>:echo (expand("%:p") != "" ? expand("%:p") : expand("%:p:h"))<CR>
+"   autocmd FileType netrw nmap <buffer> <CR> <Plug>NetrwLocalBrowseCheck<BAR>:echo expand("%:p:h")<CR>
+"   " autocmd FileType netrw nmap <buffer> - <Plug>VinegarUp<BAR>:call g:EchoPath()<CR>
+"   " autocmd FileType netrw nmap <buffer> - <Plug>VinegarUp
+"   " autocmd FileType netrw nmap <buffer> <CR> <Plug>NetrwLocalBrowseCheck<BAR>:echo (expand("%:p") != "" ? expand("%:p") : expand("%:p:h"))<CR>
+"   " autocmd FileType netrw echo b:netrw_curdir
+"   " autocmd DirChanged netrw echo b:netrw_curdir
+"   " autocmd FileType netrw pwd
+"   " autocmd BufEnter netrw pwd
+"   " autocmd DirChanged netrw echo b:netrw_curdir
+"   " autocmd FileType netrw echo getcwd()
+" augroup END
 " }
 " { nginx
 Plug 'chr4/nginx.vim'
@@ -734,17 +764,17 @@ Plug 'flazz/vim-colorschemes'
 " map z/ <Plug>(incsearch-fuzzy-/)
 " map z? <Plug>(incsearch-fuzzy-?)
 " }
-" { Vim-Sneak
-Plug 'justinmk/vim-sneak'
-nmap s <Plug>SneakLabel_s
-nmap S <Plug>SneakLabel_S
-" map s <Plug>Sneak_s
-" map S <Plug>Sneak_S
-let g:sneak#label = 0
-" let g:sneak#s_next = 1
-" let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
-let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
-" }
+" " { Vim-Sneak
+" Plug 'justinmk/vim-sneak'
+" nmap s <Plug>SneakLabel_s
+" nmap S <Plug>SneakLabel_S
+" " map s <Plug>Sneak_s
+" " map S <Plug>Sneak_S
+" let g:sneak#label = 0
+" " let g:sneak#s_next = 1
+" " let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0"
+" let g:sneak#target_labels =   "sdfioweqertphjklzxcvnm"
+" " }
 " " { Dash.app
 " Plug 'rizzatti/dash.vim'
 " nmap <silent> <leader>d <Plug>DashSearch
@@ -882,7 +912,6 @@ command! BuffersNoSortExact call fzf#vim#buffers({'options': '-m -x +s --no-sort
 nnoremap <c-p> :BuffersNoSortExact<CR>
 nnoremap <leader>O :FZF --no-sort --exact<CR>
 " nnoremap <leader>p :FilesMru --no-sort --exact<CR>
-nnoremap <leader>j :Files<CR>
 nnoremap <leader>p :BuffersNoSortExact<CR>
 nnoremap <leader>m :FilesMru --no-sort --exact<CR>
 nnoremap <leader>o :FilesMru --no-sort --exact<CR>
@@ -977,22 +1006,22 @@ Plug 'zanglg/nova.vim'
 Plug 'qpkorr/vim-renamer'
 nmap <leader><leader>r :Renamer<CR>
 " }
-" " { Vim-Rooter
-" " Change directory to project root if you are in a subfolder
-" " If you use /src as project root, this allows proper filename completion
-" " from /src without typing /src in your imports.
-" " Unfortunately, vim-dirvish doesn't work well with this on auto
-" Plug 'airblade/vim-rooter'
-" " let g:rooter_patterns = ['server.js', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'notes']
-" let g:rooter_patterns = ['.git', 'Makefile', 'notes']
-" " let g:rooter_patterns = ['.git', 'notes']
-" let g:rooter_targets = '/,*'
-" let g:rooter_silent_chdir = 0
-" let g:rooter_manual_only = 0
-" " map <leader>. :cd %:p:h<CR>:Rooter<CR>:pwd<CR>
+" { Vim-Rooter
+" Change directory to project root if you are in a subfolder
+" If you use /src as project root, this allows proper filename completion
+" from /src without typing /src in your imports.
+" Unfortunately, vim-dirvish doesn't work well with this on auto
+Plug 'airblade/vim-rooter'
+" let g:rooter_patterns = ['server.js', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'notes']
+let g:rooter_patterns = ['.git', 'Makefile', 'notes']
+" let g:rooter_patterns = ['.git', 'notes']
+let g:rooter_targets = '/,*'
+let g:rooter_silent_chdir = 1
+let g:rooter_manual_only = 1
+" map <leader>. :cd %:p:h<CR>:Rooter<CR>:pwd<CR>
 " map <leader>. :Rooter<CR>:pwd<CR>
 map <leader>. :cd %:p:h<CR>
-" " }
+" }
 " { thameera/vimv
 " Alternative to vim-renamer
 Plug 'thameera/vimv'
@@ -1086,15 +1115,37 @@ map <leader>k :GitMessenger<CR>
 " { Diminactive - Dim the current active pane window
 " Plug 'blueyed/vim-diminactive'
 " let g:diminactive_use_syntax = 1
-Plug 'TaDaa/vimade'
-au! BufWinEnter quickfix VimadeBufDisable
+" Plug 'TaDaa/vimade'
+" au! BufWinEnter quickfix VimadeBufDisable
+" let g:vimade = {
+"   \ "normalid": '',
+"   \ "normalncid": '',
+"   \ "basefg": '',
+"   \ "basebg": '',
+"   \ "fadelevel": 0.6,
+"   \ "colbufsize": 15,
+"   \ "rowbufsize": 15,
+"   \ "checkinterval": 100,
+"   \ "usecursorhold": 0,
+"   \ "detecttermcolors": 0,
+"   \ 'enablescroll': 1,
+"   \ 'signsid': 13100,
+"   \ 'signsretentionperiod': 4000,
+"   \ 'fademinimap': 1,
+"   \ 'fadepriority': 10,
+"   \ 'groupdiff': 1,
+"   \ 'groupscrollbind': 0,
+"   \ 'enablefocusfading': 0,
+"   \ 'enablebasegroups': 1,
+"   \ 'basegroups': ['Folded', 'Search', 'SignColumn', 'LineNr', 'CursorLine', 'CursorLineNr', 'DiffAdd', 'DiffChange', 'DiffDelete', 'DiffText', 'FoldColumn', 'Whitespace']
+"   \ }
 " }
-" { Golden Ratio -- better automatic vim pane window resizing
-Plug 'roman/golden-ratio'
-" Don't resize Quickfix window?
-let golden_ratio_exclude_nonmodifiable = 0
-let golden_ratio_autocommand = 1
-" }
+" " { Golden Ratio -- better automatic vim pane window resizing
+" Plug 'roman/golden-ratio'
+" " Don't resize Quickfix window?
+" let golden_ratio_exclude_nonmodifiable = 0
+" let golden_ratio_autocommand = 1
+" " }
 " { kana/vim-textobj-user
 Plug 'kana/vim-textobj-user'
 " }
@@ -1126,9 +1177,9 @@ let bufExplorerSortBy="fullpath"
 Plug 'AndrewRadev/bufferize.vim'
 map <leader>? :Bufferize map<CR>
 " }
-" { rhysd/clever-f.vim
-Plug 'rhysd/clever-f.vim'
-" }
+" " { rhysd/clever-f.vim
+" Plug 'rhysd/clever-f.vim'
+" " }
 " { justinmk/vim-sneak
 " Plug 'justinmk/vim-sneak'
 " let g:sneak#s_next = 0
@@ -1151,19 +1202,19 @@ Plug 'christoomey/vim-conflicted'
 " git config --global merge.tool 'vim-conflicted'
 
 " }
-" { junegunn/goyo.vim
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'reedes/vim-pencil'
-let g:goyo_width = 120 " (default: 80)
-let g:goyo_height = '95%' " (default: 85%)
-let g:goyo_linenr = 0 " (default: 0)
-map <leader><leader>z :Goyo<CR>:Limelight!!<CR>
-" }
-Plug 'mtth/locate.vim'
-" { vim-cpp-modern: Enhanced C and C++ syntax highlighting
-Plug 'bfrg/vim-cpp-modern'
-" }
+" " { junegunn/goyo.vim
+" Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/limelight.vim'
+" Plug 'reedes/vim-pencil'
+" let g:goyo_width = 120 " (default: 80)
+" let g:goyo_height = '95%' " (default: 85%)
+" let g:goyo_linenr = 0 " (default: 0)
+" map <leader><leader>z :Goyo<CR>:Limelight!!<CR>
+" " }
+" Plug 'mtth/locate.vim'
+" " { vim-cpp-modern: Enhanced C and C++ syntax highlighting
+" Plug 'bfrg/vim-cpp-modern'
+" " }
 
 " Plug 'preservim/nerdtree'
 " " nnoremap - :NERDTreeToggle<CR>
@@ -1178,42 +1229,63 @@ Plug 'bfrg/vim-cpp-modern'
 " autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
 " autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string("plugins.vimrc") . ')'
 
-" { chrisbra/NrrwRgn
-" You simply select the region, call :NR and the selected part will open in a new
-" split window while the rest of the buffer will be protected. Once you are finished,
-" simply write the narrowed window (:w) and all the changes will be moved back
-" to the original buffer.
-Plug 'chrisbra/NrrwRgn'
-" vnoremap <leader>z :NR!<CR>
-" nnoremap <silent> <leader>z :WR!<CR>
-" autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string("plugins.vimrc") . ')'
-Plug 'jkramer/vim-narrow'
-vnoremap <leader>z :Narrow<CR>
-nnoremap <leader>z :Widen<CR>
-" }
-" { terryma/vim-multiple-cursors
-" <C-n> to make selections
-" <C-x> to skip, or <C-p> to remove and to to previous
-" c/s/I/A to edit
-Plug 'terryma/vim-multiple-cursors'
-" }
-" { terryma/vim-smooth-scroll
-" Plug 'terryma/vim-smooth-scroll'
-" noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 10, 1)<CR>
-" noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 10, 1)<CR>
-" Plug 'yonchu/accelerated-smooth-scroll'
-" let g:ac_smooth_scroll_du_sleep_time_msec = 20
-Plug 'yuttie/comfortable-motion.vim'
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
-let g:comfortable_motion_friction = 70.0
-let g:comfortable_motion_air_drag = 2.5
-let g:comfortable_motion_no_default_key_mappings = 1
-let g:comfortable_motion_impulse_multiplier = 1.2  " Feel free to increase/decrease this value.
-nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
-" Plug 'psliwka/vim-smoothie'
+" " { chrisbra/NrrwRgn
+" " You simply select the region, call :NR and the selected part will open in a new
+" " split window while the rest of the buffer will be protected. Once you are finished,
+" " simply write the narrowed window (:w) and all the changes will be moved back
+" " to the original buffer.
+" Plug 'chrisbra/NrrwRgn'
+" " vnoremap <leader>z :NR!<CR>
+" " nnoremap <silent> <leader>z :WR!<CR>
+" " autocmd BufEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string("plugins.vimrc") . ')'
+" Plug 'jkramer/vim-narrow'
+" vnoremap <leader>z :Narrow<CR>
+" nnoremap <leader>z :Widen<CR>
+" " }
+" " { terryma/vim-multiple-cursors
+" " <C-n> to make selections
+" " <C-x> to skip, or <C-p> to remove and to to previous
+" " c/s/I/A to edit
+" Plug 'terryma/vim-multiple-cursors'
+" " }
+" " { terryma/vim-smooth-scroll
+" " Plug 'terryma/vim-smooth-scroll'
+" " noremap <silent> <c-u> :call smooth_scroll#up(&scroll/2, 10, 1)<CR>
+" " noremap <silent> <c-d> :call smooth_scroll#down(&scroll/2, 10, 1)<CR>
+" " Plug 'yonchu/accelerated-smooth-scroll'
+" " let g:ac_smooth_scroll_du_sleep_time_msec = 20
+" Plug 'yuttie/comfortable-motion.vim'
+" let g:comfortable_motion_scroll_down_key = "j"
+" let g:comfortable_motion_scroll_up_key = "k"
+" let g:comfortable_motion_friction = 90.0
+" let g:comfortable_motion_air_drag = 7.5
+" let g:comfortable_motion_no_default_key_mappings = 1
+" let g:comfortable_motion_impulse_multiplier = 3.5  " Feel free to increase/decrease this value.
+" nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+" nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+" " Plug 'psliwka/vim-smoothie'
 
-" }
+" " }
+" " { wellle/context.vim
+" " Show a contextual pane above edited window with outer indented lines, like
+" " class or function name
+" " This was working well at first, but it can be slow on scrolling.
+" Plug 'wellle/context.vim'
+" let g:context_nvim_no_redraw = 1
+" let g:context_add_mappings = 0
+" nnoremap <silent> <expr> <C-Y> context#util#map('<C-Y>')
+" nnoremap <silent> <expr> <C-E> context#util#map('<C-E>')
+" nnoremap <silent> <expr> zz    context#util#map('zz')
+" nnoremap <silent> <expr> zb    context#util#map('zb')
+" nnoremap <silent> <expr> zt    context#util#map_zt()
+" " nnoremap <silent> <expr> H     context#util#map_H()
+" " }
+" " { nvim-treesitter/nvim-treesitter
+" " Improve syntax parsing
+" " TSInstall {language} to install one or more parsers. TSInstall <tab> will give you a list of supported languages, or select all to install them all.
+" " TSInstallInfo to know which parser is installed.
+" " TSUpdate to update already installed parsers
+" Plug 'nvim-treesitter/nvim-treesitter'
+" " }
 
 call plug#end()

@@ -1,13 +1,13 @@
 bind editor <space> noop
 set realname = 'Shawn Axsom'
-set from = 'shawn.axsom@rooksecurity.com'
+set from = 'axs221@gmail.com'
 set alias_file        = '~/.mutt/aliases'
 set copy              = no
 # set display_filter    = '$HOME/.mutt/aliases.sh'
 set edit_headers
 # set editor            = "vim +/^$ ++1"
 set editor            = "vim +':set textwidth=0' +':set wrapmargin=0' +':set wrap' +':set spell'"
-set folder            = '/data/oi/Rook'
+set folder            = "imaps://imap.gmail.com:993"
 # set hostname          = "gmail.com"
 set imap_check_subscribed
 set mail_check        = 5
@@ -21,6 +21,7 @@ set sort    = reverse-threads
 set sort_aux    = last-date-received
 set signature="~/.signature"
 set sig_on_top        = yes
+set smtp_authenticators = ‘gssapi:login’
 unset imap_passive
 # unset record
 
@@ -49,7 +50,7 @@ folder-hook +INBOX 'macro index,pager y "<save-message>=[Gmail]/All Mail<enter><
 folder-hook +[Gmail]/Trash macro index,pager y <save-message>=INBOX<enter><enter> "Move to inbox"
 folder-hook +[Gmail]/Starred bind  index,pager y flag-message #"Toggle star"
 
-source $alias_file
+# source $alias_file
 
 macro index <F8> \
 "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\

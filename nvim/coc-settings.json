@@ -1,4 +1,6 @@
 {
+  "python.jediEnabled": true,
+  "python.jediPath": "/Users/shawnaxsom/Library/Python/3.8/lib/python/site-packages",
   "languageserver": {
     "go": {
       "command": "gopls",

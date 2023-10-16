@@ -18,7 +18,6 @@ saved-event-streams/
 *.js.map
 out/
 
-*.py
 *.rst
 *.txt
 swagger/
@@ -29,7 +28,5 @@ docs/
 migrations/
 loadtest/
 
-tutum*/
-highland/
 go-salesforce/
 fulfillment/

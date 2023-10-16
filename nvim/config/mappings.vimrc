@@ -324,10 +324,10 @@ noremap Y y$
 " Unimpaired keys
 nmap [[ :cprev<CR>
 nmap ]] :cnext<CR>
-nmap _ :cprev<CR>
-nmap + :cnext<CR>
-nmap [q :cprev<CR>
-nmap ]q :cnext<CR>
+nmap _ :cprev<CR>:echo ShowFuncName()<CR>
+nmap + :cnext<CR>:echo ShowFuncName()<CR>
+nmap [q :cprev<CR>:echo ShowFuncName()<CR>
+nmap ]q :cnext<CR>:echo ShowFuncName()<CR>
 nmap [w :cpfile<CR>
 nmap ]w :cnfile<CR>
 nmap [e :colder<CR>

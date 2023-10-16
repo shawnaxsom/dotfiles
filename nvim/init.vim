@@ -16,10 +16,24 @@ source $HOME/.config/nvim/config/abbreviations.vimrc
 source $HOME/.config/nvim/config/textobjects.vimrc
 source $HOME/.config/nvim/config/lint.vimrc
 source $HOME/.config/nvim/config/notes.vimrc
-source $HOME/.config/nvim/config/edits.vimrc
+source $HOME/.config/nvim/config/files.vimrc
 source $HOME/.config/nvim/config/refactorings.vimrc
 source $HOME/.config/nvim/config/packagejson.vimrc
 source $HOME/.config/nvim/config/secrets.vimrc
+
+" luado require "nvim-treesitter.configs".setup {
+"       \  highlight = {
+"       \    enable = true,
+"       \  },
+"       \}
+
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = "all",     -- one of "all", "language", or a list of languages
+"   highlight = {
+"     enable = true,              -- false will disable the whole extension
+"     disable = { "c", "rust" },  -- list of language that will be disabled
+"   },
+" }
 
 augroup config
   autocmd!

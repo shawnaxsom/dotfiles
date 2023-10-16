@@ -135,6 +135,14 @@ end
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
+if test -d /usr/local/bin
+  set -gx PATH /usr/local/bin $PATH
+end
+
+if test -d ~/Library/Android/sdk/platform-tools
+  set -gx PATH ~/Library/Android/sdk/platform-tools $PATH
+end
+
 if test -d ~/Library/Android/sdk/platform-tools
   set -gx PATH ~/Library/Android/sdk/platform-tools $PATH
 end
@@ -175,7 +183,8 @@ alias git='hub'
 
 
 function dps
-  docker ps $argv | awk -F '[ ][ ]+' '{ print $1 "%" $2 "%" $3 }' | column -s "%" -t
+  # docker ps $argv | awk -F '[ ][ ]+' '{ print $1 "%" $2 "%" $3 }' | column -s "%" -t
+  docker ps $argv
 end
 function dpsi
   # Docker PS interactive - return ID to be used in other commands
@@ -294,11 +303,13 @@ function recent
   end
 
   # git diff --name-only --author=shawnaxsom --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude .
-  set result (git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~ --since=@{$commitsToInclude} | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$"))
+  # set result (git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~ --since=@{$commitsToInclude} | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$"))
 
-  if test -z (echo $result)
-    git log --pretty="format:%n" --name-only --line-prefix=(git rev-parse --show-toplevel)/ --since=@{$commitsToInclude} | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
+  if string match -qr '^[0-9]+$' $commitsToInclude
+    # Go back certain number of commits
+    git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ HEAD~$commitsToInclude.. | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
   else
+    # Assume it is a --since flag, like "1.week.ago"
     git log --pretty="format:%n" --author=axs --name-only --line-prefix=(git rev-parse --show-toplevel)/ --since=@{$commitsToInclude} | sort | uniq | grep "\S" | grep -v (string join "" (git rev-parse --show-toplevel) "/\$")
   end
 end
@@ -361,11 +372,11 @@ function gac
   git commit -m $argv;
 end
 
-function gacp
-  git add .;
-  git commit -m $argv;
-  git push;
-end
+# function gacp
+#   git add .;
+#   git commit -m $argv;
+#   git push;
+# end
 
 # if test -e /usr/local/Cellar/vim/8.0.0130/bin/vim
 #   set vim '/usr/local/Cellar/vim/8.0.0130/bin/vim'
@@ -460,6 +471,17 @@ set -gx PATH $PATH $GOPATH/bin
 set -gx PATH $PATH $GOROOT/bin
 set -gx GOPRIVATE github.com/docker
 
+function gocover
+  go test -covermode=count -coverprofile=count.out fmt ./...
+  go tool cover -html=count.out
+end
+alias goc=gocover
+
+function gotest
+  go test --cover -v ./...
+end
+alias got=gotest
+
 # Fastlane for React Native development
 set -x PATH $HOME/.fastlane/bin $PATH
 
@@ -531,3 +553,29 @@ alias bwlogin='set -gx BW_SESSION (bw unlock --raw)'
 if test -e $PWD/secret.fish
   source $PWD/secret.fish
 end
+
+if test -d /usr/local/opt/libpq/bin/
+  set -gx PATH /usr/local/opt/libpq/bin/ $PATH
+end
+
+if test -d /usr/local/mysql/bin/
+  set -gx PATH /usr/local/mysql/bin/ $PATH
+end
+set -g fish_user_paths "/usr/local/opt/mysql@5.7/bin" $fish_user_paths
+
+function who
+  whois $argv | grep "org\|country\|address"
+end
+
+# Kubectl
+alias k='kubectl -n hub'
+alias kg='k get'
+alias kgp='k get pods'
+alias kgd='k get deployments'
+alias kd='k describe'
+function kv
+  kd $argv | grep Image
+end
+
+# AWS CLI configuration
+export AWS_DEFAULT_REGION=us-east-1

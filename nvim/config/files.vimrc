@@ -6,4 +6,5 @@ nmap geb :sp ~/.config/nvim/config/buffers.vimrc<CR>
 nmap gef :sp ~/.config/fish/config.fish<CR>
 nmap gem :sp ~/.config/nvim/config/mappings.vimrc<CR>
 nmap geq :sp ~/.vim/bundle/vim-quickly/plugin/quickly.vim<CR>
+nmap ger :sp ~/.config/ranger/rc.conf<CR>
 nmap ges :UltiSnipsEdit<CR>

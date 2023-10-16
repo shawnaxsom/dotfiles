@@ -23,7 +23,7 @@
   "editor.fontSize": 18,
   "editor.formatOnType": false,
   "editor.insertSpaces": true,
-  "editor.matchBrackets": false,
+  "editor.matchBrackets": "never",
   "editor.minimap.renderCharacters": true,
   "editor.wrappingIndent": "deepIndent",
   "emmet.syntaxProfiles": {
@@ -73,7 +73,7 @@
   "gitlens.keymap": "alternate",
   "javascript.implicitProjectConfig.checkJs": true,
   "javascript.updateImportsOnFileMove.enabled": "never",
-  "javascript.validate.enable": true,
+  "javascript.validate.enable": false,
   "json.schemas": [
     {
       "fileMatch": ["/package.json"],
@@ -100,18 +100,12 @@
   "vim.substituteGlobalFlag": true,
   "vim.useSystemClipboard": true,
   "vim.normalModeKeyBindingsNonRecursive": [
-  
-
     {
-      "commands": [
-        "workbench.action.editor.previousChange"
-      ],
+      "commands": ["workbench.action.editor.previousChange"],
       "before": ["K"]
     },
     {
-      "commands": [
-        "workbench.action.editor.nextChange"
-      ],
+      "commands": ["workbench.action.editor.nextChange"],
       "before": ["J"]
     },
     {
@@ -131,7 +125,6 @@
   ],
   "vim.visualstar": true,
   "window.title": "${activeEditorShort}${separator}${activeEditorMedium}${separator}${folderName}",
-  "window.zoomLevel": -2,
   "workbench.activityBar.visible": true,
   "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
   "workbench.sideBar.location": "left",
@@ -363,7 +356,6 @@
   "gitlens.heatmap.toggleMode": "window",
   "gitlens.blame.heatmap.enabled": false,
   "editor.minimap.enabled": false,
-  "editor.renderIndentGuides": false,
   "gitlens.hovers.currentLine.details": false,
   "gitlens.currentLine.scrollable": false,
   "gitlens.currentLine.enabled": false,
@@ -384,7 +376,7 @@
   "[python]": {
     "editor.tabSize": 4
   },
-  "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+  "workbench.colorTheme": "Monokai",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -400,12 +392,9 @@
   "editor.autoClosingBrackets": "never",
   "workbench.editor.openSideBySideDirection": "down",
   "editsHistory.maxHistory": 200,
-  "org-agenda.agendaFiles": [
-    "/Users/shawnaxsom/org/index.org"
-  ],
+  "org-agenda.agendaFiles": ["/Users/shawnaxsom/org/index.org"],
   "zenMode.centerLayout": false,
   "editor.lineNumbers": "relative",
-  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "[javascriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
@@ -422,6 +411,18 @@
   },
   "go.useLanguageServer": true,
   "editor.fontFamily": "'Hack', 'Inconsolata-g', 'Source Code Pro', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-  "python.languageServer": "Microsoft",
-  "joplin.token": "19f53480a3fa7389e3216e9e50b661713dffdad38dfb9a9232da442f01ca856ae5822f4fff2ae56774435eb5a63828689f9e643d9b187314dafa67551ebbb9b8"
+  "joplin.token": "19f53480a3fa7389e3216e9e50b661713dffdad38dfb9a9232da442f01ca856ae5822f4fff2ae56774435eb5a63828689f9e643d9b187314dafa67551ebbb9b8",
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  "flow.pathToFlow": "${workspaceFolder}/node_modules/.bin/flow",
+  "flow.coverageSeverity": "error",
+  "flow.runOnAllFiles": true,
+  "editor.formatOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+  "editor.guides.indentation": false,
+  "python.languageServer": "Pylance",
+  "window.zoomLevel": -1
 }
