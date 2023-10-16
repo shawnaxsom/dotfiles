@@ -934,11 +934,23 @@ command! FZFMostRecentlyModified call fzf#run({
 \ 'sink':    'edit',
 \ 'options': '-m -x +s',
 \ 'down':    '40%' })
+function! s:Wildignore(files) abort
+  try
+    for pattern in split(&wildignore, ',')
+      call filter(a:files,
+            \  "v:val.action__path !~? pattern")
+    endfor
+  catch /.*/
+  finally
+  endtry
+  return a:files
+endfunction
 function! s:MostRecentlyModifiedLines ()
   let lines = split(system("find . -type d \\( -path ./.git -o -path ./node_modules \\) -prune -o -print0 | xargs -0 ls -t | head -n " . 50), "\n")
-  let lines = WithinPwd(lines)
-  let lines = RelativePath(lines)
-  let lines = Wildignore(lines)
+  " let lines = WithinPwd(lines)
+  " let lines = RelativePath(lines)
+  " let lines = Wildignore(lines)
+  " Wildignore(lines)
   return lines
 endfunction
 nnoremap <leader>M :FZFMostRecentlyModified<CR>

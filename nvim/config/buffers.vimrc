@@ -106,6 +106,7 @@ set wildignore+=*.hpp
 set wildignore+=*.map
 set wildignore+=*.svg
 set wildignore+=*.png
+set wildignore+=*.o
 set wildignore+=*/Pods/*
 set wildignore+=*/syncTargetSnapshots/*
 set wildignore+=*/vendor/*
